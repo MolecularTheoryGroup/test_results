@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/client.jl</title>
+    <title>StatProfilerHTML - ../src/systems.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 26 Sep 2023 19:41:35
+        Generated on Tue, 26 Sep 2023 19:41:38
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>import Base: show, &#61;&#61;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using PeriodicTable: Element, elements</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>## client.jl - frontend handling command line options, environment setup,</span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>##             and REPL</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>export GridSpec,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>have_color &#61; nothing</span>
+            <span class='code'>    in_grid,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>const default_color_warn &#61; :yellow</span>
+            <span class='code'>    in_bounding_box,</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>const default_color_error &#61; :light_red</span>
+            <span class='code'>    clamp_to_bounding_box,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>const default_color_info &#61; :cyan</span>
+            <span class='code'>    apply_translational_symmetry,</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>const default_color_debug &#61; :blue</span>
+            <span class='code'>    generate_interpolation_grid,</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>const default_color_input &#61; :normal</span>
+            <span class='code'>    NuclearCoordinate,</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>const default_color_answer &#61; :normal</span>
+            <span class='code'>    System</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>const color_normal &#61; text_colors&#91;:normal&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Inner data types</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>function repl_color&#40;key, default&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    env_str &#61; get&#40;ENV, key, &quot;&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    c &#61; tryparse&#40;Int, env_str&#41;</span>
+            <span class='code'>    GridSpec&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    c_conv &#61; something&#40;c, Symbol&#40;env_str&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    haskey&#40;text_colors, c_conv&#41; ? c_conv : default</span>
+            <span class='code'>A struct representing a grid specification for analysis.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>This provides bounds on the analysis grid extent.</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>For grid data this will be the same as that defined by the grid.</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>error_color&#40;&#41; &#61; repl_color&#40;&quot;JULIA_ERROR_COLOR&quot;, default_color_error&#41;</span>
+            <span class='code'>For analytical functions, it can be specified manually, or</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>warn_color&#40;&#41;  &#61; repl_color&#40;&quot;JULIA_WARN_COLOR&quot; , default_color_warn&#41;</span>
+            <span class='code'>&#40;eventually&#41; it will be determined by a bounding box of the</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>info_color&#40;&#41;  &#61; repl_color&#40;&quot;JULIA_INFO_COLOR&quot; , default_color_info&#41;</span>
+            <span class='code'>atoms in the system.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>debug_color&#40;&#41;  &#61; repl_color&#40;&quot;JULIA_DEBUG_COLOR&quot; , default_color_debug&#41;</span>
+            <span class='code'>Note that this works for 2D grids as well as 3D grids.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>input_color&#40;&#41;  &#61; text_colors&#91;repl_color&#40;&quot;JULIA_INPUT_COLOR&quot;, default_color_input&#41;&#93;</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>answer_color&#40;&#41; &#61; text_colors&#91;repl_color&#40;&quot;JULIA_ANSWER_COLOR&quot;, default_color_answer&#41;&#93;</span>
+            <span class='code'>- &#96;origin::Vector&#123;T&#125;&#96;: The origin of the grid.</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;lattice::Matrix&#123;T&#125;&#96;: The lattice of the grid.</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>stackframe_lineinfo_color&#40;&#41; &#61; repl_color&#40;&quot;JULIA_STACKFRAME_LINEINFO_COLOR&quot;, :bold&#41;</span>
+            <span class='code'>- &#96;lattice_full::Matrix&#123;T&#125;&#96;: The full lattice of the grid, including the periodic boundary conditions.</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>stackframe_function_color&#40;&#41; &#61; repl_color&#40;&quot;JULIA_STACKFRAME_FUNCTION_COLOR&quot;, :bold&#41;</span>
+            <span class='code'>- &#96;lattice_full_inv::Matrix&#123;T&#125;&#96;: The inverse of the full lattice of the grid.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;n_pts::Vector&#123;Int&#125;&#96;: The number of grid points in each dimension of the grid.</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>function repl_cmd&#40;cmd, out&#41;</span>
+            <span class='code'>- &#96;n_pts_float::Vector&#123;T&#125;&#96;: The number of grid points in each dimension of the grid, as a vector of floating-point values.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>    shell &#61; shell_split&#40;get&#40;ENV, &quot;JULIA_SHELL&quot;, get&#40;ENV, &quot;SHELL&quot;, &quot;/bin/sh&quot;&#41;&#41;&#41;</span>
+            <span class='code'>- &#96;n_pts_total::Int&#96;: The total number of grid points in the grid.</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    shell_name &#61; Base.basename&#40;shell&#91;1&#93;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example using the convenience constructor that makes derived fields.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>    # Immediately expand all arguments, so that typing e.g. ~/bin/foo works.</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>    cmd.exec .&#61; expanduser.&#40;cmd.exec&#41;</span>
+            <span class='code'>origin &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>lattice &#61; &#91;0.1 0.0 0.0; 0.0 0.1 0.0; 0.0 0.0 0.1&#93;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>    if isempty&#40;cmd.exec&#41;</span>
+            <span class='code'>n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;no cmd to execute&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>    elseif cmd.exec&#91;1&#93; &#61;&#61; &quot;cd&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>        new_oldpwd &#61; pwd&#40;&#41;</span>
+            <span class='code'>gs &#61; GridSpec&#123;Float64&#125;&#40;origin, lattice, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>        if length&#40;cmd.exec&#41; &gt; 2</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>            throw&#40;ArgumentError&#40;&quot;cd method only takes one argument&quot;&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>        elseif length&#40;cmd.exec&#41; &#61;&#61; 2</span>
+            <span class='code'>struct GridSpec&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>            dir &#61; cmd.exec&#91;2&#93;</span>
+            <span class='code'>    # fields for grid data representation</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>            if dir &#61;&#61; &quot;-&quot;</span>
+            <span class='code'>    origin::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;haskey&#40;ENV, &quot;OLDPWD&quot;&#41;</span>
+            <span class='code'>    lattice::Matrix&#123;T&#125; # lattice vectors as &quot;steps&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>                    error&#40;&quot;cd: OLDPWD not set&quot;&#41;</span>
+            <span class='code'>    lattice_full::Matrix&#123;T&#125; # lattice vectors with full lattice extent</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    lattice_full_inv::Matrix&#123;T&#125; # inverse of lattice_full</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>                dir &#61; ENV&#91;&quot;OLDPWD&quot;&#93;</span>
+            <span class='code'>    n_pts::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    n_pts_float::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>            cd&#40;dir&#41;</span>
+            <span class='code'>    n_pts_total::Int</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>            cd&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># Overload Base.show to print GridSpec as key:value pairs</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>        ENV&#91;&quot;OLDPWD&quot;&#93; &#61; new_oldpwd</span>
+            <span class='code'>function show&#40;io::IO, gs::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>        println&#40;out, pwd&#40;&#41;&#41;</span>
+            <span class='code'>    s &#61; join&#40;&#91;&quot;&#36;k: &#36;&#40;getfield&#40;gs, k&#41;&#41;&quot; for k in fieldnames&#40;GridSpec&#41;&#93;, &quot;, &quot;&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    return show&#40;io, s&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>        @static if &#33;Sys.iswindows&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>            if shell_name &#61;&#61; &quot;fish&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>                shell_escape_cmd &#61; &quot;begin; &#36;&#40;shell_escape_posixly&#40;cmd&#41;&#41;; and true; end&quot;</span>
+            <span class='code'># overload &#61;&#61; operator</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;a::GridSpec, b::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>                shell_escape_cmd &#61; &quot;&#40;&#36;&#40;shell_escape_posixly&#40;cmd&#41;&#41;&#41; &amp;&amp; true&quot;</span>
+            <span class='code'>    return a.n_pts &#61;&#61; b.n_pts &amp;&amp; a.origin &#61;&#61; b.origin &amp;&amp; a.lattice &#61;&#61; b.lattice</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>            cmd &#61; &#96;&#36;shell -c &#36;shell_escape_cmd&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># Convenience constructor that calculates the derived veriables</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -713,9 +713,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in GridSpec
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L147'>line 147</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>        try</span>
+            <span class='code'>function GridSpec&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +734,7 @@
           <td>
             
             
-            <span class='code'>            run&#40;ignorestatus&#40;cmd&#41;&#41;</span>
+            <span class='code'>    origin::Vector&#123;T&#125;, lattice::AbstractMatrix&#123;T&#125;, n_pts::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +744,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,17 +754,22 @@
           <td>
             
             
-            <span class='code'>            # Windows doesn&#39;t shell out right now &#40;complex issue&#41;, so Julia tries to run the program itself</span>
+            <span class='code'>    n_pts &#61; max.&#40;1, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
           <td class='lineno'>73</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>            # Julia throws an exception if it can&#39;t find the program, but the stack trace isn&#39;t useful</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='broadcast.jl-aadc07aa8db7d970432e67b47a796fc9707f1499.html#L873'>materialize</a>
+              <br />
+            </div>
+            <span class='code'>    n_pts_float &#61; T.&#40;n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +779,7 @@
           <td>
             
             
-            <span class='code'>            lasterr &#61; current_exceptions&#40;&#41;</span>
+            <span class='code'>    n_pts_total &#61; prod&#40;n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'>            lasterr &#61; ExceptionStack&#40;&#91;&#40;exception &#61; e&#91;1&#93;, backtrace &#61; &#91;&#93; &#41; for e in lasterr&#93;&#41;</span>
+            <span class='code'>    lattice_full &#61; diagm&#40;n_pts_float&#41; * lattice</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;display_error, lasterr&#41;</span>
+            <span class='code'>    lattice_full_inv &#61; inv&#40;lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return GridSpec&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        origin, lattice, lattice_full, lattice_full_inv, n_pts, n_pts_float, n_pts_total</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'># deprecated function--preserved for DocTests.jl</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>function ip_matches_func&#40;ip, func::Symbol&#41;</span>
+            <span class='code'>    generate_interpolation_grid&#40;gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'>    for fr in StackTraces.lookup&#40;ip&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'>        if fr &#61;&#61;&#61; StackTraces.UNKNOWN || fr.from_c</span>
+            <span class='code'>Calculate a grid for interpolation based on a &#96;GridSpec&#96; object.</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'>            return false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>## Arguments</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>        fr.func &#61;&#61;&#61; func &amp;&amp; return true</span>
+            <span class='code'>- &#96;gs&#96;: A &#96;GridSpec&#96; object that defines the grid.</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +929,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>    return false</span>
+            <span class='code'>## Returns</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;g&#96;: A grid of points corresponding to density data, represented as a list of three ranges &#40;one for each dimension&#41;.</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>function scrub_repl_backtrace&#40;bt&#41;</span>
+            <span class='code'>## Example</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>    if bt &#33;&#61;&#61; nothing &amp;&amp; &#33;&#40;bt isa Vector&#123;Any&#125;&#41; # ignore our sentinel value types</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>        bt &#61; bt isa Vector&#123;StackFrame&#125; ? copy&#40;bt&#41; : stacktrace&#40;bt&#41;</span>
+            <span class='code'>gs &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'>        # remove REPL-related frames from interactive printing</span>
+            <span class='code'>generate_interpolation_grid&#40;gs&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>        eval_ind &#61; findlast&#40;frame -&gt; &#33;frame.from_c &amp;&amp; frame.func &#61;&#61;&#61; :eval, bt&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>        eval_ind &#61;&#61;&#61; nothing || deleteat&#33;&#40;bt, eval_ind:length&#40;bt&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function generate_interpolation_grid&#40;gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1039,7 @@
           <td>
             
             
-            <span class='code'>    return bt</span>
+            <span class='code'>    # Calculate grid for interpolation &#40;xyz points corresponding to density data&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    g &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1059,7 @@
           <td>
             
             
-            <span class='code'>scrub_repl_backtrace&#40;stack::ExceptionStack&#41; &#61;</span>
+            <span class='code'>        begin</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>    ExceptionStack&#40;Any&#91;&#40;;x.exception, backtrace &#61; scrub_repl_backtrace&#40;x.backtrace&#41;&#41; for x in stack&#93;&#41;</span>
+            <span class='code'>            start &#61; gs.origin&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1079,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            stop &#61; &#40;gs.origin &#43; gs.lattice * &#40;gs.n_pts_float .&#43; 0.2&#41;&#41;&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1089,7 @@
           <td>
             
             
-            <span class='code'>istrivialerror&#40;stack::ExceptionStack&#41; &#61;</span>
+            <span class='code'>            step &#61; &#40;stop - start&#41; / gs.n_pts_float&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1099,7 @@
           <td>
             
             
-            <span class='code'>    length&#40;stack&#41; &#61;&#61; 1 &amp;&amp; length&#40;stack&#91;1&#93;.backtrace&#41; ≤ 1</span>
+            <span class='code'>            &#40;start:step:stop&#41;&#91;1:&#40;end - 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1109,7 @@
           <td>
             
             
-            <span class='code'>    # frame 1 &#61; top level; assumes already went through scrub_repl_backtrace</span>
+            <span class='code'>        end for i in 1:3</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1119,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>function display_error&#40;io::IO, stack::ExceptionStack&#41;</span>
+            <span class='code'>    return g</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1139,7 @@
           <td>
             
             
-            <span class='code'>    printstyled&#40;io, &quot;ERROR: &quot;; bold&#61;true, color&#61;Base.error_color&#40;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1149,7 @@
           <td>
             
             
-            <span class='code'>    show_exception_stack&#40;IOContext&#40;io, :limit &#61;&gt; true&#41;, stack&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;io&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1169,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    function apply_translational_symmetry&#40;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1179,7 @@
           <td>
             
             
-            <span class='code'>display_error&#40;stack::ExceptionStack&#41; &#61; display_error&#40;stderr, stack&#41;</span>
+            <span class='code'>        r::Vector&#123;T&#125;, grid::GridSpec&#123;T&#125;, is_periodic::Vector&#123;Bool&#125;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1189,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1199,7 @@
           <td>
             
             
-            <span class='code'># these forms are depended on by packages outside Julia</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1209,7 @@
           <td>
             
             
-            <span class='code'>function display_error&#40;io::IO, er, bt&#41;</span>
+            <span class='code'>Apply translational symmetry to a given position vector &#96;r&#96; based on the grid specification &#96;grid&#96;. If the grid is periodic, the function adjusts the position vector to ensure it falls within the grid boundaries.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1219,7 @@
           <td>
             
             
-            <span class='code'>    printstyled&#40;io, &quot;ERROR: &quot;; bold&#61;true, color&#61;Base.error_color&#40;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1229,7 @@
           <td>
             
             
-            <span class='code'>    showerror&#40;IOContext&#40;io, :limit &#61;&gt; true&#41;, er, bt, backtrace &#61; bt&#33;&#61;&#61;nothing&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1239,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;io&#41;</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector to apply translational symmetry to.</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1249,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;grid::GridSpec&#123;T&#125;&#96;: The grid specification that defines the boundaries and periodicity of the grid.</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1259,7 @@
           <td>
             
             
-            <span class='code'>display_error&#40;er, bt&#61;nothing&#41; &#61; display_error&#40;stderr, er, bt&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1269,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1279,7 @@
           <td>
             
             
-            <span class='code'>function eval_user_input&#40;errio, @nospecialize&#40;ast&#41;, show_value::Bool&#41;</span>
+            <span class='code'>- &#96;r_new::Vector&#123;T&#125;&#96;: The position vector with translational symmetry applied, ensuring it falls within the grid boundaries.</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1289,7 @@
           <td>
             
             
-            <span class='code'>    errcount &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1299,7 @@
           <td>
             
             
-            <span class='code'>    lasterr &#61; nothing</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1309,7 @@
           <td>
             
             
-            <span class='code'>    have_color &#61; get&#40;stdout, :color, false&#41;::Bool</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1319,7 @@
           <td>
             
             
-            <span class='code'>    while true</span>
+            <span class='code'>r &#61; &#91;1.5, 2.5, 3.5&#93;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1329,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>grid &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1339,7 @@
           <td>
             
             
-            <span class='code'>            if have_color</span>
+            <span class='code'>apply_translational_symmetry&#40;r, grid, &#91;true, true, true&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1349,7 @@
           <td>
             
             
-            <span class='code'>                print&#40;color_normal&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1359,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>            if lasterr &#33;&#61;&#61; nothing</span>
+            <span class='code'>function apply_translational_symmetry&#40;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1379,7 @@
           <td>
             
             
-            <span class='code'>                lasterr &#61; scrub_repl_backtrace&#40;lasterr&#41;</span>
+            <span class='code'>    r::Vector&#123;T&#125;, grid::GridSpec&#123;U&#125;, is_periodic::Vector&#123;Bool&#125;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>                istrivialerror&#40;lasterr&#41; || setglobal&#33;&#40;Main, :err, lasterr&#41;</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1399,7 @@
           <td>
             
             
-            <span class='code'>                invokelatest&#40;display_error, errio, lasterr&#41;</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1409,7 @@
           <td>
             
             
-            <span class='code'>                errcount &#61; 0</span>
+            <span class='code'>    r1 &#61; grid.lattice_full_inv * &#40;r - grid.origin&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1419,7 @@
           <td>
             
             
-            <span class='code'>                lasterr &#61; nothing</span>
+            <span class='code'>    # @debug &quot;Transformed to lattice basis&quot; r r1</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1429,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    # Now make a copy of grid.lattice_full with the non-periodic </span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1439,7 @@
           <td>
             
             
-            <span class='code'>                ast &#61; Meta.lower&#40;Main, ast&#41;</span>
+            <span class='code'>    # apply periodicity by taking the fractional part of dimensions for which is_periodic is true. This also works for values below 0.</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1449,7 @@
           <td>
             
             
-            <span class='code'>                value &#61; Core.eval&#40;Main, ast&#41;</span>
+            <span class='code'>    r1&#91;is_periodic&#93; &#61; mod.&#40;r1&#91;is_periodic&#93;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>                setglobal&#33;&#40;Main, :ans, value&#41;</span>
+            <span class='code'>    # transform back to cartesian basis</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1469,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;&#40;value &#61;&#61;&#61; nothing&#41; &amp;&amp; show_value</span>
+            <span class='code'>    out &#61; grid.lattice_full * r1 &#43; grid.origin</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1479,7 @@
           <td>
             
             
-            <span class='code'>                    if have_color</span>
+            <span class='code'>    # @debug &quot;Applied symmetry and transformed back to cartesian basis&quot; r1 out</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1489,7 @@
           <td>
             
             
-            <span class='code'>                        print&#40;answer_color&#40;&#41;&#41;</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1499,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>    # FIXME: Fix translational symmetry for grad/hess calculations</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1509,7 @@
           <td>
             
             
-            <span class='code'>                    try</span>
+            <span class='code'>    #  Interpolations.jl currently doesn&#39;t support periodic hessian calculation.</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1519,7 @@
           <td>
             
             
-            <span class='code'>                        invokelatest&#40;display, value&#41;</span>
+            <span class='code'>    #  The current implementation suffers from boundary condition effects as you approach the edge of the grid.</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>                    catch</span>
+            <span class='code'>    #  A proper workaround would:</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1539,7 @@
           <td>
             
             
-            <span class='code'>                        @error &quot;Evaluation succeeded, but an error occurred while displaying the value&quot; typeof&#40;value&#41;</span>
+            <span class='code'>    #  1. Use an Interplations.jl interpolant with periodic boundary conditions for rho and grad, which it currently supports, and then</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1549,7 @@
           <td>
             
             
-            <span class='code'>                        rethrow&#40;&#41;</span>
+            <span class='code'>    #  2. Use a finite difference approximation for the hessian at the periodic boundary, using the interpolated gradients and manually applied translational symmetry.</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1559,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>    #  I do worry that even that type of work around would suffer from hessian error at the boundaries unless the calculation was accurate on par with that used by Interpolations.jl for rho/grad.</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1569,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1579,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1589,7 @@
           <td>
             
             
-            <span class='code'>            break</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1599,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>    in_bounding_box&#40;p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V::Matrix&#123;T&#125;&#41; where T&lt;:AbstractFloat</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1609,7 @@
           <td>
             
             
-            <span class='code'>            if errcount &gt; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1619,7 @@
           <td>
             
             
-            <span class='code'>                @error &quot;SYSTEM: display_error&#40;errio, lasterr&#41; caused an error&quot;</span>
+            <span class='code'>Returns &#96;true&#96; if the point &#96;p&#96; is inside the bounding box defined by the origin &#96;o&#96; and the inverse lattice &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1629,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>Dimensions must match between &#96;p&#96;, &#96;o&#96;, and &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1639,7 @@
           <td>
             
             
-            <span class='code'>            errcount &#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>            lasterr &#61; scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1659,7 @@
           <td>
             
             
-            <span class='code'>            setglobal&#33;&#40;Main, :err, lasterr&#41;</span>
+            <span class='code'>- &#96;p::AbstractVector&#96;: The point to test for containment in the bounding box.</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1669,7 @@
           <td>
             
             
-            <span class='code'>            if errcount &gt; 2</span>
+            <span class='code'>- &#96;o::AbstractVector&#96;: The origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1679,7 @@
           <td>
             
             
-            <span class='code'>                @error &quot;It is likely that something important is broken, and Julia will not be able to continue normally&quot; errcount</span>
+            <span class='code'>- &#96;V::AbstractMatrix&#96;: The inverse lattice of the lattice vector which describes the extent of the bounding box.</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1689,7 @@
           <td>
             
             
-            <span class='code'>                break</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1699,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1709,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>- &#96;Bool&#96;: &#96;true&#96; if the point &#96;p&#96; is inside the bounding box, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1719,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1729,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;stdin, TTY&#41; &amp;&amp; println&#40;&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1739,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1749,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1759,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1769,7 @@
           <td>
             
             
-            <span class='code'>function _parse_input_line_core&#40;s::String, filename::String&#41;</span>
+            <span class='code'>julia&gt; V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; Meta.parseall&#40;s, filename&#61;filename&#41;</span>
+            <span class='code'>julia&gt; in_bounding_box&#40;p, o, V&#41;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1789,7 @@
           <td>
             
             
-            <span class='code'>    if ex isa Expr &amp;&amp; ex.head &#61;&#61;&#61; :toplevel</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1799,7 @@
           <td>
             
             
-            <span class='code'>        if isempty&#40;ex.args&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>            return nothing</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1803,9 +1817,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in in_bounding_box
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from in_bounding_box
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L211'>line 211</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>        end</span>
+            <span class='code'>function in_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1838,7 @@
           <td>
             
             
-            <span class='code'>        last &#61; ex.args&#91;end&#93;</span>
+            <span class='code'>    p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1848,7 @@
           <td>
             
             
-            <span class='code'>        if last isa Expr &amp;&amp; &#40;last.head &#61;&#61;&#61; :error || last.head &#61;&#61;&#61; :incomplete&#41;</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1858,7 @@
           <td>
             
             
-            <span class='code'>            # if a parse error happens in the middle of a multi-line input</span>
+            <span class='code'>    D &#61; length&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1868,7 @@
           <td>
             
             
-            <span class='code'>            # return only the error, so that none of the input is evaluated.</span>
+            <span class='code'>    @assert D &#61;&#61; size&#40;V_inv, 1&#41; &#61;&#61; size&#40;p, 1&#41; &quot;Dimension mismatch&quot;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1878,7 @@
           <td>
             
             
-            <span class='code'>            return last</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1888,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1898,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    x &#61; V_inv * &#40;p - o&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,17 +1908,22 @@
           <td>
             
             
-            <span class='code'>    return ex</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L187'>
           <td class='lineno'>187</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>end</span>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='broadcast.jl-aadc07aa8db7d970432e67b47a796fc9707f1499.html#L873'>materialize</a>
+              <br />
+            </div>
+            <span class='code'>    return all&#40;0 .&lt;&#61; x .&lt;&#61; 1&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1933,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1943,7 @@
           <td>
             
             
-            <span class='code'>function parse_input_line&#40;s::String; filename::String&#61;&quot;none&quot;, depwarn&#61;true&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1953,7 @@
           <td>
             
             
-            <span class='code'>    # For now, assume all parser warnings are depwarns</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1963,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; if depwarn</span>
+            <span class='code'>    in_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1973,7 @@
           <td>
             
             
-            <span class='code'>        _parse_input_line_core&#40;s, filename&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1983,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>Check if a point &#96;p&#96; is within the bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1993,7 @@
           <td>
             
             
-            <span class='code'>        with_logger&#40;NullLogger&#40;&#41;&#41; do</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +2003,7 @@
           <td>
             
             
-            <span class='code'>            _parse_input_line_core&#40;s, filename&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +2013,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>- &#96;p&#96;: A vector of AbstractFloat values representing the coordinates of a point.</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2023,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>- &#96;gs&#96;: A GridSpec object representing the specifications of a grid.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2033,7 @@
           <td>
             
             
-            <span class='code'>    return ex</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2043,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2053,7 @@
           <td>
             
             
-            <span class='code'>parse_input_line&#40;s::AbstractString&#41; &#61; parse_input_line&#40;String&#40;s&#41;&#41;</span>
+            <span class='code'>A boolean value indicating whether the point &#96;p&#96; is within the bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2045,7 +2073,7 @@
           <td>
             
             
-            <span class='code'># detect the reason which caused an :incomplete expression</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2083,7 @@
           <td>
             
             
-            <span class='code'># from the error message</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2093,7 @@
           <td>
             
             
-            <span class='code'># NOTE: the error messages are defined in src/julia-parser.scm</span>
+            <span class='code'>p &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2103,7 @@
           <td>
             
             
-            <span class='code'>incomplete_tag&#40;ex&#41; &#61; :none</span>
+            <span class='code'>gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2113,7 @@
           <td>
             
             
-            <span class='code'>function incomplete_tag&#40;ex::Expr&#41;</span>
+            <span class='code'>in_bounding_box&#40;p, gs&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2123,7 @@
           <td>
             
             
-            <span class='code'>    Meta.isexpr&#40;ex, :incomplete&#41; || return :none</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2133,7 @@
           <td>
             
             
-            <span class='code'>    msg &#61; ex.args&#91;1&#93;</span>
+            <span class='code'>The expected output is a boolean value indicating whether the point is within the bounding box or not.</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2143,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;string&quot;, msg&#41; &amp;&amp; return :string</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,17 +2153,36 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;comment&quot;, msg&#41; &amp;&amp; return :comment</span>
+            <span class='code'>function in_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L211'>
           <td class='lineno'>211</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    occursin&#40;&quot;requires end&quot;, msg&#41; &amp;&amp; return :block</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in in_bounding_box
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from jb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L156'>line 156</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from fb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L152'>line 152</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L178'>in_bounding_box</a>
+              <br />
+            </div>
+            <span class='code'>    return in_bounding_box&#40;p, gs.origin, gs.lattice_full_inv&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2192,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;\&quot;&#96;\&quot;&quot;, msg&#41; &amp;&amp; return :cmd</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2202,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;character&quot;, msg&#41; &amp;&amp; return :char</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2212,7 @@
           <td>
             
             
-            <span class='code'>    return :other</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2222,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    clamp_to_bounding_box&#33;&#40;p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2193,18 +2240,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;20 &#37;&#41;
-              samples spent in exec_options
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _start
-              <a href='client.jl-28c8ddedb443756831a744f285baf5c69c1eb9a9.html#L522'>line 522</a>
-              <br />
-            </div>
             
-            <span class='code'>function exec_options&#40;opts&#41;</span>
+            
+            <span class='code'>Clip a point &#96;p&#96; to a bounding box defined by an origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2214,7 +2252,7 @@
           <td>
             
             
-            <span class='code'>    quiet                 &#61; &#40;opts.quiet &#33;&#61; 0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2224,7 +2262,7 @@
           <td>
             
             
-            <span class='code'>    startup               &#61; &#40;opts.startupfile &#33;&#61; 2&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2234,7 +2272,7 @@
           <td>
             
             
-            <span class='code'>    history_file          &#61; &#40;opts.historyfile &#33;&#61; 0&#41;</span>
+            <span class='code'>- &#96;p&#96;: A vector representing the coordinates of a point, which will be modified in-place.</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2244,7 +2282,7 @@
           <td>
             
             
-            <span class='code'>    color_set             &#61; &#40;opts.color &#33;&#61; 0&#41; # --color&#33;&#61;auto</span>
+            <span class='code'>- &#96;o&#96;: A vector representing the origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2254,7 +2292,7 @@
           <td>
             
             
-            <span class='code'>    global have_color     &#61; color_set ? &#40;opts.color &#61;&#61; 1&#41; : nothing # --color&#61;on</span>
+            <span class='code'>- &#96;V_inv&#96;: A matrix representing the inverse of the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2264,7 +2302,7 @@
           <td>
             
             
-            <span class='code'>    global is_interactive &#61; &#40;opts.isinteractive &#33;&#61; 0&#41;</span>
+            <span class='code'>- &#96;V&#96;: A matrix representing the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2284,7 +2322,7 @@
           <td>
             
             
-            <span class='code'>    # pre-process command line argument list</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2294,7 +2332,7 @@
           <td>
             
             
-            <span class='code'>    arg_is_program &#61; &#33;isempty&#40;ARGS&#41;</span>
+            <span class='code'>Nothing</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2304,7 +2342,7 @@
           <td>
             
             
-            <span class='code'>    repl &#61; &#33;arg_is_program</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2314,7 +2352,7 @@
           <td>
             
             
-            <span class='code'>    cmds &#61; unsafe_load_commands&#40;opts.commands&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2324,7 +2362,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;cmd, arg&#41; in cmds</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2334,7 +2372,7 @@
           <td>
             
             
-            <span class='code'>        if cmd &#61;&#61; &#39;e&#39;</span>
+            <span class='code'>p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2344,7 +2382,7 @@
           <td>
             
             
-            <span class='code'>            arg_is_program &#61; false</span>
+            <span class='code'>o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2354,7 +2392,7 @@
           <td>
             
             
-            <span class='code'>            repl &#61; false</span>
+            <span class='code'>V_inv &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2364,7 +2402,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;E&#39;</span>
+            <span class='code'>V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2374,7 +2412,7 @@
           <td>
             
             
-            <span class='code'>            arg_is_program &#61; false</span>
+            <span class='code'>clamp_to_bounding_box&#33;&#40;p, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2384,7 +2422,7 @@
           <td>
             
             
-            <span class='code'>            repl &#61; false</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2394,7 +2432,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;L&#39;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2404,7 +2442,7 @@
           <td>
             
             
-            <span class='code'>            # nothing</span>
+            <span class='code'>function clamp_to_bounding_box&#33;&#40;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2414,7 +2452,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;B&#39; # --bug-report</span>
+            <span class='code'>    p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2424,7 +2462,7 @@
           <td>
             
             
-            <span class='code'>            # If we&#39;re doing a bug report, don&#39;t load anything else. We will</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2434,7 +2472,7 @@
           <td>
             
             
-            <span class='code'>            # spawn a child in which to execute these options.</span>
+            <span class='code'>    D &#61; length&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2444,7 +2482,7 @@
           <td>
             
             
-            <span class='code'>            let InteractiveUtils &#61; load_InteractiveUtils&#40;&#41;</span>
+            <span class='code'>    @assert D &#61;&#61; size&#40;V_inv, 1&#41; &#61;&#61; size&#40;p, 1&#41; &quot;Dimension mismatch&quot;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2454,7 +2492,7 @@
           <td>
             
             
-            <span class='code'>                InteractiveUtils.report_bug&#40;arg&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2464,7 +2502,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2474,7 +2512,7 @@
           <td>
             
             
-            <span class='code'>            return nothing</span>
+            <span class='code'>    x &#61; V_inv * &#40;p - o&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2484,7 +2522,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2494,7 +2532,7 @@
           <td>
             
             
-            <span class='code'>            @warn &quot;Unexpected command -&#36;cmd&#39;&#36;arg&#39;&quot;</span>
+            <span class='code'>    p &#61; clamp.&#40;x, 0, 1&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2504,7 +2542,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2514,7 +2552,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2524,7 +2562,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2534,7 +2572,7 @@
           <td>
             
             
-            <span class='code'>    # remove filename from ARGS</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2544,7 +2582,7 @@
           <td>
             
             
-            <span class='code'>    global PROGRAM_FILE &#61; arg_is_program ? popfirst&#33;&#40;ARGS&#41; : &quot;&quot;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2554,7 +2592,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    clamp_to_bounding_box&#40;p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2564,7 +2602,7 @@
           <td>
             
             
-            <span class='code'>    # Load Distributed module only if any of the Distributed options have been specified.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2574,7 +2612,7 @@
           <td>
             
             
-            <span class='code'>    distributed_mode &#61; &#40;opts.worker &#61;&#61; 1&#41; || &#40;opts.nprocs &gt; 0&#41; || &#40;opts.machine_file &#33;&#61; C_NULL&#41;</span>
+            <span class='code'>Clip a point &#96;p&#96; to a bounding box defined by an origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2584,7 +2622,7 @@
           <td>
             
             
-            <span class='code'>    if distributed_mode</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2594,7 +2632,7 @@
           <td>
             
             
-            <span class='code'>        let Distributed &#61; require&#40;PkgId&#40;UUID&#40;&#40;0x8ba89e20_285c_5b6f, 0x9357_94700520ee1b&#41;&#41;, &quot;Distributed&quot;&#41;&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2604,7 +2642,7 @@
           <td>
             
             
-            <span class='code'>            Core.eval&#40;Main, :&#40;const Distributed &#61; &#36;Distributed&#41;&#41;</span>
+            <span class='code'>- &#96;p&#96;: A vector representing the coordinates of a point.</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2614,7 +2652,7 @@
           <td>
             
             
-            <span class='code'>            Core.eval&#40;Main, :&#40;using .Distributed&#41;&#41;</span>
+            <span class='code'>- &#96;o&#96;: A vector representing the origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2624,7 +2662,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>- &#96;V_inv&#96;: A matrix representing the inverse of the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2634,7 +2672,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;V&#96;: A matrix representing the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2644,7 +2682,7 @@
           <td>
             
             
-            <span class='code'>        invokelatest&#40;Main.Distributed.process_opts, opts&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2654,7 +2692,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2664,7 +2702,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>The clipped point that falls within the bounding box defined by the origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2674,7 +2712,7 @@
           <td>
             
             
-            <span class='code'>    interactiveinput &#61; &#40;repl || is_interactive::Bool&#41; &amp;&amp; isa&#40;stdin, TTY&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2684,7 +2722,7 @@
           <td>
             
             
-            <span class='code'>    is_interactive::Bool |&#61; interactiveinput</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2694,7 +2732,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2704,7 +2742,7 @@
           <td>
             
             
-            <span class='code'>    # load ~/.julia/config/startup.jl file</span>
+            <span class='code'>p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2714,7 +2752,7 @@
           <td>
             
             
-            <span class='code'>    if startup</span>
+            <span class='code'>o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2724,7 +2762,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>V_inv &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2734,7 +2772,7 @@
           <td>
             
             
-            <span class='code'>            load_julia_startup&#40;&#41;</span>
+            <span class='code'>V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2744,7 +2782,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>clamp_to_bounding_box&#40;p, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2754,7 +2792,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;display_error, scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2764,7 +2802,7 @@
           <td>
             
             
-            <span class='code'>            &#33;&#40;repl || is_interactive::Bool&#41; &amp;&amp; exit&#40;1&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2774,7 +2812,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>function clamp_to_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2784,7 +2822,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2794,7 +2832,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2804,7 +2842,7 @@
           <td>
             
             
-            <span class='code'>    # process cmds list</span>
+            <span class='code'>    p1 &#61; copy&#40;p&#41;</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2814,7 +2852,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;cmd, arg&#41; in cmds</span>
+            <span class='code'>    clamp_to_bounding_box&#33;&#40;p1, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2824,22 +2862,17 @@
           <td>
             
             
-            <span class='code'>        if cmd &#61;&#61; &#39;e&#39;</span>
+            <span class='code'>    return p1</span>
           </td>
         </tr>
         <tr id='L280'>
           <td class='lineno'>280</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='boot.jl-3f080772281d8a86b7e35b133daf84cac46b5da9.html#L370'>eval</a>
-              <br />
-            </div>
-            <span class='code'>            Core.eval&#40;Main, parse_input_line&#40;arg&#41;&#41;</span>
+            
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2849,7 +2882,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;E&#39;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2859,7 +2892,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;show, Core.eval&#40;Main, parse_input_line&#40;arg&#41;&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2869,7 +2902,7 @@
           <td>
             
             
-            <span class='code'>            println&#40;&#41;</span>
+            <span class='code'>    clamp_to_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where T&lt;:AbstractFloat</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2879,7 +2912,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;L&#39;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2889,7 +2922,7 @@
           <td>
             
             
-            <span class='code'>            # load file immediately on all processors</span>
+            <span class='code'>Clip the vector &#96;p&#96; to a bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2899,7 +2932,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;distributed_mode</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2909,7 +2942,7 @@
           <td>
             
             
-            <span class='code'>                include&#40;Main, arg&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2919,7 +2952,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>- &#96;p&#96;: A vector of AbstractFloat values representing a point in space.</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2929,7 +2962,7 @@
           <td>
             
             
-            <span class='code'>                # TODO: Move this logic to Distributed and use a callback</span>
+            <span class='code'>- &#96;gs&#96;: A GridSpec object containing information about the bounding box.</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2939,7 +2972,7 @@
           <td>
             
             
-            <span class='code'>                @sync for p in invokelatest&#40;Main.procs&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2949,7 +2982,7 @@
           <td>
             
             
-            <span class='code'>                    @async invokelatest&#40;Main.remotecall_wait, include, p, Main, arg&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2959,7 +2992,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>A vector representing the clipped point in the original basis.</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2969,7 +3002,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2979,7 +3012,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2989,7 +3022,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2999,7 +3032,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>p &#61; &#91;1.5, 2.0, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3009,7 +3042,7 @@
           <td>
             
             
-            <span class='code'>    # load file</span>
+            <span class='code'>gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3019,7 +3052,7 @@
           <td>
             
             
-            <span class='code'>    if arg_is_program</span>
+            <span class='code'>result &#61; clamp_to_bounding_box&#40;p, gs&#41;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3029,7 +3062,7 @@
           <td>
             
             
-            <span class='code'>        # program</span>
+            <span class='code'>println&#40;result&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3039,7 +3072,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;is_interactive::Bool</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3049,7 +3082,7 @@
           <td>
             
             
-            <span class='code'>            exit_on_sigint&#40;true&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3059,7 +3092,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>function clamp_to_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3069,7 +3102,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>    return clamp_to_bounding_box&#40;p, gs.origin, gs.lattice_full_inv, gs.lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3079,7 +3112,7 @@
           <td>
             
             
-            <span class='code'>            if PROGRAM_FILE &#61;&#61; &quot;-&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3089,7 +3122,7 @@
           <td>
             
             
-            <span class='code'>                include_string&#40;Main, read&#40;stdin, String&#41;, &quot;stdin&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3099,7 +3132,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3109,7 +3142,7 @@
           <td>
             
             
-            <span class='code'>                include&#40;Main, PROGRAM_FILE&#41;</span>
+            <span class='code'>    in_grid&#40;gs::GridSpec&#123;T&#125;, r::Vector&#123;T&#125;&#41; where T&lt;:AbstractFloat</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3119,7 +3152,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3129,7 +3162,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>Returns &#96;true&#96; if the point &#96;r&#96; is inside the grid defined by the &#96;GridSpec&#96; &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3139,7 +3172,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;display_error, scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3149,7 +3182,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;is_interactive::Bool</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3159,7 +3192,7 @@
           <td>
             
             
-            <span class='code'>                exit&#40;1&#41;</span>
+            <span class='code'>- &#96;gs::GridSpec&#123;T&#125;&#96;: The &#96;GridSpec&#96; defining the grid.</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3169,7 +3202,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The point to test for containment in the grid.</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3179,7 +3212,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3189,7 +3222,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3199,7 +3232,7 @@
           <td>
             
             
-            <span class='code'>    if repl || is_interactive::Bool</span>
+            <span class='code'>- &#96;Bool&#96;: &#96;true&#96; if the point &#96;r&#96; is inside the grid, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3209,7 +3242,7 @@
           <td>
             
             
-            <span class='code'>        if interactiveinput</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3219,7 +3252,7 @@
           <td>
             
             
-            <span class='code'>            banner &#61; &#40;opts.banner &#33;&#61; 0&#41; # --banner&#33;&#61;no</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3229,7 +3262,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3239,7 +3272,7 @@
           <td>
             
             
-            <span class='code'>            banner &#61; &#40;opts.banner &#61;&#61; 1&#41; # --banner&#61;yes</span>
+            <span class='code'>julia&gt; gs &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3249,7 +3282,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>julia&gt; r &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3259,7 +3292,7 @@
           <td>
             
             
-            <span class='code'>        run_main_repl&#40;interactiveinput, quiet, banner, history_file, color_set&#41;</span>
+            <span class='code'>julia&gt; in_grid&#40;gs, r&#41;</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3269,7 +3302,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3279,7 +3312,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3289,7 +3322,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3299,7 +3332,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function in_grid&#40;gs::GridSpec&#123;T&#125;, r::Vector&#123;U&#125;&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3309,7 +3342,7 @@
           <td>
             
             
-            <span class='code'>function _global_julia_startup_file&#40;&#41;</span>
+            <span class='code'>    return in_bounding_box&#40;r, gs.origin, gs.lattice_full_inv&#41;</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3319,7 +3352,7 @@
           <td>
             
             
-            <span class='code'>    # If the user built us with a specific Base.SYSCONFDIR, check that location first for a startup.jl file</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3329,7 +3362,7 @@
           <td>
             
             
-            <span class='code'>    # If it is not found, then continue on to the relative path based on Sys.BINDIR</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3339,7 +3372,7 @@
           <td>
             
             
-            <span class='code'>    BINDIR &#61; Sys.BINDIR</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3349,7 +3382,7 @@
           <td>
             
             
-            <span class='code'>    SYSCONFDIR &#61; Base.SYSCONFDIR</span>
+            <span class='code'>    NuclearCoordinate&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3359,7 +3392,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;SYSCONFDIR&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3369,7 +3402,7 @@
           <td>
             
             
-            <span class='code'>        p1 &#61; abspath&#40;BINDIR, SYSCONFDIR, &quot;julia&quot;, &quot;startup.jl&quot;&#41;</span>
+            <span class='code'>A struct representing a nuclear coordinate in 3D space.</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3379,7 +3412,7 @@
           <td>
             
             
-            <span class='code'>        isfile&#40;p1&#41; &amp;&amp; return p1</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3389,7 +3422,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3399,7 +3432,7 @@
           <td>
             
             
-            <span class='code'>    p2 &#61; abspath&#40;BINDIR, &quot;..&quot;, &quot;etc&quot;, &quot;julia&quot;, &quot;startup.jl&quot;&#41;</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3409,7 +3442,7 @@
           <td>
             
             
-            <span class='code'>    isfile&#40;p2&#41; &amp;&amp; return p2</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3419,7 +3452,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>- &#96;data::Element&#96;: The element associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3429,7 +3462,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3439,7 +3472,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3449,7 +3482,7 @@
           <td>
             
             
-            <span class='code'>function _local_julia_startup_file&#40;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3459,7 +3492,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;DEPOT_PATH&#41;</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3469,7 +3502,7 @@
           <td>
             
             
-            <span class='code'>        path &#61; abspath&#40;DEPOT_PATH&#91;1&#93;, &quot;config&quot;, &quot;startup.jl&quot;&#41;</span>
+            <span class='code'>data &#61; PeriodicTable.elements&#91;6&#93; # Carbon</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3479,7 +3512,7 @@
           <td>
             
             
-            <span class='code'>        isfile&#40;path&#41; &amp;&amp; return path</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3489,7 +3522,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>nc &#61; NuclearCoordinate&#123;Float64&#125;&#40;r, data&#41;</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3499,7 +3532,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3509,7 +3542,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3519,7 +3552,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct NuclearCoordinate&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3529,7 +3562,7 @@
           <td>
             
             
-            <span class='code'>function load_julia_startup&#40;&#41;</span>
+            <span class='code'>    r::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3539,7 +3572,7 @@
           <td>
             
             
-            <span class='code'>    global_file &#61; _global_julia_startup_file&#40;&#41;</span>
+            <span class='code'>    data::Element</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3549,7 +3582,7 @@
           <td>
             
             
-            <span class='code'>    &#40;global_file &#33;&#61;&#61; nothing&#41; &amp;&amp; include&#40;Main, global_file&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3559,7 +3592,7 @@
           <td>
             
             
-            <span class='code'>    local_file &#61; _local_julia_startup_file&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3569,7 +3602,7 @@
           <td>
             
             
-            <span class='code'>    &#40;local_file &#33;&#61;&#61; nothing&#41; &amp;&amp; include&#40;Main, local_file&#41;</span>
+            <span class='code'># overload Base.&#61;&#61; for NuclearCoordinate</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3579,7 +3612,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;a::NuclearCoordinate, b::NuclearCoordinate&#41;</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3589,7 +3622,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return a.r &#61;&#61; b.r &amp;&amp; a.data &#61;&#61; b.data</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3599,7 +3632,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3609,7 +3642,7 @@
           <td>
             
             
-            <span class='code'>const repl_hooks &#61; &#91;&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3619,7 +3652,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># overload Base.show for NuclearCoordinate to print data.symbol and r</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3629,7 +3662,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>show&#40;io::IO, nc::NuclearCoordinate&#41; &#61; show&#40;io, &quot;&#36;&#40;nc.data.symbol&#41; &#36;&#40;nc.r&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3639,7 +3672,7 @@
           <td>
             
             
-            <span class='code'>    atreplinit&#40;f&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3649,7 +3682,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3659,7 +3692,7 @@
           <td>
             
             
-            <span class='code'>Register a one-argument function to be called before the REPL interface is initialized in</span>
+            <span class='code'>    NuclearCoordinate&#40;r::Vector&#123;T&#125;, n::Integer&#41; where T&lt;:Real</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3669,7 +3702,7 @@
           <td>
             
             
-            <span class='code'>interactive sessions; this is useful to customize the interface. The argument of &#96;f&#96; is the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3679,7 +3712,7 @@
           <td>
             
             
-            <span class='code'>REPL object. This function should be called from within the &#96;.julia/config/startup.jl&#96;</span>
+            <span class='code'>A convenience constructor for creating a &#96;NuclearCoordinate&#96; from a position vector and an element index.</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3689,7 +3722,7 @@
           <td>
             
             
-            <span class='code'>initialization file.</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3699,7 +3732,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3709,7 +3742,7 @@
           <td>
             
             
-            <span class='code'>atreplinit&#40;f::Function&#41; &#61; &#40;pushfirst&#33;&#40;repl_hooks, f&#41;; nothing&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3719,7 +3752,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3729,7 +3762,7 @@
           <td>
             
             
-            <span class='code'>function __atreplinit&#40;repl&#41;</span>
+            <span class='code'>- &#96;n::Integer&#96;: The index of the element associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3739,7 +3772,7 @@
           <td>
             
             
-            <span class='code'>    for f in repl_hooks</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3749,7 +3782,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3759,7 +3792,7 @@
           <td>
             
             
-            <span class='code'>            f&#40;repl&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3769,7 +3802,7 @@
           <td>
             
             
-            <span class='code'>        catch err</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3779,7 +3812,7 @@
           <td>
             
             
-            <span class='code'>            showerror&#40;stderr, err&#41;</span>
+            <span class='code'>n &#61; 6 # Carbon</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3789,7 +3822,7 @@
           <td>
             
             
-            <span class='code'>            println&#40;stderr&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3799,7 +3832,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, n&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3809,7 +3842,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3819,7 +3852,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3829,7 +3862,7 @@
           <td>
             
             
-            <span class='code'>_atreplinit&#40;repl&#41; &#61; invokelatest&#40;__atreplinit, repl&#41;</span>
+            <span class='code'>function NuclearCoordinate&#40;r::Vector&#123;T&#125;, n::Integer&#41; where &#123;T&lt;:Real&#125;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3839,7 +3872,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @assert 1 ≤ n ≤ 119 &quot;Invalid element index&quot;</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3849,7 +3882,7 @@
           <td>
             
             
-            <span class='code'>function load_InteractiveUtils&#40;mod::Module&#61;Main&#41;</span>
+            <span class='code'>    type &#61; eltype&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3859,7 +3892,7 @@
           <td>
             
             
-            <span class='code'>    # load interactive-only libraries</span>
+            <span class='code'>    if &#33;&#40;T &lt;: AbstractFloat&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3869,7 +3902,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isdefined&#40;mod, :InteractiveUtils&#41;</span>
+            <span class='code'>        r &#61; Float64.&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3879,7 +3912,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>        type &#61; Float64</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3889,7 +3922,7 @@
           <td>
             
             
-            <span class='code'>            let InteractiveUtils &#61; require&#40;PkgId&#40;UUID&#40;0xb77e0a4c_d291_57a0_90e8_8db25a27a240&#41;, &quot;InteractiveUtils&quot;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3899,7 +3932,7 @@
           <td>
             
             
-            <span class='code'>                Core.eval&#40;mod, :&#40;const InteractiveUtils &#61; &#36;InteractiveUtils&#41;&#41;</span>
+            <span class='code'>    return NuclearCoordinate&#123;eltype&#40;r&#41;&#125;&#40;r, elements&#91;n&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3909,7 +3942,7 @@
           <td>
             
             
-            <span class='code'>                Core.eval&#40;mod, :&#40;using .InteractiveUtils&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3919,7 +3952,7 @@
           <td>
             
             
-            <span class='code'>                return InteractiveUtils</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3929,7 +3962,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3939,7 +3972,7 @@
           <td>
             
             
-            <span class='code'>        catch ex</span>
+            <span class='code'>    NuclearCoordinate&#40;r::Vector&#123;T&#125;, s::Symbol&#41; where T&lt;:Real</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3949,7 +3982,7 @@
           <td>
             
             
-            <span class='code'>            @warn &quot;Failed to import InteractiveUtils into module &#36;mod&quot; exception&#61;&#40;ex, catch_backtrace&#40;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3959,7 +3992,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>A convenience constructor for creating a &#96;NuclearCoordinate&#96; from a position vector and an element symbol.</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3969,7 +4002,7 @@
           <td>
             
             
-            <span class='code'>        return nothing</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3979,7 +4012,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3989,7 +4022,7 @@
           <td>
             
             
-            <span class='code'>    return getfield&#40;mod, :InteractiveUtils&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3999,7 +4032,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4009,7 +4042,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;s::Symbol&#96;: The element symbol associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4019,7 +4052,7 @@
           <td>
             
             
-            <span class='code'>global active_repl</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4029,7 +4062,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4039,7 +4072,7 @@
           <td>
             
             
-            <span class='code'># run the requested sort of evaluation loop on stdio</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4049,7 +4082,7 @@
           <td>
             
             
-            <span class='code'>function run_main_repl&#40;interactive::Bool, quiet::Bool, banner::Bool, history_file::Bool, color_set::Bool&#41;</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4059,7 +4092,7 @@
           <td>
             
             
-            <span class='code'>    load_InteractiveUtils&#40;&#41;</span>
+            <span class='code'>s &#61; :C</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4079,7 +4112,7 @@
           <td>
             
             
-            <span class='code'>    if interactive &amp;&amp; isassigned&#40;REPL_MODULE_REF&#41;</span>
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, s&#41;</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4089,7 +4122,7 @@
           <td>
             
             
-            <span class='code'>        invokelatest&#40;REPL_MODULE_REF&#91;&#93;&#41; do REPL</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4099,7 +4132,7 @@
           <td>
             
             
-            <span class='code'>            term_env &#61; get&#40;ENV, &quot;TERM&quot;, @static Sys.iswindows&#40;&#41; ? &quot;&quot; : &quot;dumb&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4109,7 +4142,7 @@
           <td>
             
             
-            <span class='code'>            term &#61; REPL.Terminals.TTYTerminal&#40;term_env, stdin, stdout, stderr&#41;</span>
+            <span class='code'>function NuclearCoordinate&#40;r::Vector&#123;T&#125;, s::Symbol&#41; where &#123;T&lt;:Real&#125;</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4119,7 +4152,7 @@
           <td>
             
             
-            <span class='code'>            banner &amp;&amp; Base.banner&#40;term&#41;</span>
+            <span class='code'>    type &#61; eltype&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4129,7 +4162,7 @@
           <td>
             
             
-            <span class='code'>            if term.term_type &#61;&#61; &quot;dumb&quot;</span>
+            <span class='code'>    if &#33;&#40;T &lt;: AbstractFloat&#41;</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4139,7 +4172,7 @@
           <td>
             
             
-            <span class='code'>                repl &#61; REPL.BasicREPL&#40;term&#41;</span>
+            <span class='code'>        r &#61; Float64.&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4149,7 +4182,7 @@
           <td>
             
             
-            <span class='code'>                quiet || @warn &quot;Terminal not fully functional&quot;</span>
+            <span class='code'>        type &#61; Float64</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4159,7 +4192,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4169,7 +4202,7 @@
           <td>
             
             
-            <span class='code'>                repl &#61; REPL.LineEditREPL&#40;term, get&#40;stdout, :color, false&#41;, true&#41;</span>
+            <span class='code'>    return NuclearCoordinate&#123;eltype&#40;r&#41;&#125;&#40;r, elements&#91;s&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4179,7 +4212,7 @@
           <td>
             
             
-            <span class='code'>                repl.history_file &#61; history_file</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4189,7 +4222,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4199,7 +4232,7 @@
           <td>
             
             
-            <span class='code'>            global active_repl &#61; repl</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4209,7 +4242,7 @@
           <td>
             
             
-            <span class='code'>            # Make sure any displays pushed in .julia/config/startup.jl ends up above the</span>
+            <span class='code'>    System&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4219,7 +4252,7 @@
           <td>
             
             
-            <span class='code'>            # REPLDisplay</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4229,7 +4262,7 @@
           <td>
             
             
-            <span class='code'>            pushdisplay&#40;REPL.REPLDisplay&#40;repl&#41;&#41;</span>
+            <span class='code'>A struct representing a system for analysis.</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4239,7 +4272,7 @@
           <td>
             
             
-            <span class='code'>            _atreplinit&#40;repl&#41;</span>
+            <span class='code'>It contains the system name, grid extent, atoms, and</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4249,7 +4282,7 @@
           <td>
             
             
-            <span class='code'>            REPL.run_repl&#40;repl, backend-&gt;&#40;global active_repl_backend &#61; backend&#41;&#41;</span>
+            <span class='code'>functions for &#96;rho&#96;, &#96;grad&#96;, and &#96;hess&#96; that can be queried</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4259,7 +4292,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>arbitrarily.</span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4269,7 +4302,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>Note that this works for 2D systems as well as 3D systems.</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4279,7 +4312,7 @@
           <td>
             
             
-            <span class='code'>        # otherwise provide a simple fallback</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4289,7 +4322,7 @@
           <td>
             
             
-            <span class='code'>        if interactive &amp;&amp; &#33;quiet</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4299,7 +4332,7 @@
           <td>
             
             
-            <span class='code'>            @warn &quot;REPL provider not available: using basic fallback&quot;</span>
+            <span class='code'>- &#96;name::String&#96;: The name of the system.</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4309,7 +4342,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>- &#96;source::String&#96;: The source of the system &#40;e.g. program name and file type&#41;.</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4319,7 +4352,7 @@
           <td>
             
             
-            <span class='code'>        banner &amp;&amp; Base.banner&#40;&#41;</span>
+            <span class='code'>- &#96;atoms::Vector&#123;NuclearCoordinate&#123;T&#125;&#125;&#96;: The atoms of the system.</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4329,7 +4362,7 @@
           <td>
             
             
-            <span class='code'>        let input &#61; stdin</span>
+            <span class='code'>- &#96;grid::GridSpec&#123;T&#125;&#96;: The grid specification of the system.</span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4339,7 +4372,7 @@
           <td>
             
             
-            <span class='code'>            if isa&#40;input, File&#41; || isa&#40;input, IOStream&#41;</span>
+            <span class='code'>- &#96;rho::Function&#96;: The rho function of the system.</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4349,7 +4382,7 @@
           <td>
             
             
-            <span class='code'>                # for files, we can slurp in the whole thing at once</span>
+            <span class='code'>- &#96;grad::Function&#96;: The grad function of the system.</span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4359,7 +4392,7 @@
           <td>
             
             
-            <span class='code'>                ex &#61; parse_input_line&#40;read&#40;input, String&#41;&#41;</span>
+            <span class='code'>- &#96;hess::Function&#96;: The hess function of the system.</span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4369,7 +4402,7 @@
           <td>
             
             
-            <span class='code'>                if Meta.isexpr&#40;ex, :toplevel&#41;</span>
+            <span class='code'>- &#96;rho&#33;::Function&#96;: The rho&#33; function of the system.</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4379,7 +4412,7 @@
           <td>
             
             
-            <span class='code'>                    # if we get back a list of statements, eval them sequentially</span>
+            <span class='code'>- &#96;grad&#33;::Function&#96;: The grad&#33; function of the system.</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4389,7 +4422,7 @@
           <td>
             
             
-            <span class='code'>                    # as if we had parsed them sequentially</span>
+            <span class='code'>- &#96;hess&#33;::Function&#96;: The hess&#33; function of the system.</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4399,7 +4432,7 @@
           <td>
             
             
-            <span class='code'>                    for stmt in ex.args</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4409,7 +4442,7 @@
           <td>
             
             
-            <span class='code'>                        eval_user_input&#40;stderr, stmt, true&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4419,7 +4452,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4429,7 +4462,7 @@
           <td>
             
             
-            <span class='code'>                    body &#61; ex.args</span>
+            <span class='code'># Define a 3D sin function to be used as rho, grad, and hess functions</span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4439,7 +4472,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'>f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4449,7 +4482,7 @@
           <td>
             
             
-            <span class='code'>                    eval_user_input&#40;stderr, ex, true&#41;</span>
+            <span class='code'>f3d_xyz&#40;x,y,z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4459,7 +4492,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L443'>
@@ -4469,7 +4502,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>hess3d&#40;r&#41; &#61; &#91;-sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;; -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;; -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4479,7 +4512,7 @@
           <td>
             
             
-            <span class='code'>                while isopen&#40;input&#41; || &#33;eof&#40;input&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4489,7 +4522,7 @@
           <td>
             
             
-            <span class='code'>                    if interactive</span>
+            <span class='code'># Define in-place versions of the functions</span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4499,7 +4532,7 @@
           <td>
             
             
-            <span class='code'>                        print&#40;&quot;julia&gt; &quot;&#41;</span>
+            <span class='code'>rho&#33;&#40;v::Vector&#123;Float64&#125;, r::Vector&#123;Float64&#125;&#41; &#61; &#40;v&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4509,7 +4542,7 @@
           <td>
             
             
-            <span class='code'>                        flush&#40;stdout&#41;</span>
+            <span class='code'>grad&#33;&#40;g::Vector&#123;Float64&#125;, r::Vector&#123;Float64&#125;&#41; &#61; &#40;g&#91;:&#93; &#61; grad3d&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4519,7 +4552,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>hess&#33;&#40;h::Matrix&#123;Float64&#125;, r::Vector&#123;Float64&#125;&#41; &#61; &#40;h&#91;:&#93; &#61; hess3d&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4529,7 +4562,7 @@
           <td>
             
             
-            <span class='code'>                    try</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L450'>
@@ -4539,7 +4572,7 @@
           <td>
             
             
-            <span class='code'>                        line &#61; &quot;&quot;</span>
+            <span class='code'># Define the origin, lattice, and number of ijk points for the GridSpec</span>
           </td>
         </tr>
         <tr id='L451'>
@@ -4549,7 +4582,7 @@
           <td>
             
             
-            <span class='code'>                        ex &#61; nothing</span>
+            <span class='code'>o &#61; zeros&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L452'>
@@ -4559,7 +4592,7 @@
           <td>
             
             
-            <span class='code'>                        while &#33;eof&#40;input&#41;</span>
+            <span class='code'>n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L453'>
@@ -4569,7 +4602,7 @@
           <td>
             
             
-            <span class='code'>                            line *&#61; readline&#40;input, keep&#61;true&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L454'>
@@ -4579,7 +4612,7 @@
           <td>
             
             
-            <span class='code'>                            ex &#61; parse_input_line&#40;line&#41;</span>
+            <span class='code'># Define the lattice for the GridSpec</span>
           </td>
         </tr>
         <tr id='L455'>
@@ -4589,7 +4622,7 @@
           <td>
             
             
-            <span class='code'>                            if &#33;&#40;isa&#40;ex, Expr&#41; &amp;&amp; ex.head &#61;&#61;&#61; :incomplete&#41;</span>
+            <span class='code'>l &#61; zeros&#40;3, 3&#41;</span>
           </td>
         </tr>
         <tr id='L456'>
@@ -4599,7 +4632,7 @@
           <td>
             
             
-            <span class='code'>                                break</span>
+            <span class='code'>for i in 1:3</span>
           </td>
         </tr>
         <tr id='L457'>
@@ -4609,7 +4642,7 @@
           <td>
             
             
-            <span class='code'>                            end</span>
+            <span class='code'>    l&#91;i, i&#93; &#61; 0.1</span>
           </td>
         </tr>
         <tr id='L458'>
@@ -4619,7 +4652,7 @@
           <td>
             
             
-            <span class='code'>                        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L459'>
@@ -4629,7 +4662,7 @@
           <td>
             
             
-            <span class='code'>                        eval_user_input&#40;stderr, ex, true&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L460'>
@@ -4639,7 +4672,7 @@
           <td>
             
             
-            <span class='code'>                    catch err</span>
+            <span class='code'># Create a GridSpec with the defined origin, lattice</span>
           </td>
         </tr>
         <tr id='L461'>
@@ -4649,7 +4682,7 @@
           <td>
             
             
-            <span class='code'>                        isa&#40;err, InterruptException&#41; ? print&#40;&quot;\n\n&quot;&#41; : rethrow&#40;&#41;</span>
+            <span class='code'>g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L462'>
@@ -4659,7 +4692,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L463'>
@@ -4669,7 +4702,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'># Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L464'>
@@ -4679,7 +4712,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>atoms &#61; &#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, 6&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L465'>
@@ -4689,7 +4722,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L466'>
@@ -4699,7 +4732,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Create a System with the 3D sin function and the defined atoms and GridSpec</span>
           </td>
         </tr>
         <tr id='L467'>
@@ -4709,7 +4742,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>system &#61; System&#123;Float64&#125;&#40;&quot;Test System&quot;, &quot;user-defined&quot;, atoms, g, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L468'>
@@ -4719,7 +4752,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L469'>
@@ -4729,7 +4762,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L470'>
@@ -4739,7 +4772,7 @@
           <td>
             
             
-            <span class='code'># MainInclude exists to hide Main.include and eval from &#96;names&#40;Main&#41;&#96;.</span>
+            <span class='code'>struct System&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L471'>
@@ -4749,7 +4782,7 @@
           <td>
             
             
-            <span class='code'>baremodule MainInclude</span>
+            <span class='code'>    name::String</span>
           </td>
         </tr>
         <tr id='L472'>
@@ -4759,7 +4792,7 @@
           <td>
             
             
-            <span class='code'>using ..Base</span>
+            <span class='code'>    source::String</span>
           </td>
         </tr>
         <tr id='L473'>
@@ -4769,7 +4802,7 @@
           <td>
             
             
-            <span class='code'># These definitions calls Base._include rather than Base.include to get</span>
+            <span class='code'>    atoms::Vector&#123;NuclearCoordinate&#123;T&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L474'>
@@ -4779,7 +4812,7 @@
           <td>
             
             
-            <span class='code'># one-frame stacktraces for the common case of using include&#40;fname&#41; in Main.</span>
+            <span class='code'>    grid::GridSpec&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L475'>
@@ -4789,7 +4822,7 @@
           <td>
             
             
-            <span class='code'>include&#40;mapexpr::Function, fname::AbstractString&#41; &#61; Base._include&#40;mapexpr, Main, fname&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L476'>
@@ -4797,18 +4830,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;20 &#37;&#41;
-              samples spent in include
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from eval
-              <a href='boot.jl-3f080772281d8a86b7e35b133daf84cac46b5da9.html#L370'>line 370</a>
-              <br />
-            </div>
             
-            <span class='code'>function include&#40;fname::AbstractString&#41;</span>
+            
+            <span class='code'>    # functions for accessing field variables and their derivatives</span>
           </td>
         </tr>
         <tr id='L477'>
@@ -4818,22 +4842,17 @@
           <td>
             
             
-            <span class='code'>    isa&#40;fname, String&#41; || &#40;fname &#61; Base.convert&#40;String, fname&#41;::String&#41;</span>
+            <span class='code'>    # at a point &#96;r&#96;</span>
           </td>
         </tr>
         <tr id='L478'>
           <td class='lineno'>478</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='loading.jl-943809bbfe34c048acd864d58de3a55a92feb474.html#L1953'>_include</a>
-              <br />
-            </div>
-            <span class='code'>    Base._include&#40;identity, Main, fname&#41;</span>
+            
+            <span class='code'>    rho_xyz::Function # &#40;x::T, y::T, z::T&#41; -&gt; T</span>
           </td>
         </tr>
         <tr id='L479'>
@@ -4843,7 +4862,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    rho::Function # &#40;r::T&#41; -&gt; T</span>
           </td>
         </tr>
         <tr id='L480'>
@@ -4853,7 +4872,7 @@
           <td>
             
             
-            <span class='code'>eval&#40;x&#41; &#61; Core.eval&#40;Main, x&#41;</span>
+            <span class='code'>    grad::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L481'>
@@ -4863,7 +4882,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    hess::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L482'>
@@ -4883,7 +4902,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # in-place versions of the above functions &#40;for efficiency&#41;</span>
           </td>
         </tr>
         <tr id='L484'>
@@ -4893,7 +4912,7 @@
           <td>
             
             
-            <span class='code'>    eval&#40;expr&#41;</span>
+            <span class='code'>    # &#40;The reason rho&#33; takes a vector of length one here is due to</span>
           </td>
         </tr>
         <tr id='L485'>
@@ -4903,7 +4922,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # the way that mutating functions work in Julia, where they can</span>
           </td>
         </tr>
         <tr id='L486'>
@@ -4913,7 +4932,7 @@
           <td>
             
             
-            <span class='code'>Evaluate an expression in the global scope of the containing module.</span>
+            <span class='code'>    # modify the contents of their arguments, but not reassign the</span>
           </td>
         </tr>
         <tr id='L487'>
@@ -4923,7 +4942,7 @@
           <td>
             
             
-            <span class='code'>Every &#96;Module&#96; &#40;except those defined with &#96;baremodule&#96;&#41; has its own 1-argument</span>
+            <span class='code'>    # the arguuments to a new symbol. see https://stackoverflow.com/a/39294877/2620767&#41;</span>
           </td>
         </tr>
         <tr id='L488'>
@@ -4933,7 +4952,7 @@
           <td>
             
             
-            <span class='code'>definition of &#96;eval&#96;, which evaluates expressions in that module.</span>
+            <span class='code'>    rho&#33;::Function # &#40;v::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
           </td>
         </tr>
         <tr id='L489'>
@@ -4943,7 +4962,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    grad&#33;::Function # &#40;g::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
           </td>
         </tr>
         <tr id='L490'>
@@ -4953,7 +4972,7 @@
           <td>
             
             
-            <span class='code'>MainInclude.eval</span>
+            <span class='code'>    hess&#33;::Function # &#40;h::Matrix&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
           </td>
         </tr>
         <tr id='L491'>
@@ -4963,7 +4982,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L492'>
@@ -4973,7 +4992,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L493'>
@@ -4983,7 +5002,7 @@
           <td>
             
             
-            <span class='code'>    include&#40;&#91;mapexpr::Function,&#93; path::AbstractString&#41;</span>
+            <span class='code'># overload Base.show for System to print name and summarize atoms and grid.</span>
           </td>
         </tr>
         <tr id='L494'>
@@ -4993,7 +5012,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># should print number of atoms of each symbol type, and grid.n_pts</span>
           </td>
         </tr>
         <tr id='L495'>
@@ -5003,7 +5022,7 @@
           <td>
             
             
-            <span class='code'>Evaluate the contents of the input source file in the global scope of the containing module.</span>
+            <span class='code'>function show&#40;io::IO, system::System&#41;</span>
           </td>
         </tr>
         <tr id='L496'>
@@ -5013,7 +5032,7 @@
           <td>
             
             
-            <span class='code'>Every module &#40;except those defined with &#96;baremodule&#96;&#41; has its own</span>
+            <span class='code'>    return show&#40;</span>
           </td>
         </tr>
         <tr id='L497'>
@@ -5023,7 +5042,7 @@
           <td>
             
             
-            <span class='code'>definition of &#96;include&#96;, which evaluates the file in that module.</span>
+            <span class='code'>        io,</span>
           </td>
         </tr>
         <tr id='L498'>
@@ -5033,7 +5052,7 @@
           <td>
             
             
-            <span class='code'>Returns the result of the last evaluated expression of the input file. During including,</span>
+            <span class='code'>        &quot;&#36;&#40;system.name&#41; with &#36;&#40;length&#40;system.atoms&#41;&#41; atom&#36;&#40;length&#40;system.atoms&#41;&#61;&#61;1 ? &quot;&quot; : &quot;s&quot;&#41; and &#36;&#40;system.grid.n_pts&#41; grid points &#40;Lattice &#61; &#36;&#40;system.grid.lattice&#41;&#41;&quot;,</span>
           </td>
         </tr>
         <tr id='L499'>
@@ -5043,7 +5062,7 @@
           <td>
             
             
-            <span class='code'>a task-local include path is set to the directory containing the file. Nested calls to</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L500'>
@@ -5053,7 +5072,7 @@
           <td>
             
             
-            <span class='code'>&#96;include&#96; will search relative to that path. This function is typically used to load source</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L501'>
@@ -5063,7 +5082,7 @@
           <td>
             
             
-            <span class='code'>interactively, or to combine files in packages that are broken into multiple source files.</span>
+            <span class='code'># TODO: Create &#96;SystemSet&#96; type to represent multiple systems/variables.</span>
           </td>
         </tr>
         <tr id='L502'>
@@ -5073,7 +5092,7 @@
           <td>
             
             
-            <span class='code'>The argument &#96;path&#96; is normalized using &#91;&#96;normpath&#96;&#93;&#40;@ref&#41; which will resolve</span>
+            <span class='code'>#  This will allow for conducting analysis on transient systems, such as a chemical reaction or mechanical perturbation.</span>
           </td>
         </tr>
         <tr id='L503'>
@@ -5083,7 +5102,7 @@
           <td>
             
             
-            <span class='code'>relative path tokens such as &#96;..&#96; and convert &#96;/&#96; to the appropriate path separator.</span>
+            <span class='code'>#  It also allows for representing multiple variables from a single system by making copies of the same system but with &quot;rho&quot; pointed to whatever variable is desired. This part will require modifying the data loaders to be able to specify which variable to load.</span>
           </td>
         </tr>
         <tr id='L504'>
@@ -5093,7 +5112,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># TODO: Add aux_data field to &#96;System&#96; to store auxiliary data that is not used for analysis.</span>
           </td>
         </tr>
         <tr id='L505'>
@@ -5103,7 +5122,7 @@
           <td>
             
             
-            <span class='code'>The optional first argument &#96;mapexpr&#96; can be used to transform the included code before</span>
+            <span class='code'>#  SCM and VASP data, at least, contains some potentially useful information, but it&#39;s not immediately used in analysis. </span>
           </td>
         </tr>
         <tr id='L506'>
@@ -5113,252 +5132,7 @@
           <td>
             
             
-            <span class='code'>it is evaluated: for each parsed expression &#96;expr&#96; in &#96;path&#96;, the &#96;include&#96; function</span>
-          </td>
-        </tr>
-        <tr id='L507'>
-          <td class='lineno'>507</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>actually evaluates &#96;mapexpr&#40;expr&#41;&#96;.  If it is omitted, &#96;mapexpr&#96; defaults to &#91;&#96;identity&#96;&#93;&#40;@ref&#41;.</span>
-          </td>
-        </tr>
-        <tr id='L508'>
-          <td class='lineno'>508</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L509'>
-          <td class='lineno'>509</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Use &#91;&#96;Base.include&#96;&#93;&#40;@ref&#41; to evaluate a file into another module.</span>
-          </td>
-        </tr>
-        <tr id='L510'>
-          <td class='lineno'>510</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L511'>
-          <td class='lineno'>511</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.5&quot;</span>
-          </td>
-        </tr>
-        <tr id='L512'>
-          <td class='lineno'>512</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Julia 1.5 is required for passing the &#96;mapexpr&#96; argument.</span>
-          </td>
-        </tr>
-        <tr id='L513'>
-          <td class='lineno'>513</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L514'>
-          <td class='lineno'>514</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>MainInclude.include</span>
-          </td>
-        </tr>
-        <tr id='L515'>
-          <td class='lineno'>515</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L516'>
-          <td class='lineno'>516</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function _start&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L517'>
-          <td class='lineno'>517</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    empty&#33;&#40;ARGS&#41;</span>
-          </td>
-        </tr>
-        <tr id='L518'>
-          <td class='lineno'>518</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    append&#33;&#40;ARGS, Core.ARGS&#41;</span>
-          </td>
-        </tr>
-        <tr id='L519'>
-          <td class='lineno'>519</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # clear any postoutput hooks that were saved in the sysimage</span>
-          </td>
-        </tr>
-        <tr id='L520'>
-          <td class='lineno'>520</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    empty&#33;&#40;Base.postoutput_hooks&#41;</span>
-          </td>
-        </tr>
-        <tr id='L521'>
-          <td class='lineno'>521</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    try</span>
-          </td>
-        </tr>
-        <tr id='L522'>
-          <td class='lineno'>522</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
-          <td>
-            
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='client.jl-28c8ddedb443756831a744f285baf5c69c1eb9a9.html#L217'>exec_options</a>
-              <br />
-            </div>
-            <span class='code'>        exec_options&#40;JLOptions&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L523'>
-          <td class='lineno'>523</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    catch</span>
-          </td>
-        </tr>
-        <tr id='L524'>
-          <td class='lineno'>524</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        invokelatest&#40;display_error, scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L525'>
-          <td class='lineno'>525</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        exit&#40;1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L526'>
-          <td class='lineno'>526</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L527'>
-          <td class='lineno'>527</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if is_interactive &amp;&amp; get&#40;stdout, :color, false&#41;</span>
-          </td>
-        </tr>
-        <tr id='L528'>
-          <td class='lineno'>528</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        print&#40;color_normal&#41;</span>
-          </td>
-        </tr>
-        <tr id='L529'>
-          <td class='lineno'>529</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L530'>
-          <td class='lineno'>530</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
+            <span class='code'>#  This data should be saved to a &#96;aux_data::Dict&#123;String, Any&#125;&#96; field in &#96;System&#96; so that it can be accessed later if needed. Then, each data loader will fetch and pass it to the &#96;System&#96; constructor as necessary.</span>
           </td>
         </tr>
       </tbody>
