@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/NLsolve/gJL1I/src/solvers/trust_region.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/NLSolversBase/kavn7/src/objective_types/oncedifferentiable.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>struct NewtonTrustRegion</span>
+            <span class='code'># Used for objectives and solvers where the gradient is available/exists</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>mutable struct OnceDifferentiable&#123;TF, TDF, TX&#125; &lt;: AbstractObjective</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f # objective</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>struct NewtonTrustRegionCache&#123;Tx&#125; &lt;: AbstractSolverCache</span>
+            <span class='code'>    df # &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>    x::Tx</span>
+            <span class='code'>    fdf # objective and &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>    xold::Tx</span>
+            <span class='code'>    F::TF # cache for f output</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    r::Tx</span>
+            <span class='code'>    DF::TDF # cache for df output</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    r_predict::Tx</span>
+            <span class='code'>    x_f::TX # x used to evaluate f &#40;stored in F&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    p::Tx</span>
+            <span class='code'>    x_df::TX # x used to evaluate df &#40;stored in DF&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    p_c::Tx</span>
+            <span class='code'>    f_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    pi::Tx</span>
+            <span class='code'>    df_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>    d::Tx</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>function NewtonTrustRegionCache&#40;df&#41;</span>
+            <span class='code'>### Only the objective</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    x &#61; copy&#40;df.x_f&#41; # Current point</span>
+            <span class='code'># Ambiguity</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    xold &#61; copy&#40;x&#41; # Old point</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    r &#61; copy&#40;df.F&#41;       # Current residual</span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    r_predict &#61; copy&#40;x&#41;  # predicted residual</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;; inplace &#61; true, autodiff &#61; :finite,  </span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    p &#61; copy&#40;x&#41;          # Step</span>
+            <span class='code'>                   chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    p_c &#61; copy&#40;x&#41;          # Cauchy point</span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, DF, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    pi &#61; copy&#40;x&#41;</span>
+            <span class='code'>#OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray; autodiff &#61; :finite&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    d &#61; copy&#40;x&#41;          # Scaling vector</span>
+            <span class='code'>#    OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, alloc_DF&#40;x, F&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    NewtonTrustRegionCache&#40;x, xold, r, r_predict, p, p_c, pi, d&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                   F::AbstractArray, DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>macro trustregiontrace&#40;stepnorm&#41;</span>
+            <span class='code'>                   inplace &#61; true, autodiff &#61; :finite&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>    esc&#40;quote</span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>        if tracing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>            dt &#61; Dict&#40;&#41;</span>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, x::AbstractArray, F::AbstractArray, DF, autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>            if extended_trace</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>                dt&#91;&quot;x&quot;&#93; &#61; copy&#40;cache.x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>                dt&#91;&quot;f&#40;x&#41;&quot;&#93; &#61; copy&#40;value&#40;df&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>                dt&#91;&quot;g&#40;x&#41;&quot;&#93; &#61; copy&#40;jacobian&#40;df&#41;&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray&#123;T&#125;,</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>                dt&#91;&quot;delta&quot;&#93; &#61; delta</span>
+            <span class='code'>                            F::Real,</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>                dt&#91;&quot;rho&quot;&#93; &#61; rho</span>
+            <span class='code'>                            DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>                            autodiff, chunk&#41; where T</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>            update&#33;&#40;tr,</span>
+            <span class='code'>    # When here, at the constructor with positional autodiff, it should already</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>                    it,</span>
+            <span class='code'>    # be the case, that f is inplace.</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>                    maximum&#40;abs, value&#40;df&#41;&#41;,</span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>                    &#36;stepnorm,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>                    dt,</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>                    store_trace,</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>                    show_trace&#41;</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    end&#41;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -493,18 +493,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;5 &#37;&#41;
-              samples spent in dogleg&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from trust_region_
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L170'>line 170</a>
-              <br />
-            </div>
             
-            <span class='code'>function dogleg&#33;&#40;p, p_c, p_i,</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -514,7 +505,7 @@
           <td>
             
             
-            <span class='code'>                 r, d, J, delta::Real&#41;</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -524,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    T &#61; eltype&#40;d&#41;</span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -534,22 +525,17 @@
           <td>
             
             
-            <span class='code'>    try</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
           <td class='lineno'>51</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L342'>copyto&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        copyto&#33;&#40;p_i, J \ vec&#40;r&#41;&#41; # Gauss-Newton step</span>
+            
+            <span class='code'>            df_array_spec &#61; DF</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +545,7 @@
           <td>
             
             
-            <span class='code'>    catch e</span>
+            <span class='code'>            x_array_spec &#61; x_seed</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +555,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;e, LAPACKException&#41; || isa&#40;e, SingularException&#41;</span>
+            <span class='code'>            return_spec &#61; typeof&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +565,7 @@
           <td>
             
             
-            <span class='code'>            # If Jacobian is singular, compute a least-squares solution to J*x&#43;r&#61;0</span>
+            <span class='code'>            gcache &#61; FiniteDiff.GradientCache&#40;df_array_spec, x_array_spec, fdtype, return_spec&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +575,7 @@
           <td>
             
             
-            <span class='code'>            U, S, V &#61; svd&#40;convert&#40;Matrix&#123;T&#125;, J&#41;&#41; # Convert to full matrix because sparse SVD not implemented as of Julia 0.3</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +585,7 @@
           <td>
             
             
-            <span class='code'>            k &#61; sum&#40;S .&gt; eps&#40;&#41;&#41;</span>
+            <span class='code'>            function g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +595,7 @@
           <td>
             
             
-            <span class='code'>            mrinv &#61; V * Matrix&#40;Diagonal&#40;&#91;1 ./ S&#91;1:k&#93;; zeros&#40;eltype&#40;S&#41;, length&#40;S&#41;-k&#41;&#93;&#41;&#41; * U&#39; # Moore-Penrose generalized inverse of J</span>
+            <span class='code'>                FiniteDiff.finite_difference_gradient&#33;&#40;storage, f, x, gcache&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +605,7 @@
           <td>
             
             
-            <span class='code'>            vecpi &#61; vec&#40;p_i&#41;</span>
+            <span class='code'>                return</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +615,7 @@
           <td>
             
             
-            <span class='code'>            mul&#33;&#40;vecpi,mrinv,vec&#40;r&#41;&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +625,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>            function fg&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +635,7 @@
           <td>
             
             
-            <span class='code'>            throw&#40;e&#41;</span>
+            <span class='code'>                g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +645,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                return f&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +655,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    rmul&#33;&#40;p_i, -one&#40;T&#41;&#41;</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +675,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            gcfg &#61; ForwardDiff.GradientConfig&#40;f, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +685,7 @@
           <td>
             
             
-            <span class='code'>    # Test if Gauss-Newton step is within the region</span>
+            <span class='code'>            g&#33; &#61; &#40;out, x&#41; -&gt; ForwardDiff.gradient&#33;&#40;out, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    if wnorm&#40;d, p_i&#41; &lt;&#61; delta</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +705,7 @@
           <td>
             
             
-            <span class='code'>        copyto&#33;&#40;p, p_i&#41;   # accepts equation 4.13 from N&amp;W for this step</span>
+            <span class='code'>            fg&#33; &#61; &#40;out, x&#41; -&gt; begin</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +715,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>                gr_res &#61; DiffResults.DiffResult&#40;zero&#40;T&#41;, out&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +725,7 @@
           <td>
             
             
-            <span class='code'>        # For intermediate we will use the output array &#96;p&#96; as a buffer to hold</span>
+            <span class='code'>                ForwardDiff.gradient&#33;&#40;gr_res, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +735,7 @@
           <td>
             
             
-            <span class='code'>        # the gradient. To make it easy to remember which variable that array</span>
+            <span class='code'>                DiffResults.value&#40;gr_res&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +745,7 @@
           <td>
             
             
-            <span class='code'>        # is representing we make g an alias to p and use g when we want the</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +755,7 @@
           <td>
             
             
-            <span class='code'>        # gradient</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +765,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;autodiff is not support. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +775,7 @@
           <td>
             
             
-            <span class='code'>        # compute g &#61; J&#39;r ./ &#40;d .^ 2&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +785,7 @@
           <td>
             
             
-            <span class='code'>        g &#61; p</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +795,7 @@
           <td>
             
             
-            <span class='code'>        mul&#33;&#40;vec&#40;g&#41;, transpose&#40;J&#41;, vec&#40;r&#41;&#41;</span>
+            <span class='code'>        return OnceDifferentiable&#40;f, g&#33;, fg&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +805,7 @@
           <td>
             
             
-            <span class='code'>        g .&#61; g ./ d.^2</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +815,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +825,7 @@
           <td>
             
             
-            <span class='code'>        # compute Cauchy point</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +835,7 @@
           <td>
             
             
-            <span class='code'>        p_c .&#61; -wnorm&#40;d, g&#41;^2 / sum&#40;abs2, J*vec&#40;g&#41;&#41; .* g</span>
+            <span class='code'>has_not_dep_symbol_in_ad &#61; Ref&#123;Bool&#125;&#40;true&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +845,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, autodiff::Symbol, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +855,7 @@
           <td>
             
             
-            <span class='code'>        if wnorm&#40;d, p_c&#41; &gt;&#61; delta</span>
+            <span class='code'>OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +865,7 @@
           <td>
             
             
-            <span class='code'>            # Cauchy point is out of the region, take the largest step along</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +875,7 @@
           <td>
             
             
-            <span class='code'>            # gradient direction</span>
+            <span class='code'>                            autodiff::Bool, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +885,7 @@
           <td>
             
             
-            <span class='code'>            rmul&#33;&#40;g, -delta/wnorm&#40;d, g&#41;&#41;</span>
+            <span class='code'>    if autodiff &#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +895,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        throw&#40;ErrorException&#40;&quot;It is not possible to set the &#96;autodiff&#96; keyword to &#96;false&#96; when constructing a OnceDifferentiable instance from only one function. Pass in the &#40;partial&#41; derivative or specify a valid &#96;autodiff&#96; symbol.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +905,7 @@
           <td>
             
             
-            <span class='code'>            # now we want to set p &#61; g, but that is already true, so we&#39;re done</span>
+            <span class='code'>    elseif has_not_dep_symbol_in_ad&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +915,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        @warn&#40;&quot;Setting the &#96;autodiff&#96; keyword to &#96;true&#96; is deprecated. Please use a valid symbol instead.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +925,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>        has_not_dep_symbol_in_ad&#91;&#93; &#61; false</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +935,7 @@
           <td>
             
             
-            <span class='code'>            # from this point on we will only need p_i in the term p_i-p_c.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +945,7 @@
           <td>
             
             
-            <span class='code'>            # so we reuse the vector p_i by computing p_i &#61; p_i - p_c and then</span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, :forward, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +955,7 @@
           <td>
             
             
-            <span class='code'>            # just so we aren&#39;t confused we name that p_diff</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +965,7 @@
           <td>
             
             
-            <span class='code'>            p_i .-&#61; p_c</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray, F::AbstractArray, DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -989,7 +975,7 @@
           <td>
             
             
-            <span class='code'>            p_diff &#61; p_i</span>
+            <span class='code'>    autodiff::Symbol , chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x_seed&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +985,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +995,7 @@
           <td>
             
             
-            <span class='code'>            # Compute the optimal point on dogleg path</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>            b &#61; 2 * wdot&#40;d, p_c, d, p_diff&#41;</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>            a &#61; wnorm&#40;d, p_diff&#41;^2</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>            tau &#61; &#40;-b &#43; sqrt&#40;b^2 - 4a*&#40;wnorm&#40;d, p_c&#41;^2 - delta^2&#41;&#41;&#41;/&#40;2a&#41;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>            p_c .&#43;&#61; tau .* p_diff</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>            copyto&#33;&#40;p, p_c&#41;</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            # Apparently only the third input is aliased.</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1107,18 +1093,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              15 &#40;79 &#37;&#41;
-              samples spent in trust_region_
-              <br />
-              
-              15 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from trust_region
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L235'>line 235</a>
-              <br />
-            </div>
             
-            <span class='code'>function trust_region_&#40;df::OnceDifferentiable,</span>
+            
+            <span class='code'>            j_finitediff_cache &#61; FiniteDiff.JacobianCache&#40;copy&#40;x_seed&#41;, copy&#40;F&#41;, copy&#40;F&#41;, fdtype&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1128,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>                       initial_x::AbstractArray&#123;T&#125;,</span>
+            <span class='code'>            if autodiff &#61;&#61; :finiteforward</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1138,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>                       xtol::Real,</span>
+            <span class='code'>                # These copies can be done away with if we add a keyword for</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1148,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>                       ftol::Real,</span>
+            <span class='code'>                # reusing arrays instead for overwriting them.</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1158,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>                       iterations::Integer,</span>
+            <span class='code'>                Fx &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1168,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>                       store_trace::Bool,</span>
+            <span class='code'>                DF &#61; copy&#40;DF&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1178,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>                       show_trace::Bool,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1188,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>                       extended_trace::Bool,</span>
+            <span class='code'>                x_f, x_df &#61; x_of_nans&#40;x_seed&#41;, x_of_nans&#40;x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1198,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>                       factor::Real,</span>
+            <span class='code'>                f_calls, j_calls &#61; &#91;0,&#93;, &#91;0,&#93;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1208,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>                       autoscale::Bool,</span>
+            <span class='code'>                function j_finiteforward&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1218,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>                       cache &#61; NewtonTrustRegionCache&#40;df&#41;&#41; where T</span>
+            <span class='code'>                    # Exploit the possibility that it might be that x_f &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1228,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;cache.x, initial_x&#41;</span>
+            <span class='code'>                    # then we don&#39;t have to call f again.</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1238,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>    value_jacobian&#33;&#33;&#40;df, cache.x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1248,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>    cache.r .&#61; value&#40;df&#41;</span>
+            <span class='code'>                    # if at least one element of x_f is different from x, update</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1258,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>    check_isfinite&#40;cache.r&#41;</span>
+            <span class='code'>                    if any&#40;x_f .&#33;&#61; x&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1268,7 +1245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                        f&#40;Fx, x&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1278,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>    it &#61; 0</span>
+            <span class='code'>                        f_calls .&#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1288,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>    x_converged, f_converged &#61; assess_convergence&#40;initial_x, cache.xold, value&#40;df&#41;, NaN, ftol&#41;</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1298,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>    stopped &#61; any&#40;isnan, cache.x&#41; || any&#40;isnan, value&#40;df&#41;&#41; ? true : false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1308,7 +1285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, Fx&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1318,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    converged &#61; x_converged || f_converged</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1328,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    delta &#61; convert&#40;real&#40;T&#41;, NaN&#41;</span>
+            <span class='code'>                function fj_finiteforward&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1338,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>    rho &#61; convert&#40;real&#40;T&#41;, NaN&#41;</span>
+            <span class='code'>                    f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1348,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    if converged</span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, F&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1358,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>        tr &#61; SolverTrace&#40;&#41;</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1368,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>        name &#61; &quot;Trust-region with dogleg&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1378,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>        if autoscale</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1388,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>            name *&#61; &quot; and autoscaling&quot;</span>
+            <span class='code'>                return OnceDifferentiable&#40;f, j_finiteforward&#33;, fj_finiteforward&#33;, Fx, DF, x_f, x_df, f_calls, j_calls&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1398,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1418,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>        return SolverResults&#40;name,</span>
+            <span class='code'>            function fj_finitediff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1428,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>        #initial_x, reshape&#40;cache.x, size&#40;initial_x&#41;...&#41;, norm&#40;cache.r, Inf&#41;,</span>
+            <span class='code'>                f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1438,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>        initial_x, copy&#40;cache.x&#41;, norm&#40;cache.r, Inf&#41;,</span>
+            <span class='code'>                FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1448,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>        it, x_converged, xtol, f_converged, ftol, tr,</span>
+            <span class='code'>                F</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1458,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>        first&#40;df.f_calls&#41;, first&#40;df.df_calls&#41;&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1468,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            function j_finitediff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1478,7 +1455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                F_cache &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1488,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>    tr &#61; SolverTrace&#40;&#41;</span>
+            <span class='code'>                fj_finitediff&#33;&#40;F_cache, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1498,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>    tracing &#61; store_trace || show_trace || extended_trace</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1508,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>    @trustregiontrace convert&#40;real&#40;T&#41;, NaN&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1518,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>    nn &#61; length&#40;cache.x&#41;</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_finitediff&#33;, fj_finitediff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1528,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>    if autoscale</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1538,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>        for j &#61; 1:nn</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1548,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>            cache.d&#91;j&#93; &#61; norm&#40;view&#40;jacobian&#40;df&#41;, :, j&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1558,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>            if cache.d&#91;j&#93; &#61;&#61; zero&#40;cache.d&#91;j&#93;&#41;</span>
+            <span class='code'>            jac_cfg &#61; ForwardDiff.JacobianConfig&#40;f, F, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1568,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>                cache.d&#91;j&#93; &#61; one&#40;cache.d&#91;j&#93;&#41;</span>
+            <span class='code'>            ForwardDiff.checktag&#40;jac_cfg, f, x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1578,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1588,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            F2 &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1598,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>            function j_forwarddiff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1608,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>        fill&#33;&#40;cache.d, one&#40;real&#40;T&#41;&#41;&#41;</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;J, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1618,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1628,7 +1605,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            function fj_forwarddiff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1638,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    delta &#61; factor * wnorm&#40;cache.d, cache.x&#41;</span>
+            <span class='code'>                jac_res &#61; DiffResults.DiffResult&#40;F, J&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1648,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    if delta &#61;&#61; zero&#40;delta&#41;</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;jac_res, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1658,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>        delta &#61; factor</span>
+            <span class='code'>                DiffResults.value&#40;jac_res&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1668,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1688,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>    eta &#61; convert&#40;real&#40;T&#41;, 1e-4&#41;</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_forwarddiff&#33;, fj_forwarddiff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1698,7 +1675,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1708,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>    while &#33;stopped &amp;&amp; &#33;converged &amp;&amp; it &lt; iterations</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;&#40;autodiff&#41; is not supported. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1718,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>        it &#43;&#61; 1</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1728,7 +1705,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1738,22 +1715,17 @@
           <td>
             
             
-            <span class='code'>        # Compute proposed iteration step</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L170'>
           <td class='lineno'>170</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L47'>dogleg&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        dogleg&#33;&#40;cache.p, cache.p_c, cache.pi, cache.r, cache.d, jacobian&#40;df&#41;, delta&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1763,7 +1735,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>### Objective and derivative</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1773,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>        copyto&#33;&#40;cache.xold, cache.x&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df,</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1783,22 +1755,17 @@
           <td>
             
             
-            <span class='code'>        cache.x .&#43;&#61; cache.p</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L174'>
           <td class='lineno'>174</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>13 &#40;68 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              13 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L28'>value&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        value&#33;&#40;df, cache.x&#41;</span>
+            
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1808,7 +1775,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1818,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>        # Ratio of actual to predicted reduction &#40;equation 11.47 in N&amp;W&#41;</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1828,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>        mul&#33;&#40;vec&#40;cache.r_predict&#41;, jacobian&#40;df&#41;, vec&#40;cache.p&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1838,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>        cache.r_predict .&#43;&#61; cache.r</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1848,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>        rho &#61; &#40;sum&#40;abs2, cache.r&#41; - sum&#40;abs2, value&#40;df&#41;&#41;&#41; / &#40;sum&#40;abs2, cache.r&#41; - sum&#40;abs2, cache.r_predict&#41;&#41;</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1868,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>        if rho &gt; eta</span>
+            <span class='code'>    fdf&#33; &#61; make_fdf&#40;x, F, f, df&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1878,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>            # Successful iteration</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1888,22 +1855,17 @@
           <td>
             
             
-            <span class='code'>            cache.r .&#61; value&#40;df&#41;</span>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, x, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
           <td class='lineno'>184</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L135'>jacobian&#33;</a>
-              <br />
-            </div>
-            <span class='code'>            jacobian&#33;&#40;df, cache.x&#41;</span>
+            
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1919,11 +1881,34 @@
         <tr id='L186'>
           <td class='lineno'>186</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>4 &#40;21 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            # Update scaling vector</span>
+            <div class='call-sites'>
+              4 &#40;21 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #nlsolve#31
+              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L62'>line 62</a>
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>OnceDifferentiable</a>
+              <br />
+              2 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L196'>#OnceDifferentiable#26</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, j,</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1933,7 +1918,7 @@
           <td>
             
             
-            <span class='code'>            if autoscale</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1943,7 +1928,7 @@
           <td>
             
             
-            <span class='code'>                for j &#61; 1:nn</span>
+            <span class='code'>                   F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1953,7 +1938,7 @@
           <td>
             
             
-            <span class='code'>                    cache.d&#91;j&#93; &#61; max&#40;convert&#40;real&#40;T&#41;, 0.1&#41; * real&#40;cache.d&#91;j&#93;&#41;, norm&#40;view&#40;jacobian&#40;df&#41;, :, j&#41;&#41;&#41;</span>
+            <span class='code'>                   J::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1963,7 +1948,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1973,7 +1958,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1983,7 +1968,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1993,7 +1978,7 @@
           <td>
             
             
-            <span class='code'>            x_converged, f_converged &#61; assess_convergence&#40;cache.x, cache.xold, cache.r, xtol, ftol&#41;</span>
+            <span class='code'>    j&#33; &#61; df&#33;_from_df&#40;j, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2003,7 +1988,7 @@
           <td>
             
             
-            <span class='code'>            converged &#61; x_converged || f_converged</span>
+            <span class='code'>    fj&#33; &#61; make_fdf&#40;x, F, f&#33;, j&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2013,17 +1998,31 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L196'>
           <td class='lineno'>196</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            cache.x .-&#61; cache.p</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in #OnceDifferentiable#26
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>OnceDifferentiable</a>
+              <br />
+            </div>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, j&#33;, fj&#33;, x, F, J&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2033,7 +2032,7 @@
           <td>
             
             
-            <span class='code'>            x_converged, converged &#61; false, false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2053,7 +2052,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2063,7 +2062,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>### Objective, derivative and combination</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2073,7 +2072,7 @@
           <td>
             
             
-            <span class='code'>        @trustregiontrace euclidean&#40;cache.x, cache.xold&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2083,7 +2082,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2093,7 +2092,7 @@
           <td>
             
             
-            <span class='code'>        # Update size of trust region</span>
+            <span class='code'>    F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2103,7 +2102,7 @@
           <td>
             
             
-            <span class='code'>        if rho &lt; 0.1</span>
+            <span class='code'>    DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2113,7 +2112,7 @@
           <td>
             
             
-            <span class='code'>            delta &#61; delta/2</span>
+            <span class='code'>    inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2123,7 +2122,7 @@
           <td>
             
             
-            <span class='code'>        elseif rho &gt;&#61; 0.9</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2133,7 +2132,7 @@
           <td>
             
             
-            <span class='code'>            delta &#61; 2 * wnorm&#40;cache.d, cache.p&#41;</span>
+            <span class='code'>    # f is never &quot;inplace&quot; since F is scalar</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2143,7 +2142,7 @@
           <td>
             
             
-            <span class='code'>        elseif rho &gt;&#61; 0.5</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2153,7 +2152,7 @@
           <td>
             
             
-            <span class='code'>            delta &#61; max&#40;delta, 2 * wnorm&#40;cache.d, cache.p&#41;&#41;</span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2163,7 +2162,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2173,7 +2172,7 @@
           <td>
             
             
-            <span class='code'>        stopped &#61; any&#40;isnan, cache.x&#41; || any&#40;isnan, value&#40;df&#41;&#41; ? true : false</span>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2183,7 +2182,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2193,7 +2192,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    OnceDifferentiable&#123;typeof&#40;F&#41;,typeof&#40;DF&#41;,typeof&#40;x&#41;&#125;&#40;f, df&#33;, fdf&#33;,</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2203,7 +2202,7 @@
           <td>
             
             
-            <span class='code'>    name &#61; &quot;Trust-region with dogleg&quot;</span>
+            <span class='code'>    copy&#40;F&#41;, copy&#40;DF&#41;,</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2213,7 +2212,7 @@
           <td>
             
             
-            <span class='code'>    if autoscale</span>
+            <span class='code'>    x_f, x_df,</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2223,7 +2222,7 @@
           <td>
             
             
-            <span class='code'>        name *&#61; &quot; and autoscaling&quot;</span>
+            <span class='code'>    &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2233,7 +2232,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2243,17 +2242,36 @@
           <td>
             
             
-            <span class='code'>    return SolverResults&#40;name,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L219'>
           <td class='lineno'>219</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>                         initial_x, copy&#40;cache.x&#41;, maximum&#40;abs, cache.r&#41;,</span>
+            <div class='call-sites'>
+              4 &#40;21 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>line 219</a>
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #OnceDifferentiable#26
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L196'>line 196</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>#OnceDifferentiable#28</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2263,7 +2281,7 @@
           <td>
             
             
-            <span class='code'>                         it, x_converged, xtol, f_converged, ftol, tr,</span>
+            <span class='code'>                            x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2273,7 +2291,7 @@
           <td>
             
             
-            <span class='code'>                         first&#40;df.f_calls&#41;, first&#40;df.df_calls&#41;&#41;</span>
+            <span class='code'>                            F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2283,7 +2301,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                            DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2293,7 +2311,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                            inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2303,7 +2321,7 @@
           <td>
             
             
-            <span class='code'>function trust_region&#40;df::OnceDifferentiable,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2313,7 +2331,7 @@
           <td>
             
             
-            <span class='code'>                      initial_x::AbstractArray&#123;T&#125;,</span>
+            <span class='code'>    f &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2323,7 +2341,7 @@
           <td>
             
             
-            <span class='code'>                      xtol::Real,</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2333,7 +2351,7 @@
           <td>
             
             
-            <span class='code'>                      ftol::Real,</span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2343,17 +2361,22 @@
           <td>
             
             
-            <span class='code'>                      iterations::Integer,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L229'>
           <td class='lineno'>229</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>                      store_trace::Bool,</span>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='NLSolversBase.jl-62c7ebdfa569b7d78037da79ddfc8dddcf651cd3.html#L60'>x_of_nans</a>
+              <br />
+            </div>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2363,7 +2386,7 @@
           <td>
             
             
-            <span class='code'>                      show_trace::Bool,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2373,74 +2396,11 @@
           <td>
             
             
-            <span class='code'>                      extended_trace::Bool,</span>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, copy&#40;F&#41;, copy&#40;DF&#41;, x_f, x_df, &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
           <td class='lineno'>232</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                      factor::Real,</span>
-          </td>
-        </tr>
-        <tr id='L233'>
-          <td class='lineno'>233</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                      autoscale::Bool,</span>
-          </td>
-        </tr>
-        <tr id='L234'>
-          <td class='lineno'>234</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                      cache &#61; NewtonTrustRegionCache&#40;df&#41;&#41; where T</span>
-          </td>
-        </tr>
-        <tr id='L235'>
-          <td class='lineno'>235</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>30 &#40;158 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              30 &#40;158 &#37;&#41;
-              samples spent in trust_region
-              <br />
-              
-              15 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from trust_region
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L235'>line 235</a>
-              <br />
-              
-              15 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #nlsolve#25
-              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L26'>line 26</a>
-              <br />
-            </div>
-            <div class='callees'>
-              15 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L107'>trust_region_</a>
-              <br />
-              15 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L235'>trust_region</a>
-              <br />
-            </div>
-            <span class='code'>    trust_region_&#40;df, initial_x, convert&#40;real&#40;T&#41;, xtol&#41;, convert&#40;real&#40;T&#41;, ftol&#41;, iterations, store_trace, show_trace, extended_trace, convert&#40;real&#40;T&#41;, factor&#41;, autoscale, cache&#41;</span>
-          </td>
-        </tr>
-        <tr id='L236'>
-          <td class='lineno'>236</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
