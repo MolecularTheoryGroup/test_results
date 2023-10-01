@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/stdlib/v1.9/LinearAlgebra/src/uniformscaling.jl</title>
+    <title>StatProfilerHTML - ../src/systems.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sun, 01 Oct 2023 01:02:44
+        Generated on Sun, 01 Oct 2023 01:03:29
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>import Base: show, &#61;&#61;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using PeriodicTable: Element, elements</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>import Base: copy, adjoint, getindex, show, transpose, one, zero, inv,</span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>             hcat, vcat, hvcat, ^</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>export GridSpec,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    in_grid,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    UniformScaling&#123;T&lt;:Number&#125;</span>
+            <span class='code'>    in_bounding_box,</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    clamp_to_bounding_box,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>Generically sized uniform scaling operator defined as a scalar times</span>
+            <span class='code'>    apply_translational_symmetry,</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>the identity operator, &#96;λ*I&#96;. Although without an explicit &#96;size&#96;, it</span>
+            <span class='code'>    generate_interpolation_grid,</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>acts similarly to a matrix in many cases and includes support for some</span>
+            <span class='code'>    NuclearCoordinate,</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>indexing. See also &#91;&#96;I&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    System</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.6&quot;</span>
+            <span class='code'># Inner data types</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>     Indexing using ranges is available as of Julia 1.6.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    GridSpec&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; J &#61; UniformScaling&#40;2.&#41;</span>
+            <span class='code'>A struct representing a grid specification for analysis.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>UniformScaling&#123;Float64&#125;</span>
+            <span class='code'>This provides bounds on the analysis grid extent.</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>2.0*I</span>
+            <span class='code'>For grid data this will be the same as that defined by the grid.</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>For analytical functions, it can be specified manually, or</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; A &#61; &#91;1. 2.; 3. 4.&#93;</span>
+            <span class='code'>&#40;eventually&#41; it will be determined by a bounding box of the</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'>atoms in the system.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'> 1.0  2.0</span>
+            <span class='code'>Note that this works for 2D grids as well as 3D grids.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'> 3.0  4.0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; J*A</span>
+            <span class='code'>- &#96;origin::Vector&#123;T&#125;&#96;: The origin of the grid.</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'>- &#96;lattice::Matrix&#123;T&#125;&#96;: The lattice of the grid.</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'> 2.0  4.0</span>
+            <span class='code'>- &#96;lattice_full::Matrix&#123;T&#125;&#96;: The full lattice of the grid, including the periodic boundary conditions.</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'> 6.0  8.0</span>
+            <span class='code'>- &#96;lattice_full_inv::Matrix&#123;T&#125;&#96;: The inverse of the full lattice of the grid.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;n_pts::Vector&#123;Int&#125;&#96;: The number of grid points in each dimension of the grid.</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; J&#91;1:2, 1:2&#93;</span>
+            <span class='code'>- &#96;n_pts_float::Vector&#123;T&#125;&#96;: The number of grid points in each dimension of the grid, as a vector of floating-point values.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'>- &#96;n_pts_total::Int&#96;: The total number of grid points in the grid.</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'> 2.0  0.0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'> 0.0  2.0</span>
+            <span class='code'># Example using the convenience constructor that makes derived fields.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>origin &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>struct UniformScaling&#123;T&lt;:Number&#125;</span>
+            <span class='code'>lattice &#61; &#91;0.1 0.0 0.0; 0.0 0.1 0.0; 0.0 0.0 0.1&#93;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>    λ::T</span>
+            <span class='code'>n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>gs &#61; GridSpec&#123;Float64&#125;&#40;origin, lattice, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    I</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>An object of type &#91;&#96;UniformScaling&#96;&#93;&#40;@ref&#41;, representing an identity matrix of any size.</span>
+            <span class='code'>struct GridSpec&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # fields for grid data representation</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    origin::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    lattice::Matrix&#123;T&#125; # lattice vectors as &quot;steps&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; fill&#40;1, &#40;5,6&#41;&#41; * I &#61;&#61; fill&#40;1, &#40;5,6&#41;&#41;</span>
+            <span class='code'>    lattice_full::Matrix&#123;T&#125; # lattice vectors with full lattice extent</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    lattice_full_inv::Matrix&#123;T&#125; # inverse of lattice_full</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    n_pts::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; &#91;1 2im 3; 1im 2 3&#93; * I</span>
+            <span class='code'>    n_pts_float::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>2×3 Matrix&#123;Complex&#123;Int64&#125;&#125;:</span>
+            <span class='code'>    n_pts_total::Int</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'> 1&#43;0im  0&#43;2im  3&#43;0im</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'> 0&#43;1im  2&#43;0im  3&#43;0im</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'># Overload Base.show to print GridSpec as key:value pairs</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>function show&#40;io::IO, gs::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>const I &#61; UniformScaling&#40;true&#41;</span>
+            <span class='code'>    s &#61; join&#40;&#91;&quot;&#36;k: &#36;&#40;getfield&#40;gs, k&#41;&#41;&quot; for k in fieldnames&#40;GridSpec&#41;&#93;, &quot;, &quot;&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return show&#40;io, s&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>    &#40;I::UniformScaling&#41;&#40;n::Integer&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># overload &#61;&#61; operator</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>Construct a &#96;Diagonal&#96; matrix from a &#96;UniformScaling&#96;.</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;a::GridSpec, b::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return a.n_pts &#61;&#61; b.n_pts &amp;&amp; a.origin &#61;&#61; b.origin &amp;&amp; a.lattice &#61;&#61; b.lattice</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.2&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>     This method is available as of Julia 1.2.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Convenience constructor that calculates the derived veriables</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>function GridSpec&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    origin::Vector&#123;T&#125;, lattice::AbstractMatrix&#123;T&#125;, n_pts::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; I&#40;3&#41;</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>3×3 Diagonal&#123;Bool, Vector&#123;Bool&#125;&#125;:</span>
+            <span class='code'>    n_pts &#61; max.&#40;1, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'> 1  ⋅  ⋅</span>
+            <span class='code'>    n_pts_float &#61; T.&#40;n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'> ⋅  1  ⋅</span>
+            <span class='code'>    n_pts_total &#61; prod&#40;n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'> ⋅  ⋅  1</span>
+            <span class='code'>    lattice_full &#61; diagm&#40;n_pts_float&#41; * lattice</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    lattice_full_inv &#61; inv&#40;lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; &#40;0.7*I&#41;&#40;3&#41;</span>
+            <span class='code'>    return GridSpec&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>3×3 Diagonal&#123;Float64, Vector&#123;Float64&#125;&#125;:</span>
+            <span class='code'>        origin, lattice, lattice_full, lattice_full_inv, n_pts, n_pts_float, n_pts_total</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'> 0.7   ⋅    ⋅</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>  ⋅   0.7   ⋅</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>  ⋅    ⋅   0.7</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    generate_interpolation_grid&#40;gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>&#40;I::UniformScaling&#41;&#40;n::Integer&#41; &#61; Diagonal&#40;fill&#40;I.λ, n&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Calculate a grid for interpolation based on a &#96;GridSpec&#96; object.</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'>eltype&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;J::UniformScaling&#41; &#61; 2</span>
+            <span class='code'>## Arguments</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>Base.has_offset_axes&#40;::UniformScaling&#41; &#61; false</span>
+            <span class='code'>- &#96;gs&#96;: A &#96;GridSpec&#96; object that defines the grid.</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>getindex&#40;J::UniformScaling, i::Integer,j::Integer&#41; &#61; ifelse&#40;i&#61;&#61;j,J.λ,zero&#40;J.λ&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>## Returns</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>getindex&#40;J::UniformScaling, n::Integer, m::AbstractVector&#123;&lt;:Integer&#125;&#41; &#61; getindex&#40;J, m, n&#41;</span>
+            <span class='code'>- &#96;g&#96;: A grid of points corresponding to density data, represented as a list of three ranges &#40;one for each dimension&#41;.</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;J::UniformScaling&#123;T&#125;, n::AbstractVector&#123;&lt;:Integer&#125;, m::Integer&#41; where T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>    v &#61; zeros&#40;T, axes&#40;n&#41;&#41;</span>
+            <span class='code'>## Example</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds for &#40;i,ii&#41; in pairs&#40;n&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>        if ii &#61;&#61; m</span>
+            <span class='code'>gs &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>            v&#91;i&#93; &#61; J.λ</span>
+            <span class='code'>generate_interpolation_grid&#40;gs&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>    return v</span>
+            <span class='code'>function generate_interpolation_grid&#40;gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Calculate grid for interpolation &#40;xyz points corresponding to density data&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    g &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;J::UniformScaling&#123;T&#125;, n::AbstractVector&#123;&lt;:Integer&#125;, m::AbstractVector&#123;&lt;:Integer&#125;&#41; where T</span>
+            <span class='code'>        begin</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>    A &#61; zeros&#40;T, axes&#40;n&#41;..., axes&#40;m&#41;...&#41;</span>
+            <span class='code'>            start &#61; gs.origin&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds for &#40;j,jj&#41; in pairs&#40;m&#41;, &#40;i,ii&#41; in pairs&#40;n&#41;</span>
+            <span class='code'>            stop &#61; &#40;gs.origin &#43; gs.lattice * &#40;gs.n_pts_float .&#43; 0.2&#41;&#41;&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>        if ii &#61;&#61; jj</span>
+            <span class='code'>            step &#61; &#40;stop - start&#41; / gs.n_pts_float&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>            A&#91;i,j&#93; &#61; J.λ</span>
+            <span class='code'>            &#40;start:step:stop&#41;&#91;1:&#40;end - 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        end for i in 1:3</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>    return A</span>
+            <span class='code'>    return g</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, ::MIME&quot;text/plain&quot;, J::UniformScaling&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; &quot;&#36;&#40;J.λ&#41;&quot;</span>
+            <span class='code'>    function apply_translational_symmetry&#40;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>    if occursin&#40;r&quot;\w&#43;\s*&#91;\&#43;\-&#93;\s*\w&#43;&quot;, s&#41;</span>
+            <span class='code'>        r::Vector&#123;T&#125;, grid::GridSpec&#123;T&#125;, is_periodic::Vector&#123;Bool&#125;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>        s &#61; &quot;&#40;&#36;s&#41;&quot;</span>
+            <span class='code'>    &#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, typeof&#40;J&#41;, &quot;\n&#36;s*I&quot;&#41;</span>
+            <span class='code'>Apply translational symmetry to a given position vector &#96;r&#96; based on the grid specification &#96;grid&#96;. If the grid is periodic, the function adjusts the position vector to ensure it falls within the grid boundaries.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>copy&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;J.λ&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector to apply translational symmetry to.</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>Base.convert&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;, J::UniformScaling&#41; where &#123;T&#125; &#61; UniformScaling&#40;convert&#40;T, J.λ&#41;&#41;::UniformScaling&#123;T&#125;</span>
+            <span class='code'>- &#96;grid::GridSpec&#123;T&#125;&#96;: The grid specification that defines the boundaries and periodicity of the grid.</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>conj&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;conj&#40;J.λ&#41;&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>real&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;real&#40;J.λ&#41;&#41;</span>
+            <span class='code'>- &#96;r_new::Vector&#123;T&#125;&#96;: The position vector with translational symmetry applied, ensuring it falls within the grid boundaries.</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>imag&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;imag&#40;J.λ&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>transpose&#40;J::UniformScaling&#41; &#61; J</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>adjoint&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;conj&#40;J.λ&#41;&#41;</span>
+            <span class='code'>r &#61; &#91;1.5, 2.5, 3.5&#93;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>grid &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>one&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; UniformScaling&#40;one&#40;T&#41;&#41;</span>
+            <span class='code'>apply_translational_symmetry&#40;r, grid, &#91;true, true, true&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>one&#40;J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; one&#40;UniformScaling&#123;T&#125;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; UniformScaling&#40;oneunit&#40;T&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; oneunit&#40;UniformScaling&#123;T&#125;&#41;</span>
+            <span class='code'>function apply_translational_symmetry&#40;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; UniformScaling&#40;zero&#40;T&#41;&#41;</span>
+            <span class='code'>    r::Vector&#123;T&#125;, grid::GridSpec&#123;U&#125;, is_periodic::Vector&#123;Bool&#125;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; zero&#40;UniformScaling&#123;T&#125;&#41;</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>isdiag&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>    r1 &#61; grid.lattice_full_inv * &#40;r - grid.origin&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>istriu&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>    # @debug &quot;Transformed to lattice basis&quot; r r1</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>istril&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>    # Now make a copy of grid.lattice_full with the non-periodic </span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>issymmetric&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>    # apply periodicity by taking the fractional part of dimensions for which is_periodic is true. This also works for values below 0.</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>ishermitian&#40;J::UniformScaling&#41; &#61; isreal&#40;J.λ&#41;</span>
+            <span class='code'>    r1&#91;is_periodic&#93; &#61; mod.&#40;r1&#91;is_periodic&#93;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>isposdef&#40;J::UniformScaling&#41; &#61; isposdef&#40;J.λ&#41;</span>
+            <span class='code'>    # transform back to cartesian basis</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    out &#61; grid.lattice_full * r1 &#43; grid.origin</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling, x::Number&#41; &#61; J.λ &#43; x</span>
+            <span class='code'>    # @debug &quot;Applied symmetry and transformed back to cartesian basis&quot; r1 out</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;x::Number, J::UniformScaling&#41; &#61; x &#43; J.λ</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J::UniformScaling, x::Number&#41; &#61; J.λ - x</span>
+            <span class='code'>    # FIXME: Fix translational symmetry for grad/hess calculations</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;x::Number, J::UniformScaling&#41; &#61; x - J.λ</span>
+            <span class='code'>    #  Interpolations.jl currently doesn&#39;t support periodic hessian calculation.</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #  The current implementation suffers from boundary condition effects as you approach the edge of the grid.</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling&#41;                      &#61; UniformScaling&#40;&#43;J.λ&#41;</span>
+            <span class='code'>    #  A proper workaround would:</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; UniformScaling&#40;J1.λ&#43;J2.λ&#41;</span>
+            <span class='code'>    #  1. Use an Interplations.jl interpolant with periodic boundary conditions for rho and grad, which it currently supports, and then</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;B::BitArray&#123;2&#125;, J::UniformScaling&#41;      &#61; Array&#40;B&#41; &#43; J</span>
+            <span class='code'>    #  2. Use a finite difference approximation for the hessian at the periodic boundary, using the interpolated gradients and manually applied translational symmetry.</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling, B::BitArray&#123;2&#125;&#41;      &#61; J &#43; Array&#40;B&#41;</span>
+            <span class='code'>    #  I do worry that even that type of work around would suffer from hessian error at the boundaries unless the calculation was accurate on par with that used by Interpolations.jl for rho/grad.</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling, A::AbstractMatrix&#41;   &#61; A &#43; J</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1575,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J::UniformScaling&#41;                      &#61; UniformScaling&#40;-J.λ&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; UniformScaling&#40;J1.λ-J2.λ&#41;</span>
+            <span class='code'>    in_bounding_box&#40;p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V::Matrix&#123;T&#125;&#41; where T&lt;:AbstractFloat</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;B::BitArray&#123;2&#125;, J::UniformScaling&#41;      &#61; Array&#40;B&#41; - J</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J::UniformScaling, B::BitArray&#123;2&#125;&#41;      &#61; J - Array&#40;B&#41;</span>
+            <span class='code'>Returns &#96;true&#96; if the point &#96;p&#96; is inside the bounding box defined by the origin &#96;o&#96; and the inverse lattice &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;A::AbstractMatrix, J::UniformScaling&#41;   &#61; A &#43; &#40;-J&#41;</span>
+            <span class='code'>Dimensions must match between &#96;p&#96;, &#96;o&#96;, and &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1635,7 +1635,7 @@
           <td>
             
             
-            <span class='code'># matrix functions</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>for f in &#40; :exp,   :log,</span>
+            <span class='code'>- &#96;p::AbstractVector&#96;: The point to test for containment in the bounding box.</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>           :expm1, :log1p,</span>
+            <span class='code'>- &#96;o::AbstractVector&#96;: The origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>           :sqrt,  :cbrt,</span>
+            <span class='code'>- &#96;V::AbstractMatrix&#96;: The inverse lattice of the lattice vector which describes the extent of the bounding box.</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>           :sin,   :cos,   :tan,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>           :asin,  :acos,  :atan,</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>           :csc,   :sec,   :cot,</span>
+            <span class='code'>- &#96;Bool&#96;: &#96;true&#96; if the point &#96;p&#96; is inside the bounding box, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>           :acsc,  :asec,  :acot,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>           :sinh,  :cosh,  :tanh,</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>           :asinh, :acosh, :atanh,</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>           :csch,  :sech,  :coth,</span>
+            <span class='code'>julia&gt; p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>           :acsch, :asech, :acoth &#41;</span>
+            <span class='code'>julia&gt; o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>    @eval Base.&#36;f&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;&#36;f&#40;J.λ&#41;&#41;</span>
+            <span class='code'>julia&gt; V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; in_bounding_box&#40;p, o, V&#41;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1775,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1785,7 @@
           <td>
             
             
-            <span class='code'># Unit&#123;Lower/Upper&#125;Triangular matrices become &#123;Lower/Upper&#125;Triangular under</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1795,7 @@
           <td>
             
             
-            <span class='code'># addition with a UniformScaling</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>for &#40;t1, t2&#41; in &#40;&#40;:UnitUpperTriangular, :UpperTriangular&#41;,</span>
+            <span class='code'>function in_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>                 &#40;:UnitLowerTriangular, :LowerTriangular&#41;&#41;</span>
+            <span class='code'>    p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>        function &#40;&#43;&#41;&#40;UL::&#36;t1, J::UniformScaling&#41;</span>
+            <span class='code'>    D &#61; length&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>            ULnew &#61; copymutable_oftype&#40;UL.data, Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;UL&#41;, typeof&#40;J&#41;&#125;&#41;&#41;</span>
+            <span class='code'>    @assert D &#61;&#61; size&#40;V_inv, 1&#41; &#61;&#61; size&#40;p, 1&#41; &quot;Dimension mismatch&quot;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>            for i in axes&#40;ULnew, 1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>                ULnew&#91;i,i&#93; &#61; one&#40;ULnew&#91;i,i&#93;&#41; &#43; J</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    x &#61; V_inv * &#40;p - o&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>            return &#40;&#36;t2&#41;&#40;ULnew&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return all&#40;0 .&lt;&#61; x .&lt;&#61; 1&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1925,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1935,7 @@
           <td>
             
             
-            <span class='code'># Adding a complex UniformScaling to the diagonal of a Hermitian</span>
+            <span class='code'>    in_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1945,7 @@
           <td>
             
             
-            <span class='code'># matrix breaks the hermiticity, if the UniformScaling is non-real.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1955,7 @@
           <td>
             
             
-            <span class='code'># However, to preserve type stability, we do not special-case a</span>
+            <span class='code'>Check if a point &#96;p&#96; is within the bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1965,7 @@
           <td>
             
             
-            <span class='code'># UniformScaling&#123;&lt;:Complex&#125; that happens to be real.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>function &#40;&#43;&#41;&#40;A::Hermitian, J::UniformScaling&#123;&lt;:Complex&#125;&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>    TS &#61; Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;</span>
+            <span class='code'>- &#96;p&#96;: A vector of AbstractFloat values representing the coordinates of a point.</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; copytri&#33;&#40;copymutable_oftype&#40;parent&#40;A&#41;, TS&#41;, A.uplo, true&#41;</span>
+            <span class='code'>- &#96;gs&#96;: A GridSpec object representing the specifications of a grid.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>    for i in diagind&#40;B&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>        B&#91;i&#93; &#61; A&#91;i&#93; &#43; J</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>A boolean value indicating whether the point &#96;p&#96; is within the bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2055,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>function &#40;-&#41;&#40;J::UniformScaling&#123;&lt;:Complex&#125;, A::Hermitian&#41;</span>
+            <span class='code'>p &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2075,7 @@
           <td>
             
             
-            <span class='code'>    TS &#61; Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;</span>
+            <span class='code'>gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; copytri&#33;&#40;copymutable_oftype&#40;parent&#40;A&#41;, TS&#41;, A.uplo, true&#41;</span>
+            <span class='code'>in_bounding_box&#40;p, gs&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2095,7 @@
           <td>
             
             
-            <span class='code'>    B .&#61; .-B</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2105,7 @@
           <td>
             
             
-            <span class='code'>    for i in diagind&#40;B&#41;</span>
+            <span class='code'>The expected output is a boolean value indicating whether the point is within the bounding box or not.</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2115,7 @@
           <td>
             
             
-            <span class='code'>        B&#91;i&#93; &#61; J - A&#91;i&#93;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function in_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'>    return in_bounding_box&#40;p, gs.origin, gs.lattice_full_inv&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2165,7 +2165,7 @@
           <td>
             
             
-            <span class='code'>function &#40;&#43;&#41;&#40;A::AbstractMatrix, J::UniformScaling&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2175,7 @@
           <td>
             
             
-            <span class='code'>    checksquare&#40;A&#41;</span>
+            <span class='code'>    clamp_to_bounding_box&#33;&#40;p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; copymutable_oftype&#40;A, Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2195,7 @@
           <td>
             
             
-            <span class='code'>    for i in intersect&#40;axes&#40;A,1&#41;, axes&#40;A,2&#41;&#41;</span>
+            <span class='code'>Clip a point &#96;p&#96; to a bounding box defined by an origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2205,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds B&#91;i,i&#93; &#43;&#61; J</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2215,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2225,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'>- &#96;p&#96;: A vector representing the coordinates of a point, which will be modified in-place.</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2235,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;o&#96;: A vector representing the origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;V_inv&#96;: A matrix representing the inverse of the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2255,7 @@
           <td>
             
             
-            <span class='code'>function &#40;-&#41;&#40;J::UniformScaling, A::AbstractMatrix&#41;</span>
+            <span class='code'>- &#96;V&#96;: A matrix representing the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2265,7 @@
           <td>
             
             
-            <span class='code'>    checksquare&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2275,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; convert&#40;AbstractMatrix&#123;Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;&#125;, -A&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2285,7 @@
           <td>
             
             
-            <span class='code'>    for i in intersect&#40;axes&#40;A,1&#41;, axes&#40;A,2&#41;&#41;</span>
+            <span class='code'>Nothing</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2295,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds B&#91;i,i&#93; &#43;&#61; J</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2305,7 +2305,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2315,7 +2315,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2325,7 +2325,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2335,7 +2335,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2345,7 +2345,7 @@
           <td>
             
             
-            <span class='code'>inv&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;inv&#40;J.λ&#41;&#41;</span>
+            <span class='code'>V_inv &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2355,7 +2355,7 @@
           <td>
             
             
-            <span class='code'>opnorm&#40;J::UniformScaling, p::Real&#61;2&#41; &#61; opnorm&#40;J.λ, p&#41;</span>
+            <span class='code'>V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2365,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>clamp_to_bounding_box&#33;&#40;p, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2375,7 @@
           <td>
             
             
-            <span class='code'>pinv&#40;J::UniformScaling&#41; &#61; ifelse&#40;iszero&#40;J.λ&#41;,</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2385,7 @@
           <td>
             
             
-            <span class='code'>                          UniformScaling&#40;zero&#40;inv&#40;J.λ&#41;&#41;&#41;,  # type stability</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2393,9 +2393,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;10 &#37;&#41;
+              samples spent in clamp_to_bounding_box&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from clamp_to_bounding_box
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L278'>line 278</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>                          UniformScaling&#40;inv&#40;J.λ&#41;&#41;&#41;</span>
+            <span class='code'>function clamp_to_bounding_box&#33;&#40;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2414,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2424,7 @@
           <td>
             
             
-            <span class='code'>function det&#40;J::UniformScaling&#123;T&#125;&#41; where T</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2434,7 @@
           <td>
             
             
-            <span class='code'>    if isone&#40;J.λ&#41;</span>
+            <span class='code'>    D &#61; length&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2444,7 @@
           <td>
             
             
-            <span class='code'>        one&#40;T&#41;</span>
+            <span class='code'>    @assert D &#61;&#61; size&#40;V_inv, 1&#41; &#61;&#61; size&#40;p, 1&#41; &quot;Dimension mismatch&quot;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2454,7 @@
           <td>
             
             
-            <span class='code'>    elseif iszero&#40;J.λ&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,17 +2464,22 @@
           <td>
             
             
-            <span class='code'>        zero&#40;T&#41;</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L244'>
           <td class='lineno'>244</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>    else</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='matmul.jl-037102772aa14a84614a4fc5ba7816c2492dae64.html#L52'>*</a>
+              <br />
+            </div>
+            <span class='code'>    x &#61; V_inv * &#40;p - o&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2475,7 +2489,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;Determinant of UniformScaling is only well-defined when λ &#61; 0 or 1.&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2485,7 +2499,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    p &#61; clamp.&#40;x, 0, 1&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2495,7 +2509,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2505,7 +2519,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2515,7 +2529,7 @@
           <td>
             
             
-            <span class='code'>function tr&#40;J::UniformScaling&#123;T&#125;&#41; where T</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2525,7 +2539,7 @@
           <td>
             
             
-            <span class='code'>    if iszero&#40;J.λ&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2535,7 +2549,7 @@
           <td>
             
             
-            <span class='code'>        zero&#40;T&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2545,7 +2559,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    clamp_to_bounding_box&#40;p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2555,7 +2569,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;Trace of UniformScaling is only well-defined when λ &#61; 0&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2565,7 +2579,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Clip a point &#96;p&#96; to a bounding box defined by an origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2575,7 +2589,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2585,7 +2599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2595,7 +2609,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; UniformScaling&#40;J1.λ*J2.λ&#41;</span>
+            <span class='code'>- &#96;p&#96;: A vector representing the coordinates of a point.</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2605,7 +2619,7 @@
           <td>
             
             
-            <span class='code'>*&#40;B::BitArray&#123;2&#125;, J::UniformScaling&#41; &#61; *&#40;Array&#40;B&#41;, J::UniformScaling&#41;</span>
+            <span class='code'>- &#96;o&#96;: A vector representing the origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2615,7 +2629,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J::UniformScaling, B::BitArray&#123;2&#125;&#41; &#61; *&#40;J::UniformScaling, Array&#40;B&#41;&#41;</span>
+            <span class='code'>- &#96;V_inv&#96;: A matrix representing the inverse of the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2625,7 +2639,7 @@
           <td>
             
             
-            <span class='code'>*&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; A*J.λ</span>
+            <span class='code'>- &#96;V&#96;: A matrix representing the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2635,7 +2649,7 @@
           <td>
             
             
-            <span class='code'>*&#40;v::AbstractVector, J::UniformScaling&#41; &#61; reshape&#40;v, length&#40;v&#41;, 1&#41; * J</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2645,7 +2659,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J::UniformScaling, A::AbstractVecOrMat&#41; &#61; J.λ*A</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2655,7 +2669,7 @@
           <td>
             
             
-            <span class='code'>*&#40;x::Number, J::UniformScaling&#41; &#61; UniformScaling&#40;x*J.λ&#41;</span>
+            <span class='code'>The clipped point that falls within the bounding box defined by the origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2665,7 +2679,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;J.λ*x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2675,7 +2689,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2685,7 +2699,7 @@
           <td>
             
             
-            <span class='code'>/&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; J2.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : UniformScaling&#40;J1.λ/J2.λ&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2695,7 +2709,7 @@
           <td>
             
             
-            <span class='code'>/&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61;</span>
+            <span class='code'>p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2705,7 +2719,7 @@
           <td>
             
             
-            <span class='code'>    &#40;invA &#61; inv&#40;A&#41;; lmul&#33;&#40;J.λ, convert&#40;AbstractMatrix&#123;promote_type&#40;eltype&#40;J&#41;,eltype&#40;invA&#41;&#41;&#125;, invA&#41;&#41;&#41;</span>
+            <span class='code'>o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2715,7 +2729,7 @@
           <td>
             
             
-            <span class='code'>/&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; J.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : A/J.λ</span>
+            <span class='code'>V_inv &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2725,7 +2739,7 @@
           <td>
             
             
-            <span class='code'>/&#40;v::AbstractVector, J::UniformScaling&#41; &#61; reshape&#40;v, length&#40;v&#41;, 1&#41; / J</span>
+            <span class='code'>V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2735,7 +2749,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>clamp_to_bounding_box&#40;p, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2745,7 +2759,7 @@
           <td>
             
             
-            <span class='code'>/&#40;J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;J.λ/x&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2755,7 +2769,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2765,7 +2779,7 @@
           <td>
             
             
-            <span class='code'>\&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; J1.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : UniformScaling&#40;J1.λ\J2.λ&#41;</span>
+            <span class='code'>function clamp_to_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2775,7 +2789,7 @@
           <td>
             
             
-            <span class='code'>\&#40;J::UniformScaling, A::AbstractVecOrMat&#41; &#61; J.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : J.λ\A</span>
+            <span class='code'>    p::Vector&#123;U&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2785,7 +2799,7 @@
           <td>
             
             
-            <span class='code'>\&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61;</span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2795,17 +2809,31 @@
           <td>
             
             
-            <span class='code'>    &#40;invA &#61; inv&#40;A&#41;; rmul&#33;&#40;convert&#40;AbstractMatrix&#123;promote_type&#40;eltype&#40;invA&#41;,eltype&#40;J&#41;&#41;&#125;, invA&#41;, J.λ&#41;&#41;</span>
+            <span class='code'>    p1 &#61; copy&#40;p&#41;</span>
           </td>
         </tr>
         <tr id='L278'>
           <td class='lineno'>278</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>\&#40;F::Factorization, J::UniformScaling&#41; &#61; F \ J&#40;size&#40;F,1&#41;&#41;</span>
+            <div class='call-sites'>
+              1 &#40;10 &#37;&#41;
+              samples spent in clamp_to_bounding_box
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from clamp_to_bounding_box
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L303'>line 303</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L237'>clamp_to_bounding_box&#33;</a>
+              <br />
+            </div>
+            <span class='code'>    clamp_to_bounding_box&#33;&#40;p1, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2815,7 +2843,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return p1</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2825,7 +2853,7 @@
           <td>
             
             
-            <span class='code'>\&#40;x::Number, J::UniformScaling&#41; &#61; UniformScaling&#40;x\J.λ&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2845,7 +2873,7 @@
           <td>
             
             
-            <span class='code'>@inline mul&#33;&#40;C::AbstractMatrix, A::AbstractMatrix, J::UniformScaling, alpha::Number, beta::Number&#41; &#61;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2855,7 +2883,7 @@
           <td>
             
             
-            <span class='code'>    mul&#33;&#40;C, A, J.λ, alpha, beta&#41;</span>
+            <span class='code'>    clamp_to_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where T&lt;:AbstractFloat</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2865,7 +2893,7 @@
           <td>
             
             
-            <span class='code'>@inline mul&#33;&#40;C::AbstractVecOrMat, J::UniformScaling, B::AbstractVecOrMat, alpha::Number, beta::Number&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2875,7 +2903,7 @@
           <td>
             
             
-            <span class='code'>    mul&#33;&#40;C, J.λ, B, alpha, beta&#41;</span>
+            <span class='code'>Clip the vector &#96;p&#96; to a bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2895,7 +2923,7 @@
           <td>
             
             
-            <span class='code'>function mul&#33;&#40;out::AbstractMatrix&#123;T&#125;, a::Number, B::UniformScaling, α::Number, β::Number&#41; where &#123;T&#125;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2905,7 +2933,7 @@
           <td>
             
             
-            <span class='code'>    checksquare&#40;out&#41;</span>
+            <span class='code'>- &#96;p&#96;: A vector of AbstractFloat values representing a point in space.</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2915,7 +2943,7 @@
           <td>
             
             
-            <span class='code'>    if iszero&#40;β&#41;  # zero contribution of the out matrix</span>
+            <span class='code'>- &#96;gs&#96;: A GridSpec object containing information about the bounding box.</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2925,7 +2953,7 @@
           <td>
             
             
-            <span class='code'>        fill&#33;&#40;out, zero&#40;T&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2935,7 +2963,7 @@
           <td>
             
             
-            <span class='code'>    elseif &#33;isone&#40;β&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2945,7 +2973,7 @@
           <td>
             
             
-            <span class='code'>        rmul&#33;&#40;out, β&#41;</span>
+            <span class='code'>A vector representing the clipped point in the original basis.</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2955,7 +2983,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2965,7 +2993,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; convert&#40;T, a*B.λ*α&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2975,7 +3003,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;iszero&#40;s&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2985,7 +3013,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds for i in diagind&#40;out&#41;</span>
+            <span class='code'>p &#61; &#91;1.5, 2.0, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -2995,7 +3023,7 @@
           <td>
             
             
-            <span class='code'>            out&#91;i&#93; &#43;&#61; s</span>
+            <span class='code'>gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3005,7 +3033,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>result &#61; clamp_to_bounding_box&#40;p, gs&#41;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3015,7 +3043,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>println&#40;result&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3025,7 +3053,7 @@
           <td>
             
             
-            <span class='code'>    return out</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3035,7 +3063,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3045,17 +3073,31 @@
           <td>
             
             
-            <span class='code'>@inline mul&#33;&#40;out::AbstractMatrix, A::UniformScaling, b::Number, α::Number, β::Number&#41;&#61;</span>
+            <span class='code'>function clamp_to_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L303'>
           <td class='lineno'>303</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    mul&#33;&#40;out, A.λ, UniformScaling&#40;b&#41;, α, β&#41;</span>
+            <div class='call-sites'>
+              1 &#40;10 &#37;&#41;
+              samples spent in clamp_to_bounding_box
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from hess&#33;
+              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L221'>line 221</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L278'>clamp_to_bounding_box</a>
+              <br />
+            </div>
+            <span class='code'>    return clamp_to_bounding_box&#40;p, gs.origin, gs.lattice_full_inv, gs.lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3065,7 +3107,7 @@
           <td>
             
             
-            <span class='code'>rmul&#33;&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; rmul&#33;&#40;A, J.λ&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3075,7 +3117,7 @@
           <td>
             
             
-            <span class='code'>lmul&#33;&#40;J::UniformScaling, B::AbstractVecOrMat&#41; &#61; lmul&#33;&#40;J.λ, B&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3085,7 +3127,7 @@
           <td>
             
             
-            <span class='code'>rdiv&#33;&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; rdiv&#33;&#40;A, J.λ&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3095,7 +3137,7 @@
           <td>
             
             
-            <span class='code'>ldiv&#33;&#40;J::UniformScaling, B::AbstractVecOrMat&#41; &#61; ldiv&#33;&#40;J.λ, B&#41;</span>
+            <span class='code'>    in_grid&#40;gs::GridSpec&#123;T&#125;, r::Vector&#123;T&#125;&#41; where T&lt;:AbstractFloat</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3105,7 +3147,7 @@
           <td>
             
             
-            <span class='code'>ldiv&#33;&#40;Y::AbstractVecOrMat, J::UniformScaling, B::AbstractVecOrMat&#41; &#61; &#40;Y .&#61; J.λ .\ B&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3115,7 +3157,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Returns &#96;true&#96; if the point &#96;r&#96; is inside the grid defined by the &#96;GridSpec&#96; &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3125,7 +3167,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;*&#41;, x::Number,J::UniformScaling&#41; &#61; UniformScaling&#40;x*J.λ&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3135,7 +3177,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;*&#41;, J::UniformScaling,x::Number&#41; &#61; UniformScaling&#40;J.λ*x&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3145,7 +3187,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;gs::GridSpec&#123;T&#125;&#96;: The &#96;GridSpec&#96; defining the grid.</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3155,7 +3197,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;/&#41;, J::UniformScaling,x::Number&#41; &#61; UniformScaling&#40;J.λ/x&#41;</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The point to test for containment in the grid.</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3175,7 +3217,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;\&#41;, x::Number,J::UniformScaling&#41; &#61; UniformScaling&#40;x\J.λ&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3185,7 +3227,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;Bool&#96;: &#96;true&#96; if the point &#96;r&#96; is inside the grid, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3195,7 +3237,7 @@
           <td>
             
             
-            <span class='code'>&#40;^&#41;&#40;J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;&#40;J.λ&#41;^x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3205,7 +3247,7 @@
           <td>
             
             
-            <span class='code'>Base.literal_pow&#40;::typeof&#40;^&#41;, J::UniformScaling, x::Val&#41; &#61; UniformScaling&#40;Base.literal_pow&#40;^, J.λ, x&#41;&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3215,7 +3257,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3225,7 +3267,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;^&#41;, J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;J.λ^x&#41;</span>
+            <span class='code'>julia&gt; gs &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3235,7 +3277,7 @@
           <td>
             
             
-            <span class='code'>function Broadcast.broadcasted&#40;::typeof&#40;Base.literal_pow&#41;, ::typeof&#40;^&#41;, J::UniformScaling, x::Val&#41;</span>
+            <span class='code'>julia&gt; r &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3245,7 +3287,7 @@
           <td>
             
             
-            <span class='code'>    UniformScaling&#40;Base.literal_pow&#40;^, J.λ, x&#41;&#41;</span>
+            <span class='code'>julia&gt; in_grid&#40;gs, r&#41;</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3255,7 +3297,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3265,7 +3307,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3275,7 +3317,7 @@
           <td>
             
             
-            <span class='code'>&#61;&#61;&#40;J1::UniformScaling,J2::UniformScaling&#41; &#61; &#40;J1.λ &#61;&#61; J2.λ&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3285,7 +3327,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function in_grid&#40;gs::GridSpec&#123;T&#125;, r::Vector&#123;U&#125;&#41; where &#123;T&lt;:AbstractFloat,U&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3295,7 +3337,7 @@
           <td>
             
             
-            <span class='code'>## equality comparison with UniformScaling</span>
+            <span class='code'>    return in_bounding_box&#40;r, gs.origin, gs.lattice_full_inv&#41;</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3305,7 +3347,7 @@
           <td>
             
             
-            <span class='code'>&#61;&#61;&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61; A &#61;&#61; J</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3315,7 +3357,7 @@
           <td>
             
             
-            <span class='code'>function &#61;&#61;&#40;A::AbstractMatrix, J::UniformScaling&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3325,7 +3367,7 @@
           <td>
             
             
-            <span class='code'>    require_one_based_indexing&#40;A&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3335,7 +3377,7 @@
           <td>
             
             
-            <span class='code'>    size&#40;A, 1&#41; &#61;&#61; size&#40;A, 2&#41; || return false</span>
+            <span class='code'>    NuclearCoordinate&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3345,7 +3387,7 @@
           <td>
             
             
-            <span class='code'>    iszero&#40;J.λ&#41; &amp;&amp; return iszero&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3355,7 +3397,7 @@
           <td>
             
             
-            <span class='code'>    isone&#40;J.λ&#41; &amp;&amp; return isone&#40;A&#41;</span>
+            <span class='code'>A struct representing a nuclear coordinate in 3D space.</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3365,7 +3407,7 @@
           <td>
             
             
-            <span class='code'>    return A &#61;&#61; J.λ*one&#40;A&#41;</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3375,7 +3417,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3385,7 +3427,7 @@
           <td>
             
             
-            <span class='code'>function &#61;&#61;&#40;A::StridedMatrix, J::UniformScaling&#41;</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3395,7 +3437,7 @@
           <td>
             
             
-            <span class='code'>    size&#40;A, 1&#41; &#61;&#61; size&#40;A, 2&#41; || return false</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3405,7 +3447,7 @@
           <td>
             
             
-            <span class='code'>    iszero&#40;J.λ&#41; &amp;&amp; return iszero&#40;A&#41;</span>
+            <span class='code'>- &#96;data::Element&#96;: The element associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3415,7 +3457,7 @@
           <td>
             
             
-            <span class='code'>    isone&#40;J.λ&#41; &amp;&amp; return isone&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3425,7 +3467,7 @@
           <td>
             
             
-            <span class='code'>    for j in axes&#40;A, 2&#41;, i in axes&#40;A, 1&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3435,7 +3477,7 @@
           <td>
             
             
-            <span class='code'>        ifelse&#40;i &#61;&#61; j, A&#91;i, j&#93; &#61;&#61; J.λ, iszero&#40;A&#91;i, j&#93;&#41;&#41; || return false</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3445,7 +3487,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3455,7 +3497,7 @@
           <td>
             
             
-            <span class='code'>    return true</span>
+            <span class='code'>data &#61; PeriodicTable.elements&#91;6&#93; # Carbon</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3465,7 +3507,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3475,7 +3517,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>nc &#61; NuclearCoordinate&#123;Float64&#125;&#40;r, data&#41;</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3485,7 +3527,7 @@
           <td>
             
             
-            <span class='code'>isequal&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; false</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3495,7 +3537,7 @@
           <td>
             
             
-            <span class='code'>isequal&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61; false</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3505,7 +3547,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct NuclearCoordinate&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3515,7 +3557,7 @@
           <td>
             
             
-            <span class='code'>function isapprox&#40;J1::UniformScaling&#123;T&#125;, J2::UniformScaling&#123;S&#125;;</span>
+            <span class='code'>    r::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3525,7 +3567,7 @@
           <td>
             
             
-            <span class='code'>            atol::Real&#61;0, rtol::Real&#61;Base.rtoldefault&#40;T,S,atol&#41;, nans::Bool&#61;false&#41; where &#123;T&lt;:Number,S&lt;:Number&#125;</span>
+            <span class='code'>    data::Element</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3535,7 +3577,7 @@
           <td>
             
             
-            <span class='code'>    isapprox&#40;J1.λ, J2.λ, rtol&#61;rtol, atol&#61;atol, nans&#61;nans&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3545,7 +3587,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3555,7 +3597,7 @@
           <td>
             
             
-            <span class='code'>function isapprox&#40;J::UniformScaling, A::AbstractMatrix;</span>
+            <span class='code'># overload Base.&#61;&#61; for NuclearCoordinate</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3565,7 +3607,7 @@
           <td>
             
             
-            <span class='code'>                  atol::Real &#61; 0,</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;a::NuclearCoordinate, b::NuclearCoordinate&#41;</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3575,7 +3617,7 @@
           <td>
             
             
-            <span class='code'>                  rtol::Real &#61; Base.rtoldefault&#40;promote_leaf_eltypes&#40;A&#41;, eltype&#40;J&#41;, atol&#41;,</span>
+            <span class='code'>    return a.r &#61;&#61; b.r &amp;&amp; a.data &#61;&#61; b.data</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3585,7 +3627,7 @@
           <td>
             
             
-            <span class='code'>                  nans::Bool &#61; false, norm::Function &#61; norm&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3595,7 +3637,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; checksquare&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3605,7 +3647,7 @@
           <td>
             
             
-            <span class='code'>    normJ &#61; norm &#61;&#61;&#61; opnorm             ? abs&#40;J.λ&#41; :</span>
+            <span class='code'># overload Base.show for NuclearCoordinate to print data.symbol and r</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3615,7 +3657,7 @@
           <td>
             
             
-            <span class='code'>            norm &#61;&#61;&#61; LinearAlgebra.norm ? abs&#40;J.λ&#41; * sqrt&#40;n&#41; :</span>
+            <span class='code'>show&#40;io::IO, nc::NuclearCoordinate&#41; &#61; show&#40;io, &quot;&#36;&#40;nc.data.symbol&#41; &#36;&#40;nc.r&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3625,7 +3667,7 @@
           <td>
             
             
-            <span class='code'>                                          norm&#40;Diagonal&#40;fill&#40;J.λ, n&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3635,7 +3677,7 @@
           <td>
             
             
-            <span class='code'>    return norm&#40;A - J&#41; &lt;&#61; max&#40;atol, rtol * max&#40;norm&#40;A&#41;, normJ&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3645,7 +3687,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    NuclearCoordinate&#40;r::Vector&#123;T&#125;, n::Integer&#41; where T&lt;:Real</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3655,7 +3697,7 @@
           <td>
             
             
-            <span class='code'>isapprox&#40;A::AbstractMatrix, J::UniformScaling; kwargs...&#41; &#61; isapprox&#40;J, A; kwargs...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3665,7 +3707,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>A convenience constructor for creating a &#96;NuclearCoordinate&#96; from a position vector and an element index.</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3675,7 +3717,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3685,7 +3727,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;dest::AbstractMatrix, src::UniformScaling&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3695,7 +3737,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3705,7 +3747,7 @@
           <td>
             
             
-            <span class='code'>Copies a &#91;&#96;UniformScaling&#96;&#93;&#40;@ref&#41; onto a matrix.</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3715,7 +3757,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;n::Integer&#96;: The index of the element associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3725,7 +3767,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.1&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3735,7 +3777,7 @@
           <td>
             
             
-            <span class='code'>    In Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3745,7 +3787,7 @@
           <td>
             
             
-            <span class='code'>    support for a rectangular matrix.</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3755,7 +3797,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3765,7 +3807,7 @@
           <td>
             
             
-            <span class='code'>function copyto&#33;&#40;A::AbstractMatrix, J::UniformScaling&#41;</span>
+            <span class='code'>n &#61; 6 # Carbon</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3775,7 +3817,7 @@
           <td>
             
             
-            <span class='code'>    require_one_based_indexing&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3785,7 +3827,7 @@
           <td>
             
             
-            <span class='code'>    fill&#33;&#40;A, 0&#41;</span>
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, n&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3795,7 +3837,7 @@
           <td>
             
             
-            <span class='code'>    λ &#61; J.λ</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3805,7 +3847,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:min&#40;size&#40;A,1&#41;,size&#40;A,2&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3815,7 +3857,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds A&#91;i,i&#93; &#61; λ</span>
+            <span class='code'>function NuclearCoordinate&#40;r::Vector&#123;T&#125;, n::Integer&#41; where &#123;T&lt;:Real&#125;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3825,7 +3867,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    @assert 1 ≤ n ≤ 119 &quot;Invalid element index&quot;</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3835,7 +3877,7 @@
           <td>
             
             
-            <span class='code'>    return A</span>
+            <span class='code'>    type &#61; eltype&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3845,7 +3887,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    if &#33;&#40;T &lt;: AbstractFloat&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3855,7 +3897,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        r &#61; Float64.&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3865,7 +3907,7 @@
           <td>
             
             
-            <span class='code'>function cond&#40;J::UniformScaling&#123;T&#125;&#41; where T</span>
+            <span class='code'>        type &#61; Float64</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3875,7 +3917,7 @@
           <td>
             
             
-            <span class='code'>    onereal &#61; inv&#40;one&#40;real&#40;J.λ&#41;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3885,7 +3927,7 @@
           <td>
             
             
-            <span class='code'>    return J.λ ≠ zero&#40;T&#41; ? onereal : oftype&#40;onereal, Inf&#41;</span>
+            <span class='code'>    return NuclearCoordinate&#123;eltype&#40;r&#41;&#125;&#40;r, elements&#91;n&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3915,7 +3957,7 @@
           <td>
             
             
-            <span class='code'># promote_to_arrays&#40;n,k, T, A...&#41; promotes any UniformScaling matrices</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3925,7 +3967,7 @@
           <td>
             
             
-            <span class='code'># in A to matrices of type T and sizes given by n&#91;k:end&#93;.  n is an array</span>
+            <span class='code'>    NuclearCoordinate&#40;r::Vector&#123;T&#125;, s::Symbol&#41; where T&lt;:Real</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3935,7 +3977,7 @@
           <td>
             
             
-            <span class='code'># so that the same promotion code can be used for hvcat.  We pass the type T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3945,7 +3987,7 @@
           <td>
             
             
-            <span class='code'># so that we can re-use this code for sparse-matrix hcat etcetera.</span>
+            <span class='code'>A convenience constructor for creating a &#96;NuclearCoordinate&#96; from a position vector and an element symbol.</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3955,7 +3997,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays_&#40;n::Int, ::Type, a::Number&#41; &#61; a</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3965,7 +4007,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays_&#40;n::Int, ::Type&#123;Matrix&#125;, J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; Matrix&#40;J, n, n&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3975,7 +4017,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays_&#40;n::Int, ::Type, A::AbstractVecOrMat&#41; &#61; A</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3985,7 +4027,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#41; &#61; &#40;&#41;</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -3995,7 +4037,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A&#41; where &#123;T&#125; &#61; &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;,&#41;</span>
+            <span class='code'>- &#96;s::Symbol&#96;: The element symbol associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4005,7 +4047,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A, B&#41; where &#123;T&#125; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4015,7 +4057,7 @@
           <td>
             
             
-            <span class='code'>    &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;, promote_to_arrays_&#40;n&#91;k&#43;1&#93;, T, B&#41;&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4025,7 +4067,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A, B, C&#41; where &#123;T&#125; &#61;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4035,7 +4077,7 @@
           <td>
             
             
-            <span class='code'>    &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;, promote_to_arrays_&#40;n&#91;k&#43;1&#93;, T, B&#41;, promote_to_arrays_&#40;n&#91;k&#43;2&#93;, T, C&#41;&#41;</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4045,7 +4087,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A, B, Cs...&#41; where &#123;T&#125; &#61;</span>
+            <span class='code'>s &#61; :C</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4055,7 +4097,7 @@
           <td>
             
             
-            <span class='code'>    &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;, promote_to_arrays_&#40;n&#91;k&#43;1&#93;, T, B&#41;, promote_to_arrays&#40;n,k&#43;2, T, Cs...&#41;...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4065,7 +4107,7 @@
           <td>
             
             
-            <span class='code'>promote_to_array_type&#40;A::Tuple&#123;Vararg&#123;Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;&#125;&#125;&#41; &#61; Matrix</span>
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, s&#41;</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4075,7 +4117,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4085,7 +4127,7 @@
           <td>
             
             
-            <span class='code'>_us2number&#40;A&#41; &#61; A</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4095,7 +4137,7 @@
           <td>
             
             
-            <span class='code'>_us2number&#40;J::UniformScaling&#41; &#61; J.λ</span>
+            <span class='code'>function NuclearCoordinate&#40;r::Vector&#123;T&#125;, s::Symbol&#41; where &#123;T&lt;:Real&#125;</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4105,7 +4147,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    type &#61; eltype&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4115,7 +4157,7 @@
           <td>
             
             
-            <span class='code'>for &#40;f, _f, dim, name&#41; in &#40;&#40;:hcat, :_hcat, 1, &quot;rows&quot;&#41;, &#40;:vcat, :_vcat, 2, &quot;cols&quot;&#41;&#41;</span>
+            <span class='code'>    if &#33;&#40;T &lt;: AbstractFloat&#41;</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4125,7 +4167,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>        r &#61; Float64.&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4135,7 +4177,7 @@
           <td>
             
             
-            <span class='code'>        @inline &#36;f&#40;A::Union&#123;AbstractVecOrMat,UniformScaling&#125;...&#41; &#61; &#36;_f&#40;A...&#41;</span>
+            <span class='code'>        type &#61; Float64</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4145,7 +4187,7 @@
           <td>
             
             
-            <span class='code'>        # if there&#39;s a Number present, J::UniformScaling must be 1x1-dimensional</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4155,7 +4197,7 @@
           <td>
             
             
-            <span class='code'>        @inline &#36;f&#40;A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...&#41; &#61; &#36;f&#40;map&#40;_us2number, A&#41;...&#41;</span>
+            <span class='code'>    return NuclearCoordinate&#123;eltype&#40;r&#41;&#125;&#40;r, elements&#91;s&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4165,7 +4207,7 @@
           <td>
             
             
-            <span class='code'>        function &#36;_f&#40;A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...; array_type &#61; promote_to_array_type&#40;A&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4175,7 +4217,7 @@
           <td>
             
             
-            <span class='code'>            n &#61; -1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4185,7 +4227,7 @@
           <td>
             
             
-            <span class='code'>            for a in A</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4195,7 +4237,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;isa&#40;a, UniformScaling&#41;</span>
+            <span class='code'>    System&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4205,7 +4247,7 @@
           <td>
             
             
-            <span class='code'>                    require_one_based_indexing&#40;a&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4215,7 +4257,7 @@
           <td>
             
             
-            <span class='code'>                    na &#61; size&#40;a,&#36;dim&#41;</span>
+            <span class='code'>A struct representing a system for analysis.</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4225,7 +4267,7 @@
           <td>
             
             
-            <span class='code'>                    n &gt;&#61; 0 &amp;&amp; n &#33;&#61; na &amp;&amp;</span>
+            <span class='code'>It contains the system name, grid extent, atoms, and</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4235,7 +4277,7 @@
           <td>
             
             
-            <span class='code'>                        throw&#40;DimensionMismatch&#40;string&#40;&quot;number of &quot;, &#36;name,</span>
+            <span class='code'>functions for &#96;rho&#96;, &#96;grad&#96;, and &#96;hess&#96; that can be queried</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4245,7 +4287,7 @@
           <td>
             
             
-            <span class='code'>                            &quot; of each array must match &#40;got &quot;, n, &quot; and &quot;, na, &quot;&#41;&quot;&#41;&#41;&#41;</span>
+            <span class='code'>arbitrarily.</span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4255,7 +4297,7 @@
           <td>
             
             
-            <span class='code'>                    n &#61; na</span>
+            <span class='code'>Note that this works for 2D systems as well as 3D systems.</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4265,7 +4307,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4275,7 +4317,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4285,7 +4327,7 @@
           <td>
             
             
-            <span class='code'>            n &#61;&#61; -1 &amp;&amp; throw&#40;ArgumentError&#40;&#36;&#40;&quot;&#36;f of only UniformScaling objects cannot determine the matrix size&quot;&#41;&#41;&#41;</span>
+            <span class='code'>- &#96;name::String&#96;: The name of the system.</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4295,7 +4337,7 @@
           <td>
             
             
-            <span class='code'>            return cat&#40;promote_to_arrays&#40;fill&#40;n, length&#40;A&#41;&#41;, 1, array_type, A...&#41;..., dims&#61;Val&#40;3-&#36;dim&#41;&#41;</span>
+            <span class='code'>- &#96;source::String&#96;: The source of the system &#40;e.g. program name and file type&#41;.</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4305,7 +4347,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>- &#96;atoms::Vector&#123;NuclearCoordinate&#123;T&#125;&#125;&#96;: The atoms of the system.</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4315,7 +4357,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>- &#96;grid::GridSpec&#123;T&#125;&#96;: The grid specification of the system.</span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4325,7 +4367,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;rho::Function&#96;: The rho function of the system.</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4335,7 +4377,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;grad::Function&#96;: The grad function of the system.</span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4345,7 +4387,7 @@
           <td>
             
             
-            <span class='code'>hvcat&#40;rows::Tuple&#123;Vararg&#123;Int&#125;&#125;, A::Union&#123;AbstractVecOrMat,UniformScaling&#125;...&#41; &#61; _hvcat&#40;rows, A...&#41;</span>
+            <span class='code'>- &#96;hess::Function&#96;: The hess function of the system.</span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4355,7 +4397,7 @@
           <td>
             
             
-            <span class='code'>hvcat&#40;rows::Tuple&#123;Vararg&#123;Int&#125;&#125;, A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...&#41; &#61; _hvcat&#40;rows, A...&#41;</span>
+            <span class='code'>- &#96;rho&#33;::Function&#96;: The rho&#33; function of the system.</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4365,7 +4407,7 @@
           <td>
             
             
-            <span class='code'>function _hvcat&#40;rows::Tuple&#123;Vararg&#123;Int&#125;&#125;, A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...; array_type &#61; promote_to_array_type&#40;A&#41;&#41;</span>
+            <span class='code'>- &#96;grad&#33;::Function&#96;: The grad&#33; function of the system.</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4375,7 +4417,7 @@
           <td>
             
             
-            <span class='code'>    require_one_based_indexing&#40;A...&#41;</span>
+            <span class='code'>- &#96;hess&#33;::Function&#96;: The hess&#33; function of the system.</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4385,7 +4427,7 @@
           <td>
             
             
-            <span class='code'>    nr &#61; length&#40;rows&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4395,7 +4437,7 @@
           <td>
             
             
-            <span class='code'>    sum&#40;rows&#41; &#61;&#61; length&#40;A&#41; || throw&#40;ArgumentError&#40;&quot;mismatch between row sizes and number of arguments&quot;&#41;&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4405,7 +4447,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; fill&#40;-1, length&#40;A&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4415,7 +4457,7 @@
           <td>
             
             
-            <span class='code'>    needcols &#61; false # whether we also need to infer some sizes from the column count</span>
+            <span class='code'># Define a 3D sin function to be used as rho, grad, and hess functions</span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4425,7 +4467,7 @@
           <td>
             
             
-            <span class='code'>    j &#61; 0</span>
+            <span class='code'>f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4435,7 +4477,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:nr # infer UniformScaling sizes from row counts, if possible:</span>
+            <span class='code'>f3d_xyz&#40;x,y,z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4445,7 +4487,7 @@
           <td>
             
             
-            <span class='code'>        ni &#61; -1 # number of rows in this block-row, -1 indicates unknown</span>
+            <span class='code'>grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L443'>
@@ -4455,7 +4497,7 @@
           <td>
             
             
-            <span class='code'>        for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>hess3d&#40;r&#41; &#61; &#91;-sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;; -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;; -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4465,7 +4507,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;isa&#40;A&#91;j&#43;k&#93;, UniformScaling&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4475,7 +4517,7 @@
           <td>
             
             
-            <span class='code'>                na &#61; size&#40;A&#91;j&#43;k&#93;, 1&#41;</span>
+            <span class='code'># Define in-place versions of the functions</span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4485,7 +4527,7 @@
           <td>
             
             
-            <span class='code'>                ni &gt;&#61; 0 &amp;&amp; ni &#33;&#61; na &amp;&amp;</span>
+            <span class='code'>rho&#33;&#40;v::Vector&#123;Float64&#125;, r::Vector&#123;Float64&#125;&#41; &#61; &#40;v&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4495,7 +4537,7 @@
           <td>
             
             
-            <span class='code'>                    throw&#40;DimensionMismatch&#40;&quot;mismatch in number of rows&quot;&#41;&#41;</span>
+            <span class='code'>grad&#33;&#40;g::Vector&#123;Float64&#125;, r::Vector&#123;Float64&#125;&#41; &#61; &#40;g&#91;:&#93; &#61; grad3d&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4505,7 +4547,7 @@
           <td>
             
             
-            <span class='code'>                ni &#61; na</span>
+            <span class='code'>hess&#33;&#40;h::Matrix&#123;Float64&#125;, r::Vector&#123;Float64&#125;&#41; &#61; &#40;h&#91;:&#93; &#61; hess3d&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4515,7 +4557,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L450'>
@@ -4525,7 +4567,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># Define the origin, lattice, and number of ijk points for the GridSpec</span>
           </td>
         </tr>
         <tr id='L451'>
@@ -4535,7 +4577,7 @@
           <td>
             
             
-            <span class='code'>        if ni &gt;&#61; 0</span>
+            <span class='code'>o &#61; zeros&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L452'>
@@ -4545,7 +4587,7 @@
           <td>
             
             
-            <span class='code'>            for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L453'>
@@ -4555,7 +4597,7 @@
           <td>
             
             
-            <span class='code'>                n&#91;j&#43;k&#93; &#61; ni</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L454'>
@@ -4565,7 +4607,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># Define the lattice for the GridSpec</span>
           </td>
         </tr>
         <tr id='L455'>
@@ -4575,7 +4617,7 @@
           <td>
             
             
-            <span class='code'>        else # row consisted only of UniformScaling objects</span>
+            <span class='code'>l &#61; zeros&#40;3, 3&#41;</span>
           </td>
         </tr>
         <tr id='L456'>
@@ -4585,7 +4627,7 @@
           <td>
             
             
-            <span class='code'>            needcols &#61; true</span>
+            <span class='code'>for i in 1:3</span>
           </td>
         </tr>
         <tr id='L457'>
@@ -4595,7 +4637,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    l&#91;i, i&#93; &#61; 0.1</span>
           </td>
         </tr>
         <tr id='L458'>
@@ -4605,7 +4647,7 @@
           <td>
             
             
-            <span class='code'>        j &#43;&#61; rows&#91;i&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L459'>
@@ -4615,7 +4657,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L460'>
@@ -4625,7 +4667,7 @@
           <td>
             
             
-            <span class='code'>    if needcols # some sizes still unknown, try to infer from column count</span>
+            <span class='code'># Create a GridSpec with the defined origin, lattice</span>
           </td>
         </tr>
         <tr id='L461'>
@@ -4635,7 +4677,7 @@
           <td>
             
             
-            <span class='code'>        nc &#61; -1</span>
+            <span class='code'>g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L462'>
@@ -4645,7 +4687,7 @@
           <td>
             
             
-            <span class='code'>        j &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L463'>
@@ -4655,7 +4697,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 1:nr</span>
+            <span class='code'># Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L464'>
@@ -4665,7 +4707,7 @@
           <td>
             
             
-            <span class='code'>            nci &#61; 0</span>
+            <span class='code'>atoms &#61; &#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, 6&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L465'>
@@ -4675,7 +4717,7 @@
           <td>
             
             
-            <span class='code'>            rows&#91;i&#93; &gt; 0 &amp;&amp; n&#91;j&#43;1&#93; &#61;&#61; -1 &amp;&amp; &#40;j &#43;&#61; rows&#91;i&#93;; continue&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L466'>
@@ -4685,7 +4727,7 @@
           <td>
             
             
-            <span class='code'>            for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'># Create a System with the 3D sin function and the defined atoms and GridSpec</span>
           </td>
         </tr>
         <tr id='L467'>
@@ -4695,7 +4737,7 @@
           <td>
             
             
-            <span class='code'>                nci &#43;&#61; isa&#40;A&#91;j&#43;k&#93;, UniformScaling&#41; ? n&#91;j&#43;k&#93; : size&#40;A&#91;j&#43;k&#93;, 2&#41;</span>
+            <span class='code'>system &#61; System&#123;Float64&#125;&#40;&quot;Test System&quot;, &quot;user-defined&quot;, atoms, g, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L468'>
@@ -4705,7 +4747,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L469'>
@@ -4715,7 +4757,7 @@
           <td>
             
             
-            <span class='code'>            nc &gt;&#61; 0 &amp;&amp; nc &#33;&#61; nci &amp;&amp; throw&#40;DimensionMismatch&#40;&quot;mismatch in number of columns&quot;&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L470'>
@@ -4725,7 +4767,7 @@
           <td>
             
             
-            <span class='code'>            nc &#61; nci</span>
+            <span class='code'>struct System&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L471'>
@@ -4735,7 +4777,7 @@
           <td>
             
             
-            <span class='code'>            j &#43;&#61; rows&#91;i&#93;</span>
+            <span class='code'>    name::String</span>
           </td>
         </tr>
         <tr id='L472'>
@@ -4745,7 +4787,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    source::String</span>
           </td>
         </tr>
         <tr id='L473'>
@@ -4755,7 +4797,7 @@
           <td>
             
             
-            <span class='code'>        nc &#61;&#61; -1 &amp;&amp; throw&#40;ArgumentError&#40;&quot;sizes of UniformScalings could not be inferred&quot;&#41;&#41;</span>
+            <span class='code'>    atoms::Vector&#123;NuclearCoordinate&#123;T&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L474'>
@@ -4765,7 +4807,7 @@
           <td>
             
             
-            <span class='code'>        j &#61; 0</span>
+            <span class='code'>    grid::GridSpec&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L475'>
@@ -4775,7 +4817,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 1:nr</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L476'>
@@ -4785,7 +4827,7 @@
           <td>
             
             
-            <span class='code'>            if rows&#91;i&#93; &gt; 0 &amp;&amp; n&#91;j&#43;1&#93; &#61;&#61; -1 # this row consists entirely of UniformScalings</span>
+            <span class='code'>    # functions for accessing field variables and their derivatives</span>
           </td>
         </tr>
         <tr id='L477'>
@@ -4795,7 +4837,7 @@
           <td>
             
             
-            <span class='code'>                nci, r &#61; divrem&#40;nc, rows&#91;i&#93;&#41;</span>
+            <span class='code'>    # at a point &#96;r&#96;</span>
           </td>
         </tr>
         <tr id='L478'>
@@ -4805,7 +4847,7 @@
           <td>
             
             
-            <span class='code'>                r &#33;&#61; 0 &amp;&amp; throw&#40;DimensionMismatch&#40;&quot;indivisible UniformScaling sizes&quot;&#41;&#41;</span>
+            <span class='code'>    rho_xyz::Function # &#40;x::T, y::T, z::T&#41; -&gt; T</span>
           </td>
         </tr>
         <tr id='L479'>
@@ -4815,7 +4857,7 @@
           <td>
             
             
-            <span class='code'>                for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>    rho::Function # &#40;r::T&#41; -&gt; T</span>
           </td>
         </tr>
         <tr id='L480'>
@@ -4825,7 +4867,7 @@
           <td>
             
             
-            <span class='code'>                    n&#91;j&#43;k&#93; &#61; nci</span>
+            <span class='code'>    grad::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L481'>
@@ -4835,7 +4877,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    hess::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L482'>
@@ -4845,7 +4887,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L483'>
@@ -4855,7 +4897,7 @@
           <td>
             
             
-            <span class='code'>            j &#43;&#61; rows&#91;i&#93;</span>
+            <span class='code'>    # in-place versions of the above functions &#40;for efficiency&#41;</span>
           </td>
         </tr>
         <tr id='L484'>
@@ -4865,7 +4907,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    # &#40;The reason rho&#33; takes a vector of length one here is due to</span>
           </td>
         </tr>
         <tr id='L485'>
@@ -4875,7 +4917,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    # the way that mutating functions work in Julia, where they can</span>
           </td>
         </tr>
         <tr id='L486'>
@@ -4885,7 +4927,7 @@
           <td>
             
             
-            <span class='code'>    Amat &#61; promote_to_arrays&#40;n, 1, array_type, A...&#41;</span>
+            <span class='code'>    # modify the contents of their arguments, but not reassign the</span>
           </td>
         </tr>
         <tr id='L487'>
@@ -4895,7 +4937,7 @@
           <td>
             
             
-            <span class='code'>    # We have two methods for promote_to_array_type, one returning Matrix and</span>
+            <span class='code'>    # the arguuments to a new symbol. see https://stackoverflow.com/a/39294877/2620767&#41;</span>
           </td>
         </tr>
         <tr id='L488'>
@@ -4905,7 +4947,7 @@
           <td>
             
             
-            <span class='code'>    # another one returning SparseMatrixCSC &#40;in SparseArrays.jl&#41;. In the dense</span>
+            <span class='code'>    rho&#33;::Function # &#40;v::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
           </td>
         </tr>
         <tr id='L489'>
@@ -4915,7 +4957,7 @@
           <td>
             
             
-            <span class='code'>    # case, we cannot call hvcat for the promoted UniformScalings because this</span>
+            <span class='code'>    grad&#33;::Function # &#40;g::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
           </td>
         </tr>
         <tr id='L490'>
@@ -4925,7 +4967,7 @@
           <td>
             
             
-            <span class='code'>    # causes a stack overflow. In the sparse case, however, we cannot call</span>
+            <span class='code'>    hess&#33;::Function # &#40;h::Matrix&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
           </td>
         </tr>
         <tr id='L491'>
@@ -4935,7 +4977,7 @@
           <td>
             
             
-            <span class='code'>    # typed_hvcat because we need a sparse output.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L492'>
@@ -4945,7 +4987,7 @@
           <td>
             
             
-            <span class='code'>    if array_type &#61;&#61; Matrix</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L493'>
@@ -4955,7 +4997,7 @@
           <td>
             
             
-            <span class='code'>        return typed_hvcat&#40;promote_eltype&#40;Amat...&#41;, rows, Amat...&#41;</span>
+            <span class='code'># overload Base.show for System to print name and summarize atoms and grid.</span>
           </td>
         </tr>
         <tr id='L494'>
@@ -4965,7 +5007,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'># should print number of atoms of each symbol type, and grid.n_pts</span>
           </td>
         </tr>
         <tr id='L495'>
@@ -4975,7 +5017,7 @@
           <td>
             
             
-            <span class='code'>        return hvcat&#40;rows, Amat...&#41;</span>
+            <span class='code'>function show&#40;io::IO, system::System&#41;</span>
           </td>
         </tr>
         <tr id='L496'>
@@ -4985,7 +5027,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return show&#40;</span>
           </td>
         </tr>
         <tr id='L497'>
@@ -4995,7 +5037,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        io,</span>
           </td>
         </tr>
         <tr id='L498'>
@@ -5005,7 +5047,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &quot;&#36;&#40;system.name&#41; with &#36;&#40;length&#40;system.atoms&#41;&#41; atom&#36;&#40;length&#40;system.atoms&#41;&#61;&#61;1 ? &quot;&quot; : &quot;s&quot;&#41; and &#36;&#40;system.grid.n_pts&#41; grid points &#40;Lattice &#61; &#36;&#40;system.grid.lattice&#41;&#41;&quot;,</span>
           </td>
         </tr>
         <tr id='L499'>
@@ -5015,7 +5057,7 @@
           <td>
             
             
-            <span class='code'>## Matrix construction from UniformScaling</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L500'>
@@ -5023,33 +5065,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;5 &#37;&#41;
-              samples spent in Array
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from Array
-              <a href='uniformscaling.jl-e2087a9abbf5542e33d0150c4fc0a805e29014b9.html#L508'>line 508</a>
-              <br />
-            </div>
             
-            <span class='code'>function Matrix&#123;T&#125;&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; where &#123;T&#125;</span>
+            
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L501'>
           <td class='lineno'>501</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L584'>zeros</a>
-              <br />
-            </div>
-            <span class='code'>    A &#61; zeros&#40;T, dims&#41;</span>
+            
+            <span class='code'># TODO: Create &#96;SystemSet&#96; type to represent multiple systems/variables.</span>
           </td>
         </tr>
         <tr id='L502'>
@@ -5059,7 +5087,7 @@
           <td>
             
             
-            <span class='code'>    v &#61; T&#40;s.λ&#41;</span>
+            <span class='code'>#  This will allow for conducting analysis on transient systems, such as a chemical reaction or mechanical perturbation.</span>
           </td>
         </tr>
         <tr id='L503'>
@@ -5069,7 +5097,7 @@
           <td>
             
             
-            <span class='code'>    for i in diagind&#40;dims...&#41;</span>
+            <span class='code'>#  It also allows for representing multiple variables from a single system by making copies of the same system but with &quot;rho&quot; pointed to whatever variable is desired. This part will require modifying the data loaders to be able to specify which variable to load.</span>
           </td>
         </tr>
         <tr id='L504'>
@@ -5079,7 +5107,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds A&#91;i&#93; &#61; v</span>
+            <span class='code'># TODO: Add aux_data field to &#96;System&#96; to store auxiliary data that is not used for analysis.</span>
           </td>
         </tr>
         <tr id='L505'>
@@ -5089,7 +5117,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>#  SCM and VASP data, at least, contains some potentially useful information, but it&#39;s not immediately used in analysis. </span>
           </td>
         </tr>
         <tr id='L506'>
@@ -5099,301 +5127,7 @@
           <td>
             
             
-            <span class='code'>    return A</span>
-          </td>
-        </tr>
-        <tr id='L507'>
-          <td class='lineno'>507</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L508'>
-          <td class='lineno'>508</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;5 &#37;&#41;
-              samples spent in Array
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from inv
-              <a href='triangular.jl-19b3267df6d1cf002ad483172ba7c5a0aa2c9935.html#L809'>line 809</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='uniformscaling.jl-e2087a9abbf5542e33d0150c4fc0a805e29014b9.html#L500'>Array</a>
-              <br />
-            </div>
-            <span class='code'>Matrix&#123;T&#125;&#40;s::UniformScaling, m::Integer, n::Integer&#41; where &#123;T&#125; &#61; Matrix&#123;T&#125;&#40;s, Dims&#40;&#40;m, n&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L509'>
-          <td class='lineno'>509</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Matrix&#40;s::UniformScaling, m::Integer, n::Integer&#41; &#61; Matrix&#40;s, Dims&#40;&#40;m, n&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L510'>
-          <td class='lineno'>510</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Matrix&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; &#61; Matrix&#123;eltype&#40;s&#41;&#125;&#40;s, dims&#41;</span>
-          </td>
-        </tr>
-        <tr id='L511'>
-          <td class='lineno'>511</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Array&#123;T&#125;&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; where &#123;T&#125; &#61; Matrix&#123;T&#125;&#40;s, dims&#41;</span>
-          </td>
-        </tr>
-        <tr id='L512'>
-          <td class='lineno'>512</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Array&#123;T&#125;&#40;s::UniformScaling, m::Integer, n::Integer&#41; where &#123;T&#125; &#61; Matrix&#123;T&#125;&#40;s, m, n&#41;</span>
-          </td>
-        </tr>
-        <tr id='L513'>
-          <td class='lineno'>513</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Array&#40;s::UniformScaling, m::Integer, n::Integer&#41; &#61; Matrix&#40;s, m, n&#41;</span>
-          </td>
-        </tr>
-        <tr id='L514'>
-          <td class='lineno'>514</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Array&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; &#61; Matrix&#40;s, dims&#41;</span>
-          </td>
-        </tr>
-        <tr id='L515'>
-          <td class='lineno'>515</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L516'>
-          <td class='lineno'>516</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>## Diagonal construction from UniformScaling</span>
-          </td>
-        </tr>
-        <tr id='L517'>
-          <td class='lineno'>517</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Diagonal&#123;T&#125;&#40;s::UniformScaling, m::Integer&#41; where &#123;T&#125; &#61; Diagonal&#123;T&#125;&#40;fill&#40;T&#40;s.λ&#41;, m&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L518'>
-          <td class='lineno'>518</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Diagonal&#40;s::UniformScaling, m::Integer&#41; &#61; Diagonal&#123;eltype&#40;s&#41;&#125;&#40;s, m&#41;</span>
-          </td>
-        </tr>
-        <tr id='L519'>
-          <td class='lineno'>519</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L520'>
-          <td class='lineno'>520</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; dot&#40;tr&#40;A&#41;, J.λ&#41;</span>
-          </td>
-        </tr>
-        <tr id='L521'>
-          <td class='lineno'>521</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61; dot&#40;J.λ, tr&#40;A&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L522'>
-          <td class='lineno'>522</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L523'>
-          <td class='lineno'>523</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;x::AbstractVector, J::UniformScaling, y::AbstractVector&#41; &#61; dot&#40;x, J.λ, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L524'>
-          <td class='lineno'>524</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;x::AbstractVector, a::Number, y::AbstractVector&#41; &#61; sum&#40;t -&gt; dot&#40;t&#91;1&#93;, a, t&#91;2&#93;&#41;, zip&#40;x, y&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L525'>
-          <td class='lineno'>525</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;x::AbstractVector, a::Union&#123;Real,Complex&#125;, y::AbstractVector&#41; &#61; a*dot&#40;x, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L526'>
-          <td class='lineno'>526</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L527'>
-          <td class='lineno'>527</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># muladd</span>
-          </td>
-        </tr>
-        <tr id='L528'>
-          <td class='lineno'>528</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.muladd&#40;A::UniformScaling, B::UniformScaling, z::UniformScaling&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L529'>
-          <td class='lineno'>529</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    UniformScaling&#40;A.λ * B.λ &#43; z.λ&#41;</span>
-          </td>
-        </tr>
-        <tr id='L530'>
-          <td class='lineno'>530</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.muladd&#40;A::Union&#123;Diagonal, UniformScaling&#125;, B::Union&#123;Diagonal, UniformScaling&#125;, z::Union&#123;Diagonal, UniformScaling&#125;&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L531'>
-          <td class='lineno'>531</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Diagonal&#40;_diag_or_value&#40;A&#41; .* _diag_or_value&#40;B&#41; .&#43; _diag_or_value&#40;z&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L532'>
-          <td class='lineno'>532</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L533'>
-          <td class='lineno'>533</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>_diag_or_value&#40;A::Diagonal&#41; &#61; A.diag</span>
-          </td>
-        </tr>
-        <tr id='L534'>
-          <td class='lineno'>534</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>_diag_or_value&#40;A::UniformScaling&#41; &#61; A.λ</span>
+            <span class='code'>#  This data should be saved to a &#96;aux_data::Dict&#123;String, Any&#125;&#96; field in &#96;System&#96; so that it can be accessed later if needed. Then, each data loader will fetch and pass it to the &#96;System&#96; constructor as necessary.</span>
           </td>
         </tr>
       </tbody>

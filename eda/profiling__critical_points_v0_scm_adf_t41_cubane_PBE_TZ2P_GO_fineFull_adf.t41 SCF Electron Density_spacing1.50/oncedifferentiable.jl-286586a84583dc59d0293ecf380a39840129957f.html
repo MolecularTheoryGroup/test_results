@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../src/analysis/critical_points.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/NLSolversBase/kavn7/src/objective_types/oncedifferentiable.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sun, 01 Oct 2023 01:03:29
+        Generated on Sun, 01 Oct 2023 01:03:31
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>using NLsolve: nlsolve</span>
+            <span class='code'># Used for objectives and solvers where the gradient is available/exists</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>using LinearAlgebra: eigvals, det, normalize</span>
+            <span class='code'>mutable struct OnceDifferentiable&#123;TF, TDF, TX&#125; &lt;: AbstractObjective</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f # objective</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>export CriticalPointType, CriticalPoint, find_cps</span>
+            <span class='code'>    df # &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    fdf # objective and &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    F::TF # cache for f output</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>@enum CriticalPointType</span>
+            <span class='code'>    DF::TDF # cache for df output</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x_f::TX # x used to evaluate f &#40;stored in F&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>Enumeration representing different types of 2d and 3d critical points.</span>
+            <span class='code'>    x_df::TX # x used to evaluate df &#40;stored in DF&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>3d points are named after their QTAIM counterparts, and 2d points have</span>
+            <span class='code'>    f_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>a &quot;2&quot; suffix.</span>
+            <span class='code'>    df_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>## Example Usage</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>### Only the objective</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>cp_type &#61; CriticalPointType.nuclear_cp</span>
+            <span class='code'># Ambiguity</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>@enum CriticalPointType begin</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;; inplace &#61; true, autodiff &#61; :finite,  </span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    nuclear_cp &#61; -3</span>
+            <span class='code'>                   chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    maximum2_cp &#61; -2</span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, DF, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    bond_cp &#61; -1</span>
+            <span class='code'>#OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray; autodiff &#61; :finite&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    saddle2_cp &#61; 0</span>
+            <span class='code'>#    OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, alloc_DF&#40;x, F&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    ring_cp &#61; 1</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    minimum2_cp &#61; 2</span>
+            <span class='code'>                   F::AbstractArray, DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>    cage_cp &#61; 3</span>
+            <span class='code'>                   inplace &#61; true, autodiff &#61; :finite&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, x::AbstractArray, F::AbstractArray, DF, autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>    IsValidCriticalPointType&#40;ind::Integer&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>Check if an input integer is a valid value for the &#96;CriticalPointType&#96; enum.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray&#123;T&#125;,</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'># Arguments</span>
+            <span class='code'>                            F::Real,</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>- &#96;ind::Integer&#96;: The input value to check if it is a valid &#96;CriticalPointType&#96; enum value.</span>
+            <span class='code'>                            DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                            autodiff, chunk&#41; where T</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'># Returns</span>
+            <span class='code'>    # When here, at the constructor with positional autodiff, it should already</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>- &#96;result::Bool&#96;: &#96;true&#96; if the input &#96;ind&#96; is a valid &#96;CriticalPointType&#96; value, &#96;false&#96; otherwise.</span>
+            <span class='code'>    # be the case, that f is inplace.</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'># Example</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>ind &#61; 1</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>result &#61; IsValidCriticalPointType&#40;ind&#41;</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>println&#40;result&#41;  # true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>function IsValidCriticalPointType&#40;ind::Integer&#41;</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    return ind in Int.&#40;instances&#40;CriticalPointType&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>    struct CriticalPoint&#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>            df_array_spec &#61; DF</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            x_array_spec &#61; x_seed</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>The &#96;CriticalPoint&#96; struct represents a critical point in Julia. It has four fields: &#96;r&#96;, &#96;type&#96;, &#96;i_atom&#96;, and &#96;T&#96;.</span>
+            <span class='code'>            return_spec &#61; typeof&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            gcache &#61; FiniteDiff.GradientCache&#40;df_array_spec, x_array_spec, fdtype, return_spec&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'># Fields</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: A vector of type &#96;T&#96; that determines the cp_index. The length of the vector determines the cp_index.</span>
+            <span class='code'>            function g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>- &#96;type::Int&#96;: An integer representing the type.</span>
+            <span class='code'>                FiniteDiff.finite_difference_gradient&#33;&#40;storage, f, x, gcache&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>- &#96;i_atom::Int&#96;: An integer representing the atom index.</span>
+            <span class='code'>                return</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>## Example Usage</span>
+            <span class='code'>            function fg&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>                g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>cp &#61; CriticalPoint&#40;&#91;1.0, 2.0, 3.0&#93;, 1, 2&#41;</span>
+            <span class='code'>                return f&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>struct CriticalPoint&#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>            gcfg &#61; ForwardDiff.GradientConfig&#40;f, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>    r::Vector&#123;T&#125; # length of r determines cp_index</span>
+            <span class='code'>            g&#33; &#61; &#40;out, x&#41; -&gt; ForwardDiff.gradient&#33;&#40;out, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    type::CriticalPointType</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    i_atom::Int</span>
+            <span class='code'>            fg&#33; &#61; &#40;out, x&#41; -&gt; begin</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                gr_res &#61; DiffResults.DiffResult&#40;zero&#40;T&#41;, out&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                ForwardDiff.gradient&#33;&#40;gr_res, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                DiffResults.value&#40;gr_res&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    CriticalPoint&#40;r::Vector&#123;T&#125;, type::Integer, i_atom::Integer&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>Create a new instance of the &#96;CriticalPoint&#96; type.</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;autodiff is not support. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>&#96;type&#96; integers are the following:</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>* nuclear_cp &#61; -3</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>* maximum2_cp &#61; -2</span>
+            <span class='code'>        return OnceDifferentiable&#40;f, g&#33;, fg&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>* bond_cp &#61; -1</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>* saddle2_cp &#61; 0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>* ring_cp &#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>* minimum2_cp &#61; 2</span>
+            <span class='code'>has_not_dep_symbol_in_ad &#61; Ref&#123;Bool&#125;&#40;true&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>* cage_cp &#61; 3</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, autodiff::Symbol, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>## Arguments</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>- &#96;r&#96;: A vector of &#96;AbstractFloat&#96; values representing the coordinates of a point.</span>
+            <span class='code'>                            autodiff::Bool, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'>- &#96;type&#96;: An integer representing the type of critical point. </span>
+            <span class='code'>    if autodiff &#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>- &#96;i_atom&#96;: An integer representing the index of the atom.</span>
+            <span class='code'>        throw&#40;ErrorException&#40;&quot;It is not possible to set the &#96;autodiff&#96; keyword to &#96;false&#96; when constructing a OnceDifferentiable instance from only one function. Pass in the &#40;partial&#41; derivative or specify a valid &#96;autodiff&#96; symbol.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif has_not_dep_symbol_in_ad&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>## Returns</span>
+            <span class='code'>        @warn&#40;&quot;Setting the &#96;autodiff&#96; keyword to &#96;true&#96; is deprecated. Please use a valid symbol instead.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>- An instance of the &#96;CriticalPoint&#96; type, representing a critical point with the given coordinates, type, and atom index.</span>
+            <span class='code'>        has_not_dep_symbol_in_ad&#91;&#93; &#61; false</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>## Example</span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, :forward, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray, F::AbstractArray, DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>type &#61; 1</span>
+            <span class='code'>    autodiff::Symbol , chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x_seed&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>i_atom &#61; 2</span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>cp &#61; CriticalPoint&#40;r, type, i_atom&#41;</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>function CriticalPoint&#40;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>    r::Vector&#123;T&#125;, type::Integer, i_atom::Integer</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>    @assert IsValidCriticalPointType&#40;type&#41;</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>    return CriticalPoint&#123;T&#125;&#40;r, CriticalPointType&#40;type&#41;, i_atom&#41;</span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            # Apparently only the third input is aliased.</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            j_finitediff_cache &#61; FiniteDiff.JacobianCache&#40;copy&#40;x_seed&#41;, copy&#40;F&#41;, copy&#40;F&#41;, fdtype&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>    find_cps&#40;sys::System&#123;T&#125;; spacing::T&#61;0.1, max_dist_from_atom::T&#61;6.0, dup_cp_check_dist::T&#61;1e-4, nuclear_coord_check_dist::T&#61;1e-4&#41;::Vector&#123;CriticalPoint&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>            if autodiff &#61;&#61; :finiteforward</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                # These copies can be done away with if we add a keyword for</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>Find critical points in a system.</span>
+            <span class='code'>                # reusing arrays instead for overwriting them.</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                Fx &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>Parameters:</span>
+            <span class='code'>                DF &#61; copy&#40;DF&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>- sys::System&#123;T&#125;: The system for which to find critical points.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>- spacing::T: The spacing between grid points for the search. Default is 0.1.</span>
+            <span class='code'>                x_f, x_df &#61; x_of_nans&#40;x_seed&#41;, x_of_nans&#40;x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>- max_dist_from_atom::T: The maximum distance from an atom for a point to be considered a critical point. Default is 6.0.</span>
+            <span class='code'>                f_calls, j_calls &#61; &#91;0,&#93;, &#91;0,&#93;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>- dup_cp_check_dist::T: The distance threshold for checking duplicate critical points. Default is 1e-4.</span>
+            <span class='code'>                function j_finiteforward&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>- nuclear_coord_check_dist::T: The distance threshold for checking nuclear coordinates. Default is 1e-4.</span>
+            <span class='code'>                    # Exploit the possibility that it might be that x_f &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1205,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    # then we don&#39;t have to call f again.</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>Returns:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>- Vector&#123;CriticalPoint&#125;: The critical points found in the system.</span>
+            <span class='code'>                    # if at least one element of x_f is different from x, update</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    if any&#40;x_f .&#33;&#61; x&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,36 +1245,17 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                        f&#40;Fx, x&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
           <td class='lineno'>123</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              4 &#40;40 &#37;&#41;
-              samples spent in find_cps
-              <br />
-              
-              2 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #61
-              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L91'>line 91</a>
-              <br />
-              
-              2 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from find_cps
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>line 123</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>#find_cps#5</a>
-              <br />
-            </div>
-            <span class='code'>function find_cps&#40;</span>
+            
+            
+            <span class='code'>                        f_calls .&#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1284,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>    sys::System&#123;T&#125;;</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1294,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>    spacing::T&#61;0.1,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1304,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    max_dist_from_atom::T&#61;6.0,</span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, Fx&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1314,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    dup_cp_check_dist::T&#61;1e-4,</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1324,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    nuclear_coord_check_dist::T&#61;1e-4,</span>
+            <span class='code'>                function fj_finiteforward&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1334,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>&#41;::Vector&#123;CriticalPoint&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>                    f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1344,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    n_pts &#61; &#91;max&#40;1, round&#40;Int, norm&#40;sys.grid.lattice_full&#91;i, :&#93;&#41; / spacing&#41;&#41; for i in 1:3&#93;</span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, F&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1354,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>    lattice &#61; hcat&#40;&#91;sys.grid.lattice_full&#91;i, :&#93; / n_pts&#91;i&#93; for i in 1:3&#93;...&#41;</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1364,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>    # define critical point search grid</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1374,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>    gs &#61; GridSpec&#123;Float64&#125;&#40;sys.grid.origin, lattice, n_pts&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1384,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    @debug &quot;search grid spec&quot; gs</span>
+            <span class='code'>                return OnceDifferentiable&#40;f, j_finiteforward&#33;, fj_finiteforward&#33;, Fx, DF, x_f, x_df, f_calls, j_calls&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1394,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>    X, Y, Z &#61; generate_interpolation_grid&#40;gs&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1404,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    X, Y, Z &#61; &#91;v&#91;1:&#40;end - 1&#41;&#93; for v in &#40;X, Y, Z&#41;&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1414,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    n_pts .-&#61; 1</span>
+            <span class='code'>            function fj_finitediff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1424,7 +1405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1434,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    @info &quot;CP search using &#36;&#40;n_pts&#91;1&#93;&#41;x&#36;&#40;n_pts&#91;2&#93;&#41;x&#36;&#40;n_pts&#91;3&#93;&#41; &#61; &#36;&#40;prod&#40;length.&#40;&#91;X,Y,Z&#93;&#41;&#41;&#41; cells with spacing of &#36;spacing&quot;</span>
+            <span class='code'>                FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1444,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    @debug &quot;Search grid size&quot; size&#40;X&#41; size&#40;Y&#41; size&#40;Z&#41;</span>
+            <span class='code'>                F</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1454,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>    results &#61; &#91;&#91;&#93; for i in 1:Threads.nthreads&#40;&#41;&#93;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1464,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>    # perform grid-based CP search in shared memory parallel</span>
+            <span class='code'>            function j_finitediff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1474,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>    Threads.@threads for xi in 1:length&#40;X&#41;</span>
+            <span class='code'>                F_cache &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1484,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>        for yi in 1:length&#40;Y&#41;, zi in 1:length&#40;Z&#41;</span>
+            <span class='code'>                fj_finitediff&#33;&#40;F_cache, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1494,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>            low &#61; gs.origin &#43; gs.lattice * float.&#40;&#91;xi, yi, zi&#93; .- 1&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1504,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>            x &#61; low &#43; gs.lattice * 0.5ones&#40;3&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1514,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>            gs1 &#61; GridSpec&#123;Float64&#125;&#40;</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_finitediff&#33;, fj_finitediff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1524,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>                low - gs.lattice * 0.01ones&#40;3&#41;, gs.lattice * diagm&#40;1.02ones&#40;3&#41;&#41;, &#91;1, 1, 1&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1534,31 +1515,17 @@
           <td>
             
             
-            <span class='code'>            &#41;</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
           <td class='lineno'>150</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #101#threadsfor_fun#10
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='matmul.jl-037102772aa14a84614a4fc5ba7816c2492dae64.html#L52'>*</a>
-              <br />
-            </div>
-            <span class='code'>            high &#61; low &#43; gs.lattice * ones&#40;3&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1566,28 +1533,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              4 &#40;40 &#37;&#41;
-              samples spent in fb&#33;
-              <br />
-              4 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              4 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from value&#33;&#33;
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L166'>line 166</a>
-              <br />
-            </div>
             
-            <span class='code'>            function fb&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>            jac_cfg &#61; ForwardDiff.JacobianConfig&#40;f, F, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
           <td class='lineno'>152</td>
-          <td class='tracecount excl'>4 &#40;40 &#37;&#41;</td>
-          <td class='tracecount incl'>4 &#40;40 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
             
-            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+            <span class='code'>            ForwardDiff.checktag&#40;jac_cfg, f, x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1597,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>                return sys.grad&#33;&#40;F, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1607,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            F2 &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1615,18 +1573,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;20 &#37;&#41;
-              samples spent in jb&#33;
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from fj&#33;
-              <a href='abstract.jl-a81708fd19b8615bb91957ad1ab557c3ed109beb.html#L7'>line 7</a>
-              <br />
-            </div>
             
-            <span class='code'>            function jb&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>            function j_forwarddiff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1636,22 +1585,17 @@
           <td>
             
             
-            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;J, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
           <td class='lineno'>157</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L221'>hess&#33;</a>
-              <br />
-            </div>
-            <span class='code'>                return sys.hess&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1661,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            function fj_forwarddiff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1671,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>            # run root finder in cell</span>
+            <span class='code'>                jac_res &#61; DiffResults.DiffResult&#40;F, J&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1681,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>            try</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;jac_res, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1691,31 +1635,17 @@
           <td>
             
             
-            <span class='code'>                # @debug &quot;searching cell &#36;xi &#36;yi &#36;zi&quot; low high</span>
+            <span class='code'>                DiffResults.value&#40;jac_res&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
           <td class='lineno'>162</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>7 &#40;70 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              7 &#40;70 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              7 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #101#threadsfor_fun#10
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
-              <br />
-            </div>
-            <div class='callees'>
-              7 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L56'>nlsolve</a>
-              <br />
-            </div>
-            <span class='code'>                r &#61; nlsolve&#40;fb&#33;, jb&#33;, x&#41;</span>
+            
+            
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1725,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>                if r.x_converged || r.f_converged</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1735,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>                    # save if converged</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_forwarddiff&#33;, fj_forwarddiff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1745,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>                    # @debug &quot;CP found&quot; r.zero</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1755,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>                    push&#33;&#40;results&#91;Threads.threadid&#40;&#41;&#93;, r&#41;</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;&#40;autodiff&#41; is not supported. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1765,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1775,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>            catch e</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1785,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>                continue</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1795,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>                @debug &quot;grid point failed&quot; x e</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1805,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>### Objective and derivative</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1815,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df,</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1825,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1835,7 +1765,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1845,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>    # create critical point data structure</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1855,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>    cp_info &#61; Vector&#123;CriticalPoint&#123;T&#125;&#125;&#40;&#41;</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1865,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;ri, ro&#41; in enumerate&#40;results&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1875,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>        for r in ro</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1885,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>            x1 &#61; r.zero</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1895,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>            nuclear_coord_ind &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1905,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;isempty&#40;sys.atoms&#41;</span>
+            <span class='code'>    fdf&#33; &#61; make_fdf&#40;x, F, f, df&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1915,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>                nuclear_coord_dists &#61; &#91;norm&#40;x1 - a.r&#41; for a in sys.atoms&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1925,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>                min_nuclear_coord_dist &#61; minimum&#40;nuclear_coord_dists&#41;</span>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, x, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1935,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>                if min_nuclear_coord_dist &gt; max_dist_from_atom</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1945,17 +1875,40 @@
           <td>
             
             
-            <span class='code'>                    continue # skip points too far from any known atoms</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
           <td class='lineno'>186</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>                end</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #nlsolve#31
+              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L62'>line 62</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>OnceDifferentiable</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L196'>#OnceDifferentiable#26</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, j,</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1965,7 +1918,7 @@
           <td>
             
             
-            <span class='code'>                if min_nuclear_coord_dist &lt; nuclear_coord_check_dist</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1975,7 +1928,7 @@
           <td>
             
             
-            <span class='code'>                    nuclear_coord_ind &#61; argmin&#40;nuclear_coord_dists&#41;</span>
+            <span class='code'>                   F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1985,7 +1938,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>                   J::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1995,7 +1948,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -2005,7 +1958,7 @@
           <td>
             
             
-            <span class='code'>            if length&#40;cp_info&#41; &gt; 0 &amp;&amp;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L192'>
@@ -2015,7 +1968,7 @@
           <td>
             
             
-            <span class='code'>                minimum&#40;&#91;norm&#40;x1 - a.r&#41; for a in cp_info&#93;&#41; &lt; dup_cp_check_dist</span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2025,7 +1978,7 @@
           <td>
             
             
-            <span class='code'>                continue # skip duplicate points</span>
+            <span class='code'>    j&#33; &#61; df&#33;_from_df&#40;j, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2035,7 +1988,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    fj&#33; &#61; make_fdf&#40;x, F, f&#33;, j&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2045,17 +1998,31 @@
           <td>
             
             
-            <span class='code'>            ρ &#61; sys.rho&#40;x1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L196'>
           <td class='lineno'>196</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            A &#61; sys.hess&#40;x1&#41;</span>
+            <div class='call-sites'>
+              1 &#40;5 &#37;&#41;
+              samples spent in #OnceDifferentiable#26
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>OnceDifferentiable</a>
+              <br />
+            </div>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, j&#33;, fj&#33;, x, F, J&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2065,7 +2032,7 @@
           <td>
             
             
-            <span class='code'>            λ &#61; eigvals&#40;A&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2075,7 +2042,7 @@
           <td>
             
             
-            <span class='code'>            cp_index &#61; Int&#40;sum&#40;sign.&#40;λ&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2085,22 +2052,17 @@
           <td>
             
             
-            <span class='code'>            if length&#40;cp_info&#41; &gt; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
           <td class='lineno'>200</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L775'>collect</a>
-              <br />
-            </div>
-            <span class='code'>                check_cps &#61; &#91;</span>
+            
+            <span class='code'>### Objective, derivative and combination</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2110,7 +2072,7 @@
           <td>
             
             
-            <span class='code'>                    norm&#40;x1 - cp.r&#41; for</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2120,7 +2082,7 @@
           <td>
             
             
-            <span class='code'>                    cp in cp_info if Int&#40;cp.type&#41; &lt;&#61; cp_index || sys.rho&#40;cp.r&#41; &gt; ρ</span>
+            <span class='code'>    x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2130,7 +2092,7 @@
           <td>
             
             
-            <span class='code'>                &#93;</span>
+            <span class='code'>    F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2140,7 +2102,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;isempty&#40;check_cps&#41;</span>
+            <span class='code'>    DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2150,7 +2112,7 @@
           <td>
             
             
-            <span class='code'>                    min_dist &#61; minimum&#40;check_cps&#41;</span>
+            <span class='code'>    inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2160,7 +2122,7 @@
           <td>
             
             
-            <span class='code'>                    if min_dist &lt; 0.05</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2170,7 +2132,7 @@
           <td>
             
             
-            <span class='code'>                        continue # skip points too close to another CP of the same cp_index</span>
+            <span class='code'>    # f is never &quot;inplace&quot; since F is scalar</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2180,7 +2142,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2190,7 +2152,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2200,7 +2162,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2210,7 +2172,7 @@
           <td>
             
             
-            <span class='code'>            # @debug &quot;found cp_index &#36;&#40;cp_index&#41; at&quot; pr&#40;x1&#41; cp_index nuclear_coord_ind</span>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2220,7 +2182,7 @@
           <td>
             
             
-            <span class='code'>            push&#33;&#40;cp_info, CriticalPoint&#40;x1, cp_index, nuclear_coord_ind&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2230,7 +2192,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    OnceDifferentiable&#123;typeof&#40;F&#41;,typeof&#40;DF&#41;,typeof&#40;x&#41;&#125;&#40;f, df&#33;, fdf&#33;,</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2240,7 +2202,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    copy&#40;F&#41;, copy&#40;DF&#41;,</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2250,7 +2212,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;cp_info&#41; &#61;&#61; 0</span>
+            <span class='code'>    x_f, x_df,</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2260,7 +2222,7 @@
           <td>
             
             
-            <span class='code'>        @warn &quot;No critical points found&quot;</span>
+            <span class='code'>    &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2270,7 +2232,7 @@
           <td>
             
             
-            <span class='code'>        return cp_info</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2280,45 +2242,46 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L219'>
           <td class='lineno'>219</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    max_rho &#61; maximum&#40;x -&gt; x, &#91;sys.rho&#40;cp.r&#41; for cp in cp_info&#93;&#41; &#43; 1.0</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>line 219</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #OnceDifferentiable#26
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L196'>line 196</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>#OnceDifferentiable#28</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L220'>
           <td class='lineno'>220</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in #17
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from lt
-              <a href='ordering.jl-073167af6e34adb75f38f97870a364f68ddcb304.html#L119'>line 119</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='sort.jl-d29b41c5309c3e0b13a77fa38eaab6275bc42768.html#L1367'>sort&#33;</a>
-              <br />
-              1 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L214'>f</a>
-              <br />
-            </div>
-            <span class='code'>    sort&#33;&#40;cp_info; by&#61;cp -&gt; Int&#40;cp.type&#41; &#43; sys.rho&#40;cp.r&#41; / max_rho&#41;</span>
+            
+            
+            <span class='code'>                            x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2328,7 +2291,7 @@
           <td>
             
             
-            <span class='code'>    @info &quot;&#36;&#40;length&#40;cp_info&#41;&#41; CPs found&quot;</span>
+            <span class='code'>                            F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2338,7 +2301,7 @@
           <td>
             
             
-            <span class='code'>    for rnk in &#91;nuclear_cp, bond_cp, ring_cp, cage_cp&#93;</span>
+            <span class='code'>                            DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2348,7 +2311,7 @@
           <td>
             
             
-            <span class='code'>        cps &#61; &#91;cp for cp in cp_info if cp.type &#61;&#61; rnk&#93;</span>
+            <span class='code'>                            inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2358,7 +2321,7 @@
           <td>
             
             
-            <span class='code'>        @info &quot;&#36;&#40;length&#40;cps&#41;&#41; cps of cp_index &#36;&#40;rnk&#41;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2368,7 +2331,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    f &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2378,11 +2341,66 @@
           <td>
             
             
-            <span class='code'>    return cp_info</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
           <td class='lineno'>227</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
+          </td>
+        </tr>
+        <tr id='L228'>
+          <td class='lineno'>228</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L229'>
+          <td class='lineno'>229</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
+          </td>
+        </tr>
+        <tr id='L230'>
+          <td class='lineno'>230</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L231'>
+          <td class='lineno'>231</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
+          <td>
+            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L365'>copy</a>
+              <br />
+            </div>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, copy&#40;F&#41;, copy&#40;DF&#41;, x_f, x_df, &#91;0,&#93;, &#91;0,&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L232'>
+          <td class='lineno'>232</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>

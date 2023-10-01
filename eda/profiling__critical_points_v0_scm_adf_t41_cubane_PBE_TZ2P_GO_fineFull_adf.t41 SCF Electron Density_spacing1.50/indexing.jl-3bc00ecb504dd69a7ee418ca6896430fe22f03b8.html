@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../src/analysis/critical_points.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/Interpolations/nDwIa/src/b-splines/indexing.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sun, 01 Oct 2023 01:03:29
+        Generated on Sun, 01 Oct 2023 01:03:31
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>using NLsolve: nlsolve</span>
+            <span class='code'>### Primary evaluation entry points &#40;itp&#40;x...&#41;, gradient&#40;itp, x...&#41;, and hessian&#40;itp, x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>using LinearAlgebra: eigvals, det, normalize</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>itpinfo&#40;itp&#41; &#61; &#40;tcollect&#40;itpflag, itp&#41;, axes&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>export CriticalPointType, CriticalPoint, find_cps</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>@enum CriticalPointType</span>
+            <span class='code'>    wis &#61; weightedindexes&#40;&#40;value_weights,&#41;, itpinfo&#40;itp&#41;..., x&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    InterpGetindex&#40;itp&#41;&#91;wis...&#93;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>Enumeration representing different types of 2d and 3d critical points.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>3d points are named after their QTAIM counterparts, and 2d points have</span>
+            <span class='code'>@propagate_inbounds function &#40;itp::BSplineInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Number,M&#125;&#41; where &#123;T,M,N&#125;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>a &quot;2&quot; suffix.</span>
+            <span class='code'>    inds, trailing &#61; split_trailing&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @boundscheck &#40;check1&#40;trailing&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>## Example Usage</span>
+            <span class='code'>    @assert length&#40;inds&#41; &#61;&#61; N</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>    itp&#40;inds...&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>cp_type &#61; CriticalPointType.nuclear_cp</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Union&#123;Number,AbstractVector&#125;,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>@enum CriticalPointType begin</span>
+            <span class='code'>    itps &#61; tcollect&#40;itpflag, itp&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    nuclear_cp &#61; -3</span>
+            <span class='code'>    wis &#61; dimension_wis&#40;value_weights, itps, axes&#40;itp&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    maximum2_cp &#61; -2</span>
+            <span class='code'>    coefs &#61; InterpGetindex&#40;itp&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    bond_cp &#61; -1</span>
+            <span class='code'>    ret &#61; &#91;coefs&#91;i...&#93; for i in Iterators.product&#40;wis...&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    saddle2_cp &#61; 0</span>
+            <span class='code'>    reshape&#40;ret, shape&#40;wis...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    ring_cp &#61; 1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    minimum2_cp &#61; 2</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>    cage_cp &#61; 3</span>
+            <span class='code'>@propagate_inbounds function gradient&#40;itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    @boundscheck checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,17 +295,31 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    wis &#61; weightedindexes&#40;&#40;value_weights, gradient_weights&#41;, itpinfo&#40;itp&#41;..., x&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
           <td class='lineno'>28</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
+            <div class='call-sites'>
+              1 &#40;5 &#37;&#41;
+              samples spent in gradient
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from gradient
+              <a href='scaling.jl-ff3c4ce95c1d4462ef83b5f818a42dad57affb50.html#L118'>line 118</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L30'>_gradient</a>
+              <br />
+            </div>
+            <span class='code'>    return SVector&#40;_gradient&#40;InterpGetindex&#40;itp&#41;, wis...&#41;&#41;   # work around #311</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,17 +329,31 @@
           <td>
             
             
-            <span class='code'>    IsValidCriticalPointType&#40;ind::Integer&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L30'>
           <td class='lineno'>30</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              1 &#40;5 &#37;&#41;
+              samples spent in _gradient
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from gradient
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L28'>line 28</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L279'>getindex</a>
+              <br />
+            </div>
+            <span class='code'>@inline _gradient&#40;coefs, inds, moreinds...&#41; &#61; &#40;coefs&#91;inds...&#93;, _gradient&#40;coefs, moreinds...&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +363,7 @@
           <td>
             
             
-            <span class='code'>Check if an input integer is a valid value for the &#96;CriticalPointType&#96; enum.</span>
+            <span class='code'>_gradient&#40;coefs&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -355,7 +383,7 @@
           <td>
             
             
-            <span class='code'># Arguments</span>
+            <span class='code'>@propagate_inbounds function gradient&#33;&#40;dest, itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +393,7 @@
           <td>
             
             
-            <span class='code'>- &#96;ind::Integer&#96;: The input value to check if it is a valid &#96;CriticalPointType&#96; enum value.</span>
+            <span class='code'>    dest .&#61; gradient&#40;itp, x...&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +403,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +413,7 @@
           <td>
             
             
-            <span class='code'># Returns</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +423,7 @@
           <td>
             
             
-            <span class='code'>- &#96;result::Bool&#96;: &#96;true&#96; if the input &#96;ind&#96; is a valid &#96;CriticalPointType&#96; value, &#96;false&#96; otherwise.</span>
+            <span class='code'>@propagate_inbounds function hessian&#40;itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +433,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @boundscheck checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +443,7 @@
           <td>
             
             
-            <span class='code'># Example</span>
+            <span class='code'>    wis &#61; weightedindexes&#40;&#40;value_weights, gradient_weights, hessian_weights&#41;, itpinfo&#40;itp&#41;..., x&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +453,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>    symmatrix&#40;map&#40;inds-&gt;InterpGetindex&#40;itp&#41;&#91;inds...&#93;, wis&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +463,7 @@
           <td>
             
             
-            <span class='code'>ind &#61; 1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +473,7 @@
           <td>
             
             
-            <span class='code'>result &#61; IsValidCriticalPointType&#40;ind&#41;</span>
+            <span class='code'>@propagate_inbounds function hessian&#33;&#40;dest, itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +483,7 @@
           <td>
             
             
-            <span class='code'>println&#40;result&#41;  # true</span>
+            <span class='code'>    dest .&#61; hessian&#40;itp, x...&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +493,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +503,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +513,7 @@
           <td>
             
             
-            <span class='code'>function IsValidCriticalPointType&#40;ind::Integer&#41;</span>
+            <span class='code'># Leftovers from AbstractInterpolation</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +523,7 @@
           <td>
             
             
-            <span class='code'>    return ind in Int.&#40;instances&#40;CriticalPointType&#41;&#41;</span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#41;&#40;x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +533,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    itp&#40;to_indices&#40;itp, x&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +543,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +553,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#41;&#40;x::Vararg&#123;ExpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +563,7 @@
           <td>
             
             
-            <span class='code'>    struct CriticalPoint&#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>    itp.&#40;Iterators.product&#40;x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +573,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +583,7 @@
           <td>
             
             
-            <span class='code'>The &#96;CriticalPoint&#96; struct represents a critical point in Julia. It has four fields: &#96;r&#96;, &#96;type&#96;, &#96;i_atom&#96;, and &#96;T&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +593,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +603,7 @@
           <td>
             
             
-            <span class='code'># Fields</span>
+            <span class='code'>    weightedindexes&#40;fs, itpflags, nodes, xs&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +613,7 @@
           <td>
             
             
-            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: A vector of type &#96;T&#96; that determines the cp_index. The length of the vector determines the cp_index.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +623,7 @@
           <td>
             
             
-            <span class='code'>- &#96;type::Int&#96;: An integer representing the type.</span>
+            <span class='code'>Compute &#96;WeightedIndex&#96; values for evaluation at the position &#96;xs...&#96;.</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +633,7 @@
           <td>
             
             
-            <span class='code'>- &#96;i_atom::Int&#96;: An integer representing the atom index.</span>
+            <span class='code'>&#96;fs&#96; is a function or tuple of functions indicating the types of index required,</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +643,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>typically &#96;value_weights&#96;, &#96;gradient_weights&#96;, and/or &#96;hessian_weights&#96;.</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +653,7 @@
           <td>
             
             
-            <span class='code'>## Example Usage</span>
+            <span class='code'>&#96;itpflags&#96; and &#96;nodes&#96; can be obtained from &#96;itpinfo&#40;itp&#41;...&#96;.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +663,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +673,7 @@
           <td>
             
             
-            <span class='code'>cp &#61; CriticalPoint&#40;&#91;1.0, 2.0, 3.0&#93;, 1, 2&#41;</span>
+            <span class='code'>See the &quot;developer documentation&quot; for further information.</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +683,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +693,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@inline function weightedindexes&#40;fs::F, itpflags::NTuple&#123;N,Flag&#125;, knots::NTuple&#123;N,AbstractVector&#125;, xs::NTuple&#123;N,Number&#125;&#41; where &#123;F,N&#125;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +703,7 @@
           <td>
             
             
-            <span class='code'>struct CriticalPoint&#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>    # parts &#61; map&#40;&#40;flag, knotvec, x&#41;-&gt;weightedindex_parts&#40;fs, flag, knotvec, x&#41;, itpflags, knots, xs&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +713,7 @@
           <td>
             
             
-            <span class='code'>    r::Vector&#123;T&#125; # length of r determines cp_index</span>
+            <span class='code'>    parts &#61; map3argf&#40;weightedindex_parts, fs, itpflags, knots, xs&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +723,7 @@
           <td>
             
             
-            <span class='code'>    type::CriticalPointType</span>
+            <span class='code'>    weightedindexes&#40;parts...&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +733,7 @@
           <td>
             
             
-            <span class='code'>    i_atom::Int</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +743,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># This is a force-inlined version of map&#40;&#40;flag, knotvec, x&#41;-&gt;g&#40;fs, flag, knotvec, x&#41;, itpflags, knots, xs&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +753,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline map3argf&#40;g::G, fs::F, itpflags, knots, xs&#41; where &#123;G,F&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +763,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    &#40;g&#40;fs, itpflags&#91;1&#93;, knots&#91;1&#93;, xs&#91;1&#93;&#41;, map3argf&#40;g, fs, Base.tail&#40;itpflags&#41;, Base.tail&#40;knots&#41;, Base.tail&#40;xs&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +773,7 @@
           <td>
             
             
-            <span class='code'>    CriticalPoint&#40;r::Vector&#123;T&#125;, type::Integer, i_atom::Integer&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>map3argf&#40;g::G, fs::F, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; where &#123;G,F&#125; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -765,7 +793,7 @@
           <td>
             
             
-            <span class='code'>Create a new instance of the &#96;CriticalPoint&#96; type.</span>
+            <span class='code'>weightedindexes&#40;i::Vararg&#123;Int,N&#125;&#41; where N &#61; i  # the all-NoInterp case</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +803,7 @@
           <td>
             
             
-            <span class='code'>&#96;type&#96; integers are the following:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +813,7 @@
           <td>
             
             
-            <span class='code'>* nuclear_cp &#61; -3</span>
+            <span class='code'>const PositionCoefs&#123;P,C&#125; &#61; NamedTuple&#123;&#40;:position,:coefs&#41;,Tuple&#123;P,C&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +823,7 @@
           <td>
             
             
-            <span class='code'>* maximum2_cp &#61; -2</span>
+            <span class='code'>const ValueParts&#123;P,W&#125; &#61; PositionCoefs&#123;P,Tuple&#123;W&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +833,7 @@
           <td>
             
             
-            <span class='code'>* bond_cp &#61; -1</span>
+            <span class='code'>@inline weightedindexes&#40;parts::Vararg&#123;Union&#123;Int,ValueParts&#125;,N&#125;&#41; where N &#61;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +843,7 @@
           <td>
             
             
-            <span class='code'>* saddle2_cp &#61; 0</span>
+            <span class='code'>    map&#40;maybe_weightedindex, map&#40;positions, parts&#41;, map&#40;valuecoefs, parts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +853,7 @@
           <td>
             
             
-            <span class='code'>* ring_cp &#61; 1</span>
+            <span class='code'>maybe_weightedindex&#40;i::Integer, _::Integer&#41; &#61; Int&#40;i&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +863,7 @@
           <td>
             
             
-            <span class='code'>* minimum2_cp &#61; 2</span>
+            <span class='code'>maybe_weightedindex&#40;pos, coefs::Tuple&#41; &#61; WeightedIndex&#40;pos, coefs&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +873,7 @@
           <td>
             
             
-            <span class='code'>* cage_cp &#61; 3</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +883,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>positions&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +893,7 @@
           <td>
             
             
-            <span class='code'>## Arguments</span>
+            <span class='code'>valuecoefs&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +903,7 @@
           <td>
             
             
-            <span class='code'>- &#96;r&#96;: A vector of &#96;AbstractFloat&#96; values representing the coordinates of a point.</span>
+            <span class='code'>gradcoefs&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +913,7 @@
           <td>
             
             
-            <span class='code'>- &#96;type&#96;: An integer representing the type of critical point. </span>
+            <span class='code'>hesscoefs&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +923,7 @@
           <td>
             
             
-            <span class='code'>- &#96;i_atom&#96;: An integer representing the index of the atom.</span>
+            <span class='code'>positions&#40;t::PositionCoefs&#41; &#61; t.position</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +933,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>valuecoefs&#40;t::PositionCoefs&#41; &#61; t.coefs&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +943,7 @@
           <td>
             
             
-            <span class='code'>## Returns</span>
+            <span class='code'>gradcoefs&#40;t::PositionCoefs&#41; &#61; t.coefs&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +953,7 @@
           <td>
             
             
-            <span class='code'>- An instance of the &#96;CriticalPoint&#96; type, representing a critical point with the given coordinates, type, and atom index.</span>
+            <span class='code'>hesscoefs&#40;t::PositionCoefs&#41; &#61; t.coefs&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -945,7 +973,7 @@
           <td>
             
             
-            <span class='code'>## Example</span>
+            <span class='code'>const GradParts&#123;P,W1,W2&#125; &#61; PositionCoefs&#123;P,Tuple&#123;W1,W2&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +983,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>function weightedindexes&#40;parts::Vararg&#123;Union&#123;Int,GradParts&#125;,N&#125;&#41; where N</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +993,7 @@
           <td>
             
             
-            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
+            <span class='code'>    # Create &#40;wis1, wis2, ...&#41; where wisn is used to evaluate the gradient along the nth *chosen* dimension</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +1003,7 @@
           <td>
             
             
-            <span class='code'>type &#61; 1</span>
+            <span class='code'>    # Example: if itp is a 3d interpolation of form &#40;Linear, NoInterp, Quadratic&#41; then we will return</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +1013,7 @@
           <td>
             
             
-            <span class='code'>i_atom &#61; 2</span>
+            <span class='code'>    #    &#40;gwi1, i2, wi3&#41;, &#40;wi1, i2, gwi3&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1023,7 @@
           <td>
             
             
-            <span class='code'>cp &#61; CriticalPoint&#40;r, type, i_atom&#41;</span>
+            <span class='code'>    # where wik are value-coefficient WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1033,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    #       gwik are gradient-coefficient WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1043,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    #       i2 is the integer index along dimension 2</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1053,7 @@
           <td>
             
             
-            <span class='code'>function CriticalPoint&#40;</span>
+            <span class='code'>    # These will result in a 2-vector gradient.</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1063,7 @@
           <td>
             
             
-            <span class='code'>    r::Vector&#123;T&#125;, type::Integer, i_atom::Integer</span>
+            <span class='code'>    # TODO: check whether this is inferrable</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1073,7 @@
           <td>
             
             
-            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>    slot_substitute&#40;parts, map&#40;positions, parts&#41;, map&#40;valuecoefs, parts&#41;, map&#40;gradcoefs, parts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1083,7 @@
           <td>
             
             
-            <span class='code'>    @assert IsValidCriticalPointType&#40;type&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1093,7 @@
           <td>
             
             
-            <span class='code'>    return CriticalPoint&#123;T&#125;&#40;r, CriticalPointType&#40;type&#41;, i_atom&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1103,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Skip over NoInterp dimensions</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1113,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>slot_substitute&#40;kind::Tuple&#123;Int,Vararg&#123;Any&#125;&#125;, p, v, g&#41; &#61; slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1123,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Substitute the dth dimension&#39;s gradient coefs for the remaining coefs</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1133,7 @@
           <td>
             
             
-            <span class='code'>    find_cps&#40;sys::System&#123;T&#125;; spacing::T&#61;0.1, max_dist_from_atom::T&#61;6.0, dup_cp_check_dist::T&#61;1e-4, nuclear_coord_check_dist::T&#61;1e-4&#41;::Vector&#123;CriticalPoint&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>slot_substitute&#40;kind, p, v, g&#41; &#61; &#40;map&#40;maybe_weightedindex, p, substitute_ruled&#40;v, kind, g&#41;&#41;, slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1143,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Termination</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1153,7 @@
           <td>
             
             
-            <span class='code'>Find critical points in a system.</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple&#123;&#125;, p, v, g&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1145,7 +1173,7 @@
           <td>
             
             
-            <span class='code'>Parameters:</span>
+            <span class='code'>const HessParts&#123;P,W1,W2,W3&#125; &#61; PositionCoefs&#123;P,Tuple&#123;W1,W2,W3&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1183,7 @@
           <td>
             
             
-            <span class='code'>- sys::System&#123;T&#125;: The system for which to find critical points.</span>
+            <span class='code'>function weightedindexes&#40;parts::Vararg&#123;Union&#123;Int,HessParts&#125;,N&#125;&#41; where N</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1193,7 @@
           <td>
             
             
-            <span class='code'>- spacing::T: The spacing between grid points for the search. Default is 0.1.</span>
+            <span class='code'>    # Create &#40;wis1, wis2, ...&#41; where wisn is used to evaluate the nth *chosen* hessian component</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1203,7 @@
           <td>
             
             
-            <span class='code'>- max_dist_from_atom::T: The maximum distance from an atom for a point to be considered a critical point. Default is 6.0.</span>
+            <span class='code'>    # Example: if itp is a 3d interpolation of form &#40;Linear, NoInterp, Quadratic&#41; then we will return</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1213,7 @@
           <td>
             
             
-            <span class='code'>- dup_cp_check_dist::T: The distance threshold for checking duplicate critical points. Default is 1e-4.</span>
+            <span class='code'>    #    &#40;hwi1, i2, wi3&#41;, &#40;gwi1, i2, gwi3&#41;, &#40;wi1, i2, hwi3&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1223,7 @@
           <td>
             
             
-            <span class='code'>- nuclear_coord_check_dist::T: The distance threshold for checking nuclear coordinates. Default is 1e-4.</span>
+            <span class='code'>    # where wik are value-coefficient WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1233,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #       gwik are 1st-derivative WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1243,7 @@
           <td>
             
             
-            <span class='code'>Returns:</span>
+            <span class='code'>    #       hwik are 2nd-derivative WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1253,7 @@
           <td>
             
             
-            <span class='code'>- Vector&#123;CriticalPoint&#125;: The critical points found in the system.</span>
+            <span class='code'>    #       i2 is just the index along dimension 2</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1263,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # These will result in a 2x2 hessian &#91;hc1 hc2; hc2 hc3&#93; where</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,36 +1273,17 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    #    hc1 &#61; coefs&#91;hwi1, i2, wi3&#93;</span>
           </td>
         </tr>
         <tr id='L123'>
           <td class='lineno'>123</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              4 &#40;40 &#37;&#41;
-              samples spent in find_cps
-              <br />
-              
-              2 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #61
-              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L91'>line 91</a>
-              <br />
-              
-              2 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from find_cps
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>line 123</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>#find_cps#5</a>
-              <br />
-            </div>
-            <span class='code'>function find_cps&#40;</span>
+            
+            
+            <span class='code'>    #    hc2 &#61; coefs&#91;gwi1, i2, gwi3&#93;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1284,7 +1293,7 @@
           <td>
             
             
-            <span class='code'>    sys::System&#123;T&#125;;</span>
+            <span class='code'>    #    hc3 &#61; coefs&#91;wi1,  i2, hwi3&#93;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1294,7 +1303,7 @@
           <td>
             
             
-            <span class='code'>    spacing::T&#61;0.1,</span>
+            <span class='code'>    slot_substitute&#40;parts, map&#40;positions, parts&#41;, map&#40;valuecoefs, parts&#41;, map&#40;gradcoefs, parts&#41;, map&#40;hesscoefs, parts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1304,7 +1313,7 @@
           <td>
             
             
-            <span class='code'>    max_dist_from_atom::T&#61;6.0,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1314,7 +1323,7 @@
           <td>
             
             
-            <span class='code'>    dup_cp_check_dist::T&#61;1e-4,</span>
+            <span class='code'># Substitute the dth dimension&#39;s gradient coefs for the remaining coefs, column by column</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1324,7 +1333,7 @@
           <td>
             
             
-            <span class='code'>    nuclear_coord_check_dist::T&#61;1e-4,</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple, p, v, g, h&#41; &#61; &#40;_column&#40;kind, kind, p, v, g, h&#41;..., slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g, h&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1334,7 +1343,7 @@
           <td>
             
             
-            <span class='code'>&#41;::Vector&#123;CriticalPoint&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>slot_substitute&#40;::Tuple&#123;&#125;, p, v, g, h&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1344,7 +1353,7 @@
           <td>
             
             
-            <span class='code'>    n_pts &#61; &#91;max&#40;1, round&#40;Int, norm&#40;sys.grid.lattice_full&#91;i, :&#93;&#41; / spacing&#41;&#41; for i in 1:3&#93;</span>
+            <span class='code'># inner: calulate a single column</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1354,7 +1363,7 @@
           <td>
             
             
-            <span class='code'>    lattice &#61; hcat&#40;&#91;sys.grid.lattice_full&#91;i, :&#93; / n_pts&#91;i&#93; for i in 1:3&#93;...&#41;</span>
+            <span class='code'>function _column&#40;kind1::K, kind2::K, p, v, g, h&#41; where &#123;K&lt;:Tuple&#125;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1364,7 +1373,7 @@
           <td>
             
             
-            <span class='code'>    # define critical point search grid</span>
+            <span class='code'>    ss &#61; substitute_ruled&#40;v, kind1, h&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1374,7 +1383,7 @@
           <td>
             
             
-            <span class='code'>    gs &#61; GridSpec&#123;Float64&#125;&#40;sys.grid.origin, lattice, n_pts&#41;</span>
+            <span class='code'>    &#40;map&#40;maybe_weightedindex, p, ss&#41;, _column&#40;Base.tail&#40;kind1&#41;, kind2, p, v, g, h&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1384,7 +1393,7 @@
           <td>
             
             
-            <span class='code'>    @debug &quot;search grid spec&quot; gs</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1394,7 +1403,7 @@
           <td>
             
             
-            <span class='code'>    X, Y, Z &#61; generate_interpolation_grid&#40;gs&#41;</span>
+            <span class='code'>function _column&#40;kind1::Tuple, kind2::Tuple, p, v, g, h&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1404,7 +1413,7 @@
           <td>
             
             
-            <span class='code'>    X, Y, Z &#61; &#91;v&#91;1:&#40;end - 1&#41;&#93; for v in &#40;X, Y, Z&#41;&#93;</span>
+            <span class='code'>    ss &#61; substitute_ruled&#40;substitute_ruled&#40;v, kind1, g&#41;, kind2, g&#41;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1414,7 +1423,7 @@
           <td>
             
             
-            <span class='code'>    n_pts .-&#61; 1</span>
+            <span class='code'>    &#40;map&#40;maybe_weightedindex, p, ss&#41;, _column&#40;Base.tail&#40;kind1&#41;, kind2, p, v, g, h&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1424,7 +1433,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1434,7 +1443,7 @@
           <td>
             
             
-            <span class='code'>    @info &quot;CP search using &#36;&#40;n_pts&#91;1&#93;&#41;x&#36;&#40;n_pts&#91;2&#93;&#41;x&#36;&#40;n_pts&#91;3&#93;&#41; &#61; &#36;&#40;prod&#40;length.&#40;&#91;X,Y,Z&#93;&#41;&#41;&#41; cells with spacing of &#36;spacing&quot;</span>
+            <span class='code'>_column&#40;::Tuple&#123;&#125;, ::Tuple, p, v, g, h&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1444,7 +1453,7 @@
           <td>
             
             
-            <span class='code'>    @debug &quot;Search grid size&quot; size&#40;X&#41; size&#40;Y&#41; size&#40;Z&#41;</span>
+            <span class='code'># Skip over NoInterp dimensions</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1454,7 +1463,7 @@
           <td>
             
             
-            <span class='code'>    results &#61; &#91;&#91;&#93; for i in 1:Threads.nthreads&#40;&#41;&#93;</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple&#123;Int,Vararg&#123;Any&#125;&#125;, p, v, g, h&#41; &#61; slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g, h&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1464,7 +1473,7 @@
           <td>
             
             
-            <span class='code'>    # perform grid-based CP search in shared memory parallel</span>
+            <span class='code'>_column&#40;kind1::Tuple&#123;Int,Vararg&#123;Any&#125;&#125;, kind2::Tuple, p, v, g, h&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1474,7 +1483,7 @@
           <td>
             
             
-            <span class='code'>    Threads.@threads for xi in 1:length&#40;X&#41;</span>
+            <span class='code'>    _column&#40;Base.tail&#40;kind1&#41;, kind2, p, v, g, h&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1484,7 +1493,7 @@
           <td>
             
             
-            <span class='code'>        for yi in 1:length&#40;Y&#41;, zi in 1:length&#40;Z&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1494,7 +1503,7 @@
           <td>
             
             
-            <span class='code'>            low &#61; gs.origin &#43; gs.lattice * float.&#40;&#91;xi, yi, zi&#93; .- 1&#41;</span>
+            <span class='code'>weightedindex_parts&#40;fs::F, itpflag::BSpline, ax, x&#41; where F &#61;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1504,7 +1513,7 @@
           <td>
             
             
-            <span class='code'>            x &#61; low &#43; gs.lattice * 0.5ones&#40;3&#41;</span>
+            <span class='code'>    weightedindex_parts&#40;fs, degree&#40;itpflag&#41;, ax, x&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1514,7 +1523,7 @@
           <td>
             
             
-            <span class='code'>            gs1 &#61; GridSpec&#123;Float64&#125;&#40;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1524,7 +1533,7 @@
           <td>
             
             
-            <span class='code'>                low - gs.lattice * 0.01ones&#40;3&#41;, gs.lattice * diagm&#40;1.02ones&#40;3&#41;&#41;, &#91;1, 1, 1&#93;</span>
+            <span class='code'>function weightedindex_parts&#40;fs::F, deg::Degree, ax::AbstractUnitRange&#123;&lt;:Integer&#125;, x&#41; where F</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1534,31 +1543,17 @@
           <td>
             
             
-            <span class='code'>            &#41;</span>
+            <span class='code'>    pos, δx &#61; positions&#40;deg, ax,  x&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
           <td class='lineno'>150</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #101#threadsfor_fun#10
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='matmul.jl-037102772aa14a84614a4fc5ba7816c2492dae64.html#L52'>*</a>
-              <br />
-            </div>
-            <span class='code'>            high &#61; low &#43; gs.lattice * ones&#40;3&#41;</span>
+            
+            
+            <span class='code'>    &#40;position&#61;pos, coefs&#61;fmap&#40;fs, deg, δx&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1566,28 +1561,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              4 &#40;40 &#37;&#41;
-              samples spent in fb&#33;
-              <br />
-              4 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              4 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from value&#33;&#33;
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L166'>line 166</a>
-              <br />
-            </div>
             
-            <span class='code'>            function fb&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L152'>
           <td class='lineno'>152</td>
-          <td class='tracecount excl'>4 &#40;40 &#37;&#41;</td>
-          <td class='tracecount incl'>4 &#40;40 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
             
-            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1597,7 +1583,7 @@
           <td>
             
             
-            <span class='code'>                return sys.grad&#33;&#40;F, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1607,7 +1593,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># there is a Heisenbug, when Base.promote_op is inlined into getindex_return_type</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1615,18 +1601,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;20 &#37;&#41;
-              samples spent in jb&#33;
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from fj&#33;
-              <a href='abstract.jl-a81708fd19b8615bb91957ad1ab557c3ed109beb.html#L7'>line 7</a>
-              <br />
-            </div>
             
-            <span class='code'>            function jb&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'># thats why we use this @noinline fence</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1636,22 +1613,17 @@
           <td>
             
             
-            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+            <span class='code'>@noinline _promote_mul&#40;a,b&#41; &#61; Base.promote_op&#40;*, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
           <td class='lineno'>157</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L221'>hess&#33;</a>
-              <br />
-            </div>
-            <span class='code'>                return sys.hess&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1661,7 +1633,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@noinline function getindex_return_type&#40;::Type&#123;BSplineInterpolation&#123;T,N,TCoefs,IT,Axs&#125;&#125;, argtypes::Tuple&#41; where &#123;T,N,TCoefs,IT&lt;:DimSpec&#123;BSpline&#125;,Axs&#125;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1671,7 +1643,7 @@
           <td>
             
             
-            <span class='code'>            # run root finder in cell</span>
+            <span class='code'>    reduce&#40;_promote_mul, eltype&#40;TCoefs&#41;, argtypes&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1681,7 +1653,7 @@
           <td>
             
             
-            <span class='code'>            try</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1691,31 +1663,17 @@
           <td>
             
             
-            <span class='code'>                # @debug &quot;searching cell &#36;xi &#36;yi &#36;zi&quot; low high</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
           <td class='lineno'>162</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>7 &#40;70 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              7 &#40;70 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              7 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #101#threadsfor_fun#10
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
-              <br />
-            </div>
-            <div class='callees'>
-              7 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L56'>nlsolve</a>
-              <br />
-            </div>
-            <span class='code'>                r &#61; nlsolve&#40;fb&#33;, jb&#33;, x&#41;</span>
+            
+            
+            <span class='code'>function getindex_return_type&#40;::Type&#123;BSplineInterpolation&#123;T,N,TCoefs,IT,Axs&#125;&#125;, ::Type&#123;I&#125;&#41; where &#123;T,N,TCoefs,IT&lt;:DimSpec&#123;BSpline&#125;,Axs,I&#125;</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1725,7 +1683,7 @@
           <td>
             
             
-            <span class='code'>                if r.x_converged || r.f_converged</span>
+            <span class='code'>    _promote_mul&#40;eltype&#40;TCoefs&#41;, I&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1735,7 +1693,7 @@
           <td>
             
             
-            <span class='code'>                    # save if converged</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1745,7 +1703,7 @@
           <td>
             
             
-            <span class='code'>                    # @debug &quot;CP found&quot; r.zero</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1755,7 +1713,7 @@
           <td>
             
             
-            <span class='code'>                    push&#33;&#40;results&#91;Threads.threadid&#40;&#41;&#93;, r&#41;</span>
+            <span class='code'># This handles round-towards-the-middle for points on half-integer edges</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1765,7 +1723,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>roundbounds&#40;x::Integer, bounds::Tuple&#123;Real,Real&#125;&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1775,7 +1733,7 @@
           <td>
             
             
-            <span class='code'>            catch e</span>
+            <span class='code'>roundbounds&#40;x::Integer, bounds::AbstractUnitRange&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1785,7 +1743,7 @@
           <td>
             
             
-            <span class='code'>                continue</span>
+            <span class='code'>roundbounds&#40;x::Number, bounds::Tuple&#123;Real,Real&#125;&#41; &#61; _roundbounds&#40;x, bounds&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1795,7 +1753,7 @@
           <td>
             
             
-            <span class='code'>                @debug &quot;grid point failed&quot; x e</span>
+            <span class='code'>roundbounds&#40;x::Number, bounds::AbstractUnitRange&#41; &#61; _roundbounds&#40;x, bounds&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1805,7 +1763,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>function _roundbounds&#40;x::Number, bounds::Union&#123;Tuple&#123;Real,Real&#125;, AbstractUnitRange&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1815,7 +1773,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    l, u &#61; first&#40;bounds&#41;, last&#40;bounds&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1825,7 +1783,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    h &#61; half&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1835,7 +1793,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    xh &#61; x&#43;h</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1845,7 +1803,7 @@
           <td>
             
             
-            <span class='code'>    # create critical point data structure</span>
+            <span class='code'>    ifelse&#40;x &lt; u&#43;half&#40;u&#41;, floor&#40;xh&#41;, ceil&#40;xh&#41;-1&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1855,7 +1813,7 @@
           <td>
             
             
-            <span class='code'>    cp_info &#61; Vector&#123;CriticalPoint&#123;T&#125;&#125;&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1865,7 +1823,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;ri, ro&#41; in enumerate&#40;results&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1875,7 +1833,7 @@
           <td>
             
             
-            <span class='code'>        for r in ro</span>
+            <span class='code'>floorbounds&#40;x::Integer, ax::Tuple&#123;Real,Real&#125;&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1885,7 +1843,7 @@
           <td>
             
             
-            <span class='code'>            x1 &#61; r.zero</span>
+            <span class='code'>floorbounds&#40;x::Integer, ax::AbstractUnitRange&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1895,7 +1853,7 @@
           <td>
             
             
-            <span class='code'>            nuclear_coord_ind &#61; 0</span>
+            <span class='code'>floorbounds&#40;x, ax::Tuple&#123;Real,Real&#125;&#41; &#61; _floorbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1905,7 +1863,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;isempty&#40;sys.atoms&#41;</span>
+            <span class='code'>floorbounds&#40;x, ax::AbstractUnitRange&#41; &#61; _floorbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1915,7 +1873,7 @@
           <td>
             
             
-            <span class='code'>                nuclear_coord_dists &#61; &#91;norm&#40;x1 - a.r&#41; for a in sys.atoms&#93;</span>
+            <span class='code'>function _floorbounds&#40;x, ax::Union&#123;Tuple&#123;Real,Real&#125;, AbstractUnitRange&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1925,7 +1883,7 @@
           <td>
             
             
-            <span class='code'>                min_nuclear_coord_dist &#61; minimum&#40;nuclear_coord_dists&#41;</span>
+            <span class='code'>    l &#61; first&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1935,7 +1893,7 @@
           <td>
             
             
-            <span class='code'>                if min_nuclear_coord_dist &gt; max_dist_from_atom</span>
+            <span class='code'>    h &#61; half&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1945,7 +1903,7 @@
           <td>
             
             
-            <span class='code'>                    continue # skip points too far from any known atoms</span>
+            <span class='code'>    ifelse&#40;x &lt; l, floor&#40;x&#43;h&#41;, floor&#40;x&#43;zero&#40;h&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1955,7 +1913,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1965,7 +1923,7 @@
           <td>
             
             
-            <span class='code'>                if min_nuclear_coord_dist &lt; nuclear_coord_check_dist</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1975,7 +1933,7 @@
           <td>
             
             
-            <span class='code'>                    nuclear_coord_ind &#61; argmin&#40;nuclear_coord_dists&#41;</span>
+            <span class='code'>ceilbounds&#40;x::Integer, ax::Tuple&#123;Real,Real&#125;&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1985,7 +1943,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>ceilbounds&#40;x::Integer, ax::AbstractUnitRange&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1995,7 +1953,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>ceilbounds&#40;x, ax::Tuple&#123;Real,Real&#125;&#41; &#61; _ceilbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -2005,7 +1963,7 @@
           <td>
             
             
-            <span class='code'>            if length&#40;cp_info&#41; &gt; 0 &amp;&amp;</span>
+            <span class='code'>ceilbounds&#40;x, ax::AbstractUnitRange&#41; &#61; _ceilbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -2015,7 +1973,7 @@
           <td>
             
             
-            <span class='code'>                minimum&#40;&#91;norm&#40;x1 - a.r&#41; for a in cp_info&#93;&#41; &lt; dup_cp_check_dist</span>
+            <span class='code'>function _ceilbounds&#40;x, ax::Union&#123;Tuple&#123;Real,Real&#125;, AbstractUnitRange&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2025,7 +1983,7 @@
           <td>
             
             
-            <span class='code'>                continue # skip duplicate points</span>
+            <span class='code'>    u &#61; last&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2035,7 +1993,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    h &#61; half&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2045,7 +2003,7 @@
           <td>
             
             
-            <span class='code'>            ρ &#61; sys.rho&#40;x1&#41;</span>
+            <span class='code'>    ifelse&#40;x &gt; u, ceil&#40;x&#43;h&#41;, ceil&#40;x&#43;zero&#40;h&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2055,7 +2013,7 @@
           <td>
             
             
-            <span class='code'>            A &#61; sys.hess&#40;x1&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2065,7 +2023,7 @@
           <td>
             
             
-            <span class='code'>            λ &#61; eigvals&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2075,7 +2033,7 @@
           <td>
             
             
-            <span class='code'>            cp_index &#61; Int&#40;sum&#40;sign.&#40;λ&#41;&#41;&#41;</span>
+            <span class='code'>half&#40;x&#41; &#61; oneunit&#40;x&#41;/2</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2085,22 +2043,17 @@
           <td>
             
             
-            <span class='code'>            if length&#40;cp_info&#41; &gt; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
           <td class='lineno'>200</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L775'>collect</a>
-              <br />
-            </div>
-            <span class='code'>                check_cps &#61; &#91;</span>
+            
+            <span class='code'>symmatrix&#40;h::NTuple&#123;1,Any&#125;&#41; &#61; SMatrix&#123;1,1&#125;&#40;h&#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2110,7 +2063,7 @@
           <td>
             
             
-            <span class='code'>                    norm&#40;x1 - cp.r&#41; for</span>
+            <span class='code'>symmatrix&#40;h::NTuple&#123;3,Any&#125;&#41; &#61; SMatrix&#123;2,2&#125;&#40;&#40;h&#91;1&#93;, h&#91;2&#93;, h&#91;2&#93;, h&#91;3&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2120,7 +2073,7 @@
           <td>
             
             
-            <span class='code'>                    cp in cp_info if Int&#40;cp.type&#41; &lt;&#61; cp_index || sys.rho&#40;cp.r&#41; &gt; ρ</span>
+            <span class='code'>symmatrix&#40;h::NTuple&#123;6,Any&#125;&#41; &#61; SMatrix&#123;3,3&#125;&#40;&#40;h&#91;1&#93;, h&#91;2&#93;, h&#91;3&#93;, h&#91;2&#93;, h&#91;4&#93;, h&#91;5&#93;, h&#91;3&#93;, h&#91;5&#93;, h&#91;6&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2130,7 +2083,7 @@
           <td>
             
             
-            <span class='code'>                &#93;</span>
+            <span class='code'>function symmatrix&#40;h::NTuple&#123;L,Any&#125;&#41; where L</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2140,7 +2093,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;isempty&#40;check_cps&#41;</span>
+            <span class='code'>    N &#61; symsize&#40;Val&#40;L&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2150,7 +2103,7 @@
           <td>
             
             
-            <span class='code'>                    min_dist &#61; minimum&#40;check_cps&#41;</span>
+            <span class='code'>    l &#61; MMatrix&#123;N,N,Int&#125;&#40;undef&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2160,7 +2113,7 @@
           <td>
             
             
-            <span class='code'>                    if min_dist &lt; 0.05</span>
+            <span class='code'>    l&#91;:,1&#93; &#61; 1:N</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2170,7 +2123,7 @@
           <td>
             
             
-            <span class='code'>                        continue # skip points too close to another CP of the same cp_index</span>
+            <span class='code'>    idx &#61; N</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2180,7 +2133,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>    for j &#61; 2:N, i &#61; 1:N</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2190,7 +2143,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>        if i &lt; j</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2200,7 +2153,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            l&#91;i,j&#93; &#61; l&#91;j,i&#93;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2210,7 +2163,7 @@
           <td>
             
             
-            <span class='code'>            # @debug &quot;found cp_index &#36;&#40;cp_index&#41; at&quot; pr&#40;x1&#41; cp_index nuclear_coord_ind</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2220,7 +2173,7 @@
           <td>
             
             
-            <span class='code'>            push&#33;&#40;cp_info, CriticalPoint&#40;x1, cp_index, nuclear_coord_ind&#41;&#41;</span>
+            <span class='code'>            l&#91;i,j&#93; &#61; &#40;idx&#43;&#61;1&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2250,7 +2203,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;cp_info&#41; &#61;&#61; 0</span>
+            <span class='code'>    if @generated</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2260,7 +2213,7 @@
           <td>
             
             
-            <span class='code'>        @warn &quot;No critical points found&quot;</span>
+            <span class='code'>        hexprs &#61; &#91;:&#40;h&#91;&#36;i&#93;&#41; for i in vec&#40;l&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2270,7 +2223,7 @@
           <td>
             
             
-            <span class='code'>        return cp_info</span>
+            <span class='code'>        :&#40;SMatrix&#123;&#36;N,&#36;N&#125;&#40;&#36;&#40;hexprs...,&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2280,7 +2233,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2290,35 +2243,17 @@
           <td>
             
             
-            <span class='code'>    max_rho &#61; maximum&#40;x -&gt; x, &#91;sys.rho&#40;cp.r&#41; for cp in cp_info&#93;&#41; &#43; 1.0</span>
+            <span class='code'>        SMatrix&#123;N,N&#125;&#40;h&#91;i&#93; for i in l&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
           <td class='lineno'>220</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in #17
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from lt
-              <a href='ordering.jl-073167af6e34adb75f38f97870a364f68ddcb304.html#L119'>line 119</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='sort.jl-d29b41c5309c3e0b13a77fa38eaab6275bc42768.html#L1367'>sort&#33;</a>
-              <br />
-              1 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L214'>f</a>
-              <br />
-            </div>
-            <span class='code'>    sort&#33;&#40;cp_info; by&#61;cp -&gt; Int&#40;cp.type&#41; &#43; sys.rho&#40;cp.r&#41; / max_rho&#41;</span>
+            
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2328,7 +2263,7 @@
           <td>
             
             
-            <span class='code'>    @info &quot;&#36;&#40;length&#40;cp_info&#41;&#41; CPs found&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2338,7 +2273,7 @@
           <td>
             
             
-            <span class='code'>    for rnk in &#91;nuclear_cp, bond_cp, ring_cp, cage_cp&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2348,7 +2283,7 @@
           <td>
             
             
-            <span class='code'>        cps &#61; &#91;cp for cp in cp_info if cp.type &#61;&#61; rnk&#93;</span>
+            <span class='code'># Use @generated to force const propagation</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2358,7 +2293,7 @@
           <td>
             
             
-            <span class='code'>        @info &quot;&#36;&#40;length&#40;cps&#41;&#41; cps of cp_index &#36;&#40;rnk&#41;&quot;</span>
+            <span class='code'>@generated function symsize&#40;::Val&#123;L&#125;&#41; where L</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2368,7 +2303,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    N &#61; floor&#40;Int, sqrt&#40;2L&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2378,11 +2313,21 @@
           <td>
             
             
-            <span class='code'>    return cp_info</span>
+            <span class='code'>    &#40;N*&#40;N&#43;1&#41;&#41;÷2 &#61;&#61; L || error&#40;&quot;&#36;L must be equal to N*&#40;N&#43;1&#41;/2 &#40;N &#61; &#36;N&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
           <td class='lineno'>227</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return :&#40;&#36;N&#41;</span>
+          </td>
+        </tr>
+        <tr id='L228'>
+          <td class='lineno'>228</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
