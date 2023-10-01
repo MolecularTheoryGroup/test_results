@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/generator.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/libuv.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sun, 01 Oct 2023 01:02:15
+        Generated on Sun, 01 Oct 2023 01:02:31
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Core definitions for interacting with the libuv library from Julia</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Generator&#40;f, iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;string&#40;length&#40;Core.ARGS&#41; &gt;&#61; 2 ? Core.ARGS&#91;2&#93; : &quot;&quot;, &quot;uv_constants.jl&quot;&#41;&#41;  # include&#40;&#36;BUILDROOT/base/uv_constants.jl&#41;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>Given a function &#96;f&#96; and an iterator &#96;iter&#96;, construct an iterator that yields</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>the values of &#96;f&#96; applied to the elements of &#96;iter&#96;.</span>
+            <span class='code'># convert UV handle data to julia object, checking for null</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>The syntax for constructing an instance of this type is &#96;f&#40;x&#41; for x in iter &#91;if cond&#40;x&#41;::Bool&#93; &#96;.</span>
+            <span class='code'>function uv_sizeof_handle&#40;handle&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>The &#96;&#91;if cond&#40;x&#41;::Bool&#93;&#96; expression is optional and acts as a &quot;guard&quot;, effectively</span>
+            <span class='code'>    if &#33;&#40;UV_UNKNOWN_HANDLE &lt; handle &lt; UV_HANDLE_TYPE_MAX&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>filtering out values where the condition is false.</span>
+            <span class='code'>        throw&#40;DomainError&#40;handle&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    return ccall&#40;:uv_handle_size, Csize_t, &#40;Int32,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; g &#61; &#40;abs2&#40;x&#41; for x in 1:5 if x &#33;&#61; 3&#41;;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; for x in g</span>
+            <span class='code'>function uv_sizeof_req&#40;req&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>           println&#40;x&#41;</span>
+            <span class='code'>    if &#33;&#40;UV_UNKNOWN_REQ &lt; req &lt; UV_REQ_TYPE_MAX&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'>        throw&#40;DomainError&#40;req&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>    return ccall&#40;:uv_req_size, Csize_t, &#40;Int32,&#41;, req&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>16</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>25</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>for h in uv_handle_types</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; collect&#40;g&#41;</span>
+            <span class='code'>@eval const &#36;&#40;Symbol&#40;&quot;_sizeof_&quot;, lowercase&#40;string&#40;h&#41;&#41;&#41;&#41; &#61; uv_sizeof_handle&#40;&#36;h&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>4-element Vector&#123;Int64&#125;:</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>  1</span>
+            <span class='code'>for r in uv_req_types</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>  4</span>
+            <span class='code'>@eval const &#36;&#40;Symbol&#40;&quot;_sizeof_&quot;, lowercase&#40;string&#40;r&#41;&#41;&#41;&#41; &#61; uv_sizeof_req&#40;&#36;r&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'> 16</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'> 25</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>uv_handle_data&#40;handle&#41; &#61; ccall&#40;:jl_uv_handle_data, Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>uv_req_data&#40;handle&#41; &#61; ccall&#40;:jl_uv_req_data, Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>struct Generator&#123;I,F&#125;</span>
+            <span class='code'>uv_req_set_data&#40;req, data&#41; &#61; ccall&#40;:jl_uv_req_set_data, Cvoid, &#40;Ptr&#123;Cvoid&#125;, Any&#41;, req, data&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    f::F</span>
+            <span class='code'>uv_req_set_data&#40;req, data::Ptr&#123;Cvoid&#125;&#41; &#61; ccall&#40;:jl_uv_req_set_data, Cvoid, &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, req, data&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>    iter::I</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>macro handle_as&#40;hand, typ&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;f, I1, I2, Is...&#41; &#61; Generator&#40;a-&gt;f&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>        local data &#61; uv_handle_data&#40;&#36;&#40;esc&#40;hand&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        data &#61;&#61; C_NULL &amp;&amp; return</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, iter::I&#41; where &#123;T,I&#125; &#61; Generator&#123;I,Type&#123;T&#125;&#125;&#40;T, iter&#41;</span>
+            <span class='code'>        unsafe_pointer_to_objref&#40;data&#41;::&#40;&#36;&#40;esc&#40;typ&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, I1, I2, Is...&#41; where &#123;T&#125; &#61; Generator&#40;a-&gt;T&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>function iterate&#40;g::Generator, s...&#41;</span>
+            <span class='code'>associate_julia_struct&#40;handle::Ptr&#123;Cvoid&#125;, @nospecialize&#40;jlobj&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,31 +455,17 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    ccall&#40;:jl_uv_associate_julia_struct, Cvoid, &#40;Ptr&#123;Cvoid&#125;, Any&#41;, handle, jlobj&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
           <td class='lineno'>44</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;11 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;11 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from grow_to&#33;
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L886'>line 886</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='iterators.jl-d47edab3807bac057c9e978326ebc99be1537cef.html#L514'>iterate</a>
-              <br />
-            </div>
-            <span class='code'>    y &#61; iterate&#40;g.iter, s...&#41;</span>
+            
+            
+            <span class='code'>disassociate_julia_struct&#40;uv&#41; &#61; disassociate_julia_struct&#40;uv.handle&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    y &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
+            <span class='code'>disassociate_julia_struct&#40;handle::Ptr&#123;Cvoid&#125;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -499,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; y::Tuple&#123;Any, Any&#125; # try to give inference some idea of what to expect about the behavior of the next line</span>
+            <span class='code'>    handle &#33;&#61; C_NULL &amp;&amp; ccall&#40;:jl_uv_disassociate_julia_struct, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -509,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;g.f&#40;y&#91;1&#93;&#41;, y&#91;2&#93;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +505,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>iolock_begin&#40;&#41; &#61; ccall&#40;:jl_iolock_begin, Cvoid, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>iolock_end&#40;&#41; &#61; ccall&#40;:jl_iolock_end, Cvoid, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +525,7 @@
           <td>
             
             
-            <span class='code'>length&#40;g::Generator&#41; &#61; length&#40;g.iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +535,7 @@
           <td>
             
             
-            <span class='code'>size&#40;g::Generator&#41; &#61; size&#40;g.iter&#41;</span>
+            <span class='code'># A dict of all libuv handles that are being waited on somewhere in the system</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +545,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;g::Generator&#41; &#61; axes&#40;g.iter&#41;</span>
+            <span class='code'># and should thus not be garbage collected</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +555,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;g::Generator&#41; &#61; ndims&#40;g.iter&#41;</span>
+            <span class='code'>const uvhandles &#61; IdDict&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +565,7 @@
           <td>
             
             
-            <span class='code'>keys&#40;g::Generator&#41; &#61; keys&#40;g.iter&#41;</span>
+            <span class='code'>const preserve_handle_lock &#61; Threads.SpinLock&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +575,7 @@
           <td>
             
             
-            <span class='code'>last&#40;g::Generator&#41; &#61; g.f&#40;last&#40;g.iter&#41;&#41;</span>
+            <span class='code'>function preserve_handle&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +585,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;g::Generator&#41; &#61; isempty&#40;g.iter&#41;</span>
+            <span class='code'>    lock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +595,7 @@
           <td>
             
             
-            <span class='code'>isdone&#40;g::Generator, state...&#41; &#61; isdone&#40;g.iter, state...&#41;</span>
+            <span class='code'>    v &#61; get&#40;uvhandles, x, 0&#41;::Int</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +605,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    uvhandles&#91;x&#93; &#61; v &#43; 1</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +615,7 @@
           <td>
             
             
-            <span class='code'>## iterator traits</span>
+            <span class='code'>    unlock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +635,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorSize end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +645,7 @@
           <td>
             
             
-            <span class='code'>struct SizeUnknown &lt;: IteratorSize end</span>
+            <span class='code'>function unpreserve_handle&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +655,7 @@
           <td>
             
             
-            <span class='code'>struct HasLength &lt;: IteratorSize end</span>
+            <span class='code'>    lock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +665,7 @@
           <td>
             
             
-            <span class='code'>struct HasShape&#123;N&#125; &lt;: IteratorSize end</span>
+            <span class='code'>    v &#61; get&#40;uvhandles, x, 0&#41;::Int</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +675,7 @@
           <td>
             
             
-            <span class='code'>struct IsInfinite &lt;: IteratorSize end</span>
+            <span class='code'>    if v &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +685,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        unlock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +695,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        error&#40;&quot;unbalanced call to unpreserve_handle for &#36;&#40;typeof&#40;x&#41;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    IteratorSize&#40;itertype::Type&#41; -&gt; IteratorSize</span>
+            <span class='code'>    elseif v &#61;&#61; 1</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        pop&#33;&#40;uvhandles, x&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +725,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +735,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        uvhandles&#91;x&#93; &#61; v - 1</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +745,7 @@
           <td>
             
             
-            <span class='code'>* &#96;SizeUnknown&#40;&#41;&#96; if the length &#40;number of elements&#41; cannot be determined in advance.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +755,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasLength&#40;&#41;&#96; if there is a fixed, finite length.</span>
+            <span class='code'>    unlock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +765,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasShape&#123;N&#125;&#40;&#41;&#96; if there is a known length plus a notion of multidimensional shape &#40;as for an array&#41;.</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +775,7 @@
           <td>
             
             
-            <span class='code'>   In this case &#96;N&#96; should give the number of dimensions, and the &#91;&#96;axes&#96;&#93;&#40;@ref&#41; function is valid</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +785,7 @@
           <td>
             
             
-            <span class='code'>   for the iterator.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +795,7 @@
           <td>
             
             
-            <span class='code'>* &#96;IsInfinite&#40;&#41;&#96; if the iterator yields values forever.</span>
+            <span class='code'>## Libuv error handling ##</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -829,7 +815,7 @@
           <td>
             
             
-            <span class='code'>The default value &#40;for iterators that do not define this function&#41; is &#96;HasLength&#40;&#41;&#96;.</span>
+            <span class='code'>struct IOError &lt;: Exception</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +825,7 @@
           <td>
             
             
-            <span class='code'>This means that most iterators are assumed to implement &#91;&#96;length&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    msg::String</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +835,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    code::Int32</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +845,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate space for their</span>
+            <span class='code'>    IOError&#40;msg::AbstractString, code::Integer&#41; &#61; new&#40;msg, code&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +855,7 @@
           <td>
             
             
-            <span class='code'>result, and algorithms that resize their result incrementally.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -889,7 +875,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>showerror&#40;io::IO, e::IOError&#41; &#61; print&#40;io, &quot;IOError: &quot;, e.msg&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +885,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;1:5&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +895,7 @@
           <td>
             
             
-            <span class='code'>Base.HasShape&#123;1&#125;&#40;&#41;</span>
+            <span class='code'>function _UVError&#40;pfx::AbstractString, code::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    code &#61; Int32&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +915,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;&#40;2,3&#41;&#41;</span>
+            <span class='code'>    IOError&#40;string&#40;pfx, &quot;: &quot;, struverror&#40;code&#41;, &quot; &#40;&quot;, uverrorname&#40;code&#41;, &quot;&#41;&quot;&#41;, code&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +925,7 @@
           <td>
             
             
-            <span class='code'>Base.HasLength&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +935,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>function _UVError&#40;pfx::AbstractString, code::Integer, sfxs::AbstractString...&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +945,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    code &#61; Int32&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +955,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;x&#41; &#61; IteratorSize&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>    IOError&#40;string&#40;pfx, &quot;: &quot;, struverror&#40;code&#41;, &quot; &#40;&quot;, uverrorname&#40;code&#41;, &quot;&#41;&quot;, &quot; &quot;, sfxs...&#41;, code&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +965,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#41; &#61; HasLength&#40;&#41;  # HasLength is the default</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -999,7 +985,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Tuple&#125;&#41; &#61; HasLength&#40;&#41;</span>
+            <span class='code'>struverror&#40;err::Int32&#41; &#61; unsafe_string&#40;ccall&#40;:uv_strerror, Cstring, &#40;Int32,&#41;, err&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +995,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:AbstractArray&#123;&lt;:Any,N&#125;&#125;&#41;  where &#123;N&#125; &#61; HasShape&#123;N&#125;&#40;&#41;</span>
+            <span class='code'>uverrorname&#40;err::Int32&#41; &#61; unsafe_string&#40;ccall&#40;:uv_err_name, Cstring, &#40;Int32,&#41;, err&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Generator&#123;I,F&#125;&#125;&#41; where &#123;I,F&#125; &#61; IteratorSize&#40;I&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1015,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>uv_error&#40;prefix::Symbol, c::Integer&#41; &#61; uv_error&#40;string&#40;prefix&#41;, c&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Any&#125;&#41; &#61; SizeUnknown&#40;&#41;</span>
+            <span class='code'>uv_error&#40;prefix::AbstractString, c::Integer&#41; &#61; c &lt; 0 ? throw&#40;_UVError&#40;prefix, c&#41;&#41; : nothing</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1059,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>haslength&#40;iter&#41; &#61; IteratorSize&#40;iter&#41; isa Union&#123;HasShape, HasLength&#125;</span>
+            <span class='code'>## event loop ##</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1079,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorEltype end</span>
+            <span class='code'>eventloop&#40;&#41; &#61; ccall&#40;:jl_global_event_loop, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>struct EltypeUnknown &lt;: IteratorEltype end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,17 +1085,26 @@
           <td>
             
             
-            <span class='code'>struct HasEltype &lt;: IteratorEltype end</span>
+            <span class='code'>function process_events&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
           <td class='lineno'>107</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;12 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;12 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;12 &#37;&#41;
+              samples spent in process_events
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from wait
+              <a href='task.jl-31bd77da87ce466cd19d44401d03cb48f62af2e9.html#L985'>line 985</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>    return ccall&#40;:jl_process_events, Int32, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1119,7 +1114,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1129,7 +1124,7 @@
           <td>
             
             
-            <span class='code'>    IteratorEltype&#40;itertype::Type&#41; -&gt; IteratorEltype</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1139,7 +1134,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function uv_alloc_buf end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1149,7 +1144,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>function uv_readcb end</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1159,7 +1154,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function uv_writecb_task end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1169,7 +1164,7 @@
           <td>
             
             
-            <span class='code'>* &#96;EltypeUnknown&#40;&#41;&#96; if the type of elements yielded by the iterator is not known in advance.</span>
+            <span class='code'>function uv_shutdowncb_task end</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1179,7 +1174,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasEltype&#40;&#41;&#96; if the element type is known, and &#91;&#96;eltype&#96;&#93;&#40;@ref&#41; would return a meaningful value.</span>
+            <span class='code'>function uv_return_spawn end</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1189,7 +1184,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function uv_asynccb end</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1199,7 +1194,7 @@
           <td>
             
             
-            <span class='code'>&#96;HasEltype&#40;&#41;&#96; is the default, since iterators are assumed to implement &#91;&#96;eltype&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>function uv_timercb end</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1219,7 +1214,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate a specific</span>
+            <span class='code'>function reinit_stdio&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1229,7 +1224,7 @@
           <td>
             
             
-            <span class='code'>type of result, and algorithms that pick a result type based on the types of yielded</span>
+            <span class='code'>    global stdin &#61; init_stdio&#40;ccall&#40;:jl_stdin_stream, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1239,7 +1234,7 @@
           <td>
             
             
-            <span class='code'>values.</span>
+            <span class='code'>    global stdout &#61; init_stdio&#40;ccall&#40;:jl_stdout_stream, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1249,7 +1244,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    global stderr &#61; init_stdio&#40;ccall&#40;:jl_stderr_stream, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1259,7 +1254,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    opts &#61; JLOptions&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1269,7 +1264,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorEltype&#40;1:5&#41;</span>
+            <span class='code'>    if opts.color &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1279,7 +1274,7 @@
           <td>
             
             
-            <span class='code'>Base.HasEltype&#40;&#41;</span>
+            <span class='code'>        have_color &#61; &#40;opts.color &#61;&#61; 1&#41;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1289,7 +1284,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        if &#33;isa&#40;stdout, TTY&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1299,7 +1294,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            global stdout &#61; IOContext&#40;stdout, :color &#61;&gt; have_color&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1309,7 +1304,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;x&#41; &#61; IteratorEltype&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1319,7 +1314,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#41; &#61; HasEltype&#40;&#41;  # HasEltype is the default</span>
+            <span class='code'>        if &#33;isa&#40;stderr, TTY&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1329,7 +1324,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            global stderr &#61; IOContext&#40;stderr, :color &#61;&gt; have_color&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1339,7 +1334,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#123;Generator&#123;I,T&#125;&#125;&#41; where &#123;I,T&#125; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1349,7 +1344,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1359,7 +1354,227 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#123;Any&#125;&#41; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>    nothing</span>
+          </td>
+        </tr>
+        <tr id='L133'>
+          <td class='lineno'>133</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L134'>
+          <td class='lineno'>134</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L135'>
+          <td class='lineno'>135</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L136'>
+          <td class='lineno'>136</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    stdin::IO</span>
+          </td>
+        </tr>
+        <tr id='L137'>
+          <td class='lineno'>137</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L138'>
+          <td class='lineno'>138</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Global variable referring to the standard input stream.</span>
+          </td>
+        </tr>
+        <tr id='L139'>
+          <td class='lineno'>139</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L140'>
+          <td class='lineno'>140</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>:stdin</span>
+          </td>
+        </tr>
+        <tr id='L141'>
+          <td class='lineno'>141</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L142'>
+          <td class='lineno'>142</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L143'>
+          <td class='lineno'>143</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    stdout::IO</span>
+          </td>
+        </tr>
+        <tr id='L144'>
+          <td class='lineno'>144</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L145'>
+          <td class='lineno'>145</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Global variable referring to the standard out stream.</span>
+          </td>
+        </tr>
+        <tr id='L146'>
+          <td class='lineno'>146</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L147'>
+          <td class='lineno'>147</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>:stdout</span>
+          </td>
+        </tr>
+        <tr id='L148'>
+          <td class='lineno'>148</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L149'>
+          <td class='lineno'>149</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L150'>
+          <td class='lineno'>150</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    stderr::IO</span>
+          </td>
+        </tr>
+        <tr id='L151'>
+          <td class='lineno'>151</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L152'>
+          <td class='lineno'>152</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Global variable referring to the standard error stream.</span>
+          </td>
+        </tr>
+        <tr id='L153'>
+          <td class='lineno'>153</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L154'>
+          <td class='lineno'>154</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>:stderr</span>
           </td>
         </tr>
       </tbody>
