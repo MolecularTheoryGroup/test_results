@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/NLSolversBase/kavn7/src/NLSolversBase.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/NLsolve/gJL1I/src/nlsolve/utils.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sun, 01 Oct 2023 01:01:50
+        Generated on Sun, 01 Oct 2023 01:02:18
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>__precompile__&#40;true&#41;</span>
+            <span class='code'>wdot&#40;wx, x, wy, y&#41; &#61; dot&#40;wx.*x, wy.*y&#41;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>wnorm&#40;w, x&#41; &#61; norm&#40;w.*x&#41;</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>module NLSolversBase</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>assess_convergence&#40;f, ftol&#41; &#61; assess_convergence&#40;NaN, NaN, f, NaN, ftol&#41;</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>using FiniteDiff, ForwardDiff, DiffResults</span>
+            <span class='code'>function assess_convergence&#40;x,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>import Distributed: clear&#33;</span>
+            <span class='code'>                            x_previous,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>export AbstractObjective,</span>
+            <span class='code'>                            f,</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>       NonDifferentiable,</span>
+            <span class='code'>                            xtol,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>       OnceDifferentiable,</span>
+            <span class='code'>                            ftol&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>       TwiceDifferentiable,</span>
+            <span class='code'>    x_converged, f_converged &#61; false, false</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>       TwiceDifferentiableHV,</span>
+            <span class='code'>    if norm&#40;x-x_previous&#41; &lt;&#61; xtol</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>       value,</span>
+            <span class='code'>        x_converged &#61; true</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>       value&#33;,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>       value_gradient&#33;,</span>
+            <span class='code'>    if maximum&#40;abs, f&#41; &lt;&#61; ftol</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>       value_jacobian&#33;,</span>
+            <span class='code'>        f_converged &#61; true</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>       gradient,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>       gradient&#33;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>       jacobian,</span>
+            <span class='code'>    return x_converged, f_converged</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>       jacobian&#33;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,17 +225,26 @@
           <td>
             
             
-            <span class='code'>       hessian,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
           <td class='lineno'>21</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;5 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;5 &#37;&#41;
+              samples spent in check_isfinite
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from trust_region
+              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L235'>line 235</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>       hessian&#33;,</span>
+            <span class='code'>function check_isfinite&#40;x::AbstractArray&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +254,7 @@
           <td>
             
             
-            <span class='code'>       value&#33;&#33;,</span>
+            <span class='code'>    if any&#40;&#33;isfinite, x&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +264,7 @@
           <td>
             
             
-            <span class='code'>       value_gradient&#33;&#33;,</span>
+            <span class='code'>        i &#61; findall&#40;&#33;isfinite, x&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +274,7 @@
           <td>
             
             
-            <span class='code'>       value_jacobian&#33;&#33;,</span>
+            <span class='code'>        throw&#40;IsFiniteException&#40;i&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +284,7 @@
           <td>
             
             
-            <span class='code'>       hessian&#33;&#33;,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +294,7 @@
           <td>
             
             
-            <span class='code'>       hv_product,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +304,7 @@
           <td>
             
             
-            <span class='code'>       hv_product&#33;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +314,7 @@
           <td>
             
             
-            <span class='code'>       only_fg&#33;,</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +324,7 @@
           <td>
             
             
-            <span class='code'>       only_fgh&#33;,</span>
+            <span class='code'>    qrdelete&#33;&#40;Q, R, k&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +334,7 @@
           <td>
             
             
-            <span class='code'>       only_fj&#33;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +344,7 @@
           <td>
             
             
-            <span class='code'>       only_fg,</span>
+            <span class='code'>Delete the left-most column of F &#61; Q&#91;:, 1:k&#93; * R&#91;1:k, 1:k&#93; by updating Q and R.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +354,7 @@
           <td>
             
             
-            <span class='code'>       only_fj,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +364,7 @@
           <td>
             
             
-            <span class='code'>       only_g_and_fg,</span>
+            <span class='code'>Only Q&#91;:, 1:&#40;k-1&#41;&#93; and R&#91;1:&#40;k-1&#41;, 1:&#40;k-1&#41;&#93; are valid on exit.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +374,7 @@
           <td>
             
             
-            <span class='code'>       only_j_and_fj,</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +384,7 @@
           <td>
             
             
-            <span class='code'>       only_fg_and_hv&#33;,</span>
+            <span class='code'>function qrdelete&#33;&#40;Q::AbstractMatrix, R::AbstractMatrix, k::Int&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +394,7 @@
           <td>
             
             
-            <span class='code'>       only_fghv&#33;,</span>
+            <span class='code'>  n, m &#61; size&#40;Q&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +404,7 @@
           <td>
             
             
-            <span class='code'>       clear&#33;,</span>
+            <span class='code'>  m &#61;&#61; LinearAlgebra.checksquare&#40;R&#41; || throw&#40;DimensionMismatch&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +414,7 @@
           <td>
             
             
-            <span class='code'>       f_calls,</span>
+            <span class='code'>  1 ≤ k ≤ m || throw&#40;ArgumentError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +424,7 @@
           <td>
             
             
-            <span class='code'>       g_calls,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +434,7 @@
           <td>
             
             
-            <span class='code'>       h_calls,</span>
+            <span class='code'>  # apply Givens rotations</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +444,7 @@
           <td>
             
             
-            <span class='code'>       hv_calls</span>
+            <span class='code'>  for i in 2:k</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +454,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>      g &#61; first&#40;givens&#40;R, i - 1, i, i&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +464,7 @@
           <td>
             
             
-            <span class='code'>export AbstractConstraints, OnceDifferentiableConstraints,</span>
+            <span class='code'>      lmul&#33;&#40;g, R&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +474,7 @@
           <td>
             
             
-            <span class='code'>    TwiceDifferentiableConstraints, ConstraintBounds</span>
+            <span class='code'>      rmul&#33;&#40;Q, g&#39;&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +484,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  end</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +494,7 @@
           <td>
             
             
-            <span class='code'>function finitediff_fdtype&#40;autodiff&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +504,7 @@
           <td>
             
             
-            <span class='code'>    if autodiff &#61;&#61; :finiteforward</span>
+            <span class='code'>  # move columns of R</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +514,7 @@
           <td>
             
             
-            <span class='code'>        fdtype &#61; Val&#123;:forward&#125;</span>
+            <span class='code'>  @inbounds for j in 1:&#40;k-1&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +524,7 @@
           <td>
             
             
-            <span class='code'>    elseif autodiff &#61;&#61; :finitecomplex</span>
+            <span class='code'>    for i in 1:&#40;k-1&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +534,7 @@
           <td>
             
             
-            <span class='code'>        fdtype &#61; Val&#123;:complex&#125;</span>
+            <span class='code'>      R&#91;i, j&#93; &#61; R&#91;i, j &#43; 1&#93;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +544,7 @@
           <td>
             
             
-            <span class='code'>    elseif any&#40;autodiff .&#61;&#61; &#40;:finite, :central, :finitecentral&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +554,7 @@
           <td>
             
             
-            <span class='code'>        fdtype &#61; Val&#123;:central&#125;</span>
+            <span class='code'>  end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +564,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +574,7 @@
           <td>
             
             
-            <span class='code'>    fdtype</span>
+            <span class='code'>  Q, R</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -595,7 +604,7 @@
           <td>
             
             
-            <span class='code'>is_finitediff&#40;autodiff&#41; &#61; autodiff ∈ &#40;:central, :finite, :finiteforward, :finitecomplex&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +614,7 @@
           <td>
             
             
-            <span class='code'>is_forwarddiff&#40;autodiff&#41; &#61; autodiff ∈ &#40;:forward, :forwarddiff, true&#41;</span>
+            <span class='code'>    qradd&#33;&#40;Q, R, v, k&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -620,35 +629,12 @@
         </tr>
         <tr id='L60'>
           <td class='lineno'>60</td>
-          <td class='tracecount excl'>1 &#40;5 &#37;&#41;</td>
-          <td class='tracecount incl'>3 &#40;16 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              3 &#40;16 &#37;&#41;
-              samples spent in x_of_nans
-              <br />
-              1 &#40;33 &#37;&#41; &#40;ex.&#41;,
-              2 &#40;67 &#37;&#41; &#40;incl.&#41;
-              when called from #OnceDifferentiable#28
-              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L229'>line 229</a>
-              <br />
-              
-              1 &#40;33 &#37;&#41; &#40;incl.&#41;
-              when called from x_of_nans
-              <a href='NLSolversBase.jl-62c7ebdfa569b7d78037da79ddfc8dddcf651cd3.html#L60'>line 60</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='NLSolversBase.jl-62c7ebdfa569b7d78037da79ddfc8dddcf651cd3.html#L60'>x_of_nans</a>
-              <br />
-              1 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='broadcast.jl-aadc07aa8db7d970432e67b47a796fc9707f1499.html#L873'>materialize</a>
-              <br />
-            </div>
-            <span class='code'>x_of_nans&#40;x, Tf&#61;eltype&#40;x&#41;&#41; &#61; fill&#33;&#40;Tf.&#40;x&#41;, Tf&#40;NaN&#41;&#41;</span>
+            
+            
+            <span class='code'>Replace the right-most column of F &#61; Q&#91;:, 1:k&#93; * R&#91;1:k, 1:k&#93; with v by updating Q and R.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -668,7 +654,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/inplace_factory.jl&quot;&#41;</span>
+            <span class='code'>This implementation modifies vector v as well. Only Q&#91;:, 1:k&#93; and R&#91;1:k, 1:k&#93; are valid on</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -678,7 +664,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/abstract.jl&quot;&#41;</span>
+            <span class='code'>exit.</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -688,7 +674,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/nondifferentiable.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -698,7 +684,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/oncedifferentiable.jl&quot;&#41;</span>
+            <span class='code'>function qradd&#33;&#40;Q::AbstractMatrix, R::AbstractMatrix, v::AbstractVector, k::Int&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -708,7 +694,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/twicedifferentiable.jl&quot;&#41;</span>
+            <span class='code'>  n, m &#61; size&#40;Q&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -718,7 +704,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/twicedifferentiablehv.jl&quot;&#41;</span>
+            <span class='code'>  n &#61;&#61; length&#40;v&#41; || throw&#40;DimensionMismatch&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -728,7 +714,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/incomplete.jl&quot;&#41;</span>
+            <span class='code'>  m &#61;&#61; LinearAlgebra.checksquare&#40;R&#41; || throw&#40;DimensionMismatch&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -738,7 +724,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;objective_types/constraints.jl&quot;&#41;</span>
+            <span class='code'>  1 ≤ k ≤ m || throw&#40;ArgumentError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -748,7 +734,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;interface.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L71'>
@@ -758,7 +744,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  @inbounds for i in 1:&#40;k-1&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -768,7 +754,7 @@
           <td>
             
             
-            <span class='code'>NonDifferentiable&#40;f::OnceDifferentiable, x::AbstractArray&#41; &#61; NonDifferentiable&#40;f.f, x, copy&#40;f.F&#41;&#41;</span>
+            <span class='code'>    q &#61; view&#40;Q, :, i&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -778,7 +764,7 @@
           <td>
             
             
-            <span class='code'>NonDifferentiable&#40;f::TwiceDifferentiable, x::AbstractArray&#41; &#61; NonDifferentiable&#40;f.f, x, copy&#40;f.F&#41;&#41;</span>
+            <span class='code'>    r &#61; dot&#40;q, v&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -788,7 +774,7 @@
           <td>
             
             
-            <span class='code'>NonDifferentiable&#40;f::TwiceDifferentiableHV, x::AbstractArray&#41; &#61; NonDifferentiable&#40;f.f, x, copy&#40;f.F&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -798,7 +784,117 @@
           <td>
             
             
-            <span class='code'>end # module</span>
+            <span class='code'>    R&#91;i, k&#93; &#61; r</span>
+          </td>
+        </tr>
+        <tr id='L76'>
+          <td class='lineno'>76</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    axpy&#33;&#40;-r, q, v&#41;</span>
+          </td>
+        </tr>
+        <tr id='L77'>
+          <td class='lineno'>77</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>  end</span>
+          </td>
+        </tr>
+        <tr id='L78'>
+          <td class='lineno'>78</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L79'>
+          <td class='lineno'>79</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>  @inbounds begin</span>
+          </td>
+        </tr>
+        <tr id='L80'>
+          <td class='lineno'>80</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    d &#61; norm&#40;v&#41;</span>
+          </td>
+        </tr>
+        <tr id='L81'>
+          <td class='lineno'>81</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    R&#91;k, k&#93; &#61; d</span>
+          </td>
+        </tr>
+        <tr id='L82'>
+          <td class='lineno'>82</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    @. Q&#91;:, k&#93; &#61; v / d</span>
+          </td>
+        </tr>
+        <tr id='L83'>
+          <td class='lineno'>83</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>  end</span>
+          </td>
+        </tr>
+        <tr id='L84'>
+          <td class='lineno'>84</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L85'>
+          <td class='lineno'>85</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>  Q, R</span>
+          </td>
+        </tr>
+        <tr id='L86'>
+          <td class='lineno'>86</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>
