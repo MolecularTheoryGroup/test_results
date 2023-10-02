@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/generator.jl</title>
+    <title>StatProfilerHTML - profiling.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Mon, 02 Oct 2023 20:33:54
+        Generated on Mon, 02 Oct 2023 20:33:57
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>using LinearAlgebra: det</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using Profile</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>using PProf: pprof</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Generator&#40;f, iter&#41;</span>
+            <span class='code'>using PyFormattedStrings</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using StatProfilerHTML: statprofilehtml</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>Given a function &#96;f&#96; and an iterator &#96;iter&#96;, construct an iterator that yields</span>
+            <span class='code'>using Test</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>the values of &#96;f&#96; applied to the elements of &#96;iter&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>The syntax for constructing an instance of this type is &#96;f&#40;x&#41; for x in iter &#91;if cond&#40;x&#41;::Bool&#93; &#96;.</span>
+            <span class='code'># Prevent redefinition warnings</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>The &#96;&#91;if cond&#40;x&#41;::Bool&#93;&#96; expression is optional and acts as a &quot;guard&quot;, effectively</span>
+            <span class='code'>if :ElectronDensityAnalysis ∉ names&#40;Main&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>filtering out values where the condition is false.</span>
+            <span class='code'>    include&#40;joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;src&quot;, &quot;ElectronDensityAnalysis.jl&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    include&#40;joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;src&quot;, &quot;io&quot;, &quot;file_helpers.jl&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; g &#61; &#40;abs2&#40;x&#41; for x in 1:5 if x &#33;&#61; 3&#41;;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_github_action &#61; get&#40;ENV, &quot;GITHUB_ACTIONS&quot;, &quot;false&quot;&#41; &#61;&#61; &quot;true&quot;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; for x in g</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>           println&#40;x&#41;</span>
+            <span class='code'>include&#40;&quot;test_helpers.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>    profile_function&#40;func::Function; load_pprof&#61;false, out_dir&#61;&quot;&quot;, spacing&#61;0.5, remove_old_dirs&#61;true&#41;::String</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>16</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>25</span>
+            <span class='code'>Profile the given function and generate profiling reports for local profiling.</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; collect&#40;g&#41;</span>
+            <span class='code'>This function profiles the given function and produces two sets of profile reports:</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>4-element Vector&#123;Int64&#125;:</span>
+            <span class='code'>- A standalone statprof site, saved at &#96;out_dir_&lt;date_time&gt;_spacing&lt;spacing&gt;&#96;, and accessible by pointing your browser to the &#96;index.html&#96; file in that directory.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>  1</span>
+            <span class='code'>- A hosted pprof site, accessible by clicking the link printed to the console or by copying/pasting it into your browser.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>  4</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'> 16</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'> 25</span>
+            <span class='code'>- &#96;func::Function&#96;: The function to profile.</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>- &#96;load_pprof::Bool&#96;: Whether to generate and host pprof. Default is &#96;false&#96;.</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;out_dir::String&#96;: The output directory for the profiling results. Default is &quot;&quot;. &quot;statprof_&quot; will be prepended.</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>struct Generator&#123;I,F&#125;</span>
+            <span class='code'>- &#96;spacing::Float&#96;: The spacing for the profiling. Default is 0.5.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    f::F</span>
+            <span class='code'>- &#96;remove_old_dirs::Bool&#96;: Whether to remove old output directories. Default is &#96;true&#96;.</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>    iter::I</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;out_dir::String&#96;: The output directory where the profiling results are saved, which includes a date-time stamp and the spacing used in the CP search.</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,17 +385,36 @@
           <td>
             
             
-            <span class='code'>Generator&#40;f, I1, I2, Is...&#41; &#61; Generator&#40;a-&gt;f&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L37'>
           <td class='lineno'>37</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in profile_function
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #profile_critical_points_v0_adf_t41#63
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L129'>line 129</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from profile_function
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L37'>line 37</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L37'>#profile_function#57</a>
+              <br />
+            </div>
+            <span class='code'>function profile_function&#40;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +424,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, iter::I&#41; where &#123;T,I&#125; &#61; Generator&#123;I,Type&#123;T&#125;&#125;&#40;T, iter&#41;</span>
+            <span class='code'>    func::Function; load_pprof&#61;&#33;is_github_action, out_dir&#61;&quot;&quot;, remove_old_dirs&#61;true</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +434,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41;::String</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +444,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, I1, I2, Is...&#41; where &#123;T&#125; &#61; Generator&#40;a-&gt;T&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>    # Run profiling</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,17 +454,22 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Profile.clear&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
           <td class='lineno'>42</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>function iterate&#40;g::Generator, s...&#41;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Profile.jl-020a57694bea50636336171913e088bc6c95f646.html#L27'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>    @profile func&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +479,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    if load_pprof</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +489,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; iterate&#40;g.iter, s...&#41;</span>
+            <span class='code'>        # Generate and host pprof </span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +499,7 @@
           <td>
             
             
-            <span class='code'>    y &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
+            <span class='code'>        pprof&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,31 +509,17 @@
           <td>
             
             
-            <span class='code'>    y &#61; y::Tuple&#123;Any, Any&#125; # try to give inference some idea of what to expect about the behavior of the next line</span>
+            <span class='code'>        @debug &quot;Open the pprof file by clicking the link above or copy/pasting it into your browser.&quot;</span>
           </td>
         </tr>
         <tr id='L47'>
           <td class='lineno'>47</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from collect_to&#33;
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L840'>line 840</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='essentials.jl-8a907f81f7a85e1b2e73d08c8751d28acc7bca86.html#L0'>#12</a>
-              <br />
-            </div>
-            <span class='code'>    return &#40;g.f&#40;y&#91;1&#93;&#41;, y&#91;2&#93;&#41;</span>
+            
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +529,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Generate and host standalone statprof site, saved at &quot;statprof&quot;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +539,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    statprofilehtml&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +549,7 @@
           <td>
             
             
-            <span class='code'>length&#40;g::Generator&#41; &#61; length&#40;g.iter&#41;</span>
+            <span class='code'>    # rename output folder for function with current date in format &quot;YYYY-MM-DD_HH-MM-SS&quot;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +559,7 @@
           <td>
             
             
-            <span class='code'>size&#40;g::Generator&#41; &#61; size&#40;g.iter&#41;</span>
+            <span class='code'>    # remove any dirs starting with out_dir</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +569,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;g::Generator&#41; &#61; axes&#40;g.iter&#41;</span>
+            <span class='code'>    if out_dir &#33;&#61; &quot;&quot;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +579,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;g::Generator&#41; &#61; ndims&#40;g.iter&#41;</span>
+            <span class='code'>        out_dir &#61; &quot;_&quot; * out_dir</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +589,7 @@
           <td>
             
             
-            <span class='code'>keys&#40;g::Generator&#41; &#61; keys&#40;g.iter&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +599,7 @@
           <td>
             
             
-            <span class='code'>last&#40;g::Generator&#41; &#61; g.f&#40;last&#40;g.iter&#41;&#41;</span>
+            <span class='code'>    out_dir &#61; joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;test_results&quot;, &quot;profiling_&#36;&#40;out_dir&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +609,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;g::Generator&#41; &#61; isempty&#40;g.iter&#41;</span>
+            <span class='code'>    if remove_old_dirs</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +619,7 @@
           <td>
             
             
-            <span class='code'>isdone&#40;g::Generator, state...&#41; &#61; isdone&#40;g.iter, state...&#41;</span>
+            <span class='code'>        old_dirs &#61; &#91;d for d in readdir&#40;&#41; if occursin&#40;out_dir, d&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +629,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        for d in old_dirs</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +639,7 @@
           <td>
             
             
-            <span class='code'>## iterator traits</span>
+            <span class='code'>            rm&#40;d; recursive&#61;true&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +649,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            @debug &quot;Removed old statprof output dir &#36;d&quot;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +659,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorSize end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +669,7 @@
           <td>
             
             
-            <span class='code'>struct SizeUnknown &lt;: IteratorSize end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +679,7 @@
           <td>
             
             
-            <span class='code'>struct HasLength &lt;: IteratorSize end</span>
+            <span class='code'>    # rename out_dir</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +689,7 @@
           <td>
             
             
-            <span class='code'>struct HasShape&#123;N&#125; &lt;: IteratorSize end</span>
+            <span class='code'>    mkpath&#40;out_dir&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +699,7 @@
           <td>
             
             
-            <span class='code'>struct IsInfinite &lt;: IteratorSize end</span>
+            <span class='code'>    mv&#40;&quot;statprof&quot;, out_dir; force&#61;true&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +709,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @debug &quot;Moved statprof output to &#36;out_dir&quot;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +719,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    return out_dir</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +729,7 @@
           <td>
             
             
-            <span class='code'>    IteratorSize&#40;itertype::Type&#41; -&gt; IteratorSize</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -739,7 +749,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +759,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    profile_critical_points_v0_trial_system&#40;; load_pprof&#61;false, out_dir&#61;&quot;critical_points_v0_trial_system&quot;, spacing&#61;0.5&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +769,7 @@
           <td>
             
             
-            <span class='code'>* &#96;SizeUnknown&#40;&#41;&#96; if the length &#40;number of elements&#41; cannot be determined in advance.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +779,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasLength&#40;&#41;&#96; if there is a fixed, finite length.</span>
+            <span class='code'>This function profiles the critical points of a trial system.</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +789,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasShape&#123;N&#125;&#40;&#41;&#96; if there is a known length plus a notion of multidimensional shape &#40;as for an array&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +799,7 @@
           <td>
             
             
-            <span class='code'>   In this case &#96;N&#96; should give the number of dimensions, and the &#91;&#96;axes&#96;&#93;&#40;@ref&#41; function is valid</span>
+            <span class='code'>## Arguments</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +809,7 @@
           <td>
             
             
-            <span class='code'>   for the iterator.</span>
+            <span class='code'>- &#96;load_pprof&#96;: A boolean indicating whether to load a pprof file. Default is &#96;false&#96;.</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +819,7 @@
           <td>
             
             
-            <span class='code'>* &#96;IsInfinite&#40;&#41;&#96; if the iterator yields values forever.</span>
+            <span class='code'>- &#96;out_dir&#96;: The output directory for the profiling results. Default is &quot;critical_points_v0_trial_system&quot;.</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +829,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;spacing&#96;: The spacing parameter for the critical points. Default is 2.0.</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +839,7 @@
           <td>
             
             
-            <span class='code'>The default value &#40;for iterators that do not define this function&#41; is &#96;HasLength&#40;&#41;&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +849,7 @@
           <td>
             
             
-            <span class='code'>This means that most iterators are assumed to implement &#91;&#96;length&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>## Returns</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +859,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>The result of the &#96;profile_critical_points_v0&#96; function.</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +869,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate space for their</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +879,7 @@
           <td>
             
             
-            <span class='code'>result, and algorithms that resize their result incrementally.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function profile_critical_points_v0_trial_system&#40;;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +899,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    load_pprof&#61;false, out_dir&#61;&quot;critical_points_v0_trial_system&quot;, spacing&#61;2.0</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +909,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;1:5&#41;</span>
+            <span class='code'>&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +919,7 @@
           <td>
             
             
-            <span class='code'>Base.HasShape&#123;1&#125;&#40;&#41;</span>
+            <span class='code'>    # Setup system</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +929,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    system, f3d, f3d_xyz, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33; &#61; create_trial_3D_system_interpolated&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +939,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;&#40;2,3&#41;&#41;</span>
+            <span class='code'>    # first run to JIT compile</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +949,7 @@
           <td>
             
             
-            <span class='code'>Base.HasLength&#40;&#41;</span>
+            <span class='code'>    find_cps&#40;system; spacing&#61;3.0&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +959,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    func &#61; &#40;&#41; -&gt; find_cps&#40;system; spacing&#61;spacing&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +969,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # run profiling</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +979,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;x&#41; &#61; IteratorSize&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>    return profile_function&#40;func; out_dir&#61;f&quot;&#123;out_dir&#125;_spacing&#123;spacing:0.2F&#125;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +989,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#41; &#61; HasLength&#40;&#41;  # HasLength is the default</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -999,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Tuple&#125;&#41; &#61; HasLength&#40;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:AbstractArray&#123;&lt;:Any,N&#125;&#125;&#41;  where &#123;N&#125; &#61; HasShape&#123;N&#125;&#40;&#41;</span>
+            <span class='code'>    profile_critical_points_v0_adf_t41&#40;f_name::AbstractString;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Generator&#123;I,F&#125;&#125;&#41; where &#123;I,F&#125; &#61; IteratorSize&#40;I&#41;</span>
+            <span class='code'>        load_pprof&#61;false,</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1039,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        out_dir&#61;&quot;critical_points_v0_scm_adf_t41&quot;,</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Any&#125;&#41; &#61; SizeUnknown&#40;&#41;</span>
+            <span class='code'>        spacing&#61;1.0,</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1059,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>haslength&#40;iter&#41; &#61; IteratorSize&#40;iter&#41; isa Union&#123;HasShape, HasLength&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1079,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>This function profiles the critical points calculation for a given system.</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1089,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorEltype end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1099,7 @@
           <td>
             
             
-            <span class='code'>struct EltypeUnknown &lt;: IteratorEltype end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1109,7 @@
           <td>
             
             
-            <span class='code'>struct HasEltype &lt;: IteratorEltype end</span>
+            <span class='code'>- &#96;f_name::AbstractString&#96;: The name of the file containing the system data.</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1109,7 +1119,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;load_pprof::Bool&#96;: Whether to load the pprof site locally.</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1119,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;out_dir::String&#96;: The output directory for the profile results.</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1129,7 +1139,7 @@
           <td>
             
             
-            <span class='code'>    IteratorEltype&#40;itertype::Type&#41; -&gt; IteratorEltype</span>
+            <span class='code'>- &#96;spacing::Float64&#96;: The spacing parameter for the critical points calculation.</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1149,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1159,7 +1169,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- The profile results.</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1169,7 +1179,7 @@
           <td>
             
             
-            <span class='code'>* &#96;EltypeUnknown&#40;&#41;&#96; if the type of elements yielded by the iterator is not known in advance.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1179,17 +1189,36 @@
           <td>
             
             
-            <span class='code'>* &#96;HasEltype&#40;&#41;&#96; if the element type is known, and &#91;&#96;eltype&#96;&#93;&#40;@ref&#41; would return a meaningful value.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
           <td class='lineno'>115</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in profile_critical_points_v0_adf_t41
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L139'>line 139</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from profile_critical_points_v0_adf_t41
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L115'>line 115</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L115'>#profile_critical_points_v0_adf_t41#63</a>
+              <br />
+            </div>
+            <span class='code'>function profile_critical_points_v0_adf_t41&#40;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1199,7 +1228,7 @@
           <td>
             
             
-            <span class='code'>&#96;HasEltype&#40;&#41;&#96; is the default, since iterators are assumed to implement &#91;&#96;eltype&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    f_name::AbstractString;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1209,7 +1238,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    load_pprof&#61;false,</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1219,7 +1248,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate a specific</span>
+            <span class='code'>    out_dir&#61;&quot;critical_points_v0_scm_adf_t41&quot;,</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1229,7 +1258,7 @@
           <td>
             
             
-            <span class='code'>type of result, and algorithms that pick a result type based on the types of yielded</span>
+            <span class='code'>    spacing&#61;1.5,</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1239,7 +1268,7 @@
           <td>
             
             
-            <span class='code'>values.</span>
+            <span class='code'>&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1249,7 +1278,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Setup system</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1259,7 +1288,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    system &#61; with_zip_file&#40;f_name, load_data_scm_adf_t41&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1269,7 +1298,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorEltype&#40;1:5&#41;</span>
+            <span class='code'>    out_sys_name &#61; sanitize_filename&#40;system.name&#41;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1279,7 +1308,7 @@
           <td>
             
             
-            <span class='code'>Base.HasEltype&#40;&#41;</span>
+            <span class='code'>    # first run to JIT compile</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1289,7 +1318,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    extent &#61; det&#40;system.grid.lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1299,17 +1328,31 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    find_cps&#40;system; spacing&#61;extent&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
           <td class='lineno'>127</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;x&#41; &#61; IteratorEltype&#40;typeof&#40;x&#41;&#41;</span>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in #64
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='Profile.jl-020a57694bea50636336171913e088bc6c95f646.html#L27'>line 27</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>find_cps</a>
+              <br />
+            </div>
+            <span class='code'>    func &#61; &#40;&#41; -&gt; find_cps&#40;system; spacing&#61;spacing&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1319,17 +1362,22 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#41; &#61; HasEltype&#40;&#41;  # HasEltype is the default</span>
+            <span class='code'>    # run profiling</span>
           </td>
         </tr>
         <tr id='L129'>
           <td class='lineno'>129</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'></span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L37'>profile_function</a>
+              <br />
+            </div>
+            <span class='code'>    return profile_function&#40;func; out_dir&#61;f&quot;&#123;out_dir&#125;_&#123;out_sys_name&#125;_spacing&#123;spacing:0.2F&#125;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1339,7 +1387,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#123;Generator&#123;I,T&#125;&#125;&#41; where &#123;I,T&#125; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1357,9 +1405,171 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in test_profiling
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from eval
+              <a href='boot.jl-3f080772281d8a86b7e35b133daf84cac46b5da9.html#L370'>line 370</a>
+              <br />
+            </div>
+            
+            <span class='code'>function test_profiling&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L133'>
+          <td class='lineno'>133</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#123;Any&#125;&#41; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>    @testset verbose &#61; false &quot;Critical points search v0&quot; begin</span>
+          </td>
+        </tr>
+        <tr id='L134'>
+          <td class='lineno'>134</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
+          <td>
+            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Test.jl-deb9ec0c6217d42e6247177e121c576767dc2404.html#L1498'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>        @testset verbose &#61; false &quot;Trial system&quot; begin</span>
+          </td>
+        </tr>
+        <tr id='L135'>
+          <td class='lineno'>135</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            out_dir &#61; profile_critical_points_v0_trial_system&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L136'>
+          <td class='lineno'>136</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            @test isdir&#40;out_dir&#41;</span>
+          </td>
+        </tr>
+        <tr id='L137'>
+          <td class='lineno'>137</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L138'>
+          <td class='lineno'>138</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        @testset verbose &#61; false &quot;ADF Tape41&quot; begin</span>
+          </td>
+        </tr>
+        <tr id='L139'>
+          <td class='lineno'>139</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
+          <td>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='Test.jl-deb9ec0c6217d42e6247177e121c576767dc2404.html#L1498'>line 1498</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L115'>profile_critical_points_v0_adf_t41</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='Test.jl-deb9ec0c6217d42e6247177e121c576767dc2404.html#L1498'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>            out_dir &#61; profile_critical_points_v0_adf_t41&#40;</span>
+          </td>
+        </tr>
+        <tr id='L140'>
+          <td class='lineno'>140</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                joinpath&#40;DATA_DIR, &quot;cubane_PBE_TZ2P_GO_fineFull_adf.t41&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L141'>
+          <td class='lineno'>141</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            &#41;</span>
+          </td>
+        </tr>
+        <tr id='L142'>
+          <td class='lineno'>142</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            @test isdir&#40;out_dir&#41;</span>
+          </td>
+        </tr>
+        <tr id='L143'>
+          <td class='lineno'>143</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L144'>
+          <td class='lineno'>144</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L145'>
+          <td class='lineno'>145</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>

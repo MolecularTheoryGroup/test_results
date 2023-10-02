@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/subarray.jl</title>
+    <title>StatProfilerHTML - ../src/io/data_loader_scm.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sun, 01 Oct 2023 01:05:01
+        Generated on Mon, 02 Oct 2023 20:33:57
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>include&#40;&quot;data_loader_grid_using.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using ..ElectronDensityAnalysis.KFReader:</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>abstract type AbstractCartesianIndex&#123;N&#125; end # This is a hacky forward declaration for CartesianIndex</span>
+            <span class='code'>    load_kf_file,</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>const ViewIndex &#61; Union&#123;Real, AbstractArray&#125;</span>
+            <span class='code'>    get_kf_integer_data,</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>const ScalarIndex &#61; Real</span>
+            <span class='code'>    get_kf_logical_data,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    get_kf_double_data,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    get_kf_string_data</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#123;T,N,P,I,L&#125; &lt;: AbstractArray&#123;T,N&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>export load_data_scm_adf_t41, load_data_scm_band_t41, load_data_scm_adf_cub</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>&#96;N&#96;-dimensional view into a parent array &#40;of type &#96;P&#96;&#41; with an element type &#96;T&#96;, restricted by a tuple of indices &#40;of type &#96;I&#96;&#41;. &#96;L&#96; is true for types that support fast linear indexing, and &#96;false&#96; otherwise.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># TODO: Add support for old versions of ADF/BAND Tape41 files</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>Construct &#96;SubArray&#96;s using the &#91;&#96;view&#96;&#93;&#40;@ref&#41; function.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L13'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>struct SubArray&#123;T,N,P,I,L&#125; &lt;: AbstractArray&#123;T,N&#125;</span>
+            <span class='code'>    load_data_scm_adf_t41&#40;f_name::String; T::Type&#61;Float64&#41; -&gt; System&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    parent::P</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    indices::I</span>
+            <span class='code'>Load ADF electron density data from a binary Tape41 file and create a &#96;System&#96; object containing all the parsed data and functions.</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    offset1::Int       # for linear indexing and pointer, only valid when L&#61;&#61;true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    stride1::Int       # used only for linear indexing</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    function SubArray&#123;T,N,P,I,L&#125;&#40;parent, indices, offset1, stride1&#41; where &#123;T,N,P,I,L&#125;</span>
+            <span class='code'>- &#96;f_name::String&#96;: the name of the .cub file to load</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>        @inline</span>
+            <span class='code'>- &#96;T::Type&#61;Float64&#96;: the type of the electron density data &#40;default: &#96;Float64&#96;&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>        check_parent_index_match&#40;parent, indices&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>        new&#40;parent, indices, offset1, stride1&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>A &#96;System&#96; object containing the parsed data and functions.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'># Compute the linear indexability of the indices, and combine it with the linear indexing of the parent</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>function SubArray&#40;parent::AbstractArray, indices::Tuple&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>julia&gt; sys &#61; load_data_scm_adf_t41&#40;&quot;test/data/data_loader_scm_adf_cub_adamantane-coarse.t41&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#40;IndexStyle&#40;viewindexing&#40;indices&#41;, IndexStyle&#40;parent&#41;&#41;, parent, ensure_indexable&#40;indices&#41;, index_dimsum&#40;indices...&#41;&#41;</span>
+            <span class='code'>System&#123;Float64&#125;&#40;&quot;Admantane: Coarse&quot;, &quot;ADF Tape41: filename.t41&quot;, NuclearCoordinate&#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 0.0, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 1.5, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 1.5, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 0.0, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 0.0, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 1.5, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 1.5, 1.5&#93;, &quot;C&quot;&#41;&#93;, GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.5 0.0 0.0; 0.0 1.5 0.0; 0.0 0.0 1.5&#93;, &#91;4.5, 4.5, 4.5&#93;, &#91;1.5, 1.5, 1.5&#93;, &#91;10, 10, 10&#93;&#41;, rho_xyz, rho, grad, hess, rho&#33;, grad&#33;, hess&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>function SubArray&#40;::IndexCartesian, parent::P, indices::I, ::NTuple&#123;N,Any&#125;&#41; where &#123;P,I,N&#125;</span>
+            <span class='code'>julia&gt; println&#40;&quot;System name: &quot;, sys.title&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>System name: Admantane: Coarse</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#123;eltype&#40;P&#41;, N, P, I, false&#125;&#40;parent, indices, 0, 0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; println&#40;&quot;Electron density at origin: &quot;, sys.rho&#40;&#91;0.0, 0.0, 0.0&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>function SubArray&#40;::IndexLinear, parent::P, indices::I, ::NTuple&#123;N,Any&#125;&#41; where &#123;P,I,N&#125;</span>
+            <span class='code'>Electron density at origin: 0.00015258789f0</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    # Compute the stride and offset</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>    stride1 &#61; compute_stride1&#40;parent, indices&#41;</span>
+            <span class='code'>function load_data_scm_adf_t41&#40;f_name::String; T::Type&#61;Float64&#41;::System&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#123;eltype&#40;P&#41;, N, P, I, true&#125;&#40;parent, indices, compute_offset1&#40;parent, stride1, indices&#41;, stride1&#41;</span>
+            <span class='code'>    # check for existance and extension</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    @assert isfile&#40;f_name&#41; &quot;File does not exist&quot;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @assert any&#40;&#91;endswith&#40;lowercase&#40;f_name&#41;, s&#41; for s in &#91;&quot;t41&quot;, &quot;tape41&quot;&#93;&#93;&#41; &quot;File name does not appear to be a Tape41 file: &#36;f_name&quot;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>check_parent_index_match&#40;parent, indices&#41; &#61; check_parent_index_match&#40;parent, index_ndims&#40;indices...&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>check_parent_index_match&#40;parent::AbstractArray&#123;T,N&#125;, ::NTuple&#123;N, Bool&#125;&#41; where &#123;T,N&#125; &#61; nothing</span>
+            <span class='code'>    # Open the file for reading</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>check_parent_index_match&#40;parent, ::NTuple&#123;N, Bool&#125;&#41; where &#123;N&#125; &#61;</span>
+            <span class='code'>    @info &quot;Loading data from &#36;f_name&quot;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    throw&#40;ArgumentError&#40;&quot;number of indices &#40;&#36;N&#41; must match the parent dimensionality &#40;&#36;&#40;ndims&#40;parent&#41;&#41;&#41;&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f &#61; load_kf_file&#40;f_name&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'># This computes the linear indexing compatibility for a given tuple of indices</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;&#125;&#41; &#61; IndexLinear&#40;&#41;</span>
+            <span class='code'>    @debug &quot;Loaded file. Sections and variables:&quot; &#91;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'># Leading scalar indices simply increase the stride</span>
+            <span class='code'>        &#91;k, String.&#40;keys&#40;f.sections&#91;k&#93;&#41;&#41;&#93; for k in keys&#40;f.sections&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;ScalarIndex, Vararg&#123;Any&#125;&#125;&#41; &#61; &#40;@inline; viewindexing&#40;tail&#40;I&#41;&#41;&#41;</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'># Slices may begin a section which may be followed by any number of Slices</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;Slice, Slice, Vararg&#123;Any&#125;&#125;&#41; &#61; &#40;@inline; viewindexing&#40;tail&#40;I&#41;&#41;&#41;</span>
+            <span class='code'>    # check that it&#39;s an ADF Tape41 file &#40;not BAND&#41; </span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'># A UnitRange can follow Slices, but only if all other indices are scalar</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;SCF&quot;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;Slice, AbstractUnitRange, Vararg&#123;ScalarIndex&#125;&#125;&#41; &#61; IndexLinear&#40;&#41;</span>
+            <span class='code'>        length&#40;f.sections&#91;&quot;SCF&quot;&#93;&#41; &gt; 0 &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;Slice, Slice, Vararg&#123;ScalarIndex&#125;&#125;&#41; &#61; IndexLinear&#40;&#41; # disambiguate</span>
+            <span class='code'>        &#33;haskey&#40;f.sections, &quot;FOO&quot;&#41; &quot;Not an ADF Tape41 file&quot;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'># In general, ranges are only fast if all other indices are scalar</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;AbstractRange, Vararg&#123;ScalarIndex&#125;&#125;&#41; &#61; IndexLinear&#40;&#41;</span>
+            <span class='code'>    # get atom info. We&#39;ll use nnuc, labels, qtch and xyznuc from the Geometry section</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'># All other index combinations are slow</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;Geometry&quot;&#41; &amp;&amp; all&#40;&#91;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;Vararg&#123;Any&#125;&#125;&#41; &#61; IndexCartesian&#40;&#41;</span>
+            <span class='code'>        haskey&#40;f.sections&#91;&quot;Geometry&quot;&#93;, s&#41; for s in &#91;&quot;nnuc&quot;, &quot;labels&quot;, &quot;xyznuc&quot;, &quot;qtch&quot;&#93;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'># Of course, all other array types are slow</span>
+            <span class='code'>    &#93;&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>viewindexing&#40;I::Tuple&#123;AbstractArray, Vararg&#123;Any&#125;&#125;&#41; &#61; IndexCartesian&#40;&#41;</span>
+            <span class='code'>    &quot;Missing atom information&quot;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    natoms &#61; get_kf_integer_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;nnuc&quot;&#93;&#41;&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'># Simple utilities</span>
+            <span class='code'>    atoms_xyz &#61; get_kf_double_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;xyznuc&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>size&#40;V::SubArray&#41; &#61; &#40;@inline; map&#40;length, axes&#40;V&#41;&#41;&#41;</span>
+            <span class='code'>    atoms_labels &#61; get_kf_string_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;labels&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    atom_numbers &#61; Int32.&#40;get_kf_double_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;qtch&quot;&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>similar&#40;V::SubArray, T::Type, dims::Dims&#41; &#61; similar&#40;V.parent, T, dims&#41;</span>
+            <span class='code'>    @assert length&#40;atoms_labels&#41; &#61;&#61; natoms &quot;Atom information is inconsistent&quot;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @debug &quot;Loaded atom information&quot; natoms atoms_labels atoms_xyz</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>sizeof&#40;V::SubArray&#41; &#61; length&#40;V&#41; * sizeof&#40;eltype&#40;V&#41;&#41;</span>
+            <span class='code'>    atoms &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>sizeof&#40;V::SubArray&#123;&lt;:Any,&lt;:Any,&lt;:Array&#125;&#41; &#61; length&#40;V&#41; * elsize&#40;V.parent&#41;</span>
+            <span class='code'>        NuclearCoordinate&#40;atoms_xyz&#91;&#40;1 &#43; &#40;3 * &#40;i - 1&#41;&#41;&#41;:&#40;3i&#41;&#93;, elements&#91;atom_numbers&#91;i&#93;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        for i in 1:natoms</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>function Base.copy&#40;V::SubArray&#41;</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>    v &#61; V.parent&#91;V.indices...&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    ndims&#40;V&#41; &#61;&#61; 0 || return v</span>
+            <span class='code'>    # get grid info</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>    x &#61; similar&#40;V&#41; # ensure proper type of x</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;Grid&quot;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    x&#91;&#93; &#61; v</span>
+            <span class='code'>        all&#40;&#91;haskey&#40;f.sections&#91;&quot;Grid&quot;&#93;, &quot;nr of points &#36;d&quot;&#41; for d in &#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;&#93;&#93;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    return x</span>
+            <span class='code'>        haskey&#40;f.sections&#91;&quot;Grid&quot;&#93;, &quot;total nr of points&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &quot;Missing grid information&quot;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>parent&#40;V::SubArray&#41; &#61; V.parent</span>
+            <span class='code'>    nIJK &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>parentindices&#40;V::SubArray&#41; &#61; V.indices</span>
+            <span class='code'>        get_kf_integer_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;nr of points &#36;d&quot;&#93;&#41;&#91;1&#93; for</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        d in &#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;&#93;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    parentindices&#40;A&#41;</span>
+            <span class='code'>    fIJK &#61; Float64.&#40;nIJK&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    npts &#61; get_kf_integer_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;total nr of points&quot;&#93;&#41;&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>Return the indices in the &#91;&#96;parent&#96;&#93;&#40;@ref&#41; which correspond to the array view &#96;A&#96;.</span>
+            <span class='code'>    @assert npts &#61;&#61; prod&#40;nIJK&#41; &quot;Grid information is inconsistent&quot;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @assert all&#40;nIJK .&gt; 1&#41; &quot;Only 3d grids supported&quot;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    # Tape41s can have explicit xyz values saved within. If their number is the</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; A &#61; &#91;1 2; 3 4&#93;;</span>
+            <span class='code'>    # same as the number of grid points, we can disregard them. Othersise, they</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # specify an irregular grid. We can&#39;t handle that yet.</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; V &#61; view&#40;A, 1, :&#41;</span>
+            <span class='code'>    # TODO: handle irregular grids for ADF Tape41s</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>2-element view&#40;::Matrix&#123;Int64&#125;, 1, :&#41; with eltype Int64:</span>
+            <span class='code'>    #  This would require saving the xyz values and returning a linear irregular interpolation instead of a quadratic bspline interpolation.</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'> 1</span>
+            <span class='code'>    @assert &#33;haskey&#40;f.sections, &quot;x values&quot;&#41; ||</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'> 2</span>
+            <span class='code'>        f.sections&#91;&quot;x values&quot;&#93;&#91;&quot;x values&quot;&#93;.length &#61;&#61; npts</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &quot;Irregular grid not supported&quot;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; parentindices&#40;V&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>&#40;1, Base.Slice&#40;Base.OneTo&#40;2&#41;&#41;&#41;</span>
+            <span class='code'>    # prepare lattice</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    @assert haskey&#40;f.sections&#91;&quot;Grid&quot;&#93;, &quot;x-vector&quot;&#41; &quot;Missing lattice information&quot;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    lattice &#61; hcat&#40;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>parentindices&#40;a::AbstractArray&#41; &#61; map&#40;oneto, size&#40;a&#41;&#41;</span>
+            <span class='code'>        &#91;get_kf_double_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;&#36;d-vector&quot;&#93;&#41; for d in &#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;&#93;&#93;...</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>## Aliasing detection</span>
+            <span class='code'>    origin &#61; get_kf_double_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;Start_point&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>dataids&#40;A::SubArray&#41; &#61; &#40;dataids&#40;A.parent&#41;..., _splatmap&#40;dataids, A.indices&#41;...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>_splatmap&#40;f, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
+            <span class='code'>    @debug &quot;Lattice information&quot; nIJK npts origin lattice</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>_splatmap&#40;f, t::Tuple&#41; &#61; &#40;f&#40;t&#91;1&#93;&#41;..., _splatmap&#40;f, tail&#40;t&#41;&#41;...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>unaliascopy&#40;A::SubArray&#41; &#61; typeof&#40;A&#41;&#40;unaliascopy&#40;A.parent&#41;, map&#40;unaliascopy, A.indices&#41;, A.offset1, A.stride1&#41;</span>
+            <span class='code'>    # Create a GridSpec object from the lattice parameters</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    gs &#61; GridSpec&#123;T&#125;&#40;origin, lattice, nIJK&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'># When the parent is an Array we can trim the size down a bit. In the future this</span>
+            <span class='code'>    @debug &quot;System GridSpec&quot; gs</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'># could possibly be extended to any mutable array.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>function unaliascopy&#40;V::SubArray&#123;T,N,A,I,LD&#125;&#41; where &#123;T,N,A&lt;:Array,I&lt;:Tuple&#123;Vararg&#123;Union&#123;Real,AbstractRange,Array&#125;&#125;&#125;,LD&#125;</span>
+            <span class='code'>    g &#61; generate_interpolation_grid&#40;gs&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>    dest &#61; Array&#123;T&#125;&#40;undef, index_lengths&#40;V.indices...&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;dest, V&#41;</span>
+            <span class='code'>    # Get charge density &#40;currently assumes presense of SCF density&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#123;T,N,A,I,LD&#125;&#40;dest, map&#40;_trimmedindex, V.indices&#41;, 0, Int&#40;LD&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;SCF&quot;&#41; &amp;&amp; haskey&#40;f.sections&#91;&quot;SCF&quot;&#93;, &quot;Density&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'># Transform indices to be &quot;dense&quot;</span>
+            <span class='code'>    &quot;Missing charge density&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>_trimmedindex&#40;i::Real&#41; &#61; oftype&#40;i, 1&#41;</span>
+            <span class='code'>    data &#61; get_kf_double_data&#40;f.sections&#91;&quot;SCF&quot;&#93;&#91;&quot;Density&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>_trimmedindex&#40;i::AbstractUnitRange&#41; &#61; oftype&#40;i, oneto&#40;length&#40;i&#41;&#41;&#41;</span>
+            <span class='code'>    # convert to 3D array</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>_trimmedindex&#40;i::AbstractArray&#41; &#61; oftype&#40;i, reshape&#40;eachindex&#40;IndexLinear&#40;&#41;, i&#41;, axes&#40;i&#41;&#41;&#41;</span>
+            <span class='code'>    data &#61; reshape&#40;data, nIJK...&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>## SubArray creation</span>
+            <span class='code'>    @debug &quot;Loaded charge density&quot; size&#40;data&#41; size&#40;g&#91;1&#93;&#41; size&#40;g&#91;2&#93;&#41; size&#40;g&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'># We always assume that the dimensionality of the parent matches the number of</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'># indices that end up getting passed to it, so we store the parent as a</span>
+            <span class='code'>    # Interpolate and scale the electron density data to create the rho_xyz function</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1245,7 @@
           <td>
             
             
-            <span class='code'># ReshapedArray view if necessary. The trouble is that arrays of &#96;CartesianIndex&#96;</span>
+            <span class='code'>    rho_xyz &#61; scale&#40;interpolate&#40;data, BSpline&#40;Quadratic&#40;Flat&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g&#91;1&#93;, g&#91;2&#93;, g&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'># can make the number of effective indices not equal to length&#40;I&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reshape_parent&#40;A::AbstractArray, ::NTuple&#123;1, Bool&#125;&#41; &#61; reshape&#40;A, Val&#40;1&#41;&#41;</span>
+            <span class='code'>    # Define functions for calculating the electron density, gradient, and Hessian</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reshape_parent&#40;A::AbstractArray&#123;&lt;:Any,1&#125;, ::NTuple&#123;1, Bool&#125;&#41; &#61; reshape&#40;A, Val&#40;1&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reshape_parent&#40;A::AbstractArray&#123;&lt;:Any,N&#125;, ::NTuple&#123;N, Bool&#125;&#41; where &#123;N&#125; &#61; A</span>
+            <span class='code'>    rho&#40;r&#41; &#61; rho_xyz&#40;r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reshape_parent&#40;A::AbstractArray, ::NTuple&#123;N, Bool&#125;&#41; where &#123;N&#125; &#61; reshape&#40;A, Val&#40;N&#41;&#41;</span>
+            <span class='code'>    grad&#40;r&#41; &#61; gradient&#40;rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    hess&#40;r&#41; &#61; hessian&#40;rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>    view&#40;A, inds...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Define functions for calculating the electron density, gradient, and Hessian in-place</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,17 +1335,31 @@
           <td>
             
             
-            <span class='code'>Like &#91;&#96;getindex&#96;&#93;&#40;@ref&#41;, but returns a lightweight array that lazily references</span>
+            <span class='code'>    rho&#33;&#40;F, r&#41; &#61; &#40;F&#91;1&#93; &#61; rho&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L132'>
           <td class='lineno'>132</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>&#40;or is effectively a _view_ into&#41; the parent array &#96;A&#96; at the given index or indices</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in grad&#33;
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from fb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L153'>line 153</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L371'>gradient&#33;</a>
+              <br />
+            </div>
+            <span class='code'>    grad&#33;&#40;G, r&#41; &#61; gradient&#33;&#40;G, rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>&#96;inds&#96; instead of eagerly extracting elements or constructing a copied subset.</span>
+            <span class='code'>    hess&#33;&#40;J, r&#41; &#61; hessian&#33;&#40;J, rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1379,7 @@
           <td>
             
             
-            <span class='code'>Calling &#91;&#96;getindex&#96;&#93;&#40;@ref&#41; or &#91;&#96;setindex&#33;&#96;&#93;&#40;@ref&#41; on the returned value</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>&#40;often a &#91;&#96;SubArray&#96;&#93;&#40;@ref&#41;&#41; computes the indices to access or modify the</span>
+            <span class='code'>    # Create a System object containing all the parsed data and functions</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1399,7 @@
           <td>
             
             
-            <span class='code'>parent array on the fly.  The behavior is undefined if the shape of the parent array is</span>
+            <span class='code'>    title &#61; basename&#40;f_name&#41;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1409,7 @@
           <td>
             
             
-            <span class='code'>changed after &#96;view&#96; is called because there is no bound check for the parent array; e.g.,</span>
+            <span class='code'>    full_f_path &#61; abspath&#40;f_name&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1419,7 @@
           <td>
             
             
-            <span class='code'>it may cause a segmentation fault.</span>
+            <span class='code'>    data_source &#61; &quot;ADF Tape41: &#36;full_f_path&quot;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1429,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    out &#61; System&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1439,7 @@
           <td>
             
             
-            <span class='code'>Some immutable parent arrays &#40;like ranges&#41; may choose to simply</span>
+            <span class='code'>        &quot;&#36;title: SCF Electron Density&quot;,</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1449,7 @@
           <td>
             
             
-            <span class='code'>recompute a new array in some circumstances instead of returning</span>
+            <span class='code'>        data_source,</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>a &#96;SubArray&#96; if doing so is efficient and provides compatible semantics.</span>
+            <span class='code'>        atoms,</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1469,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        gs,</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1479,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.6&quot;</span>
+            <span class='code'>        &#40;x, y, z&#41; -&gt; rho_xyz&#40;x, y, z&#41;,</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1489,7 @@
           <td>
             
             
-            <span class='code'>    In Julia 1.6 or later, &#96;view&#96; can be called on an &#96;AbstractString&#96;, returning a</span>
+            <span class='code'>        rho,</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1499,7 @@
           <td>
             
             
-            <span class='code'>    &#96;SubString&#96;.</span>
+            <span class='code'>        grad,</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1509,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        hess,</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1519,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>        rho&#33;,</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>        grad&#33;,</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1539,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; A &#61; &#91;1 2; 3 4&#93;</span>
+            <span class='code'>        hess&#33;,</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1549,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Int64&#125;:</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1559,7 @@
           <td>
             
             
-            <span class='code'> 1  2</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1569,7 @@
           <td>
             
             
-            <span class='code'> 3  4</span>
+            <span class='code'>    # Return the System object</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1579,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1589,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; b &#61; view&#40;A, :, 1&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1599,7 @@
           <td>
             
             
-            <span class='code'>2-element view&#40;::Matrix&#123;Int64&#125;, :, 1&#41; with eltype Int64:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1609,7 @@
           <td>
             
             
-            <span class='code'> 1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1619,7 @@
           <td>
             
             
-            <span class='code'> 3</span>
+            <span class='code'>    load_data_scm_band_t41&#40;f_name::String; T::Type&#61;Float64, is_periodic::Vector&#123;Bool&#125;&#61;&#91;false, false, false&#93;&#41; -&gt; System&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1625,7 +1639,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; fill&#33;&#40;b, 0&#41;</span>
+            <span class='code'>Load BAND electron density data from a binary Tape41 file and create a &#96;System&#96; object containing all the parsed data and functions.</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>2-element view&#40;::Matrix&#123;Int64&#125;, :, 1&#41; with eltype Int64:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1659,7 @@
           <td>
             
             
-            <span class='code'> 0</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1669,7 @@
           <td>
             
             
-            <span class='code'> 0</span>
+            <span class='code'>- &#96;f_name::String&#96;: the name of the .cub file to load</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1679,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;T::Type&#61;Float64&#96;: the type of the electron density data &#40;default: &#96;Float64&#96;&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1689,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; A # Note A has changed even though we modified b</span>
+            <span class='code'>- &#96;is_periodic::Vector&#123;Bool&#125;&#61;&#91;false, false, false&#93;&#96;: whether the system is periodic in the xyz directions</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1699,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Int64&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1709,7 @@
           <td>
             
             
-            <span class='code'> 0  2</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1719,7 @@
           <td>
             
             
-            <span class='code'> 0  4</span>
+            <span class='code'>A &#96;System&#96; object containing the parsed data and functions.</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1725,7 +1739,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; view&#40;2:5, 2:3&#41; # returns a range as type is immutable</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1749,7 @@
           <td>
             
             
-            <span class='code'>3:4</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1759,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>julia&gt; sys &#61; load_data_scm_band_t41&#40;&quot;test/data/data_loader_scm_band_cub_adamantane-coarse.t41&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1769,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>System&#123;Float64&#125;&#40;&quot;Admantane: Coarse&quot;, &quot;BAND: filename.t41&quot; NuclearCoordinate&#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 0.0, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 1.5, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 1.5, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 0.0, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 0.0, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 1.5, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 1.5, 1.5&#93;, &quot;C&quot;&#41;&#93;, GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.5 0.0 0.0; 0.0 1.5 0.0; 0.0 0.0 1.5&#93;, &#91;4.5, 4.5, 4.5&#93;, &#91;1.5, 1.5, 1.5&#93;, &#91;10, 10, 10&#93;&#41;, rho_xyz, rho, grad, hess, rho&#33;, grad&#33;, hess&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;A::AbstractArray&#123;&lt;:Any,N&#125;, I::Vararg&#123;Any,M&#125;&#41; where &#123;N,M&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1789,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>julia&gt; println&#40;&quot;System name: &quot;, sys.title&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1799,7 @@
           <td>
             
             
-            <span class='code'>    J &#61; map&#40;i-&gt;unalias&#40;A,i&#41;, to_indices&#40;A, I&#41;&#41;</span>
+            <span class='code'>System name: Admantane: Coarse</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;A, J...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1819,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;J&#41; &gt; ndims&#40;A&#41; &amp;&amp; J&#91;N&#43;1:end&#93; isa Tuple&#123;Vararg&#123;Int&#125;&#125;</span>
+            <span class='code'>julia&gt; println&#40;&quot;Electron density at origin: &quot;, sys.rho&#40;&#91;0.0, 0.0, 0.0&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1829,7 @@
           <td>
             
             
-            <span class='code'>        # view&#40;&#91;1,2,3&#93;, :, 1&#41; does not need to reshape</span>
+            <span class='code'>Electron density at origin: 0.00015258789f0</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1839,7 @@
           <td>
             
             
-            <span class='code'>        return unsafe_view&#40;A, J&#91;1:N&#93;...&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1849,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1859,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_view&#40;_maybe_reshape_parent&#40;A, index_ndims&#40;J...&#41;&#41;, J...&#41;</span>
+            <span class='code'>function load_data_scm_band_t41&#40;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1869,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    f_name::String; T::Type&#61;Float64, is_periodic::Vector&#123;Bool&#125;&#61;&#91;false, false, false&#93;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1879,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41;::System&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1889,7 @@
           <td>
             
             
-            <span class='code'># Ranges implement getindex to return recomputed ranges; use that for views, too &#40;when possible&#41;</span>
+            <span class='code'>    # check for existance and extension</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1899,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::OneTo, r2::OneTo&#41;</span>
+            <span class='code'>    @assert isfile&#40;f_name&#41; &quot;File does not exist&quot;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1909,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'>    @assert any&#40;&#91;endswith&#40;lowercase&#40;f_name&#41;, s&#41; for s in &#91;&quot;t41&quot;, &quot;tape41&quot;&#93;&#93;&#41; &quot;File name does not appear to be a Tape41 file: &#36;f_name&quot;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1919,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, r2&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1929,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Open the file for reading</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1939,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::AbstractUnitRange, r2::AbstractUnitRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>    @info &quot;Loading data from &#36;f_name&quot;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1949,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1959,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, r2&#41;</span>
+            <span class='code'>    f &#61; load_kf_file&#40;f_name&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1969,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1979,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::AbstractUnitRange, r2::StepRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>    @debug &quot;Loaded file. Sections and variables:&quot; &#91;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +1989,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'>        &#91;k, String.&#40;keys&#40;f.sections&#91;k&#93;&#41;&#41;&#93; for k in keys&#40;f.sections&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +1999,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, r2&#41;</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2009,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2019,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::StepRange, r2::AbstractRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>    # check that it&#39;s an BAND Tape41 file &#40;not BAND&#41; </span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2029,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;FOO&quot;&#41; &amp;&amp; length&#40;f.sections&#91;&quot;FOO&quot;&#93;&#41; &gt; 0</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2039,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, r2&#41;</span>
+            <span class='code'>    &quot;Not a BAND Tape41 file&quot;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2049,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2059,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::StepRangeLen, r2::OrdinalRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>    # get atom info. We&#39;ll use nnuc, labels, qtch and xyznuc from the Geometry section</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2069,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;Geometry&quot;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2079,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, r2&#41;</span>
+            <span class='code'>        all&#40;&#91;haskey&#40;f.sections&#91;&quot;Geometry&quot;&#93;, s&#41; for s in &#91;&quot;nnuc&quot;, &quot;labels&quot;, &quot;xyznuc&quot;&#93;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2089,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &quot;Missing atom information&quot;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2099,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::LinRange, r2::OrdinalRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>    natoms &#61; get_kf_integer_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;nnuc&quot;&#93;&#41;&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2109,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'>    atoms_xyz &#61; get_kf_double_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;xyznuc&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2119,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, r2&#41;</span>
+            <span class='code'>    atoms_labels &#61; get_kf_string_data&#40;f.sections&#91;&quot;Geometry&quot;&#93;&#91;&quot;labels&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2129,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    @assert length&#40;atoms_labels&#41; &#61;&#61; natoms &quot;Atom information is inconsistent&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2139,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @debug &quot;Loaded atom information&quot; natoms atoms_labels atoms_xyz</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2149,7 @@
           <td>
             
             
-            <span class='code'># getindex&#40;r::AbstractRange, ::Colon&#41; returns a copy of the range, and we may do the same for a view</span>
+            <span class='code'>    atoms &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2159,7 @@
           <td>
             
             
-            <span class='code'>function view&#40;r1::AbstractRange, c::Colon&#41;</span>
+            <span class='code'>        NuclearCoordinate&#40;atoms_xyz&#91;&#40;1 &#43; &#40;3 * &#40;i - 1&#41;&#41;&#41;:&#40;3i&#41;&#93;, Symbol&#40;atoms_labels&#91;i&#93;&#41;&#41; for</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2169,7 @@
           <td>
             
             
-            <span class='code'>    @_propagate_inbounds_meta</span>
+            <span class='code'>        i in 1:natoms</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2179,7 @@
           <td>
             
             
-            <span class='code'>    getindex&#40;r1, c&#41;</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2199,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # get grid info</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2209,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_view&#40;A::AbstractArray, I::Vararg&#123;ViewIndex,N&#125;&#41; where &#123;N&#125;</span>
+            <span class='code'>    @assert haskey&#40;f.sections, &quot;Grid&quot;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2219,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>        all&#40;&#91;haskey&#40;f.sections&#91;&quot;Grid&quot;&#93;, &quot;nr of points &#36;d&quot;&#41; for d in &#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;&#93;&#93;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2229,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#40;A, I&#41;</span>
+            <span class='code'>        haskey&#40;f.sections&#91;&quot;Grid&quot;&#93;, &quot;total nr of points&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2239,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &quot;Missing grid information&quot;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2249,7 @@
           <td>
             
             
-            <span class='code'># When we take the view of a view, it&#39;s often possible to &quot;reindex&quot; the parent</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2259,7 @@
           <td>
             
             
-            <span class='code'># view&#39;s indices such that we can &quot;pop&quot; the parent view and keep just one layer</span>
+            <span class='code'>    nIJK &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2269,7 @@
           <td>
             
             
-            <span class='code'># of indirection. But we can&#39;t always do this because arrays of &#96;CartesianIndex&#96;</span>
+            <span class='code'>        get_kf_integer_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;nr of points &#36;d&quot;&#93;&#41;&#91;1&#93; for</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2279,7 @@
           <td>
             
             
-            <span class='code'># might span multiple parent indices, making the reindex calculation very hard.</span>
+            <span class='code'>        d in &#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;&#93;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2289,7 @@
           <td>
             
             
-            <span class='code'># So we use _maybe_reindex to figure out if there are any arrays of</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2299,7 @@
           <td>
             
             
-            <span class='code'># &#96;CartesianIndex&#96;, and if so, we punt and keep two layers of indirection.</span>
+            <span class='code'>    npts &#61; get_kf_integer_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;total nr of points&quot;&#93;&#41;&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2309,7 @@
           <td>
             
             
-            <span class='code'>unsafe_view&#40;V::SubArray, I::Vararg&#123;ViewIndex,N&#125;&#41; where &#123;N&#125; &#61;</span>
+            <span class='code'>    @assert npts &#61;&#61; prod&#40;nIJK&#41; &quot;Grid information is inconsistent&quot;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2305,7 +2319,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; _maybe_reindex&#40;V, I&#41;&#41;</span>
+            <span class='code'>    @assert all&#40;nIJK .&gt; 1&#41; &quot;Only 3d grids supported&quot;</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2315,7 +2329,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reindex&#40;V, I&#41; &#61; &#40;@inline; _maybe_reindex&#40;V, I, I&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2325,7 +2339,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reindex&#40;V, I, ::Tuple&#123;AbstractArray&#123;&lt;:AbstractCartesianIndex&#125;, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>    # prepare lattice</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2335,7 +2349,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; SubArray&#40;V, I&#41;&#41;</span>
+            <span class='code'>    @assert haskey&#40;f.sections&#91;&quot;Grid&quot;&#93;, &quot;x-vector&quot;&#41; &quot;Missing lattice information&quot;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2345,7 +2359,7 @@
           <td>
             
             
-            <span class='code'># But allow arrays of CartesianIndex&#123;1&#125;; they behave just like arrays of Ints</span>
+            <span class='code'>    lattice &#61; hcat&#40;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2355,7 +2369,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reindex&#40;V, I, A::Tuple&#123;AbstractArray&#123;&lt;:AbstractCartesianIndex&#123;1&#125;&#125;, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>        &#91;get_kf_double_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;&#36;d-vector&quot;&#93;&#41; for d in &#91;&quot;x&quot;, &quot;y&quot;, &quot;z&quot;&#93;&#93;...</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2379,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; _maybe_reindex&#40;V, I, tail&#40;A&#41;&#41;&#41;</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2389,7 @@
           <td>
             
             
-            <span class='code'>_maybe_reindex&#40;V, I, A::Tuple&#123;Any, Vararg&#123;Any&#125;&#125;&#41; &#61; &#40;@inline; _maybe_reindex&#40;V, I, tail&#40;A&#41;&#41;&#41;</span>
+            <span class='code'>    origin &#61; get_kf_double_data&#40;f.sections&#91;&quot;Grid&quot;&#93;&#91;&quot;Start_point&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2399,7 @@
           <td>
             
             
-            <span class='code'>function _maybe_reindex&#40;V, I, ::Tuple&#123;&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2395,7 +2409,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    @debug &quot;Lattice information&quot; nIJK npts origin lattice</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2419,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds idxs &#61; to_indices&#40;V.parent, reindex&#40;V.indices, I&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2429,7 @@
           <td>
             
             
-            <span class='code'>    SubArray&#40;V.parent, idxs&#41;</span>
+            <span class='code'>    # Create a GridSpec object from the lattice parameters</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2439,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    gs &#61; GridSpec&#123;T&#125;&#40;origin, lattice, nIJK&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2449,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @debug &quot;System GridSpec&quot; gs</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2459,7 @@
           <td>
             
             
-            <span class='code'>## Re-indexing is the heart of a view, transforming A&#91;i, j&#93;&#91;x, y&#93; to A&#91;i&#91;x&#93;, j&#91;y&#93;&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,7 +2469,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'>    g &#61; generate_interpolation_grid&#40;gs&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2465,7 +2479,7 @@
           <td>
             
             
-            <span class='code'># Recursively look through the heads of the parent- and sub-indices, considering</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2475,7 +2489,7 @@
           <td>
             
             
-            <span class='code'># the following cases:</span>
+            <span class='code'>    # Get charge density &#40;currently assumes presense of SCF density&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2485,7 +2499,7 @@
           <td>
             
             
-            <span class='code'># * Parent index is array  -&gt; re-index that with one or more sub-indices &#40;one per dimension&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2495,7 +2509,7 @@
           <td>
             
             
-            <span class='code'># * Parent index is Colon  -&gt; just use the sub-index as provided</span>
+            <span class='code'>    @assert haskey&#40;f.sections&#91;&quot;FOO&quot;&#93;, &quot;rho&quot;&#41; &quot;Missing charge density&quot;</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2505,7 +2519,7 @@
           <td>
             
             
-            <span class='code'># * Parent index is scalar -&gt; that dimension was dropped, so skip the sub-index and use the index as is</span>
+            <span class='code'>    data &#61; get_kf_double_data&#40;f.sections&#91;&quot;FOO&quot;&#93;&#91;&quot;rho&quot;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2515,7 +2529,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # convert to 3D array</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2525,7 +2539,7 @@
           <td>
             
             
-            <span class='code'>AbstractZeroDimArray&#123;T&#125; &#61; AbstractArray&#123;T, 0&#125;</span>
+            <span class='code'>    data &#61; reshape&#40;data, nIJK...&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2545,7 +2559,7 @@
           <td>
             
             
-            <span class='code'>reindex&#40;::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
+            <span class='code'>    @debug &quot;Loaded charge density&quot; size&#40;data&#41; size&#40;g&#91;1&#93;&#41; size&#40;g&#91;2&#93;&#41; size&#40;g&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2565,7 +2579,7 @@
           <td>
             
             
-            <span class='code'># Skip dropped scalars, so simply peel them off the parent indices and continue</span>
+            <span class='code'>    # Interpolate and scale the electron density data to create the rho_xyz function</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2575,7 +2589,7 @@
           <td>
             
             
-            <span class='code'>reindex&#40;idxs::Tuple&#123;ScalarIndex, Vararg&#123;Any&#125;&#125;, subidxs::Tuple&#123;Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>    rho_xyz &#61; scale&#40;interpolate&#40;data, BSpline&#40;Quadratic&#40;Flat&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g&#91;1&#93;, g&#91;2&#93;, g&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2585,7 +2599,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@_propagate_inbounds_meta; &#40;idxs&#91;1&#93;, reindex&#40;tail&#40;idxs&#41;, subidxs&#41;...&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2595,7 +2609,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Define functions for calculating the electron density, gradient, and Hessian</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2605,7 +2619,7 @@
           <td>
             
             
-            <span class='code'># Slices simply pass their subindices straight through</span>
+            <span class='code'>    function rho&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2615,7 +2629,7 @@
           <td>
             
             
-            <span class='code'>reindex&#40;idxs::Tuple&#123;Slice, Vararg&#123;Any&#125;&#125;, subidxs::Tuple&#123;Any, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>        if any&#40;is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2625,7 +2639,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@_propagate_inbounds_meta; &#40;subidxs&#91;1&#93;, reindex&#40;tail&#40;idxs&#41;, tail&#40;subidxs&#41;&#41;...&#41;&#41;</span>
+            <span class='code'>            r1 &#61; apply_translational_symmetry&#40;r, gs, is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2635,7 +2649,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            return rho_xyz&#40;r1&#91;1&#93;, r1&#91;2&#93;, r1&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2645,7 +2659,7 @@
           <td>
             
             
-            <span class='code'># Re-index into parent vectors with one subindex</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2655,7 +2669,7 @@
           <td>
             
             
-            <span class='code'>reindex&#40;idxs::Tuple&#123;AbstractVector, Vararg&#123;Any&#125;&#125;, subidxs::Tuple&#123;Any, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>            return rho_xyz&#40;r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2665,7 +2679,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@_propagate_inbounds_meta; &#40;idxs&#91;1&#93;&#91;subidxs&#91;1&#93;&#93;, reindex&#40;tail&#40;idxs&#41;, tail&#40;subidxs&#41;&#41;...&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2675,7 +2689,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2685,7 +2699,7 @@
           <td>
             
             
-            <span class='code'># Parent matrices are re-indexed with two sub-indices</span>
+            <span class='code'>    function rho_xyz_f&#40;x, y, z&#41;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2695,7 +2709,7 @@
           <td>
             
             
-            <span class='code'>reindex&#40;idxs::Tuple&#123;AbstractMatrix, Vararg&#123;Any&#125;&#125;, subidxs::Tuple&#123;Any, Any, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>        if any&#40;is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2705,7 +2719,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@_propagate_inbounds_meta; &#40;idxs&#91;1&#93;&#91;subidxs&#91;1&#93;, subidxs&#91;2&#93;&#93;, reindex&#40;tail&#40;idxs&#41;, tail&#40;tail&#40;subidxs&#41;&#41;&#41;...&#41;&#41;</span>
+            <span class='code'>            return rho&#40;&#91;x, y, z&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2715,7 +2729,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2725,7 +2739,7 @@
           <td>
             
             
-            <span class='code'># In general, we index N-dimensional parent arrays with N indices</span>
+            <span class='code'>            return rho_xyz&#40;x, y, z&#41;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2735,7 +2749,7 @@
           <td>
             
             
-            <span class='code'>@generated function reindex&#40;idxs::Tuple&#123;AbstractArray&#123;T,N&#125;, Vararg&#123;Any&#125;&#125;, subidxs::Tuple&#123;Vararg&#123;Any&#125;&#125;&#41; where &#123;T,N&#125;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2745,7 +2759,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;subidxs.parameters&#41; &gt;&#61; N</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2755,7 +2769,7 @@
           <td>
             
             
-            <span class='code'>        subs &#61; &#91;:&#40;subidxs&#91;&#36;d&#93;&#41; for d in 1:N&#93;</span>
+            <span class='code'>    function grad&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2765,7 +2779,7 @@
           <td>
             
             
-            <span class='code'>        tail &#61; &#91;:&#40;subidxs&#91;&#36;d&#93;&#41; for d in N&#43;1:length&#40;subidxs.parameters&#41;&#93;</span>
+            <span class='code'>        if any&#40;is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2775,7 +2789,7 @@
           <td>
             
             
-            <span class='code'>        :&#40;@_propagate_inbounds_meta; &#40;idxs&#91;1&#93;&#91;&#36;&#40;subs...&#41;&#93;, reindex&#40;tail&#40;idxs&#41;, &#40;&#36;&#40;tail...&#41;,&#41;&#41;...&#41;&#41;</span>
+            <span class='code'>            r1 &#61; apply_translational_symmetry&#40;r, gs, is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2785,7 +2799,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>            return gradient&#40;rho_xyz, r1&#91;1&#93;, r1&#91;2&#93;, r1&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2795,7 +2809,7 @@
           <td>
             
             
-            <span class='code'>        :&#40;throw&#40;ArgumentError&#40;&quot;cannot re-index SubArray with fewer indices than dimensions\nThis should not occur; please submit a bug report.&quot;&#41;&#41;&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2805,7 +2819,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            return gradient&#40;rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2815,7 +2829,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2825,7 +2839,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2835,7 +2849,7 @@
           <td>
             
             
-            <span class='code'># In general, we simply re-index the parent indices by the provided ones</span>
+            <span class='code'>    function hess&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2845,7 +2859,7 @@
           <td>
             
             
-            <span class='code'>SlowSubArray&#123;T,N,P,I&#125; &#61; SubArray&#123;T,N,P,I,false&#125;</span>
+            <span class='code'>        if any&#40;is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2855,7 +2869,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;V::SubArray&#123;T,N&#125;, I::Vararg&#123;Int,N&#125;&#41; where &#123;T,N&#125;</span>
+            <span class='code'>            r1 &#61; apply_translational_symmetry&#40;r, gs, is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2865,7 +2879,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>            return hessian&#40;rho_xyz, r1&#91;1&#93;, r1&#91;2&#93;, r1&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2875,7 +2889,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, I...&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2885,7 +2899,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; V.parent&#91;reindex&#40;V.indices, I&#41;...&#93;</span>
+            <span class='code'>            return hessian&#40;rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2895,7 +2909,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2905,7 +2919,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2925,7 +2939,7 @@
           <td>
             
             
-            <span class='code'># But SubArrays with fast linear indexing pre-compute a stride and offset</span>
+            <span class='code'>    # Define functions for calculating the electron density, gradient, and Hessian in-place</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2935,7 +2949,7 @@
           <td>
             
             
-            <span class='code'>FastSubArray&#123;T,N,P,I&#125; &#61; SubArray&#123;T,N,P,I,true&#125;</span>
+            <span class='code'>    rho&#33;&#40;F, r&#41; &#61; &#40;F&#91;1&#93; &#61; rho&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2945,7 +2959,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;V::FastSubArray, i::Int&#41;</span>
+            <span class='code'>    function grad&#33;&#40;G, r&#41;</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2955,7 +2969,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>        if any&#40;is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2965,7 +2979,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>            r1 &#61; apply_translational_symmetry&#40;r, gs, is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2975,7 +2989,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; V.parent&#91;V.offset1 &#43; V.stride1*i&#93;</span>
+            <span class='code'>            return gradient&#33;&#40;G, rho_xyz, r1&#91;1&#93;, r1&#91;2&#93;, r1&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2985,7 +2999,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -2995,7 +3009,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            return gradient&#33;&#40;G, rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3005,7 +3019,7 @@
           <td>
             
             
-            <span class='code'># We can avoid a multiplication if the first parent index is a Colon or AbstractUnitRange,</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3015,7 +3029,7 @@
           <td>
             
             
-            <span class='code'># or if all the indices are scalars, i.e. the view is for a single value only</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3025,7 +3039,7 @@
           <td>
             
             
-            <span class='code'>FastContiguousSubArray&#123;T,N,P,I&lt;:Union&#123;Tuple&#123;Union&#123;Slice, AbstractUnitRange&#125;, Vararg&#123;Any&#125;&#125;,</span>
+            <span class='code'>    function hess&#33;&#40;J, r&#41;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3035,7 +3049,7 @@
           <td>
             
             
-            <span class='code'>                                      Tuple&#123;Vararg&#123;ScalarIndex&#125;&#125;&#125;&#125; &#61; SubArray&#123;T,N,P,I,true&#125;</span>
+            <span class='code'>        if any&#40;is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3045,7 +3059,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;V::FastContiguousSubArray, i::Int&#41;</span>
+            <span class='code'>            r1 &#61; apply_translational_symmetry&#40;r, gs, is_periodic&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3055,7 +3069,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>            return hessian&#33;&#40;J, rho_xyz, r1&#91;1&#93;, r1&#91;2&#93;, r1&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3065,7 +3079,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3075,7 +3089,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; V.parent&#91;V.offset1 &#43; i&#93;</span>
+            <span class='code'>            return hessian&#33;&#40;J, rho_xyz, r&#91;1&#93;, r&#91;2&#93;, r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3085,7 +3099,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3095,7 +3109,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3105,7 +3119,7 @@
           <td>
             
             
-            <span class='code'># For vector views with linear indexing, we disambiguate to favor the stride/offset</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3115,7 +3129,7 @@
           <td>
             
             
-            <span class='code'># computation as that&#39;ll generally be faster than &#40;or just as fast as&#41; re-indexing into a range.</span>
+            <span class='code'>    # Create a System object containing all the parsed data and functions</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3125,7 +3139,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;V::FastSubArray&#123;&lt;:Any, 1&#125;, i::Int&#41;</span>
+            <span class='code'>    title &#61; basename&#40;f_name&#41;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3135,7 +3149,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    full_f_path &#61; abspath&#40;f_name&#41;</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3145,7 +3159,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>    data_source &#61; &quot;BAND Tape41: &#36;full_f_path&quot;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3155,7 +3169,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; V.parent&#91;V.offset1 &#43; V.stride1*i&#93;</span>
+            <span class='code'>    out &#61; System&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3165,7 +3179,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>        &quot;&#36;title: SCF Electron Density&quot;,</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3175,7 +3189,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        data_source,</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3185,7 +3199,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;V::FastContiguousSubArray&#123;&lt;:Any, 1&#125;, i::Int&#41;</span>
+            <span class='code'>        atoms,</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3195,31 +3209,17 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>        gs,</span>
           </td>
         </tr>
         <tr id='L318'>
           <td class='lineno'>318</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;5 &#37;&#41;
-              samples spent in getindex
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _mapreduce
-              <a href='reduce.jl-26b49da5982cff03b74868b172bf857cf0d10969.html#L437'>line 437</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='abstractarray.jl-d968f486589708c83083af7fc58b588dbb14eaf2.html#L707'>checkbounds</a>
-              <br />
-            </div>
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            
+            
+            <span class='code'>        rho_xyz_f,</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3229,7 +3229,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; V.parent&#91;V.offset1 &#43; i&#93;</span>
+            <span class='code'>        rho,</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3239,7 +3239,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>        grad,</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3249,7 +3249,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        hess,</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3259,7 +3259,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        rho&#33;,</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3269,7 +3269,7 @@
           <td>
             
             
-            <span class='code'># Indexed assignment follows the same pattern as &#96;getindex&#96; above</span>
+            <span class='code'>        grad&#33;,</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3279,7 +3279,7 @@
           <td>
             
             
-            <span class='code'>function setindex&#33;&#40;V::SubArray&#123;T,N&#125;, x, I::Vararg&#123;Int,N&#125;&#41; where &#123;T,N&#125;</span>
+            <span class='code'>        hess&#33;,</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3289,7 +3289,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3299,7 +3299,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, I...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3309,7 +3309,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds V.parent&#91;reindex&#40;V.indices, I&#41;...&#93; &#61; x</span>
+            <span class='code'>    # Return the System object</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3319,7 +3319,7 @@
           <td>
             
             
-            <span class='code'>    V</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3339,7 +3339,7 @@
           <td>
             
             
-            <span class='code'>function setindex&#33;&#40;V::FastSubArray, x, i::Int&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3349,7 +3349,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3359,7 +3359,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>    load_data_scm_adf_cub&#40;f_name::String; T::Type&#61;Float32&#41; -&gt; System&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3369,7 +3369,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds V.parent&#91;V.offset1 &#43; V.stride1*i&#93; &#61; x</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3379,7 +3379,7 @@
           <td>
             
             
-            <span class='code'>    V</span>
+            <span class='code'>Load electron density data from a .cub file and create a &#96;System&#96; object containing all the parsed data and functions.</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3389,7 +3389,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Here is an example of the beginning of a .cub file:</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3399,7 +3399,7 @@
           <td>
             
             
-            <span class='code'>function setindex&#33;&#40;V::FastContiguousSubArray, x, i::Int&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3409,7 +3409,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3419,7 +3419,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>*** Adamantane &#40;coarse&#41; ***</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3429,7 +3429,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds V.parent&#91;V.offset1 &#43; i&#93; &#61; x</span>
+            <span class='code'>SCF&#37;Density</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3439,7 +3439,7 @@
           <td>
             
             
-            <span class='code'>    V</span>
+            <span class='code'>   26   -8.500000   -8.500000   -8.500000   # num_atoms and origin</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3449,7 +3449,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>   35    0.500000    0.000000    0.000000   # num I points and I lattice vector</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3459,7 +3459,7 @@
           <td>
             
             
-            <span class='code'>function setindex&#33;&#40;V::FastSubArray&#123;&lt;:Any, 1&#125;, x, i::Int&#41;</span>
+            <span class='code'>   35    0.000000    0.500000    0.000000   # num J points and J lattice vector</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3469,7 +3469,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>   35    0.000000    0.000000    0.500000   # num K points and K lattice vector</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3479,7 +3479,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>    6    0.000000   -1.687072   -1.687072   -1.687072  # atom number, charge, x, y, z</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3489,7 +3489,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds V.parent&#91;V.offset1 &#43; V.stride1*i&#93; &#61; x</span>
+            <span class='code'>    ...</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3499,7 +3499,7 @@
           <td>
             
             
-            <span class='code'>    V</span>
+            <span class='code'>    1    0.000000   -1.185898   -1.185898    4.608059  # atom number, charge, x, y, z</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3509,7 +3509,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>  0.46682E-08  0.71750E-08  0.10706E-07  0.15467E-07  0.21575E-07  0.28983E-07   # electron density data...</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3519,7 +3519,7 @@
           <td>
             
             
-            <span class='code'>function setindex&#33;&#40;V::FastContiguousSubArray&#123;&lt;:Any, 1&#125;, x, i::Int&#41;</span>
+            <span class='code'>  0.37410E-07  0.46307E-07  0.54912E-07  0.62398E-07  0.68094E-07  0.71728E-07</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3529,7 +3529,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>  0.73556E-07  0.74324E-07  0.75020E-07  0.76500E-07  0.79130E-07  0.82610E-07</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3539,7 +3539,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;V, i&#41;</span>
+            <span class='code'>  ...</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3549,7 +3549,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds V.parent&#91;V.offset1 &#43; i&#93; &#61; x</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3559,7 +3559,7 @@
           <td>
             
             
-            <span class='code'>    V</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3569,7 +3569,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3579,7 +3579,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3589,7 +3589,7 @@
           <td>
             
             
-            <span class='code'>IndexStyle&#40;::Type&#123;&lt;:FastSubArray&#125;&#41; &#61; IndexLinear&#40;&#41;</span>
+            <span class='code'>- &#96;f_name::String&#96;: the name of the .cub file to load</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3599,7 +3599,7 @@
           <td>
             
             
-            <span class='code'>IndexStyle&#40;::Type&#123;&lt;:SubArray&#125;&#41; &#61; IndexCartesian&#40;&#41;</span>
+            <span class='code'>- &#96;T::Type&#61;Float32&#96;: the type of the electron density data &#40;default: &#96;Float32&#96;&#41;</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3619,7 +3619,7 @@
           <td>
             
             
-            <span class='code'># Strides are the distance in memory between adjacent elements in a given dimension</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3629,7 +3629,7 @@
           <td>
             
             
-            <span class='code'># which we determine from the strides of the parent</span>
+            <span class='code'>A &#96;System&#96; object containing the parsed data and functions.</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3639,7 +3639,7 @@
           <td>
             
             
-            <span class='code'>strides&#40;V::SubArray&#41; &#61; substrides&#40;strides&#40;V.parent&#41;, V.indices&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3649,7 +3649,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3659,7 +3659,7 @@
           <td>
             
             
-            <span class='code'>substrides&#40;strds::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3669,7 +3669,7 @@
           <td>
             
             
-            <span class='code'>substrides&#40;strds::NTuple&#123;N,Int&#125;, I::Tuple&#123;ScalarIndex, Vararg&#123;Any&#125;&#125;&#41; where N &#61; &#40;substrides&#40;tail&#40;strds&#41;, tail&#40;I&#41;&#41;...,&#41;</span>
+            <span class='code'>julia&gt; sys &#61; load_data_scm_adf_cub&#40;&quot;test/data/data_loader_scm_adf_cub_adamantane-coarse.cub&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3679,7 +3679,7 @@
           <td>
             
             
-            <span class='code'>substrides&#40;strds::NTuple&#123;N,Int&#125;, I::Tuple&#123;Slice, Vararg&#123;Any&#125;&#125;&#41; where N &#61; &#40;first&#40;strds&#41;, substrides&#40;tail&#40;strds&#41;, tail&#40;I&#41;&#41;...&#41;</span>
+            <span class='code'>System&#123;Float32&#125;&#40;&quot;Admantane: Coarse&quot;, &quot;ADF ASCII .cub&quot;, NuclearCoordinate&#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 0.0, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 1.5, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;0.0, 1.5, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 0.0, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 0.0, 1.5&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 1.5, 0.0&#93;, &quot;C&quot;&#41;, NuclearCoordinate&#40;&#91;1.5, 1.5, 1.5&#93;, &quot;C&quot;&#41;&#93;, GridSpec&#123;Float32&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.5 0.0 0.0; 0.0 1.5 0.0; 0.0 0.0 1.5&#93;, &#91;4.5, 4.5, 4.5&#93;, &#91;1.5, 1.5, 1.5&#93;, &#91;10, 10, 10&#93;&#41;, rho_xyz, rho, grad, hess, rho&#33;, grad&#33;, hess&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3689,7 +3689,7 @@
           <td>
             
             
-            <span class='code'>substrides&#40;strds::NTuple&#123;N,Int&#125;, I::Tuple&#123;AbstractRange, Vararg&#123;Any&#125;&#125;&#41; where N &#61; &#40;first&#40;strds&#41;*step&#40;I&#91;1&#93;&#41;, substrides&#40;tail&#40;strds&#41;, tail&#40;I&#41;&#41;...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3699,7 +3699,7 @@
           <td>
             
             
-            <span class='code'>substrides&#40;strds, I::Tuple&#123;Any, Vararg&#123;Any&#125;&#125;&#41; &#61; throw&#40;ArgumentError&#40;&quot;strides is invalid for SubArrays with indices of type &#36;&#40;typeof&#40;I&#91;1&#93;&#41;&#41;&quot;&#41;&#41;</span>
+            <span class='code'>julia&gt; println&#40;&quot;System name: &quot;, sys.title&#41;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3709,7 +3709,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>System name: Admantane: Coarse</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3719,7 +3719,7 @@
           <td>
             
             
-            <span class='code'>stride&#40;V::SubArray, d::Integer&#41; &#61; d &lt;&#61; ndims&#40;V&#41; ? strides&#40;V&#41;&#91;d&#93; : strides&#40;V&#41;&#91;end&#93; * size&#40;V&#41;&#91;end&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3729,7 +3729,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; println&#40;&quot;Electron density at origin: &quot;, sys.rho&#40;&#91;0.0, 0.0, 0.0&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3739,7 +3739,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;parent::AbstractArray, I::NTuple&#123;N,Any&#125;&#41; where &#123;N&#125; &#61;</span>
+            <span class='code'>Electron density at origin: 0.00015258789f0</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3749,7 +3749,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; compute_stride1&#40;1, fill_to_length&#40;axes&#40;parent&#41;, OneTo&#40;1&#41;, Val&#40;N&#41;&#41;, I&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3759,7 +3759,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;s, inds, I::Tuple&#123;&#125;&#41; &#61; s</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3769,7 +3769,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;s, inds, I::Tuple&#123;Vararg&#123;ScalarIndex&#125;&#125;&#41; &#61; s</span>
+            <span class='code'>function load_data_scm_adf_cub&#40;f_name::String; T::Type&#61;Float32&#41;::System&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3779,7 +3779,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;s, inds, I::Tuple&#123;ScalarIndex, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
+            <span class='code'>    # load cube file</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3789,7 +3789,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; compute_stride1&#40;s*length&#40;inds&#91;1&#93;&#41;, tail&#40;inds&#41;, tail&#40;I&#41;&#41;&#41;</span>
+            <span class='code'>    out &#61; load_data_cube&#40;f_name; T&#61;T, is_periodic&#61;&#91;false, false, false&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3799,7 +3799,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;s, inds, I::Tuple&#123;AbstractRange, Vararg&#123;Any&#125;&#125;&#41; &#61; s*step&#40;I&#91;1&#93;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3809,7 +3809,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;s, inds, I::Tuple&#123;Slice, Vararg&#123;Any&#125;&#125;&#41; &#61; s</span>
+            <span class='code'>    # Create a System object containing all the parsed data and functions</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3819,7 +3819,7 @@
           <td>
             
             
-            <span class='code'>compute_stride1&#40;s, inds, I::Tuple&#123;Any, Vararg&#123;Any&#125;&#125;&#41; &#61; throw&#40;ArgumentError&#40;&quot;invalid strided index type &#36;&#40;typeof&#40;I&#91;1&#93;&#41;&#41;&quot;&#41;&#41;</span>
+            <span class='code'>    data_source &#61; &quot;SCM ADF .cub: &#36;&#40;out.source&#41;&quot;</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3829,7 +3829,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    out &#61; System&#123;T&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3839,7 +3839,7 @@
           <td>
             
             
-            <span class='code'>elsize&#40;::Type&#123;&lt;:SubArray&#123;&lt;:Any,&lt;:Any,P&#125;&#125;&#41; where &#123;P&#125; &#61; elsize&#40;P&#41;</span>
+            <span class='code'>        out.name,</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3849,7 +3849,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        data_source,</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3859,7 +3859,7 @@
           <td>
             
             
-            <span class='code'>iscontiguous&#40;A::SubArray&#41; &#61; iscontiguous&#40;typeof&#40;A&#41;&#41;</span>
+            <span class='code'>        out.atoms,</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3869,7 +3869,7 @@
           <td>
             
             
-            <span class='code'>iscontiguous&#40;::Type&#123;&lt;:SubArray&#125;&#41; &#61; false</span>
+            <span class='code'>        out.grid,</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3879,7 +3879,7 @@
           <td>
             
             
-            <span class='code'>iscontiguous&#40;::Type&#123;&lt;:FastContiguousSubArray&#125;&#41; &#61; true</span>
+            <span class='code'>        out.rho_xyz,</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3889,7 +3889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        out.rho,</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3899,7 +3899,7 @@
           <td>
             
             
-            <span class='code'>first_index&#40;V::FastSubArray&#41; &#61; V.offset1 &#43; V.stride1 # cached for fast linear SubArrays</span>
+            <span class='code'>        out.grad,</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3909,7 +3909,7 @@
           <td>
             
             
-            <span class='code'>function first_index&#40;V::SubArray&#41;</span>
+            <span class='code'>        out.hess,</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3919,7 +3919,7 @@
           <td>
             
             
-            <span class='code'>    P, I &#61; parent&#40;V&#41;, V.indices</span>
+            <span class='code'>        out.rho&#33;,</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3929,7 +3929,7 @@
           <td>
             
             
-            <span class='code'>    s1 &#61; compute_stride1&#40;P, I&#41;</span>
+            <span class='code'>        out.grad&#33;,</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3939,7 +3939,7 @@
           <td>
             
             
-            <span class='code'>    s1 &#43; compute_offset1&#40;P, s1, I&#41;</span>
+            <span class='code'>        out.hess&#33;,</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3949,7 +3949,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3969,7 +3969,7 @@
           <td>
             
             
-            <span class='code'># Computing the first index simply steps through the indices, accumulating the</span>
+            <span class='code'>    # Return the System object</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3979,7 +3979,7 @@
           <td>
             
             
-            <span class='code'># sum of index each multiplied by the parent&#39;s stride.</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3989,687 +3989,7 @@
           <td>
             
             
-            <span class='code'># The running sum is &#96;f&#96;; the cumulative stride product is &#96;s&#96;.</span>
-          </td>
-        </tr>
-        <tr id='L396'>
-          <td class='lineno'>396</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># If the parent is a vector, then we offset the parent&#39;s own indices with parameters of I</span>
-          </td>
-        </tr>
-        <tr id='L397'>
-          <td class='lineno'>397</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>compute_offset1&#40;parent::AbstractVector, stride1::Integer, I::Tuple&#123;AbstractRange&#125;&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L398'>
-          <td class='lineno'>398</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;@inline; first&#40;I&#91;1&#93;&#41; - stride1*first&#40;axes1&#40;I&#91;1&#93;&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L399'>
-          <td class='lineno'>399</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># If the result is one-dimensional and it&#39;s a Colon, then linear</span>
-          </td>
-        </tr>
-        <tr id='L400'>
-          <td class='lineno'>400</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># indexing uses the indices along the given dimension.</span>
-          </td>
-        </tr>
-        <tr id='L401'>
-          <td class='lineno'>401</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># If the result is one-dimensional and it&#39;s a range, then linear</span>
-          </td>
-        </tr>
-        <tr id='L402'>
-          <td class='lineno'>402</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># indexing might be offset if the index itself is offset</span>
-          </td>
-        </tr>
-        <tr id='L403'>
-          <td class='lineno'>403</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># Otherwise linear indexing always matches the parent.</span>
-          </td>
-        </tr>
-        <tr id='L404'>
-          <td class='lineno'>404</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>compute_offset1&#40;parent, stride1::Integer, I::Tuple&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L405'>
-          <td class='lineno'>405</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;@inline; compute_offset1&#40;parent, stride1, find_extended_dims&#40;1, I...&#41;, find_extended_inds&#40;I...&#41;, I&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L406'>
-          <td class='lineno'>406</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>compute_offset1&#40;parent, stride1::Integer, dims::Tuple&#123;Int&#125;, inds::Tuple&#123;Slice&#125;, I::Tuple&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L407'>
-          <td class='lineno'>407</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;@inline; compute_linindex&#40;parent, I&#41; - stride1*first&#40;axes&#40;parent, dims&#91;1&#93;&#41;&#41;&#41;  # index-preserving case</span>
-          </td>
-        </tr>
-        <tr id='L408'>
-          <td class='lineno'>408</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>compute_offset1&#40;parent, stride1::Integer, dims, inds::Tuple&#123;AbstractRange&#125;, I::Tuple&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L409'>
-          <td class='lineno'>409</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;@inline; compute_linindex&#40;parent, I&#41; - stride1*first&#40;axes1&#40;inds&#91;1&#93;&#41;&#41;&#41; # potentially index-offsetting case</span>
-          </td>
-        </tr>
-        <tr id='L410'>
-          <td class='lineno'>410</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>compute_offset1&#40;parent, stride1::Integer, dims, inds, I::Tuple&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L411'>
-          <td class='lineno'>411</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;@inline; compute_linindex&#40;parent, I&#41; - stride1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L412'>
-          <td class='lineno'>412</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function compute_linindex&#40;parent, I::NTuple&#123;N,Any&#125;&#41; where N</span>
-          </td>
-        </tr>
-        <tr id='L413'>
-          <td class='lineno'>413</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inline</span>
-          </td>
-        </tr>
-        <tr id='L414'>
-          <td class='lineno'>414</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IP &#61; fill_to_length&#40;axes&#40;parent&#41;, OneTo&#40;1&#41;, Val&#40;N&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L415'>
-          <td class='lineno'>415</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    compute_linindex&#40;first&#40;LinearIndices&#40;parent&#41;&#41;, 1, IP, I&#41;</span>
-          </td>
-        </tr>
-        <tr id='L416'>
-          <td class='lineno'>416</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
             <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L417'>
-          <td class='lineno'>417</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function compute_linindex&#40;f, s, IP::Tuple, I::Tuple&#123;ScalarIndex, Vararg&#123;Any&#125;&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L418'>
-          <td class='lineno'>418</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inline</span>
-          </td>
-        </tr>
-        <tr id='L419'>
-          <td class='lineno'>419</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Δi &#61; I&#91;1&#93;-first&#40;IP&#91;1&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L420'>
-          <td class='lineno'>420</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    compute_linindex&#40;f &#43; Δi*s, s*length&#40;IP&#91;1&#93;&#41;, tail&#40;IP&#41;, tail&#40;I&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L421'>
-          <td class='lineno'>421</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L422'>
-          <td class='lineno'>422</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function compute_linindex&#40;f, s, IP::Tuple, I::Tuple&#123;Any, Vararg&#123;Any&#125;&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L423'>
-          <td class='lineno'>423</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inline</span>
-          </td>
-        </tr>
-        <tr id='L424'>
-          <td class='lineno'>424</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Δi &#61; first&#40;I&#91;1&#93;&#41;-first&#40;IP&#91;1&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L425'>
-          <td class='lineno'>425</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    compute_linindex&#40;f &#43; Δi*s, s*length&#40;IP&#91;1&#93;&#41;, tail&#40;IP&#41;, tail&#40;I&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L426'>
-          <td class='lineno'>426</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L427'>
-          <td class='lineno'>427</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>compute_linindex&#40;f, s, IP::Tuple, I::Tuple&#123;&#125;&#41; &#61; f</span>
-          </td>
-        </tr>
-        <tr id='L428'>
-          <td class='lineno'>428</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L429'>
-          <td class='lineno'>429</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>find_extended_dims&#40;dim, ::ScalarIndex, I...&#41; &#61; &#40;@inline; find_extended_dims&#40;dim &#43; 1, I...&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L430'>
-          <td class='lineno'>430</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>find_extended_dims&#40;dim, i1, I...&#41; &#61; &#40;@inline; &#40;dim, find_extended_dims&#40;dim &#43; 1, I...&#41;...&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L431'>
-          <td class='lineno'>431</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>find_extended_dims&#40;dim&#41; &#61; &#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L432'>
-          <td class='lineno'>432</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>find_extended_inds&#40;::ScalarIndex, I...&#41; &#61; &#40;@inline; find_extended_inds&#40;I...&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L433'>
-          <td class='lineno'>433</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>find_extended_inds&#40;i1, I...&#41; &#61; &#40;@inline; &#40;i1, find_extended_inds&#40;I...&#41;...&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L434'>
-          <td class='lineno'>434</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>find_extended_inds&#40;&#41; &#61; &#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L435'>
-          <td class='lineno'>435</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L436'>
-          <td class='lineno'>436</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, V::SubArray&#123;T,N,P,&lt;:Tuple&#123;Vararg&#123;RangeIndex&#125;&#125;&#125;&#41; where &#123;T,N,P&#125;</span>
-          </td>
-        </tr>
-        <tr id='L437'>
-          <td class='lineno'>437</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return unsafe_convert&#40;Ptr&#123;T&#125;, V.parent&#41; &#43; _memory_offset&#40;V.parent, map&#40;first, V.indices&#41;...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L438'>
-          <td class='lineno'>438</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L439'>
-          <td class='lineno'>439</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L440'>
-          <td class='lineno'>440</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pointer&#40;V::FastSubArray, i::Int&#41; &#61; pointer&#40;V.parent, V.offset1 &#43; V.stride1*i&#41;</span>
-          </td>
-        </tr>
-        <tr id='L441'>
-          <td class='lineno'>441</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pointer&#40;V::FastContiguousSubArray, i::Int&#41; &#61; pointer&#40;V.parent, V.offset1 &#43; i&#41;</span>
-          </td>
-        </tr>
-        <tr id='L442'>
-          <td class='lineno'>442</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L443'>
-          <td class='lineno'>443</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function pointer&#40;V::SubArray&#123;&lt;:Any,&lt;:Any,&lt;:Array,&lt;:Tuple&#123;Vararg&#123;RangeIndex&#125;&#125;&#125;, is::AbstractCartesianIndex&#123;N&#125;&#41; where &#123;N&#125;</span>
-          </td>
-        </tr>
-        <tr id='L444'>
-          <td class='lineno'>444</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    index &#61; first_index&#40;V&#41;</span>
-          </td>
-        </tr>
-        <tr id='L445'>
-          <td class='lineno'>445</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    strds &#61; strides&#40;V&#41;</span>
-          </td>
-        </tr>
-        <tr id='L446'>
-          <td class='lineno'>446</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    for d &#61; 1:N</span>
-          </td>
-        </tr>
-        <tr id='L447'>
-          <td class='lineno'>447</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        index &#43;&#61; &#40;is&#91;d&#93;-1&#41;*strds&#91;d&#93;</span>
-          </td>
-        </tr>
-        <tr id='L448'>
-          <td class='lineno'>448</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L449'>
-          <td class='lineno'>449</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return pointer&#40;V.parent, index&#41;</span>
-          </td>
-        </tr>
-        <tr id='L450'>
-          <td class='lineno'>450</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L451'>
-          <td class='lineno'>451</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L452'>
-          <td class='lineno'>452</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># indices are taken from the range/vector</span>
-          </td>
-        </tr>
-        <tr id='L453'>
-          <td class='lineno'>453</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># Since bounds-checking is performance-critical and uses</span>
-          </td>
-        </tr>
-        <tr id='L454'>
-          <td class='lineno'>454</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># indices, it&#39;s worth optimizing these implementations thoroughly</span>
-          </td>
-        </tr>
-        <tr id='L455'>
-          <td class='lineno'>455</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>axes&#40;S::SubArray&#41; &#61; &#40;@inline; _indices_sub&#40;S.indices...&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L456'>
-          <td class='lineno'>456</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>_indices_sub&#40;::Real, I...&#41; &#61; &#40;@inline; _indices_sub&#40;I...&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L457'>
-          <td class='lineno'>457</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>_indices_sub&#40;&#41; &#61; &#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L458'>
-          <td class='lineno'>458</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function _indices_sub&#40;i1::AbstractArray, I...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L459'>
-          <td class='lineno'>459</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inline</span>
-          </td>
-        </tr>
-        <tr id='L460'>
-          <td class='lineno'>460</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;axes&#40;i1&#41;..., _indices_sub&#40;I...&#41;...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L461'>
-          <td class='lineno'>461</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L462'>
-          <td class='lineno'>462</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L463'>
-          <td class='lineno'>463</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>has_offset_axes&#40;S::SubArray&#41; &#61; has_offset_axes&#40;S.indices...&#41;</span>
           </td>
         </tr>
       </tbody>
