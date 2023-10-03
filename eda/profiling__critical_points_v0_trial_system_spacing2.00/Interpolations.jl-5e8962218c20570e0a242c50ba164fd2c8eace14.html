@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/Base.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/Interpolations/nDwIa/src/Interpolations.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 03 Oct 2023 00:21:25
+        Generated on Tue, 03 Oct 2023 00:31:04
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>module Interpolations</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>baremodule Base</span>
+            <span class='code'>export</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    interpolate,</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>using Core.Intrinsics, Core.IR</span>
+            <span class='code'>    interpolate&#33;,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    extrapolate,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'># to start, we&#39;re going to use a very simple definition of &#96;include&#96;</span>
+            <span class='code'>    scale,</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'># that doesn&#39;t require any function &#40;except what we can get from the &#96;Core&#96; top-module&#41;</span>
+            <span class='code'>    bounds,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>const _included_files &#61; Array&#123;Tuple&#123;Module,String&#125;,1&#125;&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>function include&#40;mod::Module, path::String&#41;</span>
+            <span class='code'>    AbstractInterpolation,</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_array_grow_end, Cvoid, &#40;Any, UInt&#41;, _included_files, UInt&#40;1&#41;&#41;</span>
+            <span class='code'>    AbstractExtrapolation,</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>    Core.arrayset&#40;true, _included_files, &#40;mod, ccall&#40;:jl_prepend_cwd, Any, &#40;Any,&#41;, path&#41;&#41;, arraylen&#40;_included_files&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>    Core.println&#40;path&#41;</span>
+            <span class='code'>    OnCell,</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_uv_flush, Nothing, &#40;Ptr&#123;Nothing&#125;,&#41;, Core.io_pointer&#40;Core.stdout&#41;&#41;</span>
+            <span class='code'>    OnGrid,</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    Core.include&#40;mod, path&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    Flat,</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>include&#40;path::String&#41; &#61; include&#40;Base, path&#41;</span>
+            <span class='code'>    Line,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Free,</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'># from now on, this is now a top-module for resolving syntax</span>
+            <span class='code'>    Periodic,</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>const is_primary_base_module &#61; ccall&#40;:jl_module_parent, Ref&#123;Module&#125;, &#40;Any,&#41;, Base&#41; &#61;&#61;&#61; Core.Main</span>
+            <span class='code'>    Reflect,</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>ccall&#40;:jl_set_istopmod, Cvoid, &#40;Any, Bool&#41;, Base, is_primary_base_module&#41;</span>
+            <span class='code'>    Natural,</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    InPlace,</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'># The @inline/@noinline macros that can be applied to a function declaration are not available</span>
+            <span class='code'>    InPlaceQ,</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'># until after array.jl, and so we will mark them within a function body instead.</span>
+            <span class='code'>    Throw,</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>macro inline&#40;&#41;   Expr&#40;:meta, :inline&#41;   end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>macro noinline&#40;&#41; Expr&#40;:meta, :noinline&#41; end</span>
+            <span class='code'>    constant_interpolation,</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    linear_interpolation,</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'># Try to help prevent users from shooting them-selves in the foot</span>
+            <span class='code'>    cubic_spline_interpolation,</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'># with ambiguities by defining a few common and critical operations</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'># &#40;and these don&#39;t need the extra convert code&#41;</span>
+            <span class='code'>    knots,</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x::Module, f::Symbol&#41; &#61; &#40;@inline; getglobal&#40;x, f&#41;&#41;</span>
+            <span class='code'>    knotsbetween</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x::Type, f::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>setproperty&#33;&#40;x::Type, f::Symbol, v&#41; &#61; error&#40;&quot;setfield&#33; fields of Types should not be changed&quot;&#41;</span>
+            <span class='code'>    # see the following files for further exports:</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x::Tuple, f::Int&#41; &#61; &#40;@inline; getfield&#40;x, f&#41;&#41;</span>
+            <span class='code'>    # b-splines/b-splines.jl</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>setproperty&#33;&#40;x::Tuple, f::Int, v&#41; &#61; setfield&#33;&#40;x, f, v&#41; # to get a decent error</span>
+            <span class='code'>    # extrapolation/extrapolation.jl</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,26 +385,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # monotonic/monotonic.jl</span>
           </td>
         </tr>
         <tr id='L37'>
           <td class='lineno'>37</td>
-          <td class='tracecount excl'>1 &#40;7 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;7 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;7 &#37;&#41;
-              samples spent in getproperty
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from macro expansion
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L163'>line 163</a>
-              <br />
-            </div>
             
-            <span class='code'>getproperty&#40;x, f::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f&#41;&#41;</span>
+            
+            <span class='code'>    # scaling/scaling.jl</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -414,7 +405,7 @@
           <td>
             
             
-            <span class='code'>setproperty&#33;&#40;x, f::Symbol, v&#41; &#61; setfield&#33;&#40;x, f, convert&#40;fieldtype&#40;typeof&#40;x&#41;, f&#41;, v&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L39'>
@@ -424,7 +415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using LinearAlgebra, SparseArrays</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -434,7 +425,7 @@
           <td>
             
             
-            <span class='code'>dotgetproperty&#40;x, f&#41; &#61; getproperty&#40;x, f&#41;</span>
+            <span class='code'>using StaticArrays, WoodburyMatrices, Ratios, AxisAlgorithms, OffsetArrays</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -444,7 +435,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using ChainRulesCore, Requires</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -454,7 +445,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x::Module, f::Symbol, order::Symbol&#41; &#61; &#40;@inline; getglobal&#40;x, f, order&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L43'>
@@ -464,7 +455,7 @@
           <td>
             
             
-            <span class='code'>function setproperty&#33;&#40;x::Module, f::Symbol, v, order::Symbol&#61;:monotonic&#41;</span>
+            <span class='code'>using Base: @propagate_inbounds, HasEltype, EltypeUnknown, HasLength, IsInfinite,</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -474,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    SizeUnknown, Indices</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -484,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    val::Core.get_binding_type&#40;x, f&#41; &#61; v</span>
+            <span class='code'>import Base: convert, size, axes, promote_rule, ndims, eltype, checkbounds, axes1,</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -494,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    return setglobal&#33;&#40;x, f, val, order&#41;</span>
+            <span class='code'>    iterate, length, IteratorEltype, IteratorSize, firstindex, getindex, LogicalIndex</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -504,7 +495,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -514,7 +505,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x::Type, f::Symbol, order::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f, order&#41;&#41;</span>
+            <span class='code'>abstract type Flag end</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -524,7 +515,7 @@
           <td>
             
             
-            <span class='code'>setproperty&#33;&#40;x::Type, f::Symbol, v, order::Symbol&#41; &#61; error&#40;&quot;setfield&#33; fields of Types should not be changed&quot;&#41;</span>
+            <span class='code'>abstract type InterpolationType &lt;: Flag end</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -534,7 +525,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x::Tuple, f::Int, order::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f, order&#41;&#41;</span>
+            <span class='code'>&quot;&#96;NoInterp&#40;&#41;&#96; indicates that the corresponding axis must use integer indexing &#40;no interpolation is to be performed&#41;&quot;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -544,7 +535,7 @@
           <td>
             
             
-            <span class='code'>setproperty&#33;&#40;x::Tuple, f::Int, v, order::Symbol&#41; &#61; setfield&#33;&#40;x, f, v, order&#41; # to get a decent error</span>
+            <span class='code'>struct NoInterp &lt;: InterpolationType end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -554,7 +545,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>abstract type GridType &lt;: Flag end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -564,7 +555,7 @@
           <td>
             
             
-            <span class='code'>getproperty&#40;x, f::Symbol, order::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f, order&#41;&#41;</span>
+            <span class='code'>&quot;&#96;OnGrid&#40;&#41;&#96; indicates that the boundary condition applies at the first &amp; last nodes&quot;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -574,7 +565,7 @@
           <td>
             
             
-            <span class='code'>setproperty&#33;&#40;x, f::Symbol, v, order::Symbol&#41; &#61; &#40;@inline; setfield&#33;&#40;x, f, convert&#40;fieldtype&#40;typeof&#40;x&#41;, f&#41;, v&#41;, order&#41;&#41;</span>
+            <span class='code'>struct OnGrid &lt;: GridType end</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -584,7 +575,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&#96;OnCell&#40;&#41;&#96; indicates that the boundary condition applies a half-gridspacing beyond the first &amp; last nodes&quot;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -594,7 +585,7 @@
           <td>
             
             
-            <span class='code'>swapproperty&#33;&#40;x, f::Symbol, v, order::Symbol&#61;:not_atomic&#41; &#61;</span>
+            <span class='code'>struct OnCell &lt;: GridType end</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -604,7 +595,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; Core.swapfield&#33;&#40;x, f, convert&#40;fieldtype&#40;typeof&#40;x&#41;, f&#41;, v&#41;, order&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
@@ -614,7 +605,7 @@
           <td>
             
             
-            <span class='code'>modifyproperty&#33;&#40;x, f::Symbol, op, v, order::Symbol&#61;:not_atomic&#41; &#61;</span>
+            <span class='code'>const DimSpec&#123;T&#125; &#61; Union&#123;T,Tuple&#123;Vararg&#123;Union&#123;T,NoInterp&#125;&#125;&#125;,NoInterp&#125;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -624,7 +615,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; Core.modifyfield&#33;&#40;x, f, op, v, order&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -634,7 +625,7 @@
           <td>
             
             
-            <span class='code'>replaceproperty&#33;&#40;x, f::Symbol, expected, desired, success_order::Symbol&#61;:not_atomic, fail_order::Symbol&#61;success_order&#41; &#61;</span>
+            <span class='code'>abstract type AbstractInterpolation&#123;T,N,IT&lt;:DimSpec&#123;InterpolationType&#125;&#125; &lt;: AbstractArray&#123;T,N&#125; end</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -644,7 +635,7 @@
           <td>
             
             
-            <span class='code'>    &#40;@inline; Core.replacefield&#33;&#40;x, f, expected, convert&#40;fieldtype&#40;typeof&#40;x&#41;, f&#41;, desired&#41;, success_order, fail_order&#41;&#41;</span>
+            <span class='code'>abstract type AbstractInterpolationWrapper&#123;T,N,ITPT,IT&#125; &lt;: AbstractInterpolation&#123;T,N,IT&#125; end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -654,7 +645,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>abstract type AbstractExtrapolation&#123;T,N,ITPT,IT&#125; &lt;: AbstractInterpolationWrapper&#123;T,N,ITPT,IT&#125; end</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -664,7 +655,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Any&#125;, Core.@nospecialize x&#41; &#61; x</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L64'>
@@ -674,7 +665,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;T&#125;, x::T&#41; where &#123;T&#125; &#61; x</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;itp1::AbstractInterpolation, itp2::AbstractInterpolation&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -684,7 +675,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;coreio.jl&quot;&#41;</span>
+            <span class='code'>    propertynames&#40;itp1&#41; &#61;&#61; propertynames&#40;itp2&#41; || return false</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -694,7 +685,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    for pname in propertynames&#40;itp1&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -704,7 +695,7 @@
           <td>
             
             
-            <span class='code'>eval&#40;x&#41; &#61; Core.eval&#40;Base, x&#41;</span>
+            <span class='code'>        getproperty&#40;itp1, pname&#41; &#61;&#61; getproperty&#40;itp2, pname&#41; || return false</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -714,7 +705,7 @@
           <td>
             
             
-            <span class='code'>eval&#40;m::Module, x&#41; &#61; Core.eval&#40;m, x&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -724,7 +715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return true</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -734,7 +725,7 @@
           <td>
             
             
-            <span class='code'># init core docsystem</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -744,7 +735,7 @@
           <td>
             
             
-            <span class='code'>import Core: @doc, @__doc__, WrappedException, @int128_str, @uint128_str, @big_str, @cmd</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L72'>
@@ -754,7 +745,7 @@
           <td>
             
             
-            <span class='code'>if isdefined&#40;Core, :Compiler&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -764,7 +755,7 @@
           <td>
             
             
-            <span class='code'>    import Core.Compiler.CoreDocs</span>
+            <span class='code'>    BoundaryCondition</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -774,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    Core.atdoc&#33;&#40;CoreDocs.docm&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -784,7 +775,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>An abstract type with one of the following values &#40;see the help for each for details&#41;:</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -804,7 +795,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;exports.jl&quot;&#41;</span>
+            <span class='code'>- &#96;Throw&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -814,7 +805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;Flat&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -824,7 +815,7 @@
           <td>
             
             
-            <span class='code'>if false</span>
+            <span class='code'>- &#96;Line&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -834,7 +825,7 @@
           <td>
             
             
-            <span class='code'>    # simple print definitions for debugging. enable these if something</span>
+            <span class='code'>- &#96;Free&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -844,7 +835,7 @@
           <td>
             
             
-            <span class='code'>    # goes wrong during bootstrap before printing code is available.</span>
+            <span class='code'>- &#96;Periodic&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -854,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    # otherwise, they just just eventually get &#40;noisily&#41; overwritten later</span>
+            <span class='code'>- &#96;Reflect&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -864,7 +855,7 @@
           <td>
             
             
-            <span class='code'>    global show, print, println</span>
+            <span class='code'>- &#96;InPlace&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -874,7 +865,7 @@
           <td>
             
             
-            <span class='code'>    show&#40;io::IO, x&#41; &#61; Core.show&#40;io, x&#41;</span>
+            <span class='code'>- &#96;InPlaceQ&#40;gt&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -884,7 +875,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io::IO, a...&#41; &#61; Core.print&#40;io, a...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L86'>
@@ -894,7 +885,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;io::IO, x...&#41; &#61; Core.println&#40;io, x...&#41;</span>
+            <span class='code'>where &#96;gt&#96; is the grid type, e.g., &#91;&#96;OnGrid&#40;&#41;&#96;&#93;&#40;@ref&#41; or &#91;&#96;OnCell&#40;&#41;&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -904,7 +895,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -914,7 +905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>abstract type BoundaryCondition &lt;: Flag end</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -924,7 +915,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Put the gridtype into the boundary condition, since that&#39;s all it affects &#40;see issue #228&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -934,7 +925,7 @@
           <td>
             
             
-            <span class='code'>    time_ns&#40;&#41; -&gt; UInt64</span>
+            <span class='code'># Nothing is used for extrapolation</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -944,7 +935,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&#96;Throw&#40;gt&#41;&#96; causes beyond-the-edge extrapolation to throw an error&quot;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -954,7 +945,7 @@
           <td>
             
             
-            <span class='code'>Get the time in nanoseconds. The time corresponding to 0 is undefined, and wraps every 5.8 years.</span>
+            <span class='code'>struct Throw&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -964,7 +955,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&quot;&#96;Flat&#40;gt&#41;&#96; sets the extrapolation slope to zero&quot;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -974,7 +965,7 @@
           <td>
             
             
-            <span class='code'>time_ns&#40;&#41; &#61; ccall&#40;:jl_hrtime, UInt64, &#40;&#41;&#41;</span>
+            <span class='code'>struct Flat&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -984,7 +975,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&#96;Line&#40;gt&#41;&#96; uses a constant slope for extrapolation&quot;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -994,7 +985,7 @@
           <td>
             
             
-            <span class='code'>start_base_include &#61; time_ns&#40;&#41;</span>
+            <span class='code'>struct Line&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1004,7 +995,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct Free&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1014,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>## Load essential files and libraries</span>
+            <span class='code'>&quot;&#96;Periodic&#40;gt&#41;&#96; applies periodic boundary conditions&quot;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1024,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;essentials.jl&quot;&#41;</span>
+            <span class='code'>struct Periodic&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1034,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;ctypes.jl&quot;&#41;</span>
+            <span class='code'>&quot;&#96;Reflect&#40;gt&#41;&#96; applies reflective boundary conditions&quot;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1044,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;gcutils.jl&quot;&#41;</span>
+            <span class='code'>struct Reflect&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1054,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;generator.jl&quot;&#41;</span>
+            <span class='code'>&quot;&#96;InPlace&#40;gt&#41;&#96; is a boundary condition that allows prefiltering to occur in-place &#40;it typically requires padding&#41;&quot;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1064,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;reflection.jl&quot;&#41;</span>
+            <span class='code'>struct InPlace&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1074,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;options.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;&#96;InPlaceQ&#40;gt&#41;&#96; is similar to &#96;InPlace&#40;gt&#41;&#96;, but is exact when the values being interpolated</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1084,7 +1075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>arise from an underlying quadratic. It is primarily useful for testing purposes,</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1094,7 +1085,7 @@
           <td>
             
             
-            <span class='code'># define invoke&#40;f, T, args...; kwargs...&#41;, without kwargs wrapping</span>
+            <span class='code'>allowing near-exact &#40;to machine precision&#41; comparisons against ground truth.&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1104,7 +1095,7 @@
           <td>
             
             
-            <span class='code'># to forward to invoke</span>
+            <span class='code'>struct InPlaceQ&#123;GT&lt;:Union&#123;GridType,Nothing&#125;&#125; &lt;: BoundaryCondition gt::GT end</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1114,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>function Core.kwcall&#40;kwargs, ::typeof&#40;invoke&#41;, f, T, args...&#41;</span>
+            <span class='code'>const Natural &#61; Line</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1124,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1134,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>    # prepend kwargs and f to the invoked from the user</span>
+            <span class='code'>&#40;::Type&#123;BC&#125;&#41;&#40;&#41; where BC&lt;:BoundaryCondition &#61; BC&#40;nothing&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1144,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>    T &#61; rewrap_unionall&#40;Tuple&#123;Any, Core.Typeof&#40;f&#41;, &#40;unwrap_unionall&#40;T&#41;::DataType&#41;.parameters...&#125;, T&#41;</span>
+            <span class='code'>function Base.show&#40;io::IO, bc::BoundaryCondition&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1154,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    return invoke&#40;Core.kwcall, T, kwargs, f, args...&#41;</span>
+            <span class='code'>    print&#40;io, nameof&#40;typeof&#40;bc&#41;&#41;, &#39;&#40;&#39;&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1164,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    bc.gt &#61;&#61;&#61; nothing || show&#40;io, bc.gt&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1174,7 +1165,7 @@
           <td>
             
             
-            <span class='code'># invoke does not have its own call cache, but kwcall for invoke does</span>
+            <span class='code'>    print&#40;io, &#39;&#41;&#39;&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1184,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>typeof&#40;invoke&#41;.name.mt.max_args &#61; 3 # invoke, f, T, args...</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1204,7 +1195,7 @@
           <td>
             
             
-            <span class='code'># core operations &amp; types</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1214,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;promotion.jl&quot;&#41;</span>
+            <span class='code'>Base.IndexStyle&#40;::Type&#123;&lt;:AbstractInterpolation&#125;&#41; &#61; IndexCartesian&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1224,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;tuple.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1234,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;expr.jl&quot;&#41;</span>
+            <span class='code'>size&#40;exp::AbstractExtrapolation&#41; &#61; size&#40;exp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1244,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;pair.jl&quot;&#41;</span>
+            <span class='code'>axes&#40;exp::AbstractExtrapolation&#41; &#61; axes&#40;exp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1254,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;traits.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1264,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;range.jl&quot;&#41;</span>
+            <span class='code'>twotuple&#40;r::AbstractUnitRange&#41; &#61; &#40;first&#40;r&#41;, last&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1274,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;error.jl&quot;&#41;</span>
+            <span class='code'>twotuple&#40;x, y&#41; &#61; &#40;x, y&#41;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1294,7 +1285,7 @@
           <td>
             
             
-            <span class='code'># core numeric operations &amp; types</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1304,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>&#61;&#61;&#40;x, y&#41; &#61; x &#61;&#61;&#61; y</span>
+            <span class='code'>    bounds&#40;itp::AbstractInterpolation&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1314,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;bool.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1324,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;number.jl&quot;&#41;</span>
+            <span class='code'>Return the &#96;bounds&#96; of the domain of &#96;itp&#96; as a tuple of &#96;&#40;min, max&#41;&#96; pairs for each coordinate. This is best explained by example:</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1334,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;int.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1344,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;operators.jl&quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest; setup &#61; :&#40;using Interpolations&#41;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1354,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;pointer.jl&quot;&#41;</span>
+            <span class='code'>julia&gt; itp &#61; interpolate&#40;&#91;1 2 3; 4 5 6&#93;, BSpline&#40;Linear&#40;&#41;&#41;&#41;;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1364,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;refvalue.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1374,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;refpointer.jl&quot;&#41;</span>
+            <span class='code'>julia&gt; bounds&#40;itp&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1384,7 +1375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#40;&#40;1, 2&#41;, &#40;1, 3&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1394,7 +1385,7 @@
           <td>
             
             
-            <span class='code'># now replace the Pair constructor &#40;relevant for NamedTuples&#41; with one that calls our Base.convert</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1404,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>delete_method&#40;which&#40;Pair&#123;Any,Any&#125;, &#40;Any, Any&#41;&#41;&#41;</span>
+            <span class='code'>julia&gt; data &#61; 1:3;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1414,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>@eval function &#40;P::Type&#123;Pair&#123;A, B&#125;&#125;&#41;&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; where &#123;A, B&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1424,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>julia&gt; knots &#61; &#40;&#91;10, 11, 13.5&#93;,&#41;;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1434,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    return &#36;&#40;Expr&#40;:new, :P, :&#40;convert&#40;A, a&#41;&#41;, :&#40;convert&#40;B, b&#41;&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1444,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; itp &#61; interpolate&#40;knots, data, Gridded&#40;Linear&#40;&#41;&#41;&#41;;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1464,7 +1455,7 @@
           <td>
             
             
-            <span class='code'># The REPL stdlib hooks into Base using this Ref</span>
+            <span class='code'>julia&gt; bounds&#40;itp&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1474,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>const REPL_MODULE_REF &#61; Ref&#123;Module&#125;&#40;&#41;</span>
+            <span class='code'>&#40;&#40;10.0, 13.5&#41;,&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1484,7 +1475,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1494,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;checked.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1504,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>using .Checked</span>
+            <span class='code'>bounds&#40;itp::AbstractInterpolation&#41; &#61; map&#40;twotuple, lbounds&#40;itp&#41;, ubounds&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1514,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>function cld end</span>
+            <span class='code'>bounds&#40;itp::AbstractInterpolation, d&#41; &#61; bounds&#40;itp&#41;&#91;d&#93;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1524,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>function fld end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1534,7 +1525,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>itptype&#40;::Type&#123;&lt;:AbstractInterpolation&#123;T,N,IT&#125;&#125;&#41; where &#123;T,N,IT&lt;:DimSpec&#123;InterpolationType&#125;&#125; &#61; IT</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1544,7 +1535,7 @@
           <td>
             
             
-            <span class='code'># Lazy strings</span>
+            <span class='code'>itptype&#40;itp::AbstractInterpolation&#41; &#61; itptype&#40;typeof&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1554,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;strings/lazy.jl&quot;&#41;</span>
+            <span class='code'># The following have been defined by AbstractArray</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1564,7 +1555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># ndims&#40;::Type&#123;&lt;:AbstractInterpolation&#123;T,N,&lt;:DimSpec&#123;InterpolationType&#125;&#125;&#125;&#41; where &#123;T,N&#125; &#61; N</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1574,7 +1565,7 @@
           <td>
             
             
-            <span class='code'># array structures</span>
+            <span class='code'># ndims&#40;itp::AbstractInterpolation&#41; &#61; ndims&#40;typeof&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1584,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;indices.jl&quot;&#41;</span>
+            <span class='code'># eltype&#40;::Type&#123;&lt;:AbstractInterpolation&#123;T,N,&lt;:DimSpec&#123;InterpolationType&#125;&#125;&#125;&#41; where &#123;T,N&#125; &#61; T</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1594,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;array.jl&quot;&#41;</span>
+            <span class='code'># eltype&#40;itp::AbstractInterpolation&#41; &#61; eltype&#40;typeof&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1604,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;abstractarray.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1614,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;subarray.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1624,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;views.jl&quot;&#41;</span>
+            <span class='code'>    n &#61; count_interp_dims&#40;ITP&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1634,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;baseext.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1644,7 +1635,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Count the number of dimensions along which type &#96;ITP&#96; is interpolating.</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1654,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;ntuple.jl&quot;&#41;</span>
+            <span class='code'>&#96;NoInterp&#96; dimensions do not contribute to the sum.</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1664,7 +1655,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1674,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;abstractdict.jl&quot;&#41;</span>
+            <span class='code'>count_interp_dims&#40;::Type&#123;ITP&#125;&#41; where &#123;ITP&lt;:AbstractInterpolation&#125; &#61; count_interp_dims&#40;itptype&#40;ITP&#41;, ndims&#40;ITP&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1684,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;iddict.jl&quot;&#41;</span>
+            <span class='code'>count_interp_dims&#40;::Type&#123;IT&#125;, n&#41; where &#123;IT&lt;:InterpolationType&#125; &#61; n * count_interp_dims&#40;IT&#41;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1694,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;idset.jl&quot;&#41;</span>
+            <span class='code'>count_interp_dims&#40;it::Type&#123;IT&#125;, n&#41; where IT&lt;:Tuple&#123;Vararg&#123;InterpolationType,N&#125;&#125; where N &#61;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1704,7 +1695,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    _count_interp_dims&#40;0, it...&#41;</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1714,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;iterators.jl&quot;&#41;</span>
+            <span class='code'>@inline _count_interp_dims&#40;c, ::IT1, args...&#41; where IT1 &#61;</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1724,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>using .Iterators: zip, enumerate, only</span>
+            <span class='code'>    _count_interp_dims&#40;c &#43; count_interp_dims&#40;IT1&#41;, args...&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1734,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>using .Iterators: Flatten, Filter, product  # for generators</span>
+            <span class='code'>_count_interp_dims&#40;c&#41; &#61; c</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1744,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>using .Iterators: Stateful    # compat &#40;was formerly used in reinterpretarray.jl&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1754,7 +1745,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1764,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;namedtuple.jl&quot;&#41;</span>
+            <span class='code'>    BoundsCheckStyle&#40;itp&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1784,7 +1775,7 @@
           <td>
             
             
-            <span class='code'># For OS specific stuff</span>
+            <span class='code'>A trait to determine dispatch of bounds-checking for &#96;itp&#96;.</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1794,7 +1785,7 @@
           <td>
             
             
-            <span class='code'># We need to strcat things here, before strings are really defined</span>
+            <span class='code'>Can return &#96;NeedsCheck&#40;&#41;&#96;, in which case bounds-checking is performed, or &#96;CheckWillPass&#40;&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1804,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>function strcat&#40;x::String, y::String&#41;</span>
+            <span class='code'>in which case the check will return &#96;true&#96;.</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1814,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>    out &#61; ccall&#40;:jl_alloc_string, Ref&#123;String&#125;, &#40;Csize_t,&#41;, Core.sizeof&#40;x&#41; &#43; Core.sizeof&#40;y&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1824,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>    GC.@preserve x y out begin</span>
+            <span class='code'>abstract type BoundsCheckStyle end</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1834,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>        out_ptr &#61; unsafe_convert&#40;Ptr&#123;UInt8&#125;, out&#41;</span>
+            <span class='code'>struct NeedsCheck &lt;: BoundsCheckStyle end</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1844,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>        unsafe_copyto&#33;&#40;out_ptr, unsafe_convert&#40;Ptr&#123;UInt8&#125;, x&#41;, Core.sizeof&#40;x&#41;&#41;</span>
+            <span class='code'>struct CheckWillPass &lt;: BoundsCheckStyle end</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1854,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>        unsafe_copyto&#33;&#40;out_ptr &#43; Core.sizeof&#40;x&#41;, unsafe_convert&#40;Ptr&#123;UInt8&#125;, y&#41;, Core.sizeof&#40;y&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1864,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>BoundsCheckStyle&#40;itp&#41; &#61; NeedsCheck&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1874,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>    return out</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1884,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1894,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>include&#40;strcat&#40;&#40;length&#40;Core.ARGS&#41;&gt;&#61;2 ? Core.ARGS&#91;2&#93; : &quot;&quot;&#41;, &quot;build_h.jl&quot;&#41;&#41;     # include&#40;&#36;BUILDROOT/base/build_h.jl&#41;</span>
+            <span class='code'>    wi &#61; WeightedIndex&#40;indexes, weights&#41;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1904,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>include&#40;strcat&#40;&#40;length&#40;Core.ARGS&#41;&gt;&#61;2 ? Core.ARGS&#91;2&#93; : &quot;&quot;&#41;, &quot;version_git.jl&quot;&#41;&#41; # include&#40;&#36;BUILDROOT/base/version_git.jl&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1914,7 +1905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Construct a weighted index &#96;wi&#96;, which can be thought of as a generalization of an</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1924,7 +1915,7 @@
           <td>
             
             
-            <span class='code'># numeric operations</span>
+            <span class='code'>ordinary array index to the context of interpolation.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1934,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;hashing.jl&quot;&#41;</span>
+            <span class='code'>For an ordinary vector &#96;a&#96;, &#96;a&#91;i&#93;&#96; extracts the element at index &#96;i&#96;.</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1944,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;rounding.jl&quot;&#41;</span>
+            <span class='code'>When interpolating, one is typically interested in a range of indexes and the output is</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1954,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>using .Rounding</span>
+            <span class='code'>some weighted combination of array values at these indexes.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1964,7 +1955,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;div.jl&quot;&#41;</span>
+            <span class='code'>For example, for linear interpolation at a location &#96;x&#96; between integers &#96;i&#96; and &#96;i&#43;1&#96;, we have</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1974,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;float.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1984,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;twiceprecision.jl&quot;&#41;</span>
+            <span class='code'>    ret &#61; &#40;1-f&#41;*a&#91;i&#93; &#43; f*a&#91;i&#43;1&#93;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1994,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;complex.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2004,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;rational.jl&quot;&#41;</span>
+            <span class='code'>where &#96;f &#61; x-i&#96; lies between 0 and 1. This can be represented as &#96;a&#91;wi&#93;&#96;, where</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2014,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;multinverses.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2024,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>using .MultiplicativeInverses</span>
+            <span class='code'>    wi &#61; WeightedIndex&#40;i:i&#43;1, &#40;1-f, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2034,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;abstractarraymath.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2044,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;arraymath.jl&quot;&#41;</span>
+            <span class='code'>i.e.,</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2054,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;slicearray.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2064,7 +2055,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ret &#61; sum&#40;a&#91;indexes&#93; .* weights&#41;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2074,7 +2065,7 @@
           <td>
             
             
-            <span class='code'># SIMD loops</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2084,7 +2075,7 @@
           <td>
             
             
-            <span class='code'>sizeof&#40;s::String&#41; &#61; Core.sizeof&#40;s&#41;  # needed by gensym as called from simdloop</span>
+            <span class='code'>Linear interpolation thus constructs weighted indices using a 2-tuple for &#96;weights&#96; and</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2094,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;simdloop.jl&quot;&#41;</span>
+            <span class='code'>a length-2 &#96;indexes&#96; range.</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2104,7 +2095,7 @@
           <td>
             
             
-            <span class='code'>using .SimdLoop</span>
+            <span class='code'>Higher-order interpolation would involve more positions and weights &#40;e.g., 3-tuples for</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2114,7 +2105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>quadratic interpolation, 4-tuples for cubic&#41;.</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2124,7 +2115,7 @@
           <td>
             
             
-            <span class='code'># map-reduce operators</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2134,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;reduce.jl&quot;&#41;</span>
+            <span class='code'>In multiple dimensions, separable interpolation schemes are implemented in terms</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2144,7 +2135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>of multiple weighted indices, accessing &#96;A&#91;wi1, wi2, ...&#93;&#96; where each &#96;wi&#96; is the</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2154,7 +2145,7 @@
           <td>
             
             
-            <span class='code'>## core structures</span>
+            <span class='code'>&#96;WeightedIndex&#96; along the corresponding dimension.</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2164,7 +2155,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;reshapedarray.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2174,7 +2165,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;reinterpretarray.jl&quot;&#41;</span>
+            <span class='code'>For value interpolation, &#96;weights&#96; will typically sum to 1.</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2184,7 +2175,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;bitarray.jl&quot;&#41;</span>
+            <span class='code'>However, for gradient and Hessian computation this will not necessarily be true.</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2194,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;bitset.jl&quot;&#41;</span>
+            <span class='code'>For example, the gradient of one-dimensional linear interpolation can be represented as</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2214,7 +2205,7 @@
           <td>
             
             
-            <span class='code'>if &#33;isdefined&#40;Core, :Compiler&#41;</span>
+            <span class='code'>    gwi &#61; WeightedIndex&#40;i:i&#43;1, &#40;-1, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2224,7 +2215,7 @@
           <td>
             
             
-            <span class='code'>    include&#40;&quot;docs/core.jl&quot;&#41;</span>
+            <span class='code'>    g1 &#61; a&#91;gwi&#93;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2234,7 +2225,7 @@
           <td>
             
             
-            <span class='code'>    Core.atdoc&#33;&#40;CoreDocs.docm&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2244,7 +2235,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>For a three-dimensional array &#96;A&#96;, one might compute &#96;∂A/∂x₂&#96; &#40;the second component</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2254,7 +2245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>of the gradient&#41; as &#96;A&#91;wi1, gwi2, wi3&#93;&#96;, where &#96;wi1&#96; and &#96;wi3&#96; are &quot;value&quot; weights</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2264,7 +2255,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;multimedia.jl&quot;&#41;</span>
+            <span class='code'>and &#96;gwi2&#96; &quot;gradient&quot; weights.</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2274,7 +2265,7 @@
           <td>
             
             
-            <span class='code'>using .Multimedia</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2284,7 +2275,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;indexes&#96; may be supplied as a range or as a tuple of the same length as &#96;weights&#96;.</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2294,7 +2285,7 @@
           <td>
             
             
-            <span class='code'># Some type</span>
+            <span class='code'>The latter is applicable, e.g., for periodic boundary conditions.</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2304,7 +2295,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;some.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2314,7 +2305,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>abstract type WeightedIndex&#123;L,W&#125; end</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2324,7 +2315,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;dict.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2334,7 +2325,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;abstractset.jl&quot;&#41;</span>
+            <span class='code'># Type to use when array locations are adjacent. This may offer more opportunities</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2344,7 +2335,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;set.jl&quot;&#41;</span>
+            <span class='code'># for compiler optimizations &#40;e.g., SIMD&#41;.</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2354,7 +2345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct WeightedAdjIndex&#123;L,W&#125; &lt;: WeightedIndex&#123;L,W&#125;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2364,7 +2355,7 @@
           <td>
             
             
-            <span class='code'># Strings</span>
+            <span class='code'>    istart::Int</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2374,7 +2365,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;char.jl&quot;&#41;</span>
+            <span class='code'>    weights::NTuple&#123;L,W&#125;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2384,7 +2375,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;strings/basic.jl&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2394,7 +2385,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;strings/string.jl&quot;&#41;</span>
+            <span class='code'># Type to use with non-adjacent locations. E.g., periodic boundary conditions.</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2404,7 +2395,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;strings/substring.jl&quot;&#41;</span>
+            <span class='code'>struct WeightedArbIndex&#123;L,W&#125; &lt;: WeightedIndex&#123;L,W&#125;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2414,7 +2405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    indexes::NTuple&#123;L,Int&#125;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2424,7 +2415,7 @@
           <td>
             
             
-            <span class='code'># Initialize DL_LOAD_PATH as early as possible.  We are defining things here in</span>
+            <span class='code'>    weights::NTuple&#123;L,W&#125;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2434,7 +2425,7 @@
           <td>
             
             
-            <span class='code'># a slightly more verbose fashion than usual, because we&#39;re running so early.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2444,7 +2435,7 @@
           <td>
             
             
-            <span class='code'>const DL_LOAD_PATH &#61; String&#91;&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2454,7 +2445,7 @@
           <td>
             
             
-            <span class='code'>let os &#61; ccall&#40;:jl_get_UNAME, Any, &#40;&#41;&#41;</span>
+            <span class='code'>function WeightedIndex&#40;indexes::AbstractUnitRange&#123;&lt;:Integer&#125;, weights::NTuple&#123;L,Any&#125;&#41; where L</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2464,7 +2455,7 @@
           <td>
             
             
-            <span class='code'>    if os &#61;&#61;&#61; :Darwin || os &#61;&#61;&#61; :Apple</span>
+            <span class='code'>    @noinline mismatch&#40;indexes, weights&#41; &#61; throw&#40;ArgumentError&#40;&quot;the length of indexes must match weights, got &#36;indexes vs &#36;weights&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2474,7 +2465,7 @@
           <td>
             
             
-            <span class='code'>        if Base.DARWIN_FRAMEWORK</span>
+            <span class='code'>    length&#40;indexes&#41; &#61;&#61; L || mismatch&#40;indexes, weights&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2484,7 +2475,7 @@
           <td>
             
             
-            <span class='code'>            push&#33;&#40;DL_LOAD_PATH, &quot;@loader_path/Frameworks&quot;&#41;</span>
+            <span class='code'>    WeightedAdjIndex&#40;first&#40;indexes&#41;, promote&#40;weights...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2494,7 +2485,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2504,7 +2495,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;DL_LOAD_PATH, &quot;@loader_path&quot;&#41;</span>
+            <span class='code'>WeightedIndex&#40;istart::Integer, weights::NTuple&#123;L,Any&#125;&#41; where L &#61;</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2514,7 +2505,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    WeightedAdjIndex&#40;istart, promote&#40;weights...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2524,7 +2515,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>WeightedIndex&#40;indexes::NTuple&#123;L,Integer&#125;, weights::NTuple&#123;L,Any&#125;&#41; where L &#61;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2534,7 +2525,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    WeightedArbIndex&#40;indexes, promote&#40;weights...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2544,7 +2535,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;osutils.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2554,7 +2545,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;c.jl&quot;&#41;</span>
+            <span class='code'>weights&#40;wi::WeightedIndex&#41; &#61; wi.weights</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2564,7 +2555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>indexes&#40;wi::WeightedAdjIndex&#41; &#61; wi.istart</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2574,7 +2565,7 @@
           <td>
             
             
-            <span class='code'># Core I/O</span>
+            <span class='code'>indexes&#40;wi::WeightedArbIndex&#41; &#61; wi.indexes</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2584,7 +2575,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;io.jl&quot;&#41;</span>
+            <span class='code'>indextuple&#40;wi::WeightedAdjIndex&#123;L&#125;&#41; where L &#61; ntuple&#40;i-&gt;wi.istart&#43;i-1, Val&#40;L&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2594,7 +2585,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;iobuffer.jl&quot;&#41;</span>
+            <span class='code'>indextuple&#40;wi::WeightedArbIndex&#123;L&#125;&#41; where L &#61; indexes&#40;wi&#41;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2614,7 +2605,7 @@
           <td>
             
             
-            <span class='code'># strings &amp; printing</span>
+            <span class='code'># Make them iterable just like numbers are</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2624,7 +2615,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;intfuncs.jl&quot;&#41;</span>
+            <span class='code'>Base.iterate&#40;x::WeightedIndex&#41; &#61; &#40;x, nothing&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2634,7 +2625,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;strings/strings.jl&quot;&#41;</span>
+            <span class='code'>Base.iterate&#40;x::WeightedIndex, ::Any&#41; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2644,7 +2635,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;regex.jl&quot;&#41;</span>
+            <span class='code'>Base.isempty&#40;x::WeightedIndex&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2654,7 +2645,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;parse.jl&quot;&#41;</span>
+            <span class='code'>Base.length&#40;x::WeightedIndex&#41; &#61; 1</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2664,7 +2655,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;shell.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2674,7 +2665,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;show.jl&quot;&#41;</span>
+            <span class='code'># Supporting arithmetic on the weights allows one to perform pre-scaling of gradient coefficients</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2684,7 +2675,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;arrayshow.jl&quot;&#41;</span>
+            <span class='code'>Base.:&#40;*&#41;&#40;wi::WeightedAdjIndex, x::Number&#41; &#61; WeightedAdjIndex&#40;wi.istart, wi.weights .* x&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2694,7 +2685,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;methodshow.jl&quot;&#41;</span>
+            <span class='code'>Base.:&#40;/&#41;&#40;wi::WeightedAdjIndex, x::Number&#41; &#61; WeightedAdjIndex&#40;wi.istart, wi.weights ./ x&#41;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2704,7 +2695,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Base.:&#40;*&#41;&#40;wi::WeightedArbIndex, x::Number&#41; &#61; WeightedArbIndex&#40;wi.indexes, wi.weights .* x&#41;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2714,7 +2705,7 @@
           <td>
             
             
-            <span class='code'># multidimensional arrays</span>
+            <span class='code'>Base.:&#40;/&#41;&#40;wi::WeightedArbIndex, x::Number&#41; &#61; WeightedArbIndex&#40;wi.indexes, wi.weights ./ x&#41;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2724,7 +2715,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;cartesian.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2734,7 +2725,7 @@
           <td>
             
             
-            <span class='code'>using .Cartesian</span>
+            <span class='code'>### Indexing with WeightedIndex</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2744,7 +2735,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;multidimensional.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2754,7 +2745,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># We inject &#96;WeightedIndex&#96; as a non-exported indexing point with a &#96;InterpGetindex&#96; wrapper.</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2764,7 +2755,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;broadcast.jl&quot;&#41;</span>
+            <span class='code'># &#96;InterpGetindex&#96; is not a subtype of &#96;AbstractArray&#96;. This ensures that the overload applies to all array types.</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2774,7 +2765,7 @@
           <td>
             
             
-            <span class='code'>using .Broadcast</span>
+            <span class='code'>struct InterpGetindex&#123;N,A&lt;:AbstractArray&#123;&lt;:Any,N&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2784,7 +2775,7 @@
           <td>
             
             
-            <span class='code'>using .Broadcast: broadcasted, broadcasted_kwsyntax, materialize, materialize&#33;,</span>
+            <span class='code'>    coeffs::A</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2794,7 +2785,7 @@
           <td>
             
             
-            <span class='code'>                  broadcast_preserving_zero_d, andand, oror</span>
+            <span class='code'>    InterpGetindex&#40;itp::AbstractInterpolation&#41; &#61; InterpGetindex&#40;coefficients&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2804,7 +2795,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    InterpGetindex&#40;A::AbstractArray&#41; &#61; new&#123;ndims&#40;A&#41;,typeof&#40;A&#41;&#125;&#40;A&#41;</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2814,17 +2805,36 @@
           <td>
             
             
-            <span class='code'># missing values</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L279'>
           <td class='lineno'>279</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>include&#40;&quot;missing.jl&quot;&#41;</span>
+            <div class='call-sites'>
+              2 &#40;20 &#37;&#41;
+              samples spent in getindex
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from _gradient
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L30'>line 30</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from BSplineInterpolation
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L8'>line 8</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L290'>interp_getindex</a>
+              <br />
+            </div>
+            <span class='code'>@inline Base.getindex&#40;A::InterpGetindex&#123;N&#125;, I::Vararg&#123;Union&#123;Int,WeightedIndex&#125;,N&#125;&#41; where &#123;N&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2834,7 +2844,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    interp_getindex&#40;A.coeffs, ntuple&#40;_ -&gt; 0, Val&#40;N&#41;&#41;, map&#40;indexflag, I&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2844,7 +2854,7 @@
           <td>
             
             
-            <span class='code'># version</span>
+            <span class='code'>indexflag&#40;I::Int&#41; &#61; I</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2854,7 +2864,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;version.jl&quot;&#41;</span>
+            <span class='code'>@inline indexflag&#40;I::WeightedIndex&#41; &#61; indextuple&#40;I&#41;, weights&#40;I&#41;</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2874,7 +2884,7 @@
           <td>
             
             
-            <span class='code'># system &amp; environment</span>
+            <span class='code'># A recursion-based &#96;interp_getindex&#96;, which follows a &quot;move processed indexes to the back&quot; strategy</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2884,7 +2894,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;sysinfo.jl&quot;&#41;</span>
+            <span class='code'># &#96;I&#96; contains the processed index, and &#40;wi1, wis...&#41; contains the yet-to-be-processed indexes</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2894,7 +2904,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;libc.jl&quot;&#41;</span>
+            <span class='code'># Here we meet a no-interp dim, just append the index to &#96;I&#96;&#39;s end.</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2904,7 +2914,7 @@
           <td>
             
             
-            <span class='code'>using .Libc: getpid, gethostname, time</span>
+            <span class='code'>@inline interp_getindex&#40;A, I, wi1::Int, wis...&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2914,7 +2924,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    interp_getindex&#40;A, &#40;Base.tail&#40;I&#41;..., wi1&#41;, wis...&#41;</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2924,17 +2934,44 @@
           <td>
             
             
-            <span class='code'># These used to be in build_h.jl and are retained for backwards compatibility.</span>
+            <span class='code'># Here we handle the expansion of a single dimension.</span>
           </td>
         </tr>
         <tr id='L290'>
           <td class='lineno'>290</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>4 &#40;40 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'># NOTE: keep in sync with &#96;libblastrampoline_jll.libblastrampoline&#96;.</span>
+            <div class='call-sites'>
+              4 &#40;40 &#37;&#41;
+              samples spent in interp_getindex
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from interp_getindex
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L290'>line 290</a>
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from getindex
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L279'>line 279</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L290'>interp_getindex</a>
+              <br />
+              1 &#40;25 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L296'>interp_getindex</a>
+              <br />
+              1 &#40;25 &#37;&#41;
+              samples spent calling
+              <a href='float.jl-a17e83d2b98118e70cab7213302105208b212ea6.html#L410'>*</a>
+              <br />
+            </div>
+            <span class='code'>@inline interp_getindex&#40;A, I, wi1::NTuple&#123;2,Tuple&#123;Any,Vararg&#123;Any,N&#125;&#125;&#125;, wis...&#41; where &#123;N&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2944,7 +2981,7 @@
           <td>
             
             
-            <span class='code'>const libblas_name &#61; &quot;libblastrampoline&quot; * &#40;Sys.iswindows&#40;&#41; ? &quot;-5&quot; : &quot;&quot;&#41;</span>
+            <span class='code'>    wi1&#91;2&#93;&#91;end&#93; * interp_getindex&#40;A, &#40;Base.tail&#40;I&#41;..., wi1&#91;1&#93;&#91;end&#93;&#41;, wis...&#41; &#43;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2954,7 +2991,7 @@
           <td>
             
             
-            <span class='code'>const liblapack_name &#61; libblas_name</span>
+            <span class='code'>    interp_getindex&#40;A, I, map&#40;Base.front, wi1&#41;, wis...&#41;</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2964,7 +3001,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline interp_getindex&#40;A, I, wi1::NTuple&#123;2,Tuple&#123;Any&#125;&#125;, wis...&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2974,7 +3011,7 @@
           <td>
             
             
-            <span class='code'># Logging</span>
+            <span class='code'>    wi1&#91;2&#93;&#91;1&#93; * interp_getindex&#40;A, &#40;Base.tail&#40;I&#41;..., wi1&#91;1&#93;&#91;1&#93;&#41;, wis...&#41;</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2984,17 +3021,31 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;logging.jl&quot;&#41;</span>
+            <span class='code'># Termination</span>
           </td>
         </tr>
         <tr id='L296'>
           <td class='lineno'>296</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>using .CoreLogging</span>
+            <div class='call-sites'>
+              1 &#40;10 &#37;&#41;
+              samples spent in interp_getindex
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from interp_getindex
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L290'>line 290</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='OffsetArrays.jl-5702480f954c1df110b01e940b08d10cd17e8d1a.html#L420'>getindex</a>
+              <br />
+            </div>
+            <span class='code'>@inline interp_getindex&#40;A::AbstractArray&#123;T,N&#125;, I::Dims&#123;N&#125;&#41; where &#123;T,N&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3004,7 +3055,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @inbounds A&#91;I...&#93; # all bounds-checks have already happened</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3014,7 +3065,7 @@
           <td>
             
             
-            <span class='code'># Concurrency</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3024,7 +3075,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;linked_list.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3034,7 +3085,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;condition.jl&quot;&#41;</span>
+            <span class='code'>    w &#61; value_weights&#40;degree, δx&#41;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3044,7 +3095,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;threads.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3054,7 +3105,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;lock.jl&quot;&#41;</span>
+            <span class='code'>Compute the weights for interpolation of the value at an offset &#96;δx&#96; from the &quot;base&quot; position.</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3064,7 +3115,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;channels.jl&quot;&#41;</span>
+            <span class='code'>&#96;degree&#96; describes the interpolation scheme.</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3074,7 +3125,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;partr.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3084,7 +3135,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;task.jl&quot;&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3094,7 +3145,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;threads_overloads.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3104,7 +3155,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;weakkeydict.jl&quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest; setup &#61; :&#40;using Interpolations&#41;</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3114,7 +3165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; Interpolations.value_weights&#40;Linear&#40;&#41;, 0.2&#41;</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3124,7 +3175,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;env.jl&quot;&#41;</span>
+            <span class='code'>&#40;0.8, 0.2&#41;</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3134,7 +3185,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3144,7 +3195,7 @@
           <td>
             
             
-            <span class='code'># functions defined in Random</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3154,7 +3205,7 @@
           <td>
             
             
-            <span class='code'>function rand end</span>
+            <span class='code'>This corresponds to the fact that linear interpolation at &#96;x &#43; 0.2&#96; is &#96;0.8*y&#91;x&#93; &#43; 0.2*y&#91;x&#43;1&#93;&#96;.</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3164,7 +3215,7 @@
           <td>
             
             
-            <span class='code'>function randn end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3174,7 +3225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function value_weights end</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3184,7 +3235,7 @@
           <td>
             
             
-            <span class='code'># I/O</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3194,7 +3245,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;libuv.jl&quot;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3204,7 +3255,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;asyncevent.jl&quot;&#41;</span>
+            <span class='code'>    w &#61; gradient_weights&#40;degree, δx&#41;</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3214,7 +3265,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;iostream.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3224,7 +3275,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;stream.jl&quot;&#41;</span>
+            <span class='code'>Compute the weights for interpolation of the gradient at an offset &#96;δx&#96; from the &quot;base&quot; position.</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3234,7 +3285,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;filesystem.jl&quot;&#41;</span>
+            <span class='code'>&#96;degree&#96; describes the interpolation scheme.</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3244,7 +3295,7 @@
           <td>
             
             
-            <span class='code'>using .Filesystem</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3254,7 +3305,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;cmd.jl&quot;&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3264,7 +3315,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;process.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3274,7 +3325,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;ttyhascolor.jl&quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest; setup &#61; :&#40;using Interpolations&#41;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3284,7 +3335,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;secretbuffer.jl&quot;&#41;</span>
+            <span class='code'>julia&gt; Interpolations.gradient_weights&#40;Linear&#40;&#41;, 0.2&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3294,7 +3345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#40;-1.0, 1.0&#41;</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3304,7 +3355,7 @@
           <td>
             
             
-            <span class='code'># core math functions</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3314,7 +3365,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;floatfuncs.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3324,7 +3375,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;math.jl&quot;&#41;</span>
+            <span class='code'>This defines the gradient of a linear interpolation at 3.2 as &#96;y&#91;4&#93; - y&#91;3&#93;&#96;.</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3334,7 +3385,7 @@
           <td>
             
             
-            <span class='code'>using .Math</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3344,7 +3395,7 @@
           <td>
             
             
-            <span class='code'>const &#40;√&#41;&#61;sqrt</span>
+            <span class='code'>function gradient_weights end</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3354,7 +3405,7 @@
           <td>
             
             
-            <span class='code'>const &#40;∛&#41;&#61;cbrt</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3364,7 +3415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3374,7 +3425,7 @@
           <td>
             
             
-            <span class='code'># now switch to a simple, race-y TLS, relative include for the rest of Base</span>
+            <span class='code'>    w &#61; hessian_weights&#40;degree, δx&#41;</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3384,7 +3435,7 @@
           <td>
             
             
-            <span class='code'>delete_method&#40;which&#40;include, &#40;Module, String&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3394,7 +3445,7 @@
           <td>
             
             
-            <span class='code'>let SOURCE_PATH &#61; &quot;&quot;</span>
+            <span class='code'>Compute the weights for interpolation of the hessian at an offset &#96;δx&#96; from the &quot;base&quot; position.</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3404,7 +3455,7 @@
           <td>
             
             
-            <span class='code'>    global function include&#40;mod::Module, path::String&#41;</span>
+            <span class='code'>&#96;degree&#96; describes the interpolation scheme.</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3414,7 +3465,7 @@
           <td>
             
             
-            <span class='code'>        prev &#61; SOURCE_PATH::String</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3424,7 +3475,7 @@
           <td>
             
             
-            <span class='code'>        path &#61; normpath&#40;joinpath&#40;dirname&#40;prev&#41;, path&#41;&#41;</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3434,7 +3485,7 @@
           <td>
             
             
-            <span class='code'>        Core.println&#40;path&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3444,7 +3495,7 @@
           <td>
             
             
-            <span class='code'>        ccall&#40;:jl_uv_flush, Nothing, &#40;Ptr&#123;Nothing&#125;,&#41;, Core.io_pointer&#40;Core.stdout&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest; setup &#61; :&#40;using Interpolations&#41;</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3454,7 +3505,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;_included_files, &#40;mod, abspath&#40;path&#41;&#41;&#41;</span>
+            <span class='code'>julia&gt; Interpolations.hessian_weights&#40;Linear&#40;&#41;, 0.2&#41;</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3464,7 +3515,7 @@
           <td>
             
             
-            <span class='code'>        SOURCE_PATH &#61; path</span>
+            <span class='code'>&#40;0.0, 0.0&#41;</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3474,7 +3525,7 @@
           <td>
             
             
-            <span class='code'>        result &#61; Core.include&#40;mod, path&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3484,7 +3535,7 @@
           <td>
             
             
-            <span class='code'>        SOURCE_PATH &#61; prev</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3494,7 +3545,7 @@
           <td>
             
             
-            <span class='code'>        return result</span>
+            <span class='code'>Linear interpolation uses straight line segments, so the second derivative is zero.</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3504,7 +3555,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3514,7 +3565,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function hessian_weights end</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3534,7 +3585,7 @@
           <td>
             
             
-            <span class='code'># reduction along dims</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3544,7 +3595,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;reducedim.jl&quot;&#41;  # macros in this file rely on string.jl</span>
+            <span class='code'>gradient1&#40;itp::AbstractInterpolation&#123;T,1&#125;, x&#41; where &#123;T&#125; &#61; gradient&#40;itp, x&#41;&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3554,7 +3605,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;accumulate.jl&quot;&#41;</span>
+            <span class='code'>hessian1&#40;itp::AbstractInterpolation&#123;T,1&#125;, x&#41; where &#123;T&#125; &#61; hessian&#40;itp, x&#41;&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3574,7 +3625,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;permuteddimsarray.jl&quot;&#41;</span>
+            <span class='code'>### Supporting expansion of CartesianIndex</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3584,7 +3635,7 @@
           <td>
             
             
-            <span class='code'>using .PermutedDimsArrays</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3594,7 +3645,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const UnexpandedIndexTypes &#61; Union&#123;Number, AbstractVector, CartesianIndex&#125;</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3604,7 +3655,7 @@
           <td>
             
             
-            <span class='code'># basic data structures</span>
+            <span class='code'>const ExpandedIndexTypes &#61; Union&#123;Number, AbstractVector&#125;</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3614,7 +3665,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;ordering.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3624,7 +3675,7 @@
           <td>
             
             
-            <span class='code'>using .Order</span>
+            <span class='code'>Base.to_index&#40;::AbstractInterpolation, x::Number&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3644,7 +3695,7 @@
           <td>
             
             
-            <span class='code'># Combinatorics</span>
+            <span class='code'># Commented out because you can&#39;t add methods to an abstract type.</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3654,7 +3705,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;sort.jl&quot;&#41;</span>
+            <span class='code'># @inline function &#40;itp::AbstractInterpolation&#41;&#40;x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3664,7 +3715,7 @@
           <td>
             
             
-            <span class='code'>using .Sort</span>
+            <span class='code'>#     itp&#40;to_indices&#40;itp, x&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3674,7 +3725,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># end</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3684,7 +3735,7 @@
           <td>
             
             
-            <span class='code'># BinaryPlatforms, used by Artifacts.  Needs &#96;Sort&#96;.</span>
+            <span class='code'>function gradient&#40;itp::AbstractInterpolation, x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3694,7 +3745,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;binaryplatforms.jl&quot;&#41;</span>
+            <span class='code'>    xi &#61; to_indices&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3704,7 +3755,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    xi &#61;&#61; x &amp;&amp; error&#40;&quot;gradient of &#36;itp not supported for position &#36;x&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3714,7 +3765,7 @@
           <td>
             
             
-            <span class='code'># Fast math</span>
+            <span class='code'>    gradient&#40;itp, xi...&#41;</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3724,7 +3775,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;fastmath.jl&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3732,19 +3783,33 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;10 &#37;&#41;
+              samples spent in gradient&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from grad&#33;
+              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L220'>line 220</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>using .FastMath</span>
+            <span class='code'>@propagate_inbounds function gradient&#33;&#40;dest, itp::AbstractInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L371'>
           <td class='lineno'>371</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'></span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='scaling.jl-ff3c4ce95c1d4462ef83b5f818a42dad57affb50.html#L118'>gradient</a>
+              <br />
+            </div>
+            <span class='code'>    dest .&#61; gradient&#40;itp, x...&#41;</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3754,7 +3819,7 @@
           <td>
             
             
-            <span class='code'>function deepcopy_internal end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3764,7 +3829,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function gradient&#33;&#40;dest, itp::AbstractInterpolation, x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3774,7 +3839,7 @@
           <td>
             
             
-            <span class='code'># enums</span>
+            <span class='code'>    gradient&#33;&#40;dest, itp, to_indices&#40;itp, x&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3784,7 +3849,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;Enums.jl&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3794,7 +3859,7 @@
           <td>
             
             
-            <span class='code'>using .Enums</span>
+            <span class='code'>function hessian&#40;itp::AbstractInterpolation, x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3804,7 +3869,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    hessian&#40;itp, to_indices&#40;itp, x&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3814,7 +3879,7 @@
           <td>
             
             
-            <span class='code'># BigInts</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3824,7 +3889,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;gmp.jl&quot;&#41;</span>
+            <span class='code'>@propagate_inbounds function hessian&#33;&#40;dest, itp::AbstractInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3834,7 +3899,7 @@
           <td>
             
             
-            <span class='code'>using .GMP</span>
+            <span class='code'>    dest .&#61; hessian&#40;itp, x...&#41;</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3844,7 +3909,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3854,7 +3919,7 @@
           <td>
             
             
-            <span class='code'># float printing: requires BigInt</span>
+            <span class='code'>function hessian&#33;&#40;dest, itp::AbstractInterpolation, x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3864,7 +3929,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;ryu/Ryu.jl&quot;&#41;</span>
+            <span class='code'>    hessian&#33;&#40;dest, itp, to_indices&#40;itp, x&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3874,7 +3939,7 @@
           <td>
             
             
-            <span class='code'>using .Ryu</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3894,7 +3959,7 @@
           <td>
             
             
-            <span class='code'># BigFloats</span>
+            <span class='code'># @inline function &#40;itp::AbstractInterpolation&#41;&#40;x::Vararg&#123;ExpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3904,7 +3969,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;mpfr.jl&quot;&#41;</span>
+            <span class='code'>#     itp.&#40;Iterators.product&#40;x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3914,7 +3979,7 @@
           <td>
             
             
-            <span class='code'>using .MPFR</span>
+            <span class='code'># end</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3924,7 +3989,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># function gradient&#40;itp::AbstractInterpolation, x::Vararg&#123;ExpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3934,7 +3999,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;combinatorics.jl&quot;&#41;</span>
+            <span class='code'>#     map&#40;y-&gt;tgradient&#40;itp, y&#41;, Iterators.product&#40;x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3944,7 +4009,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># end</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3954,7 +4019,7 @@
           <td>
             
             
-            <span class='code'># irrational mathematical constants</span>
+            <span class='code'># function hessian&#40;itp::AbstractInterpolation, x::Vararg&#123;ExpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3964,7 +4029,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;irrationals.jl&quot;&#41;</span>
+            <span class='code'>#     map&#40;y-&gt;thessian&#40;itp, y&#41;, Iterators.product&#40;x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3974,7 +4039,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;mathconstants.jl&quot;&#41;</span>
+            <span class='code'># end</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3984,7 +4049,7 @@
           <td>
             
             
-            <span class='code'>using .MathConstants: ℯ, π, pi</span>
+            <span class='code'>#</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3994,7 +4059,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># tgradient&#40;itp, y&#41; &#61; gradient&#40;itp, y...&#41;</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4004,7 +4069,7 @@
           <td>
             
             
-            <span class='code'># metaprogramming</span>
+            <span class='code'># thessian&#40;itp, y&#41; &#61; hessian&#40;itp, y...&#41;</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4014,7 +4079,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;meta.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4024,7 +4089,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># getindex is supported only for Integer indices &#40;deliberately&#41;</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4034,7 +4099,7 @@
           <td>
             
             
-            <span class='code'># Stack frames and traces</span>
+            <span class='code'>import Base: getindex</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4044,7 +4109,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;stacktraces.jl&quot;&#41;</span>
+            <span class='code'>@propagate_inbounds getindex&#40;itp::AbstractInterpolation&#123;T,N&#125;, i::Vararg&#123;Integer,N&#125;&#41; where &#123;T,N&#125; &#61; itp&#40;i...&#41;</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4054,7 +4119,7 @@
           <td>
             
             
-            <span class='code'>using .StackTraces</span>
+            <span class='code'>@propagate_inbounds function getindex&#40;itp::AbstractInterpolation&#123;T,1&#125;, i::Integer, j::Integer&#41; where T</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4064,7 +4129,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @boundscheck &#40;j &#61;&#61; 1 || Base.throw_boundserror&#40;itp, &#40;i, j&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4074,7 +4139,7 @@
           <td>
             
             
-            <span class='code'># experimental API&#39;s</span>
+            <span class='code'>    itp&#40;i&#41;</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4084,7 +4149,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;experimental.jl&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4104,7 +4169,7 @@
           <td>
             
             
-            <span class='code'># utilities</span>
+            <span class='code'>@inline checkbounds&#40;::Type&#123;Bool&#125;, itp::AbstractInterpolation, x::Vararg&#123;ExpandedIndexTypes,N&#125;&#41; where N &#61;</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4114,7 +4179,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;deepcopy.jl&quot;&#41;</span>
+            <span class='code'>    _checkbounds&#40;BoundsCheckStyle&#40;itp&#41;, itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4124,7 +4189,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;download.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4134,7 +4199,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;summarysize.jl&quot;&#41;</span>
+            <span class='code'>@inline checkbounds&#40;::Type&#123;Bool&#125;, itp::AbstractInterpolation, x::LogicalIndex&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4144,7 +4209,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;errorshow.jl&quot;&#41;</span>
+            <span class='code'>    _checkbounds&#40;BoundsCheckStyle&#40;itp&#41;, itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4164,7 +4229,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;initdefs.jl&quot;&#41;</span>
+            <span class='code'>@inline checkbounds&#40;::Type&#123;Bool&#125;, itp::AbstractInterpolation, x::LogicalIndex&#123;&lt;:Any,&lt;:AbstractArray&#123;Bool,1&#125;&#125;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4174,7 +4239,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    _checkbounds&#40;BoundsCheckStyle&#40;itp&#41;, itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4184,7 +4249,7 @@
           <td>
             
             
-            <span class='code'># worker threads</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4194,7 +4259,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;threadcall.jl&quot;&#41;</span>
+            <span class='code'>_checkbounds&#40;::CheckWillPass, itp, x&#41; &#61; true</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4204,7 +4269,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>_checkbounds&#40;::NeedsCheck, itp, x&#41; &#61; checklubounds&#40;lbounds&#40;itp&#41;, ubounds&#40;itp&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4214,7 +4279,7 @@
           <td>
             
             
-            <span class='code'># code loading</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4224,7 +4289,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;uuid.jl&quot;&#41;</span>
+            <span class='code'>checklubounds&#40;ls, us, xs&#41; &#61; _checklubounds&#40;true, ls, us, xs&#41;</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4234,7 +4299,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;pkgid.jl&quot;&#41;</span>
+            <span class='code'>_checklubounds&#40;tf::Bool, ls, us, xs::Tuple&#123;Number, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4244,7 +4309,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;toml_parser.jl&quot;&#41;</span>
+            <span class='code'>    _checklubounds&#40;tf &amp; &#40;ls&#91;1&#93; &lt;&#61; xs&#91;1&#93; &lt;&#61; us&#91;1&#93;&#41;, Base.tail&#40;ls&#41;, Base.tail&#40;us&#41;, Base.tail&#40;xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4254,7 +4319,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;linking.jl&quot;&#41;</span>
+            <span class='code'>_checklubounds&#40;tf::Bool, ls, us, xs::Tuple&#123;AbstractVector, Vararg&#123;Any&#125;&#125;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4264,7 +4329,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;loading.jl&quot;&#41;</span>
+            <span class='code'>    _checklubounds&#40;tf &amp; allbetween&#40;ls&#91;1&#93;, xs&#91;1&#93;, us&#91;1&#93;&#41;, Base.tail&#40;ls&#41;, Base.tail&#40;us&#41;, Base.tail&#40;xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4274,7 +4339,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>_checklubounds&#40;tf::Bool, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; tf</span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4284,7 +4349,7 @@
           <td>
             
             
-            <span class='code'># misc useful functions &amp; macros</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4294,7 +4359,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;timing.jl&quot;&#41;</span>
+            <span class='code'>maybe_clamp&#40;itp, xs&#41; &#61; maybe_clamp&#40;BoundsCheckStyle&#40;itp&#41;, itp, xs&#41;</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4304,7 +4369,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;util.jl&quot;&#41;</span>
+            <span class='code'>maybe_clamp&#40;::NeedsCheck, itp, xs&#41; &#61; map&#40;clamp, xs, lbounds&#40;itp&#41;, ubounds&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4314,7 +4379,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>maybe_clamp&#40;::CheckWillPass, itp, xs&#41; &#61; xs</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4324,7 +4389,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;asyncmap.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4334,7 +4399,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Base.hash&#40;x::AbstractInterpolation, h::UInt &#61; zero&#40;UInt&#41;&#41; &#61; Base.hash_uint&#40;3h - objectid&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4344,7 +4409,7 @@
           <td>
             
             
-            <span class='code'># deprecated functions</span>
+            <span class='code'>Base.hash&#40;x::AbstractExtrapolation, h::UInt &#61; zero&#40;UInt&#41;&#41; &#61; Base.hash_uint&#40;3h - objectid&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4354,7 +4419,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;deprecated.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4364,7 +4429,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;nointerp/nointerp.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4374,7 +4439,7 @@
           <td>
             
             
-            <span class='code'># Some basic documentation</span>
+            <span class='code'>include&#40;&quot;b-splines/b-splines.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4384,7 +4449,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;docs/basedocs.jl&quot;&#41;</span>
+            <span class='code'>include&#40;&quot;gridded/gridded.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4394,7 +4459,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;monotonic/monotonic.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4404,7 +4469,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;client.jl&quot;&#41;</span>
+            <span class='code'>include&#40;&quot;extrapolation/extrapolation.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4414,7 +4479,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;scaling/scaling.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4424,7 +4489,7 @@
           <td>
             
             
-            <span class='code'># Documentation -- should always be included last in sysimg.</span>
+            <span class='code'>include&#40;&quot;utils.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4434,7 +4499,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;docs/Docs.jl&quot;&#41;</span>
+            <span class='code'>include&#40;&quot;io.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4444,7 +4509,7 @@
           <td>
             
             
-            <span class='code'>using .Docs</span>
+            <span class='code'>include&#40;&quot;convenience-constructors.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4454,7 +4519,7 @@
           <td>
             
             
-            <span class='code'>if isdefined&#40;Core, :Compiler&#41; &amp;&amp; is_primary_base_module</span>
+            <span class='code'>include&#40;&quot;deprecations.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L443'>
@@ -4464,7 +4529,7 @@
           <td>
             
             
-            <span class='code'>    Docs.loaddocs&#40;Core.Compiler.CoreDocs.DOCS&#41;</span>
+            <span class='code'>include&#40;&quot;lanczos/lanczos.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4474,7 +4539,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;lanczos/lanczos_opencv.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4484,7 +4549,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;iterate.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4494,7 +4559,7 @@
           <td>
             
             
-            <span class='code'># finally, now make &#96;include&#96; point to the full version</span>
+            <span class='code'>include&#40;&quot;chainrules/chainrules.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4504,7 +4569,7 @@
           <td>
             
             
-            <span class='code'>for m in methods&#40;include&#41;</span>
+            <span class='code'>include&#40;&quot;hermite/cubic.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4514,7 +4579,7 @@
           <td>
             
             
-            <span class='code'>    delete_method&#40;m&#41;</span>
+            <span class='code'>if VERSION &gt;&#61; v&quot;1.6&quot;</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4524,7 +4589,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    include&#40;&quot;gpu_support.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L450'>
@@ -4534,7 +4599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L451'>
@@ -4544,7 +4609,7 @@
           <td>
             
             
-            <span class='code'># This method is here only to be overwritten during the test suite to test</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L452'>
@@ -4554,7 +4619,7 @@
           <td>
             
             
-            <span class='code'># various sysimg related invalidation scenarios.</span>
+            <span class='code'>function __init__&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L453'>
@@ -4564,7 +4629,7 @@
           <td>
             
             
-            <span class='code'>a_method_to_overwrite_in_test&#40;&#41; &#61; inferencebarrier&#40;1&#41;</span>
+            <span class='code'>    @require Unitful&#61;&quot;1986cc42-f94f-5a68-af5c-568840ba703d&quot; include&#40;&quot;requires/unitful.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L454'>
@@ -4574,7 +4639,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L455'>
@@ -4584,7 +4649,7 @@
           <td>
             
             
-            <span class='code'># These functions are duplicated in client.jl/include&#40;::String&#41; for</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L456'>
@@ -4594,867 +4659,7 @@
           <td>
             
             
-            <span class='code'># nicer stacktraces. Modifications here have to be backported there</span>
-          </td>
-        </tr>
-        <tr id='L457'>
-          <td class='lineno'>457</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>include&#40;mod::Module, _path::AbstractString&#41; &#61; _include&#40;identity, mod, _path&#41;</span>
-          </td>
-        </tr>
-        <tr id='L458'>
-          <td class='lineno'>458</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>include&#40;mapexpr::Function, mod::Module, _path::AbstractString&#41; &#61; _include&#40;mapexpr, mod, _path&#41;</span>
-          </td>
-        </tr>
-        <tr id='L459'>
-          <td class='lineno'>459</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L460'>
-          <td class='lineno'>460</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end_base_include &#61; time_ns&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L461'>
-          <td class='lineno'>461</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L462'>
-          <td class='lineno'>462</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>const _sysimage_modules &#61; PkgId&#91;&#93;</span>
-          </td>
-        </tr>
-        <tr id='L463'>
-          <td class='lineno'>463</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>in_sysimage&#40;pkgid::PkgId&#41; &#61; pkgid in _sysimage_modules</span>
-          </td>
-        </tr>
-        <tr id='L464'>
-          <td class='lineno'>464</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L465'>
-          <td class='lineno'>465</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># Precompiles for Revise and other packages</span>
-          </td>
-        </tr>
-        <tr id='L466'>
-          <td class='lineno'>466</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># TODO: move these to contrib/generate_precompile.jl</span>
-          </td>
-        </tr>
-        <tr id='L467'>
-          <td class='lineno'>467</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># The problem is they don&#39;t work there</span>
-          </td>
-        </tr>
-        <tr id='L468'>
-          <td class='lineno'>468</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>for match &#61; _methods&#40;&#43;, &#40;Int, Int&#41;, -1, get_world_counter&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L469'>
-          <td class='lineno'>469</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    m &#61; match.method</span>
-          </td>
-        </tr>
-        <tr id='L470'>
-          <td class='lineno'>470</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    delete&#33;&#40;push&#33;&#40;Set&#123;Method&#125;&#40;&#41;, m&#41;, m&#41;</span>
-          </td>
-        </tr>
-        <tr id='L471'>
-          <td class='lineno'>471</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    copy&#40;Core.Compiler.retrieve_code_info&#40;Core.Compiler.specialize_method&#40;match&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L472'>
-          <td class='lineno'>472</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L473'>
-          <td class='lineno'>473</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    empty&#33;&#40;Set&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L474'>
-          <td class='lineno'>474</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    push&#33;&#40;push&#33;&#40;Set&#123;Union&#123;GlobalRef,Symbol&#125;&#125;&#40;&#41;, :two&#41;, GlobalRef&#40;Base, :two&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L475'>
-          <td class='lineno'>475</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;String,Base.PkgId&#125;&#40;&#41;, Base.PkgId&#40;Base&#41;, &quot;file.jl&quot;&#41;&#41;&#91;&quot;file.jl&quot;&#93;</span>
-          </td>
-        </tr>
-        <tr id='L476'>
-          <td class='lineno'>476</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;Symbol,Vector&#123;Int&#125;&#125;&#40;&#41;, &#91;1&#93;, :two&#41;&#41;&#91;:two&#93;</span>
-          </td>
-        </tr>
-        <tr id='L477'>
-          <td class='lineno'>477</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;Base.PkgId,String&#125;&#40;&#41;, &quot;file.jl&quot;, Base.PkgId&#40;Base&#41;&#41;&#41;&#91;Base.PkgId&#40;Base&#41;&#93;</span>
-          </td>
-        </tr>
-        <tr id='L478'>
-          <td class='lineno'>478</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;Union&#123;GlobalRef,Symbol&#125;, Vector&#123;Int&#125;&#125;&#40;&#41;, &#91;1&#93;, :two&#41;&#41;&#91;:two&#93;</span>
-          </td>
-        </tr>
-        <tr id='L479'>
-          <td class='lineno'>479</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#40;setindex&#33;&#40;IdDict&#123;Type, Union&#123;Missing, Vector&#123;Tuple&#123;LineNumberNode, Expr&#125;&#125;&#125;&#125;&#40;&#41;, missing, Int&#41;&#41;&#91;Int&#93;</span>
-          </td>
-        </tr>
-        <tr id='L480'>
-          <td class='lineno'>480</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Dict&#123;Symbol, Union&#123;Nothing, Bool, Symbol&#125;&#125;&#40;:one &#61;&gt; false&#41;&#91;:one&#93;</span>
-          </td>
-        </tr>
-        <tr id='L481'>
-          <td class='lineno'>481</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Dict&#40;Base &#61;&gt; &#91;:&#40;1&#43;1&#41;&#93;&#41;&#91;Base&#93;</span>
-          </td>
-        </tr>
-        <tr id='L482'>
-          <td class='lineno'>482</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Dict&#40;:one &#61;&gt; &#91;1&#93;&#41;&#91;:one&#93;</span>
-          </td>
-        </tr>
-        <tr id='L483'>
-          <td class='lineno'>483</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Dict&#40;&quot;abc&quot; &#61;&gt; Set&#40;&#41;&#41;&#91;&quot;abc&quot;&#93;</span>
-          </td>
-        </tr>
-        <tr id='L484'>
-          <td class='lineno'>484</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pushfirst&#33;&#40;&#91;&#93;, sum&#41;</span>
-          </td>
-        </tr>
-        <tr id='L485'>
-          <td class='lineno'>485</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    get&#40;Base.pkgorigins, Base.PkgId&#40;Base&#41;, nothing&#41;</span>
-          </td>
-        </tr>
-        <tr id='L486'>
-          <td class='lineno'>486</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    sort&#33;&#40;&#91;1,2,3&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L487'>
-          <td class='lineno'>487</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    unique&#33;&#40;&#91;1,2,3&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L488'>
-          <td class='lineno'>488</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    cumsum&#40;&#91;1,2,3&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L489'>
-          <td class='lineno'>489</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    append&#33;&#40;Int&#91;&#93;, BitSet&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L490'>
-          <td class='lineno'>490</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    isempty&#40;BitSet&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L491'>
-          <td class='lineno'>491</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    delete&#33;&#40;BitSet&#40;&#91;1,2&#93;&#41;, 3&#41;</span>
-          </td>
-        </tr>
-        <tr id='L492'>
-          <td class='lineno'>492</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    deleteat&#33;&#40;Int32&#91;1,2,3&#93;, &#91;1,3&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L493'>
-          <td class='lineno'>493</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    deleteat&#33;&#40;Any&#91;1,2,3&#93;, &#91;1,3&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L494'>
-          <td class='lineno'>494</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Core.svec&#40;1, 2&#41; &#61;&#61; Core.svec&#40;3, 4&#41;</span>
-          </td>
-        </tr>
-        <tr id='L495'>
-          <td class='lineno'>495</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    any&#40;t-&gt;t&#91;1&#93;.line &gt; 1, &#91;&#40;LineNumberNode&#40;2,:none&#41;, :&#40;1&#43;1&#41;&#41;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L496'>
-          <td class='lineno'>496</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L497'>
-          <td class='lineno'>497</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Code loading uses this</span>
-          </td>
-        </tr>
-        <tr id='L498'>
-          <td class='lineno'>498</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    sortperm&#40;mtime.&#40;readdir&#40;&quot;.&quot;&#41;&#41;, rev&#61;true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L499'>
-          <td class='lineno'>499</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # JLLWrappers uses these</span>
-          </td>
-        </tr>
-        <tr id='L500'>
-          <td class='lineno'>500</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Dict&#123;UUID,Set&#123;String&#125;&#125;&#40;&#41;&#91;UUID&#40;&quot;692b3bcd-3c85-4b1f-b108-f13ce0eb3210&quot;&#41;&#93; &#61; Set&#123;String&#125;&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L501'>
-          <td class='lineno'>501</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    get&#33;&#40;Set&#123;String&#125;, Dict&#123;UUID,Set&#123;String&#125;&#125;&#40;&#41;, UUID&#40;&quot;692b3bcd-3c85-4b1f-b108-f13ce0eb3210&quot;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L502'>
-          <td class='lineno'>502</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    eachindex&#40;IndexLinear&#40;&#41;, Expr&#91;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L503'>
-          <td class='lineno'>503</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    push&#33;&#40;Expr&#91;&#93;, Expr&#40;:return, false&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L504'>
-          <td class='lineno'>504</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    vcat&#40;String&#91;&#93;, String&#91;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L505'>
-          <td class='lineno'>505</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    k, v &#61; &#40;:hello &#61;&gt; nothing&#41;</span>
-          </td>
-        </tr>
-        <tr id='L506'>
-          <td class='lineno'>506</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    precompile&#40;indexed_iterate, &#40;Pair&#123;Symbol, Union&#123;Nothing, String&#125;&#125;, Int&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L507'>
-          <td class='lineno'>507</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    precompile&#40;indexed_iterate, &#40;Pair&#123;Symbol, Union&#123;Nothing, String&#125;&#125;, Int, Int&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L508'>
-          <td class='lineno'>508</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Preferences uses these</span>
-          </td>
-        </tr>
-        <tr id='L509'>
-          <td class='lineno'>509</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    precompile&#40;get_preferences, &#40;UUID,&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L510'>
-          <td class='lineno'>510</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    precompile&#40;record_compiletime_preference, &#40;UUID, String&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L511'>
-          <td class='lineno'>511</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    get&#40;Dict&#123;String,Any&#125;&#40;&#41;, &quot;missing&quot;, nothing&#41;</span>
-          </td>
-        </tr>
-        <tr id='L512'>
-          <td class='lineno'>512</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    delete&#33;&#40;Dict&#123;String,Any&#125;&#40;&#41;, &quot;missing&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L513'>
-          <td class='lineno'>513</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    for &#40;k, v&#41; in Dict&#123;String,Any&#125;&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L514'>
-          <td class='lineno'>514</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        println&#40;k&#41;</span>
-          </td>
-        </tr>
-        <tr id='L515'>
-          <td class='lineno'>515</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L516'>
-          <td class='lineno'>516</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L517'>
-          <td class='lineno'>517</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    break   # only actually need to do this once</span>
-          </td>
-        </tr>
-        <tr id='L518'>
-          <td class='lineno'>518</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L519'>
-          <td class='lineno'>519</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L520'>
-          <td class='lineno'>520</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>if is_primary_base_module</span>
-          </td>
-        </tr>
-        <tr id='L521'>
-          <td class='lineno'>521</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function __init__&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L522'>
-          <td class='lineno'>522</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Base library init</span>
-          </td>
-        </tr>
-        <tr id='L523'>
-          <td class='lineno'>523</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    reinit_stdio&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L524'>
-          <td class='lineno'>524</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Multimedia.reinit_displays&#40;&#41; # since Multimedia.displays uses stdout as fallback</span>
-          </td>
-        </tr>
-        <tr id='L525'>
-          <td class='lineno'>525</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # initialize loading</span>
-          </td>
-        </tr>
-        <tr id='L526'>
-          <td class='lineno'>526</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    init_depot_path&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L527'>
-          <td class='lineno'>527</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    init_load_path&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L528'>
-          <td class='lineno'>528</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    init_active_project&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L529'>
-          <td class='lineno'>529</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    append&#33;&#40;empty&#33;&#40;_sysimage_modules&#41;, keys&#40;loaded_modules&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L530'>
-          <td class='lineno'>530</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if haskey&#40;ENV, &quot;JULIA_MAX_NUM_PRECOMPILE_FILES&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L531'>
-          <td class='lineno'>531</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        MAX_NUM_PRECOMPILE_FILES&#91;&#93; &#61; parse&#40;Int, ENV&#91;&quot;JULIA_MAX_NUM_PRECOMPILE_FILES&quot;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L532'>
-          <td class='lineno'>532</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L533'>
-          <td class='lineno'>533</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nothing</span>
-          </td>
-        </tr>
-        <tr id='L534'>
-          <td class='lineno'>534</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L535'>
-          <td class='lineno'>535</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L536'>
-          <td class='lineno'>536</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># enable threads support</span>
-          </td>
-        </tr>
-        <tr id='L537'>
-          <td class='lineno'>537</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@eval PCRE PCRE_COMPILE_LOCK &#61; Threads.SpinLock&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L538'>
-          <td class='lineno'>538</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L539'>
-          <td class='lineno'>539</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L540'>
-          <td class='lineno'>540</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L541'>
-          <td class='lineno'>541</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L542'>
-          <td class='lineno'>542</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end # baremodule Base</span>
+            <span class='code'>end # module</span>
           </td>
         </tr>
       </tbody>
