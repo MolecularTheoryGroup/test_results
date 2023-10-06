@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 03 Oct 2023 00:31:04
+        Generated on Fri, 06 Oct 2023 23:43:42
       </div>
     </div>
     <table>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>export CriticalPointType, CriticalPoint, find_cps</span>
+            <span class='code'>export CriticalPointType, CriticalPoint, find_cps, poincare_hopf_value</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>    r::Vector&#123;T&#125;, type::Integer, i_atom::Integer</span>
+            <span class='code'>    r::Vector&#123;T&#125;, type::Integer; i_atom::Integer&#61;0</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>    find_cps&#40;sys::System&#123;T&#125;; spacing::T&#61;0.1, max_dist_from_atom::T&#61;6.0, dup_cp_check_dist::T&#61;1e-4, nuclear_coord_check_dist::T&#61;1e-4&#41;::Vector&#123;CriticalPoint&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>    poincare_hopf_value&#40;cps::Vector&#123;CriticalPoint&#125;&#41;::Int</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>Find critical points in a system.</span>
+            <span class='code'>Check if the Poincaré-Hopf relation is satisfied for a given set of critical points.</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>Parameters:</span>
+            <span class='code'>The Poincaré-Hopf theorem relates the sum of the indices of all critical points of a vector field to the Euler characteristic of the underlying manifold. Specifically, the theorem states that the sum of the indices of all critical points is equal to the Euler characteristic of the manifold.</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>- sys::System&#123;T&#125;: The system for which to find critical points.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>- spacing::T: The spacing between grid points for the search. Default is 0.1.</span>
+            <span class='code'>This function takes a vector of critical points &#96;cps&#96; and checks if the sum of the indices of all critical points in &#96;cps&#96; is equal to the Euler characteristic of the underlying manifold. If the sum of the indices is equal to the Euler characteristic, the function returns &#96;true&#96;. Otherwise, it returns &#96;false&#96;.</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>- max_dist_from_atom::T: The maximum distance from an atom for a point to be considered a critical point. Default is 6.0.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>- dup_cp_check_dist::T: The distance threshold for checking duplicate critical points. Default is 1e-4.</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>- nuclear_coord_check_dist::T: The distance threshold for checking nuclear coordinates. Default is 1e-4.</span>
+            <span class='code'>- &#96;cps::Vector&#123;CriticalPoint&#125;&#96;: A vector of critical points.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>Returns:</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>- Vector&#123;CriticalPoint&#125;: The critical points found in the system.</span>
+            <span class='code'>- &#96;true&#96; if the Poincaré-Hopf relation is satisfied, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1245,36 +1245,17 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L123'>
           <td class='lineno'>123</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              4 &#40;40 &#37;&#41;
-              samples spent in find_cps
-              <br />
-              
-              2 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #61
-              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L91'>line 91</a>
-              <br />
-              
-              2 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from find_cps
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>line 123</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L123'>#find_cps#5</a>
-              <br />
-            </div>
-            <span class='code'>function find_cps&#40;</span>
+            
+            
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1284,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>    sys::System&#123;T&#125;;</span>
+            <span class='code'>cps &#61; &#91;CriticalPoint&#40;&#91;1.0, 2.0, 3.0&#93;, -3&#41;, CriticalPoint&#40;&#91;1.0, 2.0, -3.0&#93;, -3&#41;, CriticalPoint&#40;&#91;1.0, 2.0, 0.0&#93;, -1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1294,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>    spacing::T&#61;0.1,</span>
+            <span class='code'>result &#61; poincare_hopf_value&#40;cps&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1304,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    max_dist_from_atom::T&#61;6.0,</span>
+            <span class='code'>println&#40;result&#41;  # true</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1314,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    dup_cp_check_dist::T&#61;1e-4,</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1324,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    nuclear_coord_check_dist::T&#61;1e-4,</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1334,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>&#41;::Vector&#123;CriticalPoint&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
+            <span class='code'>function poincare_hopf_value&#40;cps::Vector&#123;CriticalPoint&#123;T&#125;&#125;&#41;::Int where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1344,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    n_pts &#61; &#91;max&#40;1, round&#40;Int, norm&#40;sys.grid.lattice_full&#91;i, :&#93;&#41; / spacing&#41;&#41; for i in 1:3&#93;</span>
+            <span class='code'>    cp_types &#61; &#91;nuclear_cp, bond_cp, ring_cp, cage_cp&#93;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1354,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>    lattice &#61; hcat&#40;&#91;sys.grid.lattice_full&#91;i, :&#93; / n_pts&#91;i&#93; for i in 1:3&#93;...&#41;</span>
+            <span class='code'>    cp_counts &#61; &#91;length&#40;filter&#40;x -&gt; x.type &#61;&#61; t, cps&#41;&#41; for t in cp_types&#93;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1364,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>    # define critical point search grid</span>
+            <span class='code'>    ph_rel &#61; cp_counts&#91;1&#93; - cp_counts&#91;2&#93; &#43; cp_counts&#91;3&#93; - cp_counts&#91;4&#93;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1374,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>    gs &#61; GridSpec&#123;Float64&#125;&#40;sys.grid.origin, lattice, n_pts&#41;</span>
+            <span class='code'>    return ph_rel</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1384,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    @debug &quot;search grid spec&quot; gs</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1394,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>    X, Y, Z &#61; generate_interpolation_grid&#40;gs&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1404,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    X, Y, Z &#61; &#91;v&#91;1:&#40;end - 1&#41;&#93; for v in &#40;X, Y, Z&#41;&#93;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1414,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    n_pts .-&#61; 1</span>
+            <span class='code'>    find_cps&#40;sys::System&#123;T&#125;; spacing::T&#61;0.1, max_dist_from_atom::T&#61;6.0, dup_cp_check_dist::T&#61;1e-4, nuclear_coord_check_dist::T&#61;1e-4&#41;::Vector&#123;CriticalPoint&#123;T&#125;&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1434,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    @info &quot;CP search using &#36;&#40;n_pts&#91;1&#93;&#41;x&#36;&#40;n_pts&#91;2&#93;&#41;x&#36;&#40;n_pts&#91;3&#93;&#41; &#61; &#36;&#40;prod&#40;length.&#40;&#91;X,Y,Z&#93;&#41;&#41;&#41; cells with spacing of &#36;spacing&quot;</span>
+            <span class='code'>Find critical points in a system.</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1444,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    @debug &quot;Search grid size&quot; size&#40;X&#41; size&#40;Y&#41; size&#40;Z&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1454,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>    results &#61; &#91;&#91;&#93; for i in 1:Threads.nthreads&#40;&#41;&#93;</span>
+            <span class='code'>Parameters:</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1464,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>    # perform grid-based CP search in shared memory parallel</span>
+            <span class='code'>- sys::System&#123;T&#125;: The system for which to find critical points.</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1474,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>    Threads.@threads for xi in 1:length&#40;X&#41;</span>
+            <span class='code'>- spacing::T: The spacing between grid points for the search. Default is 0.1.</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1484,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>        for yi in 1:length&#40;Y&#41;, zi in 1:length&#40;Z&#41;</span>
+            <span class='code'>- max_dist_from_atom::T: The maximum distance from an atom for a point to be considered a critical point. Default is 6.0.</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1494,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>            low &#61; gs.origin &#43; gs.lattice * float.&#40;&#91;xi, yi, zi&#93; .- 1&#41;</span>
+            <span class='code'>- dup_cp_check_dist::T: The distance threshold for checking duplicate critical points. Default is 1e-4.</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1504,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>            x &#61; low &#43; gs.lattice * 0.5ones&#40;3&#41;</span>
+            <span class='code'>- nuclear_coord_check_dist::T: The distance threshold for checking nuclear coordinates. Default is 1e-4.</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1514,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>            gs1 &#61; GridSpec&#123;Float64&#125;&#40;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1524,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>                low - gs.lattice * 0.01ones&#40;3&#41;, gs.lattice * diagm&#40;1.02ones&#40;3&#41;&#41;, &#91;1, 1, 1&#93;</span>
+            <span class='code'>Returns:</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1534,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>            &#41;</span>
+            <span class='code'>- Vector&#123;CriticalPoint&#123;T&#125;&#125;: The critical points found in the system.</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1544,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>            high &#61; low &#43; gs.lattice * ones&#40;3&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1552,48 +1533,48 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              7 &#40;70 &#37;&#41;
-              samples spent in fb&#33;
-              <br />
-              6 &#40;86 &#37;&#41; &#40;ex.&#41;,
-              6 &#40;86 &#37;&#41; &#40;incl.&#41;
-              when called from value&#33;&#33;
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L166'>line 166</a>
-              <br />
-              
-              1 &#40;14 &#37;&#41; &#40;incl.&#41;
-              when called from fj&#33;
-              <a href='abstract.jl-a81708fd19b8615bb91957ad1ab557c3ed109beb.html#L8'>line 8</a>
-              <br />
-            </div>
             
-            <span class='code'>            function fb&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L152'>
           <td class='lineno'>152</td>
-          <td class='tracecount excl'>6 &#40;60 &#37;&#41;</td>
-          <td class='tracecount incl'>6 &#40;60 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>3 &#40;23 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+            <div class='call-sites'>
+              6 &#40;46 &#37;&#41;
+              samples spent in find_cps
+              <br />
+              
+              3 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #65
+              <a href='profiling.jl-6bfbe717c729fd9130ea9672d3eeba50ac5ecb59.html#L91'>line 91</a>
+              <br />
+              
+              3 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from find_cps
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L152'>line 152</a>
+              <br />
+            </div>
+            <div class='callees'>
+              3 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L152'>#find_cps#9</a>
+              <br />
+            </div>
+            <span class='code'>function find_cps&#40;</span>
           </td>
         </tr>
         <tr id='L153'>
           <td class='lineno'>153</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L220'>grad&#33;</a>
-              <br />
-            </div>
-            <span class='code'>                return sys.grad&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>    sys::System&#123;T&#125;;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1603,7 +1584,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    spacing::T&#61;0.25,</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1611,33 +1592,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in jb&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from fj&#33;
-              <a href='abstract.jl-a81708fd19b8615bb91957ad1ab557c3ed109beb.html#L7'>line 7</a>
-              <br />
-            </div>
             
-            <span class='code'>            function jb&#33;&#40;F, x&#41;</span>
+            
+            <span class='code'>    dup_cp_check_dist::T&#61;0.2,</span>
           </td>
         </tr>
         <tr id='L156'>
           <td class='lineno'>156</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L211'>in_bounding_box</a>
-              <br />
-            </div>
-            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+            
+            <span class='code'>    cutoff_rho&#61;1e-3,</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1647,7 +1614,7 @@
           <td>
             
             
-            <span class='code'>                return sys.hess&#33;&#40;F, x&#41;</span>
+            <span class='code'>    cutoff_grad&#61;1e-4,</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1657,7 +1624,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    cutoff_dist_from_atom&#61;4.0,</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1667,7 +1634,7 @@
           <td>
             
             
-            <span class='code'>            # run root finder in cell</span>
+            <span class='code'>&#41;::Vector&#123;CriticalPoint&#123;T&#125;&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1677,7 +1644,7 @@
           <td>
             
             
-            <span class='code'>            try</span>
+            <span class='code'>    n_pts &#61; &#91;max&#40;1, round&#40;Int, norm&#40;sys.grid.lattice_full&#91;i, :&#93;&#41; / spacing&#41;&#41; for i in 1:3&#93;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1687,31 +1654,17 @@
           <td>
             
             
-            <span class='code'>                # @debug &quot;searching cell &#36;xi &#36;yi &#36;zi&quot; low high</span>
+            <span class='code'>    lattice &#61; hcat&#40;&#91;sys.grid.lattice_full&#91;i, :&#93; / n_pts&#91;i&#93; for i in 1:3&#93;...&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
           <td class='lineno'>162</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>8 &#40;80 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              8 &#40;80 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              8 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #101#threadsfor_fun#10
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
-              <br />
-            </div>
-            <div class='callees'>
-              8 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L56'>nlsolve</a>
-              <br />
-            </div>
-            <span class='code'>                r &#61; nlsolve&#40;fb&#33;, jb&#33;, x&#41;</span>
+            
+            
+            <span class='code'>    # define critical point search grid</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1721,7 +1674,7 @@
           <td>
             
             
-            <span class='code'>                if r.x_converged || r.f_converged</span>
+            <span class='code'>    gs &#61; GridSpec&#123;Float64&#125;&#40;sys.grid.origin, lattice, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1731,7 +1684,7 @@
           <td>
             
             
-            <span class='code'>                    # save if converged</span>
+            <span class='code'>    @debug &quot;search grid spec&quot; gs</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1741,7 +1694,7 @@
           <td>
             
             
-            <span class='code'>                    # @debug &quot;CP found&quot; r.zero</span>
+            <span class='code'>    X, Y, Z &#61; generate_interpolation_grid&#40;gs&#41;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1751,7 +1704,7 @@
           <td>
             
             
-            <span class='code'>                    push&#33;&#40;results&#91;Threads.threadid&#40;&#41;&#93;, r&#41;</span>
+            <span class='code'>    X, Y, Z &#61; &#91;v&#91;1:&#40;end - 1&#41;&#93; for v in &#40;X, Y, Z&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1761,7 +1714,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    n_pts .-&#61; 1</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1771,7 +1724,7 @@
           <td>
             
             
-            <span class='code'>            catch e</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1781,7 +1734,7 @@
           <td>
             
             
-            <span class='code'>                continue</span>
+            <span class='code'>    @info &quot;CP search using &#36;&#40;n_pts&#91;1&#93;&#41;x&#36;&#40;n_pts&#91;2&#93;&#41;x&#36;&#40;n_pts&#91;3&#93;&#41; &#61; &#36;&#40;prod&#40;length.&#40;&#91;X,Y,Z&#93;&#41;&#41;&#41; cells with spacing of &#36;spacing&quot;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1791,7 +1744,7 @@
           <td>
             
             
-            <span class='code'>                @debug &quot;grid point failed&quot; x e</span>
+            <span class='code'>    @debug &quot;Search grid size&quot; size&#40;X&#41; size&#40;Y&#41; size&#40;Z&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1801,7 +1754,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    results &#61; &#91;&#91;&#93; for i in 1:Threads.nthreads&#40;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1811,7 +1764,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1821,7 +1774,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    # Run a search at the midpoint between neighboring atom coords.</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1831,7 +1784,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Store edges to be searched as a set</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1841,7 +1794,7 @@
           <td>
             
             
-            <span class='code'>    # create critical point data structure</span>
+            <span class='code'>    if length&#40;sys.atoms&#41; &gt; 1</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1851,7 +1804,7 @@
           <td>
             
             
-            <span class='code'>    cp_info &#61; Vector&#123;CriticalPoint&#123;T&#125;&#125;&#40;&#41;</span>
+            <span class='code'>        get_edge&#40;n1, n2&#41; &#61; &#40;n1 &lt; n2&#41; ? &#40;n1, n2&#41; : &#40;n2, n1&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1861,7 +1814,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;ri, ro&#41; in enumerate&#40;results&#41;</span>
+            <span class='code'>        edge_set &#61; Set&#123;Tuple&#123;Int,Int&#125;&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1871,7 +1824,7 @@
           <td>
             
             
-            <span class='code'>        for r in ro</span>
+            <span class='code'>        for i in 1:length&#40;sys.atoms&#41;, j in &#40;i &#43; 1&#41;:length&#40;sys.atoms&#41;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1881,7 +1834,7 @@
           <td>
             
             
-            <span class='code'>            x1 &#61; r.zero</span>
+            <span class='code'>            # only include if distance is less than cutoff_dist_from_atom</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1891,7 +1844,7 @@
           <td>
             
             
-            <span class='code'>            nuclear_coord_ind &#61; 0</span>
+            <span class='code'>            if norm&#40;sys.atoms&#91;i&#93;.r - sys.atoms&#91;j&#93;.r&#41; &lt; cutoff_dist_from_atom</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1901,7 +1854,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;isempty&#40;sys.atoms&#41;</span>
+            <span class='code'>                push&#33;&#40;edge_set, get_edge&#40;i, j&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1911,7 +1864,7 @@
           <td>
             
             
-            <span class='code'>                nuclear_coord_dists &#61; &#91;norm&#40;x1 - a.r&#41; for a in sys.atoms&#93;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1921,7 +1874,7 @@
           <td>
             
             
-            <span class='code'>                min_nuclear_coord_dist &#61; minimum&#40;nuclear_coord_dists&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1931,7 +1884,7 @@
           <td>
             
             
-            <span class='code'>                if min_nuclear_coord_dist &gt; max_dist_from_atom</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1941,7 +1894,7 @@
           <td>
             
             
-            <span class='code'>                    continue # skip points too far from any known atoms</span>
+            <span class='code'>        # get rho values at atom coords</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1951,7 +1904,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>        atom_r &#61; invert&#40;&#91;a.r for a in sys.atoms&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1961,7 +1914,7 @@
           <td>
             
             
-            <span class='code'>                if min_nuclear_coord_dist &lt; nuclear_coord_check_dist</span>
+            <span class='code'>        atom_rho &#61; log1p.&#40;sys.rho_xyz.&#40;atom_r&#91;1&#93;, atom_r&#91;2&#93;, atom_r&#91;3&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1971,7 +1924,7 @@
           <td>
             
             
-            <span class='code'>                    nuclear_coord_ind &#61; argmin&#40;nuclear_coord_dists&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1981,7 +1934,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>        # now loop over edges, doing a search at the midpoint of each.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1991,22 +1944,17 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        # make list from edge set</span>
           </td>
         </tr>
         <tr id='L191'>
           <td class='lineno'>191</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;10 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L775'>collect</a>
-              <br />
-            </div>
-            <span class='code'>            if length&#40;cp_info&#41; &gt; 0 &amp;&amp;</span>
+            
+            <span class='code'>        edge_set &#61; collect&#40;edge_set&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -2016,7 +1964,7 @@
           <td>
             
             
-            <span class='code'>                minimum&#40;&#91;norm&#40;x1 - a.r&#41; for a in cp_info&#93;&#41; &lt; dup_cp_check_dist</span>
+            <span class='code'>        Threads.@threads for e in edge_set</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2026,7 +1974,7 @@
           <td>
             
             
-            <span class='code'>                continue # skip duplicate points</span>
+            <span class='code'>            i1, i2 &#61; e</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2036,7 +1984,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            # position midpoint based on ratio of log&#40;rho&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2046,7 +1994,7 @@
           <td>
             
             
-            <span class='code'>            ρ &#61; sys.rho&#40;x1&#41;</span>
+            <span class='code'>            rho_tot &#61; atom_rho&#91;i1&#93; &#43; atom_rho&#91;i2&#93;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2056,7 +2004,7 @@
           <td>
             
             
-            <span class='code'>            A &#61; sys.hess&#40;x1&#41;</span>
+            <span class='code'>            k &#61; atom_rho&#91;i2&#93; / rho_tot</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2066,7 +2014,7 @@
           <td>
             
             
-            <span class='code'>            λ &#61; eigvals&#40;A&#41;</span>
+            <span class='code'>            x &#61; sys.atoms&#91;i1&#93;.r * k &#43; sys.atoms&#91;i2&#93;.r * &#40;1 - k&#41;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2076,7 +2024,7 @@
           <td>
             
             
-            <span class='code'>            cp_index &#61; Int&#40;sum&#40;sign.&#40;λ&#41;&#41;&#41;</span>
+            <span class='code'>            gs1 &#61; GridSpec&#123;Float64&#125;&#40;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2086,7 +2034,7 @@
           <td>
             
             
-            <span class='code'>            if length&#40;cp_info&#41; &gt; 0</span>
+            <span class='code'>                x - gs.lattice * 1.5ones&#40;3&#41;, gs.lattice * diagm&#40;3ones&#40;3&#41;&#41;, &#91;1, 1, 1&#93;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2096,7 +2044,7 @@
           <td>
             
             
-            <span class='code'>                check_cps &#61; &#91;</span>
+            <span class='code'>            &#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2106,7 +2054,7 @@
           <td>
             
             
-            <span class='code'>                    norm&#40;x1 - cp.r&#41; for</span>
+            <span class='code'>            function fb&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2116,7 +2064,7 @@
           <td>
             
             
-            <span class='code'>                    cp in cp_info if Int&#40;cp.type&#41; &lt;&#61; cp_index || sys.rho&#40;cp.r&#41; &gt; ρ</span>
+            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2126,7 +2074,7 @@
           <td>
             
             
-            <span class='code'>                &#93;</span>
+            <span class='code'>                return sys.grad&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2136,7 +2084,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;isempty&#40;check_cps&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2146,7 +2094,7 @@
           <td>
             
             
-            <span class='code'>                    min_dist &#61; minimum&#40;check_cps&#41;</span>
+            <span class='code'>            function jb&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2156,7 +2104,7 @@
           <td>
             
             
-            <span class='code'>                    if min_dist &lt; 0.05</span>
+            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2166,7 +2114,7 @@
           <td>
             
             
-            <span class='code'>                        continue # skip points too close to another CP of the same cp_index</span>
+            <span class='code'>                return sys.hess&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2176,7 +2124,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2186,7 +2134,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>            # run root finder in cell</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2196,7 +2144,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            try</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2206,7 +2154,7 @@
           <td>
             
             
-            <span class='code'>            # @debug &quot;found cp_index &#36;&#40;cp_index&#41; at&quot; pr&#40;x1&#41; cp_index nuclear_coord_ind</span>
+            <span class='code'>                r &#61; nlsolve&#40;fb&#33;, jb&#33;, x&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2216,7 +2164,7 @@
           <td>
             
             
-            <span class='code'>            push&#33;&#40;cp_info, CriticalPoint&#40;x1, cp_index, nuclear_coord_ind&#41;&#41;</span>
+            <span class='code'>                if r.x_converged || r.f_converged</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2226,7 +2174,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                    # save if converged</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2236,7 +2184,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                    # @debug &quot;CP found&quot; r.zero</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2246,7 +2194,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;cp_info&#41; &#61;&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2256,7 +2204,7 @@
           <td>
             
             
-            <span class='code'>        @warn &quot;No critical points found&quot;</span>
+            <span class='code'>                    push&#33;&#40;results&#91;Threads.threadid&#40;&#41;&#93;, r&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2266,7 +2214,7 @@
           <td>
             
             
-            <span class='code'>        return cp_info</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2276,7 +2224,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            catch e</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2286,17 +2234,1007 @@
           <td>
             
             
-            <span class='code'>    max_rho &#61; maximum&#40;x -&gt; x, &#91;sys.rho&#40;cp.r&#41; for cp in cp_info&#93;&#41; &#43; 1.0</span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L220'>
           <td class='lineno'>220</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                @debug &quot;grid point failed&quot; x e</span>
+          </td>
+        </tr>
+        <tr id='L221'>
+          <td class='lineno'>221</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L222'>
+          <td class='lineno'>222</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L223'>
+          <td class='lineno'>223</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L224'>
+          <td class='lineno'>224</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L225'>
+          <td class='lineno'>225</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # perform grid-based CP search in shared memory parallel</span>
+          </td>
+        </tr>
+        <tr id='L226'>
+          <td class='lineno'>226</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Threads.@threads for xi in 1:length&#40;X&#41;</span>
+          </td>
+        </tr>
+        <tr id='L227'>
+          <td class='lineno'>227</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        for yi in 1:length&#40;Y&#41;, zi in 1:length&#40;Z&#41;</span>
+          </td>
+        </tr>
+        <tr id='L228'>
+          <td class='lineno'>228</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
             <div class='call-sites'>
-              1 &#40;10 &#37;&#41;
-              samples spent in #17
+              1 &#40;8 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #141#threadsfor_fun#16
+              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='arraymath.jl-4a16403dcf37d49ba755bcda17c8952005bb1bda.html#L12'>&#43;</a>
+              <br />
+            </div>
+            <span class='code'>            low &#61; gs.origin &#43; gs.lattice * float.&#40;&#91;xi, yi, zi&#93; .- 1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L229'>
+          <td class='lineno'>229</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            x &#61; low &#43; gs.lattice * 0.5ones&#40;3&#41;</span>
+          </td>
+        </tr>
+        <tr id='L230'>
+          <td class='lineno'>230</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            # check against cutoffs</span>
+          </td>
+        </tr>
+        <tr id='L231'>
+          <td class='lineno'>231</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if sys.rho&#40;x&#41; &lt; cutoff_rho || norm&#40;sys.grad&#40;x&#41;&#41; &lt; cutoff_grad</span>
+          </td>
+        </tr>
+        <tr id='L232'>
+          <td class='lineno'>232</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                continue</span>
+          </td>
+        </tr>
+        <tr id='L233'>
+          <td class='lineno'>233</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L234'>
+          <td class='lineno'>234</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            # check not within check dist of nuclear coordinates</span>
+          </td>
+        </tr>
+        <tr id='L235'>
+          <td class='lineno'>235</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if &#33;isempty&#40;sys.atoms&#41;</span>
+          </td>
+        </tr>
+        <tr id='L236'>
+          <td class='lineno'>236</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                min_atom_dist &#61; minimum&#40;&#91;norm&#40;x - a.r&#41; for a in sys.atoms&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L237'>
+          <td class='lineno'>237</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                if min_atom_dist &lt; dup_cp_check_dist ||</span>
+          </td>
+        </tr>
+        <tr id='L238'>
+          <td class='lineno'>238</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    min_atom_dist &gt; cutoff_dist_from_atom</span>
+          </td>
+        </tr>
+        <tr id='L239'>
+          <td class='lineno'>239</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    continue</span>
+          </td>
+        </tr>
+        <tr id='L240'>
+          <td class='lineno'>240</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                end</span>
+          </td>
+        </tr>
+        <tr id='L241'>
+          <td class='lineno'>241</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L242'>
+          <td class='lineno'>242</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if any&#40;&#91;&#33;isempty&#40;i&#41; for i in results&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L243'>
+          <td class='lineno'>243</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>2 &#40;15 &#37;&#41;</td>
+          <td>
+            <div class='call-sites'>
+              2 &#40;15 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #141#threadsfor_fun#16
+              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L707'>collect</a>
+              <br />
+            </div>
+            <span class='code'>                min_point_dist &#61; minimum&#40;&#91;norm&#40;x - r.zero&#41; for ro in results for r in ro&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L244'>
+          <td class='lineno'>244</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                if min_point_dist &lt; dup_cp_check_dist</span>
+          </td>
+        </tr>
+        <tr id='L245'>
+          <td class='lineno'>245</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    continue</span>
+          </td>
+        </tr>
+        <tr id='L246'>
+          <td class='lineno'>246</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                end</span>
+          </td>
+        </tr>
+        <tr id='L247'>
+          <td class='lineno'>247</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L248'>
+          <td class='lineno'>248</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            gs1 &#61; GridSpec&#123;Float64&#125;&#40;</span>
+          </td>
+        </tr>
+        <tr id='L249'>
+          <td class='lineno'>249</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                low - gs.lattice * 0.2ones&#40;3&#41;, gs.lattice * diagm&#40;1.4ones&#40;3&#41;&#41;, &#91;1, 1, 1&#93;</span>
+          </td>
+        </tr>
+        <tr id='L250'>
+          <td class='lineno'>250</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            &#41;</span>
+          </td>
+        </tr>
+        <tr id='L251'>
+          <td class='lineno'>251</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            <div class='call-sites'>
+              4 &#40;31 &#37;&#41;
+              samples spent in fb&#33;
+              <br />
+              4 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              4 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from value&#33;&#33;
+              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L166'>line 166</a>
+              <br />
+            </div>
+            
+            <span class='code'>            function fb&#33;&#40;F, x&#41;</span>
+          </td>
+        </tr>
+        <tr id='L252'>
+          <td class='lineno'>252</td>
+          <td class='tracecount excl'>4 &#40;31 &#37;&#41;</td>
+          <td class='tracecount incl'>4 &#40;31 &#37;&#41;</td>
+          <td>
+            
+            
+            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L253'>
+          <td class='lineno'>253</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                return sys.grad&#33;&#40;F, x&#41;</span>
+          </td>
+        </tr>
+        <tr id='L254'>
+          <td class='lineno'>254</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L255'>
+          <td class='lineno'>255</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in jb&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from jacobian&#33;&#33;
+              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L142'>line 142</a>
+              <br />
+            </div>
+            
+            <span class='code'>            function jb&#33;&#40;F, x&#41;</span>
+          </td>
+        </tr>
+        <tr id='L256'>
+          <td class='lineno'>256</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                @assert in_bounding_box&#40;x, gs1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L257'>
+          <td class='lineno'>257</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
+          <td>
+            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='test_helpers.jl-009548eb3316e18fbb4808fb79fe412be0647763.html#L221'>hess&#33;</a>
+              <br />
+            </div>
+            <span class='code'>                return sys.hess&#33;&#40;F, x&#41;</span>
+          </td>
+        </tr>
+        <tr id='L258'>
+          <td class='lineno'>258</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L259'>
+          <td class='lineno'>259</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            # run root finder in cell</span>
+          </td>
+        </tr>
+        <tr id='L260'>
+          <td class='lineno'>260</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            try</span>
+          </td>
+        </tr>
+        <tr id='L261'>
+          <td class='lineno'>261</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                # @debug &quot;searching cell &#36;xi &#36;yi &#36;zi&quot; low high</span>
+          </td>
+        </tr>
+        <tr id='L262'>
+          <td class='lineno'>262</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>7 &#40;54 &#37;&#41;</td>
+          <td>
+            <div class='call-sites'>
+              7 &#40;54 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              7 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #141#threadsfor_fun#16
+              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L200'>line 200</a>
+              <br />
+            </div>
+            <div class='callees'>
+              7 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L56'>nlsolve</a>
+              <br />
+            </div>
+            <span class='code'>                r &#61; nlsolve&#40;fb&#33;, jb&#33;, x&#41;</span>
+          </td>
+        </tr>
+        <tr id='L263'>
+          <td class='lineno'>263</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                if r.x_converged || r.f_converged</span>
+          </td>
+        </tr>
+        <tr id='L264'>
+          <td class='lineno'>264</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    # save if converged</span>
+          </td>
+        </tr>
+        <tr id='L265'>
+          <td class='lineno'>265</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    # @debug &quot;CP found&quot; r.zero</span>
+          </td>
+        </tr>
+        <tr id='L266'>
+          <td class='lineno'>266</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L267'>
+          <td class='lineno'>267</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    push&#33;&#40;results&#91;Threads.threadid&#40;&#41;&#93;, r&#41;</span>
+          </td>
+        </tr>
+        <tr id='L268'>
+          <td class='lineno'>268</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                end</span>
+          </td>
+        </tr>
+        <tr id='L269'>
+          <td class='lineno'>269</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            catch e</span>
+          </td>
+        </tr>
+        <tr id='L270'>
+          <td class='lineno'>270</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                continue</span>
+          </td>
+        </tr>
+        <tr id='L271'>
+          <td class='lineno'>271</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                @debug &quot;grid point failed&quot; x e</span>
+          </td>
+        </tr>
+        <tr id='L272'>
+          <td class='lineno'>272</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L273'>
+          <td class='lineno'>273</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L274'>
+          <td class='lineno'>274</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L275'>
+          <td class='lineno'>275</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L276'>
+          <td class='lineno'>276</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # create critical point data structure</span>
+          </td>
+        </tr>
+        <tr id='L277'>
+          <td class='lineno'>277</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    cp_info &#61; Vector&#123;CriticalPoint&#123;T&#125;&#125;&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L278'>
+          <td class='lineno'>278</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # add nuclear coordinates to the results</span>
+          </td>
+        </tr>
+        <tr id='L279'>
+          <td class='lineno'>279</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for &#40;i, a&#41; in enumerate&#40;sys.atoms&#41;</span>
+          </td>
+        </tr>
+        <tr id='L280'>
+          <td class='lineno'>280</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        push&#33;&#40;cp_info, CriticalPoint&#40;a.r, -3; i_atom&#61;i&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L281'>
+          <td class='lineno'>281</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L282'>
+          <td class='lineno'>282</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for ro in results, r in ro</span>
+          </td>
+        </tr>
+        <tr id='L283'>
+          <td class='lineno'>283</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        x1 &#61; r.zero</span>
+          </td>
+        </tr>
+        <tr id='L284'>
+          <td class='lineno'>284</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if length&#40;cp_info&#41; &gt; 0 &amp;&amp;</span>
+          </td>
+        </tr>
+        <tr id='L285'>
+          <td class='lineno'>285</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            minimum&#40;&#91;norm&#40;x1 - a.r&#41; for a in cp_info&#93;&#41; &lt; dup_cp_check_dist</span>
+          </td>
+        </tr>
+        <tr id='L286'>
+          <td class='lineno'>286</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            continue # skip duplicate points</span>
+          </td>
+        </tr>
+        <tr id='L287'>
+          <td class='lineno'>287</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L288'>
+          <td class='lineno'>288</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        ρ &#61; sys.rho&#40;x1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L289'>
+          <td class='lineno'>289</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        A &#61; sys.hess&#40;x1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L290'>
+          <td class='lineno'>290</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        λ &#61; eigvals&#40;A&#41;</span>
+          </td>
+        </tr>
+        <tr id='L291'>
+          <td class='lineno'>291</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        cp_index &#61; Int&#40;sum&#40;sign.&#40;λ&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L292'>
+          <td class='lineno'>292</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if length&#40;cp_info&#41; &gt; 0</span>
+          </td>
+        </tr>
+        <tr id='L293'>
+          <td class='lineno'>293</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            check_cps &#61; &#91;</span>
+          </td>
+        </tr>
+        <tr id='L294'>
+          <td class='lineno'>294</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                norm&#40;x1 - cp.r&#41; for</span>
+          </td>
+        </tr>
+        <tr id='L295'>
+          <td class='lineno'>295</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                cp in cp_info if Int&#40;cp.type&#41; &lt;&#61; cp_index || sys.rho&#40;cp.r&#41; &gt; ρ</span>
+          </td>
+        </tr>
+        <tr id='L296'>
+          <td class='lineno'>296</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            &#93;</span>
+          </td>
+        </tr>
+        <tr id='L297'>
+          <td class='lineno'>297</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if &#33;isempty&#40;check_cps&#41;</span>
+          </td>
+        </tr>
+        <tr id='L298'>
+          <td class='lineno'>298</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                min_dist &#61; minimum&#40;check_cps&#41;</span>
+          </td>
+        </tr>
+        <tr id='L299'>
+          <td class='lineno'>299</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                if min_dist &lt; 0.05</span>
+          </td>
+        </tr>
+        <tr id='L300'>
+          <td class='lineno'>300</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                    continue # skip points too close to another CP of the same cp_index</span>
+          </td>
+        </tr>
+        <tr id='L301'>
+          <td class='lineno'>301</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                end</span>
+          </td>
+        </tr>
+        <tr id='L302'>
+          <td class='lineno'>302</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L303'>
+          <td class='lineno'>303</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L304'>
+          <td class='lineno'>304</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        # @debug &quot;found cp_index &#36;&#40;cp_index&#41; at&quot; pr&#40;x1&#41; cp_index nuclear_coord_ind</span>
+          </td>
+        </tr>
+        <tr id='L305'>
+          <td class='lineno'>305</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
+          <td>
+            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L1058'>push&#33;</a>
+              <br />
+            </div>
+            <span class='code'>        push&#33;&#40;cp_info, CriticalPoint&#40;x1, cp_index&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L306'>
+          <td class='lineno'>306</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L307'>
+          <td class='lineno'>307</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if length&#40;cp_info&#41; &#61;&#61; 0</span>
+          </td>
+        </tr>
+        <tr id='L308'>
+          <td class='lineno'>308</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        @warn &quot;No critical points found&quot;</span>
+          </td>
+        </tr>
+        <tr id='L309'>
+          <td class='lineno'>309</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return cp_info</span>
+          </td>
+        </tr>
+        <tr id='L310'>
+          <td class='lineno'>310</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L311'>
+          <td class='lineno'>311</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    max_rho &#61; maximum&#40;x -&gt; x, &#91;sys.rho&#40;cp.r&#41; for cp in cp_info&#93;&#41; &#43; 1.0</span>
+          </td>
+        </tr>
+        <tr id='L312'>
+          <td class='lineno'>312</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>2 &#40;15 &#37;&#41;</td>
+          <td>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in #26
               <br />
               
               1 &#40;100 &#37;&#41; &#40;incl.&#41;
@@ -2317,8 +3255,8 @@
             <span class='code'>    sort&#33;&#40;cp_info; by&#61;cp -&gt; Int&#40;cp.type&#41; &#43; sys.rho&#40;cp.r&#41; / max_rho&#41;</span>
           </td>
         </tr>
-        <tr id='L221'>
-          <td class='lineno'>221</td>
+        <tr id='L313'>
+          <td class='lineno'>313</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
@@ -2327,8 +3265,8 @@
             <span class='code'>    @info &quot;&#36;&#40;length&#40;cp_info&#41;&#41; CPs found&quot;</span>
           </td>
         </tr>
-        <tr id='L222'>
-          <td class='lineno'>222</td>
+        <tr id='L314'>
+          <td class='lineno'>314</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
@@ -2337,8 +3275,8 @@
             <span class='code'>    for rnk in &#91;nuclear_cp, bond_cp, ring_cp, cage_cp&#93;</span>
           </td>
         </tr>
-        <tr id='L223'>
-          <td class='lineno'>223</td>
+        <tr id='L315'>
+          <td class='lineno'>315</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
@@ -2347,18 +3285,23 @@
             <span class='code'>        cps &#61; &#91;cp for cp in cp_info if cp.type &#61;&#61; rnk&#93;</span>
           </td>
         </tr>
-        <tr id='L224'>
-          <td class='lineno'>224</td>
+        <tr id='L316'>
+          <td class='lineno'>316</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
             
-            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='logging.jl-6c2d3388976526e633fc835aa024046f6a14d7c2.html#L384'>macro expansion</a>
+              <br />
+            </div>
             <span class='code'>        @info &quot;&#36;&#40;length&#40;cps&#41;&#41; cps of cp_index &#36;&#40;rnk&#41;&quot;</span>
           </td>
         </tr>
-        <tr id='L225'>
-          <td class='lineno'>225</td>
+        <tr id='L317'>
+          <td class='lineno'>317</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
@@ -2367,8 +3310,48 @@
             <span class='code'>    end</span>
           </td>
         </tr>
-        <tr id='L226'>
-          <td class='lineno'>226</td>
+        <tr id='L318'>
+          <td class='lineno'>318</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    poincare_hopf_relation_value &#61; poincare_hopf_value&#40;cp_info&#41;</span>
+          </td>
+        </tr>
+        <tr id='L319'>
+          <td class='lineno'>319</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if poincare_hopf_relation_value &#33;&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L320'>
+          <td class='lineno'>320</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        @warn &quot;Poincaré-Hopf relation &#40;NCP - BCP &#43; RCP - CCP &#61; 1&#41; not satisfied for system: &#36;&#40;sys.name&#41;&quot; poincare_hopf_relation_value</span>
+          </td>
+        </tr>
+        <tr id='L321'>
+          <td class='lineno'>321</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L322'>
+          <td class='lineno'>322</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
@@ -2377,8 +3360,8 @@
             <span class='code'>    return cp_info</span>
           </td>
         </tr>
-        <tr id='L227'>
-          <td class='lineno'>227</td>
+        <tr id='L323'>
+          <td class='lineno'>323</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
