@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/threadingconstructs.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/iobuffer.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Mon, 09 Oct 2023 01:07:12
+        Generated on Mon, 09 Oct 2023 01:07:08
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>export threadid, nthreads, @threads, @spawn,</span>
+            <span class='code'>## work with AbstractVector&#123;UInt8&#125; via I/O primitives ##</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>       threadpool, nthreadpools</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Stateful string</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>mutable struct GenericIOBuffer&#123;T&lt;:AbstractVector&#123;UInt8&#125;&#125; &lt;: IO</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    Threads.threadid&#40;&#41; -&gt; Int</span>
+            <span class='code'>    data::T # T should support: getindex, setindex&#33;, length, copyto&#33;, and resize&#33;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    readable::Bool</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>Get the ID number of the current thread of execution. The master thread has</span>
+            <span class='code'>    writable::Bool</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>ID &#96;1&#96;.</span>
+            <span class='code'>    seekable::Bool # if not seekable, implementation is free to destroy &#40;compact&#41; past read data</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    append::Bool # add data at end instead of at pointer</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    size::Int # end pointer &#40;and write pointer if append &#61;&#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia-repl</span>
+            <span class='code'>    maxsize::Int # fixed array size &#40;typically pre-allocated&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Threads.threadid&#40;&#41;</span>
+            <span class='code'>    ptr::Int # read &#40;and maybe write&#41; pointer</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>    mark::Int # reset mark location for ptr &#40;or &lt;0 for no mark&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Threads.@threads for i in 1:4</span>
+            <span class='code'>    function GenericIOBuffer&#123;T&#125;&#40;data::T, readable::Bool, writable::Bool, seekable::Bool, append::Bool,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>          println&#40;Threads.threadid&#40;&#41;&#41;</span>
+            <span class='code'>                                maxsize::Integer&#41; where T&lt;:AbstractVector&#123;UInt8&#125;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'>        require_one_based_indexing&#40;data&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>        new&#40;data,readable,writable,seekable,append,length&#40;data&#41;,maxsize,1,-1&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>2</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>5</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>const IOBuffer &#61; GenericIOBuffer&#123;Vector&#123;UInt8&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function GenericIOBuffer&#40;data::T, readable::Bool, writable::Bool, seekable::Bool, append::Bool,</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; note</span>
+            <span class='code'>                         maxsize::Integer&#41; where T&lt;:AbstractVector&#123;UInt8&#125;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>    The thread that a task runs on may change if the task yields, which is known as &#91;&#96;Task Migration&#96;&#93;&#40;@ref man-task-migration&#41;.</span>
+            <span class='code'>    GenericIOBuffer&#123;T&#125;&#40;data, readable, writable, seekable, append, maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    For this reason in most cases it is not safe to use &#96;threadid&#40;&#41;&#96; to index into, say, a vector of buffer or stateful objects.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># allocate Vector&#123;UInt8&#125;s for IOBuffer storage that can efficiently become Strings</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>threadid&#40;&#41; &#61; Int&#40;ccall&#40;:jl_threadid, Int16, &#40;&#41;&#41;&#43;1&#41;</span>
+            <span class='code'>StringVector&#40;n::Integer&#41; &#61; unsafe_wrap&#40;Vector&#123;UInt8&#125;, _string_n&#40;n&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'># lower bound on the largest threadid&#40;&#41;</span>
+            <span class='code'># IOBuffers behave like Files. They are typically readable and writable. They are seekable. &#40;They can be appendable&#41;.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    Threads.maxthreadid&#40;&#41; -&gt; Int</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    IOBuffer&#40;&#91;data::AbstractVector&#123;UInt8&#125;&#93;; keywords...&#41; -&gt; IOBuffer</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>Get a lower bound on the number of threads &#40;across all thread pools&#41; available</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>to the Julia process, with atomic-acquire semantics. The result will always be</span>
+            <span class='code'>Create an in-memory I/O stream, which may optionally operate on a pre-existing array.</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>greater than or equal to &#91;&#96;threadid&#40;&#41;&#96;&#93;&#40;@ref&#41; as well as &#96;threadid&#40;task&#41;&#96; for</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>any task you were able to observe before calling &#96;maxthreadid&#96;.</span>
+            <span class='code'>It may take optional keyword arguments:</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;read&#96;, &#96;write&#96;, &#96;append&#96;: restricts operations to the buffer; see &#96;open&#96; for details.</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>maxthreadid&#40;&#41; &#61; Int&#40;Core.Intrinsics.atomic_pointerref&#40;cglobal&#40;:jl_n_threads, Cint&#41;, :acquire&#41;&#41;</span>
+            <span class='code'>- &#96;truncate&#96;: truncates the buffer size to zero length.</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;maxsize&#96;: specifies a size beyond which the buffer may not be grown.</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;sizehint&#96;: suggests a capacity of the buffer &#40;&#96;data&#96; must implement &#96;sizehint&#33;&#40;data, size&#41;&#96;&#41;.</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    Threads.nthreads&#40;:default | :interactive&#41; -&gt; Int</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>When &#96;data&#96; is not given, the buffer will be both readable and writable by default.</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>Get the current number of threads within the specified thread pool. The threads in default</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>have id numbers &#96;1:nthreads&#40;:default&#41;&#96;.</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>See also &#96;BLAS.get_num_threads&#96; and &#96;BLAS.set_num_threads&#96; in the &#91;&#96;LinearAlgebra&#96;&#93;&#40;@ref</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;&#41;;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>man-linalg&#41; standard library, and &#96;nprocs&#40;&#41;&#96; in the &#91;&#96;Distributed&#96;&#93;&#40;@ref man-distributed&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>standard library and &#91;&#96;Threads.maxthreadid&#40;&#41;&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>julia&gt; write&#40;io, &quot;JuliaLang is a GitHub organization.&quot;, &quot; It has many members.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>56</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>nthreads&#40;pool::Symbol&#41; &#61; threadpoolsize&#40;pool&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; String&#40;take&#33;&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>function _nthreads_in_pool&#40;tpid::Int8&#41;</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization. It has many members.&quot;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>    p &#61; unsafe_load&#40;cglobal&#40;:jl_n_threads_per_pool, Ptr&#123;Cint&#125;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>    return Int&#40;unsafe_load&#40;p, tpid &#43; 1&#41;&#41;</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;b&quot;JuliaLang is a GitHub organization.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>IOBuffer&#40;data&#61;UInt8&#91;...&#93;, readable&#61;true, writable&#61;false, seekable&#61;true, append&#61;false, size&#61;35, maxsize&#61;Inf, ptr&#61;1, mark&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>function _tpid_to_sym&#40;tpid::Int8&#41;</span>
+            <span class='code'>julia&gt; read&#40;io, String&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>    if tpid &#61;&#61; 0</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization.&quot;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>        return :interactive</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    elseif tpid &#61;&#61; 1</span>
+            <span class='code'>julia&gt; write&#40;io, &quot;This isn&#39;t writable.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>        return :default</span>
+            <span class='code'>ERROR: ArgumentError: ensureroom failed, IOBuffer is not writeable</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;Unrecognized threadpool id &#36;tpid&quot;&#41;&#41;</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;UInt8&#91;&#93;, read&#61;true, write&#61;true, maxsize&#61;34&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>IOBuffer&#40;data&#61;UInt8&#91;...&#93;, readable&#61;true, writable&#61;true, seekable&#61;true, append&#61;false, size&#61;0, maxsize&#61;34, ptr&#61;1, mark&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; write&#40;io, &quot;JuliaLang is a GitHub organization.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>function _sym_to_tpid&#40;tp::Symbol&#41;</span>
+            <span class='code'>34</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    if tp &#61;&#61;&#61; :interactive</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>        return Int8&#40;0&#41;</span>
+            <span class='code'>julia&gt; String&#40;take&#33;&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    elseif tp &#61;&#61;&#61; :default</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization&quot;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>        return Int8&#40;1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>julia&gt; length&#40;read&#40;IOBuffer&#40;b&quot;data&quot;, read&#61;true, truncate&#61;false&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;Unrecognized threadpool name &#96;&#36;&#40;repr&#40;tp&#41;&#41;&#96;&quot;&#41;&#41;</span>
+            <span class='code'>4</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; length&#40;read&#40;IOBuffer&#40;b&quot;data&quot;, read&#61;true, truncate&#61;true&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>0</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    Threads.threadpool&#40;tid &#61; threadid&#40;&#41;&#41; -&gt; Symbol</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function IOBuffer&#40;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>Returns the specified thread&#39;s threadpool; either &#96;:default&#96; or &#96;:interactive&#96;.</span>
+            <span class='code'>        data::AbstractVector&#123;UInt8&#125;;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        read::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'>function threadpool&#40;tid &#61; threadid&#40;&#41;&#41;</span>
+            <span class='code'>        write::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>    tpid &#61; ccall&#40;:jl_threadpoolid, Int8, &#40;Int16,&#41;, tid-1&#41;</span>
+            <span class='code'>        append::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>    return _tpid_to_sym&#40;tpid&#41;</span>
+            <span class='code'>        truncate::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        maxsize::Integer&#61;typemax&#40;Int&#41;,</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        sizehint::Union&#123;Integer,Nothing&#125;&#61;nothing&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if maxsize &lt; 0</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>    Threads.nthreadpools&#40;&#41; -&gt; Int</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;negative maxsize&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>Returns the number of threadpools currently configured.</span>
+            <span class='code'>    if sizehint &#33;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        sizehint&#33;&#40;data, sizehint&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>nthreadpools&#40;&#41; &#61; Int&#40;unsafe_load&#40;cglobal&#40;:jl_n_threadpools, Cint&#41;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    flags &#61; open_flags&#40;read&#61;read, write&#61;write, append&#61;append, truncate&#61;truncate&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    buf &#61; GenericIOBuffer&#40;data, flags.read, flags.write, true, flags.append, Int&#40;maxsize&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>    Threads.threadpoolsize&#40;pool::Symbol &#61; :default&#41; -&gt; Int</span>
+            <span class='code'>    if flags.truncate</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        buf.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>Get the number of threads available to the default thread pool &#40;or to the</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>specified thread pool&#41;.</span>
+            <span class='code'>    return buf</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>See also: &#96;BLAS.get_num_threads&#96; and &#96;BLAS.set_num_threads&#96; in the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;LinearAlgebra&#96;&#93;&#40;@ref man-linalg&#41; standard library, and &#96;nprocs&#40;&#41;&#96; in the</span>
+            <span class='code'>function IOBuffer&#40;;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;Distributed&#96;&#93;&#40;@ref man-distributed&#41; standard library.</span>
+            <span class='code'>        read::Union&#123;Bool,Nothing&#125;&#61;true,</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        write::Union&#123;Bool,Nothing&#125;&#61;true,</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>function threadpoolsize&#40;pool::Symbol &#61; :default&#41;</span>
+            <span class='code'>        append::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>    if pool &#61;&#61;&#61; :default || pool &#61;&#61;&#61; :interactive</span>
+            <span class='code'>        truncate::Union&#123;Bool,Nothing&#125;&#61;true,</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>        tpid &#61; _sym_to_tpid&#40;pool&#41;</span>
+            <span class='code'>        maxsize::Integer&#61;typemax&#40;Int&#41;,</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        sizehint::Union&#123;Integer,Nothing&#125;&#61;nothing&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;invalid threadpool specified&quot;&#41;</span>
+            <span class='code'>    size &#61; sizehint &#33;&#61;&#61; nothing ? Int&#40;sizehint&#41; : maxsize &#33;&#61; typemax&#40;Int&#41; ? Int&#40;maxsize&#41; : 32</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    flags &#61; open_flags&#40;read&#61;read, write&#61;write, append&#61;append, truncate&#61;truncate&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>    return _nthreads_in_pool&#40;tpid&#41;</span>
+            <span class='code'>    buf &#61; IOBuffer&#40;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        StringVector&#40;size&#41;,</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        read&#61;flags.read,</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        write&#61;flags.write,</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>    threadpooltids&#40;pool::Symbol&#41;</span>
+            <span class='code'>        append&#61;flags.append,</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        truncate&#61;flags.truncate,</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>Returns a vector of IDs of threads in the given pool.</span>
+            <span class='code'>        maxsize&#61;maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    fill&#33;&#40;buf.data, 0&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>function threadpooltids&#40;pool::Symbol&#41;</span>
+            <span class='code'>    return buf</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>    ni &#61; _nthreads_in_pool&#40;Int8&#40;0&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>    if pool &#61;&#61;&#61; :interactive</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>        return collect&#40;1:ni&#41;</span>
+            <span class='code'># PipeBuffers behave like Unix Pipes. They are typically readable and writable, they act appendable, and are not seekable.</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    elseif pool &#61;&#61;&#61; :default</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>        return collect&#40;ni&#43;1:ni&#43;_nthreads_in_pool&#40;Int8&#40;1&#41;&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    PipeBuffer&#40;data::Vector&#123;UInt8&#125;&#61;UInt8&#91;&#93;; maxsize::Integer &#61; typemax&#40;Int&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;invalid threadpool specified&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>An &#91;&#96;IOBuffer&#96;&#93;&#40;@ref&#41; that allows reading and performs writes by appending.</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Seeking and truncating are not supported.</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>See &#91;&#96;IOBuffer&#96;&#93;&#40;@ref&#41; for the available constructors.</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>function threading_run&#40;fun, static&#41;</span>
+            <span class='code'>If &#96;data&#96; is given, creates a &#96;PipeBuffer&#96; to operate on a data vector,</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_enter_threaded_region, Cvoid, &#40;&#41;&#41;</span>
+            <span class='code'>optionally specifying a size beyond which the underlying &#96;Array&#96; may not be grown.</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; threadpoolsize&#40;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    tid_offset &#61; threadpoolsize&#40;:interactive&#41;</span>
+            <span class='code'>PipeBuffer&#40;data::Vector&#123;UInt8&#125;&#61;UInt8&#91;&#93;; maxsize::Int &#61; typemax&#40;Int&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    tasks &#61; Vector&#123;Task&#125;&#40;undef, n&#41;</span>
+            <span class='code'>    GenericIOBuffer&#40;data,true,true,false,true,maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,22 +1405,17 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:n</span>
+            <span class='code'>PipeBuffer&#40;maxsize::Integer&#41; &#61; &#40;x &#61; PipeBuffer&#40;StringVector&#40;maxsize&#41;, maxsize &#61; maxsize&#41;; x.size&#61;0; x&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
           <td class='lineno'>139</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>13 &#40;93 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              13 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L167'>#143#threadsfor_fun</a>
-              <br />
-            </div>
-            <span class='code'>        t &#61; Task&#40;&#40;&#41; -&gt; fun&#40;i&#41;&#41; # pass in tid</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1430,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>        t.sticky &#61; static</span>
+            <span class='code'>function copy&#40;b::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1440,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>        if static</span>
+            <span class='code'>    ret &#61; typeof&#40;b&#41;&#40;b.writable ? copy&#40;b.data&#41; : b.data,</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1450,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>            ccall&#40;:jl_set_task_tid, Cint, &#40;Any, Cint&#41;, t, tid_offset &#43; i-1&#41;</span>
+            <span class='code'>                    b.readable, b.writable, b.seekable, b.append, b.maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1460,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    ret.size &#61; b.size</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1470,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>            # TODO: this should be the current pool &#40;except interactive&#41; if there</span>
+            <span class='code'>    ret.ptr  &#61; b.ptr</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1480,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>            # are ever more than two pools.</span>
+            <span class='code'>    return ret</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1490,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>            ccall&#40;:jl_set_task_threadpoolid, Cint, &#40;Any, Int8&#41;, t, _sym_to_tpid&#40;:default&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1500,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1510,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>        tasks&#91;i&#93; &#61; t</span>
+            <span class='code'>show&#40;io::IO, b::GenericIOBuffer&#41; &#61; print&#40;io, &quot;IOBuffer&#40;data&#61;UInt8&#91;...&#93;, &quot;,</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1520,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>        schedule&#40;t&#41;</span>
+            <span class='code'>                                      &quot;readable&#61;&quot;, b.readable, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1530,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                                      &quot;writable&#61;&quot;, b.writable, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1540,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:n</span>
+            <span class='code'>                                      &quot;seekable&#61;&quot;, b.seekable, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1550,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>        Base._wait&#40;tasks&#91;i&#93;&#41;</span>
+            <span class='code'>                                      &quot;append&#61;&quot;,   b.append, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1560,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                                      &quot;size&#61;&quot;,     b.size, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1570,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_exit_threaded_region, Cvoid, &#40;&#41;&#41;</span>
+            <span class='code'>                                      &quot;maxsize&#61;&quot;,  b.maxsize &#61;&#61; typemax&#40;Int&#41; ? &quot;Inf&quot; : b.maxsize, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1580,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>    failed_tasks &#61; filter&#40;istaskfailed, tasks&#41;</span>
+            <span class='code'>                                      &quot;ptr&#61;&quot;,      b.ptr, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1590,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;failed_tasks&#41;</span>
+            <span class='code'>                                      &quot;mark&#61;&quot;,     b.mark, &quot;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1600,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;CompositeException&#40;map&#40;TaskFailedException, failed_tasks&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1610,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@noinline function _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1620,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # See https://github.com/JuliaLang/julia/issues/29688.</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1630,7 +1625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    throw&#40;ArgumentError&#40;&quot;read failed, IOBuffer is not readable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1640,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>function _threadsfor&#40;iter, lbody, schedule&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1650,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>    lidx &#61; iter.args&#91;1&#93;         # index</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1660,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>    range &#61; iter.args&#91;2&#93;</span>
+            <span class='code'>function unsafe_read&#40;from::GenericIOBuffer, p::Ptr&#123;UInt8&#125;, nb::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1670,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>    quote</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1680,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>        local threadsfor_fun</span>
+            <span class='code'>    avail &#61; bytesavailable&#40;from&#41;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1690,36 +1685,17 @@
           <td>
             
             
-            <span class='code'>        let range &#61; &#36;&#40;esc&#40;range&#41;&#41;</span>
+            <span class='code'>    adv &#61; min&#40;avail, nb&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
           <td class='lineno'>167</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>13 &#40;93 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              26 &#40;186 &#37;&#41;
-              samples spent in #143#threadsfor_fun
-              <br />
-              
-              13 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #143#threadsfor_fun
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L167'>line 167</a>
-              <br />
-              
-              13 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #1
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L139'>line 139</a>
-              <br />
-            </div>
-            <div class='callees'>
-              13 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='threadingconstructs.jl-69da4926deae06dc9dc6e5a13f09a897b39ad603.html#L167'>#143#threadsfor_fun#23</a>
-              <br />
-            </div>
-            <span class='code'>        function threadsfor_fun&#40;tid &#61; 1; onethread &#61; false&#41;</span>
+            
+            
+            <span class='code'>    GC.@preserve from unsafe_copyto&#33;&#40;p, pointer&#40;from.data, from.ptr&#41;, adv&#41;</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1729,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>            r &#61; range # Load into local variable</span>
+            <span class='code'>    from.ptr &#43;&#61; adv</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1739,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>            lenr &#61; length&#40;r&#41;</span>
+            <span class='code'>    if nb &gt; avail</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1749,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>            # divide loop iterations among threads</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1759,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>            if onethread</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1769,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>                tid &#61; 1</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1779,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>                len, rem &#61; lenr, 0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1789,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1799,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>                len, rem &#61; divrem&#40;lenr, threadpoolsize&#40;&#41;&#41;</span>
+            <span class='code'>function peek&#40;from::GenericIOBuffer, T::Union&#123;Type&#123;Int16&#125;,Type&#123;UInt16&#125;,Type&#123;Int32&#125;,Type&#123;UInt32&#125;,Type&#123;Int64&#125;,Type&#123;UInt64&#125;,Type&#123;Int128&#125;,Type&#123;UInt128&#125;,Type&#123;Float16&#125;,Type&#123;Float32&#125;,Type&#123;Float64&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1809,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1819,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>            # not enough iterations for all the threads?</span>
+            <span class='code'>    avail &#61; bytesavailable&#40;from&#41;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1829,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>            if len &#61;&#61; 0</span>
+            <span class='code'>    nb &#61; sizeof&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1839,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>                if tid &gt; rem</span>
+            <span class='code'>    if nb &gt; avail</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1849,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>                    return</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1859,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1869,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>                len, rem &#61; 1, 0</span>
+            <span class='code'>    GC.@preserve from begin</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1879,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        ptr::Ptr&#123;T&#125; &#61; pointer&#40;from.data, from.ptr&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1889,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>            # compute this thread&#39;s iterations</span>
+            <span class='code'>        x &#61; unsafe_load&#40;ptr&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1899,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>            f &#61; firstindex&#40;r&#41; &#43; &#40;&#40;tid-1&#41; * len&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1909,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>            l &#61; f &#43; len - 1</span>
+            <span class='code'>    return x</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1919,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>            # distribute remaining iterations evenly</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1929,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>            if rem &gt; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1939,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>                if tid &lt;&#61; rem</span>
+            <span class='code'>function read&#40;from::GenericIOBuffer, T::Union&#123;Type&#123;Int16&#125;,Type&#123;UInt16&#125;,Type&#123;Int32&#125;,Type&#123;UInt32&#125;,Type&#123;Int64&#125;,Type&#123;UInt64&#125;,Type&#123;Int128&#125;,Type&#123;UInt128&#125;,Type&#123;Float16&#125;,Type&#123;Float32&#125;,Type&#123;Float64&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1949,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>                    f &#61; f &#43; &#40;tid-1&#41;</span>
+            <span class='code'>    x &#61; peek&#40;from, T&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1959,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>                    l &#61; l &#43; tid</span>
+            <span class='code'>    from.ptr &#43;&#61; sizeof&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1969,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'>    return x</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1979,7 +1955,7 @@
           <td>
             
             
-            <span class='code'>                    f &#61; f &#43; rem</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1989,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>                    l &#61; l &#43; rem</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1999,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>function read_sub&#40;from::GenericIOBuffer, a::AbstractArray&#123;T&#125;, offs, nel&#41; where T</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2009,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    require_one_based_indexing&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2019,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>            # run this thread&#39;s iterations</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2029,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>            for i &#61; f:l</span>
+            <span class='code'>    if offs&#43;nel-1 &gt; length&#40;a&#41; || offs &lt; 1 || nel &lt; 0</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2039,30 +2015,17 @@
           <td>
             
             
-            <span class='code'>                local &#36;&#40;esc&#40;lidx&#41;&#41; &#61; @inbounds r&#91;i&#93;</span>
+            <span class='code'>        throw&#40;BoundsError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
           <td class='lineno'>200</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>13 &#40;93 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              9 &#40;69 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L329'>macro expansion</a>
-              <br />
-              3 &#40;23 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L315'>macro expansion</a>
-              <br />
-              1 &#40;8 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L295'>macro expansion</a>
-              <br />
-            </div>
-            <span class='code'>                &#36;&#40;esc&#40;lbody&#41;&#41;</span>
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2072,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    if isbitstype&#40;T&#41; &amp;&amp; isa&#40;a,Array&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2082,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        nb &#61; UInt&#40;nel * sizeof&#40;T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2092,7 +2055,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        GC.@preserve a unsafe_read&#40;from, pointer&#40;a, offs&#41;, nb&#41;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2102,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>        if &#36;&#40;schedule &#61;&#61;&#61; :dynamic || schedule &#61;&#61;&#61; :default&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2112,7 +2075,7 @@
           <td>
             
             
-            <span class='code'>            threading_run&#40;threadsfor_fun, false&#41;</span>
+            <span class='code'>        for i &#61; offs:offs&#43;nel-1</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2122,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>        elseif ccall&#40;:jl_in_threaded_region, Cint, &#40;&#41;&#41; &#33;&#61; 0 # :static</span>
+            <span class='code'>            a&#91;i&#93; &#61; read&#40;to, T&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2132,7 +2095,7 @@
           <td>
             
             
-            <span class='code'>            error&#40;&quot;&#96;@threads :static&#96; cannot be used concurrently or nested&quot;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2142,7 +2105,7 @@
           <td>
             
             
-            <span class='code'>        else # :static</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2152,7 +2115,7 @@
           <td>
             
             
-            <span class='code'>            threading_run&#40;threadsfor_fun, true&#41;</span>
+            <span class='code'>    return a</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2162,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2172,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>        nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2182,7 +2145,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@inline function read&#40;from::GenericIOBuffer, ::Type&#123;UInt8&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2192,7 +2155,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2202,7 +2165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ptr &#61; from.ptr</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2212,7 +2175,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    size &#61; from.size</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2222,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>    Threads.@threads &#91;schedule&#93; for ... end</span>
+            <span class='code'>    if ptr &gt; size</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2232,7 +2195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2242,7 +2205,7 @@
           <td>
             
             
-            <span class='code'>A macro to execute a &#96;for&#96; loop in parallel. The iteration space is distributed to</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2252,7 +2215,7 @@
           <td>
             
             
-            <span class='code'>coarse-grained tasks. This policy can be specified by the &#96;schedule&#96; argument. The</span>
+            <span class='code'>    @inbounds byte &#61; from.data&#91;ptr&#93;::UInt8</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2262,7 +2225,7 @@
           <td>
             
             
-            <span class='code'>execution of the loop waits for the evaluation of all iterations.</span>
+            <span class='code'>    from.ptr &#61; ptr &#43; 1</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2272,7 +2235,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return byte</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2282,7 +2245,7 @@
           <td>
             
             
-            <span class='code'>See also: &#91;&#96;@spawn&#96;&#93;&#40;@ref Threads.@spawn&#41; and</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2292,7 +2255,7 @@
           <td>
             
             
-            <span class='code'>&#96;pmap&#96; in &#91;&#96;Distributed&#96;&#93;&#40;@ref man-distributed&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2302,7 +2265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function peek&#40;from::GenericIOBuffer, ::Type&#123;UInt8&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2312,7 +2275,7 @@
           <td>
             
             
-            <span class='code'># Extended help</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2322,7 +2285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if from.ptr &gt; from.size</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2332,7 +2295,7 @@
           <td>
             
             
-            <span class='code'>## Semantics</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2342,7 +2305,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2352,7 +2315,7 @@
           <td>
             
             
-            <span class='code'>Unless stronger guarantees are specified by the scheduling option, the loop executed by</span>
+            <span class='code'>    return from.data&#91;from.ptr&#93;::UInt8</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2362,7 +2325,7 @@
           <td>
             
             
-            <span class='code'>&#96;@threads&#96; macro have the following semantics.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2382,7 +2345,7 @@
           <td>
             
             
-            <span class='code'>The &#96;@threads&#96; macro executes the loop body in an unspecified order and potentially</span>
+            <span class='code'>read&#40;from::GenericIOBuffer, ::Type&#123;Ptr&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; convert&#40;Ptr&#123;T&#125;, read&#40;from, UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2392,7 +2355,7 @@
           <td>
             
             
-            <span class='code'>concurrently. It does not specify the exact assignments of the tasks and the worker threads.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2402,7 +2365,7 @@
           <td>
             
             
-            <span class='code'>The assignments can be different for each execution. The loop body code &#40;including any code</span>
+            <span class='code'>isreadable&#40;io::GenericIOBuffer&#41; &#61; io.readable</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2412,7 +2375,7 @@
           <td>
             
             
-            <span class='code'>transitively called from it&#41; must not make any assumptions about the distribution of</span>
+            <span class='code'>iswritable&#40;io::GenericIOBuffer&#41; &#61; io.writable</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2422,7 +2385,7 @@
           <td>
             
             
-            <span class='code'>iterations to tasks or the worker thread in which they are executed. The loop body for each</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2432,7 +2395,7 @@
           <td>
             
             
-            <span class='code'>iteration must be able to make forward progress independent of other iterations and be free</span>
+            <span class='code'># TODO: GenericIOBuffer is not iterable, so doesn&#39;t really have a length.</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2442,7 +2405,7 @@
           <td>
             
             
-            <span class='code'>from data races. As such, invalid synchronizations across iterations may deadlock while</span>
+            <span class='code'># This should maybe be sizeof&#40;&#41; instead.</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2452,7 +2415,7 @@
           <td>
             
             
-            <span class='code'>unsynchronized memory accesses may result in undefined behavior.</span>
+            <span class='code'>#length&#40;io::GenericIOBuffer&#41; &#61; &#40;io.seekable ? io.size : bytesavailable&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2462,7 +2425,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>bytesavailable&#40;io::GenericIOBuffer&#41; &#61; io.size - io.ptr &#43; 1</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2472,7 +2435,7 @@
           <td>
             
             
-            <span class='code'>For example, the above conditions imply that:</span>
+            <span class='code'>position&#40;io::GenericIOBuffer&#41; &#61; io.ptr-1</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2492,7 +2455,7 @@
           <td>
             
             
-            <span class='code'>- The lock taken in an iteration *must* be released within the same iteration.</span>
+            <span class='code'>function skip&#40;io::GenericIOBuffer, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2502,7 +2465,7 @@
           <td>
             
             
-            <span class='code'>- Communicating between iterations using blocking primitives like &#96;Channel&#96;s is incorrect.</span>
+            <span class='code'>    seekto &#61; io.ptr &#43; n</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2512,7 +2475,7 @@
           <td>
             
             
-            <span class='code'>- Write only to locations not shared across iterations &#40;unless a lock or atomic operation is</span>
+            <span class='code'>    n &lt; 0 &amp;&amp; return seek&#40;io, seekto-1&#41; # Does error checking</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2522,7 +2485,7 @@
           <td>
             
             
-            <span class='code'>  used&#41;.</span>
+            <span class='code'>    io.ptr &#61; min&#40;seekto, io.size&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2532,7 +2495,7 @@
           <td>
             
             
-            <span class='code'>- Unless the &#96;:static&#96; schedule is used, the value of &#91;&#96;threadid&#40;&#41;&#96;&#93;&#40;@ref Threads.threadid&#41;</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2542,7 +2505,7 @@
           <td>
             
             
-            <span class='code'>  may change even within a single iteration. See &#91;&#96;Task Migration&#96;&#93;&#40;@ref man-task-migration&#41;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2562,7 +2525,7 @@
           <td>
             
             
-            <span class='code'>## Schedulers</span>
+            <span class='code'>function seek&#40;io::GenericIOBuffer, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2572,7 +2535,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if &#33;io.seekable</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2582,7 +2545,7 @@
           <td>
             
             
-            <span class='code'>Without the scheduler argument, the exact scheduling is unspecified and varies across Julia</span>
+            <span class='code'>        ismarked&#40;io&#41; || throw&#40;ArgumentError&#40;&quot;seek failed, IOBuffer is not seekable and is not marked&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2592,7 +2555,7 @@
           <td>
             
             
-            <span class='code'>releases. Currently, &#96;:dynamic&#96; is used when the scheduler is not specified.</span>
+            <span class='code'>        n &#61;&#61; io.mark || throw&#40;ArgumentError&#40;&quot;seek failed, IOBuffer is not seekable and n &#33;&#61; mark&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2602,7 +2565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2612,7 +2575,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.5&quot;</span>
+            <span class='code'>    # TODO: REPL.jl relies on the fact that this does not throw &#40;by seeking past the beginning or end</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2622,7 +2585,7 @@
           <td>
             
             
-            <span class='code'>    The &#96;schedule&#96; argument is available as of Julia 1.5.</span>
+            <span class='code'>    #       of an GenericIOBuffer&#41;, so that would need to be fixed in order to throw an error here</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2632,7 +2595,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #&#40;n &lt; 0 || n &gt; io.size&#41; &amp;&amp; throw&#40;ArgumentError&#40;&quot;Attempted to seek outside IOBuffer boundaries.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2642,7 +2605,7 @@
           <td>
             
             
-            <span class='code'>### &#96;:dynamic&#96; &#40;default&#41;</span>
+            <span class='code'>    #io.ptr &#61; n&#43;1</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2652,7 +2615,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.ptr &#61; max&#40;min&#40;n&#43;1, io.size&#43;1&#41;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2662,7 +2625,7 @@
           <td>
             
             
-            <span class='code'>&#96;:dynamic&#96; scheduler executes iterations dynamically to available worker threads. Current</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2672,7 +2635,7 @@
           <td>
             
             
-            <span class='code'>implementation assumes that the workload for each iteration is uniform. However, this</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2682,7 +2645,7 @@
           <td>
             
             
-            <span class='code'>assumption may be removed in the future.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2692,7 +2655,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function seekend&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2702,7 +2665,7 @@
           <td>
             
             
-            <span class='code'>This scheduling option is merely a hint to the underlying execution mechanism. However, a</span>
+            <span class='code'>    io.ptr &#61; io.size&#43;1</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2712,7 +2675,7 @@
           <td>
             
             
-            <span class='code'>few properties can be expected. The number of &#96;Task&#96;s used by &#96;:dynamic&#96; scheduler is</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2722,7 +2685,7 @@
           <td>
             
             
-            <span class='code'>bounded by a small constant multiple of the number of available worker threads</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2732,7 +2695,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#91;&#96;Threads.threadpoolsize&#40;&#41;&#96;&#93;&#40;@ref&#41;&#41;. Each task processes contiguous regions of the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2742,7 +2705,7 @@
           <td>
             
             
-            <span class='code'>iteration space. Thus, &#96;@threads :dynamic for x in xs; f&#40;x&#41;; end&#96; is typically more</span>
+            <span class='code'>function truncate&#40;io::GenericIOBuffer, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2752,7 +2715,7 @@
           <td>
             
             
-            <span class='code'>efficient than &#96;@sync for x in xs; @spawn f&#40;x&#41;; end&#96; if &#96;length&#40;xs&#41;&#96; is significantly</span>
+            <span class='code'>    io.writable || throw&#40;ArgumentError&#40;&quot;truncate failed, IOBuffer is not writeable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2762,7 +2725,7 @@
           <td>
             
             
-            <span class='code'>larger than the number of the worker threads and the run-time of &#96;f&#40;x&#41;&#96; is relatively</span>
+            <span class='code'>    io.seekable || throw&#40;ArgumentError&#40;&quot;truncate failed, IOBuffer is not seekable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2772,7 +2735,7 @@
           <td>
             
             
-            <span class='code'>smaller than the cost of spawning and synchronizing a task &#40;typically less than 10</span>
+            <span class='code'>    n &lt; 0 &amp;&amp; throw&#40;ArgumentError&#40;&quot;truncate failed, n bytes must be ≥ 0, got &#36;n&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2782,7 +2745,7 @@
           <td>
             
             
-            <span class='code'>microseconds&#41;.</span>
+            <span class='code'>    n &gt; io.maxsize &amp;&amp; throw&#40;ArgumentError&#40;&quot;truncate failed, &#36;&#40;n&#41; bytes is exceeds IOBuffer maxsize &#36;&#40;io.maxsize&#41;&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2792,7 +2755,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if n &gt; length&#40;io.data&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2802,7 +2765,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.8&quot;</span>
+            <span class='code'>        resize&#33;&#40;io.data, n&#41;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2812,7 +2775,7 @@
           <td>
             
             
-            <span class='code'>    The &#96;:dynamic&#96; option for the &#96;schedule&#96; argument is available and the default as of Julia 1.8.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2822,7 +2785,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.data&#91;io.size&#43;1:n&#93; .&#61; 0</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2832,7 +2795,7 @@
           <td>
             
             
-            <span class='code'>### &#96;:static&#96;</span>
+            <span class='code'>    io.size &#61; n</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2842,7 +2805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.ptr &#61; min&#40;io.ptr, n&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2852,7 +2815,7 @@
           <td>
             
             
-            <span class='code'>&#96;:static&#96; scheduler creates one task per thread and divides the iterations equally among</span>
+            <span class='code'>    ismarked&#40;io&#41; &amp;&amp; io.mark &gt; n &amp;&amp; unmark&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2862,7 +2825,7 @@
           <td>
             
             
-            <span class='code'>them, assigning each task specifically to each thread. In particular, the value of</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2872,7 +2835,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;threadid&#40;&#41;&#96;&#93;&#40;@ref Threads.threadid&#41; is guaranteed to be constant within one iteration.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2882,7 +2845,7 @@
           <td>
             
             
-            <span class='code'>Specifying &#96;:static&#96; is an error if used from inside another &#96;@threads&#96; loop or from a</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2892,7 +2855,7 @@
           <td>
             
             
-            <span class='code'>thread other than 1.</span>
+            <span class='code'>function compact&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2902,7 +2865,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.writable || throw&#40;ArgumentError&#40;&quot;compact failed, IOBuffer is not writeable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2912,7 +2875,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; note</span>
+            <span class='code'>    io.seekable &amp;&amp; throw&#40;ArgumentError&#40;&quot;compact failed, IOBuffer is seekable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2922,7 +2885,7 @@
           <td>
             
             
-            <span class='code'>    &#96;:static&#96; scheduling exists for supporting transition of code written before Julia 1.3.</span>
+            <span class='code'>    local ptr::Int, bytes_to_move::Int</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2932,7 +2895,7 @@
           <td>
             
             
-            <span class='code'>    In newly written library functions, &#96;:static&#96; scheduling is discouraged because the</span>
+            <span class='code'>    if ismarked&#40;io&#41; &amp;&amp; io.mark &lt; io.ptr</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2942,7 +2905,7 @@
           <td>
             
             
-            <span class='code'>    functions using this option cannot be called from arbitrary worker threads.</span>
+            <span class='code'>        if io.mark &#61;&#61; 0 return end</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2952,7 +2915,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        ptr &#61; io.mark</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2962,7 +2925,7 @@
           <td>
             
             
-            <span class='code'>## Example</span>
+            <span class='code'>        bytes_to_move &#61; bytesavailable&#40;io&#41; &#43; &#40;io.ptr-io.mark&#41;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2972,7 +2935,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2982,7 +2945,7 @@
           <td>
             
             
-            <span class='code'>To illustrate of the different scheduling strategies, consider the following function</span>
+            <span class='code'>        ptr &#61; io.ptr</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2992,7 +2955,7 @@
           <td>
             
             
-            <span class='code'>&#96;busywait&#96; containing a non-yielding timed loop that runs for a given number of seconds.</span>
+            <span class='code'>        bytes_to_move &#61; bytesavailable&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -3002,7 +2965,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -3012,7 +2975,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia-repl</span>
+            <span class='code'>    copyto&#33;&#40;io.data, 1, io.data, ptr, bytes_to_move&#41;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -3022,7 +2985,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; function busywait&#40;seconds&#41;</span>
+            <span class='code'>    io.size -&#61; ptr - 1</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3032,7 +2995,7 @@
           <td>
             
             
-            <span class='code'>            tstart &#61; time_ns&#40;&#41;</span>
+            <span class='code'>    io.ptr -&#61; ptr - 1</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3042,7 +3005,7 @@
           <td>
             
             
-            <span class='code'>            while &#40;time_ns&#40;&#41; - tstart&#41; / 1e9 &lt; seconds</span>
+            <span class='code'>    io.mark -&#61; ptr - 1</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3052,7 +3015,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3062,7 +3025,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3082,7 +3045,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; @time begin</span>
+            <span class='code'>@noinline function ensureroom_slowpath&#40;io::GenericIOBuffer, nshort::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3092,7 +3055,7 @@
           <td>
             
             
-            <span class='code'>            Threads.@spawn busywait&#40;5&#41;</span>
+            <span class='code'>    io.writable || throw&#40;ArgumentError&#40;&quot;ensureroom failed, IOBuffer is not writeable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3102,7 +3065,7 @@
           <td>
             
             
-            <span class='code'>            Threads.@threads :static for i in 1:Threads.threadpoolsize&#40;&#41;</span>
+            <span class='code'>    if &#33;io.seekable</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3112,7 +3075,7 @@
           <td>
             
             
-            <span class='code'>                busywait&#40;1&#41;</span>
+            <span class='code'>        if &#33;ismarked&#40;io&#41; &amp;&amp; io.ptr &gt; 1 &amp;&amp; io.size &lt;&#61; io.ptr - 1</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3122,7 +3085,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3132,7 +3095,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3142,7 +3105,7 @@
           <td>
             
             
-            <span class='code'>6.003001 seconds &#40;16.33 k allocations: 899.255 KiB, 0.25&#37; compilation time&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3152,7 +3115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            datastart &#61; ismarked&#40;io&#41; ? io.mark : io.ptr</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3162,7 +3125,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; @time begin</span>
+            <span class='code'>            if &#40;io.size&#43;nshort &gt; io.maxsize&#41; ||</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3172,7 +3135,7 @@
           <td>
             
             
-            <span class='code'>            Threads.@spawn busywait&#40;5&#41;</span>
+            <span class='code'>                &#40;datastart &gt; 4096 &amp;&amp; datastart &gt; io.size - io.ptr&#41; ||</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3182,7 +3145,7 @@
           <td>
             
             
-            <span class='code'>            Threads.@threads :dynamic for i in 1:Threads.threadpoolsize&#40;&#41;</span>
+            <span class='code'>                &#40;datastart &gt; 262144&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3192,7 +3155,7 @@
           <td>
             
             
-            <span class='code'>                busywait&#40;1&#41;</span>
+            <span class='code'>                # apply somewhat arbitrary heuristics to decide when to destroy</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3202,7 +3165,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>                # old, read data to make more room for new data</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3212,7 +3175,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                compact&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3222,7 +3185,7 @@
           <td>
             
             
-            <span class='code'>2.012056 seconds &#40;16.05 k allocations: 883.919 KiB, 0.66&#37; compilation time&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3232,7 +3195,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3242,7 +3205,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3252,7 +3215,7 @@
           <td>
             
             
-            <span class='code'>The &#96;:dynamic&#96; example takes 2 seconds since one of the non-occupied threads is able</span>
+            <span class='code'>    return</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3262,7 +3225,7 @@
           <td>
             
             
-            <span class='code'>to run two of the 1-second iterations to complete the for loop.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3272,7 +3235,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3282,7 +3245,7 @@
           <td>
             
             
-            <span class='code'>macro threads&#40;args...&#41;</span>
+            <span class='code'>@inline ensureroom&#40;io::GenericIOBuffer, nshort::Int&#41; &#61; ensureroom&#40;io, UInt&#40;nshort&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3292,7 +3255,7 @@
           <td>
             
             
-            <span class='code'>    na &#61; length&#40;args&#41;</span>
+            <span class='code'>@inline function ensureroom&#40;io::GenericIOBuffer, nshort::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3302,7 +3265,7 @@
           <td>
             
             
-            <span class='code'>    if na &#61;&#61; 2</span>
+            <span class='code'>    if &#33;io.writable || &#40;&#33;io.seekable &amp;&amp; io.ptr &gt; 1&#41;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3312,7 +3275,7 @@
           <td>
             
             
-            <span class='code'>        sched, ex &#61; args</span>
+            <span class='code'>        ensureroom_slowpath&#40;io, nshort&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3322,7 +3285,7 @@
           <td>
             
             
-            <span class='code'>        if sched isa QuoteNode</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3332,7 +3295,7 @@
           <td>
             
             
-            <span class='code'>            sched &#61; sched.value</span>
+            <span class='code'>    n &#61; min&#40;&#40;nshort &#37; Int&#41; &#43; &#40;io.append ? io.size : io.ptr-1&#41;, io.maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3342,7 +3305,7 @@
           <td>
             
             
-            <span class='code'>        elseif sched isa Symbol</span>
+            <span class='code'>    l &#61; length&#40;io.data&#41;</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3352,7 +3315,7 @@
           <td>
             
             
-            <span class='code'>            # for now only allow quoted symbols</span>
+            <span class='code'>    if n &gt; l</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3362,7 +3325,7 @@
           <td>
             
             
-            <span class='code'>            sched &#61; nothing</span>
+            <span class='code'>        _growend&#33;&#40;io.data, &#40;n - l&#41; &#37; UInt&#41;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3372,7 +3335,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3382,7 +3345,7 @@
           <td>
             
             
-            <span class='code'>        if sched &#33;&#61;&#61; :static &amp;&amp; sched &#33;&#61;&#61; :dynamic</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3392,7 +3355,7 @@
           <td>
             
             
-            <span class='code'>            throw&#40;ArgumentError&#40;&quot;unsupported schedule argument in @threads&quot;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3402,7 +3365,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3412,7 +3375,7 @@
           <td>
             
             
-            <span class='code'>    elseif na &#61;&#61; 1</span>
+            <span class='code'>eof&#40;io::GenericIOBuffer&#41; &#61; &#40;io.ptr-1 &#61;&#61; io.size&#41;</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3422,7 +3385,7 @@
           <td>
             
             
-            <span class='code'>        sched &#61; :default</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3432,7 +3395,7 @@
           <td>
             
             
-            <span class='code'>        ex &#61; args&#91;1&#93;</span>
+            <span class='code'>function closewrite&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3442,7 +3405,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    io.writable &#61; false</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3452,7 +3415,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;wrong number of arguments in @threads&quot;&#41;&#41;</span>
+            <span class='code'>    # OR throw&#40;_UVError&#40;&quot;closewrite&quot;, UV_ENOTSOCK&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3462,7 +3425,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3472,7 +3435,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;isa&#40;ex, Expr&#41; &amp;&amp; ex.head &#61;&#61;&#61; :for&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3482,7 +3445,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;@threads requires a &#96;for&#96; loop expression&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3492,7 +3455,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@noinline function close&#40;io::GenericIOBuffer&#123;T&#125;&#41; where T</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3502,7 +3465,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;ex.args&#91;1&#93; isa Expr &amp;&amp; ex.args&#91;1&#93;.head &#61;&#61;&#61; :&#40;&#61;&#41;&#41;</span>
+            <span class='code'>    io.readable &#61; false</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3512,7 +3475,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;nested outer loops are not currently supported by @threads&quot;&#41;&#41;</span>
+            <span class='code'>    io.writable &#61; false</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3522,7 +3485,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    io.seekable &#61; false</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3532,7 +3495,7 @@
           <td>
             
             
-            <span class='code'>    return _threadsfor&#40;ex.args&#91;1&#93;, ex.args&#91;2&#93;, sched&#41;</span>
+            <span class='code'>    io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3542,7 +3505,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    io.maxsize &#61; 0</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3552,7 +3515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3562,7 +3525,7 @@
           <td>
             
             
-            <span class='code'>function _spawn_set_thrpool&#40;t::Task, tp::Symbol&#41;</span>
+            <span class='code'>    io.mark &#61; -1</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3572,7 +3535,7 @@
           <td>
             
             
-            <span class='code'>    tpid &#61; _sym_to_tpid&#40;tp&#41;</span>
+            <span class='code'>    if io.writable</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3582,7 +3545,7 @@
           <td>
             
             
-            <span class='code'>    if _nthreads_in_pool&#40;tpid&#41; &#61;&#61; 0</span>
+            <span class='code'>        resize&#33;&#40;io.data, 0&#41;</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3592,7 +3555,7 @@
           <td>
             
             
-            <span class='code'>        tpid &#61; _sym_to_tpid&#40;:default&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3602,7 +3565,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3612,7 +3575,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_set_task_threadpoolid, Cint, &#40;Any, Int8&#41;, t, tpid&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3622,7 +3585,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3632,7 +3595,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>isopen&#40;io::GenericIOBuffer&#41; &#61; io.readable || io.writable || io.seekable || bytesavailable&#40;io&#41; &gt; 0</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3662,7 +3625,7 @@
           <td>
             
             
-            <span class='code'>    Threads.@spawn &#91;:default|:interactive&#93; expr</span>
+            <span class='code'>    take&#33;&#40;b::IOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3682,7 +3645,7 @@
           <td>
             
             
-            <span class='code'>Create a &#91;&#96;Task&#96;&#93;&#40;@ref&#41; and &#91;&#96;schedule&#96;&#93;&#40;@ref&#41; it to run on any available</span>
+            <span class='code'>Obtain the contents of an &#96;IOBuffer&#96; as an array. Afterwards, the &#96;IOBuffer&#96; is reset to its initial state.</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3692,7 +3655,7 @@
           <td>
             
             
-            <span class='code'>thread in the specified threadpool &#40;&#96;:default&#96; if unspecified&#41;. The task is</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3702,7 +3665,7 @@
           <td>
             
             
-            <span class='code'>allocated to a thread once one becomes available. To wait for the task to</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3712,7 +3675,7 @@
           <td>
             
             
-            <span class='code'>finish, call &#91;&#96;wait&#96;&#93;&#40;@ref&#41; on the result of this macro, or call</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3722,7 +3685,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;fetch&#96;&#93;&#40;@ref&#41; to wait and then obtain its return value.</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;&#41;;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3742,7 +3705,7 @@
           <td>
             
             
-            <span class='code'>Values can be interpolated into &#96;@spawn&#96; via &#96;\&#36;&#96;, which copies the value</span>
+            <span class='code'>julia&gt; write&#40;io, &quot;JuliaLang is a GitHub organization.&quot;, &quot; It has many members.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3752,7 +3715,7 @@
           <td>
             
             
-            <span class='code'>directly into the constructed underlying closure. This allows you to insert</span>
+            <span class='code'>56</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3762,7 +3725,7 @@
           <td>
             
             
-            <span class='code'>the _value_ of a variable, isolating the asynchronous code from changes to</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3772,7 +3735,7 @@
           <td>
             
             
-            <span class='code'>the variable&#39;s value in the current task.</span>
+            <span class='code'>julia&gt; String&#40;take&#33;&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3782,7 +3745,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization. It has many members.&quot;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3792,7 +3755,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; note</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3802,7 +3765,7 @@
           <td>
             
             
-            <span class='code'>    The thread that the task runs on may change if the task yields, therefore &#96;threadid&#40;&#41;&#96; should not</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3812,7 +3775,7 @@
           <td>
             
             
-            <span class='code'>    be treated as constant for a task. See &#91;&#96;Task Migration&#96;&#93;&#40;@ref man-task-migration&#41;, and the broader</span>
+            <span class='code'>function take&#33;&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3822,7 +3785,7 @@
           <td>
             
             
-            <span class='code'>    &#91;multi-threading&#93;&#40;@ref man-multithreading&#41; manual for further important caveats.</span>
+            <span class='code'>    ismarked&#40;io&#41; &amp;&amp; unmark&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3832,7 +3795,7 @@
           <td>
             
             
-            <span class='code'>    See also the chapter on &#91;threadpools&#93;&#40;@ref man-threadpools&#41;.</span>
+            <span class='code'>    if io.seekable</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3842,7 +3805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        nbytes &#61; io.size</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3852,7 +3815,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.3&quot;</span>
+            <span class='code'>        data &#61; copyto&#33;&#40;StringVector&#40;nbytes&#41;, 1, io.data, 1, nbytes&#41;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3862,7 +3825,7 @@
           <td>
             
             
-            <span class='code'>    This macro is available as of Julia 1.3.</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3872,7 +3835,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        nbytes &#61; bytesavailable&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3882,7 +3845,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.4&quot;</span>
+            <span class='code'>        data &#61; read&#33;&#40;io,StringVector&#40;nbytes&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3892,7 +3855,7 @@
           <td>
             
             
-            <span class='code'>    Interpolating values via &#96;\&#36;&#96; is available as of Julia 1.4.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3902,7 +3865,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if io.writable</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3912,7 +3875,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.9&quot;</span>
+            <span class='code'>        io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3922,7 +3885,7 @@
           <td>
             
             
-            <span class='code'>    A threadpool may be specified as of Julia 1.9.</span>
+            <span class='code'>        io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3932,7 +3895,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3942,7 +3905,7 @@
           <td>
             
             
-            <span class='code'>macro spawn&#40;args...&#41;</span>
+            <span class='code'>    return data</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3952,7 +3915,7 @@
           <td>
             
             
-            <span class='code'>    tp &#61; QuoteNode&#40;:default&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3962,7 +3925,7 @@
           <td>
             
             
-            <span class='code'>    na &#61; length&#40;args&#41;</span>
+            <span class='code'>function take&#33;&#40;io::IOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3972,7 +3935,7 @@
           <td>
             
             
-            <span class='code'>    if na &#61;&#61; 2</span>
+            <span class='code'>    ismarked&#40;io&#41; &amp;&amp; unmark&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3982,7 +3945,7 @@
           <td>
             
             
-            <span class='code'>        ttype, ex &#61; args</span>
+            <span class='code'>    if io.seekable</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3992,7 +3955,7 @@
           <td>
             
             
-            <span class='code'>        if ttype isa QuoteNode</span>
+            <span class='code'>        data &#61; io.data</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -4002,7 +3965,7 @@
           <td>
             
             
-            <span class='code'>            ttype &#61; ttype.value</span>
+            <span class='code'>        if io.writable</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -4012,7 +3975,7 @@
           <td>
             
             
-            <span class='code'>            if ttype &#33;&#61;&#61; :interactive &amp;&amp; ttype &#33;&#61;&#61; :default</span>
+            <span class='code'>            maxsize &#61; &#40;io.maxsize &#61;&#61; typemax&#40;Int&#41; ? 0 : min&#40;length&#40;io.data&#41;,io.maxsize&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -4022,7 +3985,7 @@
           <td>
             
             
-            <span class='code'>                throw&#40;ArgumentError&#40;&quot;unsupported threadpool in @spawn: &#36;ttype&quot;&#41;&#41;</span>
+            <span class='code'>            io.data &#61; StringVector&#40;maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4032,7 +3995,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4042,7 +4005,7 @@
           <td>
             
             
-            <span class='code'>            tp &#61; QuoteNode&#40;ttype&#41;</span>
+            <span class='code'>            data &#61; copy&#40;data&#41;</span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4052,7 +4015,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4062,7 +4025,7 @@
           <td>
             
             
-            <span class='code'>            tp &#61; ttype</span>
+            <span class='code'>        resize&#33;&#40;data,io.size&#41;</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4072,7 +4035,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4082,7 +4045,7 @@
           <td>
             
             
-            <span class='code'>    elseif na &#61;&#61; 1</span>
+            <span class='code'>        nbytes &#61; bytesavailable&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4092,7 +4055,7 @@
           <td>
             
             
-            <span class='code'>        ex &#61; args&#91;1&#93;</span>
+            <span class='code'>        a &#61; StringVector&#40;nbytes&#41;</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4102,7 +4065,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        data &#61; read&#33;&#40;io, a&#41;</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4112,7 +4075,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;wrong number of arguments in @spawn&quot;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4122,7 +4085,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    if io.writable</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4132,7 +4095,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4142,7 +4105,7 @@
           <td>
             
             
-            <span class='code'>    letargs &#61; Base._lift_one_interp&#33;&#40;ex&#41;</span>
+            <span class='code'>        io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4152,7 +4115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4162,7 +4125,7 @@
           <td>
             
             
-            <span class='code'>    thunk &#61; esc&#40;:&#40;&#40;&#41;-&gt;&#40;&#36;ex&#41;&#41;&#41;</span>
+            <span class='code'>    return data</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4172,7 +4135,7 @@
           <td>
             
             
-            <span class='code'>    var &#61; esc&#40;Base.sync_varname&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4182,7 +4145,7 @@
           <td>
             
             
-            <span class='code'>    quote</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4192,7 +4155,7 @@
           <td>
             
             
-            <span class='code'>        let &#36;&#40;letargs...&#41;</span>
+            <span class='code'>function write&#40;to::IO, from::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4202,7 +4165,7 @@
           <td>
             
             
-            <span class='code'>            local task &#61; Task&#40;&#36;thunk&#41;</span>
+            <span class='code'>    if to &#61;&#61;&#61; from</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4212,7 +4175,7 @@
           <td>
             
             
-            <span class='code'>            task.sticky &#61; false</span>
+            <span class='code'>        from.ptr &#61; from.size &#43; 1</span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4222,7 +4185,7 @@
           <td>
             
             
-            <span class='code'>            _spawn_set_thrpool&#40;task, &#36;&#40;esc&#40;tp&#41;&#41;&#41;</span>
+            <span class='code'>        return 0</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4232,7 +4195,7 @@
           <td>
             
             
-            <span class='code'>            if &#36;&#40;Expr&#40;:islocal, var&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4242,7 +4205,7 @@
           <td>
             
             
-            <span class='code'>                put&#33;&#40;&#36;var, task&#41;</span>
+            <span class='code'>    written::Int &#61; GC.@preserve from unsafe_write&#40;to, pointer&#40;from.data, from.ptr&#41;, UInt&#40;bytesavailable&#40;from&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4252,7 +4215,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    from.ptr &#43;&#61; written</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4262,7 +4225,7 @@
           <td>
             
             
-            <span class='code'>            schedule&#40;task&#41;</span>
+            <span class='code'>    return written</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4272,7 +4235,7 @@
           <td>
             
             
-            <span class='code'>            task</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4282,7 +4245,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4290,9 +4253,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;9 &#37;&#41;
+              samples spent in unsafe_write
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from write
+              <a href='io.jl-a2c274b436e582cefedcace1085af1d3635b878f.html#L244'>line 244</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>    end</span>
+            <span class='code'>function unsafe_write&#40;to::GenericIOBuffer, p::Ptr&#123;UInt8&#125;, nb::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4302,7 +4274,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    ensureroom&#40;to, nb&#41;</span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4312,7 +4284,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ptr &#61; &#40;to.append ? to.size&#43;1 : to.ptr&#41;</span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4322,7 +4294,7 @@
           <td>
             
             
-            <span class='code'># This is a stub that can be overloaded for downstream structures like &#96;Channel&#96;</span>
+            <span class='code'>    written &#61; Int&#40;min&#40;nb, Int&#40;length&#40;to.data&#41;&#41;::Int - ptr &#43; 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4332,7 +4304,7 @@
           <td>
             
             
-            <span class='code'>function foreach end</span>
+            <span class='code'>    towrite &#61; written</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4342,7 +4314,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    d &#61; to.data</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4352,7 +4324,7 @@
           <td>
             
             
-            <span class='code'># Scheduling traits that can be employed for downstream overloads</span>
+            <span class='code'>    while towrite &gt; 0</span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4362,7 +4334,7 @@
           <td>
             
             
-            <span class='code'>abstract type AbstractSchedule end</span>
+            <span class='code'>        @inbounds d&#91;ptr&#93; &#61; unsafe_load&#40;p&#41;</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4372,17 +4344,932 @@
           <td>
             
             
-            <span class='code'>struct StaticSchedule &lt;: AbstractSchedule end</span>
+            <span class='code'>        ptr &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L432'>
           <td class='lineno'>432</td>
           <td class='tracecount excl'></td>
+          <td class='tracecount incl'>1 &#40;9 &#37;&#41;</td>
+          <td>
+            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='pointer.jl-3c97c6fae55c67c62f7ba26d2b3052ddd5cebd87.html#L167'>&#43;</a>
+              <br />
+            </div>
+            <span class='code'>        p &#43;&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L433'>
+          <td class='lineno'>433</td>
+          <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
             
             
-            <span class='code'>struct FairSchedule &lt;: AbstractSchedule end</span>
+            <span class='code'>        towrite -&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L434'>
+          <td class='lineno'>434</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L435'>
+          <td class='lineno'>435</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    to.size &#61; max&#40;to.size, ptr - 1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L436'>
+          <td class='lineno'>436</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if &#33;to.append</span>
+          </td>
+        </tr>
+        <tr id='L437'>
+          <td class='lineno'>437</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        to.ptr &#43;&#61; written</span>
+          </td>
+        </tr>
+        <tr id='L438'>
+          <td class='lineno'>438</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L439'>
+          <td class='lineno'>439</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return written</span>
+          </td>
+        </tr>
+        <tr id='L440'>
+          <td class='lineno'>440</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L441'>
+          <td class='lineno'>441</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L442'>
+          <td class='lineno'>442</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline function write&#40;to::GenericIOBuffer, a::UInt8&#41;</span>
+          </td>
+        </tr>
+        <tr id='L443'>
+          <td class='lineno'>443</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    ensureroom&#40;to, UInt&#40;1&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L444'>
+          <td class='lineno'>444</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    ptr &#61; &#40;to.append ? to.size&#43;1 : to.ptr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L445'>
+          <td class='lineno'>445</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ptr &gt; to.maxsize</span>
+          </td>
+        </tr>
+        <tr id='L446'>
+          <td class='lineno'>446</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return 0</span>
+          </td>
+        </tr>
+        <tr id='L447'>
+          <td class='lineno'>447</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    else</span>
+          </td>
+        </tr>
+        <tr id='L448'>
+          <td class='lineno'>448</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        to.data&#91;ptr&#93; &#61; a</span>
+          </td>
+        </tr>
+        <tr id='L449'>
+          <td class='lineno'>449</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L450'>
+          <td class='lineno'>450</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    to.size &#61; max&#40;to.size, ptr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L451'>
+          <td class='lineno'>451</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if &#33;to.append</span>
+          </td>
+        </tr>
+        <tr id='L452'>
+          <td class='lineno'>452</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        to.ptr &#43;&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L453'>
+          <td class='lineno'>453</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L454'>
+          <td class='lineno'>454</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return sizeof&#40;UInt8&#41;</span>
+          </td>
+        </tr>
+        <tr id='L455'>
+          <td class='lineno'>455</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L456'>
+          <td class='lineno'>456</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L457'>
+          <td class='lineno'>457</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>readbytes&#33;&#40;io::GenericIOBuffer, b::Array&#123;UInt8&#125;, nb&#61;length&#40;b&#41;&#41; &#61; readbytes&#33;&#40;io, b, Int&#40;nb&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L458'>
+          <td class='lineno'>458</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function readbytes&#33;&#40;io::GenericIOBuffer, b::Array&#123;UInt8&#125;, nb::Int&#41;</span>
+          </td>
+        </tr>
+        <tr id='L459'>
+          <td class='lineno'>459</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    nr &#61; min&#40;nb, bytesavailable&#40;io&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L460'>
+          <td class='lineno'>460</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if length&#40;b&#41; &lt; nr</span>
+          </td>
+        </tr>
+        <tr id='L461'>
+          <td class='lineno'>461</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        resize&#33;&#40;b, nr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L462'>
+          <td class='lineno'>462</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L463'>
+          <td class='lineno'>463</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    read_sub&#40;io, b, 1, nr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L464'>
+          <td class='lineno'>464</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return nr</span>
+          </td>
+        </tr>
+        <tr id='L465'>
+          <td class='lineno'>465</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L466'>
+          <td class='lineno'>466</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>read&#40;io::GenericIOBuffer&#41; &#61; read&#33;&#40;io,StringVector&#40;bytesavailable&#40;io&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L467'>
+          <td class='lineno'>467</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>readavailable&#40;io::GenericIOBuffer&#41; &#61; read&#40;io&#41;</span>
+          </td>
+        </tr>
+        <tr id='L468'>
+          <td class='lineno'>468</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>read&#40;io::GenericIOBuffer, nb::Integer&#41; &#61; read&#33;&#40;io,StringVector&#40;min&#40;nb, bytesavailable&#40;io&#41;&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L469'>
+          <td class='lineno'>469</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L470'>
+          <td class='lineno'>470</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function occursin&#40;delim::UInt8, buf::IOBuffer&#41;</span>
+          </td>
+        </tr>
+        <tr id='L471'>
+          <td class='lineno'>471</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    p &#61; pointer&#40;buf.data, buf.ptr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L472'>
+          <td class='lineno'>472</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    q &#61; GC.@preserve buf ccall&#40;:memchr,Ptr&#123;UInt8&#125;,&#40;Ptr&#123;UInt8&#125;,Int32,Csize_t&#41;,p,delim,bytesavailable&#40;buf&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L473'>
+          <td class='lineno'>473</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return q &#33;&#61; C_NULL</span>
+          </td>
+        </tr>
+        <tr id='L474'>
+          <td class='lineno'>474</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L475'>
+          <td class='lineno'>475</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L476'>
+          <td class='lineno'>476</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function occursin&#40;delim::UInt8, buf::GenericIOBuffer&#41;</span>
+          </td>
+        </tr>
+        <tr id='L477'>
+          <td class='lineno'>477</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    data &#61; buf.data</span>
+          </td>
+        </tr>
+        <tr id='L478'>
+          <td class='lineno'>478</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for i &#61; buf.ptr:buf.size</span>
+          </td>
+        </tr>
+        <tr id='L479'>
+          <td class='lineno'>479</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        @inbounds b &#61; data&#91;i&#93;</span>
+          </td>
+        </tr>
+        <tr id='L480'>
+          <td class='lineno'>480</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        b &#61;&#61; delim &amp;&amp; return true</span>
+          </td>
+        </tr>
+        <tr id='L481'>
+          <td class='lineno'>481</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L482'>
+          <td class='lineno'>482</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return false</span>
+          </td>
+        </tr>
+        <tr id='L483'>
+          <td class='lineno'>483</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L484'>
+          <td class='lineno'>484</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L485'>
+          <td class='lineno'>485</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function readuntil&#40;io::GenericIOBuffer, delim::UInt8; keep::Bool&#61;false&#41;</span>
+          </td>
+        </tr>
+        <tr id='L486'>
+          <td class='lineno'>486</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    lb &#61; 70</span>
+          </td>
+        </tr>
+        <tr id='L487'>
+          <td class='lineno'>487</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    A &#61; StringVector&#40;lb&#41;</span>
+          </td>
+        </tr>
+        <tr id='L488'>
+          <td class='lineno'>488</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    nread &#61; 0</span>
+          </td>
+        </tr>
+        <tr id='L489'>
+          <td class='lineno'>489</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    nout &#61; 0</span>
+          </td>
+        </tr>
+        <tr id='L490'>
+          <td class='lineno'>490</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    data &#61; io.data</span>
+          </td>
+        </tr>
+        <tr id='L491'>
+          <td class='lineno'>491</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for i &#61; io.ptr : io.size</span>
+          </td>
+        </tr>
+        <tr id='L492'>
+          <td class='lineno'>492</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        @inbounds b &#61; data&#91;i&#93;</span>
+          </td>
+        </tr>
+        <tr id='L493'>
+          <td class='lineno'>493</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        nread &#43;&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L494'>
+          <td class='lineno'>494</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if keep || b &#33;&#61; delim</span>
+          </td>
+        </tr>
+        <tr id='L495'>
+          <td class='lineno'>495</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            nout &#43;&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L496'>
+          <td class='lineno'>496</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if nout &gt; lb</span>
+          </td>
+        </tr>
+        <tr id='L497'>
+          <td class='lineno'>497</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                lb &#61; nout*2</span>
+          </td>
+        </tr>
+        <tr id='L498'>
+          <td class='lineno'>498</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                resize&#33;&#40;A, lb&#41;</span>
+          </td>
+        </tr>
+        <tr id='L499'>
+          <td class='lineno'>499</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L500'>
+          <td class='lineno'>500</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            @inbounds A&#91;nout&#93; &#61; b</span>
+          </td>
+        </tr>
+        <tr id='L501'>
+          <td class='lineno'>501</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L502'>
+          <td class='lineno'>502</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if b &#61;&#61; delim</span>
+          </td>
+        </tr>
+        <tr id='L503'>
+          <td class='lineno'>503</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            break</span>
+          </td>
+        </tr>
+        <tr id='L504'>
+          <td class='lineno'>504</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L505'>
+          <td class='lineno'>505</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L506'>
+          <td class='lineno'>506</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    io.ptr &#43;&#61; nread</span>
+          </td>
+        </tr>
+        <tr id='L507'>
+          <td class='lineno'>507</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if lb &#33;&#61; nout</span>
+          </td>
+        </tr>
+        <tr id='L508'>
+          <td class='lineno'>508</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        resize&#33;&#40;A, nout&#41;</span>
+          </td>
+        </tr>
+        <tr id='L509'>
+          <td class='lineno'>509</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L510'>
+          <td class='lineno'>510</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    A</span>
+          </td>
+        </tr>
+        <tr id='L511'>
+          <td class='lineno'>511</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L512'>
+          <td class='lineno'>512</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L513'>
+          <td class='lineno'>513</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># copy-free crc32c of IOBuffer:</span>
+          </td>
+        </tr>
+        <tr id='L514'>
+          <td class='lineno'>514</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function _crc32c&#40;io::IOBuffer, nb::Integer, crc::UInt32&#61;0x00000000&#41;</span>
+          </td>
+        </tr>
+        <tr id='L515'>
+          <td class='lineno'>515</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    nb &lt; 0 &amp;&amp; throw&#40;ArgumentError&#40;&quot;number of bytes to checksum must be ≥ 0, got &#36;nb&quot;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L516'>
+          <td class='lineno'>516</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    io.readable || _throw_not_readable&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L517'>
+          <td class='lineno'>517</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    n &#61; min&#40;nb, bytesavailable&#40;io&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L518'>
+          <td class='lineno'>518</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    n &#61;&#61; 0 &amp;&amp; return crc</span>
+          </td>
+        </tr>
+        <tr id='L519'>
+          <td class='lineno'>519</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    crc &#61; GC.@preserve io unsafe_crc32c&#40;pointer&#40;io.data, io.ptr&#41;, n, crc&#41;</span>
+          </td>
+        </tr>
+        <tr id='L520'>
+          <td class='lineno'>520</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    io.ptr &#43;&#61; n</span>
+          </td>
+        </tr>
+        <tr id='L521'>
+          <td class='lineno'>521</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return crc</span>
+          </td>
+        </tr>
+        <tr id='L522'>
+          <td class='lineno'>522</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L523'>
+          <td class='lineno'>523</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>_crc32c&#40;io::IOBuffer, crc::UInt32&#61;0x00000000&#41; &#61; _crc32c&#40;io, bytesavailable&#40;io&#41;, crc&#41;</span>
           </td>
         </tr>
       </tbody>
