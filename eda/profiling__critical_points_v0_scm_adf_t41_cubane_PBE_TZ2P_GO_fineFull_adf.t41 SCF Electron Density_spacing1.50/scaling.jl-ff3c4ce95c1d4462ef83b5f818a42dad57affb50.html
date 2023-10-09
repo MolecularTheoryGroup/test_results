@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/GitHubActions/PCtSF/src/GitHubActions.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/Interpolations/nDwIa/src/scaling/scaling.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Mon, 09 Oct 2023 01:07:08
+        Generated on Mon, 09 Oct 2023 05:43:08
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>module GitHubActions</span>
+            <span class='code'>export ScaledInterpolation, eachvalue</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>export</span>
+            <span class='code'>import Base: iterate</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    GitHubActionsLogger,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>    add_path,</span>
+            <span class='code'>struct ScaledInterpolation&#123;T,N,ITPT,IT,RT&#125; &lt;: AbstractInterpolationWrapper&#123;T,N,ITPT,IT&#125;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>    end_group,</span>
+            <span class='code'>    itp::ITPT</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    get_input,</span>
+            <span class='code'>    ranges::RT</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    get_state,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    group,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    log_debug,</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;o1::ScaledInterpolation, o2::ScaledInterpolation&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    log_error,</span>
+            <span class='code'>    o1.ranges &#61;&#61; o2.ranges &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>    log_warning,</span>
+            <span class='code'>    o1.itp &#61;&#61; o2.itp</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>    save_state,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    set_command_echo,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    set_env,</span>
+            <span class='code'>Base.parent&#40;A::ScaledInterpolation&#41; &#61; A.itp</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    set_failed,</span>
+            <span class='code'>count_interp_dims&#40;::Type&#123;&lt;:ScaledInterpolation&#123;T,N,ITPT&#125;&#125;, n&#41; where &#123;T,N,ITPT&#125; &#61; count_interp_dims&#40;ITPT, n&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    set_output,</span>
+            <span class='code'>BoundsCheckStyle&#40;sitp::ScaledInterpolation&#41; &#61; BoundsCheckStyle&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    set_secret,</span>
+            <span class='code'>coefficients&#40;A::ScaledInterpolation&#41; &#61; coefficients&#40;A.itp&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    start_group</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>using Logging: Logging, AbstractLogger, LogLevel, Debug, Info, Warn, Error</span>
+            <span class='code'>&#96;scale&#40;itp, xs, ys, ...&#41;&#96; scales an existing interpolation object to allow for indexing using other coordinate axes than unit ranges, by wrapping the interpolation object and transforming the indices from the provided axes onto unit ranges upon indexing.</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>using JSON: json</span>
+            <span class='code'>The parameters &#96;xs&#96; etc must be either ranges or linspaces, and there must be one coordinate range/linspace for each dimension of the interpolation object.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>const CMD_MARKER &#61; &quot;::&quot;</span>
+            <span class='code'>For every &#96;NoInterp&#96; dimension of the interpolation object, the range must be exactly &#96;1:size&#40;itp, d&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>function scale&#40;itp::AbstractInterpolation&#123;T,N,IT&#125;, ranges::Vararg&#123;AbstractRange,N&#125;&#41; where &#123;T,N,IT&#125;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    MissingInputError&#40;k&#41;</span>
+            <span class='code'>    check_ranges&#40;itpflag&#40;itp&#41;, axes&#40;itp&#41;, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ScaledInterpolation&#123;T,N,typeof&#40;itp&#41;,IT,typeof&#40;ranges&#41;&#125;&#40;itp, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>Indicates that a required input was not provided.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>The input&#39;s name is stored in &#96;k&#96;.</span>
+            <span class='code'>scale&#40;itp::AbstractInterpolation&#123;T,N,IT&#125;, ranges::NTuple&#123;N, &lt;:AbstractRange&#125;&#41; where &#123;T,N,IT&#125; &#61; scale&#40;itp, ranges...&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>struct MissingInputError &lt;: Exception</span>
+            <span class='code'>function check_ranges&#40;flags, axs, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>    k::String</span>
+            <span class='code'>    check_range&#40;getfirst&#40;flags&#41;, axs&#91;1&#93;, ranges&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    check_range&#40;ranges&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    check_ranges&#40;getrest&#40;flags&#41;, Base.tail&#40;axs&#41;, Base.tail&#40;ranges&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>Base.showerror&#40;io::IO, e::MissingInputError&#41; &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;Input required and not supplied: &#36;&#40;e.k&#41;&quot;&#41;</span>
+            <span class='code'>check_ranges&#40;::Any, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>cmd_value&#40;::Nothing&#41; &#61; &quot;&quot;</span>
+            <span class='code'>check_range&#40;::NoInterp, ax, r&#41; &#61; ax &#61;&#61; r || throw&#40;ArgumentError&#40;&quot;The range &#36;r did not equal the corresponding axis of the interpolation object &#36;ax&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>cmd_value&#40;s::AbstractString&#41; &#61; s</span>
+            <span class='code'>check_range&#40;::Any, ax, r&#41; &#61; length&#40;ax&#41; &#61;&#61; length&#40;r&#41; || throw&#40;ArgumentError&#40;&quot;The range &#36;r is incommensurate with the corresponding axis &#36;ax&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>cmd_value&#40;x&#41; &#61; json&#40;x&#41;</span>
+            <span class='code'>check_range&#40;r::AbstractRange&#41; &#61; step&#40;r&#41; &gt; zero&#40;eltype&#40;r&#41;&#41; || throw&#40;ArgumentError&#40;&quot;The range &#36;r is in decreasing order; only ranges with positive steps are supported by scale&#40;&#41;.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>function esc_data&#40;val&#41;</span>
+            <span class='code'># With regards to size and &#91;&#93;, ScaledInterpolation behaves like the underlying interpolation object</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; cmd_value&#40;val&#41;</span>
+            <span class='code'>size&#40;sitp::ScaledInterpolation&#41; &#61; size&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;&#37;&#39; &#61;&gt; &quot;&#37;25&quot;&#41;</span>
+            <span class='code'>axes&#40;sitp::ScaledInterpolation&#41; &#61; axes&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;\r&#39; &#61;&gt; &quot;&#37;0D&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;\n&#39; &#61;&gt; &quot;&#37;0A&quot;&#41;</span>
+            <span class='code'>itpflag&#40;sitp::ScaledInterpolation&#41; &#61; itpflag&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@propagate_inbounds function Base.getindex&#40;sitp::ScaledInterpolation&#123;T,N&#125;, i::Vararg&#123;Int,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    sitp.itp&#91;i...&#93;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>function esc_prop&#40;val&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; cmd_value&#40;val&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;&#37;&#39; &#61;&gt; &quot;&#37;25&quot;&#41;</span>
+            <span class='code'>lbounds&#40;sitp::ScaledInterpolation&#41; &#61; _lbounds&#40;sitp.ranges, itpflag&#40;sitp.itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;\r&#39; &#61;&gt; &quot;&#37;0D&quot;&#41;</span>
+            <span class='code'>ubounds&#40;sitp::ScaledInterpolation&#41; &#61; _ubounds&#40;sitp.ranges, itpflag&#40;sitp.itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;\n&#39; &#61;&gt; &quot;&#37;0A&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;:&#39; &#61;&gt; &quot;&#37;3A&quot;&#41;</span>
+            <span class='code'>boundstep&#40;r::StepRange&#41; &#61; r.step / 2</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; replace&#40;s, &#39;,&#39; &#61;&gt; &quot;&#37;2C&quot;&#41;</span>
+            <span class='code'>boundstep&#40;r::UnitRange&#41; &#61; 1//2</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Returns *half* the width of one step of the range.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>format_props&#40;props&#41; &#61;</span>
+            <span class='code'>This function is used to calculate the upper and lower bounds of &#96;OnCell&#96; interpolation objects.</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>    join&#40;map&#40;p -&gt; string&#40;p.first, &quot;&#61;&quot;, esc_prop&#40;p.second&#41;&#41;, collect&#40;pairs&#40;props&#41;&#41;&#41;, &#39;,&#39;&#41;</span>
+            <span class='code'>&quot;&quot;&quot; boundstep</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>function command&#40;cmd, props, val&#41;</span>
+            <span class='code'>lbound&#40;ax::AbstractRange, ::DegreeBC, ::OnCell&#41; &#61; first&#40;ax&#41; - boundstep&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; CMD_MARKER * cmd</span>
+            <span class='code'>ubound&#40;ax::AbstractRange, ::DegreeBC, ::OnCell&#41; &#61; last&#40;ax&#41; &#43; boundstep&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    isempty&#40;props&#41; || &#40;s *&#61; &#39; &#39; * format_props&#40;props&#41;&#41;</span>
+            <span class='code'>lbound&#40;ax::AbstractRange, ::DegreeBC, ::OnGrid&#41; &#61; first&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    s *&#61; CMD_MARKER * esc_data&#40;val&#41;</span>
+            <span class='code'>ubound&#40;ax::AbstractRange, ::DegreeBC, ::OnGrid&#41; &#61; last&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># For &#40;&#41;, we scale the evaluation point</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@propagate_inbounds function &#40;sitp::ScaledInterpolation&#123;T,N&#125;&#41;&#40;xs::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>fail&#40;&#41; &#61; exit&#40;1&#41;</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, sitp, xs...&#41; || Base.throw_boundserror&#40;sitp, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,17 +755,31 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    xl &#61; maybe_clamp&#40;sitp.itp, coordslookup&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
           <td class='lineno'>74</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>add_to_file&#40;k, v&#41; &#61; open&#40;f -&gt; println&#40;f, v&#41;, ENV&#91;k&#93;, &quot;a&quot;&#41;</span>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in ScaledInterpolation
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from rho
+              <a href='data_loader_scm.jl-d39d0539a9be5eca4986f5a6a8244422a3de3954.html#L126'>line 126</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L8'>BSplineInterpolation</a>
+              <br />
+            </div>
+            <span class='code'>    @inbounds sitp.itp&#40;xl...&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@propagate_inbounds function &#40;itp::ScaledInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Number,M&#125;&#41; where &#123;T,M,N&#125;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>    end_group&#40;&#41;</span>
+            <span class='code'>    inds, trailing &#61; split_trailing&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @boundscheck &#40;check1&#40;trailing&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>End a group that was started with &#91;&#96;start_group&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    @assert length&#40;inds&#41; &#61;&#61; N</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    itp&#40;inds...&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'>end_group&#40;&#41; &#61; command&#40;&quot;endgroup&quot;, &#40;&#41;, &quot;&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function &#40;sitp::ScaledInterpolation&#41;&#40;x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    xis &#61; to_indices&#40;sitp, x&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'>    get_state&#40;k&#41;</span>
+            <span class='code'>    xis &#61;&#61; x &amp;&amp; error&#40;&quot;evaluation not supported for ScaledInterpolation at positions &#36;x&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    sitp&#40;xis...&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'>Get the state variable with name &#96;k&#96;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>get_state&#40;k&#41; &#61; get&#40;ENV, &quot;STATE_&#36;k&quot;, &quot;&quot;&#41;</span>
+            <span class='code'>&#40;sitp::ScaledInterpolation&#123;T,1&#125;, x::Number, y::Int&#41; where &#123;T&#125; &#61; y &#61;&#61; 1 ? sitp&#40;x&#41; : Base.throw_boundserror&#40;sitp, &#40;x, y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@inline function &#40;itp::ScaledInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Union&#123;Number,AbstractVector&#125;,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>    log_debug&#40;msg&#41;</span>
+            <span class='code'>    &#91;itp&#40;i...&#41; for i in Iterators.product&#40;x...&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>Log a debug message.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;GitHubActionsLogger&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>@inline function coordslookup&#40;flags, ranges, xs&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    item &#61; coordlookup&#40;getfirst&#40;flags&#41;, ranges&#91;1&#93;, xs&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'>log_debug&#40;msg&#41; &#61; command&#40;&quot;debug&quot;, &#40;&#41;, msg&#41;</span>
+            <span class='code'>    &#40;item, coordslookup&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;, Base.tail&#40;xs&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>coordslookup&#40;::Any, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>    log_error&#40;msg&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1039,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>coordlookup&#40;::NoInterp, r, i&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>Log an error message.</span>
+            <span class='code'>coordlookup&#40;::Flag, r, x&#41; &#61; coordlookup&#40;r, x&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1059,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;GitHubActionsLogger&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>coordlookup&#40;r::AbstractUnitRange, x&#41; &#61; &#40;x - first&#40;r&#41;&#41;/oneunit&#40;eltype&#40;r&#41;&#41; &#43; one&#40;eltype&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1079,7 @@
           <td>
             
             
-            <span class='code'>log_error&#40;msg&#41; &#61; command&#40;&quot;error&quot;, &#40;&#41;, msg&#41;</span>
+            <span class='code'># coordlookup&#40;i::Bool, r::AbstractRange, x&#41; &#61; i ? coordlookup&#40;r, x&#41; : convert&#40;typeof&#40;coordlookup&#40;r,x&#41;&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1089,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>coordlookup&#40;r::StepRange, x&#41; &#61; &#40;x - r.start&#41; / r.step &#43; one&#40;eltype&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1099,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1109,7 @@
           <td>
             
             
-            <span class='code'>    log_warning&#40;msg&#41;</span>
+            <span class='code'>coordlookup&#40;r::AbstractRange, x&#41; &#61; &#40;x - first&#40;r&#41;&#41; / step&#40;r&#41; &#43; one&#40;eltype&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1119,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>boundstep&#40;r::AbstractRange&#41; &#61; 0.5*step&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>Log a warning message.</span>
+            <span class='code'>rescale_gradient&#40;r::AbstractRange, g&#41; &#61; g / step&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1139,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;GitHubActionsLogger&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1149,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>basetype&#40;::Type&#123;ScaledInterpolation&#123;T,N,ITPT,IT,RT&#125;&#125;&#41; where &#123;T,N,ITPT,IT,RT&#125; &#61; ITPT</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>log_warning&#40;msg&#41; &#61; command&#40;&quot;warning&quot;, &#40;&#41;, msg&#41;</span>
+            <span class='code'>basetype&#40;sitp::ScaledInterpolation&#41; &#61; basetype&#40;typeof&#40;sitp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1165,7 +1179,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1189,7 @@
           <td>
             
             
-            <span class='code'>    save_state&#40;k, v&#41;</span>
+            <span class='code'>@propagate_inbounds function gradient&#40;sitp::ScaledInterpolation&#123;T,N&#125;, xs::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1199,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, sitp, xs...&#41; || Base.throw_boundserror&#40;sitp, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1209,7 @@
           <td>
             
             
-            <span class='code'>Save value &#96;v&#96; with name &#96;k&#96; to state.</span>
+            <span class='code'>    xl &#61; maybe_clamp&#40;sitp.itp, coordslookup&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1219,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    g &#61; gradient&#40;sitp.itp, xl...&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1229,7 @@
           <td>
             
             
-            <span class='code'>save_state&#40;k, v&#41; &#61; add_to_file&#40;&quot;GITHUB_STATE&quot;, &quot;&#36;k&#61;&#36;v&quot;&#41;</span>
+            <span class='code'>    SVector&#40;rescale_gradient_components&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, Tuple&#40;g&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1239,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1249,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1259,7 @@
           <td>
             
             
-            <span class='code'>    set_command_echo&#40;enable&#41;</span>
+            <span class='code'>function rescale_gradient_components&#40;flags, ranges, g&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1269,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if getfirst&#40;flags&#41; isa NoInterp</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1279,7 @@
           <td>
             
             
-            <span class='code'>Enable or disable command echoing.</span>
+            <span class='code'>        return rescale_gradient_components&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;, g&#41;    # don&#39;t consume a coordinate of g</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1289,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1299,7 @@
           <td>
             
             
-            <span class='code'>set_command_echo&#40;enable&#41; &#61; command&#40;&quot;echo&quot;, &#40;&#41;, enable ? &quot;on&quot; : &quot;off&quot;&#41;</span>
+            <span class='code'>        item &#61; rescale_gradient&#40;ranges&#91;1&#93;, g&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1309,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return &#40;item, rescale_gradient_components&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;, Base.tail&#40;g&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1319,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1329,7 @@
           <td>
             
             
-            <span class='code'>    set_output&#40;k, v&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1339,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>rescale_gradient_components&#40;flags, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1349,7 @@
           <td>
             
             
-            <span class='code'>Set the output with name &#96;k&#96; to value &#96;v&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1359,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>rescale_gradient&#40;r::StepRange, g&#41; &#61; g / r.step</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>function set_output&#40;k, v&#41;</span>
+            <span class='code'>rescale_gradient&#40;r::UnitRange, g&#41; &#61; g</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1379,7 @@
           <td>
             
             
-            <span class='code'>    val &#61; cmd_value&#40;v&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>    delimiter &#61; &quot;EOF&quot;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1399,7 @@
           <td>
             
             
-            <span class='code'>    while occursin&#40;delimiter, val&#41;</span>
+            <span class='code'>&#96;rescale_gradient&#40;r::AbstractRange&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1409,7 @@
           <td>
             
             
-            <span class='code'>        delimiter *&#61; &quot;EOF&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1419,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Implements the chain rule dy/dx &#61; dy/du * du/dx for use when calculating gradients with scaled interpolation objects.</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1429,7 @@
           <td>
             
             
-            <span class='code'>    add_to_file&#40;&quot;GITHUB_OUTPUT&quot;, join&#40;&#91;&quot;&#36;k&lt;&lt;&#36;delimiter&quot;, val, delimiter&#93;, &quot;\n&quot;&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot; rescale_gradient</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1439,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1449,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@propagate_inbounds function hessian&#40;sitp::ScaledInterpolation&#123;T,N&#125;, xs::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, sitp, xs...&#41; || Base.throw_boundserror&#40;sitp, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1469,7 @@
           <td>
             
             
-            <span class='code'>    set_secret&#40;v&#41;</span>
+            <span class='code'>    xl &#61; maybe_clamp&#40;sitp.itp, coordslookup&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1479,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    h &#61; hessian&#40;sitp.itp, xl...&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1489,7 @@
           <td>
             
             
-            <span class='code'>Mask the value &#96;v&#96; in logs.</span>
+            <span class='code'>    return rescale_hessian_components&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, h&#41;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1499,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1509,7 @@
           <td>
             
             
-            <span class='code'>set_secret&#40;v&#41; &#61; command&#40;&quot;add-mask&quot;, &#40;&#41;, v&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1519,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function rescale_hessian_components&#40;flags, ranges, h&#41;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    steps &#61; SVector&#40;get_steps&#40;flags, ranges&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1539,7 @@
           <td>
             
             
-            <span class='code'>    start_group&#40;name&#41;</span>
+            <span class='code'>    return h ./ &#40;steps .* steps&#39;&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1549,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1559,7 @@
           <td>
             
             
-            <span class='code'>Start a foldable group called &#96;name&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1569,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>function get_steps&#40;flags, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1579,7 @@
           <td>
             
             
-            <span class='code'>start_group&#40;name&#41; &#61; command&#40;&quot;group&quot;, &#40;&#41;, name&#41;</span>
+            <span class='code'>    if getfirst&#40;flags&#41; isa NoInterp</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1589,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return get_steps&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1599,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1609,7 @@
           <td>
             
             
-            <span class='code'>    add_path&#40;v&#41;</span>
+            <span class='code'>        item &#61; step&#40;ranges&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1619,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return &#40;item, get_steps&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1629,7 @@
           <td>
             
             
-            <span class='code'>Add &#96;v&#96; to the system &#96;PATH&#96;.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1639,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>function add_path&#40;v&#41;</span>
+            <span class='code'>get_steps&#40;flags, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1659,7 @@
           <td>
             
             
-            <span class='code'>    sep &#61; @static Sys.iswindows&#40;&#41; ? &#39;;&#39; : &#39;:&#39;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1669,7 @@
           <td>
             
             
-            <span class='code'>    ENV&#91;&quot;PATH&quot;&#93; &#61; v * sep * ENV&#91;&quot;PATH&quot;&#93;</span>
+            <span class='code'>### Iteration</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1679,7 @@
           <td>
             
             
-            <span class='code'>    add_to_file&#40;&quot;GITHUB_PATH&quot;, v&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1689,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>struct ScaledIterator&#123;SITPT,CI,WIS&#125;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1699,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    sitp::SITPT   # ScaledInterpolation object</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1709,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    ci::CI        # the CartesianIndices object</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1719,7 @@
           <td>
             
             
-            <span class='code'>    get_input&#40;k; required&#61;false&#41;</span>
+            <span class='code'>    wis::WIS      # WeightedIndex vectors</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1729,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    breaks1::Vector&#123;Int&#125;   # breaks along dimension 1 where new evaluations must occur</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1739,7 @@
           <td>
             
             
-            <span class='code'>Get an input.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1749,7 @@
           <td>
             
             
-            <span class='code'>If &#96;required&#96; is set and the input is not, a &#91;&#96;MissingInputError&#96;&#93;&#40;@ref&#41; is thrown.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1759,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>Base.IteratorSize&#40;::Type&#123;ScaledIterator&#123;SITPT,CI,WIS&#125;&#125;&#41; where &#123;SITPT,CI&lt;:CartesianIndices&#123;N&#125;,WIS&#125; where N &#61; Base.HasShape&#123;N&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1769,7 @@
           <td>
             
             
-            <span class='code'>function get_input&#40;k; required&#61;false&#41;</span>
+            <span class='code'>Base.axes&#40;iter::ScaledIterator&#41; &#61; axes&#40;iter.ci&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>    val &#61; get&#40;ENV, &quot;INPUT_&quot; * uppercase&#40;replace&#40;k, &#39; &#39; &#61;&gt; &#39;_&#39;&#41;&#41;, &quot;&quot;&#41;</span>
+            <span class='code'>Base.size&#40;iter::ScaledIterator&#41; &#61; size&#40;iter.ci&#41;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1789,7 @@
           <td>
             
             
-            <span class='code'>    required &amp;&amp; isempty&#40;val&#41; &amp;&amp; throw&#40;MissingInputError&#40;k&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1799,7 @@
           <td>
             
             
-            <span class='code'>    return string&#40;strip&#40;val&#41;&#41;</span>
+            <span class='code'>struct ScaledIterState&#123;N,V,D&#125;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    cistate::CartesianIndex&#123;N&#125;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1819,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ibreak::Int</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1829,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    cached_evaluations::NTuple&#123;D,V&#125;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1839,7 @@
           <td>
             
             
-            <span class='code'>    group&#40;f, name&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1845,7 +1859,7 @@
           <td>
             
             
-            <span class='code'>Run &#96;f&#96; inside of a foldable group.</span>
+            <span class='code'>function eachvalue&#40;sitp::ScaledInterpolation&#123;T,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1869,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;start_group&#96;&#93;&#40;@ref&#41; and &#91;&#96;end_group&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    itps &#61; tcollect&#40;itpflag, sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1879,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    newaxes &#61; map&#40;r-&gt;Base.Slice&#40;ceil&#40;Int, first&#40;r&#41;&#41;:floor&#40;Int, last&#40;r&#41;&#41;&#41;, sitp.ranges&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1889,7 @@
           <td>
             
             
-            <span class='code'>function group&#40;f, name&#41;</span>
+            <span class='code'>    wis &#61; dimension_wis&#40;value_weights, itps, axes&#40;sitp.itp&#41;, newaxes, sitp.ranges&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1899,7 @@
           <td>
             
             
-            <span class='code'>    start_group&#40;name&#41;</span>
+            <span class='code'>    wis1 &#61; wis&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1909,7 @@
           <td>
             
             
-            <span class='code'>    return try f&#40;&#41; finally end_group&#40;&#41; end</span>
+            <span class='code'>    i1 &#61; first&#40;axes&#40;wis1, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1919,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    breaks1 &#61; &#91;i1&#93;</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1929,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    for i in Iterators.drop&#40;axes&#40;wis1, 1&#41;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1939,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        if indexes&#40;wis1&#91;i&#93;&#41; &#33;&#61; indexes&#40;wis1&#91;i-1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1949,7 @@
           <td>
             
             
-            <span class='code'>    set_env&#40;k, v&#41;</span>
+            <span class='code'>            push&#33;&#40;breaks1, i&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1959,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1969,7 @@
           <td>
             
             
-            <span class='code'>Set environment variable &#96;k&#96; to value &#96;v&#96;.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1979,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    push&#33;&#40;breaks1, last&#40;axes&#40;wis1, 1&#41;&#41;&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +1989,7 @@
           <td>
             
             
-            <span class='code'>function set_env&#40;k, v&#41;</span>
+            <span class='code'>    ScaledIterator&#40;sitp, CartesianIndices&#40;newaxes&#41;, wis, breaks1&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +1999,7 @@
           <td>
             
             
-            <span class='code'>    val &#61; cmd_value&#40;v&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2009,7 @@
           <td>
             
             
-            <span class='code'>    ENV&#91;k&#93; &#61; val</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2019,7 @@
           <td>
             
             
-            <span class='code'>    delimiter &#61; &quot;EOF&quot;</span>
+            <span class='code'>function dimension_wis&#40;f::F, itps, axs, newaxes, ranges&#41; where F</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2029,7 @@
           <td>
             
             
-            <span class='code'>    while occursin&#40;delimiter, val&#41;</span>
+            <span class='code'>    itpflag, ax, nax, r &#61; itps&#91;1&#93;, axs&#91;1&#93;, newaxes&#91;1&#93;, ranges&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2039,7 @@
           <td>
             
             
-            <span class='code'>        delimiter *&#61; &quot;EOF&quot;</span>
+            <span class='code'>    function makewi&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2049,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        pos, coefs &#61; weightedindex_parts&#40;&#40;f,&#41;, itpflag, ax, coordlookup&#40;r, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2059,7 @@
           <td>
             
             
-            <span class='code'>    add_to_file&#40;&quot;GITHUB_ENV&quot;, join&#40;&#91;&quot;&#36;k&lt;&lt;&#36;delimiter&quot;, val, delimiter&#93;, &quot;\n&quot;&#41;&#41;</span>
+            <span class='code'>        maybe_weightedindex&#40;pos, coefs&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2069,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2079,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#40;makewi.&#40;nax&#41;, dimension_wis&#40;f, Base.tail&#40;itps&#41;, Base.tail&#40;axs&#41;, Base.tail&#40;newaxes&#41;, Base.tail&#40;ranges&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2089,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2099,7 @@
           <td>
             
             
-            <span class='code'>    set_failed&#40;msg&#41;</span>
+            <span class='code'>dimension_wis&#40;f, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2105,7 +2119,7 @@
           <td>
             
             
-            <span class='code'>Error with &#96;msg&#96;, and set the process exit code to &#96;1&#96;.</span>
+            <span class='code'>function Base.iterate&#40;iter::ScaledIterator&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2129,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    ret &#61; iterate&#40;iter.ci&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2139,7 @@
           <td>
             
             
-            <span class='code'>function set_failed&#40;msg&#41;</span>
+            <span class='code'>    ret &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2149,7 @@
           <td>
             
             
-            <span class='code'>    atexit&#40;fail&#41;</span>
+            <span class='code'>    item, cistate &#61; ret</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2159,7 @@
           <td>
             
             
-            <span class='code'>    log_error&#40;msg&#41;</span>
+            <span class='code'>    wis &#61; getindex.&#40;iter.wis, Tuple&#40;item&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2169,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    ces &#61; cache_evaluations&#40;InterpGetindex&#40;iter.sitp&#41;, indexes&#40;wis&#91;1&#93;&#41;, weights&#40;wis&#91;1&#93;&#41;, Base.tail&#40;wis&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2179,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return _reduce&#40;&#43;, weights&#40;wis&#91;1&#93;&#41;.*ces&#41;, ScaledIterState&#40;cistate, firstindex&#40;iter.breaks1&#41;, ces&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2199,7 @@
           <td>
             
             
-            <span class='code'>    GitHubActionsLogger&#40;level&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2209,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function Base.iterate&#40;iter::ScaledIterator, state&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2219,7 @@
           <td>
             
             
-            <span class='code'>A logger that prints to standard output in the format expected by GitHub Actions.</span>
+            <span class='code'>    ret &#61; iterate&#40;iter.ci, state.cistate&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2229,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ret &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2239,7 @@
           <td>
             
             
-            <span class='code'>By default, GitHubActionsLogger inspects the</span>
+            <span class='code'>    item, cistate &#61; ret</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2249,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;RUNNER_DEBUG&#96; environment variable&#93;&#40;https://docs.github.com/en/actions/learn-github-actions/variables&#41;</span>
+            <span class='code'>    i1 &#61; item&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2259,7 @@
           <td>
             
             
-            <span class='code'>to match the log-level to that set in GitHub Actions.</span>
+            <span class='code'>    isnext1 &#61; i1 &#61;&#61; state.cistate&#91;1&#93;&#43;1</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2269,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if isnext1 &amp;&amp; i1 &lt; iter.breaks1&#91;state.ibreak&#43;1&#93;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2279,7 @@
           <td>
             
             
-            <span class='code'>struct GitHubActionsLogger &lt;: AbstractLogger</span>
+            <span class='code'>        # We can use the previously cached values</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2289,7 @@
           <td>
             
             
-            <span class='code'>    level::LogLevel</span>
+            <span class='code'>        wis1 &#61; iter.wis&#91;1&#93;&#91;i1&#93;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2299,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return _reduce&#40;&#43;, weights&#40;wis1&#41;.*state.cached_evaluations&#41;, ScaledIterState&#40;cistate, state.ibreak, state.cached_evaluations&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2309,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2305,7 +2319,7 @@
           <td>
             
             
-            <span class='code'>function get_gha_level&#40;&#41;</span>
+            <span class='code'>    # Re-evaluate. We&#39;re being a bit lazy here: in some cases, some of the cached values could be reused</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2315,7 +2329,7 @@
           <td>
             
             
-            <span class='code'>    env_str &#61; get&#40;ENV, &quot;RUNNER_DEBUG&quot;, &quot;false&quot;&#41;</span>
+            <span class='code'>    wis &#61; getindex.&#40;iter.wis, Tuple&#40;item&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2325,7 +2339,7 @@
           <td>
             
             
-            <span class='code'>    # &#96;tryparse&#40;Bool, &quot;1&quot;&#41;&#96; does not work on Julia 1.0, so we special-case that value</span>
+            <span class='code'>    ces &#61; cache_evaluations&#40;InterpGetindex&#40;iter.sitp&#41;, indexes&#40;wis&#91;1&#93;&#41;, weights&#40;wis&#91;1&#93;&#41;, Base.tail&#40;wis&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2335,7 +2349,7 @@
           <td>
             
             
-            <span class='code'>    # &#40;which is the only documented value for &#96;RUNNER_DEBUG&#96;, so any other case should be</span>
+            <span class='code'>    return _reduce&#40;&#43;, weights&#40;wis&#91;1&#93;&#41;.*ces&#41;, ScaledIterState&#40;cistate, isnext1 ? state.ibreak&#43;1 : firstindex&#40;iter.breaks1&#41;, ces&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2345,7 +2359,7 @@
           <td>
             
             
-            <span class='code'>    # due to the user setting it manually somehow&#41;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2355,7 +2369,7 @@
           <td>
             
             
-            <span class='code'>    env_str &#61;&#61; &quot;1&quot; &amp;&amp; return Debug</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2379,7 @@
           <td>
             
             
-            <span class='code'>    # Fallback for all other values:</span>
+            <span class='code'>_reduce&#40;op, list&#41; &#61; op&#40;list&#91;1&#93;, _reduce&#40;op, Base.tail&#40;list&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2389,7 @@
           <td>
             
             
-            <span class='code'>    is_debug &#61; something&#40;tryparse&#40;Bool, env_str&#41;, false&#41;</span>
+            <span class='code'>_reduce&#40;op, list::Tuple&#123;Any&#125;&#41; &#61; list&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2399,7 @@
           <td>
             
             
-            <span class='code'>    return is_debug ? Debug : Info</span>
+            <span class='code'>_reduce&#40;op, list::Tuple&#123;&#125;&#41; &#61; error&#40;&quot;cannot reduce an empty list&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2395,7 +2409,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2419,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># We use weights only as a ruler to determine when we are done</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2429,7 @@
           <td>
             
             
-            <span class='code'>GitHubActionsLogger&#40;&#41; &#61; GitHubActionsLogger&#40;get_gha_level&#40;&#41;&#41;</span>
+            <span class='code'>cache_evaluations&#40;coefs, i::Int, weights, rest&#41; &#61; &#40;coefs&#91;i, rest...&#93;, cache_evaluations&#40;coefs, i&#43;1, Base.tail&#40;weights&#41;, rest&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2439,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>cache_evaluations&#40;coefs, indexes, weights, rest&#41; &#61; &#40;coefs&#91;indexes&#91;1&#93;, rest...&#93;, cache_evaluations&#40;coefs, Base.tail&#40;indexes&#41;, Base.tail&#40;weights&#41;, rest&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2449,7 @@
           <td>
             
             
-            <span class='code'>Logging.catch_exceptions&#40;::GitHubActionsLogger&#41; &#61; true</span>
+            <span class='code'>cache_evaluations&#40;coefs, ::Int, ::Tuple&#123;&#125;, rest&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2459,7 @@
           <td>
             
             
-            <span class='code'>Logging.min_enabled_level&#40;logger::GitHubActionsLogger&#41; &#61; logger.level</span>
+            <span class='code'>cache_evaluations&#40;coefs, ::Any, ::Tuple&#123;&#125;, rest&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,7 +2469,7 @@
           <td>
             
             
-            <span class='code'>Logging.shouldlog&#40;::GitHubActionsLogger, args...&#41; &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2465,411 +2479,7 @@
           <td>
             
             
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L245'>
-          <td class='lineno'>245</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;9 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              2 &#40;18 &#37;&#41;
-              samples spent in handle_message
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from #invokelatest#2
-              <a href='essentials.jl-8a907f81f7a85e1b2e73d08c8751d28acc7bca86.html#L821'>line 821</a>
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from handle_message
-              <a href='GitHubActions.jl-3d1df74b88fbd5b4221f9d811a0d5f4c3eb823c2.html#L245'>line 245</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='GitHubActions.jl-3d1df74b88fbd5b4221f9d811a0d5f4c3eb823c2.html#L245'>#handle_message#6</a>
-              <br />
-            </div>
-            <span class='code'>function Logging.handle_message&#40;</span>
-          </td>
-        </tr>
-        <tr id='L246'>
-          <td class='lineno'>246</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ::GitHubActionsLogger,</span>
-          </td>
-        </tr>
-        <tr id='L247'>
-          <td class='lineno'>247</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    level, msg, _module, group, id, file, line;</span>
-          </td>
-        </tr>
-        <tr id='L248'>
-          <td class='lineno'>248</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    location&#61;nothing, kwargs...,</span>
-          </td>
-        </tr>
-        <tr id='L249'>
-          <td class='lineno'>249</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#41;</span>
-          </td>
-        </tr>
-        <tr id='L250'>
-          <td class='lineno'>250</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    file, line &#61; something&#40;location, &#40;file, line&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L251'>
-          <td class='lineno'>251</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    workspace &#61; get&#40;ENV, &quot;GITHUB_WORKSPACE&quot;, nothing&#41;</span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if workspace &#33;&#61;&#61; nothing</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # In order for inline annotations to work correctly:</span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;9 &#37;&#41;</td>
-          <td>
-            
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='path.jl-787a6efa00139ac93fc34dd031624fcc6ec342ac.html#L554'>relpath</a>
-              <br />
-            </div>
-            <span class='code'>        file &#61; relpath&#40;file, workspace&#41;</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    message &#61; string&#40;msg&#41;</span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    for &#40;k, v&#41; in kwargs</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        result &#61; sprint&#40;Logging.showvalue, v&#41;</span>
-          </td>
-        </tr>
-        <tr id='L260'>
-          <td class='lineno'>260</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        message *&#61; &quot;\n  &#36;k &#61; &quot; * if occursin&#40;&#39;\n&#39;, result&#41;</span>
-          </td>
-        </tr>
-        <tr id='L261'>
-          <td class='lineno'>261</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            replace&#40;&quot;\n&quot; * result, &#39;\n&#39; &#61;&gt; &quot;\n    &quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L262'>
-          <td class='lineno'>262</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        else</span>
-          </td>
-        </tr>
-        <tr id='L263'>
-          <td class='lineno'>263</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            result</span>
-          </td>
-        </tr>
-        <tr id='L264'>
-          <td class='lineno'>264</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L265'>
-          <td class='lineno'>265</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if level &#61;&#61;&#61; Info</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        println&#40;message&#41;</span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    else</span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        cmd &#61; if level &#61;&#61;&#61; Debug</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            &quot;debug&quot;</span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        elseif level &#61;&#61;&#61; Warn</span>
-          </td>
-        </tr>
-        <tr id='L272'>
-          <td class='lineno'>272</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            &quot;warning&quot;</span>
-          </td>
-        </tr>
-        <tr id='L273'>
-          <td class='lineno'>273</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        elseif level &#61;&#61;&#61; Error</span>
-          </td>
-        </tr>
-        <tr id='L274'>
-          <td class='lineno'>274</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            &quot;error&quot;</span>
-          </td>
-        </tr>
-        <tr id='L275'>
-          <td class='lineno'>275</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        else</span>
-          </td>
-        </tr>
-        <tr id='L276'>
-          <td class='lineno'>276</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            &quot;notice&quot;</span>
-          </td>
-        </tr>
-        <tr id='L277'>
-          <td class='lineno'>277</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L278'>
-          <td class='lineno'>278</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        command&#40;cmd, &#40;file&#61;file, line&#61;line&#41;, message&#41;</span>
-          </td>
-        </tr>
-        <tr id='L279'>
-          <td class='lineno'>279</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L280'>
-          <td class='lineno'>280</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L281'>
-          <td class='lineno'>281</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L282'>
-          <td class='lineno'>282</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
+            <span class='code'>ssize&#40;sitp::ScaledInterpolation&#123;T,N&#125;&#41; where &#123;T,N&#125; &#61; map&#40;r-&gt;round&#40;Int, last&#40;r&#41;-first&#40;r&#41;&#43;1&#41;, sitp.ranges&#41;::NTuple&#123;N,Int&#125;</span>
           </td>
         </tr>
       </tbody>
