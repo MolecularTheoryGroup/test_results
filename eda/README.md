@@ -1,11 +1,9 @@
 ## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/dev`
-*Generated on 2023-10-11@00:07:24 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/6476023997)*
+*Generated on 2023-10-11@05:21:03 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/6478195031)*
 
 ---
 
 ## Profiling results
-- [profiling: critical points v0 scm adf t41 cubane PBE TZ2P GO fineFull adf.t41 SCF Electron Density spacing1.50](http://htmlpreview.github.io/?https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__critical_points_v0_scm_adf_t41_cubane_PBE_TZ2P_GO_fineFull_adf.t41%20SCF%20Electron%20Density_spacing1.50/index.html)
-- [profiling: critical points v0 trial system spacing2.00](http://htmlpreview.github.io/?https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__critical_points_v0_trial_system_spacing2.00/index.html)
 
 ---
 
