@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/generator.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/compiler/methodtable.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>abstract type MethodTableView; end</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Generator&#40;f, iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct MethodLookupResult</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>Given a function &#96;f&#96; and an iterator &#96;iter&#96;, construct an iterator that yields</span>
+            <span class='code'>    # Really Vector&#123;Core.MethodMatch&#125;, but it&#39;s easier to represent this as</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>the values of &#96;f&#96; applied to the elements of &#96;iter&#96;.</span>
+            <span class='code'>    # and work with Vector&#123;Any&#125; on the C side.</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>The syntax for constructing an instance of this type is &#96;f&#40;x&#41; for x in iter &#91;if cond&#40;x&#41;::Bool&#93; &#96;.</span>
+            <span class='code'>    matches::Vector&#123;Any&#125;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>The &#96;&#91;if cond&#40;x&#41;::Bool&#93;&#96; expression is optional and acts as a &quot;guard&quot;, effectively</span>
+            <span class='code'>    valid_worlds::WorldRange</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>filtering out values where the condition is false.</span>
+            <span class='code'>    ambig::Bool</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>length&#40;result::MethodLookupResult&#41; &#61; length&#40;result.matches&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; g &#61; &#40;abs2&#40;x&#41; for x in 1:5 if x &#33;&#61; 3&#41;;</span>
+            <span class='code'>function iterate&#40;result::MethodLookupResult, args...&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    r &#61; iterate&#40;result.matches, args...&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; for x in g</span>
+            <span class='code'>    r &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>           println&#40;x&#41;</span>
+            <span class='code'>    match, state &#61; r</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'>    return &#40;match::MethodMatch, state&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>getindex&#40;result::MethodLookupResult, idx::Int&#41; &#61; getindex&#40;result.matches, idx&#41;::MethodMatch</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>16</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>25</span>
+            <span class='code'>struct MethodMatchResult</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    matches::MethodLookupResult</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; collect&#40;g&#41;</span>
+            <span class='code'>    overlayed::Bool</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>4-element Vector&#123;Int64&#125;:</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>  1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>  4</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'> 16</span>
+            <span class='code'>    struct InternalMethodTable &lt;: MethodTableView</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'> 25</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>A struct representing the state of the internal method table at a</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>particular world age.</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>struct Generator&#123;I,F&#125;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    f::F</span>
+            <span class='code'>struct InternalMethodTable &lt;: MethodTableView</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>    iter::I</span>
+            <span class='code'>    world::UInt</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;f, I1, I2, Is...&#41; &#61; Generator&#40;a-&gt;f&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    struct OverlayMethodTable &lt;: MethodTableView</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, iter::I&#41; where &#123;T,I&#125; &#61; Generator&#123;I,Type&#123;T&#125;&#125;&#40;T, iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Overlays the internal method table such that specific queries can be redirected to an</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, I1, I2, Is...&#41; where &#123;T&#125; &#61; Generator&#40;a-&gt;T&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>external table, e.g., to override existing method.</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>function iterate&#40;g::Generator, s...&#41;</span>
+            <span class='code'>struct OverlayMethodTable &lt;: MethodTableView</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,31 +455,17 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    world::UInt</span>
           </td>
         </tr>
         <tr id='L44'>
           <td class='lineno'>44</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;1 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;1 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from grow_to&#33;
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L886'>line 886</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='iterators.jl-d47edab3807bac057c9e978326ebc99be1537cef.html#L514'>iterate</a>
-              <br />
-            </div>
-            <span class='code'>    y &#61; iterate&#40;g.iter, s...&#41;</span>
+            
+            
+            <span class='code'>    mt::Core.MethodTable</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    y &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -499,31 +485,17 @@
           <td>
             
             
-            <span class='code'>    y &#61; y::Tuple&#123;Any, Any&#125; # try to give inference some idea of what to expect about the behavior of the next line</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
           <td class='lineno'>47</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from grow_to&#33;
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L886'>line 886</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='notfound.html#L0'>#11</a>
-              <br />
-            </div>
-            <span class='code'>    return &#40;g.f&#40;y&#91;1&#93;&#41;, y&#91;2&#93;&#41;</span>
+            
+            
+            <span class='code'>struct MethodMatchKey</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -533,7 +505,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    sig # ::Type</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -543,7 +515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    limit::Int</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -553,7 +525,7 @@
           <td>
             
             
-            <span class='code'>length&#40;g::Generator&#41; &#61; length&#40;g.iter&#41;</span>
+            <span class='code'>    MethodMatchKey&#40;@nospecialize&#40;sig&#41;, limit::Int&#41; &#61; new&#40;sig, limit&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -563,7 +535,7 @@
           <td>
             
             
-            <span class='code'>size&#40;g::Generator&#41; &#61; size&#40;g.iter&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -573,7 +545,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;g::Generator&#41; &#61; axes&#40;g.iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L53'>
@@ -583,7 +555,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;g::Generator&#41; &#61; ndims&#40;g.iter&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -593,7 +565,7 @@
           <td>
             
             
-            <span class='code'>keys&#40;g::Generator&#41; &#61; keys&#40;g.iter&#41;</span>
+            <span class='code'>    struct CachedMethodTable &lt;: MethodTableView</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -603,7 +575,7 @@
           <td>
             
             
-            <span class='code'>last&#40;g::Generator&#41; &#61; g.f&#40;last&#40;g.iter&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -613,7 +585,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;g::Generator&#41; &#61; isempty&#40;g.iter&#41;</span>
+            <span class='code'>Overlays another method table view with an additional local fast path cache that</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -623,7 +595,7 @@
           <td>
             
             
-            <span class='code'>isdone&#40;g::Generator, state...&#41; &#61; isdone&#40;g.iter, state...&#41;</span>
+            <span class='code'>can respond to repeated, identical queries faster than the original method table.</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -633,7 +605,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -643,7 +615,7 @@
           <td>
             
             
-            <span class='code'>## iterator traits</span>
+            <span class='code'>struct CachedMethodTable&#123;T&#125; &lt;: MethodTableView</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -653,7 +625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    cache::IdDict&#123;MethodMatchKey, Union&#123;Missing,MethodMatchResult&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -663,7 +635,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorSize end</span>
+            <span class='code'>    table::T</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -673,7 +645,7 @@
           <td>
             
             
-            <span class='code'>struct SizeUnknown &lt;: IteratorSize end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -683,7 +655,7 @@
           <td>
             
             
-            <span class='code'>struct HasLength &lt;: IteratorSize end</span>
+            <span class='code'>CachedMethodTable&#40;table::T&#41; where T &#61; CachedMethodTable&#123;T&#125;&#40;IdDict&#123;MethodMatchKey, Union&#123;Missing,MethodMatchResult&#125;&#125;&#40;&#41;, table&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -693,7 +665,7 @@
           <td>
             
             
-            <span class='code'>struct HasShape&#123;N&#125; &lt;: IteratorSize end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L65'>
@@ -703,7 +675,7 @@
           <td>
             
             
-            <span class='code'>struct IsInfinite &lt;: IteratorSize end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -713,7 +685,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    findall&#40;sig::Type, view::MethodTableView; limit::Int&#61;-1&#41; -&gt;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -723,7 +695,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        MethodMatchResult&#40;matches::MethodLookupResult, overlayed::Bool&#41; or missing</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -733,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    IteratorSize&#40;itertype::Type&#41; -&gt; IteratorSize</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L69'>
@@ -743,7 +715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Find all methods in the given method table &#96;view&#96; that are applicable to the given signature &#96;sig&#96;.</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -753,7 +725,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>If no applicable methods are found, an empty result is returned.</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -763,7 +735,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>If the number of applicable methods exceeded the specified &#96;limit&#96;, &#96;missing&#96; is returned.</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -773,7 +745,7 @@
           <td>
             
             
-            <span class='code'>* &#96;SizeUnknown&#40;&#41;&#96; if the length &#40;number of elements&#41; cannot be determined in advance.</span>
+            <span class='code'>Note that the default setting &#96;limit&#61;-1&#96; does not limit the number of applicable methods.</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -783,7 +755,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasLength&#40;&#41;&#96; if there is a fixed, finite length.</span>
+            <span class='code'>&#96;overlayed&#96; indicates if any of the matching methods comes from an overlayed method table.</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -793,27 +765,55 @@
           <td>
             
             
-            <span class='code'>* &#96;HasShape&#123;N&#125;&#40;&#41;&#96; if there is a known length plus a notion of multidimensional shape &#40;as for an array&#41;.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L75'>
           <td class='lineno'>75</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>   In this case &#96;N&#96; should give the number of dimensions, and the &#91;&#96;axes&#96;&#93;&#40;@ref&#41; function is valid</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in findall
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #findall#277
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L123'>line 123</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L76'>#findall#275</a>
+              <br />
+            </div>
+            <span class='code'>function findall&#40;@nospecialize&#40;sig::Type&#41;, table::InternalMethodTable; limit::Int&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
           <td class='lineno'>76</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>   for the iterator.</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in #findall#275
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from findall
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L75'>line 75</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L107'>_findall</a>
+              <br />
+            </div>
+            <span class='code'>    result &#61; _findall&#40;sig, nothing, table.world, limit&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -823,7 +823,7 @@
           <td>
             
             
-            <span class='code'>* &#96;IsInfinite&#40;&#41;&#96; if the iterator yields values forever.</span>
+            <span class='code'>    result &#61;&#61;&#61; missing &amp;&amp; return missing</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -833,7 +833,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return MethodMatchResult&#40;result, false&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -843,7 +843,7 @@
           <td>
             
             
-            <span class='code'>The default value &#40;for iterators that do not define this function&#41; is &#96;HasLength&#40;&#41;&#96;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -853,7 +853,7 @@
           <td>
             
             
-            <span class='code'>This means that most iterators are assumed to implement &#91;&#96;length&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -863,7 +863,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function findall&#40;@nospecialize&#40;sig::Type&#41;, table::OverlayMethodTable; limit::Int&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -873,7 +873,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate space for their</span>
+            <span class='code'>    result &#61; _findall&#40;sig, table.mt, table.world, limit&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -883,7 +883,7 @@
           <td>
             
             
-            <span class='code'>result, and algorithms that resize their result incrementally.</span>
+            <span class='code'>    result &#61;&#61;&#61; missing &amp;&amp; return missing</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -893,7 +893,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    nr &#61; length&#40;result&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -903,7 +903,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    if nr ≥ 1 &amp;&amp; result&#91;nr&#93;.fully_covers</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -913,7 +913,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;1:5&#41;</span>
+            <span class='code'>        # no need to fall back to the internal method table</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -923,7 +923,7 @@
           <td>
             
             
-            <span class='code'>Base.HasShape&#123;1&#125;&#40;&#41;</span>
+            <span class='code'>        return MethodMatchResult&#40;result, true&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -933,7 +933,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -943,7 +943,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;&#40;2,3&#41;&#41;</span>
+            <span class='code'>    # fall back to the internal method table</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -953,7 +953,7 @@
           <td>
             
             
-            <span class='code'>Base.HasLength&#40;&#41;</span>
+            <span class='code'>    fallback_result &#61; _findall&#40;sig, nothing, table.world, limit&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -963,7 +963,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    fallback_result &#61;&#61;&#61; missing &amp;&amp; return missing</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -973,7 +973,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # merge the fallback match results with the internal method table</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -983,7 +983,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;x&#41; &#61; IteratorSize&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>    return MethodMatchResult&#40;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -993,7 +993,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#41; &#61; HasLength&#40;&#41;  # HasLength is the default</span>
+            <span class='code'>        MethodLookupResult&#40;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -1003,7 +1003,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            vcat&#40;result.matches, fallback_result.matches&#41;,</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -1013,7 +1013,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Tuple&#125;&#41; &#61; HasLength&#40;&#41;</span>
+            <span class='code'>            WorldRange&#40;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1023,7 +1023,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:AbstractArray&#123;&lt;:Any,N&#125;&#125;&#41;  where &#123;N&#125; &#61; HasShape&#123;N&#125;&#40;&#41;</span>
+            <span class='code'>                max&#40;result.valid_worlds.min_world, fallback_result.valid_worlds.min_world&#41;,</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1033,7 +1033,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Generator&#123;I,F&#125;&#125;&#41; where &#123;I,F&#125; &#61; IteratorSize&#40;I&#41;</span>
+            <span class='code'>                min&#40;result.valid_worlds.max_world, fallback_result.valid_worlds.max_world&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1043,7 +1043,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            result.ambig | fallback_result.ambig&#41;,</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1053,7 +1053,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Any&#125;&#41; &#61; SizeUnknown&#40;&#41;</span>
+            <span class='code'>        &#33;isempty&#40;result&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1063,7 +1063,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1073,7 +1073,7 @@
           <td>
             
             
-            <span class='code'>haslength&#40;iter&#41; &#61; IteratorSize&#40;iter&#41; isa Union&#123;HasShape, HasLength&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1083,7 +1083,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function _findall&#40;@nospecialize&#40;sig::Type&#41;, mt::Union&#123;Nothing,Core.MethodTable&#125;, world::UInt, limit::Int&#41;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1093,7 +1093,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorEltype end</span>
+            <span class='code'>    _min_val &#61; RefValue&#123;UInt&#125;&#40;typemin&#40;UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1103,7 +1103,7 @@
           <td>
             
             
-            <span class='code'>struct EltypeUnknown &lt;: IteratorEltype end</span>
+            <span class='code'>    _max_val &#61; RefValue&#123;UInt&#125;&#40;typemax&#40;UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1113,17 +1113,31 @@
           <td>
             
             
-            <span class='code'>struct HasEltype &lt;: IteratorEltype end</span>
+            <span class='code'>    _ambig &#61; RefValue&#123;Int32&#125;&#40;0&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
           <td class='lineno'>107</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in _findall
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #findall#275
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L76'>line 76</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='reflection.jl-c0c4c11cdcd816ed82652a07e247b9a182c971a7.html#L952'>_methods_by_ftype</a>
+              <br />
+            </div>
+            <span class='code'>    ms &#61; _methods_by_ftype&#40;sig, mt, limit, world, false, _min_val, _max_val, _ambig&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1133,7 +1147,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if ms &#61;&#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1143,7 +1157,7 @@
           <td>
             
             
-            <span class='code'>    IteratorEltype&#40;itertype::Type&#41; -&gt; IteratorEltype</span>
+            <span class='code'>        return missing</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1153,7 +1167,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1163,7 +1177,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>    return MethodLookupResult&#40;ms::Vector&#123;Any&#125;, WorldRange&#40;_min_val&#91;&#93;, _max_val&#91;&#93;&#41;, _ambig&#91;&#93; &#33;&#61; 0&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1173,7 +1187,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1183,17 +1197,36 @@
           <td>
             
             
-            <span class='code'>* &#96;EltypeUnknown&#40;&#41;&#96; if the type of elements yielded by the iterator is not known in advance.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
           <td class='lineno'>114</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>* &#96;HasEltype&#40;&#41;&#96; if the element type is known, and &#91;&#96;eltype&#96;&#93;&#40;@ref&#41; would return a meaningful value.</span>
+            <div class='call-sites'>
+              2 &#40;1 &#37;&#41;
+              samples spent in findall
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from findall
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L114'>line 114</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from find_matching_methods
+              <a href='abstractinterpretation.jl-700a49116fd4465bdb82a69dff9057a232b48b1f.html#L336'>line 336</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L114'>#findall#277</a>
+              <br />
+            </div>
+            <span class='code'>function findall&#40;@nospecialize&#40;sig::Type&#41;, table::CachedMethodTable; limit::Int&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1203,7 +1236,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if isconcretetype&#40;sig&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1213,7 +1246,7 @@
           <td>
             
             
-            <span class='code'>&#96;HasEltype&#40;&#41;&#96; is the default, since iterators are assumed to implement &#91;&#96;eltype&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>        # as for concrete types, we cache result at on the next level</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1223,7 +1256,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return findall&#40;sig, table.table; limit&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1233,7 +1266,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate a specific</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1243,7 +1276,7 @@
           <td>
             
             
-            <span class='code'>type of result, and algorithms that pick a result type based on the types of yielded</span>
+            <span class='code'>    key &#61; MethodMatchKey&#40;sig, limit&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1253,7 +1286,7 @@
           <td>
             
             
-            <span class='code'>values.</span>
+            <span class='code'>    if haskey&#40;table.cache, key&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1263,7 +1296,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return table.cache&#91;key&#93;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1273,17 +1306,22 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L123'>
           <td class='lineno'>123</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>julia&gt; Base.IteratorEltype&#40;1:5&#41;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='methodtable.jl-880ea86aba2cd8e96e9ce4850801937add605762.html#L75'>findall</a>
+              <br />
+            </div>
+            <span class='code'>        return table.cache&#91;key&#93; &#61; findall&#40;sig, table.table; limit&#41;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1293,7 +1331,7 @@
           <td>
             
             
-            <span class='code'>Base.HasEltype&#40;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1303,7 +1341,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1313,7 +1351,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1323,7 +1361,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;x&#41; &#61; IteratorEltype&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1333,7 +1371,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#41; &#61; HasEltype&#40;&#41;  # HasEltype is the default</span>
+            <span class='code'>    findsup&#40;sig::Type, view::MethodTableView&#41; -&gt;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1343,7 +1381,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#40;match::MethodMatch, valid_worlds::WorldRange, overlayed::Bool&#41; or nothing</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1353,7 +1391,7 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#123;Generator&#123;I,T&#125;&#125;&#41; where &#123;I,T&#125; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1363,7 +1401,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Find the &#40;unique&#41; method such that &#96;sig &lt;: match.method.sig&#96;, while being more</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1373,7 +1411,457 @@
           <td>
             
             
-            <span class='code'>IteratorEltype&#40;::Type&#123;Any&#125;&#41; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>specific than any other method with the same property. In other words, find the method</span>
+          </td>
+        </tr>
+        <tr id='L133'>
+          <td class='lineno'>133</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>which is the least upper bound &#40;supremum&#41; under the specificity/subtype relation of</span>
+          </td>
+        </tr>
+        <tr id='L134'>
+          <td class='lineno'>134</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>the queried &#96;sig&#96;nature. If &#96;sig&#96; is concrete, this is equivalent to asking for the method</span>
+          </td>
+        </tr>
+        <tr id='L135'>
+          <td class='lineno'>135</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>that will be called given arguments whose types match the given signature.</span>
+          </td>
+        </tr>
+        <tr id='L136'>
+          <td class='lineno'>136</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Note that this query is also used to implement &#96;invoke&#96;.</span>
+          </td>
+        </tr>
+        <tr id='L137'>
+          <td class='lineno'>137</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L138'>
+          <td class='lineno'>138</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Such a matching method &#96;match&#96; doesn&#39;t necessarily exist.</span>
+          </td>
+        </tr>
+        <tr id='L139'>
+          <td class='lineno'>139</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>It is possible that no method is an upper bound of &#96;sig&#96;, or</span>
+          </td>
+        </tr>
+        <tr id='L140'>
+          <td class='lineno'>140</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>it is possible that among the upper bounds, there is no least element.</span>
+          </td>
+        </tr>
+        <tr id='L141'>
+          <td class='lineno'>141</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>In both cases &#96;nothing&#96; is returned.</span>
+          </td>
+        </tr>
+        <tr id='L142'>
+          <td class='lineno'>142</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L143'>
+          <td class='lineno'>143</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&#96;overlayed&#96; indicates if any of the matching methods comes from an overlayed method table.</span>
+          </td>
+        </tr>
+        <tr id='L144'>
+          <td class='lineno'>144</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L145'>
+          <td class='lineno'>145</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function findsup&#40;@nospecialize&#40;sig::Type&#41;, table::InternalMethodTable&#41;</span>
+          </td>
+        </tr>
+        <tr id='L146'>
+          <td class='lineno'>146</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return &#40;_findsup&#40;sig, nothing, table.world&#41;..., false&#41;</span>
+          </td>
+        </tr>
+        <tr id='L147'>
+          <td class='lineno'>147</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L148'>
+          <td class='lineno'>148</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L149'>
+          <td class='lineno'>149</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function findsup&#40;@nospecialize&#40;sig::Type&#41;, table::OverlayMethodTable&#41;</span>
+          </td>
+        </tr>
+        <tr id='L150'>
+          <td class='lineno'>150</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    match, valid_worlds &#61; _findsup&#40;sig, table.mt, table.world&#41;</span>
+          </td>
+        </tr>
+        <tr id='L151'>
+          <td class='lineno'>151</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    match &#33;&#61;&#61; nothing &amp;&amp; return match, valid_worlds, true</span>
+          </td>
+        </tr>
+        <tr id='L152'>
+          <td class='lineno'>152</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # fall back to the internal method table</span>
+          </td>
+        </tr>
+        <tr id='L153'>
+          <td class='lineno'>153</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    fallback_match, fallback_valid_worlds &#61; _findsup&#40;sig, nothing, table.world&#41;</span>
+          </td>
+        </tr>
+        <tr id='L154'>
+          <td class='lineno'>154</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return &#40;</span>
+          </td>
+        </tr>
+        <tr id='L155'>
+          <td class='lineno'>155</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        fallback_match,</span>
+          </td>
+        </tr>
+        <tr id='L156'>
+          <td class='lineno'>156</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        WorldRange&#40;</span>
+          </td>
+        </tr>
+        <tr id='L157'>
+          <td class='lineno'>157</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            max&#40;valid_worlds.min_world, fallback_valid_worlds.min_world&#41;,</span>
+          </td>
+        </tr>
+        <tr id='L158'>
+          <td class='lineno'>158</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            min&#40;valid_worlds.max_world, fallback_valid_worlds.max_world&#41;&#41;,</span>
+          </td>
+        </tr>
+        <tr id='L159'>
+          <td class='lineno'>159</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        false&#41;</span>
+          </td>
+        </tr>
+        <tr id='L160'>
+          <td class='lineno'>160</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L161'>
+          <td class='lineno'>161</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L162'>
+          <td class='lineno'>162</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function _findsup&#40;@nospecialize&#40;sig::Type&#41;, mt::Union&#123;Nothing,Core.MethodTable&#125;, world::UInt&#41;</span>
+          </td>
+        </tr>
+        <tr id='L163'>
+          <td class='lineno'>163</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    min_valid &#61; RefValue&#123;UInt&#125;&#40;typemin&#40;UInt&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L164'>
+          <td class='lineno'>164</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    max_valid &#61; RefValue&#123;UInt&#125;&#40;typemax&#40;UInt&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L165'>
+          <td class='lineno'>165</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    match &#61; ccall&#40;:jl_gf_invoke_lookup_worlds, Any, &#40;Any, Any, UInt, Ptr&#123;Csize_t&#125;, Ptr&#123;Csize_t&#125;&#41;,</span>
+          </td>
+        </tr>
+        <tr id='L166'>
+          <td class='lineno'>166</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                   sig, mt, world, min_valid, max_valid&#41;::Union&#123;MethodMatch, Nothing&#125;</span>
+          </td>
+        </tr>
+        <tr id='L167'>
+          <td class='lineno'>167</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    valid_worlds &#61; WorldRange&#40;min_valid&#91;&#93;, max_valid&#91;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L168'>
+          <td class='lineno'>168</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return match, valid_worlds</span>
+          </td>
+        </tr>
+        <tr id='L169'>
+          <td class='lineno'>169</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L170'>
+          <td class='lineno'>170</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L171'>
+          <td class='lineno'>171</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># This query is not cached</span>
+          </td>
+        </tr>
+        <tr id='L172'>
+          <td class='lineno'>172</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>findsup&#40;@nospecialize&#40;sig::Type&#41;, table::CachedMethodTable&#41; &#61; findsup&#40;sig, table.table&#41;</span>
+          </td>
+        </tr>
+        <tr id='L173'>
+          <td class='lineno'>173</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L174'>
+          <td class='lineno'>174</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>isoverlayed&#40;::MethodTableView&#41;     &#61; error&#40;&quot;unsatisfied MethodTableView interface&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L175'>
+          <td class='lineno'>175</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>isoverlayed&#40;::InternalMethodTable&#41; &#61; false</span>
+          </td>
+        </tr>
+        <tr id='L176'>
+          <td class='lineno'>176</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>isoverlayed&#40;::OverlayMethodTable&#41;  &#61; true</span>
+          </td>
+        </tr>
+        <tr id='L177'>
+          <td class='lineno'>177</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>isoverlayed&#40;mt::CachedMethodTable&#41; &#61; isoverlayed&#40;mt.table&#41;</span>
           </td>
         </tr>
       </tbody>

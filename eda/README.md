@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/compathelper/new_version/2023-11-01-00-09-29-542-03899042276`
-*Generated on 2023-11-01@00:31:58 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/6713852270)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/dev`
+*Generated on 2023-11-01@17:47:07 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/6722982921)*
 
 ---
 
@@ -10,7 +10,15 @@
 ---
 
 ## Image Galleries
-1. [dataloader plots: 30 images](#dataloader-plots)
+1. [cp v0 plots: 1 images](#cp-v0-plots)
+2. [dataloader plots: 30 images](#dataloader-plots)
+#### cp v0 plots
+| cp v0 plots | 1 images |
+| --- | --- |
+| [Test System_CPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/cp_v0_plots%2F%2FTest%20System_CPs.png) ![Test System_CPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/cp_v0_plots%2F%2FTest%20System_CPs.png) | |
+
+---
+
 #### dataloader plots
 | dataloader plots | 30 images |
 | --- | --- |

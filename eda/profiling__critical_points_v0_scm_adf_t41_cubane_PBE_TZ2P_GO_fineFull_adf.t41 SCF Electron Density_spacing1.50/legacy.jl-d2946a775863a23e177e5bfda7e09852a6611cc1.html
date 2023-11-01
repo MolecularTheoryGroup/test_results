@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/generator.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.3/x64/share/julia/base/compiler/ssair/legacy.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Generator&#40;f, iter&#41;</span>
+            <span class='code'>    inflate_ir&#33;&#40;ci::CodeInfo, linfo::MethodInstance&#41; -&gt; ir::IRCode</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    inflate_ir&#33;&#40;ci::CodeInfo, sptypes::Vector&#123;Any&#125;, argtypes::Vector&#123;Any&#125;&#41; -&gt; ir::IRCode</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>Given a function &#96;f&#96; and an iterator &#96;iter&#96;, construct an iterator that yields</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>the values of &#96;f&#96; applied to the elements of &#96;iter&#96;.</span>
+            <span class='code'>Inflates &#96;ci::CodeInfo&#96;-IR to &#96;ir::IRCode&#96;-format.</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>The syntax for constructing an instance of this type is &#96;f&#40;x&#41; for x in iter &#91;if cond&#40;x&#41;::Bool&#93; &#96;.</span>
+            <span class='code'>This should be used with caution as it is a in-place transformation where the fields of</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>The &#96;&#91;if cond&#40;x&#41;::Bool&#93;&#96; expression is optional and acts as a &quot;guard&quot;, effectively</span>
+            <span class='code'>the original &#96;ci::CodeInfo&#96; are modified.</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>filtering out values where the condition is false.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -133,9 +133,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              2 &#40;1 &#37;&#41;
+              samples spent in inflate_ir&#33;
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from retrieve_ir_for_inlining
+              <a href='inlining.jl-4e932406c62909d4305b6293844bbdb248ff6962.html#L987'>line 987</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>function inflate_ir&#33;&#40;ci::CodeInfo, linfo::MethodInstance&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +154,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    sptypes &#61; sptypes_from_meth_instance&#40;linfo&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,17 +164,22 @@
           <td>
             
             
-            <span class='code'>julia&gt; g &#61; &#40;abs2&#40;x&#41; for x in 1:5 if x &#33;&#61; 3&#41;;</span>
+            <span class='code'>    if ci.inferred</span>
           </td>
         </tr>
         <tr id='L14'>
           <td class='lineno'>14</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'></span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='inferenceresult.jl-7b70fc5ebc818255d3f017251402bf1ec75dfd82.html#L28'>matching_cache_argtypes</a>
+              <br />
+            </div>
+            <span class='code'>        argtypes, _ &#61; matching_cache_argtypes&#40;linfo&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +189,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; for x in g</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +199,7 @@
           <td>
             
             
-            <span class='code'>           println&#40;x&#41;</span>
+            <span class='code'>        argtypes &#61; Any&#91; Any for i &#61; 1:length&#40;ci.slotflags&#41; &#93;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,17 +209,22 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L18'>
           <td class='lineno'>18</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>1</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='legacy.jl-d2946a775863a23e177e5bfda7e09852a6611cc1.html#L20'>inflate_ir&#33;</a>
+              <br />
+            </div>
+            <span class='code'>    return inflate_ir&#33;&#40;ci, sptypes, argtypes&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +234,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -223,9 +242,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in inflate_ir&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from inflate_ir&#33;
+              <a href='legacy.jl-d2946a775863a23e177e5bfda7e09852a6611cc1.html#L18'>line 18</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>16</span>
+            <span class='code'>function inflate_ir&#33;&#40;ci::CodeInfo, sptypes::Vector&#123;Any&#125;, argtypes::Vector&#123;Any&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,17 +263,22 @@
           <td>
             
             
-            <span class='code'>25</span>
+            <span class='code'>    code &#61; ci.code</span>
           </td>
         </tr>
         <tr id='L22'>
           <td class='lineno'>22</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'></span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='ir.jl-cbb9f4c6bf3a951fa22d42eef6c721b73d00b9db.html#L93'>compute_basic_blocks</a>
+              <br />
+            </div>
+            <span class='code'>    cfg &#61; compute_basic_blocks&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +288,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; collect&#40;g&#41;</span>
+            <span class='code'>    for i &#61; 1:length&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +298,7 @@
           <td>
             
             
-            <span class='code'>4-element Vector&#123;Int64&#125;:</span>
+            <span class='code'>        stmt &#61; code&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +308,7 @@
           <td>
             
             
-            <span class='code'>  1</span>
+            <span class='code'>        # Translate statement edges to bb_edges</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +318,7 @@
           <td>
             
             
-            <span class='code'>  4</span>
+            <span class='code'>        if isa&#40;stmt, GotoNode&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +328,7 @@
           <td>
             
             
-            <span class='code'> 16</span>
+            <span class='code'>            code&#91;i&#93; &#61; GotoNode&#40;block_for_inst&#40;cfg, stmt.label&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +338,7 @@
           <td>
             
             
-            <span class='code'> 25</span>
+            <span class='code'>        elseif isa&#40;stmt, GotoIfNot&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +348,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>            code&#91;i&#93; &#61; GotoIfNot&#40;stmt.cond, block_for_inst&#40;cfg, stmt.dest&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +358,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        elseif isa&#40;stmt, PhiNode&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +368,7 @@
           <td>
             
             
-            <span class='code'>struct Generator&#123;I,F&#125;</span>
+            <span class='code'>            code&#91;i&#93; &#61; PhiNode&#40;Int32&#91;block_for_inst&#40;cfg, Int&#40;edge&#41;&#41; for edge in stmt.edges&#93;, stmt.values&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +378,7 @@
           <td>
             
             
-            <span class='code'>    f::F</span>
+            <span class='code'>        elseif isexpr&#40;stmt, :enter&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +388,7 @@
           <td>
             
             
-            <span class='code'>    iter::I</span>
+            <span class='code'>            stmt.args&#91;1&#93; &#61; block_for_inst&#40;cfg, stmt.args&#91;1&#93;::Int&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +398,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            code&#91;i&#93; &#61; stmt</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +408,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +418,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;f, I1, I2, Is...&#41; &#61; Generator&#40;a-&gt;f&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +428,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    nstmts &#61; length&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +438,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, iter::I&#41; where &#123;T,I&#125; &#61; Generator&#123;I,Type&#123;T&#125;&#125;&#40;T, iter&#41;</span>
+            <span class='code'>    ssavaluetypes &#61; ci.ssavaluetypes</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +448,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if &#33;isa&#40;ssavaluetypes, Vector&#123;Any&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +458,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, I1, I2, Is...&#41; where &#123;T&#125; &#61; Generator&#40;a-&gt;T&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>        ssavaluetypes &#61; Any&#91; Any for i &#61; 1:ssavaluetypes::Int &#93;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +468,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +478,7 @@
           <td>
             
             
-            <span class='code'>function iterate&#40;g::Generator, s...&#41;</span>
+            <span class='code'>    info &#61; CallInfo&#91;NoCallInfo&#40;&#41; for i &#61; 1:nstmts&#93;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,31 +488,17 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    stmts &#61; InstructionStream&#40;code, ssavaluetypes, info, ci.codelocs, ci.ssaflags&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
           <td class='lineno'>44</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;1 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;1 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from grow_to&#33;
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L886'>line 886</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='iterators.jl-d47edab3807bac057c9e978326ebc99be1537cef.html#L514'>iterate</a>
-              <br />
-            </div>
-            <span class='code'>    y &#61; iterate&#40;g.iter, s...&#41;</span>
+            
+            
+            <span class='code'>    linetable &#61; ci.linetable</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +508,7 @@
           <td>
             
             
-            <span class='code'>    y &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
+            <span class='code'>    if &#33;isa&#40;linetable, Vector&#123;LineInfoNode&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -499,31 +518,17 @@
           <td>
             
             
-            <span class='code'>    y &#61; y::Tuple&#123;Any, Any&#125; # try to give inference some idea of what to expect about the behavior of the next line</span>
+            <span class='code'>        linetable &#61; collect&#40;LineInfoNode, linetable::Vector&#123;Any&#125;&#41;::Vector&#123;LineInfoNode&#125;</span>
           </td>
         </tr>
         <tr id='L47'>
           <td class='lineno'>47</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from grow_to&#33;
-              <a href='array.jl-a1a5689c27c2ba640bec06e0656c2051a2b4f20d.html#L886'>line 886</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='notfound.html#L0'>#11</a>
-              <br />
-            </div>
-            <span class='code'>    return &#40;g.f&#40;y&#91;1&#93;&#41;, y&#91;2&#93;&#41;</span>
+            
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -533,7 +538,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    meta &#61; Expr&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -543,7 +548,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return IRCode&#40;stmts, cfg, linetable, argtypes, meta, sptypes&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -553,7 +558,7 @@
           <td>
             
             
-            <span class='code'>length&#40;g::Generator&#41; &#61; length&#40;g.iter&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -563,7 +568,7 @@
           <td>
             
             
-            <span class='code'>size&#40;g::Generator&#41; &#61; size&#40;g.iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L52'>
@@ -573,7 +578,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;g::Generator&#41; &#61; axes&#40;g.iter&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -583,7 +588,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;g::Generator&#41; &#61; ndims&#40;g.iter&#41;</span>
+            <span class='code'>    inflate_ir&#40;ci::CodeInfo, linfo::MethodInstance&#41; -&gt; ir::IRCode</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -593,7 +598,7 @@
           <td>
             
             
-            <span class='code'>keys&#40;g::Generator&#41; &#61; keys&#40;g.iter&#41;</span>
+            <span class='code'>    inflate_ir&#40;ci::CodeInfo, sptypes::Vector&#123;Any&#125;, argtypes::Vector&#123;Any&#125;&#41; -&gt; ir::IRCode</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -603,7 +608,7 @@
           <td>
             
             
-            <span class='code'>last&#40;g::Generator&#41; &#61; g.f&#40;last&#40;g.iter&#41;&#41;</span>
+            <span class='code'>    inflate_ir&#40;ci::CodeInfo&#41; -&gt; ir::IRCode</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -613,7 +618,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;g::Generator&#41; &#61; isempty&#40;g.iter&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -623,7 +628,7 @@
           <td>
             
             
-            <span class='code'>isdone&#40;g::Generator, state...&#41; &#61; isdone&#40;g.iter, state...&#41;</span>
+            <span class='code'>Non-destructive version of &#96;inflate_ir&#33;&#96;.</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -633,7 +638,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Mainly used for testing or interactive use.</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -643,7 +648,7 @@
           <td>
             
             
-            <span class='code'>## iterator traits</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -653,7 +658,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>inflate_ir&#40;ci::CodeInfo, linfo::MethodInstance&#41; &#61; inflate_ir&#33;&#40;copy&#40;ci&#41;, linfo&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -663,7 +668,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorSize end</span>
+            <span class='code'>inflate_ir&#40;ci::CodeInfo, sptypes::Vector&#123;Any&#125;, argtypes::Vector&#123;Any&#125;&#41; &#61; inflate_ir&#33;&#40;copy&#40;ci&#41;, sptypes, argtypes&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -673,7 +678,7 @@
           <td>
             
             
-            <span class='code'>struct SizeUnknown &lt;: IteratorSize end</span>
+            <span class='code'>inflate_ir&#40;ci::CodeInfo&#41; &#61; inflate_ir&#40;ci, Any&#91;&#93;, Any&#91; ci.slottypes &#61;&#61;&#61; nothing ? Any : &#40;ci.slottypes::Vector&#123;Any&#125;&#41;&#91;i&#93; for i &#61; 1:length&#40;ci.slotflags&#41; &#93;&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -683,7 +688,7 @@
           <td>
             
             
-            <span class='code'>struct HasLength &lt;: IteratorSize end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L64'>
@@ -693,7 +698,7 @@
           <td>
             
             
-            <span class='code'>struct HasShape&#123;N&#125; &lt;: IteratorSize end</span>
+            <span class='code'>function replace_code_newstyle&#33;&#40;ci::CodeInfo, ir::IRCode, nargs::Int&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -703,7 +708,7 @@
           <td>
             
             
-            <span class='code'>struct IsInfinite &lt;: IteratorSize end</span>
+            <span class='code'>    @assert isempty&#40;ir.new_nodes&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -713,7 +718,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # All but the first &#96;nargs&#96; slots will now be unused</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -723,7 +728,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    resize&#33;&#40;ci.slotflags, nargs&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -733,7 +738,7 @@
           <td>
             
             
-            <span class='code'>    IteratorSize&#40;itertype::Type&#41; -&gt; IteratorSize</span>
+            <span class='code'>    stmts &#61; ir.stmts</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -743,7 +748,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    code &#61; ci.code &#61; stmts.inst</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -753,7 +758,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>    ssavaluetypes &#61; ci.ssavaluetypes &#61; stmts.type</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -763,7 +768,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    codelocs &#61; ci.codelocs &#61; stmts.line</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -773,7 +778,7 @@
           <td>
             
             
-            <span class='code'>* &#96;SizeUnknown&#40;&#41;&#96; if the length &#40;number of elements&#41; cannot be determined in advance.</span>
+            <span class='code'>    ssaflags &#61; ci.ssaflags &#61; stmts.flag</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -783,7 +788,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasLength&#40;&#41;&#96; if there is a fixed, finite length.</span>
+            <span class='code'>    linetable &#61; ci.linetable &#61; ir.linetable</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -793,7 +798,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasShape&#123;N&#125;&#40;&#41;&#96; if there is a known length plus a notion of multidimensional shape &#40;as for an array&#41;.</span>
+            <span class='code'>    for metanode in ir.meta</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -803,7 +808,7 @@
           <td>
             
             
-            <span class='code'>   In this case &#96;N&#96; should give the number of dimensions, and the &#91;&#96;axes&#96;&#93;&#40;@ref&#41; function is valid</span>
+            <span class='code'>        push&#33;&#40;code, metanode&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -813,7 +818,7 @@
           <td>
             
             
-            <span class='code'>   for the iterator.</span>
+            <span class='code'>        push&#33;&#40;codelocs, 1&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -823,7 +828,7 @@
           <td>
             
             
-            <span class='code'>* &#96;IsInfinite&#40;&#41;&#96; if the iterator yields values forever.</span>
+            <span class='code'>        push&#33;&#40;ssavaluetypes, Any&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -833,7 +838,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        push&#33;&#40;ssaflags, IR_FLAG_NULL&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -843,7 +848,7 @@
           <td>
             
             
-            <span class='code'>The default value &#40;for iterators that do not define this function&#41; is &#96;HasLength&#40;&#41;&#96;.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -853,7 +858,7 @@
           <td>
             
             
-            <span class='code'>This means that most iterators are assumed to implement &#91;&#96;length&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    # Translate BB Edges to statement edges</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -863,7 +868,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # &#40;and undo normalization for now&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -873,7 +878,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate space for their</span>
+            <span class='code'>    for i &#61; 1:length&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -883,7 +888,7 @@
           <td>
             
             
-            <span class='code'>result, and algorithms that resize their result incrementally.</span>
+            <span class='code'>        stmt &#61; code&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -893,7 +898,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if isa&#40;stmt, GotoNode&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -903,7 +908,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>            code&#91;i&#93; &#61; GotoNode&#40;first&#40;ir.cfg.blocks&#91;stmt.label&#93;.stmts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -913,7 +918,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;1:5&#41;</span>
+            <span class='code'>        elseif isa&#40;stmt, GotoIfNot&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -923,7 +928,7 @@
           <td>
             
             
-            <span class='code'>Base.HasShape&#123;1&#125;&#40;&#41;</span>
+            <span class='code'>            code&#91;i&#93; &#61; GotoIfNot&#40;stmt.cond, first&#40;ir.cfg.blocks&#91;stmt.dest&#93;.stmts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -933,7 +938,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        elseif isa&#40;stmt, PhiNode&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -943,7 +948,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;&#40;2,3&#41;&#41;</span>
+            <span class='code'>            code&#91;i&#93; &#61; PhiNode&#40;Int32&#91;edge &#61;&#61; 0 ? 0 : last&#40;ir.cfg.blocks&#91;edge&#93;.stmts&#41; for edge in stmt.edges&#93;, stmt.values&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -953,7 +958,7 @@
           <td>
             
             
-            <span class='code'>Base.HasLength&#40;&#41;</span>
+            <span class='code'>        elseif isexpr&#40;stmt, :enter&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -963,7 +968,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>            stmt.args&#91;1&#93; &#61; first&#40;ir.cfg.blocks&#91;stmt.args&#91;1&#93;::Int&#93;.stmts&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -973,7 +978,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            code&#91;i&#93; &#61; stmt</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -983,7 +988,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;x&#41; &#61; IteratorSize&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -993,7 +998,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#41; &#61; HasLength&#40;&#41;  # HasLength is the default</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -1003,377 +1008,7 @@
           <td>
             
             
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L96'>
-          <td class='lineno'>96</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Tuple&#125;&#41; &#61; HasLength&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L97'>
-          <td class='lineno'>97</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:AbstractArray&#123;&lt;:Any,N&#125;&#125;&#41;  where &#123;N&#125; &#61; HasShape&#123;N&#125;&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L98'>
-          <td class='lineno'>98</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorSize&#40;::Type&#123;Generator&#123;I,F&#125;&#125;&#41; where &#123;I,F&#125; &#61; IteratorSize&#40;I&#41;</span>
-          </td>
-        </tr>
-        <tr id='L99'>
-          <td class='lineno'>99</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L100'>
-          <td class='lineno'>100</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorSize&#40;::Type&#123;Any&#125;&#41; &#61; SizeUnknown&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L101'>
-          <td class='lineno'>101</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L102'>
-          <td class='lineno'>102</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>haslength&#40;iter&#41; &#61; IteratorSize&#40;iter&#41; isa Union&#123;HasShape, HasLength&#125;</span>
-          </td>
-        </tr>
-        <tr id='L103'>
-          <td class='lineno'>103</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L104'>
-          <td class='lineno'>104</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>abstract type IteratorEltype end</span>
-          </td>
-        </tr>
-        <tr id='L105'>
-          <td class='lineno'>105</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>struct EltypeUnknown &lt;: IteratorEltype end</span>
-          </td>
-        </tr>
-        <tr id='L106'>
-          <td class='lineno'>106</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>struct HasEltype &lt;: IteratorEltype end</span>
-          </td>
-        </tr>
-        <tr id='L107'>
-          <td class='lineno'>107</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L108'>
-          <td class='lineno'>108</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L109'>
-          <td class='lineno'>109</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IteratorEltype&#40;itertype::Type&#41; -&gt; IteratorEltype</span>
-          </td>
-        </tr>
-        <tr id='L110'>
-          <td class='lineno'>110</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L111'>
-          <td class='lineno'>111</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
-          </td>
-        </tr>
-        <tr id='L112'>
-          <td class='lineno'>112</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L113'>
-          <td class='lineno'>113</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>* &#96;EltypeUnknown&#40;&#41;&#96; if the type of elements yielded by the iterator is not known in advance.</span>
-          </td>
-        </tr>
-        <tr id='L114'>
-          <td class='lineno'>114</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>* &#96;HasEltype&#40;&#41;&#96; if the element type is known, and &#91;&#96;eltype&#96;&#93;&#40;@ref&#41; would return a meaningful value.</span>
-          </td>
-        </tr>
-        <tr id='L115'>
-          <td class='lineno'>115</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L116'>
-          <td class='lineno'>116</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;HasEltype&#40;&#41;&#96; is the default, since iterators are assumed to implement &#91;&#96;eltype&#96;&#93;&#40;@ref&#41;.</span>
-          </td>
-        </tr>
-        <tr id='L117'>
-          <td class='lineno'>117</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L118'>
-          <td class='lineno'>118</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate a specific</span>
-          </td>
-        </tr>
-        <tr id='L119'>
-          <td class='lineno'>119</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>type of result, and algorithms that pick a result type based on the types of yielded</span>
-          </td>
-        </tr>
-        <tr id='L120'>
-          <td class='lineno'>120</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>values.</span>
-          </td>
-        </tr>
-        <tr id='L121'>
-          <td class='lineno'>121</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L122'>
-          <td class='lineno'>122</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
-          </td>
-        </tr>
-        <tr id='L123'>
-          <td class='lineno'>123</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>julia&gt; Base.IteratorEltype&#40;1:5&#41;</span>
-          </td>
-        </tr>
-        <tr id='L124'>
-          <td class='lineno'>124</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.HasEltype&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L125'>
-          <td class='lineno'>125</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;</span>
-          </td>
-        </tr>
-        <tr id='L126'>
-          <td class='lineno'>126</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L127'>
-          <td class='lineno'>127</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;x&#41; &#61; IteratorEltype&#40;typeof&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L128'>
-          <td class='lineno'>128</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#41; &#61; HasEltype&#40;&#41;  # HasEltype is the default</span>
-          </td>
-        </tr>
-        <tr id='L129'>
-          <td class='lineno'>129</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L130'>
-          <td class='lineno'>130</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#123;Generator&#123;I,T&#125;&#125;&#41; where &#123;I,T&#125; &#61; EltypeUnknown&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L131'>
-          <td class='lineno'>131</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L132'>
-          <td class='lineno'>132</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#123;Any&#125;&#41; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>
