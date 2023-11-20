@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/NLSolversBase/kavn7/src/interface.jl</title>
+    <title>StatProfilerHTML - test_helpers.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Mon, 20 Nov 2023 22:51:48
+        Generated on Mon, 20 Nov 2023 22:51:44
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>using Dates</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>Force &#40;re-&#41;evaluation of the objective value at &#96;x&#96;.</span>
+            <span class='code'>using Interpolations</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>Returns &#96;f&#40;x&#41;&#96; and stores the value in &#96;obj.F&#96;</span>
+            <span class='code'>using ZipFile</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>function value&#33;&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'># only import ElectronDensityAnalysis if it is not already imported</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls .&#43;&#61; 1</span>
+            <span class='code'>if &#33;isdefined&#40;Main, :ElectronDensityAnalysis&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_f, x&#41;</span>
+            <span class='code'>    using ElectronDensityAnalysis</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    obj.F &#61; obj.f&#40;x&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    value&#40;obj&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Define path to test data directory</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>DATA_DIR &#61; joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;test_data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>Evaluates the objective value at &#96;x&#96;.</span>
+            <span class='code'># get full path of all files in DATA_DIR with .zip extension removed</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>DATA_FILES &#61; map&#40;x -&gt; joinpath&#40;DATA_DIR, replace&#40;x, &quot;.zip&quot; &#61;&gt; &quot;&quot;&#41;&#41;, readdir&#40;DATA_DIR&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>Returns &#96;f&#40;x&#41;&#96;, but does *not* store the value in &#96;obj.F&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>function value&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>    unzip&#40;file::AbstractString, exdir::AbstractString&#61;&quot;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls .&#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    return obj.f&#40;x&#41;</span>
+            <span class='code'>Unzips the specified zip file to the specified directory.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Taken from: https://discourse.julialang.org/t/how-to-extract-a-file-in-a-zip-archive-without-using-os-specific-tools/34585/4</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>Evaluates the objective value at &#96;x&#96;.</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;file::AbstractString&#96;: The path to the zip file to unzip.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>Returns &#96;f&#40;x&#41;&#96; and stores the value in &#96;obj.F&#96;</span>
+            <span class='code'>- &#96;exdir::AbstractString&#61;&quot;&quot;&#41;&#96;: The path to the directory to extract the zip file to. If not specified, the zip file will be extracted to the same directory as the zip file.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>function value&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,31 +295,17 @@
           <td>
             
             
-            <span class='code'>    if x &#33;&#61; obj.x_f</span>
+            <span class='code'>- &#96;ZipFile.Reader&#96;: A &#96;ZipFile.Reader&#96; object representing the unzipped files.</span>
           </td>
         </tr>
         <tr id='L28'>
           <td class='lineno'>28</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>10 &#40;33 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              10 &#40;33 &#37;&#41;
-              samples spent in value&#33;
-              <br />
-              
-              10 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from trust_region_
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L174'>line 174</a>
-              <br />
-            </div>
-            <div class='callees'>
-              10 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L164'>value&#33;&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        value&#33;&#33;&#40;obj, x&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -329,7 +315,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -339,7 +325,7 @@
           <td>
             
             
-            <span class='code'>    value&#40;obj&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -349,7 +335,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; unzip&#40;&quot;data.zip&quot;, &quot;data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -359,7 +345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -379,7 +365,7 @@
           <td>
             
             
-            <span class='code'>Evaluates the gradient value at &#96;x&#96;</span>
+            <span class='code'>function unzip&#40;file::String, exdir&#61;&quot;&quot;&#41;::Nothing</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -389,7 +375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @assert isfile&#40;file&#41; &quot;File does not exist: &#36;file&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -399,7 +385,7 @@
           <td>
             
             
-            <span class='code'>This does *not* update &#96;obj.DF&#96; or &#96;obj.x_df&#96;.</span>
+            <span class='code'>    fileFullPath &#61; isabspath&#40;file&#41; ? file : joinpath&#40;pwd&#40;&#41;, file&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -409,7 +395,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    basePath &#61; dirname&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -419,7 +405,7 @@
           <td>
             
             
-            <span class='code'>function gradient&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>    outPath &#61; &#40;exdir &#61;&#61; &quot;&quot; ? basePath : &#40;isabspath&#40;exdir&#41; ? exdir : joinpath&#40;pwd&#40;&#41;, exdir&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -429,7 +415,7 @@
           <td>
             
             
-            <span class='code'>    newdf &#61; copy&#40;obj.DF&#41;</span>
+            <span class='code'>    isdir&#40;outPath&#41; ? &quot;&quot; : mkdir&#40;outPath&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -439,7 +425,7 @@
           <td>
             
             
-            <span class='code'>    obj.df&#40;newdf, x&#41;</span>
+            <span class='code'>    zarchive &#61; ZipFile.Reader&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -449,7 +435,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls .&#43;&#61; 1</span>
+            <span class='code'>    for f in zarchive.files</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -459,7 +445,7 @@
           <td>
             
             
-            <span class='code'>    return newdf</span>
+            <span class='code'>        fullFilePath &#61; joinpath&#40;outPath, f.name&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -469,7 +455,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        if &#40;endswith&#40;f.name, &quot;/&quot;&#41; || endswith&#40;f.name, &quot;\\&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -479,7 +465,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            mkpath&#40;fullFilePath&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +475,7 @@
           <td>
             
             
-            <span class='code'>Evaluates the gradient value at &#96;x&#96;.</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -499,7 +485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            try</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -509,7 +495,7 @@
           <td>
             
             
-            <span class='code'>Stores the value in &#96;obj.DF&#96;.</span>
+            <span class='code'>                write&#40;fullFilePath, read&#40;f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +505,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            catch e</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +515,7 @@
           <td>
             
             
-            <span class='code'>function gradient&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>                @debug &quot;Error writing file in unzip&#40;&#41;: &#36;e&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    if x &#33;&#61; obj.x_df</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +535,7 @@
           <td>
             
             
-            <span class='code'>        gradient&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -569,7 +555,7 @@
           <td>
             
             
-            <span class='code'>    gradient&#40;obj&#41;</span>
+            <span class='code'>    return close&#40;zarchive&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +565,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +575,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +585,7 @@
           <td>
             
             
-            <span class='code'>Force &#40;re-&#41;evaluation of the gradient value at &#96;x&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +595,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +605,7 @@
           <td>
             
             
-            <span class='code'>Stores the value in &#96;obj.DF&#96;.</span>
+            <span class='code'>    with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +615,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +625,7 @@
           <td>
             
             
-            <span class='code'>function gradient&#33;&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>The &#96;with_zip_file&#96; function is a utility function that takes a file path and a function as inputs. It first appends the &quot;.zip&quot; extension to the file path to get the path of the corresponding zip file. Then, it tries to unzip the zip file using the &#96;unzip&#96; function. If the unzipping is successful, it calls the provided function with the original file path as an argument. If any error occurs during the unzipping or function execution, the error is rethrown. Finally, it removes the original file using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +635,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls .&#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +645,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_df, x&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +655,7 @@
           <td>
             
             
-            <span class='code'>    obj.df&#40;obj.DF, x&#41;</span>
+            <span class='code'>- &#96;f_path::AbstractString&#96;: The file path of the file to be unzipped and processed.</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    gradient&#40;obj&#41;</span>
+            <span class='code'>- &#96;func::Function&#96;: The function to be executed with the unzipped file.</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +675,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +685,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +695,7 @@
           <td>
             
             
-            <span class='code'>function value_gradient&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    if x &#33;&#61; obj.x_f &amp;&amp; x &#33;&#61; obj.x_df</span>
+            <span class='code'># Define a function to be executed with the unzipped file</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +715,7 @@
           <td>
             
             
-            <span class='code'>        value_gradient&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'>function process_file&#40;file_path&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +725,7 @@
           <td>
             
             
-            <span class='code'>    elseif x &#33;&#61; obj.x_f</span>
+            <span class='code'>    # Process the file here</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +735,7 @@
           <td>
             
             
-            <span class='code'>        value&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'>    println&#40;&quot;Processing file&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    elseif x &#33;&#61; obj.x_df</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +755,7 @@
           <td>
             
             
-            <span class='code'>        gradient&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Call the with_zip_file function</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    value&#40;obj&#41;, gradient&#40;obj&#41;</span>
+            <span class='code'>with_zip_file&#40;&quot;path/to/file&quot;, process_file&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +785,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +795,7 @@
           <td>
             
             
-            <span class='code'>function value_gradient&#33;&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>In this example, the &#96;with_zip_file&#96; function is called with the file path &quot;path/to/file&quot; and the &#96;process_file&#96; function as arguments. The zip file &quot;path/to/file.zip&quot; is unzipped, and then the &#96;process_file&#96; function is called with the original file path &quot;path/to/file&quot;. The function &#96;process_file&#96; can perform any desired operations on the unzipped file.</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +805,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls .&#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +815,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls .&#43;&#61; 1</span>
+            <span class='code'># Exceptions</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +825,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_f, x&#41;</span>
+            <span class='code'>- If any error occurs during the unzipping or function execution, the error is rethrown.</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +835,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_df, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    obj.F &#61; obj.fdf&#40;gradient&#40;obj&#41;, x&#41;</span>
+            <span class='code'># Side Effects</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +855,7 @@
           <td>
             
             
-            <span class='code'>    value&#40;obj&#41;, gradient&#40;obj&#41;</span>
+            <span class='code'>- The original file specified by &#96;f_path&#96; is removed using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +865,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +875,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +885,7 @@
           <td>
             
             
-            <span class='code'>function hessian&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>- Passes the returned value from &#96;func&#96;.</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +895,7 @@
           <td>
             
             
-            <span class='code'>    if x &#33;&#61; obj.x_h</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +905,7 @@
           <td>
             
             
-            <span class='code'>        hessian&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'>function with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +915,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    z_path &#61; f_path * &quot;.zip&quot;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +925,7 @@
           <td>
             
             
-            <span class='code'>    hessian&#40;obj&#41;</span>
+            <span class='code'>    out &#61; nothing</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +935,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    if isfile&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +945,7 @@
           <td>
             
             
-            <span class='code'>function hessian&#33;&#33;&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>        try</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +955,7 @@
           <td>
             
             
-            <span class='code'>    obj.h_calls .&#43;&#61; 1</span>
+            <span class='code'>            unzip&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +965,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_h, x&#41;</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -989,7 +975,7 @@
           <td>
             
             
-            <span class='code'>    obj.h&#40;obj.H, x&#41;</span>
+            <span class='code'>        catch e</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +985,7 @@
           <td>
             
             
-            <span class='code'>    hessian&#40;obj&#41;</span>
+            <span class='code'>            rethrow&#40;e&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +995,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        finally</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1005,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            for f in readdir&#40;dirname&#40;f_path&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1015,7 @@
           <td>
             
             
-            <span class='code'># Getters are without &#33; and accept only an objective and index or just an objective</span>
+            <span class='code'>                if startswith&#40;f, basename&#40;f_path&#41;&#41; &amp;&amp; &#33;endswith&#40;f, &quot;.zip&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>&quot;Get the most recently evaluated objective value of &#96;obj&#96;.&quot;</span>
+            <span class='code'>                    rm&#40;joinpath&#40;dirname&#40;f_path&#41;, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>value&#40;obj::AbstractObjective&#41; &#61; obj.F</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>&quot;Get the most recently evaluated gradient of &#96;obj&#96;.&quot;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>gradient&#40;obj::AbstractObjective&#41; &#61; obj.DF</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>&quot;Get the most recently evaluated Jacobian of &#96;obj&#96;.&quot;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>jacobian&#40;obj::AbstractObjective&#41; &#61; obj.DF</span>
+            <span class='code'>        if isfile&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>&quot;Get the &#96;i&#96;th element of the most recently evaluated gradient of &#96;obj&#96;.&quot;</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1109,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>gradient&#40;obj::AbstractObjective, i::Integer&#41; &#61; obj.DF&#91;i&#93;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1119,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>&quot;Get the most recently evaluated Hessian of &#96;obj&#96;&quot;</span>
+            <span class='code'>            error&#40;&quot;File does not exist: &#36;f_path&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1129,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>hessian&#40;obj::AbstractObjective&#41; &#61; obj.H</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1139,7 +1125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1149,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>value_jacobian&#33;&#40;obj, x&#41; &#61; value_jacobian&#33;&#40;obj, obj.F, obj.DF, x&#41;</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1159,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>function value_jacobian&#33;&#40;obj, F, J, x&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1169,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>    if x &#33;&#61; obj.x_f &amp;&amp; x &#33;&#61; obj.x_df</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1179,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>        value_jacobian&#33;&#33;&#40;obj, F, J, x&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1189,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>    elseif x &#33;&#61; obj.x_f</span>
+            <span class='code'>    create_trial_3D_system&#40;&#41;::System</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1199,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>        value&#33;&#33;&#40;obj, F, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1209,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>    elseif x &#33;&#61; obj.x_df</span>
+            <span class='code'>Create a 3D system with a sin function and specified atoms and grid specifications.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1219,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>        jacobian&#33;&#33;&#40;obj, J, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1229,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1239,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>    F, J</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1249,31 +1235,17 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>system &#61; create_trial_3D_system&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
           <td class='lineno'>122</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;3 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;3 &#37;&#41;
-              samples spent in value_jacobian&#33;&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from trust_region_
-              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L119'>line 119</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L123'>value_jacobian&#33;&#33;</a>
-              <br />
-            </div>
-            <span class='code'>value_jacobian&#33;&#33;&#40;obj, x&#41; &#61; value_jacobian&#33;&#33;&#40;obj, obj.F, obj.DF, x&#41;</span>
+            
+            
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1281,33 +1253,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;3 &#37;&#41;
-              samples spent in value_jacobian&#33;&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from value_jacobian&#33;&#33;
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L122'>line 122</a>
-              <br />
-            </div>
             
-            <span class='code'>function value_jacobian&#33;&#33;&#40;obj, F, J, x&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L124'>
           <td class='lineno'>124</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;3 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='abstract.jl-a81708fd19b8615bb91957ad1ab557c3ed109beb.html#L6'>fj&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    obj.fdf&#40;F, J, x&#41;</span>
+            
+            <span class='code'># Inputs</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1317,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_f, x&#41;</span>
+            <span class='code'>- None</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1327,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_df, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1337,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls .&#43;&#61; 1</span>
+            <span class='code'># Outputs</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1347,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls .&#43;&#61; 1</span>
+            <span class='code'>- A &#96;System&#96; object representing a 3D system with the specified functions, atoms, and grid specifications.</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1357,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1367,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    F, J</span>
+            <span class='code'>function create_trial_3D_system&#40;;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1377,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1387,7 +1345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1397,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>function jacobian&#33;&#40;obj, x&#41;</span>
+            <span class='code'>    # Define a 3D sin function to be used as rho, grad, and hess functions</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1407,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    if x &#33;&#61; obj.x_df</span>
+            <span class='code'>    f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1417,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>        jacobian&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'>    f3d_xyz&#40;x, y, z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1427,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1437,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    jacobian&#40;obj&#41;</span>
+            <span class='code'>    function hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1447,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return &#91;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1457,7 +1415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1467,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>jacobian&#33;&#33;&#40;obj, x&#41; &#61; jacobian&#33;&#33;&#40;obj, obj.DF, x&#41;</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1477,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>function jacobian&#33;&#33;&#40;obj, J, x&#41;</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1487,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>    obj.df&#40;J, x&#41;</span>
+            <span class='code'>        &#93;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1497,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_df, x&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1507,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls .&#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1517,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>    obj.df_calls</span>
+            <span class='code'>    # Make in-place versions using the above versions</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1527,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>    J</span>
+            <span class='code'>    function rho&#33;&#40;f, r&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1537,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return f&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1547,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>function jacobian&#40;obj::AbstractObjective, x&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1557,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>    tmp &#61; copy&#40;obj.DF&#41;</span>
+            <span class='code'>    function grad&#33;&#40;g, r&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1567,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>    jacobian&#33;&#33;&#40;obj, x&#41;</span>
+            <span class='code'>        return g&#91;:&#93; &#61; grad3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1577,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>    newdf &#61; copy&#40;obj.DF&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1587,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.DF, tmp&#41;</span>
+            <span class='code'>    function hess&#33;&#40;h, r&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1597,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>    return newdf</span>
+            <span class='code'>        return h&#91;:&#93; &#61; hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1607,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1627,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>value&#40;obj::NonDifferentiable&#123;TF, TX&#125;, x&#41; where &#123;TF&lt;:AbstractArray, TX&#125; &#61; value&#40;obj, copy&#40;obj.F&#41;, x&#41;</span>
+            <span class='code'>    # Define the extent, origin, and spacing for the GridSpec</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1637,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>value&#40;obj::OnceDifferentiable&#123;TF, TDF, TX&#125;, x&#41; where &#123;TF&lt;:AbstractArray, TDF, TX&#125; &#61; value&#40;obj, copy&#40;obj.F&#41;, x&#41;</span>
+            <span class='code'>    e &#61; 2π * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1647,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>function value&#40;obj::AbstractObjective, F, x&#41;</span>
+            <span class='code'>    o &#61; zeros&#40;3&#41; .- e / 2</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1657,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls .&#43;&#61; 1</span>
+            <span class='code'>    s &#61; π / 10 * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1667,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    return obj.f&#40;F, x&#41;</span>
+            <span class='code'>    n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1677,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1687,7 +1645,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Define the lattice for the GridSpec</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1697,31 +1655,17 @@
           <td>
             
             
-            <span class='code'>value&#33;&#33;&#40;obj::NonDifferentiable&#123;TF, TX&#125;, x&#41; where &#123;TF&lt;:AbstractArray, TX&#125; &#61; value&#33;&#33;&#40;obj, obj.F, x&#41;</span>
+            <span class='code'>    l &#61; zeros&#40;3, 3&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
           <td class='lineno'>164</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>10 &#40;33 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              10 &#40;33 &#37;&#41;
-              samples spent in value&#33;&#33;
-              <br />
-              
-              10 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from value&#33;
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L28'>line 28</a>
-              <br />
-            </div>
-            <div class='callees'>
-              10 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L165'>value&#33;&#33;</a>
-              <br />
-            </div>
-            <span class='code'>value&#33;&#33;&#40;obj::OnceDifferentiable&#123;TF, TDF, TX&#125;, x&#41; where &#123;TF&lt;:AbstractArray, TDF, TX&#125; &#61; value&#33;&#33;&#40;obj, obj.F, x&#41;</span>
+            
+            
+            <span class='code'>    for i in 1:3</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1729,33 +1673,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              10 &#40;33 &#37;&#41;
-              samples spent in value&#33;&#33;
-              <br />
-              
-              10 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from value&#33;&#33;
-              <a href='interface.jl-f2c29230e804547c565f1aa8a029bdb0b99b1849.html#L164'>line 164</a>
-              <br />
-            </div>
             
-            <span class='code'>function value&#33;&#33;&#40;obj::AbstractObjective, F, x&#41;</span>
+            
+            <span class='code'>        l&#91;i, i&#93; &#61; s&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L166'>
           <td class='lineno'>166</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>10 &#40;33 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              10 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L318'>fb&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    obj.f&#40;F, x&#41;</span>
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1765,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;obj.x_f, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1775,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls .&#43;&#61; 1</span>
+            <span class='code'>    # Create a GridSpec with the defined origin, lattice, and number of points</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1785,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>    obj.f_calls</span>
+            <span class='code'>    g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1795,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>    F</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1805,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1815,7 +1745,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    atoms &#61; &#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1825,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>function _clear_f&#33;&#40;d::NLSolversBase.AbstractObjective&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1835,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>    d.f_calls .&#61; 0</span>
+            <span class='code'>    # Create a System with the 3D sin function and the defined atoms and GridSpec</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1845,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>    if typeof&#40;d.F&#41; &lt;: AbstractArray</span>
+            <span class='code'>    system &#61; System&#40;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1855,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>        d.F .&#61; eltype&#40;d.F&#41;&#40;NaN&#41;</span>
+            <span class='code'>        name, source, atoms, g, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1865,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1875,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>        d.F &#61; typeof&#40;d.F&#41;&#40;NaN&#41;</span>
+            <span class='code'>    return system, f3d, f3d_xyz, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1885,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1895,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>    d.x_f .&#61; eltype&#40;d.x_f&#41;&#40;NaN&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1905,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1915,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    create_trial_3D_system_interpolated&#40;; name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;&#41; -&gt; Tuple&#123;System, Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1935,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>function _clear_df&#33;&#40;d::NLSolversBase.AbstractObjective&#41;</span>
+            <span class='code'>Create a 3D system that interpolates using grid data generated with a trial 3d &#96;sin&#96; function.</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1945,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>    d.df_calls .&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1955,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>    d.DF .&#61; eltype&#40;d.DF&#41;&#40;NaN&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1965,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>    d.x_df .&#61; eltype&#40;d.x_df&#41;&#40;NaN&#41;</span>
+            <span class='code'>- &#96;name::AbstractString&#96; &#40;optional&#41;: The name of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1975,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>- &#96;source::AbstractString&#96; &#40;optional&#41;: The source of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1985,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1995,7 +1925,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -2005,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>function _clear_h&#33;&#40;d::NLSolversBase.AbstractObjective&#41;</span>
+            <span class='code'>- &#96;system&#96;: A &#96;System&#96; object representing a 3D system with the interpolated functions and grid specifications.</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -2015,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>    d.h_calls .&#61; 0</span>
+            <span class='code'>- &#96;f&#96;: The interpolated function &#96;f&#40;x&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2025,7 +1955,7 @@
           <td>
             
             
-            <span class='code'>    d.H .&#61; eltype&#40;d.H&#41;&#40;NaN&#41;</span>
+            <span class='code'>- &#96;f_xyz&#96;: The interpolated function &#96;f_xyz&#40;x, y, z&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2035,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>    d.x_h .&#61; eltype&#40;d.x_h&#41;&#40;NaN&#41;</span>
+            <span class='code'>- &#96;grad&#96;: The gradient function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2045,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>- &#96;hess&#96;: The Hessian function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2055,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;f&#33;&#96;: An in-place version of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2065,7 +1995,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;grad&#33;&#96;: An in-place version of the gradient function.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2075,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>function _clear_hv&#33;&#40;d::NLSolversBase.AbstractObjective&#41;</span>
+            <span class='code'>- &#96;hess&#33;&#96;: An in-place version of the Hessian function.</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2085,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>    d.hv_calls .&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2095,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>    d.Hv .&#61; eltype&#40;d.Hv&#41;&#40;NaN&#41;</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2105,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>    d.x_hv .&#61; eltype&#40;d.x_hv&#41;&#40;NaN&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2115,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>    d.v_hv .&#61; eltype&#40;d.v_hv&#41;&#40;NaN&#41;</span>
+            <span class='code'>system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33; &#61; create_trial_3D_system_interpolated&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2125,7 +2055,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2135,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2145,7 +2075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function create_trial_3D_system_interpolated&#40;;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2155,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>clear&#33;&#40;d::NonDifferentiable&#41;  &#61; _clear_f&#33;&#40;d&#41;</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2165,7 +2095,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2175,7 +2105,7 @@
           <td>
             
             
-            <span class='code'>function clear&#33;&#40;d::OnceDifferentiable&#41;</span>
+            <span class='code'>    g1 &#61; &#40;-3π&#41;:&#40;π / 5&#41;:&#40;3π&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2185,7 +2115,7 @@
           <td>
             
             
-            <span class='code'>    _clear_f&#33;&#40;d&#41;</span>
+            <span class='code'>    n_pts &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2195,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>    _clear_df&#33;&#40;d&#41;</span>
+            <span class='code'>    spacing &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2205,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>    gs &#61; GridSpec&#40;&#91;-2π, -2π, -2π&#93;, spacing, &#91;n_pts, n_pts, n_pts&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2215,7 +2145,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    sin_data &#61; &#91;3.0 &#43; sum&#40;sin.&#40;&#91;xi, yi, zi&#93;&#41;&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2225,17 +2155,31 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    fz &#61; scale&#40;interpolate&#40;sin_data, BSpline&#40;Cubic&#40;Reflect&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g1, g1, g1&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
           <td class='lineno'>214</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>function clear&#33;&#40;d::TwiceDifferentiable&#41;</span>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in f
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #find_cps#16
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L352'>line 352</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='scaling.jl-ff3c4ce95c1d4462ef83b5f818a42dad57affb50.html#L71'>ScaledInterpolation</a>
+              <br />
+            </div>
+            <span class='code'>    f&#40;x&#41; &#61; fz&#40;clamp_to_bounding_box&#40;x, gs&#41;...&#41; # pointer for later</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2245,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>    _clear_f&#33;&#40;d&#41;</span>
+            <span class='code'>    f_xyz&#40;x, y, z&#41; &#61; f&#40;&#91;x, y, z&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2255,7 +2199,7 @@
           <td>
             
             
-            <span class='code'>    _clear_df&#33;&#40;d&#41;</span>
+            <span class='code'>    f&#33;&#40;F, x&#41; &#61; F&#91;:&#93; &#61; &#91;f&#40;x&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2265,17 +2209,31 @@
           <td>
             
             
-            <span class='code'>    _clear_h&#33;&#40;d&#41;</span>
+            <span class='code'>    grad&#40;x&#41; &#61; Interpolations.gradient&#40;fz, clamp_to_bounding_box&#40;x, gs&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
           <td class='lineno'>218</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    nothing</span>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in hess
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #find_cps#16
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L353'>line 353</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='scaling.jl-ff3c4ce95c1d4462ef83b5f818a42dad57affb50.html#L141'>hessian</a>
+              <br />
+            </div>
+            <span class='code'>    hess&#40;x&#41; &#61; Interpolations.hessian&#40;fz, clamp_to_bounding_box&#40;x, gs&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2285,17 +2243,26 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L220'>
           <td class='lineno'>220</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;6 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;6 &#37;&#41;
+              samples spent in grad&#33;
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from fb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L320'>line 320</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>    grad&#33;&#40;F, x&#41; &#61; Interpolations.gradient&#33;&#40;F, fz, clamp_to_bounding_box&#40;x, gs&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2305,7 +2272,7 @@
           <td>
             
             
-            <span class='code'>function clear&#33;&#40;d::TwiceDifferentiableHV&#41;</span>
+            <span class='code'>    hess&#33;&#40;J, x&#41; &#61; Interpolations.hessian&#33;&#40;J, fz, clamp_to_bounding_box&#40;x, gs&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2315,7 +2282,7 @@
           <td>
             
             
-            <span class='code'>    _clear_f&#33;&#40;d&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2325,7 +2292,7 @@
           <td>
             
             
-            <span class='code'>    _clear_df&#33;&#40;d&#41;</span>
+            <span class='code'>    g1 &#61; &#40;-2π&#41;:&#40;π / 5&#41;:&#40;2π&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2335,7 +2302,7 @@
           <td>
             
             
-            <span class='code'>    _clear_hv&#33;&#40;d&#41;</span>
+            <span class='code'>    n_pts1 &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2345,7 +2312,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>    spacing1 &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2355,7 +2322,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    gs1 &#61; GridSpec&#40;&#91;-2π, -2π, -2π&#93;, spacing, &#91;n_pts1, n_pts1, n_pts1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2375,7 +2342,7 @@
           <td>
             
             
-            <span class='code'>g_calls&#40;d::NonDifferentiable&#41; &#61; 0</span>
+            <span class='code'>    system &#61; System&#40;name, source, &#91;&#93;, gs1, f_xyz, f, grad, hess, f&#33;, grad&#33;, hess&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2385,7 +2352,7 @@
           <td>
             
             
-            <span class='code'>h_calls&#40;d::Union&#123;NonDifferentiable, OnceDifferentiable&#125;&#41; &#61; 0</span>
+            <span class='code'>    return system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2395,57 +2362,7 @@
           <td>
             
             
-            <span class='code'>f_calls&#40;d&#41; &#61; first&#40;d.f_calls&#41;</span>
-          </td>
-        </tr>
-        <tr id='L231'>
-          <td class='lineno'>231</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>g_calls&#40;d&#41; &#61; first&#40;d.df_calls&#41;</span>
-          </td>
-        </tr>
-        <tr id='L232'>
-          <td class='lineno'>232</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>h_calls&#40;d&#41; &#61; first&#40;d.h_calls&#41;</span>
-          </td>
-        </tr>
-        <tr id='L233'>
-          <td class='lineno'>233</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>hv_calls&#40;d&#41; &#61; 0</span>
-          </td>
-        </tr>
-        <tr id='L234'>
-          <td class='lineno'>234</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>h_calls&#40;d::TwiceDifferentiableHV&#41; &#61; 0</span>
-          </td>
-        </tr>
-        <tr id='L235'>
-          <td class='lineno'>235</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>hv_calls&#40;d::TwiceDifferentiableHV&#41; &#61; first&#40;d.hv_calls&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>
