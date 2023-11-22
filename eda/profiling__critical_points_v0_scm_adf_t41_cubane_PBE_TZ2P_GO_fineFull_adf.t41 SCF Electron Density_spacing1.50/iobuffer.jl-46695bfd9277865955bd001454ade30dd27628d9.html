@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.4/x64/share/julia/stdlib/v1.9/LinearAlgebra/src/uniformscaling.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.4/x64/share/julia/base/iobuffer.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 22 Nov 2023 15:07:28
+        Generated on Wed, 22 Nov 2023 17:24:24
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>import Base: copy, adjoint, getindex, show, transpose, one, zero, inv,</span>
+            <span class='code'>## work with AbstractVector&#123;UInt8&#125; via I/O primitives ##</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>             hcat, vcat, hvcat, ^</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Stateful string</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>mutable struct GenericIOBuffer&#123;T&lt;:AbstractVector&#123;UInt8&#125;&#125; &lt;: IO</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    UniformScaling&#123;T&lt;:Number&#125;</span>
+            <span class='code'>    data::T # T should support: getindex, setindex&#33;, length, copyto&#33;, and resize&#33;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    readable::Bool</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>Generically sized uniform scaling operator defined as a scalar times</span>
+            <span class='code'>    writable::Bool</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>the identity operator, &#96;λ*I&#96;. Although without an explicit &#96;size&#96;, it</span>
+            <span class='code'>    seekable::Bool # if not seekable, implementation is free to destroy &#40;compact&#41; past read data</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>acts similarly to a matrix in many cases and includes support for some</span>
+            <span class='code'>    append::Bool # add data at end instead of at pointer</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>indexing. See also &#91;&#96;I&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    size::Int # end pointer &#40;and write pointer if append &#61;&#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    maxsize::Int # fixed array size &#40;typically pre-allocated&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.6&quot;</span>
+            <span class='code'>    ptr::Int # read &#40;and maybe write&#41; pointer</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>     Indexing using ranges is available as of Julia 1.6.</span>
+            <span class='code'>    mark::Int # reset mark location for ptr &#40;or &lt;0 for no mark&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    function GenericIOBuffer&#123;T&#125;&#40;data::T, readable::Bool, writable::Bool, seekable::Bool, append::Bool,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>                                maxsize::Integer&#41; where T&lt;:AbstractVector&#123;UInt8&#125;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; J &#61; UniformScaling&#40;2.&#41;</span>
+            <span class='code'>        require_one_based_indexing&#40;data&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>UniformScaling&#123;Float64&#125;</span>
+            <span class='code'>        new&#40;data,readable,writable,seekable,append,length&#40;data&#41;,maxsize,1,-1&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>2.0*I</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; A &#61; &#91;1. 2.; 3. 4.&#93;</span>
+            <span class='code'>const IOBuffer &#61; GenericIOBuffer&#123;Vector&#123;UInt8&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'> 1.0  2.0</span>
+            <span class='code'>function GenericIOBuffer&#40;data::T, readable::Bool, writable::Bool, seekable::Bool, append::Bool,</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'> 3.0  4.0</span>
+            <span class='code'>                         maxsize::Integer&#41; where T&lt;:AbstractVector&#123;UInt8&#125;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    GenericIOBuffer&#123;T&#125;&#40;data, readable, writable, seekable, append, maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; J*A</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,17 +325,31 @@
           <td>
             
             
-            <span class='code'> 2.0  4.0</span>
+            <span class='code'># allocate Vector&#123;UInt8&#125;s for IOBuffer storage that can efficiently become Strings</span>
           </td>
         </tr>
         <tr id='L31'>
           <td class='lineno'>31</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;4 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'> 6.0  8.0</span>
+            <div class='call-sites'>
+              1 &#40;4 &#37;&#41;
+              samples spent in StringVector
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #IOBuffer#454
+              <a href='iobuffer.jl-46695bfd9277865955bd001454ade30dd27628d9.html#L114'>line 114</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='string.jl-7175d8cb073e7f3ca6690978490c7ac6d0eb30e4.html#L90'>_string_n</a>
+              <br />
+            </div>
+            <span class='code'>StringVector&#40;n::Integer&#41; &#61; unsafe_wrap&#40;Vector&#123;UInt8&#125;, _string_n&#40;n&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -355,7 +369,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; J&#91;1:2, 1:2&#93;</span>
+            <span class='code'># IOBuffers behave like Files. They are typically readable and writable. They are seekable. &#40;They can be appendable&#41;.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +379,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +389,7 @@
           <td>
             
             
-            <span class='code'> 2.0  0.0</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +399,7 @@
           <td>
             
             
-            <span class='code'> 0.0  2.0</span>
+            <span class='code'>    IOBuffer&#40;&#91;data::AbstractVector&#123;UInt8&#125;&#93;; keywords...&#41; -&gt; IOBuffer</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +409,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +419,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>Create an in-memory I/O stream, which may optionally operate on a pre-existing array.</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +429,7 @@
           <td>
             
             
-            <span class='code'>struct UniformScaling&#123;T&lt;:Number&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +439,7 @@
           <td>
             
             
-            <span class='code'>    λ::T</span>
+            <span class='code'>It may take optional keyword arguments:</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +449,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;read&#96;, &#96;write&#96;, &#96;append&#96;: restricts operations to the buffer; see &#96;open&#96; for details.</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +459,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;truncate&#96;: truncates the buffer size to zero length.</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +469,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;maxsize&#96;: specifies a size beyond which the buffer may not be grown.</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +479,7 @@
           <td>
             
             
-            <span class='code'>    I</span>
+            <span class='code'>- &#96;sizehint&#96;: suggests a capacity of the buffer &#40;&#96;data&#96; must implement &#96;sizehint&#33;&#40;data, size&#41;&#96;&#41;.</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -485,7 +499,7 @@
           <td>
             
             
-            <span class='code'>An object of type &#91;&#96;UniformScaling&#96;&#93;&#40;@ref&#41;, representing an identity matrix of any size.</span>
+            <span class='code'>When &#96;data&#96; is not given, the buffer will be both readable and writable by default.</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -525,7 +539,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; fill&#40;1, &#40;5,6&#41;&#41; * I &#61;&#61; fill&#40;1, &#40;5,6&#41;&#41;</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;&#41;;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +549,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +559,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; write&#40;io, &quot;JuliaLang is a GitHub organization.&quot;, &quot; It has many members.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +569,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; &#91;1 2im 3; 1im 2 3&#93; * I</span>
+            <span class='code'>56</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +579,7 @@
           <td>
             
             
-            <span class='code'>2×3 Matrix&#123;Complex&#123;Int64&#125;&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +589,7 @@
           <td>
             
             
-            <span class='code'> 1&#43;0im  0&#43;2im  3&#43;0im</span>
+            <span class='code'>julia&gt; String&#40;take&#33;&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +599,7 @@
           <td>
             
             
-            <span class='code'> 0&#43;1im  2&#43;0im  3&#43;0im</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization. It has many members.&quot;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +609,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +619,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;b&quot;JuliaLang is a GitHub organization.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +629,7 @@
           <td>
             
             
-            <span class='code'>const I &#61; UniformScaling&#40;true&#41;</span>
+            <span class='code'>IOBuffer&#40;data&#61;UInt8&#91;...&#93;, readable&#61;true, writable&#61;false, seekable&#61;true, append&#61;false, size&#61;35, maxsize&#61;Inf, ptr&#61;1, mark&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -635,7 +649,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>julia&gt; read&#40;io, String&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +659,7 @@
           <td>
             
             
-            <span class='code'>    &#40;I::UniformScaling&#41;&#40;n::Integer&#41;</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization.&quot;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -665,7 +679,7 @@
           <td>
             
             
-            <span class='code'>Construct a &#96;Diagonal&#96; matrix from a &#96;UniformScaling&#96;.</span>
+            <span class='code'>julia&gt; write&#40;io, &quot;This isn&#39;t writable.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +689,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>ERROR: ArgumentError: ensureroom failed, IOBuffer is not writeable</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +699,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.2&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +709,7 @@
           <td>
             
             
-            <span class='code'>     This method is available as of Julia 1.2.</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;UInt8&#91;&#93;, read&#61;true, write&#61;true, maxsize&#61;34&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +719,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>IOBuffer&#40;data&#61;UInt8&#91;...&#93;, readable&#61;true, writable&#61;true, seekable&#61;true, append&#61;false, size&#61;0, maxsize&#61;34, ptr&#61;1, mark&#61;-1&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +729,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +739,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>julia&gt; write&#40;io, &quot;JuliaLang is a GitHub organization.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +749,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; I&#40;3&#41;</span>
+            <span class='code'>34</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +759,7 @@
           <td>
             
             
-            <span class='code'>3×3 Diagonal&#123;Bool, Vector&#123;Bool&#125;&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +769,7 @@
           <td>
             
             
-            <span class='code'> 1  ⋅  ⋅</span>
+            <span class='code'>julia&gt; String&#40;take&#33;&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +779,7 @@
           <td>
             
             
-            <span class='code'> ⋅  1  ⋅</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization&quot;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'> ⋅  ⋅  1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; length&#40;read&#40;IOBuffer&#40;b&quot;data&quot;, read&#61;true, truncate&#61;false&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; &#40;0.7*I&#41;&#40;3&#41;</span>
+            <span class='code'>4</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'>3×3 Diagonal&#123;Float64, Vector&#123;Float64&#125;&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'> 0.7   ⋅    ⋅</span>
+            <span class='code'>julia&gt; length&#40;read&#40;IOBuffer&#40;b&quot;data&quot;, read&#61;true, truncate&#61;true&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>  ⋅   0.7   ⋅</span>
+            <span class='code'>0</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'>  ⋅    ⋅   0.7</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>function IOBuffer&#40;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'>&#40;I::UniformScaling&#41;&#40;n::Integer&#41; &#61; Diagonal&#40;fill&#40;I.λ, n&#41;&#41;</span>
+            <span class='code'>        data::AbstractVector&#123;UInt8&#125;;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        read::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'>eltype&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; T</span>
+            <span class='code'>        write::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;J::UniformScaling&#41; &#61; 2</span>
+            <span class='code'>        append::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>Base.has_offset_axes&#40;::UniformScaling&#41; &#61; false</span>
+            <span class='code'>        truncate::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +929,7 @@
           <td>
             
             
-            <span class='code'>getindex&#40;J::UniformScaling, i::Integer,j::Integer&#41; &#61; ifelse&#40;i&#61;&#61;j,J.λ,zero&#40;J.λ&#41;&#41;</span>
+            <span class='code'>        maxsize::Integer&#61;typemax&#40;Int&#41;,</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        sizehint::Union&#123;Integer,Nothing&#125;&#61;nothing&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>getindex&#40;J::UniformScaling, n::Integer, m::AbstractVector&#123;&lt;:Integer&#125;&#41; &#61; getindex&#40;J, m, n&#41;</span>
+            <span class='code'>    if maxsize &lt; 0</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;J::UniformScaling&#123;T&#125;, n::AbstractVector&#123;&lt;:Integer&#125;, m::Integer&#41; where T</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;negative maxsize&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>    v &#61; zeros&#40;T, axes&#40;n&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds for &#40;i,ii&#41; in pairs&#40;n&#41;</span>
+            <span class='code'>    if sizehint &#33;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>        if ii &#61;&#61; m</span>
+            <span class='code'>        sizehint&#33;&#40;data, sizehint&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'>            v&#91;i&#93; &#61; J.λ</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    flags &#61; open_flags&#40;read&#61;read, write&#61;write, append&#61;append, truncate&#61;truncate&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    buf &#61; GenericIOBuffer&#40;data, flags.read, flags.write, true, flags.append, Int&#40;maxsize&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>    return v</span>
+            <span class='code'>    if flags.truncate</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1039,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        buf.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1059,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;J::UniformScaling&#123;T&#125;, n::AbstractVector&#123;&lt;:Integer&#125;, m::AbstractVector&#123;&lt;:Integer&#125;&#41; where T</span>
+            <span class='code'>    return buf</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>    A &#61; zeros&#40;T, axes&#40;n&#41;..., axes&#40;m&#41;...&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,17 +1079,36 @@
           <td>
             
             
-            <span class='code'>    @inbounds for &#40;j,jj&#41; in pairs&#40;m&#41;, &#40;i,ii&#41; in pairs&#40;n&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L105'>
           <td class='lineno'>105</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;4 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        if ii &#61;&#61; jj</span>
+            <div class='call-sites'>
+              2 &#40;8 &#37;&#41;
+              samples spent in GenericIOBuffer
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #sprint#484
+              <a href='io.jl-dffdba29d550543f4d2e65648cf314bfc4288934.html#L108'>line 108</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from GenericIOBuffer
+              <a href='iobuffer.jl-46695bfd9277865955bd001454ade30dd27628d9.html#L105'>line 105</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='iobuffer.jl-46695bfd9277865955bd001454ade30dd27628d9.html#L105'>#IOBuffer#454</a>
+              <br />
+            </div>
+            <span class='code'>function IOBuffer&#40;;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1118,7 @@
           <td>
             
             
-            <span class='code'>            A&#91;i,j&#93; &#61; J.λ</span>
+            <span class='code'>        read::Union&#123;Bool,Nothing&#125;&#61;true,</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1128,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        write::Union&#123;Bool,Nothing&#125;&#61;true,</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1138,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        append::Union&#123;Bool,Nothing&#125;&#61;nothing,</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1148,7 @@
           <td>
             
             
-            <span class='code'>    return A</span>
+            <span class='code'>        truncate::Union&#123;Bool,Nothing&#125;&#61;true,</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1158,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        maxsize::Integer&#61;typemax&#40;Int&#41;,</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1168,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        sizehint::Union&#123;Integer,Nothing&#125;&#61;nothing&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1178,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, ::MIME&quot;text/plain&quot;, J::UniformScaling&#41;</span>
+            <span class='code'>    size &#61; sizehint &#33;&#61;&#61; nothing ? Int&#40;sizehint&#41; : maxsize &#33;&#61; typemax&#40;Int&#41; ? Int&#40;maxsize&#41; : 32</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,17 +1188,22 @@
           <td>
             
             
-            <span class='code'>    s &#61; &quot;&#36;&#40;J.λ&#41;&quot;</span>
+            <span class='code'>    flags &#61; open_flags&#40;read&#61;read, write&#61;write, append&#61;append, truncate&#61;truncate&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
           <td class='lineno'>114</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;4 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>    if occursin&#40;r&quot;\w&#43;\s*&#91;\&#43;\-&#93;\s*\w&#43;&quot;, s&#41;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='iobuffer.jl-46695bfd9277865955bd001454ade30dd27628d9.html#L31'>StringVector</a>
+              <br />
+            </div>
+            <span class='code'>    buf &#61; IOBuffer&#40;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1213,7 @@
           <td>
             
             
-            <span class='code'>        s &#61; &quot;&#40;&#36;s&#41;&quot;</span>
+            <span class='code'>        StringVector&#40;size&#41;,</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1223,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        read&#61;flags.read,</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1233,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, typeof&#40;J&#41;, &quot;\n&#36;s*I&quot;&#41;</span>
+            <span class='code'>        write&#61;flags.write,</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1243,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        append&#61;flags.append,</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1253,7 @@
           <td>
             
             
-            <span class='code'>copy&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;J.λ&#41;</span>
+            <span class='code'>        truncate&#61;flags.truncate,</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1263,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        maxsize&#61;maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1273,7 @@
           <td>
             
             
-            <span class='code'>Base.convert&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;, J::UniformScaling&#41; where &#123;T&#125; &#61; UniformScaling&#40;convert&#40;T, J.λ&#41;&#41;::UniformScaling&#123;T&#125;</span>
+            <span class='code'>    fill&#33;&#40;buf.data, 0&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1283,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return buf</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1293,7 @@
           <td>
             
             
-            <span class='code'>conj&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;conj&#40;J.λ&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1303,7 @@
           <td>
             
             
-            <span class='code'>real&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;real&#40;J.λ&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1313,7 @@
           <td>
             
             
-            <span class='code'>imag&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;imag&#40;J.λ&#41;&#41;</span>
+            <span class='code'># PipeBuffers behave like Unix Pipes. They are typically readable and writable, they act appendable, and are not seekable.</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1295,7 +1333,7 @@
           <td>
             
             
-            <span class='code'>transpose&#40;J::UniformScaling&#41; &#61; J</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1343,7 @@
           <td>
             
             
-            <span class='code'>adjoint&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;conj&#40;J.λ&#41;&#41;</span>
+            <span class='code'>    PipeBuffer&#40;data::Vector&#123;UInt8&#125;&#61;UInt8&#91;&#93;; maxsize::Integer &#61; typemax&#40;Int&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1325,7 +1363,7 @@
           <td>
             
             
-            <span class='code'>one&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; UniformScaling&#40;one&#40;T&#41;&#41;</span>
+            <span class='code'>An &#91;&#96;IOBuffer&#96;&#93;&#40;@ref&#41; that allows reading and performs writes by appending.</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1373,7 @@
           <td>
             
             
-            <span class='code'>one&#40;J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; one&#40;UniformScaling&#123;T&#125;&#41;</span>
+            <span class='code'>Seeking and truncating are not supported.</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1383,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; UniformScaling&#40;oneunit&#40;T&#41;&#41;</span>
+            <span class='code'>See &#91;&#96;IOBuffer&#96;&#93;&#40;@ref&#41; for the available constructors.</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1393,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; oneunit&#40;UniformScaling&#123;T&#125;&#41;</span>
+            <span class='code'>If &#96;data&#96; is given, creates a &#96;PipeBuffer&#96; to operate on a data vector,</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1403,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;::Type&#123;UniformScaling&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; UniformScaling&#40;zero&#40;T&#41;&#41;</span>
+            <span class='code'>optionally specifying a size beyond which the underlying &#96;Array&#96; may not be grown.</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1413,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; zero&#40;UniformScaling&#123;T&#125;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1423,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>PipeBuffer&#40;data::Vector&#123;UInt8&#125;&#61;UInt8&#91;&#93;; maxsize::Int &#61; typemax&#40;Int&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1433,7 @@
           <td>
             
             
-            <span class='code'>isdiag&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>    GenericIOBuffer&#40;data,true,true,false,true,maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1443,7 @@
           <td>
             
             
-            <span class='code'>istriu&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>PipeBuffer&#40;maxsize::Integer&#41; &#61; &#40;x &#61; PipeBuffer&#40;StringVector&#40;maxsize&#41;, maxsize &#61; maxsize&#41;; x.size&#61;0; x&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1453,7 @@
           <td>
             
             
-            <span class='code'>istril&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1463,7 @@
           <td>
             
             
-            <span class='code'>issymmetric&#40;::UniformScaling&#41; &#61; true</span>
+            <span class='code'>function copy&#40;b::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1473,7 @@
           <td>
             
             
-            <span class='code'>ishermitian&#40;J::UniformScaling&#41; &#61; isreal&#40;J.λ&#41;</span>
+            <span class='code'>    ret &#61; typeof&#40;b&#41;&#40;b.writable ? copy&#40;b.data&#41; : b.data,</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1483,7 @@
           <td>
             
             
-            <span class='code'>isposdef&#40;J::UniformScaling&#41; &#61; isposdef&#40;J.λ&#41;</span>
+            <span class='code'>                    b.readable, b.writable, b.seekable, b.append, b.maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1493,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ret.size &#61; b.size</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1503,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling, x::Number&#41; &#61; J.λ &#43; x</span>
+            <span class='code'>    ret.ptr  &#61; b.ptr</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1513,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;x::Number, J::UniformScaling&#41; &#61; x &#43; J.λ</span>
+            <span class='code'>    return ret</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1523,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J::UniformScaling, x::Number&#41; &#61; J.λ - x</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1533,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;x::Number, J::UniformScaling&#41; &#61; x - J.λ</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1543,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>show&#40;io::IO, b::GenericIOBuffer&#41; &#61; print&#40;io, &quot;IOBuffer&#40;data&#61;UInt8&#91;...&#93;, &quot;,</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1553,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling&#41;                      &#61; UniformScaling&#40;&#43;J.λ&#41;</span>
+            <span class='code'>                                      &quot;readable&#61;&quot;, b.readable, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1563,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; UniformScaling&#40;J1.λ&#43;J2.λ&#41;</span>
+            <span class='code'>                                      &quot;writable&#61;&quot;, b.writable, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1573,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;B::BitArray&#123;2&#125;, J::UniformScaling&#41;      &#61; Array&#40;B&#41; &#43; J</span>
+            <span class='code'>                                      &quot;seekable&#61;&quot;, b.seekable, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1583,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling, B::BitArray&#123;2&#125;&#41;      &#61; J &#43; Array&#40;B&#41;</span>
+            <span class='code'>                                      &quot;append&#61;&quot;,   b.append, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1593,7 @@
           <td>
             
             
-            <span class='code'>&#40;&#43;&#41;&#40;J::UniformScaling, A::AbstractMatrix&#41;   &#61; A &#43; J</span>
+            <span class='code'>                                      &quot;size&#61;&quot;,     b.size, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1603,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                                      &quot;maxsize&#61;&quot;,  b.maxsize &#61;&#61; typemax&#40;Int&#41; ? &quot;Inf&quot; : b.maxsize, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1613,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J::UniformScaling&#41;                      &#61; UniformScaling&#40;-J.λ&#41;</span>
+            <span class='code'>                                      &quot;ptr&#61;&quot;,      b.ptr, &quot;, &quot;,</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1623,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; UniformScaling&#40;J1.λ-J2.λ&#41;</span>
+            <span class='code'>                                      &quot;mark&#61;&quot;,     b.mark, &quot;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1633,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;B::BitArray&#123;2&#125;, J::UniformScaling&#41;      &#61; Array&#40;B&#41; - J</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1643,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;J::UniformScaling, B::BitArray&#123;2&#125;&#41;      &#61; J - Array&#40;B&#41;</span>
+            <span class='code'>@noinline function _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1653,7 @@
           <td>
             
             
-            <span class='code'>&#40;-&#41;&#40;A::AbstractMatrix, J::UniformScaling&#41;   &#61; A &#43; &#40;-J&#41;</span>
+            <span class='code'>    # See https://github.com/JuliaLang/julia/issues/29688.</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1663,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    throw&#40;ArgumentError&#40;&quot;read failed, IOBuffer is not readable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1673,7 @@
           <td>
             
             
-            <span class='code'># matrix functions</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1683,7 @@
           <td>
             
             
-            <span class='code'>for f in &#40; :exp,   :log,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1693,7 @@
           <td>
             
             
-            <span class='code'>           :expm1, :log1p,</span>
+            <span class='code'>function unsafe_read&#40;from::GenericIOBuffer, p::Ptr&#123;UInt8&#125;, nb::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1703,7 @@
           <td>
             
             
-            <span class='code'>           :sqrt,  :cbrt,</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1713,7 @@
           <td>
             
             
-            <span class='code'>           :sin,   :cos,   :tan,</span>
+            <span class='code'>    avail &#61; bytesavailable&#40;from&#41;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1723,7 @@
           <td>
             
             
-            <span class='code'>           :asin,  :acos,  :atan,</span>
+            <span class='code'>    adv &#61; min&#40;avail, nb&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1733,7 @@
           <td>
             
             
-            <span class='code'>           :csc,   :sec,   :cot,</span>
+            <span class='code'>    GC.@preserve from unsafe_copyto&#33;&#40;p, pointer&#40;from.data, from.ptr&#41;, adv&#41;</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1743,7 @@
           <td>
             
             
-            <span class='code'>           :acsc,  :asec,  :acot,</span>
+            <span class='code'>    from.ptr &#43;&#61; adv</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1753,7 @@
           <td>
             
             
-            <span class='code'>           :sinh,  :cosh,  :tanh,</span>
+            <span class='code'>    if nb &gt; avail</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1763,7 @@
           <td>
             
             
-            <span class='code'>           :asinh, :acosh, :atanh,</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1773,7 @@
           <td>
             
             
-            <span class='code'>           :csch,  :sech,  :coth,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1783,7 @@
           <td>
             
             
-            <span class='code'>           :acsch, :asech, :acoth &#41;</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1793,7 @@
           <td>
             
             
-            <span class='code'>    @eval Base.&#36;f&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;&#36;f&#40;J.λ&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1803,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1813,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function peek&#40;from::GenericIOBuffer, T::Union&#123;Type&#123;Int16&#125;,Type&#123;UInt16&#125;,Type&#123;Int32&#125;,Type&#123;UInt32&#125;,Type&#123;Int64&#125;,Type&#123;UInt64&#125;,Type&#123;Int128&#125;,Type&#123;UInt128&#125;,Type&#123;Float16&#125;,Type&#123;Float32&#125;,Type&#123;Float64&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1823,7 @@
           <td>
             
             
-            <span class='code'># Unit&#123;Lower/Upper&#125;Triangular matrices become &#123;Lower/Upper&#125;Triangular under</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1833,7 @@
           <td>
             
             
-            <span class='code'># addition with a UniformScaling</span>
+            <span class='code'>    avail &#61; bytesavailable&#40;from&#41;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1843,7 @@
           <td>
             
             
-            <span class='code'>for &#40;t1, t2&#41; in &#40;&#40;:UnitUpperTriangular, :UpperTriangular&#41;,</span>
+            <span class='code'>    nb &#61; sizeof&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1853,7 @@
           <td>
             
             
-            <span class='code'>                 &#40;:UnitLowerTriangular, :LowerTriangular&#41;&#41;</span>
+            <span class='code'>    if nb &gt; avail</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1863,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1873,7 @@
           <td>
             
             
-            <span class='code'>        function &#40;&#43;&#41;&#40;UL::&#36;t1, J::UniformScaling&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1883,7 @@
           <td>
             
             
-            <span class='code'>            ULnew &#61; copymutable_oftype&#40;UL.data, Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;UL&#41;, typeof&#40;J&#41;&#125;&#41;&#41;</span>
+            <span class='code'>    GC.@preserve from begin</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1893,7 @@
           <td>
             
             
-            <span class='code'>            for i in axes&#40;ULnew, 1&#41;</span>
+            <span class='code'>        ptr::Ptr&#123;T&#125; &#61; pointer&#40;from.data, from.ptr&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1903,7 @@
           <td>
             
             
-            <span class='code'>                ULnew&#91;i,i&#93; &#61; one&#40;ULnew&#91;i,i&#93;&#41; &#43; J</span>
+            <span class='code'>        x &#61; unsafe_load&#40;ptr&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1913,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1923,7 @@
           <td>
             
             
-            <span class='code'>            return &#40;&#36;t2&#41;&#40;ULnew&#41;</span>
+            <span class='code'>    return x</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1933,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1943,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1953,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function read&#40;from::GenericIOBuffer, T::Union&#123;Type&#123;Int16&#125;,Type&#123;UInt16&#125;,Type&#123;Int32&#125;,Type&#123;UInt32&#125;,Type&#123;Int64&#125;,Type&#123;UInt64&#125;,Type&#123;Int128&#125;,Type&#123;UInt128&#125;,Type&#123;Float16&#125;,Type&#123;Float32&#125;,Type&#123;Float64&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1963,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x &#61; peek&#40;from, T&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1973,7 @@
           <td>
             
             
-            <span class='code'># Adding a complex UniformScaling to the diagonal of a Hermitian</span>
+            <span class='code'>    from.ptr &#43;&#61; sizeof&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1983,7 @@
           <td>
             
             
-            <span class='code'># matrix breaks the hermiticity, if the UniformScaling is non-real.</span>
+            <span class='code'>    return x</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1993,7 @@
           <td>
             
             
-            <span class='code'># However, to preserve type stability, we do not special-case a</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +2003,7 @@
           <td>
             
             
-            <span class='code'># UniformScaling&#123;&lt;:Complex&#125; that happens to be real.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +2013,7 @@
           <td>
             
             
-            <span class='code'>function &#40;&#43;&#41;&#40;A::Hermitian, J::UniformScaling&#123;&lt;:Complex&#125;&#41;</span>
+            <span class='code'>function read_sub&#40;from::GenericIOBuffer, a::AbstractArray&#123;T&#125;, offs, nel&#41; where T</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +2023,7 @@
           <td>
             
             
-            <span class='code'>    TS &#61; Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;</span>
+            <span class='code'>    require_one_based_indexing&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2033,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; copytri&#33;&#40;copymutable_oftype&#40;parent&#40;A&#41;, TS&#41;, A.uplo, true&#41;</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2043,7 @@
           <td>
             
             
-            <span class='code'>    for i in diagind&#40;B&#41;</span>
+            <span class='code'>    if offs&#43;nel-1 &gt; length&#40;a&#41; || offs &lt; 1 || nel &lt; 0</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2053,7 @@
           <td>
             
             
-            <span class='code'>        B&#91;i&#93; &#61; A&#91;i&#93; &#43; J</span>
+            <span class='code'>        throw&#40;BoundsError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2035,7 +2073,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'>    if isbitstype&#40;T&#41; &amp;&amp; isa&#40;a,Array&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2083,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        nb &#61; UInt&#40;nel * sizeof&#40;T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2093,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        GC.@preserve a unsafe_read&#40;from, pointer&#40;a, offs&#41;, nb&#41;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2103,7 @@
           <td>
             
             
-            <span class='code'>function &#40;-&#41;&#40;J::UniformScaling&#123;&lt;:Complex&#125;, A::Hermitian&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2113,7 @@
           <td>
             
             
-            <span class='code'>    TS &#61; Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;</span>
+            <span class='code'>        for i &#61; offs:offs&#43;nel-1</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2123,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; copytri&#33;&#40;copymutable_oftype&#40;parent&#40;A&#41;, TS&#41;, A.uplo, true&#41;</span>
+            <span class='code'>            a&#91;i&#93; &#61; read&#40;to, T&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2133,7 @@
           <td>
             
             
-            <span class='code'>    B .&#61; .-B</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2143,7 @@
           <td>
             
             
-            <span class='code'>    for i in diagind&#40;B&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2153,7 @@
           <td>
             
             
-            <span class='code'>        B&#91;i&#93; &#61; J - A&#91;i&#93;</span>
+            <span class='code'>    return a</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2163,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2173,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2183,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function read&#40;from::GenericIOBuffer, ::Type&#123;UInt8&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2193,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2203,7 @@
           <td>
             
             
-            <span class='code'>function &#40;&#43;&#41;&#40;A::AbstractMatrix, J::UniformScaling&#41;</span>
+            <span class='code'>    ptr &#61; from.ptr</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2213,7 @@
           <td>
             
             
-            <span class='code'>    checksquare&#40;A&#41;</span>
+            <span class='code'>    size &#61; from.size</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2223,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; copymutable_oftype&#40;A, Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;&#41;</span>
+            <span class='code'>    if ptr &gt; size</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2233,7 @@
           <td>
             
             
-            <span class='code'>    for i in intersect&#40;axes&#40;A,1&#41;, axes&#40;A,2&#41;&#41;</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2243,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds B&#91;i,i&#93; &#43;&#61; J</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2253,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    @inbounds byte &#61; from.data&#91;ptr&#93;::UInt8</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2263,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'>    from.ptr &#61; ptr &#43; 1</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2273,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return byte</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2283,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2293,7 @@
           <td>
             
             
-            <span class='code'>function &#40;-&#41;&#40;J::UniformScaling, A::AbstractMatrix&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2303,7 @@
           <td>
             
             
-            <span class='code'>    checksquare&#40;A&#41;</span>
+            <span class='code'>function peek&#40;from::GenericIOBuffer, ::Type&#123;UInt8&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2313,7 @@
           <td>
             
             
-            <span class='code'>    B &#61; convert&#40;AbstractMatrix&#123;Base._return_type&#40;&#43;, Tuple&#123;eltype&#40;A&#41;, typeof&#40;J&#41;&#125;&#41;&#125;, -A&#41;</span>
+            <span class='code'>    from.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2323,7 @@
           <td>
             
             
-            <span class='code'>    for i in intersect&#40;axes&#40;A,1&#41;, axes&#40;A,2&#41;&#41;</span>
+            <span class='code'>    if from.ptr &gt; from.size</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2333,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds B&#91;i,i&#93; &#43;&#61; J</span>
+            <span class='code'>        throw&#40;EOFError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2315,7 +2353,7 @@
           <td>
             
             
-            <span class='code'>    return B</span>
+            <span class='code'>    return from.data&#91;from.ptr&#93;::UInt8</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2345,7 +2383,7 @@
           <td>
             
             
-            <span class='code'>inv&#40;J::UniformScaling&#41; &#61; UniformScaling&#40;inv&#40;J.λ&#41;&#41;</span>
+            <span class='code'>read&#40;from::GenericIOBuffer, ::Type&#123;Ptr&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; convert&#40;Ptr&#123;T&#125;, read&#40;from, UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2355,7 +2393,7 @@
           <td>
             
             
-            <span class='code'>opnorm&#40;J::UniformScaling, p::Real&#61;2&#41; &#61; opnorm&#40;J.λ, p&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2403,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>isreadable&#40;io::GenericIOBuffer&#41; &#61; io.readable</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2413,7 @@
           <td>
             
             
-            <span class='code'>pinv&#40;J::UniformScaling&#41; &#61; ifelse&#40;iszero&#40;J.λ&#41;,</span>
+            <span class='code'>iswritable&#40;io::GenericIOBuffer&#41; &#61; io.writable</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2423,7 @@
           <td>
             
             
-            <span class='code'>                          UniformScaling&#40;zero&#40;inv&#40;J.λ&#41;&#41;&#41;,  # type stability</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2395,7 +2433,7 @@
           <td>
             
             
-            <span class='code'>                          UniformScaling&#40;inv&#40;J.λ&#41;&#41;&#41;</span>
+            <span class='code'># TODO: GenericIOBuffer is not iterable, so doesn&#39;t really have a length.</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2443,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># This should maybe be sizeof&#40;&#41; instead.</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2453,7 @@
           <td>
             
             
-            <span class='code'>function det&#40;J::UniformScaling&#123;T&#125;&#41; where T</span>
+            <span class='code'>#length&#40;io::GenericIOBuffer&#41; &#61; &#40;io.seekable ? io.size : bytesavailable&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2463,7 @@
           <td>
             
             
-            <span class='code'>    if isone&#40;J.λ&#41;</span>
+            <span class='code'>bytesavailable&#40;io::GenericIOBuffer&#41; &#61; io.size - io.ptr &#43; 1</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2473,7 @@
           <td>
             
             
-            <span class='code'>        one&#40;T&#41;</span>
+            <span class='code'>position&#40;io::GenericIOBuffer&#41; &#61; io.ptr-1</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2483,7 @@
           <td>
             
             
-            <span class='code'>    elseif iszero&#40;J.λ&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,7 +2493,7 @@
           <td>
             
             
-            <span class='code'>        zero&#40;T&#41;</span>
+            <span class='code'>function skip&#40;io::GenericIOBuffer, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2465,7 +2503,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    seekto &#61; io.ptr &#43; n</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2475,7 +2513,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;Determinant of UniformScaling is only well-defined when λ &#61; 0 or 1.&quot;&#41;&#41;</span>
+            <span class='code'>    n &lt; 0 &amp;&amp; return seek&#40;io, seekto-1&#41; # Does error checking</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2485,7 +2523,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    io.ptr &#61; min&#40;seekto, io.size&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2495,7 +2533,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2505,7 +2543,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2515,7 +2553,7 @@
           <td>
             
             
-            <span class='code'>function tr&#40;J::UniformScaling&#123;T&#125;&#41; where T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2525,7 +2563,7 @@
           <td>
             
             
-            <span class='code'>    if iszero&#40;J.λ&#41;</span>
+            <span class='code'>function seek&#40;io::GenericIOBuffer, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2535,7 +2573,7 @@
           <td>
             
             
-            <span class='code'>        zero&#40;T&#41;</span>
+            <span class='code'>    if &#33;io.seekable</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2545,7 +2583,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        ismarked&#40;io&#41; || throw&#40;ArgumentError&#40;&quot;seek failed, IOBuffer is not seekable and is not marked&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2555,7 +2593,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;Trace of UniformScaling is only well-defined when λ &#61; 0&quot;&#41;&#41;</span>
+            <span class='code'>        n &#61;&#61; io.mark || throw&#40;ArgumentError&#40;&quot;seek failed, IOBuffer is not seekable and n &#33;&#61; mark&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2575,7 +2613,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # TODO: REPL.jl relies on the fact that this does not throw &#40;by seeking past the beginning or end</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2585,7 +2623,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #       of an GenericIOBuffer&#41;, so that would need to be fixed in order to throw an error here</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2595,7 +2633,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; UniformScaling&#40;J1.λ*J2.λ&#41;</span>
+            <span class='code'>    #&#40;n &lt; 0 || n &gt; io.size&#41; &amp;&amp; throw&#40;ArgumentError&#40;&quot;Attempted to seek outside IOBuffer boundaries.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2605,7 +2643,7 @@
           <td>
             
             
-            <span class='code'>*&#40;B::BitArray&#123;2&#125;, J::UniformScaling&#41; &#61; *&#40;Array&#40;B&#41;, J::UniformScaling&#41;</span>
+            <span class='code'>    #io.ptr &#61; n&#43;1</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2615,7 +2653,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J::UniformScaling, B::BitArray&#123;2&#125;&#41; &#61; *&#40;J::UniformScaling, Array&#40;B&#41;&#41;</span>
+            <span class='code'>    io.ptr &#61; max&#40;min&#40;n&#43;1, io.size&#43;1&#41;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2625,7 +2663,7 @@
           <td>
             
             
-            <span class='code'>*&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; A*J.λ</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2635,7 +2673,7 @@
           <td>
             
             
-            <span class='code'>*&#40;v::AbstractVector, J::UniformScaling&#41; &#61; reshape&#40;v, length&#40;v&#41;, 1&#41; * J</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2645,7 +2683,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J::UniformScaling, A::AbstractVecOrMat&#41; &#61; J.λ*A</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2655,7 +2693,7 @@
           <td>
             
             
-            <span class='code'>*&#40;x::Number, J::UniformScaling&#41; &#61; UniformScaling&#40;x*J.λ&#41;</span>
+            <span class='code'>function seekend&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2665,7 +2703,7 @@
           <td>
             
             
-            <span class='code'>*&#40;J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;J.λ*x&#41;</span>
+            <span class='code'>    io.ptr &#61; io.size&#43;1</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2675,7 +2713,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2685,7 +2723,7 @@
           <td>
             
             
-            <span class='code'>/&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; J2.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : UniformScaling&#40;J1.λ/J2.λ&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2695,7 +2733,7 @@
           <td>
             
             
-            <span class='code'>/&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2705,7 +2743,7 @@
           <td>
             
             
-            <span class='code'>    &#40;invA &#61; inv&#40;A&#41;; lmul&#33;&#40;J.λ, convert&#40;AbstractMatrix&#123;promote_type&#40;eltype&#40;J&#41;,eltype&#40;invA&#41;&#41;&#125;, invA&#41;&#41;&#41;</span>
+            <span class='code'>function truncate&#40;io::GenericIOBuffer, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2715,7 +2753,7 @@
           <td>
             
             
-            <span class='code'>/&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; J.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : A/J.λ</span>
+            <span class='code'>    io.writable || throw&#40;ArgumentError&#40;&quot;truncate failed, IOBuffer is not writeable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2725,7 +2763,7 @@
           <td>
             
             
-            <span class='code'>/&#40;v::AbstractVector, J::UniformScaling&#41; &#61; reshape&#40;v, length&#40;v&#41;, 1&#41; / J</span>
+            <span class='code'>    io.seekable || throw&#40;ArgumentError&#40;&quot;truncate failed, IOBuffer is not seekable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2735,7 +2773,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    n &lt; 0 &amp;&amp; throw&#40;ArgumentError&#40;&quot;truncate failed, n bytes must be ≥ 0, got &#36;n&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2745,7 +2783,7 @@
           <td>
             
             
-            <span class='code'>/&#40;J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;J.λ/x&#41;</span>
+            <span class='code'>    n &gt; io.maxsize &amp;&amp; throw&#40;ArgumentError&#40;&quot;truncate failed, &#36;&#40;n&#41; bytes is exceeds IOBuffer maxsize &#36;&#40;io.maxsize&#41;&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2755,7 +2793,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if n &gt; length&#40;io.data&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2765,7 +2803,7 @@
           <td>
             
             
-            <span class='code'>\&#40;J1::UniformScaling, J2::UniformScaling&#41; &#61; J1.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : UniformScaling&#40;J1.λ\J2.λ&#41;</span>
+            <span class='code'>        resize&#33;&#40;io.data, n&#41;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2775,7 +2813,7 @@
           <td>
             
             
-            <span class='code'>\&#40;J::UniformScaling, A::AbstractVecOrMat&#41; &#61; J.λ &#61;&#61; 0 ? throw&#40;SingularException&#40;1&#41;&#41; : J.λ\A</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2785,7 +2823,7 @@
           <td>
             
             
-            <span class='code'>\&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61;</span>
+            <span class='code'>    io.data&#91;io.size&#43;1:n&#93; .&#61; 0</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2795,7 +2833,7 @@
           <td>
             
             
-            <span class='code'>    &#40;invA &#61; inv&#40;A&#41;; rmul&#33;&#40;convert&#40;AbstractMatrix&#123;promote_type&#40;eltype&#40;invA&#41;,eltype&#40;J&#41;&#41;&#125;, invA&#41;, J.λ&#41;&#41;</span>
+            <span class='code'>    io.size &#61; n</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2805,7 +2843,7 @@
           <td>
             
             
-            <span class='code'>\&#40;F::Factorization, J::UniformScaling&#41; &#61; F \ J&#40;size&#40;F,1&#41;&#41;</span>
+            <span class='code'>    io.ptr &#61; min&#40;io.ptr, n&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2815,7 +2853,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ismarked&#40;io&#41; &amp;&amp; io.mark &gt; n &amp;&amp; unmark&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2825,7 +2863,7 @@
           <td>
             
             
-            <span class='code'>\&#40;x::Number, J::UniformScaling&#41; &#61; UniformScaling&#40;x\J.λ&#41;</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2835,7 +2873,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2845,7 +2883,7 @@
           <td>
             
             
-            <span class='code'>@inline mul&#33;&#40;C::AbstractMatrix, A::AbstractMatrix, J::UniformScaling, alpha::Number, beta::Number&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2855,7 +2893,7 @@
           <td>
             
             
-            <span class='code'>    mul&#33;&#40;C, A, J.λ, alpha, beta&#41;</span>
+            <span class='code'>function compact&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2865,7 +2903,7 @@
           <td>
             
             
-            <span class='code'>@inline mul&#33;&#40;C::AbstractVecOrMat, J::UniformScaling, B::AbstractVecOrMat, alpha::Number, beta::Number&#41; &#61;</span>
+            <span class='code'>    io.writable || throw&#40;ArgumentError&#40;&quot;compact failed, IOBuffer is not writeable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2875,7 +2913,7 @@
           <td>
             
             
-            <span class='code'>    mul&#33;&#40;C, J.λ, B, alpha, beta&#41;</span>
+            <span class='code'>    io.seekable &amp;&amp; throw&#40;ArgumentError&#40;&quot;compact failed, IOBuffer is seekable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2885,7 +2923,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    local ptr::Int, bytes_to_move::Int</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2895,7 +2933,7 @@
           <td>
             
             
-            <span class='code'>function mul&#33;&#40;out::AbstractMatrix&#123;T&#125;, a::Number, B::UniformScaling, α::Number, β::Number&#41; where &#123;T&#125;</span>
+            <span class='code'>    if ismarked&#40;io&#41; &amp;&amp; io.mark &lt; io.ptr</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2905,7 +2943,7 @@
           <td>
             
             
-            <span class='code'>    checksquare&#40;out&#41;</span>
+            <span class='code'>        if io.mark &#61;&#61; 0 return end</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2915,7 +2953,7 @@
           <td>
             
             
-            <span class='code'>    if iszero&#40;β&#41;  # zero contribution of the out matrix</span>
+            <span class='code'>        ptr &#61; io.mark</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2925,7 +2963,7 @@
           <td>
             
             
-            <span class='code'>        fill&#33;&#40;out, zero&#40;T&#41;&#41;</span>
+            <span class='code'>        bytes_to_move &#61; bytesavailable&#40;io&#41; &#43; &#40;io.ptr-io.mark&#41;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2935,7 +2973,7 @@
           <td>
             
             
-            <span class='code'>    elseif &#33;isone&#40;β&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2945,7 +2983,7 @@
           <td>
             
             
-            <span class='code'>        rmul&#33;&#40;out, β&#41;</span>
+            <span class='code'>        ptr &#61; io.ptr</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2955,7 +2993,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        bytes_to_move &#61; bytesavailable&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2965,7 +3003,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; convert&#40;T, a*B.λ*α&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2975,7 +3013,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;iszero&#40;s&#41;</span>
+            <span class='code'>    copyto&#33;&#40;io.data, 1, io.data, ptr, bytes_to_move&#41;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2985,7 +3023,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds for i in diagind&#40;out&#41;</span>
+            <span class='code'>    io.size -&#61; ptr - 1</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -2995,7 +3033,7 @@
           <td>
             
             
-            <span class='code'>            out&#91;i&#93; &#43;&#61; s</span>
+            <span class='code'>    io.ptr -&#61; ptr - 1</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3005,7 +3043,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    io.mark -&#61; ptr - 1</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3015,7 +3053,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3025,7 +3063,7 @@
           <td>
             
             
-            <span class='code'>    return out</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3035,7 +3073,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3045,7 +3083,7 @@
           <td>
             
             
-            <span class='code'>@inline mul&#33;&#40;out::AbstractMatrix, A::UniformScaling, b::Number, α::Number, β::Number&#41;&#61;</span>
+            <span class='code'>@noinline function ensureroom_slowpath&#40;io::GenericIOBuffer, nshort::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3055,7 +3093,7 @@
           <td>
             
             
-            <span class='code'>    mul&#33;&#40;out, A.λ, UniformScaling&#40;b&#41;, α, β&#41;</span>
+            <span class='code'>    io.writable || throw&#40;ArgumentError&#40;&quot;ensureroom failed, IOBuffer is not writeable&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3065,7 +3103,7 @@
           <td>
             
             
-            <span class='code'>rmul&#33;&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; rmul&#33;&#40;A, J.λ&#41;</span>
+            <span class='code'>    if &#33;io.seekable</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3075,7 +3113,7 @@
           <td>
             
             
-            <span class='code'>lmul&#33;&#40;J::UniformScaling, B::AbstractVecOrMat&#41; &#61; lmul&#33;&#40;J.λ, B&#41;</span>
+            <span class='code'>        if &#33;ismarked&#40;io&#41; &amp;&amp; io.ptr &gt; 1 &amp;&amp; io.size &lt;&#61; io.ptr - 1</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3085,7 +3123,7 @@
           <td>
             
             
-            <span class='code'>rdiv&#33;&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; rdiv&#33;&#40;A, J.λ&#41;</span>
+            <span class='code'>            io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3095,7 +3133,7 @@
           <td>
             
             
-            <span class='code'>ldiv&#33;&#40;J::UniformScaling, B::AbstractVecOrMat&#41; &#61; ldiv&#33;&#40;J.λ, B&#41;</span>
+            <span class='code'>            io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3105,7 +3143,7 @@
           <td>
             
             
-            <span class='code'>ldiv&#33;&#40;Y::AbstractVecOrMat, J::UniformScaling, B::AbstractVecOrMat&#41; &#61; &#40;Y .&#61; J.λ .\ B&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3115,7 +3153,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            datastart &#61; ismarked&#40;io&#41; ? io.mark : io.ptr</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3125,7 +3163,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;*&#41;, x::Number,J::UniformScaling&#41; &#61; UniformScaling&#40;x*J.λ&#41;</span>
+            <span class='code'>            if &#40;io.size&#43;nshort &gt; io.maxsize&#41; ||</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3135,7 +3173,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;*&#41;, J::UniformScaling,x::Number&#41; &#61; UniformScaling&#40;J.λ*x&#41;</span>
+            <span class='code'>                &#40;datastart &gt; 4096 &amp;&amp; datastart &gt; io.size - io.ptr&#41; ||</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3145,7 +3183,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                &#40;datastart &gt; 262144&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3155,7 +3193,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;/&#41;, J::UniformScaling,x::Number&#41; &#61; UniformScaling&#40;J.λ/x&#41;</span>
+            <span class='code'>                # apply somewhat arbitrary heuristics to decide when to destroy</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3165,7 +3203,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                # old, read data to make more room for new data</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3175,7 +3213,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;\&#41;, x::Number,J::UniformScaling&#41; &#61; UniformScaling&#40;x\J.λ&#41;</span>
+            <span class='code'>                compact&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3185,7 +3223,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3195,7 +3233,7 @@
           <td>
             
             
-            <span class='code'>&#40;^&#41;&#40;J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;&#40;J.λ&#41;^x&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3205,7 +3243,7 @@
           <td>
             
             
-            <span class='code'>Base.literal_pow&#40;::typeof&#40;^&#41;, J::UniformScaling, x::Val&#41; &#61; UniformScaling&#40;Base.literal_pow&#40;^, J.λ, x&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3215,7 +3253,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3225,7 +3263,7 @@
           <td>
             
             
-            <span class='code'>Broadcast.broadcasted&#40;::typeof&#40;^&#41;, J::UniformScaling, x::Number&#41; &#61; UniformScaling&#40;J.λ^x&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3235,7 +3273,7 @@
           <td>
             
             
-            <span class='code'>function Broadcast.broadcasted&#40;::typeof&#40;Base.literal_pow&#41;, ::typeof&#40;^&#41;, J::UniformScaling, x::Val&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3245,7 +3283,7 @@
           <td>
             
             
-            <span class='code'>    UniformScaling&#40;Base.literal_pow&#40;^, J.λ, x&#41;&#41;</span>
+            <span class='code'>@inline ensureroom&#40;io::GenericIOBuffer, nshort::Int&#41; &#61; ensureroom&#40;io, UInt&#40;nshort&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3255,7 +3293,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function ensureroom&#40;io::GenericIOBuffer, nshort::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3265,7 +3303,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if &#33;io.writable || &#40;&#33;io.seekable &amp;&amp; io.ptr &gt; 1&#41;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3275,7 +3313,7 @@
           <td>
             
             
-            <span class='code'>&#61;&#61;&#40;J1::UniformScaling,J2::UniformScaling&#41; &#61; &#40;J1.λ &#61;&#61; J2.λ&#41;</span>
+            <span class='code'>        ensureroom_slowpath&#40;io, nshort&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3285,7 +3323,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3295,7 +3333,7 @@
           <td>
             
             
-            <span class='code'>## equality comparison with UniformScaling</span>
+            <span class='code'>    n &#61; min&#40;&#40;nshort &#37; Int&#41; &#43; &#40;io.append ? io.size : io.ptr-1&#41;, io.maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3305,7 +3343,7 @@
           <td>
             
             
-            <span class='code'>&#61;&#61;&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61; A &#61;&#61; J</span>
+            <span class='code'>    l &#61; length&#40;io.data&#41;</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3315,7 +3353,7 @@
           <td>
             
             
-            <span class='code'>function &#61;&#61;&#40;A::AbstractMatrix, J::UniformScaling&#41;</span>
+            <span class='code'>    if n &gt; l</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3325,7 +3363,7 @@
           <td>
             
             
-            <span class='code'>    require_one_based_indexing&#40;A&#41;</span>
+            <span class='code'>        _growend&#33;&#40;io.data, &#40;n - l&#41; &#37; UInt&#41;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3335,7 +3373,7 @@
           <td>
             
             
-            <span class='code'>    size&#40;A, 1&#41; &#61;&#61; size&#40;A, 2&#41; || return false</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3345,7 +3383,7 @@
           <td>
             
             
-            <span class='code'>    iszero&#40;J.λ&#41; &amp;&amp; return iszero&#40;A&#41;</span>
+            <span class='code'>    return io</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3355,7 +3393,7 @@
           <td>
             
             
-            <span class='code'>    isone&#40;J.λ&#41; &amp;&amp; return isone&#40;A&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3365,7 +3403,7 @@
           <td>
             
             
-            <span class='code'>    return A &#61;&#61; J.λ*one&#40;A&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3375,7 +3413,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>eof&#40;io::GenericIOBuffer&#41; &#61; &#40;io.ptr-1 &#61;&#61; io.size&#41;</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3385,7 +3423,7 @@
           <td>
             
             
-            <span class='code'>function &#61;&#61;&#40;A::StridedMatrix, J::UniformScaling&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3395,7 +3433,7 @@
           <td>
             
             
-            <span class='code'>    size&#40;A, 1&#41; &#61;&#61; size&#40;A, 2&#41; || return false</span>
+            <span class='code'>function closewrite&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3405,7 +3443,7 @@
           <td>
             
             
-            <span class='code'>    iszero&#40;J.λ&#41; &amp;&amp; return iszero&#40;A&#41;</span>
+            <span class='code'>    io.writable &#61; false</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3415,7 +3453,7 @@
           <td>
             
             
-            <span class='code'>    isone&#40;J.λ&#41; &amp;&amp; return isone&#40;A&#41;</span>
+            <span class='code'>    # OR throw&#40;_UVError&#40;&quot;closewrite&quot;, UV_ENOTSOCK&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3425,7 +3463,7 @@
           <td>
             
             
-            <span class='code'>    for j in axes&#40;A, 2&#41;, i in axes&#40;A, 1&#41;</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3435,7 +3473,7 @@
           <td>
             
             
-            <span class='code'>        ifelse&#40;i &#61;&#61; j, A&#91;i, j&#93; &#61;&#61; J.λ, iszero&#40;A&#91;i, j&#93;&#41;&#41; || return false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3445,7 +3483,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3455,7 +3493,7 @@
           <td>
             
             
-            <span class='code'>    return true</span>
+            <span class='code'>@noinline function close&#40;io::GenericIOBuffer&#123;T&#125;&#41; where T</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3465,7 +3503,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    io.readable &#61; false</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3475,7 +3513,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.writable &#61; false</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3485,7 +3523,7 @@
           <td>
             
             
-            <span class='code'>isequal&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; false</span>
+            <span class='code'>    io.seekable &#61; false</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3495,7 +3533,7 @@
           <td>
             
             
-            <span class='code'>isequal&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61; false</span>
+            <span class='code'>    io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3505,7 +3543,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    io.maxsize &#61; 0</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3515,7 +3553,7 @@
           <td>
             
             
-            <span class='code'>function isapprox&#40;J1::UniformScaling&#123;T&#125;, J2::UniformScaling&#123;S&#125;;</span>
+            <span class='code'>    io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3525,7 +3563,7 @@
           <td>
             
             
-            <span class='code'>            atol::Real&#61;0, rtol::Real&#61;Base.rtoldefault&#40;T,S,atol&#41;, nans::Bool&#61;false&#41; where &#123;T&lt;:Number,S&lt;:Number&#125;</span>
+            <span class='code'>    io.mark &#61; -1</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3535,7 +3573,7 @@
           <td>
             
             
-            <span class='code'>    isapprox&#40;J1.λ, J2.λ, rtol&#61;rtol, atol&#61;atol, nans&#61;nans&#41;</span>
+            <span class='code'>    if io.writable</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3545,7 +3583,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        resize&#33;&#40;io.data, 0&#41;</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3555,7 +3593,7 @@
           <td>
             
             
-            <span class='code'>function isapprox&#40;J::UniformScaling, A::AbstractMatrix;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3565,7 +3603,7 @@
           <td>
             
             
-            <span class='code'>                  atol::Real &#61; 0,</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3575,7 +3613,7 @@
           <td>
             
             
-            <span class='code'>                  rtol::Real &#61; Base.rtoldefault&#40;promote_leaf_eltypes&#40;A&#41;, eltype&#40;J&#41;, atol&#41;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3585,7 +3623,7 @@
           <td>
             
             
-            <span class='code'>                  nans::Bool &#61; false, norm::Function &#61; norm&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3595,7 +3633,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; checksquare&#40;A&#41;</span>
+            <span class='code'>isopen&#40;io::GenericIOBuffer&#41; &#61; io.readable || io.writable || io.seekable || bytesavailable&#40;io&#41; &gt; 0</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3605,7 +3643,7 @@
           <td>
             
             
-            <span class='code'>    normJ &#61; norm &#61;&#61;&#61; opnorm             ? abs&#40;J.λ&#41; :</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3615,7 +3653,7 @@
           <td>
             
             
-            <span class='code'>            norm &#61;&#61;&#61; LinearAlgebra.norm ? abs&#40;J.λ&#41; * sqrt&#40;n&#41; :</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3625,7 +3663,7 @@
           <td>
             
             
-            <span class='code'>                                          norm&#40;Diagonal&#40;fill&#40;J.λ, n&#41;&#41;&#41;</span>
+            <span class='code'>    take&#33;&#40;b::IOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3635,7 +3673,7 @@
           <td>
             
             
-            <span class='code'>    return norm&#40;A - J&#41; &lt;&#61; max&#40;atol, rtol * max&#40;norm&#40;A&#41;, normJ&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3645,7 +3683,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Obtain the contents of an &#96;IOBuffer&#96; as an array. Afterwards, the &#96;IOBuffer&#96; is reset to its initial state.</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3655,7 +3693,7 @@
           <td>
             
             
-            <span class='code'>isapprox&#40;A::AbstractMatrix, J::UniformScaling; kwargs...&#41; &#61; isapprox&#40;J, A; kwargs...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3665,7 +3703,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3675,7 +3713,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3685,7 +3723,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;dest::AbstractMatrix, src::UniformScaling&#41;</span>
+            <span class='code'>julia&gt; io &#61; IOBuffer&#40;&#41;;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3705,7 +3743,7 @@
           <td>
             
             
-            <span class='code'>Copies a &#91;&#96;UniformScaling&#96;&#93;&#40;@ref&#41; onto a matrix.</span>
+            <span class='code'>julia&gt; write&#40;io, &quot;JuliaLang is a GitHub organization.&quot;, &quot; It has many members.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3715,7 +3753,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>56</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3725,7 +3763,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.1&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3735,7 +3773,7 @@
           <td>
             
             
-            <span class='code'>    In Julia 1.0 this method only supported a square destination matrix. Julia 1.1. added</span>
+            <span class='code'>julia&gt; String&#40;take&#33;&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3745,7 +3783,7 @@
           <td>
             
             
-            <span class='code'>    support for a rectangular matrix.</span>
+            <span class='code'>&quot;JuliaLang is a GitHub organization. It has many members.&quot;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3755,7 +3793,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3765,7 +3803,7 @@
           <td>
             
             
-            <span class='code'>function copyto&#33;&#40;A::AbstractMatrix, J::UniformScaling&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3775,7 +3813,7 @@
           <td>
             
             
-            <span class='code'>    require_one_based_indexing&#40;A&#41;</span>
+            <span class='code'>function take&#33;&#40;io::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3785,7 +3823,7 @@
           <td>
             
             
-            <span class='code'>    fill&#33;&#40;A, 0&#41;</span>
+            <span class='code'>    ismarked&#40;io&#41; &amp;&amp; unmark&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3795,7 +3833,7 @@
           <td>
             
             
-            <span class='code'>    λ &#61; J.λ</span>
+            <span class='code'>    if io.seekable</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3805,7 +3843,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:min&#40;size&#40;A,1&#41;,size&#40;A,2&#41;&#41;</span>
+            <span class='code'>        nbytes &#61; io.size</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3815,7 +3853,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds A&#91;i,i&#93; &#61; λ</span>
+            <span class='code'>        data &#61; copyto&#33;&#40;StringVector&#40;nbytes&#41;, 1, io.data, 1, nbytes&#41;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3825,7 +3863,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3835,7 +3873,7 @@
           <td>
             
             
-            <span class='code'>    return A</span>
+            <span class='code'>        nbytes &#61; bytesavailable&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3845,7 +3883,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        data &#61; read&#33;&#40;io,StringVector&#40;nbytes&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3855,7 +3893,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3865,7 +3903,7 @@
           <td>
             
             
-            <span class='code'>function cond&#40;J::UniformScaling&#123;T&#125;&#41; where T</span>
+            <span class='code'>    if io.writable</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3875,7 +3913,7 @@
           <td>
             
             
-            <span class='code'>    onereal &#61; inv&#40;one&#40;real&#40;J.λ&#41;&#41;&#41;</span>
+            <span class='code'>        io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3885,7 +3923,7 @@
           <td>
             
             
-            <span class='code'>    return J.λ ≠ zero&#40;T&#41; ? onereal : oftype&#40;onereal, Inf&#41;</span>
+            <span class='code'>        io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3895,7 +3933,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3905,7 +3943,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return data</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3915,7 +3953,7 @@
           <td>
             
             
-            <span class='code'># promote_to_arrays&#40;n,k, T, A...&#41; promotes any UniformScaling matrices</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3925,7 +3963,7 @@
           <td>
             
             
-            <span class='code'># in A to matrices of type T and sizes given by n&#91;k:end&#93;.  n is an array</span>
+            <span class='code'>function take&#33;&#40;io::IOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3935,7 +3973,7 @@
           <td>
             
             
-            <span class='code'># so that the same promotion code can be used for hvcat.  We pass the type T</span>
+            <span class='code'>    ismarked&#40;io&#41; &amp;&amp; unmark&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3945,7 +3983,7 @@
           <td>
             
             
-            <span class='code'># so that we can re-use this code for sparse-matrix hcat etcetera.</span>
+            <span class='code'>    if io.seekable</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3955,7 +3993,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays_&#40;n::Int, ::Type, a::Number&#41; &#61; a</span>
+            <span class='code'>        data &#61; io.data</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3965,7 +4003,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays_&#40;n::Int, ::Type&#123;Matrix&#125;, J::UniformScaling&#123;T&#125;&#41; where &#123;T&#125; &#61; Matrix&#40;J, n, n&#41;</span>
+            <span class='code'>        if io.writable</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3975,7 +4013,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays_&#40;n::Int, ::Type, A::AbstractVecOrMat&#41; &#61; A</span>
+            <span class='code'>            maxsize &#61; &#40;io.maxsize &#61;&#61; typemax&#40;Int&#41; ? 0 : min&#40;length&#40;io.data&#41;,io.maxsize&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3985,7 +4023,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#41; &#61; &#40;&#41;</span>
+            <span class='code'>            io.data &#61; StringVector&#40;maxsize&#41;</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -3995,7 +4033,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A&#41; where &#123;T&#125; &#61; &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;,&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4005,7 +4043,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A, B&#41; where &#123;T&#125; &#61;</span>
+            <span class='code'>            data &#61; copy&#40;data&#41;</span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4015,7 +4053,7 @@
           <td>
             
             
-            <span class='code'>    &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;, promote_to_arrays_&#40;n&#91;k&#43;1&#93;, T, B&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4025,7 +4063,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A, B, C&#41; where &#123;T&#125; &#61;</span>
+            <span class='code'>        resize&#33;&#40;data,io.size&#41;</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4035,7 +4073,7 @@
           <td>
             
             
-            <span class='code'>    &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;, promote_to_arrays_&#40;n&#91;k&#43;1&#93;, T, B&#41;, promote_to_arrays_&#40;n&#91;k&#43;2&#93;, T, C&#41;&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4045,7 +4083,7 @@
           <td>
             
             
-            <span class='code'>promote_to_arrays&#40;n,k, ::Type&#123;T&#125;, A, B, Cs...&#41; where &#123;T&#125; &#61;</span>
+            <span class='code'>        nbytes &#61; bytesavailable&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4055,7 +4093,7 @@
           <td>
             
             
-            <span class='code'>    &#40;promote_to_arrays_&#40;n&#91;k&#93;, T, A&#41;, promote_to_arrays_&#40;n&#91;k&#43;1&#93;, T, B&#41;, promote_to_arrays&#40;n,k&#43;2, T, Cs...&#41;...&#41;</span>
+            <span class='code'>        a &#61; StringVector&#40;nbytes&#41;</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4065,7 +4103,7 @@
           <td>
             
             
-            <span class='code'>promote_to_array_type&#40;A::Tuple&#123;Vararg&#123;Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;&#125;&#125;&#41; &#61; Matrix</span>
+            <span class='code'>        data &#61; read&#33;&#40;io, a&#41;</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4075,7 +4113,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4085,7 +4123,7 @@
           <td>
             
             
-            <span class='code'>_us2number&#40;A&#41; &#61; A</span>
+            <span class='code'>    if io.writable</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4095,7 +4133,7 @@
           <td>
             
             
-            <span class='code'>_us2number&#40;J::UniformScaling&#41; &#61; J.λ</span>
+            <span class='code'>        io.ptr &#61; 1</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4105,7 +4143,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        io.size &#61; 0</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4115,7 +4153,7 @@
           <td>
             
             
-            <span class='code'>for &#40;f, _f, dim, name&#41; in &#40;&#40;:hcat, :_hcat, 1, &quot;rows&quot;&#41;, &#40;:vcat, :_vcat, 2, &quot;cols&quot;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4125,7 +4163,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>    return data</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4135,7 +4173,7 @@
           <td>
             
             
-            <span class='code'>        @inline &#36;f&#40;A::Union&#123;AbstractVecOrMat,UniformScaling&#125;...&#41; &#61; &#36;_f&#40;A...&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4145,7 +4183,7 @@
           <td>
             
             
-            <span class='code'>        # if there&#39;s a Number present, J::UniformScaling must be 1x1-dimensional</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4155,7 +4193,7 @@
           <td>
             
             
-            <span class='code'>        @inline &#36;f&#40;A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...&#41; &#61; &#36;f&#40;map&#40;_us2number, A&#41;...&#41;</span>
+            <span class='code'>function write&#40;to::IO, from::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4165,7 +4203,7 @@
           <td>
             
             
-            <span class='code'>        function &#36;_f&#40;A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...; array_type &#61; promote_to_array_type&#40;A&#41;&#41;</span>
+            <span class='code'>    if to &#61;&#61;&#61; from</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4175,7 +4213,7 @@
           <td>
             
             
-            <span class='code'>            n &#61; -1</span>
+            <span class='code'>        from.ptr &#61; from.size &#43; 1</span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4185,7 +4223,7 @@
           <td>
             
             
-            <span class='code'>            for a in A</span>
+            <span class='code'>        return 0</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4195,7 +4233,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;isa&#40;a, UniformScaling&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4205,7 +4243,7 @@
           <td>
             
             
-            <span class='code'>                    require_one_based_indexing&#40;a&#41;</span>
+            <span class='code'>    written::Int &#61; GC.@preserve from unsafe_write&#40;to, pointer&#40;from.data, from.ptr&#41;, UInt&#40;bytesavailable&#40;from&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4215,7 +4253,7 @@
           <td>
             
             
-            <span class='code'>                    na &#61; size&#40;a,&#36;dim&#41;</span>
+            <span class='code'>    from.ptr &#43;&#61; written</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4225,7 +4263,7 @@
           <td>
             
             
-            <span class='code'>                    n &gt;&#61; 0 &amp;&amp; n &#33;&#61; na &amp;&amp;</span>
+            <span class='code'>    return written</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4235,7 +4273,7 @@
           <td>
             
             
-            <span class='code'>                        throw&#40;DimensionMismatch&#40;string&#40;&quot;number of &quot;, &#36;name,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4245,7 +4283,7 @@
           <td>
             
             
-            <span class='code'>                            &quot; of each array must match &#40;got &quot;, n, &quot; and &quot;, na, &quot;&#41;&quot;&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4255,7 +4293,7 @@
           <td>
             
             
-            <span class='code'>                    n &#61; na</span>
+            <span class='code'>function unsafe_write&#40;to::GenericIOBuffer, p::Ptr&#123;UInt8&#125;, nb::UInt&#41;</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4265,7 +4303,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    ensureroom&#40;to, nb&#41;</span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4275,7 +4313,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    ptr &#61; &#40;to.append ? to.size&#43;1 : to.ptr&#41;</span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4285,7 +4323,7 @@
           <td>
             
             
-            <span class='code'>            n &#61;&#61; -1 &amp;&amp; throw&#40;ArgumentError&#40;&#36;&#40;&quot;&#36;f of only UniformScaling objects cannot determine the matrix size&quot;&#41;&#41;&#41;</span>
+            <span class='code'>    written &#61; Int&#40;min&#40;nb, Int&#40;length&#40;to.data&#41;&#41;::Int - ptr &#43; 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4295,7 +4333,7 @@
           <td>
             
             
-            <span class='code'>            return cat&#40;promote_to_arrays&#40;fill&#40;n, length&#40;A&#41;&#41;, 1, array_type, A...&#41;..., dims&#61;Val&#40;3-&#36;dim&#41;&#41;</span>
+            <span class='code'>    towrite &#61; written</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4305,7 +4343,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    d &#61; to.data</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4315,7 +4353,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    while towrite &gt; 0</span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4325,7 +4363,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        @inbounds d&#91;ptr&#93; &#61; unsafe_load&#40;p&#41;</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4335,7 +4373,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        ptr &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4345,7 +4383,7 @@
           <td>
             
             
-            <span class='code'>hvcat&#40;rows::Tuple&#123;Vararg&#123;Int&#125;&#125;, A::Union&#123;AbstractVecOrMat,UniformScaling&#125;...&#41; &#61; _hvcat&#40;rows, A...&#41;</span>
+            <span class='code'>        p &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4355,7 +4393,7 @@
           <td>
             
             
-            <span class='code'>hvcat&#40;rows::Tuple&#123;Vararg&#123;Int&#125;&#125;, A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...&#41; &#61; _hvcat&#40;rows, A...&#41;</span>
+            <span class='code'>        towrite -&#61; 1</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4365,7 +4403,7 @@
           <td>
             
             
-            <span class='code'>function _hvcat&#40;rows::Tuple&#123;Vararg&#123;Int&#125;&#125;, A::Union&#123;AbstractVecOrMat,UniformScaling,Number&#125;...; array_type &#61; promote_to_array_type&#40;A&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4375,7 +4413,7 @@
           <td>
             
             
-            <span class='code'>    require_one_based_indexing&#40;A...&#41;</span>
+            <span class='code'>    to.size &#61; max&#40;to.size, ptr - 1&#41;</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4385,7 +4423,7 @@
           <td>
             
             
-            <span class='code'>    nr &#61; length&#40;rows&#41;</span>
+            <span class='code'>    if &#33;to.append</span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4395,7 +4433,7 @@
           <td>
             
             
-            <span class='code'>    sum&#40;rows&#41; &#61;&#61; length&#40;A&#41; || throw&#40;ArgumentError&#40;&quot;mismatch between row sizes and number of arguments&quot;&#41;&#41;</span>
+            <span class='code'>        to.ptr &#43;&#61; written</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4405,7 +4443,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; fill&#40;-1, length&#40;A&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4415,7 +4453,7 @@
           <td>
             
             
-            <span class='code'>    needcols &#61; false # whether we also need to infer some sizes from the column count</span>
+            <span class='code'>    return written</span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4425,7 +4463,7 @@
           <td>
             
             
-            <span class='code'>    j &#61; 0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4435,7 +4473,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:nr # infer UniformScaling sizes from row counts, if possible:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4445,7 +4483,7 @@
           <td>
             
             
-            <span class='code'>        ni &#61; -1 # number of rows in this block-row, -1 indicates unknown</span>
+            <span class='code'>@inline function write&#40;to::GenericIOBuffer, a::UInt8&#41;</span>
           </td>
         </tr>
         <tr id='L443'>
@@ -4455,7 +4493,7 @@
           <td>
             
             
-            <span class='code'>        for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>    ensureroom&#40;to, UInt&#40;1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4465,7 +4503,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;isa&#40;A&#91;j&#43;k&#93;, UniformScaling&#41;</span>
+            <span class='code'>    ptr &#61; &#40;to.append ? to.size&#43;1 : to.ptr&#41;</span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4475,7 +4513,7 @@
           <td>
             
             
-            <span class='code'>                na &#61; size&#40;A&#91;j&#43;k&#93;, 1&#41;</span>
+            <span class='code'>    if ptr &gt; to.maxsize</span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4485,7 +4523,7 @@
           <td>
             
             
-            <span class='code'>                ni &gt;&#61; 0 &amp;&amp; ni &#33;&#61; na &amp;&amp;</span>
+            <span class='code'>        return 0</span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4495,7 +4533,7 @@
           <td>
             
             
-            <span class='code'>                    throw&#40;DimensionMismatch&#40;&quot;mismatch in number of rows&quot;&#41;&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4505,7 +4543,7 @@
           <td>
             
             
-            <span class='code'>                ni &#61; na</span>
+            <span class='code'>        to.data&#91;ptr&#93; &#61; a</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4515,7 +4553,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L450'>
@@ -4525,7 +4563,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    to.size &#61; max&#40;to.size, ptr&#41;</span>
           </td>
         </tr>
         <tr id='L451'>
@@ -4535,7 +4573,7 @@
           <td>
             
             
-            <span class='code'>        if ni &gt;&#61; 0</span>
+            <span class='code'>    if &#33;to.append</span>
           </td>
         </tr>
         <tr id='L452'>
@@ -4545,7 +4583,7 @@
           <td>
             
             
-            <span class='code'>            for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>        to.ptr &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L453'>
@@ -4555,7 +4593,7 @@
           <td>
             
             
-            <span class='code'>                n&#91;j&#43;k&#93; &#61; ni</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L454'>
@@ -4565,7 +4603,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    return sizeof&#40;UInt8&#41;</span>
           </td>
         </tr>
         <tr id='L455'>
@@ -4575,7 +4613,7 @@
           <td>
             
             
-            <span class='code'>        else # row consisted only of UniformScaling objects</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L456'>
@@ -4585,7 +4623,7 @@
           <td>
             
             
-            <span class='code'>            needcols &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L457'>
@@ -4595,7 +4633,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>readbytes&#33;&#40;io::GenericIOBuffer, b::Array&#123;UInt8&#125;, nb&#61;length&#40;b&#41;&#41; &#61; readbytes&#33;&#40;io, b, Int&#40;nb&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L458'>
@@ -4605,7 +4643,7 @@
           <td>
             
             
-            <span class='code'>        j &#43;&#61; rows&#91;i&#93;</span>
+            <span class='code'>function readbytes&#33;&#40;io::GenericIOBuffer, b::Array&#123;UInt8&#125;, nb::Int&#41;</span>
           </td>
         </tr>
         <tr id='L459'>
@@ -4615,7 +4653,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    nr &#61; min&#40;nb, bytesavailable&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L460'>
@@ -4625,7 +4663,7 @@
           <td>
             
             
-            <span class='code'>    if needcols # some sizes still unknown, try to infer from column count</span>
+            <span class='code'>    if length&#40;b&#41; &lt; nr</span>
           </td>
         </tr>
         <tr id='L461'>
@@ -4635,7 +4673,7 @@
           <td>
             
             
-            <span class='code'>        nc &#61; -1</span>
+            <span class='code'>        resize&#33;&#40;b, nr&#41;</span>
           </td>
         </tr>
         <tr id='L462'>
@@ -4645,7 +4683,7 @@
           <td>
             
             
-            <span class='code'>        j &#61; 0</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L463'>
@@ -4655,7 +4693,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 1:nr</span>
+            <span class='code'>    read_sub&#40;io, b, 1, nr&#41;</span>
           </td>
         </tr>
         <tr id='L464'>
@@ -4665,7 +4703,7 @@
           <td>
             
             
-            <span class='code'>            nci &#61; 0</span>
+            <span class='code'>    return nr</span>
           </td>
         </tr>
         <tr id='L465'>
@@ -4675,7 +4713,7 @@
           <td>
             
             
-            <span class='code'>            rows&#91;i&#93; &gt; 0 &amp;&amp; n&#91;j&#43;1&#93; &#61;&#61; -1 &amp;&amp; &#40;j &#43;&#61; rows&#91;i&#93;; continue&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L466'>
@@ -4685,7 +4723,7 @@
           <td>
             
             
-            <span class='code'>            for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>read&#40;io::GenericIOBuffer&#41; &#61; read&#33;&#40;io,StringVector&#40;bytesavailable&#40;io&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L467'>
@@ -4695,7 +4733,7 @@
           <td>
             
             
-            <span class='code'>                nci &#43;&#61; isa&#40;A&#91;j&#43;k&#93;, UniformScaling&#41; ? n&#91;j&#43;k&#93; : size&#40;A&#91;j&#43;k&#93;, 2&#41;</span>
+            <span class='code'>readavailable&#40;io::GenericIOBuffer&#41; &#61; read&#40;io&#41;</span>
           </td>
         </tr>
         <tr id='L468'>
@@ -4705,7 +4743,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>read&#40;io::GenericIOBuffer, nb::Integer&#41; &#61; read&#33;&#40;io,StringVector&#40;min&#40;nb, bytesavailable&#40;io&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L469'>
@@ -4715,7 +4753,7 @@
           <td>
             
             
-            <span class='code'>            nc &gt;&#61; 0 &amp;&amp; nc &#33;&#61; nci &amp;&amp; throw&#40;DimensionMismatch&#40;&quot;mismatch in number of columns&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L470'>
@@ -4725,7 +4763,7 @@
           <td>
             
             
-            <span class='code'>            nc &#61; nci</span>
+            <span class='code'>function occursin&#40;delim::UInt8, buf::IOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L471'>
@@ -4735,7 +4773,7 @@
           <td>
             
             
-            <span class='code'>            j &#43;&#61; rows&#91;i&#93;</span>
+            <span class='code'>    p &#61; pointer&#40;buf.data, buf.ptr&#41;</span>
           </td>
         </tr>
         <tr id='L472'>
@@ -4745,7 +4783,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    q &#61; GC.@preserve buf ccall&#40;:memchr,Ptr&#123;UInt8&#125;,&#40;Ptr&#123;UInt8&#125;,Int32,Csize_t&#41;,p,delim,bytesavailable&#40;buf&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L473'>
@@ -4755,7 +4793,7 @@
           <td>
             
             
-            <span class='code'>        nc &#61;&#61; -1 &amp;&amp; throw&#40;ArgumentError&#40;&quot;sizes of UniformScalings could not be inferred&quot;&#41;&#41;</span>
+            <span class='code'>    return q &#33;&#61; C_NULL</span>
           </td>
         </tr>
         <tr id='L474'>
@@ -4765,7 +4803,7 @@
           <td>
             
             
-            <span class='code'>        j &#61; 0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L475'>
@@ -4775,7 +4813,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 1:nr</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L476'>
@@ -4785,7 +4823,7 @@
           <td>
             
             
-            <span class='code'>            if rows&#91;i&#93; &gt; 0 &amp;&amp; n&#91;j&#43;1&#93; &#61;&#61; -1 # this row consists entirely of UniformScalings</span>
+            <span class='code'>function occursin&#40;delim::UInt8, buf::GenericIOBuffer&#41;</span>
           </td>
         </tr>
         <tr id='L477'>
@@ -4795,7 +4833,7 @@
           <td>
             
             
-            <span class='code'>                nci, r &#61; divrem&#40;nc, rows&#91;i&#93;&#41;</span>
+            <span class='code'>    data &#61; buf.data</span>
           </td>
         </tr>
         <tr id='L478'>
@@ -4805,7 +4843,7 @@
           <td>
             
             
-            <span class='code'>                r &#33;&#61; 0 &amp;&amp; throw&#40;DimensionMismatch&#40;&quot;indivisible UniformScaling sizes&quot;&#41;&#41;</span>
+            <span class='code'>    for i &#61; buf.ptr:buf.size</span>
           </td>
         </tr>
         <tr id='L479'>
@@ -4815,7 +4853,7 @@
           <td>
             
             
-            <span class='code'>                for k &#61; 1:rows&#91;i&#93;</span>
+            <span class='code'>        @inbounds b &#61; data&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L480'>
@@ -4825,7 +4863,7 @@
           <td>
             
             
-            <span class='code'>                    n&#91;j&#43;k&#93; &#61; nci</span>
+            <span class='code'>        b &#61;&#61; delim &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L481'>
@@ -4835,7 +4873,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L482'>
@@ -4845,7 +4883,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    return false</span>
           </td>
         </tr>
         <tr id='L483'>
@@ -4855,7 +4893,7 @@
           <td>
             
             
-            <span class='code'>            j &#43;&#61; rows&#91;i&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L484'>
@@ -4865,7 +4903,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L485'>
@@ -4875,7 +4913,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function readuntil&#40;io::GenericIOBuffer, delim::UInt8; keep::Bool&#61;false&#41;</span>
           </td>
         </tr>
         <tr id='L486'>
@@ -4885,7 +4923,7 @@
           <td>
             
             
-            <span class='code'>    Amat &#61; promote_to_arrays&#40;n, 1, array_type, A...&#41;</span>
+            <span class='code'>    lb &#61; 70</span>
           </td>
         </tr>
         <tr id='L487'>
@@ -4895,7 +4933,7 @@
           <td>
             
             
-            <span class='code'>    # We have two methods for promote_to_array_type, one returning Matrix and</span>
+            <span class='code'>    A &#61; StringVector&#40;lb&#41;</span>
           </td>
         </tr>
         <tr id='L488'>
@@ -4905,7 +4943,7 @@
           <td>
             
             
-            <span class='code'>    # another one returning SparseMatrixCSC &#40;in SparseArrays.jl&#41;. In the dense</span>
+            <span class='code'>    nread &#61; 0</span>
           </td>
         </tr>
         <tr id='L489'>
@@ -4915,7 +4953,7 @@
           <td>
             
             
-            <span class='code'>    # case, we cannot call hvcat for the promoted UniformScalings because this</span>
+            <span class='code'>    nout &#61; 0</span>
           </td>
         </tr>
         <tr id='L490'>
@@ -4925,7 +4963,7 @@
           <td>
             
             
-            <span class='code'>    # causes a stack overflow. In the sparse case, however, we cannot call</span>
+            <span class='code'>    data &#61; io.data</span>
           </td>
         </tr>
         <tr id='L491'>
@@ -4935,7 +4973,7 @@
           <td>
             
             
-            <span class='code'>    # typed_hvcat because we need a sparse output.</span>
+            <span class='code'>    for i &#61; io.ptr : io.size</span>
           </td>
         </tr>
         <tr id='L492'>
@@ -4945,7 +4983,7 @@
           <td>
             
             
-            <span class='code'>    if array_type &#61;&#61; Matrix</span>
+            <span class='code'>        @inbounds b &#61; data&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L493'>
@@ -4955,7 +4993,7 @@
           <td>
             
             
-            <span class='code'>        return typed_hvcat&#40;promote_eltype&#40;Amat...&#41;, rows, Amat...&#41;</span>
+            <span class='code'>        nread &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L494'>
@@ -4965,7 +5003,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        if keep || b &#33;&#61; delim</span>
           </td>
         </tr>
         <tr id='L495'>
@@ -4975,7 +5013,7 @@
           <td>
             
             
-            <span class='code'>        return hvcat&#40;rows, Amat...&#41;</span>
+            <span class='code'>            nout &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L496'>
@@ -4985,7 +5023,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            if nout &gt; lb</span>
           </td>
         </tr>
         <tr id='L497'>
@@ -4995,7 +5033,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                lb &#61; nout*2</span>
           </td>
         </tr>
         <tr id='L498'>
@@ -5005,7 +5043,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                resize&#33;&#40;A, lb&#41;</span>
           </td>
         </tr>
         <tr id='L499'>
@@ -5015,7 +5053,7 @@
           <td>
             
             
-            <span class='code'>## Matrix construction from UniformScaling</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L500'>
@@ -5023,33 +5061,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;6 &#37;&#41;
-              samples spent in Array
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from Array
-              <a href='uniformscaling.jl-948966f96b356883b4e96bdb23fa67f7c7db6f9f.html#L508'>line 508</a>
-              <br />
-            </div>
             
-            <span class='code'>function Matrix&#123;T&#125;&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; where &#123;T&#125;</span>
+            
+            <span class='code'>            @inbounds A&#91;nout&#93; &#61; b</span>
           </td>
         </tr>
         <tr id='L501'>
           <td class='lineno'>501</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-a87924e5889dbcec8f6d32882c7ff26bd9c71d0a.html#L585'>zeros</a>
-              <br />
-            </div>
-            <span class='code'>    A &#61; zeros&#40;T, dims&#41;</span>
+            
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L502'>
@@ -5059,7 +5083,7 @@
           <td>
             
             
-            <span class='code'>    v &#61; T&#40;s.λ&#41;</span>
+            <span class='code'>        if b &#61;&#61; delim</span>
           </td>
         </tr>
         <tr id='L503'>
@@ -5069,7 +5093,7 @@
           <td>
             
             
-            <span class='code'>    for i in diagind&#40;dims...&#41;</span>
+            <span class='code'>            break</span>
           </td>
         </tr>
         <tr id='L504'>
@@ -5079,7 +5103,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds A&#91;i&#93; &#61; v</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L505'>
@@ -5099,7 +5123,7 @@
           <td>
             
             
-            <span class='code'>    return A</span>
+            <span class='code'>    io.ptr &#43;&#61; nread</span>
           </td>
         </tr>
         <tr id='L507'>
@@ -5109,31 +5133,17 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    if lb &#33;&#61; nout</span>
           </td>
         </tr>
         <tr id='L508'>
           <td class='lineno'>508</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;6 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;6 &#37;&#41;
-              samples spent in Array
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from inv
-              <a href='triangular.jl-221f42e4a65d6e1c54fcabf70fe65ecf7d21c3e7.html#L809'>line 809</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='uniformscaling.jl-948966f96b356883b4e96bdb23fa67f7c7db6f9f.html#L500'>Array</a>
-              <br />
-            </div>
-            <span class='code'>Matrix&#123;T&#125;&#40;s::UniformScaling, m::Integer, n::Integer&#41; where &#123;T&#125; &#61; Matrix&#123;T&#125;&#40;s, Dims&#40;&#40;m, n&#41;&#41;&#41;</span>
+            
+            
+            <span class='code'>        resize&#33;&#40;A, nout&#41;</span>
           </td>
         </tr>
         <tr id='L509'>
@@ -5143,7 +5153,7 @@
           <td>
             
             
-            <span class='code'>Matrix&#40;s::UniformScaling, m::Integer, n::Integer&#41; &#61; Matrix&#40;s, Dims&#40;&#40;m, n&#41;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L510'>
@@ -5153,7 +5163,7 @@
           <td>
             
             
-            <span class='code'>Matrix&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; &#61; Matrix&#123;eltype&#40;s&#41;&#125;&#40;s, dims&#41;</span>
+            <span class='code'>    A</span>
           </td>
         </tr>
         <tr id='L511'>
@@ -5163,7 +5173,7 @@
           <td>
             
             
-            <span class='code'>Array&#123;T&#125;&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; where &#123;T&#125; &#61; Matrix&#123;T&#125;&#40;s, dims&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L512'>
@@ -5173,7 +5183,7 @@
           <td>
             
             
-            <span class='code'>Array&#123;T&#125;&#40;s::UniformScaling, m::Integer, n::Integer&#41; where &#123;T&#125; &#61; Matrix&#123;T&#125;&#40;s, m, n&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L513'>
@@ -5183,7 +5193,7 @@
           <td>
             
             
-            <span class='code'>Array&#40;s::UniformScaling, m::Integer, n::Integer&#41; &#61; Matrix&#40;s, m, n&#41;</span>
+            <span class='code'># copy-free crc32c of IOBuffer:</span>
           </td>
         </tr>
         <tr id='L514'>
@@ -5193,7 +5203,7 @@
           <td>
             
             
-            <span class='code'>Array&#40;s::UniformScaling, dims::Dims&#123;2&#125;&#41; &#61; Matrix&#40;s, dims&#41;</span>
+            <span class='code'>function _crc32c&#40;io::IOBuffer, nb::Integer, crc::UInt32&#61;0x00000000&#41;</span>
           </td>
         </tr>
         <tr id='L515'>
@@ -5203,7 +5213,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    nb &lt; 0 &amp;&amp; throw&#40;ArgumentError&#40;&quot;number of bytes to checksum must be ≥ 0, got &#36;nb&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L516'>
@@ -5213,7 +5223,7 @@
           <td>
             
             
-            <span class='code'>## Diagonal construction from UniformScaling</span>
+            <span class='code'>    io.readable || _throw_not_readable&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L517'>
@@ -5223,7 +5233,7 @@
           <td>
             
             
-            <span class='code'>Diagonal&#123;T&#125;&#40;s::UniformScaling, m::Integer&#41; where &#123;T&#125; &#61; Diagonal&#123;T&#125;&#40;fill&#40;T&#40;s.λ&#41;, m&#41;&#41;</span>
+            <span class='code'>    n &#61; min&#40;nb, bytesavailable&#40;io&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L518'>
@@ -5233,7 +5243,7 @@
           <td>
             
             
-            <span class='code'>Diagonal&#40;s::UniformScaling, m::Integer&#41; &#61; Diagonal&#123;eltype&#40;s&#41;&#125;&#40;s, m&#41;</span>
+            <span class='code'>    n &#61;&#61; 0 &amp;&amp; return crc</span>
           </td>
         </tr>
         <tr id='L519'>
@@ -5243,7 +5253,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    crc &#61; GC.@preserve io unsafe_crc32c&#40;pointer&#40;io.data, io.ptr&#41;, n, crc&#41;</span>
           </td>
         </tr>
         <tr id='L520'>
@@ -5253,7 +5263,7 @@
           <td>
             
             
-            <span class='code'>dot&#40;A::AbstractMatrix, J::UniformScaling&#41; &#61; dot&#40;tr&#40;A&#41;, J.λ&#41;</span>
+            <span class='code'>    io.ptr &#43;&#61; n</span>
           </td>
         </tr>
         <tr id='L521'>
@@ -5263,7 +5273,7 @@
           <td>
             
             
-            <span class='code'>dot&#40;J::UniformScaling, A::AbstractMatrix&#41; &#61; dot&#40;J.λ, tr&#40;A&#41;&#41;</span>
+            <span class='code'>    return crc</span>
           </td>
         </tr>
         <tr id='L522'>
@@ -5273,7 +5283,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L523'>
@@ -5283,117 +5293,7 @@
           <td>
             
             
-            <span class='code'>dot&#40;x::AbstractVector, J::UniformScaling, y::AbstractVector&#41; &#61; dot&#40;x, J.λ, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L524'>
-          <td class='lineno'>524</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;x::AbstractVector, a::Number, y::AbstractVector&#41; &#61; sum&#40;t -&gt; dot&#40;t&#91;1&#93;, a, t&#91;2&#93;&#41;, zip&#40;x, y&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L525'>
-          <td class='lineno'>525</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>dot&#40;x::AbstractVector, a::Union&#123;Real,Complex&#125;, y::AbstractVector&#41; &#61; a*dot&#40;x, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L526'>
-          <td class='lineno'>526</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L527'>
-          <td class='lineno'>527</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># muladd</span>
-          </td>
-        </tr>
-        <tr id='L528'>
-          <td class='lineno'>528</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.muladd&#40;A::UniformScaling, B::UniformScaling, z::UniformScaling&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L529'>
-          <td class='lineno'>529</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    UniformScaling&#40;A.λ * B.λ &#43; z.λ&#41;</span>
-          </td>
-        </tr>
-        <tr id='L530'>
-          <td class='lineno'>530</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.muladd&#40;A::Union&#123;Diagonal, UniformScaling&#125;, B::Union&#123;Diagonal, UniformScaling&#125;, z::Union&#123;Diagonal, UniformScaling&#125;&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L531'>
-          <td class='lineno'>531</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Diagonal&#40;_diag_or_value&#40;A&#41; .* _diag_or_value&#40;B&#41; .&#43; _diag_or_value&#40;z&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L532'>
-          <td class='lineno'>532</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L533'>
-          <td class='lineno'>533</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>_diag_or_value&#40;A::Diagonal&#41; &#61; A.diag</span>
-          </td>
-        </tr>
-        <tr id='L534'>
-          <td class='lineno'>534</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>_diag_or_value&#40;A::UniformScaling&#41; &#61; A.λ</span>
+            <span class='code'>_crc32c&#40;io::IOBuffer, crc::UInt32&#61;0x00000000&#41; &#61; _crc32c&#40;io, bytesavailable&#40;io&#41;, crc&#41;</span>
           </td>
         </tr>
       </tbody>
