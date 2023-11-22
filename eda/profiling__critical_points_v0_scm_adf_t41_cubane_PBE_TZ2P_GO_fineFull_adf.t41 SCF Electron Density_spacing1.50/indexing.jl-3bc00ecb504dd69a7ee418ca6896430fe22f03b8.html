@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - test_helpers.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/Interpolations/nDwIa/src/b-splines/indexing.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 22 Nov 2023 03:04:34
+        Generated on Wed, 22 Nov 2023 03:04:39
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>using Dates</span>
+            <span class='code'>### Primary evaluation entry points &#40;itp&#40;x...&#41;, gradient&#40;itp, x...&#41;, and hessian&#40;itp, x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>using Interpolations</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>using LinearAlgebra: diagm</span>
+            <span class='code'>itpinfo&#40;itp&#41; &#61; &#40;tcollect&#40;itpflag, itp&#41;, axes&#40;itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>using ZipFile</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'># only import ElectronDensityAnalysis if it is not already imported</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>if &#33;isdefined&#40;Main, :ElectronDensityAnalysis&#41;</span>
+            <span class='code'>    wis &#61; weightedindexes&#40;&#40;value_weights,&#41;, itpinfo&#40;itp&#41;..., x&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    using ElectronDensityAnalysis</span>
+            <span class='code'>    InterpGetindex&#40;itp&#41;&#91;wis...&#93;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@propagate_inbounds function &#40;itp::BSplineInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Number,M&#125;&#41; where &#123;T,M,N&#125;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'># Define path to test data directory</span>
+            <span class='code'>    inds, trailing &#61; split_trailing&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>DATA_DIR &#61; joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;test_data&quot;&#41;</span>
+            <span class='code'>    @boundscheck &#40;check1&#40;trailing&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'># get full path of all files in DATA_DIR with .zip extension removed</span>
+            <span class='code'>    @assert length&#40;inds&#41; &#61;&#61; N</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>DATA_FILES &#61; map&#40;x -&gt; joinpath&#40;DATA_DIR, replace&#40;x, &quot;.zip&quot; &#61;&gt; &quot;&quot;&#41;&#41;, readdir&#40;DATA_DIR&#41;&#41;</span>
+            <span class='code'>    itp&#40;inds...&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Union&#123;Number,AbstractVector&#125;,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    unzip&#40;file::AbstractString, exdir::AbstractString&#61;&quot;&quot;&#41;</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    itps &#61; tcollect&#40;itpflag, itp&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>Unzips the specified zip file to the specified directory.</span>
+            <span class='code'>    wis &#61; dimension_wis&#40;value_weights, itps, axes&#40;itp&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>Taken from: https://discourse.julialang.org/t/how-to-extract-a-file-in-a-zip-archive-without-using-os-specific-tools/34585/4</span>
+            <span class='code'>    coefs &#61; InterpGetindex&#40;itp&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ret &#61; &#91;coefs&#91;i...&#93; for i in Iterators.product&#40;wis...&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'># Arguments</span>
+            <span class='code'>    reshape&#40;ret, shape&#40;wis...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>- &#96;file::AbstractString&#96;: The path to the zip file to unzip.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>- &#96;exdir::AbstractString&#61;&quot;&quot;&#41;&#96;: The path to the directory to extract the zip file to. If not specified, the zip file will be extracted to the same directory as the zip file.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@propagate_inbounds function gradient&#40;itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'># Returns</span>
+            <span class='code'>    @boundscheck checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,17 +295,31 @@
           <td>
             
             
-            <span class='code'>- &#96;ZipFile.Reader&#96;: A &#96;ZipFile.Reader&#96; object representing the unzipped files.</span>
+            <span class='code'>    wis &#61; weightedindexes&#40;&#40;value_weights, gradient_weights&#41;, itpinfo&#40;itp&#41;..., x&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
           <td class='lineno'>28</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;2 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              1 &#40;2 &#37;&#41;
+              samples spent in gradient
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from gradient
+              <a href='scaling.jl-ff3c4ce95c1d4462ef83b5f818a42dad57affb50.html#L118'>line 118</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L30'>_gradient</a>
+              <br />
+            </div>
+            <span class='code'>    return SVector&#40;_gradient&#40;InterpGetindex&#40;itp&#41;, wis...&#41;&#41;   # work around #311</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,17 +329,31 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L30'>
           <td class='lineno'>30</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;2 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <div class='call-sites'>
+              1 &#40;2 &#37;&#41;
+              samples spent in _gradient
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from gradient
+              <a href='indexing.jl-3bc00ecb504dd69a7ee418ca6896430fe22f03b8.html#L28'>line 28</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L279'>getindex</a>
+              <br />
+            </div>
+            <span class='code'>@inline _gradient&#40;coefs, inds, moreinds...&#41; &#61; &#40;coefs&#91;inds...&#93;, _gradient&#40;coefs, moreinds...&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +363,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; unzip&#40;&quot;data.zip&quot;, &quot;data&quot;&#41;</span>
+            <span class='code'>_gradient&#40;coefs&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +373,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +383,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@propagate_inbounds function gradient&#33;&#40;dest, itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +393,7 @@
           <td>
             
             
-            <span class='code'>function unzip&#40;file::String, exdir&#61;&quot;&quot;&#41;::Nothing</span>
+            <span class='code'>    dest .&#61; gradient&#40;itp, x...&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +403,7 @@
           <td>
             
             
-            <span class='code'>    @assert isfile&#40;file&#41; &quot;File does not exist: &#36;file&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +413,7 @@
           <td>
             
             
-            <span class='code'>    fileFullPath &#61; isabspath&#40;file&#41; ? file : joinpath&#40;pwd&#40;&#41;, file&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +423,7 @@
           <td>
             
             
-            <span class='code'>    basePath &#61; dirname&#40;fileFullPath&#41;</span>
+            <span class='code'>@propagate_inbounds function hessian&#40;itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +433,7 @@
           <td>
             
             
-            <span class='code'>    outPath &#61; &#40;exdir &#61;&#61; &quot;&quot; ? basePath : &#40;isabspath&#40;exdir&#41; ? exdir : joinpath&#40;pwd&#40;&#41;, exdir&#41;&#41;&#41;</span>
+            <span class='code'>    @boundscheck checkbounds&#40;Bool, itp, x...&#41; || Base.throw_boundserror&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +443,7 @@
           <td>
             
             
-            <span class='code'>    isdir&#40;outPath&#41; ? &quot;&quot; : mkdir&#40;outPath&#41;</span>
+            <span class='code'>    wis &#61; weightedindexes&#40;&#40;value_weights, gradient_weights, hessian_weights&#41;, itpinfo&#40;itp&#41;..., x&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +453,7 @@
           <td>
             
             
-            <span class='code'>    zarchive &#61; ZipFile.Reader&#40;fileFullPath&#41;</span>
+            <span class='code'>    symmatrix&#40;map&#40;inds-&gt;InterpGetindex&#40;itp&#41;&#91;inds...&#93;, wis&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +463,7 @@
           <td>
             
             
-            <span class='code'>    for f in zarchive.files</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +473,7 @@
           <td>
             
             
-            <span class='code'>        fullFilePath &#61; joinpath&#40;outPath, f.name&#41;</span>
+            <span class='code'>@propagate_inbounds function hessian&#33;&#40;dest, itp::BSplineInterpolation&#123;T,N&#125;, x::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +483,7 @@
           <td>
             
             
-            <span class='code'>        if &#40;endswith&#40;f.name, &quot;/&quot;&#41; || endswith&#40;f.name, &quot;\\&quot;&#41;&#41;</span>
+            <span class='code'>    dest .&#61; hessian&#40;itp, x...&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +493,7 @@
           <td>
             
             
-            <span class='code'>            mkpath&#40;fullFilePath&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +503,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +513,7 @@
           <td>
             
             
-            <span class='code'>            try</span>
+            <span class='code'># Leftovers from AbstractInterpolation</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +523,7 @@
           <td>
             
             
-            <span class='code'>                write&#40;fullFilePath, read&#40;f&#41;&#41;</span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#41;&#40;x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +533,7 @@
           <td>
             
             
-            <span class='code'>            catch e</span>
+            <span class='code'>    itp&#40;to_indices&#40;itp, x&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +543,7 @@
           <td>
             
             
-            <span class='code'>                @debug &quot;Error writing file in unzip&#40;&#41;: &#36;e&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +553,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@inline function &#40;itp::BSplineInterpolation&#41;&#40;x::Vararg&#123;ExpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +563,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    itp.&#40;Iterators.product&#40;x...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +573,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +583,7 @@
           <td>
             
             
-            <span class='code'>    return close&#40;zarchive&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +593,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +603,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    weightedindexes&#40;fs, itpflags, nodes, xs&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -595,7 +623,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>Compute &#96;WeightedIndex&#96; values for evaluation at the position &#96;xs...&#96;.</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +633,7 @@
           <td>
             
             
-            <span class='code'>    with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
+            <span class='code'>&#96;fs&#96; is a function or tuple of functions indicating the types of index required,</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +643,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>typically &#96;value_weights&#96;, &#96;gradient_weights&#96;, and/or &#96;hessian_weights&#96;.</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +653,7 @@
           <td>
             
             
-            <span class='code'>The &#96;with_zip_file&#96; function is a utility function that takes a file path and a function as inputs. It first appends the &quot;.zip&quot; extension to the file path to get the path of the corresponding zip file. Then, it tries to unzip the zip file using the &#96;unzip&#96; function. If the unzipping is successful, it calls the provided function with the original file path as an argument. If any error occurs during the unzipping or function execution, the error is rethrown. Finally, it removes the original file using the &#96;rm&#96; function.</span>
+            <span class='code'>&#96;itpflags&#96; and &#96;nodes&#96; can be obtained from &#96;itpinfo&#40;itp&#41;...&#96;.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -645,7 +673,7 @@
           <td>
             
             
-            <span class='code'># Arguments</span>
+            <span class='code'>See the &quot;developer documentation&quot; for further information.</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +683,7 @@
           <td>
             
             
-            <span class='code'>- &#96;f_path::AbstractString&#96;: The file path of the file to be unzipped and processed.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +693,7 @@
           <td>
             
             
-            <span class='code'>- &#96;func::Function&#96;: The function to be executed with the unzipped file.</span>
+            <span class='code'>@inline function weightedindexes&#40;fs::F, itpflags::NTuple&#123;N,Flag&#125;, knots::NTuple&#123;N,AbstractVector&#125;, xs::NTuple&#123;N,Number&#125;&#41; where &#123;F,N&#125;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +703,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # parts &#61; map&#40;&#40;flag, knotvec, x&#41;-&gt;weightedindex_parts&#40;fs, flag, knotvec, x&#41;, itpflags, knots, xs&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +713,7 @@
           <td>
             
             
-            <span class='code'># Example Usage</span>
+            <span class='code'>    parts &#61; map3argf&#40;weightedindex_parts, fs, itpflags, knots, xs&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +723,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>    weightedindexes&#40;parts...&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +733,7 @@
           <td>
             
             
-            <span class='code'># Define a function to be executed with the unzipped file</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +743,7 @@
           <td>
             
             
-            <span class='code'>function process_file&#40;file_path&#41;</span>
+            <span class='code'># This is a force-inlined version of map&#40;&#40;flag, knotvec, x&#41;-&gt;g&#40;fs, flag, knotvec, x&#41;, itpflags, knots, xs&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +753,7 @@
           <td>
             
             
-            <span class='code'>    # Process the file here</span>
+            <span class='code'>@inline map3argf&#40;g::G, fs::F, itpflags, knots, xs&#41; where &#123;G,F&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +763,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;&quot;Processing file&quot;&#41;</span>
+            <span class='code'>    &#40;g&#40;fs, itpflags&#91;1&#93;, knots&#91;1&#93;, xs&#91;1&#93;&#41;, map3argf&#40;g, fs, Base.tail&#40;itpflags&#41;, Base.tail&#40;knots&#41;, Base.tail&#40;xs&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +773,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>map3argf&#40;g::G, fs::F, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; where &#123;G,F&#125; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -765,7 +793,7 @@
           <td>
             
             
-            <span class='code'># Call the with_zip_file function</span>
+            <span class='code'>weightedindexes&#40;i::Vararg&#123;Int,N&#125;&#41; where N &#61; i  # the all-NoInterp case</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +803,7 @@
           <td>
             
             
-            <span class='code'>with_zip_file&#40;&quot;path/to/file&quot;, process_file&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +813,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>const PositionCoefs&#123;P,C&#125; &#61; NamedTuple&#123;&#40;:position,:coefs&#41;,Tuple&#123;P,C&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +823,7 @@
           <td>
             
             
-            <span class='code'>In this example, the &#96;with_zip_file&#96; function is called with the file path &quot;path/to/file&quot; and the &#96;process_file&#96; function as arguments. The zip file &quot;path/to/file.zip&quot; is unzipped, and then the &#96;process_file&#96; function is called with the original file path &quot;path/to/file&quot;. The function &#96;process_file&#96; can perform any desired operations on the unzipped file.</span>
+            <span class='code'>const ValueParts&#123;P,W&#125; &#61; PositionCoefs&#123;P,Tuple&#123;W&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +833,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline weightedindexes&#40;parts::Vararg&#123;Union&#123;Int,ValueParts&#125;,N&#125;&#41; where N &#61;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +843,7 @@
           <td>
             
             
-            <span class='code'># Exceptions</span>
+            <span class='code'>    map&#40;maybe_weightedindex, map&#40;positions, parts&#41;, map&#40;valuecoefs, parts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +853,7 @@
           <td>
             
             
-            <span class='code'>- If any error occurs during the unzipping or function execution, the error is rethrown.</span>
+            <span class='code'>maybe_weightedindex&#40;i::Integer, _::Integer&#41; &#61; Int&#40;i&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +863,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>maybe_weightedindex&#40;pos, coefs::Tuple&#41; &#61; WeightedIndex&#40;pos, coefs&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +873,7 @@
           <td>
             
             
-            <span class='code'># Side Effects</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +883,7 @@
           <td>
             
             
-            <span class='code'>- The original file specified by &#96;f_path&#96; is removed using the &#96;rm&#96; function.</span>
+            <span class='code'>positions&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +893,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>valuecoefs&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +903,7 @@
           <td>
             
             
-            <span class='code'># Returns</span>
+            <span class='code'>gradcoefs&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +913,7 @@
           <td>
             
             
-            <span class='code'>- Passes the returned value from &#96;func&#96;.</span>
+            <span class='code'>hesscoefs&#40;i::Int&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +923,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>positions&#40;t::PositionCoefs&#41; &#61; t.position</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +933,7 @@
           <td>
             
             
-            <span class='code'>function with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
+            <span class='code'>valuecoefs&#40;t::PositionCoefs&#41; &#61; t.coefs&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +943,7 @@
           <td>
             
             
-            <span class='code'>    z_path &#61; f_path * &quot;.zip&quot;</span>
+            <span class='code'>gradcoefs&#40;t::PositionCoefs&#41; &#61; t.coefs&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +953,7 @@
           <td>
             
             
-            <span class='code'>    out &#61; nothing</span>
+            <span class='code'>hesscoefs&#40;t::PositionCoefs&#41; &#61; t.coefs&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +963,7 @@
           <td>
             
             
-            <span class='code'>    if isfile&#40;z_path&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +973,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>const GradParts&#123;P,W1,W2&#125; &#61; PositionCoefs&#123;P,Tuple&#123;W1,W2&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +983,7 @@
           <td>
             
             
-            <span class='code'>            unzip&#40;z_path&#41;</span>
+            <span class='code'>function weightedindexes&#40;parts::Vararg&#123;Union&#123;Int,GradParts&#125;,N&#125;&#41; where N</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +993,7 @@
           <td>
             
             
-            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
+            <span class='code'>    # Create &#40;wis1, wis2, ...&#41; where wisn is used to evaluate the gradient along the nth *chosen* dimension</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +1003,7 @@
           <td>
             
             
-            <span class='code'>        catch e</span>
+            <span class='code'>    # Example: if itp is a 3d interpolation of form &#40;Linear, NoInterp, Quadratic&#41; then we will return</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +1013,7 @@
           <td>
             
             
-            <span class='code'>            rethrow&#40;e&#41;</span>
+            <span class='code'>    #    &#40;gwi1, i2, wi3&#41;, &#40;wi1, i2, gwi3&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1023,7 @@
           <td>
             
             
-            <span class='code'>        finally</span>
+            <span class='code'>    # where wik are value-coefficient WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1033,7 @@
           <td>
             
             
-            <span class='code'>            for f in readdir&#40;dirname&#40;f_path&#41;&#41;</span>
+            <span class='code'>    #       gwik are gradient-coefficient WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1043,7 @@
           <td>
             
             
-            <span class='code'>                if startswith&#40;f, basename&#40;f_path&#41;&#41; &amp;&amp; &#33;endswith&#40;f, &quot;.zip&quot;&#41;</span>
+            <span class='code'>    #       i2 is the integer index along dimension 2</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1053,7 @@
           <td>
             
             
-            <span class='code'>                    rm&#40;joinpath&#40;dirname&#40;f_path&#41;, f&#41;&#41;</span>
+            <span class='code'>    # These will result in a 2-vector gradient.</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1063,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    # TODO: check whether this is inferrable</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1073,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    slot_substitute&#40;parts, map&#40;positions, parts&#41;, map&#40;valuecoefs, parts&#41;, map&#40;gradcoefs, parts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1083,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1093,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1103,7 @@
           <td>
             
             
-            <span class='code'>        if isfile&#40;f_path&#41;</span>
+            <span class='code'># Skip over NoInterp dimensions</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1113,7 @@
           <td>
             
             
-            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple&#123;Int,Vararg&#123;Any&#125;&#125;, p, v, g&#41; &#61; slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1123,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'># Substitute the dth dimension&#39;s gradient coefs for the remaining coefs</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1133,7 @@
           <td>
             
             
-            <span class='code'>            error&#40;&quot;File does not exist: &#36;f_path&quot;&#41;</span>
+            <span class='code'>slot_substitute&#40;kind, p, v, g&#41; &#61; &#40;map&#40;maybe_weightedindex, p, substitute_ruled&#40;v, kind, g&#41;&#41;, slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1143,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># Termination</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1153,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple&#123;&#125;, p, v, g&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1163,7 @@
           <td>
             
             
-            <span class='code'>    return out</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1173,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>const HessParts&#123;P,W1,W2,W3&#125; &#61; PositionCoefs&#123;P,Tuple&#123;W1,W2,W3&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1183,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function weightedindexes&#40;parts::Vararg&#123;Union&#123;Int,HessParts&#125;,N&#125;&#41; where N</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1193,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # Create &#40;wis1, wis2, ...&#41; where wisn is used to evaluate the nth *chosen* hessian component</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1203,7 @@
           <td>
             
             
-            <span class='code'>    create_trial_3D_system&#40;&#41;::System</span>
+            <span class='code'>    # Example: if itp is a 3d interpolation of form &#40;Linear, NoInterp, Quadratic&#41; then we will return</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1213,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #    &#40;hwi1, i2, wi3&#41;, &#40;gwi1, i2, gwi3&#41;, &#40;wi1, i2, hwi3&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1223,7 @@
           <td>
             
             
-            <span class='code'>Create a 3D system with a sin function and specified atoms and grid specifications.</span>
+            <span class='code'>    # where wik are value-coefficient WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1233,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #       gwik are 1st-derivative WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1243,7 @@
           <td>
             
             
-            <span class='code'># Example Usage</span>
+            <span class='code'>    #       hwik are 2nd-derivative WeightedIndexes along dimension k</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1253,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>    #       i2 is just the index along dimension 2</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1263,7 @@
           <td>
             
             
-            <span class='code'>system &#61; create_trial_3D_system&#40;&#41;</span>
+            <span class='code'>    # These will result in a 2x2 hessian &#91;hc1 hc2; hc2 hc3&#93; where</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1273,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    #    hc1 &#61; coefs&#91;hwi1, i2, wi3&#93;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1283,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    #    hc2 &#61; coefs&#91;gwi1, i2, gwi3&#93;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1293,7 @@
           <td>
             
             
-            <span class='code'># Inputs</span>
+            <span class='code'>    #    hc3 &#61; coefs&#91;wi1,  i2, hwi3&#93;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1303,7 @@
           <td>
             
             
-            <span class='code'>- None</span>
+            <span class='code'>    slot_substitute&#40;parts, map&#40;positions, parts&#41;, map&#40;valuecoefs, parts&#41;, map&#40;gradcoefs, parts&#41;, map&#40;hesscoefs, parts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1313,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1323,7 @@
           <td>
             
             
-            <span class='code'># Outputs</span>
+            <span class='code'># Substitute the dth dimension&#39;s gradient coefs for the remaining coefs, column by column</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1333,7 @@
           <td>
             
             
-            <span class='code'>- A &#96;System&#96; object representing a 3D system with the specified functions, atoms, and grid specifications.</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple, p, v, g, h&#41; &#61; &#40;_column&#40;kind, kind, p, v, g, h&#41;..., slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g, h&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1343,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>slot_substitute&#40;::Tuple&#123;&#125;, p, v, g, h&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1353,7 @@
           <td>
             
             
-            <span class='code'>function create_trial_3D_system&#40;;</span>
+            <span class='code'># inner: calulate a single column</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1363,7 @@
           <td>
             
             
-            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
+            <span class='code'>function _column&#40;kind1::K, kind2::K, p, v, g, h&#41; where &#123;K&lt;:Tuple&#125;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1373,7 @@
           <td>
             
             
-            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
+            <span class='code'>    ss &#61; substitute_ruled&#40;v, kind1, h&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1383,7 @@
           <td>
             
             
-            <span class='code'>    # Define a 3D sin function to be used as rho, grad, and hess functions</span>
+            <span class='code'>    &#40;map&#40;maybe_weightedindex, p, ss&#41;, _column&#40;Base.tail&#40;kind1&#41;, kind2, p, v, g, h&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1393,7 @@
           <td>
             
             
-            <span class='code'>    f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1403,7 @@
           <td>
             
             
-            <span class='code'>    f3d_xyz&#40;x, y, z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
+            <span class='code'>function _column&#40;kind1::Tuple, kind2::Tuple, p, v, g, h&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1413,7 @@
           <td>
             
             
-            <span class='code'>    grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
+            <span class='code'>    ss &#61; substitute_ruled&#40;substitute_ruled&#40;v, kind1, g&#41;, kind2, g&#41;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1423,7 @@
           <td>
             
             
-            <span class='code'>    function hess3d&#40;r&#41;</span>
+            <span class='code'>    &#40;map&#40;maybe_weightedindex, p, ss&#41;, _column&#40;Base.tail&#40;kind1&#41;, kind2, p, v, g, h&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1433,7 @@
           <td>
             
             
-            <span class='code'>        return &#91;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1443,7 @@
           <td>
             
             
-            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
+            <span class='code'>_column&#40;::Tuple&#123;&#125;, ::Tuple, p, v, g, h&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1453,7 @@
           <td>
             
             
-            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;</span>
+            <span class='code'># Skip over NoInterp dimensions</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1463,7 @@
           <td>
             
             
-            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
+            <span class='code'>slot_substitute&#40;kind::Tuple&#123;Int,Vararg&#123;Any&#125;&#125;, p, v, g, h&#41; &#61; slot_substitute&#40;Base.tail&#40;kind&#41;, p, v, g, h&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1473,7 @@
           <td>
             
             
-            <span class='code'>        &#93;</span>
+            <span class='code'>_column&#40;kind1::Tuple&#123;Int,Vararg&#123;Any&#125;&#125;, kind2::Tuple, p, v, g, h&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1483,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    _column&#40;Base.tail&#40;kind1&#41;, kind2, p, v, g, h&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1475,7 +1503,7 @@
           <td>
             
             
-            <span class='code'>    # Make in-place versions using the above versions</span>
+            <span class='code'>weightedindex_parts&#40;fs::F, itpflag::BSpline, ax, x&#41; where F &#61;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1513,7 @@
           <td>
             
             
-            <span class='code'>    function rho&#33;&#40;f, r&#41;</span>
+            <span class='code'>    weightedindex_parts&#40;fs, degree&#40;itpflag&#41;, ax, x&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1523,7 @@
           <td>
             
             
-            <span class='code'>        return f&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1533,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function weightedindex_parts&#40;fs::F, deg::Degree, ax::AbstractUnitRange&#123;&lt;:Integer&#125;, x&#41; where F</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1543,7 @@
           <td>
             
             
-            <span class='code'>    function grad&#33;&#40;g, r&#41;</span>
+            <span class='code'>    pos, δx &#61; positions&#40;deg, ax,  x&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1553,7 @@
           <td>
             
             
-            <span class='code'>        return g&#91;:&#93; &#61; grad3d&#40;r&#41;</span>
+            <span class='code'>    &#40;position&#61;pos, coefs&#61;fmap&#40;fs, deg, δx&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1563,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1573,7 @@
           <td>
             
             
-            <span class='code'>    function hess&#33;&#40;h, r&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1583,7 @@
           <td>
             
             
-            <span class='code'>        return h&#91;:&#93; &#61; hess3d&#40;r&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1593,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># there is a Heisenbug, when Base.promote_op is inlined into getindex_return_type</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1603,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># thats why we use this @noinline fence</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1613,7 @@
           <td>
             
             
-            <span class='code'>    # Define the extent, origin, and spacing for the GridSpec</span>
+            <span class='code'>@noinline _promote_mul&#40;a,b&#41; &#61; Base.promote_op&#40;*, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1623,7 @@
           <td>
             
             
-            <span class='code'>    e &#61; 2π * ones&#40;3&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1633,7 @@
           <td>
             
             
-            <span class='code'>    o &#61; zeros&#40;3&#41; .- e / 2</span>
+            <span class='code'>@noinline function getindex_return_type&#40;::Type&#123;BSplineInterpolation&#123;T,N,TCoefs,IT,Axs&#125;&#125;, argtypes::Tuple&#41; where &#123;T,N,TCoefs,IT&lt;:DimSpec&#123;BSpline&#125;,Axs&#125;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1643,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; π / 10 * ones&#40;3&#41;</span>
+            <span class='code'>    reduce&#40;_promote_mul, eltype&#40;TCoefs&#41;, argtypes&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1653,7 @@
           <td>
             
             
-            <span class='code'>    n_pts &#61; &#91;10, 10, 10&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1645,7 +1673,7 @@
           <td>
             
             
-            <span class='code'>    # Define the lattice for the GridSpec</span>
+            <span class='code'>function getindex_return_type&#40;::Type&#123;BSplineInterpolation&#123;T,N,TCoefs,IT,Axs&#125;&#125;, ::Type&#123;I&#125;&#41; where &#123;T,N,TCoefs,IT&lt;:DimSpec&#123;BSpline&#125;,Axs,I&#125;</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1683,7 @@
           <td>
             
             
-            <span class='code'>    l &#61; zeros&#40;3, 3&#41;</span>
+            <span class='code'>    _promote_mul&#40;eltype&#40;TCoefs&#41;, I&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1693,7 @@
           <td>
             
             
-            <span class='code'>    for i in 1:3</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1703,7 @@
           <td>
             
             
-            <span class='code'>        l&#91;i, i&#93; &#61; s&#91;i&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1713,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># This handles round-towards-the-middle for points on half-integer edges</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1723,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>roundbounds&#40;x::Integer, bounds::Tuple&#123;Real,Real&#125;&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1733,7 @@
           <td>
             
             
-            <span class='code'>    # Create a GridSpec with the defined origin, lattice, and number of points</span>
+            <span class='code'>roundbounds&#40;x::Integer, bounds::AbstractUnitRange&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1743,7 @@
           <td>
             
             
-            <span class='code'>    g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
+            <span class='code'>roundbounds&#40;x::Number, bounds::Tuple&#123;Real,Real&#125;&#41; &#61; _roundbounds&#40;x, bounds&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1753,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>roundbounds&#40;x::Number, bounds::AbstractUnitRange&#41; &#61; _roundbounds&#40;x, bounds&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1763,7 @@
           <td>
             
             
-            <span class='code'>    # Create 3D Array of rho values based on the GridSpec</span>
+            <span class='code'>function _roundbounds&#40;x::Number, bounds::Union&#123;Tuple&#123;Real,Real&#125;, AbstractUnitRange&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1773,7 @@
           <td>
             
             
-            <span class='code'>    rho_data &#61; &#91;</span>
+            <span class='code'>    l, u &#61; first&#40;bounds&#41;, last&#40;bounds&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1783,7 @@
           <td>
             
             
-            <span class='code'>        f3d&#40;o &#43; l * &#91;i, j, k&#93;&#41; for i in 1:n_pts&#91;1&#93;, j in 1:n_pts&#91;2&#93;, k in 1:n_pts&#91;3&#93;</span>
+            <span class='code'>    h &#61; half&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1793,7 @@
           <td>
             
             
-            <span class='code'>    &#93;</span>
+            <span class='code'>    xh &#61; x&#43;h</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1803,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ifelse&#40;x &lt; u&#43;half&#40;u&#41;, floor&#40;xh&#41;, ceil&#40;xh&#41;-1&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1813,7 @@
           <td>
             
             
-            <span class='code'>    # Define the atoms for the System</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1823,7 @@
           <td>
             
             
-            <span class='code'>    atoms &#61; &#91;NuclearCoordinate&#40;&#91;π / 2, π / 2, π / 2&#93;, 1&#41;&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1833,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>floorbounds&#40;x::Integer, ax::Tuple&#123;Real,Real&#125;&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1843,7 @@
           <td>
             
             
-            <span class='code'>    # Create a System with the 3D sin function and the defined atoms and GridSpec</span>
+            <span class='code'>floorbounds&#40;x::Integer, ax::AbstractUnitRange&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1853,7 @@
           <td>
             
             
-            <span class='code'>    system &#61; System&#40;</span>
+            <span class='code'>floorbounds&#40;x, ax::Tuple&#123;Real,Real&#125;&#41; &#61; _floorbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1863,7 @@
           <td>
             
             
-            <span class='code'>        name, source, atoms, g, rho_data, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
+            <span class='code'>floorbounds&#40;x, ax::AbstractUnitRange&#41; &#61; _floorbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1873,7 @@
           <td>
             
             
-            <span class='code'>    &#41;</span>
+            <span class='code'>function _floorbounds&#40;x, ax::Union&#123;Tuple&#123;Real,Real&#125;, AbstractUnitRange&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1883,7 @@
           <td>
             
             
-            <span class='code'>    return system, f3d, f3d_xyz, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
+            <span class='code'>    l &#61; first&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1893,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    h &#61; half&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1903,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ifelse&#40;x &lt; l, floor&#40;x&#43;h&#41;, floor&#40;x&#43;zero&#40;h&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1913,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1923,7 @@
           <td>
             
             
-            <span class='code'>    create_trial_3D_system_interpolated&#40;; name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;&#41; -&gt; Tuple&#123;System, Vararg&#123;Function&#125;&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1933,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>ceilbounds&#40;x::Integer, ax::Tuple&#123;Real,Real&#125;&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1943,7 @@
           <td>
             
             
-            <span class='code'>Create a 3D system that interpolates using grid data generated with a trial 3d &#96;sin&#96; function.</span>
+            <span class='code'>ceilbounds&#40;x::Integer, ax::AbstractUnitRange&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1953,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>ceilbounds&#40;x, ax::Tuple&#123;Real,Real&#125;&#41; &#61; _ceilbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1963,7 @@
           <td>
             
             
-            <span class='code'># Arguments</span>
+            <span class='code'>ceilbounds&#40;x, ax::AbstractUnitRange&#41; &#61; _ceilbounds&#40;x, ax&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1973,7 @@
           <td>
             
             
-            <span class='code'>- &#96;name::AbstractString&#96; &#40;optional&#41;: The name of the system. Default is &quot;Test System&quot;.</span>
+            <span class='code'>function _ceilbounds&#40;x, ax::Union&#123;Tuple&#123;Real,Real&#125;, AbstractUnitRange&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1983,7 @@
           <td>
             
             
-            <span class='code'>- &#96;source::AbstractString&#96; &#40;optional&#41;: The source of the system. Default is &quot;Test System&quot;.</span>
+            <span class='code'>    u &#61; last&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1993,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    h &#61; half&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +2003,7 @@
           <td>
             
             
-            <span class='code'># Returns</span>
+            <span class='code'>    ifelse&#40;x &gt; u, ceil&#40;x&#43;h&#41;, ceil&#40;x&#43;zero&#40;h&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +2013,7 @@
           <td>
             
             
-            <span class='code'>- &#96;system&#96;: A &#96;System&#96; object representing a 3D system with the interpolated functions and grid specifications.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2023,7 @@
           <td>
             
             
-            <span class='code'>- &#96;f&#96;: The interpolated function &#96;f&#40;x&#41;&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2033,7 @@
           <td>
             
             
-            <span class='code'>- &#96;f_xyz&#96;: The interpolated function &#96;f_xyz&#40;x, y, z&#41;&#96;.</span>
+            <span class='code'>half&#40;x&#41; &#61; oneunit&#40;x&#41;/2</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2043,7 @@
           <td>
             
             
-            <span class='code'>- &#96;grad&#96;: The gradient function of the interpolated function.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2053,7 @@
           <td>
             
             
-            <span class='code'>- &#96;hess&#96;: The Hessian function of the interpolated function.</span>
+            <span class='code'>symmatrix&#40;h::NTuple&#123;1,Any&#125;&#41; &#61; SMatrix&#123;1,1&#125;&#40;h&#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2063,7 @@
           <td>
             
             
-            <span class='code'>- &#96;f&#33;&#96;: An in-place version of the interpolated function.</span>
+            <span class='code'>symmatrix&#40;h::NTuple&#123;3,Any&#125;&#41; &#61; SMatrix&#123;2,2&#125;&#40;&#40;h&#91;1&#93;, h&#91;2&#93;, h&#91;2&#93;, h&#91;3&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2073,7 @@
           <td>
             
             
-            <span class='code'>- &#96;grad&#33;&#96;: An in-place version of the gradient function.</span>
+            <span class='code'>symmatrix&#40;h::NTuple&#123;6,Any&#125;&#41; &#61; SMatrix&#123;3,3&#125;&#40;&#40;h&#91;1&#93;, h&#91;2&#93;, h&#91;3&#93;, h&#91;2&#93;, h&#91;4&#93;, h&#91;5&#93;, h&#91;3&#93;, h&#91;5&#93;, h&#91;6&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2083,7 @@
           <td>
             
             
-            <span class='code'>- &#96;hess&#33;&#96;: An in-place version of the Hessian function.</span>
+            <span class='code'>function symmatrix&#40;h::NTuple&#123;L,Any&#125;&#41; where L</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2093,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    N &#61; symsize&#40;Val&#40;L&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2103,7 @@
           <td>
             
             
-            <span class='code'># Example Usage</span>
+            <span class='code'>    l &#61; MMatrix&#123;N,N,Int&#125;&#40;undef&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2113,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;julia</span>
+            <span class='code'>    l&#91;:,1&#93; &#61; 1:N</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2123,7 @@
           <td>
             
             
-            <span class='code'>system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33; &#61; create_trial_3D_system_interpolated&#40;&#41;</span>
+            <span class='code'>    idx &#61; N</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2133,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    for j &#61; 2:N, i &#61; 1:N</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2143,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        if i &lt; j</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2153,7 @@
           <td>
             
             
-            <span class='code'>function create_trial_3D_system_interpolated&#40;;</span>
+            <span class='code'>            l&#91;i,j&#93; &#61; l&#91;j,i&#93;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2163,7 @@
           <td>
             
             
-            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2173,7 @@
           <td>
             
             
-            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
+            <span class='code'>            l&#91;i,j&#93; &#61; &#40;idx&#43;&#61;1&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2183,7 @@
           <td>
             
             
-            <span class='code'>    g1 &#61; &#40;-3π&#41;:&#40;π / 10&#41;:&#40;3π&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2193,7 @@
           <td>
             
             
-            <span class='code'>    n_pts &#61; length&#40;g1&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2203,7 @@
           <td>
             
             
-            <span class='code'>    spacing &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
+            <span class='code'>    if @generated</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2213,7 @@
           <td>
             
             
-            <span class='code'>    gs &#61; GridSpec&#40;&#91;-2π, -2π, -2π&#93;, spacing, &#91;n_pts, n_pts, n_pts&#93;&#41;</span>
+            <span class='code'>        hexprs &#61; &#91;:&#40;h&#91;&#36;i&#93;&#41; for i in vec&#40;l&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2223,7 @@
           <td>
             
             
-            <span class='code'>    sin_data &#61; &#91;3.0 &#43; sum&#40;sin.&#40;&#91;xi, yi, zi&#93;&#41;&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
+            <span class='code'>        :&#40;SMatrix&#123;&#36;N,&#36;N&#125;&#40;&#36;&#40;hexprs...,&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2233,7 @@
           <td>
             
             
-            <span class='code'>    fz &#61; scale&#40;interpolate&#40;sin_data, BSpline&#40;Cubic&#40;Reflect&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g1, g1, g1&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2243,7 @@
           <td>
             
             
-            <span class='code'>    f&#40;x&#41; &#61; fz&#40;ElectronDensityAnalysis.clamp_to_bounding_box&#40;x, gs&#41;...&#41; # pointer for later</span>
+            <span class='code'>        SMatrix&#123;N,N&#125;&#40;h&#91;i&#93; for i in l&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2253,7 @@
           <td>
             
             
-            <span class='code'>    f_xyz&#40;x, y, z&#41; &#61; f&#40;&#91;x, y, z&#93;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2263,7 @@
           <td>
             
             
-            <span class='code'>    f&#33;&#40;F, x&#41; &#61; F&#91;:&#93; &#61; &#91;f&#40;x&#41;&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2273,7 @@
           <td>
             
             
-            <span class='code'>    function grad&#40;x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2283,7 @@
           <td>
             
             
-            <span class='code'>        return Interpolations.gradient&#40;</span>
+            <span class='code'># Use @generated to force const propagation</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2293,7 @@
           <td>
             
             
-            <span class='code'>            fz, ElectronDensityAnalysis.clamp_to_bounding_box&#40;x, gs&#41;...</span>
+            <span class='code'>@generated function symsize&#40;::Val&#123;L&#125;&#41; where L</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2303,7 @@
           <td>
             
             
-            <span class='code'>        &#41;</span>
+            <span class='code'>    N &#61; floor&#40;Int, sqrt&#40;2L&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2313,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    &#40;N*&#40;N&#43;1&#41;&#41;÷2 &#61;&#61; L || error&#40;&quot;&#36;L must be equal to N*&#40;N&#43;1&#41;/2 &#40;N &#61; &#36;N&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,344 +2323,11 @@
           <td>
             
             
-            <span class='code'>    function hess&#40;x&#41;</span>
+            <span class='code'>    return :&#40;&#36;N&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
           <td class='lineno'>228</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return Interpolations.hessian&#40;</span>
-          </td>
-        </tr>
-        <tr id='L229'>
-          <td class='lineno'>229</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            fz, ElectronDensityAnalysis.clamp_to_bounding_box&#40;x, gs&#41;...</span>
-          </td>
-        </tr>
-        <tr id='L230'>
-          <td class='lineno'>230</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#41;</span>
-          </td>
-        </tr>
-        <tr id='L231'>
-          <td class='lineno'>231</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L232'>
-          <td class='lineno'>232</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L233'>
-          <td class='lineno'>233</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;9 &#37;&#41;
-              samples spent in grad&#33;
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from fb&#33;
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L320'>line 320</a>
-              <br />
-            </div>
-            
-            <span class='code'>    function grad&#33;&#40;F, x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L234'>
-          <td class='lineno'>234</td>
-          <td class='tracecount excl'>1 &#40;9 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;9 &#37;&#41;</td>
-          <td>
-            
-            
-            <span class='code'>        return Interpolations.gradient&#33;&#40;</span>
-          </td>
-        </tr>
-        <tr id='L235'>
-          <td class='lineno'>235</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            F, fz, ElectronDensityAnalysis.clamp_to_bounding_box&#40;x, gs&#41;...</span>
-          </td>
-        </tr>
-        <tr id='L236'>
-          <td class='lineno'>236</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#41;</span>
-          </td>
-        </tr>
-        <tr id='L237'>
-          <td class='lineno'>237</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L238'>
-          <td class='lineno'>238</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;9 &#37;&#41;
-              samples spent in hess&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from jb&#33;
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L324'>line 324</a>
-              <br />
-            </div>
-            
-            <span class='code'>    function hess&#33;&#40;J, x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L239'>
-          <td class='lineno'>239</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;9 &#37;&#41;</td>
-          <td>
-            
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='Interpolations.jl-5e8962218c20570e0a242c50ba164fd2c8eace14.html#L379'>hessian&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        return Interpolations.hessian&#33;&#40;</span>
-          </td>
-        </tr>
-        <tr id='L240'>
-          <td class='lineno'>240</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            J, fz, ElectronDensityAnalysis.clamp_to_bounding_box&#40;x, gs&#41;...</span>
-          </td>
-        </tr>
-        <tr id='L241'>
-          <td class='lineno'>241</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#41;</span>
-          </td>
-        </tr>
-        <tr id='L242'>
-          <td class='lineno'>242</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L243'>
-          <td class='lineno'>243</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L244'>
-          <td class='lineno'>244</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    g1 &#61; &#40;-2π&#41;:&#40;π / 8&#41;:&#40;2π&#41;</span>
-          </td>
-        </tr>
-        <tr id='L245'>
-          <td class='lineno'>245</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    n_pts1 &#61; length&#40;g1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L246'>
-          <td class='lineno'>246</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    spacing1 &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L247'>
-          <td class='lineno'>247</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    gs1 &#61; GridSpec&#40;-2pi * ones&#40;3&#41;, spacing1, &#91;n_pts1, n_pts1, n_pts1&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L248'>
-          <td class='lineno'>248</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L249'>
-          <td class='lineno'>249</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Define the atoms for the System</span>
-          </td>
-        </tr>
-        <tr id='L250'>
-          <td class='lineno'>250</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    atoms &#61; &#91;&#93; #&#91;NuclearCoordinate&#40;&#91;π/2, π/2, π/2&#93;, 1&#41;&#93;</span>
-          </td>
-        </tr>
-        <tr id='L251'>
-          <td class='lineno'>251</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # make 3D array of f values</span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    f_xyz_data &#61; &#91;f_xyz&#40;xi, yi, zi&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    system &#61; System&#40;</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        name, source, atoms, gs1, f_xyz_data, f_xyz, f, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    &#41;</span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
