@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.4/x64/share/julia/base/pcre.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/NLSolversBase/kavn7/src/objective_types/oncedifferentiable.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Fri, 01 Dec 2023 00:35:23
+        Generated on Fri, 01 Dec 2023 03:09:59
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'># Used for objectives and solvers where the gradient is available/exists</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>mutable struct OnceDifferentiable&#123;TF, TDF, TX&#125; &lt;: AbstractObjective</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>## low-level pcre2 interface ##</span>
+            <span class='code'>    f # objective</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    df # &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>module PCRE</span>
+            <span class='code'>    fdf # objective and &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    F::TF # cache for f output</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>import ..RefValue</span>
+            <span class='code'>    DF::TDF # cache for df output</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x_f::TX # x used to evaluate f &#40;stored in F&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'># include&#40;&#36;BUILDROOT/base/pcre_h.jl&#41;</span>
+            <span class='code'>    x_df::TX # x used to evaluate df &#40;stored in DF&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>include&#40;string&#40;length&#40;Core.ARGS&#41; &gt;&#61; 2 ? Core.ARGS&#91;2&#93; : &quot;&quot;, &quot;pcre_h.jl&quot;&#41;&#41;</span>
+            <span class='code'>    f_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    df_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>const PCRE_LIB &#61; &quot;libpcre2-8&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>function create_match_context&#40;&#41;</span>
+            <span class='code'>### Only the objective</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    JIT_STACK_START_SIZE &#61; 32768</span>
+            <span class='code'># Ambiguity</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    JIT_STACK_MAX_SIZE &#61; 1048576</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    jit_stack &#61; ccall&#40;&#40;:pcre2_jit_stack_create_8, PCRE_LIB&#41;, Ptr&#123;Cvoid&#125;,</span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>                      &#40;Csize_t, Csize_t, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;; inplace &#61; true, autodiff &#61; :finite,  </span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>                      JIT_STACK_START_SIZE, JIT_STACK_MAX_SIZE, C_NULL&#41;</span>
+            <span class='code'>                   chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    ctx &#61; ccall&#40;&#40;:pcre2_match_context_create_8, PCRE_LIB&#41;,</span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, DF, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>                Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, C_NULL&#41;</span>
+            <span class='code'>#OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray; autodiff &#61; :finite&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_jit_stack_assign_8, PCRE_LIB&#41;, Cvoid,</span>
+            <span class='code'>#    OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, alloc_DF&#40;x, F&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>          &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, ctx, C_NULL, jit_stack&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    return ctx</span>
+            <span class='code'>                   F::AbstractArray, DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                   inplace &#61; true, autodiff &#61; :finite&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>THREAD_MATCH_CONTEXTS::Vector&#123;Ptr&#123;Cvoid&#125;&#125; &#61; &#91;C_NULL&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, x::AbstractArray, F::AbstractArray, DF, autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>PCRE_COMPILE_LOCK &#61; nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>_tid&#40;&#41; &#61; Int&#40;ccall&#40;:jl_threadid, Int16, &#40;&#41;&#41;&#41; &#43; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>_mth&#40;&#41; &#61; Int&#40;Core.Intrinsics.atomic_pointerref&#40;cglobal&#40;:jl_n_threads, Cint&#41;, :acquire&#41;&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray&#123;T&#125;,</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                            F::Real,</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>function get_local_match_context&#40;&#41;</span>
+            <span class='code'>                            DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    tid &#61; _tid&#40;&#41;</span>
+            <span class='code'>                            autodiff, chunk&#41; where T</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    ctxs &#61; THREAD_MATCH_CONTEXTS</span>
+            <span class='code'>    # When here, at the constructor with positional autodiff, it should already</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;ctxs&#41; &lt; tid</span>
+            <span class='code'>    # be the case, that f is inplace.</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>        # slow path to allocate it</span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>        l &#61; PCRE_COMPILE_LOCK::Threads.SpinLock</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>        lock&#40;l&#41;</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>            ctxs &#61; THREAD_MATCH_CONTEXTS</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>            if length&#40;ctxs&#41; &lt; tid</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>                global THREAD_MATCH_CONTEXTS &#61; ctxs &#61; copyto&#33;&#40;fill&#40;C_NULL, length&#40;ctxs&#41; &#43; _mth&#40;&#41;&#41;, ctxs&#41;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>        finally</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>            unlock&#40;l&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    ctx &#61; @inbounds ctxs&#91;tid&#93;</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>    if ctx &#61;&#61; C_NULL</span>
+            <span class='code'>            df_array_spec &#61; DF</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>        # slow path to allocate it</span>
+            <span class='code'>            x_array_spec &#61; x_seed</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>        ctx &#61; create_match_context&#40;&#41;</span>
+            <span class='code'>            return_spec &#61; typeof&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>        THREAD_MATCH_CONTEXTS&#91;tid&#93; &#61; ctx</span>
+            <span class='code'>            gcache &#61; FiniteDiff.GradientCache&#40;df_array_spec, x_array_spec, fdtype, return_spec&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>    return ctx</span>
+            <span class='code'>            function g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                FiniteDiff.finite_difference_gradient&#33;&#40;storage, f, x, gcache&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                return</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'># supported options for different use cases</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            function fg&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'># arguments to pcre2_compile</span>
+            <span class='code'>                g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>const COMPILE_MASK      &#61;</span>
+            <span class='code'>                return f&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>      ALT_BSUX          |</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>      ALT_CIRCUMFLEX    |</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>      ALT_VERBNAMES     |</span>
+            <span class='code'>            gcfg &#61; ForwardDiff.GradientConfig&#40;f, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>      ANCHORED          |</span>
+            <span class='code'>            g&#33; &#61; &#40;out, x&#41; -&gt; ForwardDiff.gradient&#33;&#40;out, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>      # AUTO_CALLOUT    |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>      CASELESS          |</span>
+            <span class='code'>            fg&#33; &#61; &#40;out, x&#41; -&gt; begin</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>      DOLLAR_ENDONLY    |</span>
+            <span class='code'>                gr_res &#61; DiffResults.DiffResult&#40;zero&#40;T&#41;, out&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>      DOTALL            |</span>
+            <span class='code'>                ForwardDiff.gradient&#33;&#40;gr_res, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>      # DUPNAMES        |</span>
+            <span class='code'>                DiffResults.value&#40;gr_res&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>      ENDANCHORED       |</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>      EXTENDED          |</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>      EXTENDED_MORE     |</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;autodiff is not support. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>      FIRSTLINE         |</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>      LITERAL           |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>      MATCH_INVALID_UTF |</span>
+            <span class='code'>        return OnceDifferentiable&#40;f, g&#33;, fg&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>      MATCH_UNSET_BACKREF |</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>      MULTILINE         |</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>      NEVER_BACKSLASH_C |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>      NEVER_UCP         |</span>
+            <span class='code'>has_not_dep_symbol_in_ad &#61; Ref&#123;Bool&#125;&#40;true&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>      NEVER_UTF         |</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, autodiff::Symbol, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>      NO_AUTO_CAPTURE   |</span>
+            <span class='code'>OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>      NO_AUTO_POSSESS   |</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>      NO_DOTSTAR_ANCHOR |</span>
+            <span class='code'>                            autodiff::Bool, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'>      NO_START_OPTIMIZE |</span>
+            <span class='code'>    if autodiff &#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>      NO_UTF_CHECK      |</span>
+            <span class='code'>        throw&#40;ErrorException&#40;&quot;It is not possible to set the &#96;autodiff&#96; keyword to &#96;false&#96; when constructing a OnceDifferentiable instance from only one function. Pass in the &#40;partial&#41; derivative or specify a valid &#96;autodiff&#96; symbol.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>      UCP               |</span>
+            <span class='code'>    elseif has_not_dep_symbol_in_ad&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>      UNGREEDY          |</span>
+            <span class='code'>        @warn&#40;&quot;Setting the &#96;autodiff&#96; keyword to &#96;true&#96; is deprecated. Please use a valid symbol instead.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>      USE_OFFSET_LIMIT  |</span>
+            <span class='code'>        has_not_dep_symbol_in_ad&#91;&#93; &#61; false</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>      UTF</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, :forward, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'># arguments to pcre2_set_newline</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>const COMPILE_NEWLINE_MASK &#61; &#40;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray, F::AbstractArray, DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_CR,</span>
+            <span class='code'>    autodiff::Symbol , chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x_seed&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_LF,</span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_CRLF,</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_ANY,</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_ANYCRLF,</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_NUL&#41;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'># arguments to pcre2_set_compile_extra_options</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>const COMPILE_EXTRA_MASK            &#61;</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_ALLOW_SURROGATE_ESCAPES |</span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_ALT_BSUX                |</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_BAD_ESCAPE_IS_LITERAL   |</span>
+            <span class='code'>            # Apparently only the third input is aliased.</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_ESCAPED_CR_IS_LF        |</span>
+            <span class='code'>            j_finitediff_cache &#61; FiniteDiff.JacobianCache&#40;copy&#40;x_seed&#41;, copy&#40;F&#41;, copy&#40;F&#41;, fdtype&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_MATCH_LINE              |</span>
+            <span class='code'>            if autodiff &#61;&#61; :finiteforward</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_MATCH_WORD</span>
+            <span class='code'>                # These copies can be done away with if we add a keyword for</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                # reusing arrays instead for overwriting them.</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'># arguments to match</span>
+            <span class='code'>                Fx &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>const EXECUTE_MASK      &#61;</span>
+            <span class='code'>                DF &#61; copy&#40;DF&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>      # ANCHORED        |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>      # COPY_MATCHED_SUBJECT |</span>
+            <span class='code'>                x_f, x_df &#61; x_of_nans&#40;x_seed&#41;, x_of_nans&#40;x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>      # ENDANCHORED     |</span>
+            <span class='code'>                f_calls, j_calls &#61; &#91;0,&#93;, &#91;0,&#93;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>      NOTBOL            |</span>
+            <span class='code'>                function j_finiteforward&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>      NOTEMPTY          |</span>
+            <span class='code'>                    # Exploit the possibility that it might be that x_f &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>      NOTEMPTY_ATSTART  |</span>
+            <span class='code'>                    # then we don&#39;t have to call f again.</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>      NOTEOL            |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>      # NO_JIT          |</span>
+            <span class='code'>                    # if at least one element of x_f is different from x, update</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>      NO_START_OPTIMIZE |</span>
+            <span class='code'>                    if any&#40;x_f .&#33;&#61; x&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>      NO_UTF_CHECK      |</span>
+            <span class='code'>                        f&#40;Fx, x&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>      PARTIAL_HARD      |</span>
+            <span class='code'>                        f_calls .&#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>      PARTIAL_SOFT</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, Fx&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>const UNSET &#61; ~Csize_t&#40;0&#41;  # Indicates that an output vector element is unset</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                function fj_finiteforward&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>function info&#40;regex::Ptr&#123;Cvoid&#125;, what::Integer, ::Type&#123;T&#125;&#41; where T</span>
+            <span class='code'>                    f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    buf &#61; RefValue&#123;T&#125;&#40;&#41;</span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, F&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61; ccall&#40;&#40;:pcre2_pattern_info_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>                &#40;Ptr&#123;Cvoid&#125;, UInt32, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>                regex, what, buf&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    if ret &#33;&#61; 0</span>
+            <span class='code'>                return OnceDifferentiable&#40;f, j_finiteforward&#33;, fj_finiteforward&#33;, Fx, DF, x_f, x_df, f_calls, j_calls&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;ret &#61;&#61; ERROR_NULL      ? &quot;PCRE error: NULL regex object&quot; :</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>              ret &#61;&#61; ERROR_BADMAGIC  ? &quot;PCRE error: invalid regex object&quot; :</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>              ret &#61;&#61; ERROR_BADOPTION ? &quot;PCRE error: invalid option flags&quot; :</span>
+            <span class='code'>            function fj_finitediff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>                                       &quot;PCRE error: unknown error &#40;&#36;ret&#41;&quot;&#41;</span>
+            <span class='code'>                f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    return buf&#91;&#93;</span>
+            <span class='code'>                F</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1445,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            function j_finitediff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>function ovec_length&#40;match_data&#41;</span>
+            <span class='code'>                F_cache &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; ccall&#40;&#40;:pcre2_get_ovector_count_8, PCRE_LIB&#41;, UInt32,</span>
+            <span class='code'>                fj_finitediff&#33;&#40;F_cache, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>              &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>    return 2Int&#40;n&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_finitediff&#33;, fj_finitediff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1515,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>function ovec_ptr&#40;match_data&#41;</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>    ptr &#61; ccall&#40;&#40;:pcre2_get_ovector_pointer_8, PCRE_LIB&#41;, Ptr&#123;Csize_t&#125;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>                &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
+            <span class='code'>            jac_cfg &#61; ForwardDiff.JacobianConfig&#40;f, F, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>    return ptr</span>
+            <span class='code'>            ForwardDiff.checktag&#40;jac_cfg, f, x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            F2 &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>function compile&#40;pattern::AbstractString, options::Integer&#41;</span>
+            <span class='code'>            function j_forwarddiff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;pattern isa Union&#123;String,SubString&#123;String&#125;&#125;&#41;</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;J, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>        pattern &#61; String&#40;pattern&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            function fj_forwarddiff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61; RefValue&#123;Cint&#125;&#40;0&#41;</span>
+            <span class='code'>                jac_res &#61; DiffResults.DiffResult&#40;F, J&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    erroff &#61; RefValue&#123;Csize_t&#125;&#40;0&#41;</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;jac_res, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>    re_ptr &#61; ccall&#40;&#40;:pcre2_compile_8, PCRE_LIB&#41;, Ptr&#123;Cvoid&#125;,</span>
+            <span class='code'>                DiffResults.value&#40;jac_res&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>                   &#40;Ptr&#123;UInt8&#125;, Csize_t, UInt32, Ref&#123;Cint&#125;, Ref&#123;Csize_t&#125;, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>                   pattern, ncodeunits&#40;pattern&#41;, options, errno, erroff, C_NULL&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>    if re_ptr &#61;&#61; C_NULL</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_forwarddiff&#33;, fj_forwarddiff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;PCRE compilation error: &#36;&#40;err_message&#40;errno&#91;&#93;&#41;&#41; at offset &#36;&#40;erroff&#91;&#93;&#41;&quot;&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;&#40;autodiff&#41; is not supported. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>    return re_ptr</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>function jit_compile&#40;regex::Ptr&#123;Cvoid&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61; ccall&#40;&#40;:pcre2_jit_compile_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>### Objective and derivative</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>                  &#40;Ptr&#123;Cvoid&#125;, UInt32&#41;, regex, JIT_COMPLETE&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df,</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61;&#61; 0 &amp;&amp; return true</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61;&#61; ERROR_JIT_BADOPTION &amp;&amp; return false</span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>    error&#40;&quot;PCRE JIT error: &#36;&#40;err_message&#40;errno&#41;&#41;&quot;&#41;</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1805,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>free_match_data&#40;match_data&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_match_data_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1835,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>free_re&#40;re&#41; &#61;</span>
+            <span class='code'>    fdf&#33; &#61; make_fdf&#40;x, F, f, df&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_code_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, re&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1855,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, x, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>free_jit_stack&#40;stack&#41; &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,17 +1875,40 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_jit_stack_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, stack&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
           <td class='lineno'>186</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;29 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              2 &#40;29 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #nlsolve#31
+              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L62'>line 62</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>OnceDifferentiable</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L194'>#OnceDifferentiable#26</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, j,</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1918,7 @@
           <td>
             
             
-            <span class='code'>free_match_context&#40;context&#41; &#61;</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1928,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_match_context_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, context&#41;</span>
+            <span class='code'>                   F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1938,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                   J::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1948,7 @@
           <td>
             
             
-            <span class='code'>function err_message&#40;errno::Integer&#41;</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1958,7 @@
           <td>
             
             
-            <span class='code'>    buffer &#61; Vector&#123;UInt8&#125;&#40;undef, 1024&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1968,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61; ccall&#40;&#40;:pcre2_get_error_message_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,17 +1978,31 @@
           <td>
             
             
-            <span class='code'>                &#40;Cint, Ptr&#123;UInt8&#125;, Csize_t&#41;, errno, buffer, length&#40;buffer&#41;&#41;</span>
+            <span class='code'>    j&#33; &#61; df&#33;_from_df&#40;j, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
           <td class='lineno'>194</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;14 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    ret &#61;&#61; ERROR_BADDATA &amp;&amp; error&#40;&quot;PCRE error: invalid errno &#40;&#36;errno&#41;&quot;&#41;</span>
+            <div class='call-sites'>
+              1 &#40;14 &#37;&#41;
+              samples spent in #OnceDifferentiable#26
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='abstract.jl-a81708fd19b8615bb91957ad1ab557c3ed109beb.html#L6'>make_fdf</a>
+              <br />
+            </div>
+            <span class='code'>    fj&#33; &#61; make_fdf&#40;x, F, f&#33;, j&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +2012,7 @@
           <td>
             
             
-            <span class='code'>    # TODO: seems like there should be a better way to get this string</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +2022,7 @@
           <td>
             
             
-            <span class='code'>    return GC.@preserve buffer unsafe_string&#40;pointer&#40;buffer&#41;&#41;</span>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, j&#33;, fj&#33;, x, F, J&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2013,18 +2050,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;3 &#37;&#41;
-              samples spent in exec
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from exec_r
-              <a href='pcre.jl-b17b2d60ebbca03e55912728719bfc119dadcaa1.html#L213'>line 213</a>
-              <br />
-            </div>
             
-            <span class='code'>function exec&#40;re, subject, offset, options, match_data&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2034,7 +2062,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;subject isa Union&#123;String,SubString&#123;String&#125;&#125;&#41;</span>
+            <span class='code'>### Objective, derivative and combination</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2044,7 +2072,7 @@
           <td>
             
             
-            <span class='code'>        subject &#61; String&#40;subject&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2054,17 +2082,17 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L203'>
           <td class='lineno'>203</td>
-          <td class='tracecount excl'>1 &#40;3 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;3 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
             
-            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_match_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2074,7 +2102,7 @@
           <td>
             
             
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;UInt8&#125;, Csize_t, Csize_t, UInt32, Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'>    DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2084,7 +2112,7 @@
           <td>
             
             
-            <span class='code'>               re, subject, ncodeunits&#40;subject&#41;, offset, options, match_data, get_local_match_context&#40;&#41;&#41;</span>
+            <span class='code'>    inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2094,7 +2122,7 @@
           <td>
             
             
-            <span class='code'>    # rc &#61;&#61; -1 means no match, -2 means partial match.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2104,7 +2132,7 @@
           <td>
             
             
-            <span class='code'>    rc &lt; -2 &amp;&amp; error&#40;&quot;PCRE.exec error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
+            <span class='code'>    # f is never &quot;inplace&quot; since F is scalar</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2114,7 +2142,7 @@
           <td>
             
             
-            <span class='code'>    return rc &gt;&#61; 0</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2124,7 +2152,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2144,7 +2172,7 @@
           <td>
             
             
-            <span class='code'>function exec_r&#40;re, subject, offset, options&#41;</span>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2154,31 +2182,17 @@
           <td>
             
             
-            <span class='code'>    match_data &#61; create_match_data&#40;re&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L213'>
           <td class='lineno'>213</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;3 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;3 &#37;&#41;
-              samples spent in exec_r
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #occursin#500
-              <a href='regex.jl-7ec24ff3f1a0b5dfa67ee1324ee605ae4fae17f9.html#L259'>line 259</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='pcre.jl-b17b2d60ebbca03e55912728719bfc119dadcaa1.html#L199'>exec</a>
-              <br />
-            </div>
-            <span class='code'>    ans &#61; exec&#40;re, subject, offset, options, match_data&#41;</span>
+            
+            
+            <span class='code'>    OnceDifferentiable&#123;typeof&#40;F&#41;,typeof&#40;DF&#41;,typeof&#40;x&#41;&#125;&#40;f, df&#33;, fdf&#33;,</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2188,7 +2202,7 @@
           <td>
             
             
-            <span class='code'>    free_match_data&#40;match_data&#41;</span>
+            <span class='code'>    copy&#40;F&#41;, copy&#40;DF&#41;,</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2198,7 +2212,7 @@
           <td>
             
             
-            <span class='code'>    return ans</span>
+            <span class='code'>    x_f, x_df,</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2208,7 +2222,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2218,7 +2232,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2228,7 +2242,7 @@
           <td>
             
             
-            <span class='code'>function exec_r_data&#40;re, subject, offset, options&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2238,7 +2252,7 @@
           <td>
             
             
-            <span class='code'>    match_data &#61; create_match_data&#40;re&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2248,7 +2262,7 @@
           <td>
             
             
-            <span class='code'>    ans &#61; exec&#40;re, subject, offset, options, match_data&#41;</span>
+            <span class='code'>                            x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2258,7 +2272,7 @@
           <td>
             
             
-            <span class='code'>    return ans, match_data</span>
+            <span class='code'>                            F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2268,7 +2282,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                            DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2278,7 +2292,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                            inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2288,7 +2302,7 @@
           <td>
             
             
-            <span class='code'>function create_match_data&#40;re&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2298,7 +2312,7 @@
           <td>
             
             
-            <span class='code'>    p &#61; ccall&#40;&#40;:pcre2_match_data_create_from_pattern_8, PCRE_LIB&#41;,</span>
+            <span class='code'>    f &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2308,7 +2322,7 @@
           <td>
             
             
-            <span class='code'>              Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, re, C_NULL&#41;</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2318,7 +2332,7 @@
           <td>
             
             
-            <span class='code'>    p &#61;&#61; C_NULL &amp;&amp; error&#40;&quot;PCRE error: could not allocate memory&quot;&#41;</span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2328,7 +2342,7 @@
           <td>
             
             
-            <span class='code'>    return p</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2338,7 +2352,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2358,7 +2372,7 @@
           <td>
             
             
-            <span class='code'>function substring_number_from_name&#40;re, name&#41;</span>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, copy&#40;F&#41;, copy&#40;DF&#41;, x_f, x_df, &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2368,447 +2382,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; ccall&#40;&#40;:pcre2_substring_number_from_name_8, PCRE_LIB&#41;, Cint,</span>
-          </td>
-        </tr>
-        <tr id='L233'>
-          <td class='lineno'>233</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Cstring&#41;, re, name&#41;</span>
-          </td>
-        </tr>
-        <tr id='L234'>
-          <td class='lineno'>234</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return Int&#40;n&#41;</span>
-          </td>
-        </tr>
-        <tr id='L235'>
-          <td class='lineno'>235</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
             <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L236'>
-          <td class='lineno'>236</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L237'>
-          <td class='lineno'>237</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function substring_length_bynumber&#40;match_data, number&#41;</span>
-          </td>
-        </tr>
-        <tr id='L238'>
-          <td class='lineno'>238</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    s &#61; RefValue&#123;Csize_t&#125;&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L239'>
-          <td class='lineno'>239</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_substring_length_bynumber_8, PCRE_LIB&#41;, Cint,</span>
-          </td>
-        </tr>
-        <tr id='L240'>
-          <td class='lineno'>240</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Cint, Ref&#123;Csize_t&#125;&#41;, match_data, number, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L241'>
-          <td class='lineno'>241</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if rc &lt; 0</span>
-          </td>
-        </tr>
-        <tr id='L242'>
-          <td class='lineno'>242</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        rc &#61;&#61; ERROR_UNSET &amp;&amp; return 0</span>
-          </td>
-        </tr>
-        <tr id='L243'>
-          <td class='lineno'>243</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        error&#40;&quot;PCRE error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L244'>
-          <td class='lineno'>244</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L245'>
-          <td class='lineno'>245</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return Int&#40;s&#91;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L246'>
-          <td class='lineno'>246</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L247'>
-          <td class='lineno'>247</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L248'>
-          <td class='lineno'>248</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function substring_copy_bynumber&#40;match_data, number, buf, buf_size&#41;</span>
-          </td>
-        </tr>
-        <tr id='L249'>
-          <td class='lineno'>249</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    s &#61; RefValue&#123;Csize_t&#125;&#40;buf_size&#41;</span>
-          </td>
-        </tr>
-        <tr id='L250'>
-          <td class='lineno'>250</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_substring_copy_bynumber_8, PCRE_LIB&#41;, Cint,</span>
-          </td>
-        </tr>
-        <tr id='L251'>
-          <td class='lineno'>251</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, UInt32, Ptr&#123;UInt8&#125;, Ref&#123;Csize_t&#125;&#41;,</span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>               match_data, number, buf, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    rc &lt; 0 &amp;&amp; error&#40;&quot;PCRE error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return Int&#40;s&#91;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function capture_names&#40;re&#41;</span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    name_count &#61; info&#40;re, INFO_NAMECOUNT, UInt32&#41;</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    name_entry_size &#61; info&#40;re, INFO_NAMEENTRYSIZE, UInt32&#41;</span>
-          </td>
-        </tr>
-        <tr id='L260'>
-          <td class='lineno'>260</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nametable_ptr &#61; info&#40;re, INFO_NAMETABLE, Ptr&#123;UInt8&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L261'>
-          <td class='lineno'>261</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    names &#61; Dict&#123;Int,String&#125;&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L262'>
-          <td class='lineno'>262</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    for i &#61; 1:name_count</span>
-          </td>
-        </tr>
-        <tr id='L263'>
-          <td class='lineno'>263</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        offset &#61; &#40;i-1&#41;*name_entry_size &#43; 1</span>
-          </td>
-        </tr>
-        <tr id='L264'>
-          <td class='lineno'>264</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # The capture group index corresponding to name &#39;i&#39; is stored as a</span>
-          </td>
-        </tr>
-        <tr id='L265'>
-          <td class='lineno'>265</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # big-endian 16-bit value.</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        high_byte &#61; UInt16&#40;unsafe_load&#40;nametable_ptr, offset&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        low_byte &#61; UInt16&#40;unsafe_load&#40;nametable_ptr, offset&#43;1&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        idx &#61; &#40;high_byte &lt;&lt; 8&#41; | low_byte</span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # The capture group name is a null-terminated string located directly</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # after the index.</span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        names&#91;idx&#93; &#61; unsafe_string&#40;nametable_ptr&#43;offset&#43;1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L272'>
-          <td class='lineno'>272</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L273'>
-          <td class='lineno'>273</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return names</span>
-          </td>
-        </tr>
-        <tr id='L274'>
-          <td class='lineno'>274</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L275'>
-          <td class='lineno'>275</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L276'>
-          <td class='lineno'>276</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end # module</span>
           </td>
         </tr>
       </tbody>
