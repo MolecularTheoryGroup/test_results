@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
-*Generated on 2023-12-01@03:10:45 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/7055081584)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/gp-algorithm`
+*Generated on 2023-12-13@17:54:04 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/7198602513)*
 
 ---
 
