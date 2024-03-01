@@ -4,9 +4,9 @@
 ---
 
 ## Profiling results
-- [profiling: critical points v0 scm adf t41 cubane PBE TZ2P GO fineFull adf.t41 SCF Electron Density spacing1.50](http://html-preview.github.io/?https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__critical_points_v0_scm_adf_t41_cubane_PBE_TZ2P_GO_fineFull_adf.t41%20SCF%20Electron%20Density_spacing1.50/index.html)
-- [profiling: critical points v0 trial system spacing2.00](http://html-preview.github.io/?https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__critical_points_v0_trial_system_spacing2.00/index.html)
-- [profiling: gradient paths scm adf t41 benzene adf.t41 SCF Electron Density](http://html-preview.github.io/?https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__gradient_paths_scm_adf_t41_benzene_adf.t41%20SCF%20Electron%20Density/index.html)
+- [profiling: critical points v0 scm adf t41 cubane PBE TZ2P GO fineFull adf.t41 SCF Electron Density spacing1.50](http://html-preview.github.io/?url=https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__critical_points_v0_scm_adf_t41_cubane_PBE_TZ2P_GO_fineFull_adf.t41%20SCF%20Electron%20Density_spacing1.50/index.html)
+- [profiling: critical points v0 trial system spacing2.00](http://html-preview.github.io/?url=https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__critical_points_v0_trial_system_spacing2.00/index.html)
+- [profiling: gradient paths scm adf t41 benzene adf.t41 SCF Electron Density](http://html-preview.github.io/?url=https://github.com/MolecularTheoryGroup/test_results/blob/main/eda/profiling__gradient_paths_scm_adf_t41_benzene_adf.t41%20SCF%20Electron%20Density/index.html)
 
 ---
 
