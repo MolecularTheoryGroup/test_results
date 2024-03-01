@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.9.4/x64/share/julia/base/ryu/Ryu.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/DiffEqBase/eTCPy/src/fastpow.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Fri, 01 Mar 2024 07:38:16
+        Generated on Fri, 01 Mar 2024 18:32:42
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>module Ryu</span>
+            <span class='code'># From David Goldberg&#39;s blog post</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># https://tech.ebayinc.com/engineering/fast-approximate-logarithms-part-iii-the-formulas/</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>import .Base: significand_bits, significand_mask, exponent_bits, exponent_mask, exponent_bias, exponent_max, uinttype</span>
+            <span class='code'>@inline function fastlog2&#40;x::Float32&#41;::Float32</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # &#40;x-1&#41;*&#40;a*&#40;x-1&#41; &#43; b&#41;/&#40;&#40;x-1&#41; &#43; c&#41; &#40;line 8 of table 2&#41;</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;utils.jl&quot;&#41;</span>
+            <span class='code'>    a &#61; 0.338953f0</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;shortest.jl&quot;&#41;</span>
+            <span class='code'>    b &#61; 2.198599f0</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;fixed.jl&quot;&#41;</span>
+            <span class='code'>    c &#61; 1.523692f0</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;exp.jl&quot;&#41;</span>
+            <span class='code'>    #</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Assume IEEE representation, which is sgn&#40;1&#41;:exp&#40;8&#41;:frac&#40;23&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # representing &#40;1&#43;frac&#41;*2^&#40;exp-127&#41;  Call 1&#43;frac the significand</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    Ryu.neededdigits&#40;T&#41;</span>
+            <span class='code'>    #</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>Number of digits necessary to represent type &#96;T&#96; in fixed-precision decimal.</span>
+            <span class='code'>    # get exponent</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    ux1i &#61; reinterpret&#40;UInt32, x&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>neededdigits&#40;::Type&#123;Float64&#125;&#41; &#61; 309 &#43; 17</span>
+            <span class='code'>    exp &#61; &#40;ux1i &amp; 0x7F800000&#41; &gt;&gt; 23</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>neededdigits&#40;::Type&#123;Float32&#125;&#41; &#61; 39 &#43; 9 &#43; 2</span>
+            <span class='code'>    # actual exponent is exp-127, will subtract 127 later</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>neededdigits&#40;::Type&#123;Float16&#125;&#41; &#61; 9 &#43; 5 &#43; 9</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    greater &#61; ux1i &amp; 0x00400000  # true if signif &gt; 1.5</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if greater &#33;&#61;&#61; 0x00000000</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    Ryu.writeshortest&#40;x, plus&#61;false, space&#61;false, hash&#61;true, precision&#61;-1, expchar&#61;UInt8&#40;&#39;e&#39;&#41;, padexp&#61;false, decchar&#61;UInt8&#40;&#39;.&#39;&#41;, typed&#61;false, compact&#61;false&#41;</span>
+            <span class='code'>        ux2i &#61; &#40;ux1i &amp; 0x007FFFFF&#41; | 0x3f000000</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,17 +235,31 @@
           <td>
             
             
-            <span class='code'>    Ryu.writeshortest&#40;buf::Vector&#123;UInt8&#125;, pos::Int, x, args...&#41;</span>
+            <span class='code'>        signif &#61; reinterpret&#40;Float32, ux2i&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
           <td class='lineno'>22</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in fastlog2
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from fastpow
+              <a href='fastpow.jl-cc528f28ec1096329400b7c9bf03acb4af3a0d44.html#L106'>line 106</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='promotion.jl-dd57fba38b21fe4ae0b7b98630364555f6d2efc3.html#L412'>-</a>
+              <br />
+            </div>
+            <span class='code'>        fexp &#61; exp - 126.0f0    # 126 instead of 127 compensates for division by 2</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +269,7 @@
           <td>
             
             
-            <span class='code'>Convert a float value &#96;x&#96; into its &quot;shortest&quot; decimal string, which can be parsed back to the same value.</span>
+            <span class='code'>        signif &#61; signif - 1.0f0</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +279,7 @@
           <td>
             
             
-            <span class='code'>This function allows achieving the &#96;&#37;g&#96; printf format.</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +289,7 @@
           <td>
             
             
-            <span class='code'>Note the 2nd method allows passing in a byte buffer and position directly; callers must ensure the buffer has sufficient room to hold the entire decimal string.</span>
+            <span class='code'>        ux2i &#61; &#40;ux1i &amp; 0x007FFFFF&#41; | 0x3f800000</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +299,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        signif &#61; reinterpret&#40;Float32, ux2i&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +309,7 @@
           <td>
             
             
-            <span class='code'>Various options for the output format include:</span>
+            <span class='code'>        fexp &#61; exp - 127.0f0</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +319,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;plus&#96;: for positive &#96;x&#96;, prefix decimal string with a &#96;&#39;&#43;&#39;&#96; character</span>
+            <span class='code'>        signif &#61; signif - 1.0f0</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,17 +329,31 @@
           <td>
             
             
-            <span class='code'>  * &#96;space&#96;: for positive &#96;x&#96;, prefix decimal string with a &#96;&#39; &#39;&#96; character; overridden if &#96;plus&#61;true&#96;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L30'>
           <td class='lineno'>30</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>  * &#96;hash&#96;: whether the decimal point should be written, even if no additional digits are needed for precision</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in fastlog2
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from fastpow
+              <a href='fastpow.jl-cc528f28ec1096329400b7c9bf03acb4af3a0d44.html#L106'>line 106</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='float.jl-f8bff2723ae36bf5d241e1dfb84415e8caa69aa0.html#L408'>&#43;</a>
+              <br />
+            </div>
+            <span class='code'>    lg2 &#61; fexp &#43; signif * &#40;a * signif &#43; b&#41; / &#40;signif &#43; c&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +363,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;precision&#96;: minimum number of digits to be included in the decimal string; extra &#96;&#39;0&#39;&#96; characters will be added for padding if necessary</span>
+            <span class='code'>    return lg2</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +373,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;expchar&#96;: character to use exponent component in scientific notation</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +383,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;padexp&#96;: whether two digits should always be written, even for single-digit exponents &#40;e.g. &#96;e&#43;1&#96; becomes &#96;e&#43;01&#96;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +393,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;decchar&#96;: decimal point character to be used</span>
+            <span class='code'># Translated from OpenLibm but less accurate because I forced the tableau to be</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +403,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;typed&#96;: whether additional type information should be printed for &#96;Float16&#96; / &#96;Float32&#96;</span>
+            <span class='code'># Float32, whereas OpenLibm uses Float64</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +413,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;compact&#96;: output will be limited to 6 significant digits</span>
+            <span class='code'>#</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +423,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># https://github.com/JuliaMath/openlibm/blob/cca41bc1abd01804afa4862bbd2c79cc9803171a/src/s_exp2f.c</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +433,7 @@
           <td>
             
             
-            <span class='code'>function writeshortest&#40;x::T,</span>
+            <span class='code'>const EXP2FT &#61; &#40;Float32&#40;0x1.6a09e667f3bcdp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +443,7 @@
           <td>
             
             
-            <span class='code'>        plus::Bool&#61;false,</span>
+            <span class='code'>    Float32&#40;0x1.7a11473eb0187p-1&#41;,</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +453,7 @@
           <td>
             
             
-            <span class='code'>        space::Bool&#61;false,</span>
+            <span class='code'>    Float32&#40;0x1.8ace5422aa0dbp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +463,7 @@
           <td>
             
             
-            <span class='code'>        hash::Bool&#61;true,</span>
+            <span class='code'>    Float32&#40;0x1.9c49182a3f090p-1&#41;,</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +473,7 @@
           <td>
             
             
-            <span class='code'>        precision::Integer&#61;-1,</span>
+            <span class='code'>    Float32&#40;0x1.ae89f995ad3adp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +483,7 @@
           <td>
             
             
-            <span class='code'>        expchar::UInt8&#61;UInt8&#40;&#39;e&#39;&#41;,</span>
+            <span class='code'>    Float32&#40;0x1.c199bdd85529cp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +493,7 @@
           <td>
             
             
-            <span class='code'>        padexp::Bool&#61;false,</span>
+            <span class='code'>    Float32&#40;0x1.d5818dcfba487p-1&#41;,</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +503,7 @@
           <td>
             
             
-            <span class='code'>        decchar::UInt8&#61;UInt8&#40;&#39;.&#39;&#41;,</span>
+            <span class='code'>    Float32&#40;0x1.ea4afa2a490dap-1&#41;,</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +513,7 @@
           <td>
             
             
-            <span class='code'>        typed::Bool&#61;false,</span>
+            <span class='code'>    Float32&#40;0x1.0000000000000p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +523,7 @@
           <td>
             
             
-            <span class='code'>        compact::Bool&#61;false&#41; where &#123;T &lt;: Base.IEEEFloat&#125;</span>
+            <span class='code'>    Float32&#40;0x1.0b5586cf9890fp&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +533,7 @@
           <td>
             
             
-            <span class='code'>    buf &#61; Base.StringVector&#40;neededdigits&#40;T&#41;&#41;</span>
+            <span class='code'>    Float32&#40;0x1.172b83c7d517bp&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +543,7 @@
           <td>
             
             
-            <span class='code'>    pos &#61; writeshortest&#40;buf, 1, x, plus, space, hash, precision, expchar, padexp, decchar, typed, compact&#41;</span>
+            <span class='code'>    Float32&#40;0x1.2387a6e756238p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +553,7 @@
           <td>
             
             
-            <span class='code'>    return String&#40;resize&#33;&#40;buf, pos - 1&#41;&#41;</span>
+            <span class='code'>    Float32&#40;0x1.306fe0a31b715p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +563,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    Float32&#40;0x1.3dea64c123422p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +573,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Float32&#40;0x1.4bfdad5362a27p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +583,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    Float32&#40;0x1.5ab07dd485429p&#43;0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +593,7 @@
           <td>
             
             
-            <span class='code'>    Ryu.writefixed&#40;x, precision, plus&#61;false, space&#61;false, hash&#61;false, decchar&#61;UInt8&#40;&#39;.&#39;&#41;, trimtrailingzeros&#61;false&#41;</span>
+            <span class='code'>@inline function _exp2&#40;x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +603,7 @@
           <td>
             
             
-            <span class='code'>    Ryu.writefixed&#40;buf::Vector&#123;UInt8&#125;, pos::Int, x, args...&#41;</span>
+            <span class='code'>    TBLBITS &#61; UInt32&#40;4&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +613,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    TBLSIZE &#61; UInt32&#40;1 &lt;&lt; TBLBITS&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +623,7 @@
           <td>
             
             
-            <span class='code'>Convert a float value &#96;x&#96; into a &quot;fixed&quot; size decimal string of the provided precision.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +633,7 @@
           <td>
             
             
-            <span class='code'>This function allows achieving the &#96;&#37;f&#96; printf format.</span>
+            <span class='code'>    redux &#61; Float32&#40;0x1.8p23&#41; / TBLSIZE</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +643,7 @@
           <td>
             
             
-            <span class='code'>Note the 2nd method allows passing in a byte buffer and position directly; callers must ensure the buffer has sufficient room to hold the entire decimal string.</span>
+            <span class='code'>    P1 &#61; Float32&#40;0x1.62e430p-1&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +653,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    P2 &#61; Float32&#40;0x1.ebfbe0p-3&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +663,7 @@
           <td>
             
             
-            <span class='code'>Various options for the output format include:</span>
+            <span class='code'>    P3 &#61; Float32&#40;0x1.c6b348p-5&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +673,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;plus&#96;: for positive &#96;x&#96;, prefix decimal string with a &#96;&#39;&#43;&#39;&#96; character</span>
+            <span class='code'>    P4 &#61; Float32&#40;0x1.3b2c9cp-7&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +683,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;space&#96;: for positive &#96;x&#96;, prefix decimal string with a &#96;&#39; &#39;&#96; character; overridden if &#96;plus&#61;true&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +693,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;hash&#96;: whether the decimal point should be written, even if no additional digits are needed for precision</span>
+            <span class='code'>    # Reduce x, computing z, i0, and k.</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +703,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;precision&#96;: minimum number of significant digits to be included in the decimal string; extra &#96;&#39;0&#39;&#96; characters will be added for padding if necessary</span>
+            <span class='code'>    t::Float32 &#61; x &#43; redux</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +713,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;decchar&#96;: decimal point character to be used</span>
+            <span class='code'>    i0 &#61; reinterpret&#40;UInt32, t&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +723,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;trimtrailingzeros&#96;: whether trailing zeros of fractional part should be removed</span>
+            <span class='code'>    i0 &#43;&#61; TBLSIZE ÷ UInt32&#40;2&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +733,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    k::UInt32 &#61; unsafe_trunc&#40;UInt32, &#40;i0 &gt;&gt; TBLBITS&#41; &lt;&lt; 20&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +743,7 @@
           <td>
             
             
-            <span class='code'>function writefixed&#40;x::T,</span>
+            <span class='code'>    i0 &amp;&#61; TBLSIZE - UInt32&#40;1&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +753,7 @@
           <td>
             
             
-            <span class='code'>    precision::Integer,</span>
+            <span class='code'>    t -&#61; redux</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +763,7 @@
           <td>
             
             
-            <span class='code'>    plus::Bool&#61;false,</span>
+            <span class='code'>    z &#61; x - t</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +773,7 @@
           <td>
             
             
-            <span class='code'>    space::Bool&#61;false,</span>
+            <span class='code'>    twopk &#61; Float32&#40;reinterpret&#40;Float64, UInt64&#40;0x3ff00000 &#43; k&#41; &lt;&lt; 32&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +783,7 @@
           <td>
             
             
-            <span class='code'>    hash::Bool&#61;false,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +793,7 @@
           <td>
             
             
-            <span class='code'>    decchar::UInt8&#61;UInt8&#40;&#39;.&#39;&#41;,</span>
+            <span class='code'>    # Compute r &#61; exp2&#40;y&#41; &#61; exp2ft&#91;i0&#93; * p&#40;z&#41;.</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +803,7 @@
           <td>
             
             
-            <span class='code'>    trimtrailingzeros::Bool&#61;false&#41; where &#123;T &lt;: Base.IEEEFloat&#125;</span>
+            <span class='code'>    tv &#61; EXP2FT&#91;i0 &#43; UInt32&#40;1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +813,7 @@
           <td>
             
             
-            <span class='code'>    buf &#61; Base.StringVector&#40;precision &#43; neededdigits&#40;T&#41;&#41;</span>
+            <span class='code'>    u &#61; tv * z</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +823,7 @@
           <td>
             
             
-            <span class='code'>    pos &#61; writefixed&#40;buf, 1, x, precision, plus, space, hash, decchar, trimtrailingzeros&#41;</span>
+            <span class='code'>    tv &#61; tv &#43; u * &#40;P1 &#43; z * P2&#41; &#43; u * &#40;z * z&#41; * &#40;P3 &#43; z * P4&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +833,7 @@
           <td>
             
             
-            <span class='code'>    return String&#40;resize&#33;&#40;buf, pos - 1&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +843,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Scale by 2**&#40;k&gt;&gt;20&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +853,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return tv * twopk</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +863,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +873,7 @@
           <td>
             
             
-            <span class='code'>    Ryu.writeexp&#40;x, precision, plus&#61;false, space&#61;false, hash&#61;false, expchar&#61;UInt8&#40;&#39;e&#39;&#41;, decchar&#61;UInt8&#40;&#39;.&#39;&#41;, trimtrailingzeros&#61;false&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +883,7 @@
           <td>
             
             
-            <span class='code'>    Ryu.writeexp&#40;buf::Vector&#123;UInt8&#125;, pos::Int, x, args...&#41;</span>
+            <span class='code'>if VERSION &lt; v&quot;1.7.0&quot;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +893,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +903,7 @@
           <td>
             
             
-            <span class='code'>Convert a float value &#96;x&#96; into a scientific notation decimal string.</span>
+            <span class='code'>        fastpow&#40;x::Real, y::Real&#41; -&gt; Float32</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +913,7 @@
           <td>
             
             
-            <span class='code'>This function allows achieving the &#96;&#37;e&#96; printf format.</span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +923,7 @@
           <td>
             
             
-            <span class='code'>Note the 2nd method allows passing in a byte buffer and position directly; callers must ensure the buffer has sufficient room to hold the entire decimal string.</span>
+            <span class='code'>    @inline function fastpow&#40;x::Real, y::Real&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +933,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if iszero&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +943,7 @@
           <td>
             
             
-            <span class='code'>Various options for the output format include:</span>
+            <span class='code'>            return 0.0f0</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +953,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;plus&#96;: for positive &#96;x&#96;, prefix decimal string with a &#96;&#39;&#43;&#39;&#96; character</span>
+            <span class='code'>        elseif isinf&#40;x&#41; &amp;&amp; isinf&#40;y&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +963,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;space&#96;: for positive &#96;x&#96;, prefix decimal string with a &#96;&#39; &#39;&#96; character; overridden if &#96;plus&#61;true&#96;</span>
+            <span class='code'>            return Float32&#40;Inf&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +973,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;hash&#96;: whether the decimal point should be written, even if no additional digits are needed for precision</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +983,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;precision&#96;: minimum number of significant digits to be included in the decimal string; extra &#96;&#39;0&#39;&#96; characters will be added for padding if necessary</span>
+            <span class='code'>            return _exp2&#40;convert&#40;Float32, y&#41; * fastlog2&#40;convert&#40;Float32, x&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +993,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;expchar&#96;: character to use exponent component in scientific notation</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +1003,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;decchar&#96;: decimal point character to be used</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +1013,7 @@
           <td>
             
             
-            <span class='code'>  * &#96;trimtrailingzeros&#96;: whether trailing zeros should be removed</span>
+            <span class='code'>else</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1023,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1033,7 @@
           <td>
             
             
-            <span class='code'>function writeexp&#40;x::T,</span>
+            <span class='code'>        fastpow&#40;x::Real, y::Real&#41; -&gt; Float32</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1043,7 @@
           <td>
             
             
-            <span class='code'>    precision::Integer,</span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1053,7 @@
           <td>
             
             
-            <span class='code'>    plus::Bool&#61;false,</span>
+            <span class='code'>    @inline function fastpow&#40;x::Real, y::Real&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1063,7 @@
           <td>
             
             
-            <span class='code'>    space::Bool&#61;false,</span>
+            <span class='code'>        if iszero&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,17 +1073,31 @@
           <td>
             
             
-            <span class='code'>    hash::Bool&#61;false,</span>
+            <span class='code'>            return 0.0f0</span>
           </td>
         </tr>
         <tr id='L103'>
           <td class='lineno'>103</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    expchar::UInt8&#61;UInt8&#40;&#39;e&#39;&#41;,</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in fastpow
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from stepsize_controller&#33;
+              <a href='controllers.jl-1501331312ef6dc9c5154139bb40b95e5443b97d.html#L140'>line 140</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='float.jl-f8bff2723ae36bf5d241e1dfb84415e8caa69aa0.html#L633'>isinf</a>
+              <br />
+            </div>
+            <span class='code'>        elseif isinf&#40;x&#41; &amp;&amp; isinf&#40;y&#41;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1107,7 @@
           <td>
             
             
-            <span class='code'>    decchar::UInt8&#61;UInt8&#40;&#39;.&#39;&#41;,</span>
+            <span class='code'>            return Float32&#40;Inf&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,17 +1117,48 @@
           <td>
             
             
-            <span class='code'>    trimtrailingzeros::Bool&#61;false&#41; where &#123;T &lt;: Base.IEEEFloat&#125;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L106'>
           <td class='lineno'>106</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>5 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    buf &#61; Base.StringVector&#40;precision &#43; neededdigits&#40;T&#41;&#41;</span>
+            <div class='call-sites'>
+              5 &#40;0 &#37;&#41;
+              samples spent in fastpow
+              <br />
+              
+              4 &#40;80 &#37;&#41; &#40;incl.&#41;
+              when called from stepsize_controller&#33;
+              <a href='controllers.jl-1501331312ef6dc9c5154139bb40b95e5443b97d.html#L140'>line 140</a>
+              <br />
+              
+              1 &#40;20 &#37;&#41; &#40;incl.&#41;
+              when called from stepsize_controller&#33;
+              <a href='controllers.jl-1501331312ef6dc9c5154139bb40b95e5443b97d.html#L141'>line 141</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;40 &#37;&#41;
+              samples spent calling
+              <a href='fastmath.jl-5313ef1947b6b16087c3aa7729e1404ac9087d94.html#L276'>exp2_fast</a>
+              <br />
+              1 &#40;20 &#37;&#41;
+              samples spent calling
+              <a href='fastmath.jl-5313ef1947b6b16087c3aa7729e1404ac9087d94.html#L167'>mul_fast</a>
+              <br />
+              1 &#40;20 &#37;&#41;
+              samples spent calling
+              <a href='fastpow.jl-cc528f28ec1096329400b7c9bf03acb4af3a0d44.html#L22'>fastlog2</a>
+              <br />
+              1 &#40;20 &#37;&#41;
+              samples spent calling
+              <a href='fastpow.jl-cc528f28ec1096329400b7c9bf03acb4af3a0d44.html#L30'>fastlog2</a>
+              <br />
+            </div>
+            <span class='code'>            return @fastmath exp2&#40;convert&#40;Float32, y&#41; * fastlog2&#40;convert&#40;Float32, x&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1168,7 @@
           <td>
             
             
-            <span class='code'>    pos &#61; writeexp&#40;buf, 1, x, precision, plus, space, hash, expchar, decchar, trimtrailingzeros&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1178,7 @@
           <td>
             
             
-            <span class='code'>    return String&#40;resize&#33;&#40;buf, pos - 1&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1125,235 +1198,7 @@
           <td>
             
             
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L111'>
-          <td class='lineno'>111</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in show
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from show
-              <a href='Ryu.jl-8345df4318c86140391aae1cc0d7316e2e904e54.html#L112'>line 112</a>
-              <br />
-            </div>
-            
-            <span class='code'>function Base.show&#40;io::IO, x::T, forceuntyped::Bool&#61;false, fromprint::Bool&#61;false&#41; where &#123;T &lt;: Base.IEEEFloat&#125;</span>
-          </td>
-        </tr>
-        <tr id='L112'>
-          <td class='lineno'>112</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in show
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from print
-              <a href='io.jl-dffdba29d550543f4d2e65648cf314bfc4288934.html#L35'>line 35</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='Ryu.jl-8345df4318c86140391aae1cc0d7316e2e904e54.html#L111'>show</a>
-              <br />
-            </div>
-            <span class='code'>    compact &#61; get&#40;io, :compact, false&#41;::Bool</span>
-          </td>
-        </tr>
-        <tr id='L113'>
-          <td class='lineno'>113</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
-          <td>
-            
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='iobuffer.jl-46695bfd9277865955bd001454ade30dd27628d9.html#L31'>StringVector</a>
-              <br />
-            </div>
-            <span class='code'>    buf &#61; Base.StringVector&#40;neededdigits&#40;T&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L114'>
-          <td class='lineno'>114</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    typed &#61; &#33;forceuntyped &amp;&amp; &#33;compact &amp;&amp; get&#40;io, :typeinfo, Any&#41; &#33;&#61; typeof&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L115'>
-          <td class='lineno'>115</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pos &#61; writeshortest&#40;buf, 1, x, false, false, true, -1,</span>
-          </td>
-        </tr>
-        <tr id='L116'>
-          <td class='lineno'>116</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#40;x isa Float32 &amp;&amp; &#33;fromprint&#41; ? UInt8&#40;&#39;f&#39;&#41; : UInt8&#40;&#39;e&#39;&#41;, false, UInt8&#40;&#39;.&#39;&#41;, typed, compact&#41;</span>
-          </td>
-        </tr>
-        <tr id='L117'>
-          <td class='lineno'>117</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    write&#40;io, resize&#33;&#40;buf, pos - 1&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L118'>
-          <td class='lineno'>118</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return</span>
-          </td>
-        </tr>
-        <tr id='L119'>
-          <td class='lineno'>119</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L120'>
-          <td class='lineno'>120</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L121'>
-          <td class='lineno'>121</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function Base.string&#40;x::T&#41; where &#123;T &lt;: Base.IEEEFloat&#125;</span>
-          </td>
-        </tr>
-        <tr id='L122'>
-          <td class='lineno'>122</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    buf &#61; Base.StringVector&#40;neededdigits&#40;T&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L123'>
-          <td class='lineno'>123</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pos &#61; writeshortest&#40;buf, 1, x, false, false, true, -1,</span>
-          </td>
-        </tr>
-        <tr id='L124'>
-          <td class='lineno'>124</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        UInt8&#40;&#39;e&#39;&#41;, false, UInt8&#40;&#39;.&#39;&#41;, false, false&#41;</span>
-          </td>
-        </tr>
-        <tr id='L125'>
-          <td class='lineno'>125</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return String&#40;resize&#33;&#40;buf, pos - 1&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L126'>
-          <td class='lineno'>126</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L127'>
-          <td class='lineno'>127</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L128'>
-          <td class='lineno'>128</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.print&#40;io::IO, x::Union&#123;Float16, Float32&#125;&#41; &#61; show&#40;io, x, true, true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L129'>
-          <td class='lineno'>129</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L130'>
-          <td class='lineno'>130</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end # module</span>
+            <span class='code'>@inline fastpow&#40;x, y&#41; &#61; x^y</span>
           </td>
         </tr>
       </tbody>

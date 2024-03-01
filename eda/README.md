@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/bond-ring-paths`
-*Generated on 2024-03-01@07:38:53 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8107621275)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
+*Generated on 2024-03-01@18:33:23 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8114520026)*
 
 ---
 
