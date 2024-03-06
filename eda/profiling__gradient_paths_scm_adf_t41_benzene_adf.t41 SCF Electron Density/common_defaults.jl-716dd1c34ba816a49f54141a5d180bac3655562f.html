@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/OrdinaryDiffEq/DmspS/src/caches/basic_caches.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/DiffEqBase/8vI1R/src/common_defaults.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 06 Mar 2024 17:05:11
+        Generated on Wed, 06 Mar 2024 17:41:35
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>abstract type OrdinaryDiffEqCache &lt;: DiffEqBase.DECache end</span>
+            <span class='code'>function abs2_and_sum&#40;x, y&#41;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>abstract type OrdinaryDiffEqConstantCache &lt;: OrdinaryDiffEqCache end</span>
+            <span class='code'>    reduce&#40;Base.add_sum, x, init &#61; zero&#40;real&#40;value&#40;eltype&#40;x&#41;&#41;&#41;&#41;&#41; &#43;</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>abstract type OrdinaryDiffEqMutableCache &lt;: OrdinaryDiffEqCache end</span>
+            <span class='code'>    reduce&#40;Base.add_sum, y, init &#61; zero&#40;real&#40;value&#40;eltype&#40;y&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>struct ODEEmptyCache &lt;: OrdinaryDiffEqConstantCache end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>struct ODEChunkCache&#123;CS&#125; &lt;: OrdinaryDiffEqConstantCache end</span>
+            <span class='code'>@inline UNITLESS_ABS2&#40;x::Number&#41; &#61; abs2&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function UNITLESS_ABS2&#40;x::AbstractArray&#41;</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>mutable struct CompositeCache&#123;T, F&#125; &lt;: OrdinaryDiffEqCache</span>
+            <span class='code'>    mapreduce&#40;UNITLESS_ABS2, abs2_and_sum, x, init &#61; zero&#40;real&#40;value&#40;eltype&#40;x&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    caches::T</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    choice_function::F</span>
+            <span class='code'>@inline function UNITLESS_ABS2&#40;x::RecursiveArrayTools.AbstractVectorOfArray&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    current::Int</span>
+            <span class='code'>    mapreduce&#40;UNITLESS_ABS2, abs2_and_sum, x.u, init &#61; zero&#40;real&#40;value&#40;eltype&#40;x&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function UNITLESS_ABS2&#40;x::RecursiveArrayTools.ArrayPartition&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>TruncatedStacktraces.@truncate_stacktrace CompositeCache 1</span>
+            <span class='code'>    mapreduce&#40;UNITLESS_ABS2, abs2_and_sum, x.x, init &#61; zero&#40;real&#40;value&#40;eltype&#40;x&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>if isdefined&#40;Base, :Experimental&#41; &amp;&amp; isdefined&#40;Base.Experimental, :silence&#33;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    Base.Experimental.silence&#33;&#40;CompositeCache&#41;</span>
+            <span class='code'>@inline UNITLESS_ABS2&#40;f::F, x::Number&#41; where &#123;F&#125; &#61; abs2&#40;f&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function UNITLESS_ABS2&#40;f::F, x::AbstractArray&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return mapreduce&#40;UNITLESS_ABS2 ∘ f, abs2_and_sum, x;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>function alg_cache&#40;alg::CompositeAlgorithm&#123;Tuple&#123;T1, T2&#125;, F&#125;, u, rate_prototype,</span>
+            <span class='code'>        init &#61; zero&#40;real&#40;value&#40;eltype&#40;x&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uEltypeNoUnits&#125;, ::Type&#123;uBottomEltypeNoUnits&#125;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;tTypeNoUnits&#125;, uprev,</span>
+            <span class='code'>@inline function UNITLESS_ABS2&#40;f::F, x::RecursiveArrayTools.ArrayPartition&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>        uprev2, f, t, dt, reltol, p, calck,</span>
+            <span class='code'>    return mapreduce&#40;UNITLESS_ABS2 ∘ f, abs2_and_sum, x.x;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;V&#125;&#41; where &#123;T1, T2, F, V, uEltypeNoUnits, uBottomEltypeNoUnits,</span>
+            <span class='code'>        init &#61; zero&#40;real&#40;value&#40;eltype&#40;x&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,31 +265,17 @@
           <td>
             
             
-            <span class='code'>        tTypeNoUnits&#125;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L25'>
           <td class='lineno'>25</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in alg_cache
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #__init#762
-              <a href='solve.jl-648acca9c7975003ae59f8da47d057cf282bea3c.html#L344'>line 344</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='kencarp_kvaerno_caches.jl-8ecf034821ee0020b12ffe037b468e2337aa5a63.html#L362'>alg_cache</a>
-              <br />
-            </div>
-            <span class='code'>    caches &#61; &#40;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -299,7 +285,7 @@
           <td>
             
             
-            <span class='code'>        alg_cache&#40;alg.algs&#91;1&#93;, u, rate_prototype, uEltypeNoUnits,</span>
+            <span class='code'>@inline recursive_length&#40;u::AbstractArray&#123;&lt;:Number&#125;&#41; &#61; length&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -309,7 +295,7 @@
           <td>
             
             
-            <span class='code'>            uBottomEltypeNoUnits,</span>
+            <span class='code'>@inline recursive_length&#40;u::Number&#41; &#61; length&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -319,7 +305,7 @@
           <td>
             
             
-            <span class='code'>            tTypeNoUnits, uprev, uprev2, f, t, dt, reltol, p, calck, Val&#40;V&#41;&#41;,</span>
+            <span class='code'>@inline recursive_length&#40;u::AbstractArray&#123;&lt;:AbstractArray&#125;&#41; &#61; sum&#40;recursive_length, u&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -329,7 +315,7 @@
           <td>
             
             
-            <span class='code'>        alg_cache&#40;alg.algs&#91;2&#93;, u, rate_prototype, uEltypeNoUnits,</span>
+            <span class='code'>@inline recursive_length&#40;u::RecursiveArrayTools.ArrayPartition&#41; &#61; sum&#40;recursive_length, u.x&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -339,7 +325,7 @@
           <td>
             
             
-            <span class='code'>            uBottomEltypeNoUnits,</span>
+            <span class='code'>@inline recursive_length&#40;u::RecursiveArrayTools.VectorOfArray&#41; &#61; sum&#40;recursive_length, u.u&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -349,7 +335,7 @@
           <td>
             
             
-            <span class='code'>            tTypeNoUnits, uprev, uprev2, f, t, dt, reltol, p, calck, Val&#40;V&#41;&#41;&#41;</span>
+            <span class='code'>@inline function recursive_length&#40;u::AbstractArray&#123;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -359,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    CompositeCache&#40;caches, alg.choice_function, 1&#41;</span>
+            <span class='code'>        &lt;:StaticArraysCore.StaticArray&#123;S, &lt;:Number&#125;&#125;&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -369,7 +355,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    prod&#40;Size&#40;eltype&#40;u&#41;&#41;&#41; * length&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -379,7 +365,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -389,7 +375,7 @@
           <td>
             
             
-            <span class='code'>function alg_cache&#40;alg::CompositeAlgorithm, u, rate_prototype, ::Type&#123;uEltypeNoUnits&#125;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L36'>
@@ -399,7 +385,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uBottomEltypeNoUnits&#125;, ::Type&#123;tTypeNoUnits&#125;, uprev, uprev2, f, t,</span>
+            <span class='code'>@inline ODE_DEFAULT_NORM&#40;u::Union&#123;AbstractFloat, Complex&#125;, t&#41; &#61; @fastmath abs&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -409,7 +395,7 @@
           <td>
             
             
-            <span class='code'>        dt, reltol, p, calck,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L38'>
@@ -419,7 +405,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;V&#125;&#41; where &#123;V, uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits&#125;</span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;f::F, u::Union&#123;AbstractFloat, Complex&#125;, t&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -429,7 +415,7 @@
           <td>
             
             
-            <span class='code'>    caches &#61; __alg_cache&#40;alg.algs, u, rate_prototype, uEltypeNoUnits, uBottomEltypeNoUnits,</span>
+            <span class='code'>    return @fastmath abs&#40;f&#40;u&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -439,7 +425,7 @@
           <td>
             
             
-            <span class='code'>        tTypeNoUnits, uprev, uprev2, f, t, dt, reltol, p, calck, Val&#40;V&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -449,7 +435,7 @@
           <td>
             
             
-            <span class='code'>    CompositeCache&#40;caches, alg.choice_function, 1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -459,7 +445,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;u::Array&#123;T&#125;, t&#41; where &#123;T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -469,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x &#61; zero&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -479,7 +465,7 @@
           <td>
             
             
-            <span class='code'># map &#43; closure approach doesn&#39;t infer</span>
+            <span class='code'>    @inbounds @fastmath for ui in u</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,27 +475,55 @@
           <td>
             
             
-            <span class='code'>@generated function __alg_cache&#40;algs::T, u, rate_prototype, ::Type&#123;uEltypeNoUnits&#125;,</span>
+            <span class='code'>        x &#43;&#61; abs2&#40;ui&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
           <td class='lineno'>46</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        ::Type&#123;uBottomEltypeNoUnits&#125;, ::Type&#123;tTypeNoUnits&#125;, uprev,</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in ODE_DEFAULT_NORM
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from perform_step&#33;
+              <a href='verner_rk_perform_step.jl-2c67991eb0cc2b554a28fcf30ccd7502c80d1f51.html#L1152'>line 1152</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L945'>iterate</a>
+              <br />
+            </div>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L47'>
           <td class='lineno'>47</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        uprev2, f, t, dt, reltol, p, calck,</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in ODE_DEFAULT_NORM
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from perform_step&#33;
+              <a href='verner_rk_perform_step.jl-2c67991eb0cc2b554a28fcf30ccd7502c80d1f51.html#L1154'>line 1154</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='promotion.jl-44ebf2f4984ea9f5732597165bf7a9648777f045.html#L532'>max</a>
+              <br />
+            </div>
+            <span class='code'>    Base.FastMath.sqrt_fast&#40;real&#40;x&#41; / max&#40;length&#40;u&#41;, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +533,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;V&#125;&#41; where &#123;T &lt;: Tuple, V, uEltypeNoUnits,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +543,7 @@
           <td>
             
             
-            <span class='code'>        uBottomEltypeNoUnits, tTypeNoUnits&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +553,7 @@
           <td>
             
             
-            <span class='code'>    return Expr&#40;:tuple,</span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;f::F,</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +563,7 @@
           <td>
             
             
-            <span class='code'>        map&#40;1:length&#40;T.types&#41;&#41; do i</span>
+            <span class='code'>        u::Union&#123;Array&#123;T&#125;, Iterators.Zip&#123;&lt;:Tuple&#123;Vararg&#123;Array&#123;T&#125;&#125;&#125;&#125;&#125;,</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +573,7 @@
           <td>
             
             
-            <span class='code'>            :&#40;alg_cache&#40;algs&#91;&#36;i&#93;, u, rate_prototype, uEltypeNoUnits,</span>
+            <span class='code'>        t&#41; where &#123;F, T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +583,7 @@
           <td>
             
             
-            <span class='code'>                uBottomEltypeNoUnits, tTypeNoUnits, uprev, uprev2, f, t, dt,</span>
+            <span class='code'>    x &#61; zero&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +593,7 @@
           <td>
             
             
-            <span class='code'>                reltol, p, calck, Val&#40;&#36;V&#41;&#41;&#41;</span>
+            <span class='code'>    @inbounds @fastmath for ui in u</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +603,7 @@
           <td>
             
             
-            <span class='code'>        end...&#41;</span>
+            <span class='code'>        x &#43;&#61; abs2&#40;f&#40;ui&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +613,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +623,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Base.FastMath.sqrt_fast&#40;real&#40;x&#41; / max&#40;length&#40;u&#41;, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +633,7 @@
           <td>
             
             
-            <span class='code'>alg_cache&#40;alg::OrdinaryDiffEqAlgorithm, prob, callback::F&#41; where &#123;F&#125; &#61; ODEEmptyCache&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -639,7 +653,7 @@
           <td>
             
             
-            <span class='code'>@cache struct FunctionMapCache&#123;uType, rateType&#125; &lt;: OrdinaryDiffEqMutableCache</span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;u::StaticArraysCore.StaticArray&#123;&lt;:Tuple, T&#125;,</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +663,7 @@
           <td>
             
             
-            <span class='code'>    u::uType</span>
+            <span class='code'>        t&#41; where &#123;T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +673,7 @@
           <td>
             
             
-            <span class='code'>    uprev::uType</span>
+            <span class='code'>    Base.FastMath.sqrt_fast&#40;real&#40;sum&#40;abs2, u&#41;&#41; / max&#40;length&#40;u&#41;, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +683,7 @@
           <td>
             
             
-            <span class='code'>    tmp::rateType</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +693,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +703,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;f::F, u::StaticArraysCore.StaticArray&#123;&lt;:Tuple, T&#125;,</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +713,7 @@
           <td>
             
             
-            <span class='code'>function alg_cache&#40;alg::FunctionMap, u, rate_prototype, ::Type&#123;uEltypeNoUnits&#125;,</span>
+            <span class='code'>        t&#41; where &#123;F, T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +723,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uBottomEltypeNoUnits&#125;, ::Type&#123;tTypeNoUnits&#125;, uprev, uprev2, f, t,</span>
+            <span class='code'>    Base.FastMath.sqrt_fast&#40;real&#40;sum&#40;abs2 ∘ f, u&#41;&#41; / max&#40;length&#40;u&#41;, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +733,7 @@
           <td>
             
             
-            <span class='code'>        dt, reltol, p, calck,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +743,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;true&#125;&#41; where &#123;uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +753,7 @@
           <td>
             
             
-            <span class='code'>    FunctionMapCache&#40;u, uprev,</span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +763,7 @@
           <td>
             
             
-            <span class='code'>        FunctionMap_scale_by_time&#40;alg&#41; ? rate_prototype :</span>
+            <span class='code'>        u::Union&#123;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +773,7 @@
           <td>
             
             
-            <span class='code'>        &#40;eltype&#40;u&#41; &lt;: Enum ? copy&#40;u&#41; : zero&#40;u&#41;&#41;&#41;</span>
+            <span class='code'>            AbstractArray,</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +783,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            RecursiveArrayTools.AbstractVectorOfArray</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +793,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#125;,</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +803,7 @@
           <td>
             
             
-            <span class='code'>struct FunctionMapConstantCache &lt;: OrdinaryDiffEqConstantCache end</span>
+            <span class='code'>        t&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +813,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Base.FastMath.sqrt_fast&#40;UNITLESS_ABS2&#40;u&#41; / max&#40;recursive_length&#40;u&#41;, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +823,7 @@
           <td>
             
             
-            <span class='code'>function alg_cache&#40;alg::FunctionMap, u, rate_prototype, ::Type&#123;uEltypeNoUnits&#125;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +833,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uBottomEltypeNoUnits&#125;, ::Type&#123;tTypeNoUnits&#125;, uprev, uprev2, f, t,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +843,7 @@
           <td>
             
             
-            <span class='code'>        dt, reltol, p, calck,</span>
+            <span class='code'>@inline function ODE_DEFAULT_NORM&#40;f::F, u::AbstractArray, t&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +853,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;false&#125;&#41; where &#123;uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits&#125;</span>
+            <span class='code'>    Base.FastMath.sqrt_fast&#40;UNITLESS_ABS2&#40;f, u&#41; / max&#40;recursive_length&#40;u&#41;, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +863,7 @@
           <td>
             
             
-            <span class='code'>    FunctionMapConstantCache&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +873,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +883,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline ODE_DEFAULT_NORM&#40;u, t&#41; &#61; norm&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +893,7 @@
           <td>
             
             
-            <span class='code'>@cache struct ExplicitRKCache&#123;uType, rateType, uNoUnitsType, TabType&#125; &lt;:</span>
+            <span class='code'>@inline ODE_DEFAULT_NORM&#40;f::F, u, t&#41; where &#123;F&#125; &#61; norm&#40;f.&#40;u&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +903,7 @@
           <td>
             
             
-            <span class='code'>              OrdinaryDiffEqMutableCache</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +913,7 @@
           <td>
             
             
-            <span class='code'>    u::uType</span>
+            <span class='code'>@inline ODE_DEFAULT_ISOUTOFDOMAIN&#40;u, p, t&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +923,7 @@
           <td>
             
             
-            <span class='code'>    uprev::uType</span>
+            <span class='code'>@inline function ODE_DEFAULT_PROG_MESSAGE&#40;dt, u::Array, p, t&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +933,7 @@
           <td>
             
             
-            <span class='code'>    tmp::uType</span>
+            <span class='code'>    tmp &#61; u&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +943,7 @@
           <td>
             
             
-            <span class='code'>    utilde::rateType</span>
+            <span class='code'>    for i in eachindex&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +953,7 @@
           <td>
             
             
-            <span class='code'>    atmp::uNoUnitsType</span>
+            <span class='code'>        tmp &#61; ifelse&#40;abs&#40;u&#91;i&#93;&#41; &gt; abs&#40;tmp&#41;, u&#91;i&#93;, tmp&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +963,7 @@
           <td>
             
             
-            <span class='code'>    fsalfirst::rateType</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +973,7 @@
           <td>
             
             
-            <span class='code'>    fsallast::rateType</span>
+            <span class='code'>    &quot;dt&#61;&quot; * string&#40;dt&#41; * &quot;\nt&#61;&quot; * string&#40;t&#41; * &quot;\nmax u&#61;&quot; * string&#40;tmp&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +983,7 @@
           <td>
             
             
-            <span class='code'>    kk::Vector&#123;rateType&#125;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +993,7 @@
           <td>
             
             
-            <span class='code'>    tab::TabType</span>
+            <span class='code'>@inline function ODE_DEFAULT_PROG_MESSAGE&#40;dt, u, p, t&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -989,7 +1003,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &quot;dt&#61;&quot; * string&#40;dt&#41; * &quot;\nt&#61;&quot; * string&#40;t&#41; * &quot;\nmax u&#61;&quot; * string&#40;maximum&#40;abs.&#40;u&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +1013,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +1023,7 @@
           <td>
             
             
-            <span class='code'>TruncatedStacktraces.@truncate_stacktrace ExplicitRKCache 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1033,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline NAN_CHECK&#40;x::Number&#41; &#61; isnan&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1043,7 @@
           <td>
             
             
-            <span class='code'>function alg_cache&#40;alg::ExplicitRK, u, rate_prototype, ::Type&#123;uEltypeNoUnits&#125;,</span>
+            <span class='code'>@inline NAN_CHECK&#40;x::Float64&#41; &#61; isnan&#40;x&#41; || &#40;x &gt; 1e50&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1053,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uBottomEltypeNoUnits&#125;, ::Type&#123;tTypeNoUnits&#125;, uprev, uprev2, f, t,</span>
+            <span class='code'>@inline NAN_CHECK&#40;x::Enum&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1063,7 @@
           <td>
             
             
-            <span class='code'>        dt, reltol, p, calck,</span>
+            <span class='code'>@inline NAN_CHECK&#40;x::Union&#123;AbstractArray, RecursiveArrayTools.AbstractVectorOfArray&#125;&#41; &#61; any&#40;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1073,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;true&#125;&#41; where &#123;uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits&#125;</span>
+            <span class='code'>    NAN_CHECK,</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1083,7 @@
           <td>
             
             
-            <span class='code'>    kk &#61; Vector&#123;typeof&#40;rate_prototype&#41;&#125;&#40;undef, 0&#41;</span>
+            <span class='code'>    x&#41;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1093,7 @@
           <td>
             
             
-            <span class='code'>    for i in 1:&#40;alg.tableau.stages&#41;</span>
+            <span class='code'>@inline NAN_CHECK&#40;x::RecursiveArrayTools.ArrayPartition&#41; &#61; any&#40;NAN_CHECK, x.x&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1103,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;kk, zero&#40;rate_prototype&#41;&#41;</span>
+            <span class='code'>@inline function NAN_CHECK&#40;x::SparseArrays.AbstractSparseMatrixCSC&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1113,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    any&#40;NAN_CHECK, SparseArrays.nonzeros&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1109,7 +1123,7 @@
           <td>
             
             
-            <span class='code'>    fsalfirst &#61; kk&#91;1&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1119,7 +1133,7 @@
           <td>
             
             
-            <span class='code'>    if isfsal&#40;alg.tableau&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1129,7 +1143,7 @@
           <td>
             
             
-            <span class='code'>        fsallast &#61; kk&#91;end&#93;</span>
+            <span class='code'>@inline ODE_DEFAULT_UNSTABLE_CHECK&#40;dt, u, p, t&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1139,7 +1153,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>@inline ODE_DEFAULT_UNSTABLE_CHECK&#40;dt, u::Union&#123;Number, AbstractArray&#125;, p, t&#41; &#61; NAN_CHECK&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1149,7 +1163,7 @@
           <td>
             
             
-            <span class='code'>        fsallast &#61; zero&#40;rate_prototype&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1159,7 +1173,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Nonlinear Solve Norm &#40;norm&#40;_, 2&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1169,7 +1183,7 @@
           <td>
             
             
-            <span class='code'>    utilde &#61; zero&#40;rate_prototype&#41;</span>
+            <span class='code'>@inline NONLINEARSOLVE_DEFAULT_NORM&#40;u::Union&#123;AbstractFloat, Complex&#125;&#41; &#61; @fastmath abs&#40;u&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1179,7 +1193,7 @@
           <td>
             
             
-            <span class='code'>    tmp &#61; zero&#40;u&#41;</span>
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;f::F,</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1189,7 +1203,7 @@
           <td>
             
             
-            <span class='code'>    atmp &#61; similar&#40;u, uEltypeNoUnits&#41;</span>
+            <span class='code'>        u::Union&#123;AbstractFloat, Complex&#125;&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1199,7 +1213,7 @@
           <td>
             
             
-            <span class='code'>    recursivefill&#33;&#40;atmp, false&#41;</span>
+            <span class='code'>    return @fastmath abs&#40;f&#40;u&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1209,7 +1223,7 @@
           <td>
             
             
-            <span class='code'>    tab &#61; ExplicitRKConstantCache&#40;alg.tableau, rate_prototype&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1219,7 +1233,7 @@
           <td>
             
             
-            <span class='code'>    ExplicitRKCache&#40;u, uprev, tmp, utilde, atmp, fsalfirst, fsallast, kk, tab&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1229,7 +1243,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;u::Array&#123;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1239,7 +1253,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        T&#125;&#41; where &#123;T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1249,7 +1263,7 @@
           <td>
             
             
-            <span class='code'>struct ExplicitRKConstantCache&#123;MType, VType, KType&#125; &lt;: OrdinaryDiffEqConstantCache</span>
+            <span class='code'>    x &#61; zero&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1259,7 +1273,7 @@
           <td>
             
             
-            <span class='code'>    A::MType</span>
+            <span class='code'>    @inbounds @fastmath for ui in u</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1269,7 +1283,7 @@
           <td>
             
             
-            <span class='code'>    c::VType</span>
+            <span class='code'>        x &#43;&#61; abs2&#40;ui&#41;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1279,7 +1293,7 @@
           <td>
             
             
-            <span class='code'>    α::VType</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1289,7 +1303,7 @@
           <td>
             
             
-            <span class='code'>    αEEst::VType</span>
+            <span class='code'>    return Base.FastMath.sqrt_fast&#40;real&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1299,7 +1313,7 @@
           <td>
             
             
-            <span class='code'>    stages::Int</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1309,7 +1323,7 @@
           <td>
             
             
-            <span class='code'>    kk::KType</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1319,7 +1333,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;f::F,</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1329,7 +1343,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        u::Union&#123;Array&#123;T&#125;, Iterators.Zip&#123;&lt;:Tuple&#123;Vararg&#123;Array&#123;T&#125;&#125;&#125;&#125;&#125;&#41; where &#123;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1339,7 +1353,7 @@
           <td>
             
             
-            <span class='code'>function ExplicitRKConstantCache&#40;tableau, rate_prototype&#41;</span>
+            <span class='code'>        F, T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1349,7 +1363,7 @@
           <td>
             
             
-            <span class='code'>    @unpack A, c, α, αEEst, stages &#61; tableau</span>
+            <span class='code'>    x &#61; zero&#40;T&#41;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1359,7 +1373,7 @@
           <td>
             
             
-            <span class='code'>    A &#61; copy&#40;A&#39;&#41; # Transpose A to column major looping</span>
+            <span class='code'>    @inbounds @fastmath for ui in u</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1369,7 +1383,7 @@
           <td>
             
             
-            <span class='code'>    kk &#61; Array&#123;typeof&#40;rate_prototype&#41;&#125;&#40;undef, stages&#41; # Not ks since that&#39;s for integrator.opts.dense</span>
+            <span class='code'>        x &#43;&#61; abs2&#40;f&#40;ui&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1379,7 +1393,7 @@
           <td>
             
             
-            <span class='code'>    αEEst &#61; isempty&#40;αEEst&#41; ? αEEst : α .- αEEst</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1389,7 +1403,7 @@
           <td>
             
             
-            <span class='code'>    ExplicitRKConstantCache&#40;A, c, α, αEEst, stages, kk&#41;</span>
+            <span class='code'>    return Base.FastMath.sqrt_fast&#40;real&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1419,7 +1433,7 @@
           <td>
             
             
-            <span class='code'>function alg_cache&#40;alg::ExplicitRK, u, rate_prototype, ::Type&#123;uEltypeNoUnits&#125;,</span>
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;u::StaticArraysCore.StaticArray&#123;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1429,7 +1443,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uBottomEltypeNoUnits&#125;, ::Type&#123;tTypeNoUnits&#125;, uprev, uprev2, f, t,</span>
+            <span class='code'>        &lt;:Tuple, T&#125;&#41; where &#123;T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1439,7 +1453,7 @@
           <td>
             
             
-            <span class='code'>        dt, reltol, p, calck,</span>
+            <span class='code'>    return Base.FastMath.sqrt_fast&#40;real&#40;sum&#40;abs2, u&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1449,7 +1463,7 @@
           <td>
             
             
-            <span class='code'>        ::Val&#123;false&#125;&#41; where &#123;uEltypeNoUnits, uBottomEltypeNoUnits, tTypeNoUnits&#125;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1473,7 @@
           <td>
             
             
-            <span class='code'>    ExplicitRKConstantCache&#40;alg.tableau, rate_prototype&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1469,7 +1483,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;f::F,</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1479,7 +1493,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        u::StaticArraysCore.StaticArray&#123;&lt;:Tuple, T&#125;&#41; where &#123;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1503,7 @@
           <td>
             
             
-            <span class='code'>get_chunksize&#40;cache::DiffEqBase.DECache&#41; &#61; error&#40;&quot;This cache does not have a chunksize.&quot;&#41;</span>
+            <span class='code'>        F, T &lt;: Union&#123;AbstractFloat, Complex&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1513,127 @@
           <td>
             
             
-            <span class='code'>get_chunksize&#40;cache::ODEChunkCache&#123;CS&#125;&#41; where &#123;CS&#125; &#61; CS</span>
+            <span class='code'>    return Base.FastMath.sqrt_fast&#40;real&#40;sum&#40;abs2 ∘ f, u&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L147'>
+          <td class='lineno'>147</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L148'>
+          <td class='lineno'>148</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L149'>
+          <td class='lineno'>149</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;u::AbstractArray&#41;</span>
+          </td>
+        </tr>
+        <tr id='L150'>
+          <td class='lineno'>150</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return Base.FastMath.sqrt_fast&#40;UNITLESS_ABS2&#40;u&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L151'>
+          <td class='lineno'>151</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L152'>
+          <td class='lineno'>152</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L153'>
+          <td class='lineno'>153</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline function NONLINEARSOLVE_DEFAULT_NORM&#40;f::F, u::AbstractArray&#41; where &#123;F&#125;</span>
+          </td>
+        </tr>
+        <tr id='L154'>
+          <td class='lineno'>154</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return Base.FastMath.sqrt_fast&#40;UNITLESS_ABS2&#40;f, u&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L155'>
+          <td class='lineno'>155</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L156'>
+          <td class='lineno'>156</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L157'>
+          <td class='lineno'>157</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline NONLINEARSOLVE_DEFAULT_NORM&#40;u&#41; &#61; norm&#40;u&#41;</span>
+          </td>
+        </tr>
+        <tr id='L158'>
+          <td class='lineno'>158</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline NONLINEARSOLVE_DEFAULT_NORM&#40;f::F, u&#41; where &#123;F&#125; &#61; norm&#40;f.&#40;u&#41;&#41;</span>
           </td>
         </tr>
       </tbody>

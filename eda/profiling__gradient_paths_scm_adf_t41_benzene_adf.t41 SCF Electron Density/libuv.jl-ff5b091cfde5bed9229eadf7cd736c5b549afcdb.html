@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/refpointer.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/libuv.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 06 Mar 2024 17:05:11
+        Generated on Wed, 06 Mar 2024 17:41:35
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Core definitions for interacting with the libuv library from Julia</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#123;T&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;string&#40;length&#40;Core.ARGS&#41; &gt;&#61; 2 ? Core.ARGS&#91;2&#93; : &quot;&quot;, &quot;uv_constants.jl&quot;&#41;&#41;  # include&#40;&#36;BUILDROOT/base/uv_constants.jl&#41;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>An object that safely references data of type &#96;T&#96;. This type is guaranteed to point to</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>valid, Julia-allocated memory of the correct type. The underlying data is protected from</span>
+            <span class='code'># convert UV handle data to julia object, checking for null</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>freeing by the garbage collector as long as the &#96;Ref&#96; itself is referenced.</span>
+            <span class='code'>function uv_sizeof_handle&#40;handle&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if &#33;&#40;UV_UNKNOWN_HANDLE &lt; handle &lt; UV_HANDLE_TYPE_MAX&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>In Julia, &#96;Ref&#96; objects are dereferenced &#40;loaded or stored&#41; with &#96;&#91;&#93;&#96;.</span>
+            <span class='code'>        throw&#40;DomainError&#40;handle&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>Creation of a &#96;Ref&#96; to a value &#96;x&#96; of type &#96;T&#96; is usually written &#96;Ref&#40;x&#41;&#96;.</span>
+            <span class='code'>    return ccall&#40;:uv_handle_size, Csize_t, &#40;Int32,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>Additionally, for creating interior pointers to containers &#40;such as Array or Ptr&#41;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>it can be written &#96;Ref&#40;a, i&#41;&#96; for creating a reference to the &#96;i&#96;-th element of &#96;a&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function uv_sizeof_req&#40;req&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ref&#123;T&#125;&#40;&#41;&#96; creates a reference to a value of type &#96;T&#96; without initialization.</span>
+            <span class='code'>    if &#33;&#40;UV_UNKNOWN_REQ &lt; req &lt; UV_REQ_TYPE_MAX&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>For a bitstype &#96;T&#96;, the value will be whatever currently resides in the memory</span>
+            <span class='code'>        throw&#40;DomainError&#40;req&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>allocated. For a non-bitstype &#96;T&#96;, the reference will be undefined and attempting to</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>dereference it will result in an error, &quot;UndefRefError: access to undefined reference&quot;.</span>
+            <span class='code'>    return ccall&#40;:uv_req_size, Csize_t, &#40;Int32,&#41;, req&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>To check if a &#96;Ref&#96; is an undefined reference, use &#91;&#96;isassigned&#40;ref::RefValue&#41;&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>For example, &#96;isassigned&#40;Ref&#123;T&#125;&#40;&#41;&#41;&#96; is &#96;false&#96; if &#96;T&#96; is not a bitstype.</span>
+            <span class='code'>for h in uv_handle_types</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>If &#96;T&#96; is a bitstype, &#96;isassigned&#40;Ref&#123;T&#125;&#40;&#41;&#41;&#96; will always be true.</span>
+            <span class='code'>@eval const &#36;&#40;Symbol&#40;&quot;_sizeof_&quot;, lowercase&#40;string&#40;h&#41;&#41;&#41;&#41; &#61; uv_sizeof_handle&#40;&#36;h&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>When passed as a &#96;ccall&#96; argument &#40;either as a &#96;Ptr&#96; or &#96;Ref&#96; type&#41;, a &#96;Ref&#96;</span>
+            <span class='code'>for r in uv_req_types</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>object will be converted to a native pointer to the data it references.</span>
+            <span class='code'>@eval const &#36;&#40;Symbol&#40;&quot;_sizeof_&quot;, lowercase&#40;string&#40;r&#41;&#41;&#41;&#41; &#61; uv_sizeof_req&#40;&#36;r&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>For most &#96;T&#96;, or when converted to a &#96;Ptr&#123;Cvoid&#125;&#96;, this is a pointer to the</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>object data. When &#96;T&#96; is an &#96;isbits&#96; type, this value may be safely mutated,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>otherwise mutation is strictly undefined behavior.</span>
+            <span class='code'>uv_handle_data&#40;handle&#41; &#61; ccall&#40;:jl_uv_handle_data, Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>uv_req_data&#40;handle&#41; &#61; ccall&#40;:jl_uv_req_data, Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>As a special case, setting &#96;T &#61; Any&#96; will instead cause the creation of a</span>
+            <span class='code'>uv_req_set_data&#40;req, data&#41; &#61; ccall&#40;:jl_uv_req_set_data, Cvoid, &#40;Ptr&#123;Cvoid&#125;, Any&#41;, req, data&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>pointer to the reference itself when converted to a &#96;Ptr&#123;Any&#125;&#96;</span>
+            <span class='code'>uv_req_set_data&#40;req, data::Ptr&#123;Cvoid&#125;&#41; &#61; ccall&#40;:jl_uv_req_set_data, Cvoid, &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, req, data&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>&#40;a &#96;jl_value_t const* const*&#96; if T is immutable, else a &#96;jl_value_t *const *&#96;&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>When converted to a &#96;Ptr&#123;Cvoid&#125;&#96;, it will still return a pointer to the data</span>
+            <span class='code'>macro handle_as&#40;hand, typ&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>region as for any other &#96;T&#96;.</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        local data &#61; uv_handle_data&#40;&#36;&#40;esc&#40;hand&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>A &#96;C_NULL&#96; instance of &#96;Ptr&#96; can be passed to a &#96;ccall&#96; &#96;Ref&#96; argument to initialize it.</span>
+            <span class='code'>        data &#61;&#61; C_NULL &amp;&amp; return</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        unsafe_pointer_to_objref&#40;data&#41;::&#40;&#36;&#40;esc&#40;typ&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'># Use in broadcasting</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ref&#96; is sometimes used in broadcasting in order to treat the referenced values as a scalar.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>associate_julia_struct&#40;handle::Ptr&#123;Cvoid&#125;, @nospecialize&#40;jlobj&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ccall&#40;:jl_uv_associate_julia_struct, Cvoid, &#40;Ptr&#123;Cvoid&#125;, Any&#41;, handle, jlobj&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>disassociate_julia_struct&#40;uv&#41; &#61; disassociate_julia_struct&#40;uv.handle&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#40;5&#41;</span>
+            <span class='code'>disassociate_julia_struct&#40;handle::Ptr&#123;Cvoid&#125;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>Base.RefValue&#123;Int64&#125;&#40;5&#41;</span>
+            <span class='code'>    handle &#33;&#61; C_NULL &amp;&amp; ccall&#40;:jl_uv_disassociate_julia_struct, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, handle&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isa.&#40;Ref&#40;&#91;1,2,3&#93;&#41;, &#91;Array, Dict, Int&#93;&#41; # Treat reference values as scalar during broadcasting</span>
+            <span class='code'>iolock_begin&#40;&#41; &#61; ccall&#40;:jl_iolock_begin, Cvoid, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>3-element BitVector:</span>
+            <span class='code'>iolock_end&#40;&#41; &#61; ccall&#40;:jl_iolock_end, Cvoid, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'> 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'> 0</span>
+            <span class='code'># A dict of all libuv handles that are being waited on somewhere in the system</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'> 0</span>
+            <span class='code'># and should thus not be garbage collected</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const uvhandles &#61; IdDict&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#123;Function&#125;&#40;&#41;  # Undefined reference to a non-bitstype, Function</span>
+            <span class='code'>const preserve_handle_lock &#61; Threads.SpinLock&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>Base.RefValue&#123;Function&#125;&#40;#undef&#41;</span>
+            <span class='code'>function preserve_handle&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    lock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; try</span>
+            <span class='code'>    v &#61; get&#40;uvhandles, x, 0&#41;::Int</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>           Ref&#123;Function&#125;&#40;&#41;&#91;&#93; # Dereferencing an undefined reference will result in an error</span>
+            <span class='code'>    uvhandles&#91;x&#93; &#61; v &#43; 1</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>       catch e</span>
+            <span class='code'>    unlock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>           println&#40;e&#41;</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>UndefRefError&#40;&#41;</span>
+            <span class='code'>function unpreserve_handle&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    lock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#123;Int64&#125;&#40;&#41;&#91;&#93;; # A reference to a bitstype refers to an undetermined value if not given</span>
+            <span class='code'>    v &#61; get&#40;uvhandles, x, 0&#41;::Int</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if v &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isassigned&#40;Ref&#123;Int64&#125;&#40;&#41;&#41; # A reference to a bitstype is always assigned</span>
+            <span class='code'>        unlock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>        error&#40;&quot;unbalanced call to unpreserve_handle for &#36;&#40;typeof&#40;x&#41;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif v &#61;&#61; 1</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#123;Int64&#125;&#40;0&#41;&#91;&#93; &#61;&#61; 0 # Explicitly give a value for a bitstype reference</span>
+            <span class='code'>        pop&#33;&#40;uvhandles, x&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        uvhandles&#91;x&#93; &#61; v - 1</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>Ref</span>
+            <span class='code'>    unlock&#40;preserve_handle_lock&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'># C NUL-terminated string pointers; these can be used in ccall</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'># instead of Ptr&#123;Cchar&#125; and Ptr&#123;Cwchar_t&#125;, respectively, to enforce</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'># a check for embedded NUL chars in the string &#40;to avoid silent truncation&#41;.</span>
+            <span class='code'>## Libuv error handling ##</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>if Int &#61;&#61;&#61; Int64</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cstring  64 end</span>
+            <span class='code'>struct IOError &lt;: Exception</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cwstring 64 end</span>
+            <span class='code'>    msg::String</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>else</span>
+            <span class='code'>    code::Int32</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cstring  32 end</span>
+            <span class='code'>    IOError&#40;msg::AbstractString, code::Integer&#41; &#61; new&#40;msg, code&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cwstring 32 end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>showerror&#40;io::IO, e::IOError&#41; &#61; print&#40;io, &quot;IOError: &quot;, e.msg&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>### General Methods for Ref&#123;T&#125; type</span>
+            <span class='code'>function _UVError&#40;pfx::AbstractString, code::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    code &#61; Int32&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>eltype&#40;x::Type&#123;&lt;:Ref&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; @isdefined&#40;T&#41; ? T : Any</span>
+            <span class='code'>    IOError&#40;string&#40;pfx, &quot;: &quot;, struverror&#40;code&#41;, &quot; &#40;&quot;, uverrorname&#40;code&#41;, &quot;&#41;&quot;&#41;, code&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x::Ref&#123;T&#125;&#41; where &#123;T&#125; &#61; x</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>size&#40;x::Ref&#41; &#61; &#40;&#41;</span>
+            <span class='code'>function _UVError&#40;pfx::AbstractString, code::Integer, sfxs::AbstractString...&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;x::Ref&#41; &#61; &#40;&#41;</span>
+            <span class='code'>    code &#61; Int32&#40;code&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>length&#40;x::Ref&#41; &#61; 1</span>
+            <span class='code'>    IOError&#40;string&#40;pfx, &quot;: &quot;, struverror&#40;code&#41;, &quot; &#40;&quot;, uverrorname&#40;code&#41;, &quot;&#41;&quot;, &quot; &quot;, sfxs...&#41;, code&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;x::Ref&#41; &#61; false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;x::Ref&#41; &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;::Type&#123;&lt;:Ref&#125;&#41; &#61; 0</span>
+            <span class='code'>struverror&#40;err::Int32&#41; &#61; unsafe_string&#40;ccall&#40;:uv_strerror, Cstring, &#40;Int32,&#41;, err&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>iterate&#40;r::Ref&#41; &#61; &#40;r&#91;&#93;, nothing&#41;</span>
+            <span class='code'>uverrorname&#40;err::Int32&#41; &#61; unsafe_string&#40;ccall&#40;:uv_err_name, Cstring, &#40;Int32,&#41;, err&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>iterate&#40;r::Ref, s&#41; &#61; nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Ref&#125;&#41; &#61; HasShape&#123;0&#125;&#40;&#41;</span>
+            <span class='code'>uv_error&#40;prefix::Symbol, c::Integer&#41; &#61; uv_error&#40;string&#40;prefix&#41;, c&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>uv_error&#40;prefix::AbstractString, c::Integer&#41; &#61; c &lt; 0 ? throw&#40;_UVError&#40;prefix, c&#41;&#41; : nothing</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'># create Ref objects for general object conversion</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x::Ref&#123;T&#125;&#41; where &#123;T&#125; &#61; unsafe_convert&#40;Ptr&#123;T&#125;, x&#41;</span>
+            <span class='code'>## event loop ##</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x&#41; where &#123;T&#125; &#61; unsafe_convert&#40;Ptr&#123;T&#125;, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>eventloop&#40;&#41; &#61; ccall&#40;:jl_global_event_loop, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x&#41; where &#123;T&#125; &#61; RefValue&#123;T&#125;&#40;x&#41;::RefValue&#123;T&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function uv_unref&#40;h::Ptr&#123;Cvoid&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>### Methods for a Ref object that is backed by an array at index i</span>
+            <span class='code'>    iolock_begin&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>struct RefArray&#123;T,A&lt;:AbstractArray&#123;T&#125;,R&#125; &lt;: Ref&#123;T&#125;</span>
+            <span class='code'>    ccall&#40;:uv_unref, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, h&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>    x::A</span>
+            <span class='code'>    iolock_end&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>    i::Int</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>    roots::R # should be either ::Nothing or ::Any</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    RefArray&#123;T,A,R&#125;&#40;x,i,roots&#61;nothing&#41; where &#123;T,A&lt;:AbstractArray&#123;T&#125;,R&#125; &#61; new&#40;x,i,roots&#41;</span>
+            <span class='code'>function uv_ref&#40;h::Ptr&#123;Cvoid&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    iolock_begin&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Int, roots::Any&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Any&#125;&#40;x, i, roots&#41;</span>
+            <span class='code'>    ccall&#40;:uv_ref, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, h&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Int&#61;1, roots::Nothing&#61;nothing&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Nothing&#125;&#40;x, i, nothing&#41;</span>
+            <span class='code'>    iolock_end&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Integer, roots::Any&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Any&#125;&#40;x, Int&#40;i&#41;, roots&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Integer, roots::Nothing&#61;nothing&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Nothing&#125;&#40;x, Int&#40;i&#41;, nothing&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,17 +1205,26 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x::AbstractArray&#123;T&#125;&#41; where &#123;T&#125; &#61; RefArray&#40;x, 1&#41;</span>
+            <span class='code'>function process_events&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
           <td class='lineno'>119</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in process_events
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from wait
+              <a href='task.jl-27e33abc9728abaa3d4045e3bdd4ed1c75b0356c.html#L996'>line 996</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>    return ccall&#40;:jl_process_events, Int32, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1234,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_convert&#40;P::Union&#123;Type&#123;Ptr&#123;T&#125;&#125;,Type&#123;Ptr&#123;Cvoid&#125;&#125;&#125;, b::RefArray&#123;T&#125;&#41;::P where T</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1244,7 @@
           <td>
             
             
-            <span class='code'>    if allocatedinline&#40;T&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1254,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; pointer&#40;b.x, b.i&#41;</span>
+            <span class='code'>function uv_alloc_buf end</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1264,7 @@
           <td>
             
             
-            <span class='code'>    elseif isconcretetype&#40;T&#41; &amp;&amp; ismutabletype&#40;T&#41;</span>
+            <span class='code'>function uv_readcb end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1274,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; pointer_from_objref&#40;b.x&#91;b.i&#93;&#41;</span>
+            <span class='code'>function uv_writecb_task end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1284,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>function uv_shutdowncb_task end</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1294,7 @@
           <td>
             
             
-            <span class='code'>        # see comment on equivalent branch for RefValue</span>
+            <span class='code'>function uv_return_spawn end</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1304,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; pointerref&#40;Ptr&#123;Ptr&#123;Cvoid&#125;&#125;&#40;pointer&#40;b.x, b.i&#41;&#41;, 1, Core.sizeof&#40;Ptr&#123;Cvoid&#125;&#41;&#41;</span>
+            <span class='code'>function uv_asynccb end</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1314,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function uv_timercb end</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1324,7 @@
           <td>
             
             
-            <span class='code'>    return p</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1334,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function reinit_stdio&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1344,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_convert&#40;::Type&#123;Ptr&#123;Any&#125;&#125;, b::RefArray&#123;Any&#125;&#41;::Ptr&#123;Any&#125;</span>
+            <span class='code'>    global stdin &#61; init_stdio&#40;ccall&#40;:jl_stdin_stream, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1354,7 @@
           <td>
             
             
-            <span class='code'>    return pointer&#40;b.x, b.i&#41;</span>
+            <span class='code'>    global stdout &#61; init_stdio&#40;ccall&#40;:jl_stdout_stream, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1364,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    global stderr &#61; init_stdio&#40;ccall&#40;:jl_stderr_stream, Ptr&#123;Cvoid&#125;, &#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1374,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    opts &#61; JLOptions&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1384,7 @@
           <td>
             
             
-            <span class='code'>###</span>
+            <span class='code'>    if opts.color &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,31 +1394,17 @@
           <td>
             
             
-            <span class='code'>if is_primary_base_module</span>
+            <span class='code'>        have_color &#61; &#40;opts.color &#61;&#61; 1&#41;</span>
           </td>
         </tr>
         <tr id='L137'>
           <td class='lineno'>137</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in Ref
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from broadcastable
-              <a href='broadcast.jl-452d9d2e3a2787f40b88516ed5b304de3fe060e3.html#L739'>line 739</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='refvalue.jl-3e98c76d36d007f49ee43e2292d24772401abdc0.html#L10'>RefValue</a>
-              <br />
-            </div>
-            <span class='code'>    Ref&#40;x::Any&#41; &#61; RefValue&#40;x&#41;</span>
+            
+            
+            <span class='code'>        if &#33;isa&#40;stdout, TTY&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1419,7 +1414,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#123;T&#125;&#40;&#41; where &#123;T&#125; &#61; RefValue&#123;T&#125;&#40;&#41; # Ref&#123;T&#125;&#40;&#41;</span>
+            <span class='code'>            global stdout &#61; IOContext&#40;stdout, :color &#61;&gt; have_color&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1429,7 +1424,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#123;T&#125;&#40;x&#41; where &#123;T&#125; &#61; RefValue&#123;T&#125;&#40;x&#41; # Ref&#123;T&#125;&#40;x&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1439,7 +1434,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if &#33;isa&#40;stderr, TTY&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1449,7 +1444,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#40;x::Ref, i::Integer&#41; &#61; &#40;i &#33;&#61; 1 &amp;&amp; error&#40;&quot;Ref only has one element&quot;&#41;; x&#41;</span>
+            <span class='code'>            global stderr &#61; IOContext&#40;stderr, :color &#61;&gt; have_color&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1454,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#40;x::Ptr&#123;T&#125;, i::Integer&#41; where &#123;T&#125; &#61; x &#43; &#40;i - 1&#41; * Core.sizeof&#40;T&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1469,7 +1464,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1479,7 +1474,7 @@
           <td>
             
             
-            <span class='code'>    # convert Arrays to pointer arrays for ccall</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1484,7 @@
           <td>
             
             
-            <span class='code'>    function Ref&#123;P&#125;&#40;a::Array&#123;&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;&#125;&#41; where P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1494,7 @@
           <td>
             
             
-            <span class='code'>        return RefArray&#40;a&#41; # effectively a no-op</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1509,7 +1504,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1519,7 +1514,7 @@
           <td>
             
             
-            <span class='code'>    function Ref&#123;P&#125;&#40;a::Array&#123;T&#125;&#41; where P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125; where T</span>
+            <span class='code'>    stdin::IO</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1529,7 +1524,7 @@
           <td>
             
             
-            <span class='code'>        if &#40;&#33;isbitstype&#40;T&#41; &amp;&amp; T &lt;: eltype&#40;P&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1539,7 +1534,7 @@
           <td>
             
             
-            <span class='code'>            # this Array already has the right memory layout for the requested Ref</span>
+            <span class='code'>Global variable referring to the standard input stream.</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1549,7 +1544,7 @@
           <td>
             
             
-            <span class='code'>            return RefArray&#40;a,1,false&#41; # root something, so that this function is type-stable</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1559,7 +1554,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>:stdin</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1569,7 +1564,7 @@
           <td>
             
             
-            <span class='code'>            ptrs &#61; Vector&#123;P&#125;&#40;undef, length&#40;a&#41;&#43;1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1579,7 +1574,7 @@
           <td>
             
             
-            <span class='code'>            roots &#61; Vector&#123;Any&#125;&#40;undef, length&#40;a&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1589,7 +1584,7 @@
           <td>
             
             
-            <span class='code'>            for i &#61; 1:length&#40;a&#41;</span>
+            <span class='code'>    stdout::IO</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1599,7 +1594,7 @@
           <td>
             
             
-            <span class='code'>                root &#61; cconvert&#40;P, a&#91;i&#93;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1609,7 +1604,7 @@
           <td>
             
             
-            <span class='code'>                ptrs&#91;i&#93; &#61; unsafe_convert&#40;P, root&#41;::P</span>
+            <span class='code'>Global variable referring to the standard out stream.</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1619,7 +1614,7 @@
           <td>
             
             
-            <span class='code'>                roots&#91;i&#93; &#61; root</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1629,7 +1624,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>:stdout</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1639,7 +1634,7 @@
           <td>
             
             
-            <span class='code'>            ptrs&#91;length&#40;a&#41;&#43;1&#93; &#61; C_NULL</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1649,7 +1644,7 @@
           <td>
             
             
-            <span class='code'>            return RefArray&#40;ptrs,1,roots&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1659,7 +1654,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    stderr::IO</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1669,7 +1664,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1679,7 +1674,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#40;x::AbstractArray, i::Integer&#41; &#61; RefArray&#40;x, i&#41;</span>
+            <span class='code'>Global variable referring to the standard error stream.</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1689,7 +1684,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1699,337 +1694,7 @@
           <td>
             
             
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L167'>
-          <td class='lineno'>167</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>cconvert&#40;::Type&#123;Ptr&#123;P&#125;&#125;, a::Array&#123;&lt;:Ptr&#125;&#41; where &#123;P&lt;:Ptr&#125; &#61; a</span>
-          </td>
-        </tr>
-        <tr id='L168'>
-          <td class='lineno'>168</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;P&#125;&#125;, a::Array&#123;&lt;:Ptr&#125;&#41; where &#123;P&lt;:Ptr&#125; &#61; a</span>
-          </td>
-        </tr>
-        <tr id='L169'>
-          <td class='lineno'>169</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>cconvert&#40;::Type&#123;Ptr&#123;P&#125;&#125;, a::Array&#41; where &#123;P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;&#125; &#61; Ref&#123;P&#125;&#40;a&#41;</span>
-          </td>
-        </tr>
-        <tr id='L170'>
-          <td class='lineno'>170</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;P&#125;&#125;, a::Array&#41; where &#123;P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;&#125; &#61; Ref&#123;P&#125;&#40;a&#41;</span>
-          </td>
-        </tr>
-        <tr id='L171'>
-          <td class='lineno'>171</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L172'>
-          <td class='lineno'>172</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># pass NTuple&#123;N,T&#125; as Ptr&#123;T&#125;/Ref&#123;T&#125;</span>
-          </td>
-        </tr>
-        <tr id='L173'>
-          <td class='lineno'>173</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;T&#125;&#125;, t::NTuple&#123;N,T&#125;&#41; where &#123;N,T&#125; &#61; Ref&#123;NTuple&#123;N,T&#125;&#125;&#40;t&#41;</span>
-          </td>
-        </tr>
-        <tr id='L174'>
-          <td class='lineno'>174</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;T&#125;&#125;, r::Ref&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61; r</span>
-          </td>
-        </tr>
-        <tr id='L175'>
-          <td class='lineno'>175</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, r::Ref&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L176'>
-          <td class='lineno'>176</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    convert&#40;Ptr&#123;T&#125;, unsafe_convert&#40;Ptr&#123;NTuple&#123;N,T&#125;&#125;, r&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L177'>
-          <td class='lineno'>177</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, r::Ref&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L178'>
-          <td class='lineno'>178</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    convert&#40;Ptr&#123;T&#125;, unsafe_convert&#40;Ptr&#123;NTuple&#123;N,T&#125;&#125;, r&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L179'>
-          <td class='lineno'>179</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, r::Ptr&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L180'>
-          <td class='lineno'>180</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    convert&#40;Ptr&#123;T&#125;, r&#41;</span>
-          </td>
-        </tr>
-        <tr id='L181'>
-          <td class='lineno'>181</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L182'>
-          <td class='lineno'>182</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>###</span>
-          </td>
-        </tr>
-        <tr id='L183'>
-          <td class='lineno'>183</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L184'>
-          <td class='lineno'>184</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>getindex&#40;b::RefArray&#41; &#61; b.x&#91;b.i&#93;</span>
-          </td>
-        </tr>
-        <tr id='L185'>
-          <td class='lineno'>185</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>setindex&#33;&#40;b::RefArray, x&#41; &#61; &#40;b.x&#91;b.i&#93; &#61; x; b&#41;</span>
-          </td>
-        </tr>
-        <tr id='L186'>
-          <td class='lineno'>186</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L187'>
-          <td class='lineno'>187</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>###</span>
-          </td>
-        </tr>
-        <tr id='L188'>
-          <td class='lineno'>188</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L189'>
-          <td class='lineno'>189</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L190'>
-          <td class='lineno'>190</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    LLVMPtr&#123;T, AS&#125;</span>
-          </td>
-        </tr>
-        <tr id='L191'>
-          <td class='lineno'>191</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L192'>
-          <td class='lineno'>192</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>A pointer type that more closely resembles LLVM semantics: It includes the pointer address</span>
-          </td>
-        </tr>
-        <tr id='L193'>
-          <td class='lineno'>193</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>space, and will be passed as an actual pointer instead of an integer.</span>
-          </td>
-        </tr>
-        <tr id='L194'>
-          <td class='lineno'>194</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L195'>
-          <td class='lineno'>195</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>This type is mainly used to interface with code that has strict requirements about pointers,</span>
-          </td>
-        </tr>
-        <tr id='L196'>
-          <td class='lineno'>196</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>e.g., intrinsics that are selected based on the address space, or back-ends that require</span>
-          </td>
-        </tr>
-        <tr id='L197'>
-          <td class='lineno'>197</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pointers to be identifiable by their types.</span>
-          </td>
-        </tr>
-        <tr id='L198'>
-          <td class='lineno'>198</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L199'>
-          <td class='lineno'>199</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Core.LLVMPtr</span>
+            <span class='code'>:stderr</span>
           </td>
         </tr>
       </tbody>

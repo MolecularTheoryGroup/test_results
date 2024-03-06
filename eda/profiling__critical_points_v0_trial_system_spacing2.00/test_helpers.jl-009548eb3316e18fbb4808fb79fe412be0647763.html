@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/pcre.jl</title>
+    <title>StatProfilerHTML - test_helpers.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 06 Mar 2024 17:05:11
+        Generated on Wed, 06 Mar 2024 17:41:17
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>using Dates</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using Interpolations</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>## low-level pcre2 interface ##</span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using ZipFile</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>module PCRE</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># only import ElectronDensityAnalysis if it is not already imported</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>import ..RefValue</span>
+            <span class='code'>if &#33;isdefined&#40;Main, :ElectronDensityAnalysis&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    using ElectronDensityAnalysis</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'># include&#40;&#36;BUILDROOT/base/pcre_h.jl&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>include&#40;string&#40;length&#40;Core.ARGS&#41; &gt;&#61; 2 ? Core.ARGS&#91;2&#93; : &quot;&quot;, &quot;pcre_h.jl&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Define path to test data directory</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>const PCRE_LIB &#61; &quot;libpcre2-8&quot;</span>
+            <span class='code'>DATA_DIR &#61; joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;test_data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># get full path of all files in DATA_DIR with .zip extension removed</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>function create_match_context&#40;&#41;</span>
+            <span class='code'>DATA_FILES &#61; map&#40;x -&gt; joinpath&#40;DATA_DIR, replace&#40;x, &quot;.zip&quot; &#61;&gt; &quot;&quot;&#41;&#41;, readdir&#40;DATA_DIR&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    JIT_STACK_START_SIZE &#61; 32768</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    JIT_STACK_MAX_SIZE &#61; 1048576</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    jit_stack &#61; ccall&#40;&#40;:pcre2_jit_stack_create_8, PCRE_LIB&#41;, Ptr&#123;Cvoid&#125;,</span>
+            <span class='code'>    unzip&#40;file::AbstractString, exdir::AbstractString&#61;&quot;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>                      &#40;Csize_t, Csize_t, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>                      JIT_STACK_START_SIZE, JIT_STACK_MAX_SIZE, C_NULL&#41;</span>
+            <span class='code'>Unzips the specified zip file to the specified directory.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    ctx &#61; ccall&#40;&#40;:pcre2_match_context_create_8, PCRE_LIB&#41;,</span>
+            <span class='code'>Taken from: https://discourse.julialang.org/t/how-to-extract-a-file-in-a-zip-archive-without-using-os-specific-tools/34585/4</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>                Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, C_NULL&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_jit_stack_assign_8, PCRE_LIB&#41;, Cvoid,</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>          &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, ctx, C_NULL, jit_stack&#41;</span>
+            <span class='code'>- &#96;file::AbstractString&#96;: The path to the zip file to unzip.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    return ctx</span>
+            <span class='code'>- &#96;exdir::AbstractString&#61;&quot;&quot;&#41;&#96;: The path to the directory to extract the zip file to. If not specified, the zip file will be extracted to the same directory as the zip file.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>THREAD_MATCH_CONTEXTS::Vector&#123;Ptr&#123;Cvoid&#125;&#125; &#61; &#91;C_NULL&#93;</span>
+            <span class='code'>- &#96;ZipFile.Reader&#96;: A &#96;ZipFile.Reader&#96; object representing the unzipped files.</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>PCRE_COMPILE_LOCK &#61; nothing</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>_tid&#40;&#41; &#61; Int&#40;ccall&#40;:jl_threadid, Int16, &#40;&#41;&#41;&#41; &#43; 1</span>
+            <span class='code'>julia&gt; unzip&#40;&quot;data.zip&quot;, &quot;data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>_mth&#40;&#41; &#61; Int&#40;Core.Intrinsics.atomic_pointerref&#40;cglobal&#40;:jl_n_threads, Cint&#41;, :acquire&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,26 +355,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L34'>
           <td class='lineno'>34</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in get_local_match_context
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from exec
-              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L203'>line 203</a>
-              <br />
-            </div>
             
-            <span class='code'>function get_local_match_context&#40;&#41;</span>
+            
+            <span class='code'>function unzip&#40;file::String, exdir&#61;&quot;&quot;&#41;::Nothing</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -384,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    tid &#61; _tid&#40;&#41;</span>
+            <span class='code'>    @assert isfile&#40;file&#41; &quot;File does not exist: &#36;file&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -394,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    ctxs &#61; THREAD_MATCH_CONTEXTS</span>
+            <span class='code'>    fileFullPath &#61; isabspath&#40;file&#41; ? file : joinpath&#40;pwd&#40;&#41;, file&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -404,7 +395,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;ctxs&#41; &lt; tid</span>
+            <span class='code'>    basePath &#61; dirname&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -414,7 +405,7 @@
           <td>
             
             
-            <span class='code'>        # slow path to allocate it</span>
+            <span class='code'>    outPath &#61; &#40;exdir &#61;&#61; &quot;&quot; ? basePath : &#40;isabspath&#40;exdir&#41; ? exdir : joinpath&#40;pwd&#40;&#41;, exdir&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -424,7 +415,7 @@
           <td>
             
             
-            <span class='code'>        l &#61; PCRE_COMPILE_LOCK::Threads.SpinLock</span>
+            <span class='code'>    isdir&#40;outPath&#41; ? &quot;&quot; : mkdir&#40;outPath&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -434,7 +425,7 @@
           <td>
             
             
-            <span class='code'>        lock&#40;l&#41;</span>
+            <span class='code'>    zarchive &#61; ZipFile.Reader&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -444,7 +435,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>    for f in zarchive.files</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -454,7 +445,7 @@
           <td>
             
             
-            <span class='code'>            ctxs &#61; THREAD_MATCH_CONTEXTS</span>
+            <span class='code'>        fullFilePath &#61; joinpath&#40;outPath, f.name&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -464,7 +455,7 @@
           <td>
             
             
-            <span class='code'>            if length&#40;ctxs&#41; &lt; tid</span>
+            <span class='code'>        if &#40;endswith&#40;f.name, &quot;/&quot;&#41; || endswith&#40;f.name, &quot;\\&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -474,7 +465,7 @@
           <td>
             
             
-            <span class='code'>                global THREAD_MATCH_CONTEXTS &#61; ctxs &#61; copyto&#33;&#40;fill&#40;C_NULL, length&#40;ctxs&#41; &#43; _mth&#40;&#41;&#41;, ctxs&#41;</span>
+            <span class='code'>            mkpath&#40;fullFilePath&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -484,7 +475,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -494,7 +485,7 @@
           <td>
             
             
-            <span class='code'>        finally</span>
+            <span class='code'>            try</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -504,7 +495,7 @@
           <td>
             
             
-            <span class='code'>            unlock&#40;l&#41;</span>
+            <span class='code'>                write&#40;fullFilePath, read&#40;f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -514,7 +505,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            catch e</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -524,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                @debug &quot;Error writing file in unzip&#40;&#41;: &#36;e&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -534,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    ctx &#61; @inbounds ctxs&#91;tid&#93;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -544,7 +535,7 @@
           <td>
             
             
-            <span class='code'>    if ctx &#61;&#61; C_NULL</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -554,7 +545,7 @@
           <td>
             
             
-            <span class='code'>        # slow path to allocate it</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -564,7 +555,7 @@
           <td>
             
             
-            <span class='code'>        ctx &#61; create_match_context&#40;&#41;</span>
+            <span class='code'>    return close&#40;zarchive&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -574,7 +565,7 @@
           <td>
             
             
-            <span class='code'>        THREAD_MATCH_CONTEXTS&#91;tid&#93; &#61; ctx</span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -584,7 +575,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -594,7 +585,7 @@
           <td>
             
             
-            <span class='code'>    return ctx</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -604,7 +595,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -614,7 +605,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -624,7 +615,7 @@
           <td>
             
             
-            <span class='code'># supported options for different use cases</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -634,7 +625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>The &#96;with_zip_file&#96; function is a utility function that takes a file path and a function as inputs. It first appends the &quot;.zip&quot; extension to the file path to get the path of the corresponding zip file. Then, it tries to unzip the zip file using the &#96;unzip&#96; function. If the unzipping is successful, it calls the provided function with the original file path as an argument. If any error occurs during the unzipping or function execution, the error is rethrown. Finally, it removes the original file using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -644,7 +635,7 @@
           <td>
             
             
-            <span class='code'># arguments to pcre2_compile</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -654,7 +645,7 @@
           <td>
             
             
-            <span class='code'>const COMPILE_MASK      &#61;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -664,7 +655,7 @@
           <td>
             
             
-            <span class='code'>      ALT_BSUX          |</span>
+            <span class='code'>- &#96;f_path::AbstractString&#96;: The file path of the file to be unzipped and processed.</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -674,7 +665,7 @@
           <td>
             
             
-            <span class='code'>      ALT_CIRCUMFLEX    |</span>
+            <span class='code'>- &#96;func::Function&#96;: The function to be executed with the unzipped file.</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -684,7 +675,7 @@
           <td>
             
             
-            <span class='code'>      ALT_VERBNAMES     |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L66'>
@@ -694,7 +685,7 @@
           <td>
             
             
-            <span class='code'>      ANCHORED          |</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -704,7 +695,7 @@
           <td>
             
             
-            <span class='code'>      # AUTO_CALLOUT    |</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -714,7 +705,7 @@
           <td>
             
             
-            <span class='code'>      CASELESS          |</span>
+            <span class='code'># Define a function to be executed with the unzipped file</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -724,7 +715,7 @@
           <td>
             
             
-            <span class='code'>      DOLLAR_ENDONLY    |</span>
+            <span class='code'>function process_file&#40;file_path&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -734,7 +725,7 @@
           <td>
             
             
-            <span class='code'>      DOTALL            |</span>
+            <span class='code'>    # Process the file here</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -744,7 +735,7 @@
           <td>
             
             
-            <span class='code'>      # DUPNAMES        |</span>
+            <span class='code'>    println&#40;&quot;Processing file&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -754,7 +745,7 @@
           <td>
             
             
-            <span class='code'>      ENDANCHORED       |</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -764,7 +755,7 @@
           <td>
             
             
-            <span class='code'>      EXTENDED          |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -774,7 +765,7 @@
           <td>
             
             
-            <span class='code'>      EXTENDED_MORE     |</span>
+            <span class='code'># Call the with_zip_file function</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -784,7 +775,7 @@
           <td>
             
             
-            <span class='code'>      FIRSTLINE         |</span>
+            <span class='code'>with_zip_file&#40;&quot;path/to/file&quot;, process_file&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -794,7 +785,7 @@
           <td>
             
             
-            <span class='code'>      LITERAL           |</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -804,7 +795,7 @@
           <td>
             
             
-            <span class='code'>      MATCH_INVALID_UTF |</span>
+            <span class='code'>In this example, the &#96;with_zip_file&#96; function is called with the file path &quot;path/to/file&quot; and the &#96;process_file&#96; function as arguments. The zip file &quot;path/to/file.zip&quot; is unzipped, and then the &#96;process_file&#96; function is called with the original file path &quot;path/to/file&quot;. The function &#96;process_file&#96; can perform any desired operations on the unzipped file.</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -814,7 +805,7 @@
           <td>
             
             
-            <span class='code'>      MATCH_UNSET_BACKREF |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -824,7 +815,7 @@
           <td>
             
             
-            <span class='code'>      MULTILINE         |</span>
+            <span class='code'># Exceptions</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -834,7 +825,7 @@
           <td>
             
             
-            <span class='code'>      NEVER_BACKSLASH_C |</span>
+            <span class='code'>- If any error occurs during the unzipping or function execution, the error is rethrown.</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -844,7 +835,7 @@
           <td>
             
             
-            <span class='code'>      NEVER_UCP         |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L82'>
@@ -854,7 +845,7 @@
           <td>
             
             
-            <span class='code'>      NEVER_UTF         |</span>
+            <span class='code'># Side Effects</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -864,7 +855,7 @@
           <td>
             
             
-            <span class='code'>      NO_AUTO_CAPTURE   |</span>
+            <span class='code'>- The original file specified by &#96;f_path&#96; is removed using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -874,7 +865,7 @@
           <td>
             
             
-            <span class='code'>      NO_AUTO_POSSESS   |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -884,7 +875,7 @@
           <td>
             
             
-            <span class='code'>      NO_DOTSTAR_ANCHOR |</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -894,7 +885,7 @@
           <td>
             
             
-            <span class='code'>      NO_START_OPTIMIZE |</span>
+            <span class='code'>- Passes the returned value from &#96;func&#96;.</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -904,7 +895,7 @@
           <td>
             
             
-            <span class='code'>      NO_UTF_CHECK      |</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -914,7 +905,7 @@
           <td>
             
             
-            <span class='code'>      UCP               |</span>
+            <span class='code'>function with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -924,7 +915,7 @@
           <td>
             
             
-            <span class='code'>      UNGREEDY          |</span>
+            <span class='code'>    z_path &#61; f_path * &quot;.zip&quot;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -934,7 +925,7 @@
           <td>
             
             
-            <span class='code'>      USE_OFFSET_LIMIT  |</span>
+            <span class='code'>    out &#61; nothing</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -944,7 +935,7 @@
           <td>
             
             
-            <span class='code'>      UTF</span>
+            <span class='code'>    if isfile&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -954,7 +945,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        try</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -964,7 +955,7 @@
           <td>
             
             
-            <span class='code'># arguments to pcre2_set_newline</span>
+            <span class='code'>            unzip&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -974,7 +965,7 @@
           <td>
             
             
-            <span class='code'>const COMPILE_NEWLINE_MASK &#61; &#40;</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -984,7 +975,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_CR,</span>
+            <span class='code'>        catch e</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -994,7 +985,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_LF,</span>
+            <span class='code'>            rethrow&#40;e&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1004,7 +995,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_CRLF,</span>
+            <span class='code'>        finally</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1014,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_ANY,</span>
+            <span class='code'>            for f in readdir&#40;dirname&#40;f_path&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1024,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_ANYCRLF,</span>
+            <span class='code'>                if startswith&#40;f, basename&#40;f_path&#41;&#41; &amp;&amp; &#33;endswith&#40;f, &quot;.zip&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1034,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>      NEWLINE_NUL&#41;</span>
+            <span class='code'>                    rm&#40;joinpath&#40;dirname&#40;f_path&#41;, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1044,7 +1035,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1054,7 +1045,7 @@
           <td>
             
             
-            <span class='code'># arguments to pcre2_set_compile_extra_options</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1064,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>const COMPILE_EXTRA_MASK            &#61;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1074,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_ALLOW_SURROGATE_ESCAPES |</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1084,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_ALT_BSUX                |</span>
+            <span class='code'>        if isfile&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1094,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_BAD_ESCAPE_IS_LITERAL   |</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1104,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_ESCAPED_CR_IS_LF        |</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1114,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_MATCH_LINE              |</span>
+            <span class='code'>            error&#40;&quot;File does not exist: &#36;f_path&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1124,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>      EXTRA_MATCH_WORD</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1134,7 +1125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1144,7 +1135,7 @@
           <td>
             
             
-            <span class='code'># arguments to match</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1154,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>const EXECUTE_MASK      &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1164,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>      # ANCHORED        |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1174,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>      # COPY_MATCHED_SUBJECT |</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1184,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>      # ENDANCHORED     |</span>
+            <span class='code'>    create_trial_3D_system&#40;&#41;::System</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1194,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>      NOTBOL            |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1204,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>      NOTEMPTY          |</span>
+            <span class='code'>Create a 3D system with a sin function and specified atoms and grid specifications.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1214,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>      NOTEMPTY_ATSTART  |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1224,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>      NOTEOL            |</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1234,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>      # NO_JIT          |</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1244,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>      NO_START_OPTIMIZE |</span>
+            <span class='code'>system &#61; create_trial_3D_system&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1254,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>      NO_UTF_CHECK      |</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1264,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>      PARTIAL_HARD      |</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1274,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>      PARTIAL_SOFT</span>
+            <span class='code'># Inputs</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1284,7 +1275,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- None</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1304,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>const UNSET &#61; ~Csize_t&#40;0&#41;  # Indicates that an output vector element is unset</span>
+            <span class='code'># Outputs</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1314,7 +1305,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- A &#96;System&#96; object representing a 3D system with the specified functions, atoms, and grid specifications.</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1324,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>function info&#40;regex::Ptr&#123;Cvoid&#125;, what::Integer, ::Type&#123;T&#125;&#41; where T</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1334,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>    buf &#61; RefValue&#123;T&#125;&#40;&#41;</span>
+            <span class='code'>function create_trial_3D_system&#40;;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1344,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61; ccall&#40;&#40;:pcre2_pattern_info_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1354,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>                &#40;Ptr&#123;Cvoid&#125;, UInt32, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1364,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>                regex, what, buf&#41;</span>
+            <span class='code'>    # Define a 3D sin function to be used as rho, grad, and hess functions</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1374,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    if ret &#33;&#61; 0</span>
+            <span class='code'>    f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1384,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;ret &#61;&#61; ERROR_NULL      ? &quot;PCRE error: NULL regex object&quot; :</span>
+            <span class='code'>    f3d_xyz&#40;x, y, z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1394,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>              ret &#61;&#61; ERROR_BADMAGIC  ? &quot;PCRE error: invalid regex object&quot; :</span>
+            <span class='code'>    grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1404,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>              ret &#61;&#61; ERROR_BADOPTION ? &quot;PCRE error: invalid option flags&quot; :</span>
+            <span class='code'>    function hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1414,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>                                       &quot;PCRE error: unknown error &#40;&#36;ret&#41;&quot;&#41;</span>
+            <span class='code'>        return &#91;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1424,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1434,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    return buf&#91;&#93;</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1444,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1454,7 +1445,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#93;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1464,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>function ovec_length&#40;match_data&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1474,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; ccall&#40;&#40;:pcre2_get_ovector_count_8, PCRE_LIB&#41;, UInt32,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1484,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>              &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
+            <span class='code'>    # Make in-place versions using the above versions</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1494,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>    return 2Int&#40;n&#41;</span>
+            <span class='code'>    function rho&#33;&#40;f, r&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1504,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return f&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1514,7 +1505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1524,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>function ovec_ptr&#40;match_data&#41;</span>
+            <span class='code'>    function grad&#33;&#40;g, r&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1534,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>    ptr &#61; ccall&#40;&#40;:pcre2_get_ovector_pointer_8, PCRE_LIB&#41;, Ptr&#123;Csize_t&#125;,</span>
+            <span class='code'>        return g&#91;:&#93; &#61; grad3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1544,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>                &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1554,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>    return ptr</span>
+            <span class='code'>    function hess&#33;&#40;h, r&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1564,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return h&#91;:&#93; &#61; hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1574,7 +1565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1584,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>function compile&#40;pattern::AbstractString, options::Integer&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1594,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;pattern isa Union&#123;String,SubString&#123;String&#125;&#125;&#41;</span>
+            <span class='code'>    # Define the extent, origin, and spacing for the GridSpec</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1604,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>        pattern &#61; String&#40;pattern&#41;</span>
+            <span class='code'>    e &#61; 2π * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1614,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    o &#61; zeros&#40;3&#41; .- e / 2</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1624,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61; RefValue&#123;Cint&#125;&#40;0&#41;</span>
+            <span class='code'>    s &#61; π / 10 * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1634,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    erroff &#61; RefValue&#123;Csize_t&#125;&#40;0&#41;</span>
+            <span class='code'>    n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1644,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>    re_ptr &#61; ccall&#40;&#40;:pcre2_compile_8, PCRE_LIB&#41;, Ptr&#123;Cvoid&#125;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1654,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>                   &#40;Ptr&#123;UInt8&#125;, Csize_t, UInt32, Ref&#123;Cint&#125;, Ref&#123;Csize_t&#125;, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'>    # Define the lattice for the GridSpec</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1664,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>                   pattern, ncodeunits&#40;pattern&#41;, options, errno, erroff, C_NULL&#41;</span>
+            <span class='code'>    l &#61; zeros&#40;3, 3&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1674,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>    if re_ptr &#61;&#61; C_NULL</span>
+            <span class='code'>    for i in 1:3</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1684,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;PCRE compilation error: &#36;&#40;err_message&#40;errno&#91;&#93;&#41;&#41; at offset &#36;&#40;erroff&#91;&#93;&#41;&quot;&#41;</span>
+            <span class='code'>        l&#91;i, i&#93; &#61; s&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1704,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>    return re_ptr</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1714,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Create a GridSpec with the defined origin, lattice, and number of points</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1724,7 +1715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1734,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>function jit_compile&#40;regex::Ptr&#123;Cvoid&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1744,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61; ccall&#40;&#40;:pcre2_jit_compile_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    # Create 3D Array of rho values based on the GridSpec</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1754,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>                  &#40;Ptr&#123;Cvoid&#125;, UInt32&#41;, regex, JIT_COMPLETE&#41;</span>
+            <span class='code'>    rho_data &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1764,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61;&#61; 0 &amp;&amp; return true</span>
+            <span class='code'>        f3d&#40;o &#43; l * &#91;i, j, k&#93;&#41; for i in 1:n_pts&#91;1&#93;, j in 1:n_pts&#91;2&#93;, k in 1:n_pts&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1774,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>    errno &#61;&#61; ERROR_JIT_BADOPTION &amp;&amp; return false</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1784,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>    error&#40;&quot;PCRE JIT error: &#36;&#40;err_message&#40;errno&#41;&#41;&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1794,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1804,7 +1795,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    atoms &#61; &#91;NuclearCoordinate&#40;&#91;π / 2, π / 2, π / 2&#93;, 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1814,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>free_match_data&#40;match_data&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1824,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_match_data_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
+            <span class='code'>    # Create a System with the 3D sin function and the defined atoms and GridSpec</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1834,7 +1825,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    system &#61; System&#40;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1844,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>free_re&#40;re&#41; &#61;</span>
+            <span class='code'>        name, source, atoms, g, rho_data, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1854,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_code_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, re&#41;</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1864,7 +1855,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return system, f3d, f3d_xyz, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1874,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>free_jit_stack&#40;stack&#41; &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1884,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_jit_stack_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, stack&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1894,7 +1885,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1904,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>free_match_context&#40;context&#41; &#61;</span>
+            <span class='code'>    create_trial_3D_system_interpolated&#40;; name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;&#41; -&gt; Tuple&#123;System, Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1914,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;&#40;:pcre2_match_context_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, context&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1924,7 +1915,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Create a 3D system that interpolates using grid data generated with a trial 3d &#96;sin&#96; function.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1934,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>function err_message&#40;errno::Integer&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1944,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>    buffer &#61; Vector&#123;UInt8&#125;&#40;undef, 1024&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1954,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61; ccall&#40;&#40;:pcre2_get_error_message_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>- &#96;name::AbstractString&#96; &#40;optional&#41;: The name of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1964,7 +1955,7 @@
           <td>
             
             
-            <span class='code'>                &#40;Cint, Ptr&#123;UInt8&#125;, Csize_t&#41;, errno, buffer, length&#40;buffer&#41;&#41;</span>
+            <span class='code'>- &#96;source::AbstractString&#96; &#40;optional&#41;: The source of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1974,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61;&#61; ERROR_BADDATA &amp;&amp; error&#40;&quot;PCRE error: invalid errno &#40;&#36;errno&#41;&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1984,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>    # TODO: seems like there should be a better way to get this string</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1994,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>    return GC.@preserve buffer unsafe_string&#40;pointer&#40;buffer&#41;&#41;</span>
+            <span class='code'>- &#96;system&#96;: A &#96;System&#96; object representing a 3D system with the interpolated functions and grid specifications.</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2004,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;f&#96;: The interpolated function &#96;f&#40;x&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2014,7 +2005,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;f_xyz&#96;: The interpolated function &#96;f_xyz&#40;x, y, z&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2022,18 +2013,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in exec
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from exec_r_data
-              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L220'>line 220</a>
-              <br />
-            </div>
             
-            <span class='code'>function exec&#40;re, subject, offset, options, match_data&#41;</span>
+            
+            <span class='code'>- &#96;grad&#96;: The gradient function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2043,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;subject isa Union&#123;String,SubString&#123;String&#125;&#125;&#41;</span>
+            <span class='code'>- &#96;hess&#96;: The Hessian function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2053,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>        subject &#61; String&#40;subject&#41;</span>
+            <span class='code'>- &#96;f&#33;&#96;: An in-place version of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2063,22 +2045,17 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>- &#96;grad&#33;&#96;: An in-place version of the gradient function.</span>
           </td>
         </tr>
         <tr id='L203'>
           <td class='lineno'>203</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L34'>get_local_match_context</a>
-              <br />
-            </div>
-            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_match_8, PCRE_LIB&#41;, Cint,</span>
+            
+            <span class='code'>- &#96;hess&#33;&#96;: An in-place version of the Hessian function.</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2088,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;UInt8&#125;, Csize_t, Csize_t, UInt32, Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2098,7 +2075,7 @@
           <td>
             
             
-            <span class='code'>               re, subject, ncodeunits&#40;subject&#41;, offset, options, match_data, get_local_match_context&#40;&#41;&#41;</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2108,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>    # rc &#61;&#61; -1 means no match, -2 means partial match.</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2118,7 +2095,7 @@
           <td>
             
             
-            <span class='code'>    rc &lt; -2 &amp;&amp; error&#40;&quot;PCRE.exec error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
+            <span class='code'>system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33; &#61; create_trial_3D_system_interpolated&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2128,7 +2105,7 @@
           <td>
             
             
-            <span class='code'>    return rc &gt;&#61; 0</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2138,7 +2115,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2148,7 +2125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function create_trial_3D_system_interpolated&#40;;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2158,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>function exec_r&#40;re, subject, offset, options&#41;</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2168,7 +2145,7 @@
           <td>
             
             
-            <span class='code'>    match_data &#61; create_match_data&#40;re&#41;</span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2178,7 +2155,7 @@
           <td>
             
             
-            <span class='code'>    ans &#61; exec&#40;re, subject, offset, options, match_data&#41;</span>
+            <span class='code'>    g1 &#61; &#40;-3π&#41;:&#40;π / 10&#41;:&#40;3π&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2188,7 +2165,7 @@
           <td>
             
             
-            <span class='code'>    free_match_data&#40;match_data&#41;</span>
+            <span class='code'>    n_pts &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2198,7 +2175,7 @@
           <td>
             
             
-            <span class='code'>    return ans</span>
+            <span class='code'>    spacing &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2208,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    gs &#61; GridSpec&#40;&#91;-2π, -2π, -2π&#93;, spacing, &#91;n_pts, n_pts, n_pts&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2218,7 +2195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    sin_data &#61; &#91;3.0 &#43; sum&#40;sin.&#40;&#91;xi, yi, zi&#93;&#41;&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2228,7 +2205,7 @@
           <td>
             
             
-            <span class='code'>function exec_r_data&#40;re, subject, offset, options&#41;</span>
+            <span class='code'>    fz &#61; scale&#40;interpolate&#40;sin_data, BSpline&#40;Cubic&#40;Reflect&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g1, g1, g1&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2238,31 +2215,17 @@
           <td>
             
             
-            <span class='code'>    match_data &#61; create_match_data&#40;re&#41;</span>
+            <span class='code'>    f&#40;x&#41; &#61; fz&#40;x...&#41; # pointer for later</span>
           </td>
         </tr>
         <tr id='L220'>
           <td class='lineno'>220</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in exec_r_data
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _findnext_re
-              <a href='regex.jl-3ccc23d2ab4aafbf7466c1a59e7a52d0068e871e.html#L442'>line 442</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L199'>exec</a>
-              <br />
-            </div>
-            <span class='code'>    ans &#61; exec&#40;re, subject, offset, options, match_data&#41;</span>
+            
+            
+            <span class='code'>    f_xyz&#40;x, y, z&#41; &#61; f&#40;&#91;x, y, z&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2272,7 +2235,7 @@
           <td>
             
             
-            <span class='code'>    return ans, match_data</span>
+            <span class='code'>    f&#33;&#40;F, x&#41; &#61; F&#91;:&#93; &#61; &#91;f&#40;x&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2282,7 +2245,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    function grad&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2292,7 +2255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return Interpolations.gradient&#40;fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2302,7 +2265,7 @@
           <td>
             
             
-            <span class='code'>function create_match_data&#40;re&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2312,7 +2275,7 @@
           <td>
             
             
-            <span class='code'>    p &#61; ccall&#40;&#40;:pcre2_match_data_create_from_pattern_8, PCRE_LIB&#41;,</span>
+            <span class='code'>    function hess&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2322,7 +2285,7 @@
           <td>
             
             
-            <span class='code'>              Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, re, C_NULL&#41;</span>
+            <span class='code'>        return Interpolations.hessian&#40;fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2332,7 +2295,7 @@
           <td>
             
             
-            <span class='code'>    p &#61;&#61; C_NULL &amp;&amp; error&#40;&quot;PCRE error: could not allocate memory&quot;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2342,7 +2305,7 @@
           <td>
             
             
-            <span class='code'>    return p</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2352,7 +2315,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    function grad&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2362,7 +2325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return Interpolations.gradient&#33;&#40;F, fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2372,7 +2335,7 @@
           <td>
             
             
-            <span class='code'>function substring_number_from_name&#40;re, name&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2380,19 +2343,28 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;17 &#37;&#41;
+              samples spent in hess&#33;
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from jb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L331'>line 331</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>    n &#61; ccall&#40;&#40;:pcre2_substring_number_from_name_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    function hess&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
           <td class='lineno'>233</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;17 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;17 &#37;&#41;</td>
           <td>
             
             
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Cstring&#41;, re, name&#41;</span>
+            <span class='code'>        return Interpolations.hessian&#33;&#40;J, fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2402,7 +2374,7 @@
           <td>
             
             
-            <span class='code'>    return Int&#40;n&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2412,7 +2384,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2422,7 +2394,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    g1 &#61; &#40;-2π&#41;:&#40;π / 8&#41;:&#40;2π&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2432,7 +2404,7 @@
           <td>
             
             
-            <span class='code'>function substring_length_bynumber&#40;match_data, number&#41;</span>
+            <span class='code'>    n_pts1 &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2442,7 +2414,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; RefValue&#123;Csize_t&#125;&#40;&#41;</span>
+            <span class='code'>    spacing1 &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2452,7 +2424,7 @@
           <td>
             
             
-            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_substring_length_bynumber_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    gs1 &#61; GridSpec&#40;-2pi * ones&#40;3&#41;, spacing1, &#91;n_pts1, n_pts1, n_pts1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2462,7 +2434,7 @@
           <td>
             
             
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Cint, Ref&#123;Csize_t&#125;&#41;, match_data, number, s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2472,7 +2444,7 @@
           <td>
             
             
-            <span class='code'>    if rc &lt; 0</span>
+            <span class='code'>    # Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2482,7 +2454,7 @@
           <td>
             
             
-            <span class='code'>        rc &#61;&#61; ERROR_UNSET &amp;&amp; return 0</span>
+            <span class='code'>    atoms &#61; &#91;&#93; #&#91;NuclearCoordinate&#40;&#91;π/2, π/2, π/2&#93;, 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2492,7 +2464,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;PCRE error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2502,7 +2474,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    # make 3D array of f values</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2512,7 +2484,7 @@
           <td>
             
             
-            <span class='code'>    return Int&#40;s&#91;&#93;&#41;</span>
+            <span class='code'>    f_xyz_data &#61; &#91;f_xyz&#40;xi, yi, zi&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2522,7 +2494,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2532,7 +2504,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    system &#61; System&#40;</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2542,7 +2514,7 @@
           <td>
             
             
-            <span class='code'>function substring_copy_bynumber&#40;match_data, number, buf, buf_size&#41;</span>
+            <span class='code'>        name, source, atoms, gs1, f_xyz_data, f_xyz, f, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2552,7 +2524,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; RefValue&#123;Csize_t&#125;&#40;buf_size&#41;</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2562,7 +2534,7 @@
           <td>
             
             
-            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_substring_copy_bynumber_8, PCRE_LIB&#41;, Cint,</span>
+            <span class='code'>    return system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2572,257 +2544,7 @@
           <td>
             
             
-            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, UInt32, Ptr&#123;UInt8&#125;, Ref&#123;Csize_t&#125;&#41;,</span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>               match_data, number, buf, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    rc &lt; 0 &amp;&amp; error&#40;&quot;PCRE error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return Int&#40;s&#91;&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
             <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function capture_names&#40;re&#41;</span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    name_count &#61; info&#40;re, INFO_NAMECOUNT, UInt32&#41;</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    name_entry_size &#61; info&#40;re, INFO_NAMEENTRYSIZE, UInt32&#41;</span>
-          </td>
-        </tr>
-        <tr id='L260'>
-          <td class='lineno'>260</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nametable_ptr &#61; info&#40;re, INFO_NAMETABLE, Ptr&#123;UInt8&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L261'>
-          <td class='lineno'>261</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    names &#61; Dict&#123;Int,String&#125;&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L262'>
-          <td class='lineno'>262</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    for i &#61; 1:name_count</span>
-          </td>
-        </tr>
-        <tr id='L263'>
-          <td class='lineno'>263</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        offset &#61; &#40;i-1&#41;*name_entry_size &#43; 1</span>
-          </td>
-        </tr>
-        <tr id='L264'>
-          <td class='lineno'>264</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # The capture group index corresponding to name &#39;i&#39; is stored as a</span>
-          </td>
-        </tr>
-        <tr id='L265'>
-          <td class='lineno'>265</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # big-endian 16-bit value.</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        high_byte &#61; UInt16&#40;unsafe_load&#40;nametable_ptr, offset&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        low_byte &#61; UInt16&#40;unsafe_load&#40;nametable_ptr, offset&#43;1&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        idx &#61; &#40;high_byte &lt;&lt; 8&#41; | low_byte</span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # The capture group name is a null-terminated string located directly</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # after the index.</span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        names&#91;idx&#93; &#61; unsafe_string&#40;nametable_ptr&#43;offset&#43;1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L272'>
-          <td class='lineno'>272</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L273'>
-          <td class='lineno'>273</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return names</span>
-          </td>
-        </tr>
-        <tr id='L274'>
-          <td class='lineno'>274</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L275'>
-          <td class='lineno'>275</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L276'>
-          <td class='lineno'>276</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end # module</span>
           </td>
         </tr>
       </tbody>

@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/bitset.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/abstractlattice.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 06 Mar 2024 17:05:11
+        Generated on Wed, 06 Mar 2024 17:41:35
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'># TODO add more documentations</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>const Bits &#61; Vector&#123;UInt64&#125;</span>
+            <span class='code'>function widenlattice end</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>const CHK0 &#61; zero&#40;UInt64&#41;</span>
+            <span class='code'>function is_valid_lattice_norec end</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>const NO_OFFSET &#61; Int &#61;&#61;&#61; Int64 ? -one&#40;Int&#41; &lt;&lt; 60 : -one&#40;Int&#41; &lt;&lt; 29</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'># &#43; NO_OFFSET must be small enough to stay &lt; 0 when added with any offset.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>#   An offset is in the range -2^57:2^57 &#40;64-bits architectures&#41;</span>
+            <span class='code'>    struct JLTypeLattice &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>#   or -2^26:2^26 &#40;32-bits architectures&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'># &#43; when the offset is NO_OFFSET, the bits field *must* be empty</span>
+            <span class='code'>A singleton type representing the lattice of Julia types, without any inference extensions.</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'># &#43; NO_OFFSET could be made to be &gt; 0, but a negative one allows</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>#   a small optimization in the in&#40;x, ::BitSet&#41; method</span>
+            <span class='code'>struct JLTypeLattice &lt;: AbstractLattice; end</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>widenlattice&#40;::JLTypeLattice&#41; &#61; error&#40;&quot;Type lattice is the least-precise lattice available&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>mutable struct BitSet &lt;: AbstractSet&#123;Int&#125;</span>
+            <span class='code'>is_valid_lattice_norec&#40;::JLTypeLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, Type&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    const bits::Vector&#123;UInt64&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    # 1st stored Int equals 64*offset</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    offset::Int</span>
+            <span class='code'>    struct ConstsLattice &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -200,31 +200,12 @@
         </tr>
         <tr id='L18'>
           <td class='lineno'>18</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;0 &#37;&#41;
-              samples spent in BitSet
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from basic_blocks_starts
-              <a href='ir.jl-99f4bb597df652b28f172808c2a641e0ee1afd99.html#L48'>line 48</a>
-              <br />
-              1 &#40;50 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from copy
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L44'>line 44</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L1320'>resize&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    BitSet&#40;&#41; &#61; new&#40;resize&#33;&#40;Vector&#123;UInt64&#125;&#40;undef, 4&#41;, 0&#41;, NO_OFFSET&#41;</span>
+            
+            
+            <span class='code'>A lattice extending &#96;JLTypeLattice&#96; and adjoining &#96;Const&#96; and &#96;PartialTypeVar&#96;.</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -234,7 +215,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -244,7 +225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct ConstsLattice &lt;: AbstractLattice; end</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -254,7 +235,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>widenlattice&#40;::ConstsLattice&#41; &#61; JLTypeLattice&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -264,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    BitSet&#40;&#91;itr&#93;&#41;</span>
+            <span class='code'>is_valid_lattice_norec&#40;::ConstsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, Const&#41; || isa&#40;elem, PartialTypeVar&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -284,7 +265,7 @@
           <td>
             
             
-            <span class='code'>Construct a sorted set of &#96;Int&#96;s generated by the given iterable object, or an</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -294,7 +275,7 @@
           <td>
             
             
-            <span class='code'>empty set. Implemented as a bit string, and therefore designed for dense integer sets.</span>
+            <span class='code'>    struct PartialsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -304,7 +285,7 @@
           <td>
             
             
-            <span class='code'>If the set will be sparse &#40;for example, holding a few</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -314,7 +295,7 @@
           <td>
             
             
-            <span class='code'>very large integers&#41;, use &#91;&#96;Set&#96;&#93;&#40;@ref&#41; instead.</span>
+            <span class='code'>A lattice extending a base lattice &#96;𝕃&#96; and adjoining &#96;PartialStruct&#96; and &#96;PartialOpaque&#96;.</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -334,7 +315,7 @@
           <td>
             
             
-            <span class='code'>BitSet&#40;itr&#41; &#61; union&#33;&#40;BitSet&#40;&#41;, itr&#41;</span>
+            <span class='code'>struct PartialsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -344,7 +325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    parent::𝕃</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -354,7 +335,7 @@
           <td>
             
             
-            <span class='code'># Special implementation for BitSet, which lacks a fast &#96;length&#96; method.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -364,7 +345,7 @@
           <td>
             
             
-            <span class='code'>function union&#33;&#40;s::BitSet, itr&#41;</span>
+            <span class='code'>widenlattice&#40;𝕃::PartialsLattice&#41; &#61; 𝕃.parent</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -374,7 +355,7 @@
           <td>
             
             
-            <span class='code'>    for x in itr</span>
+            <span class='code'>is_valid_lattice_norec&#40;::PartialsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, PartialStruct&#41; || isa&#40;elem, PartialOpaque&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -384,7 +365,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;s, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L35'>
@@ -394,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -404,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'>    struct ConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -414,7 +395,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L38'>
@@ -424,7 +405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>A lattice extending a base lattice &#96;𝕃&#96; and adjoining &#96;Conditional&#96;.</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -434,7 +415,7 @@
           <td>
             
             
-            <span class='code'>@inline intoffset&#40;s::BitSet&#41; &#61; s.offset &lt;&lt; 6</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -444,7 +425,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct ConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -454,7 +435,7 @@
           <td>
             
             
-            <span class='code'>empty&#40;s::BitSet, ::Type&#123;Int&#125;&#61;Int&#41; &#61; BitSet&#40;&#41;</span>
+            <span class='code'>    parent::𝕃</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -464,7 +445,7 @@
           <td>
             
             
-            <span class='code'>emptymutable&#40;s::BitSet, ::Type&#123;Int&#125;&#61;Int&#41; &#61; BitSet&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -474,55 +455,27 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>widenlattice&#40;𝕃::ConditionalsLattice&#41; &#61; 𝕃.parent</span>
           </td>
         </tr>
         <tr id='L44'>
           <td class='lineno'>44</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in copy
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from copymutable
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L45'>line 45</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L18'>BitSet</a>
-              <br />
-            </div>
-            <span class='code'>copy&#40;s1::BitSet&#41; &#61; copy&#33;&#40;BitSet&#40;&#41;, s1&#41;</span>
+            
+            
+            <span class='code'>is_valid_lattice_norec&#40;::ConditionalsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, Conditional&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
           <td class='lineno'>45</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in copymutable
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from setdiff
-              <a href='abstractset.jl-3226e33bf08717b0b1bb2ac88f4cb19ecc36cfe1.html#L216'>line 216</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L44'>copy</a>
-              <br />
-            </div>
-            <span class='code'>copymutable&#40;s::BitSet&#41; &#61; copy&#40;s&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -532,7 +485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -542,7 +495,7 @@
           <td>
             
             
-            <span class='code'>function copy&#33;&#40;dest::BitSet, src::BitSet&#41;</span>
+            <span class='code'>    struct InterConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -552,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    resize&#33;&#40;dest.bits, length&#40;src.bits&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L49'>
@@ -562,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;dest.bits, src.bits&#41;</span>
+            <span class='code'>A lattice extending a base lattice &#96;𝕃&#96; and adjoining &#96;InterConditional&#96;.</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -572,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    dest.offset &#61; src.offset</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -582,7 +535,7 @@
           <td>
             
             
-            <span class='code'>    dest</span>
+            <span class='code'>struct InterConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -592,7 +545,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    parent::𝕃</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -602,7 +555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -612,7 +565,7 @@
           <td>
             
             
-            <span class='code'>sizehint&#33;&#40;s::BitSet, n::Integer&#41; &#61; &#40;sizehint&#33;&#40;s.bits, &#40;n&#43;63&#41; &gt;&gt; 6&#41;; s&#41;</span>
+            <span class='code'>widenlattice&#40;𝕃::InterConditionalsLattice&#41; &#61; 𝕃.parent</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -622,7 +575,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_valid_lattice_norec&#40;::InterConditionalsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, InterConditional&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -632,7 +585,7 @@
           <td>
             
             
-            <span class='code'>function _bits_getindex&#40;b::Bits, n::Int, offset::Int&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -642,7 +595,7 @@
           <td>
             
             
-            <span class='code'>    ci &#61; _div64&#40;n&#41; - offset &#43; 1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -652,7 +605,7 @@
           <td>
             
             
-            <span class='code'>    1 &lt;&#61; ci &lt;&#61; length&#40;b&#41; || return false</span>
+            <span class='code'>    struct MustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -662,7 +615,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; &#40;b&#91;ci&#93; &amp; &#40;one&#40;UInt64&#41; &lt;&lt; _mod64&#40;n&#41;&#41;&#41; &#33;&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -672,7 +625,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>A lattice extending lattice &#96;𝕃&#96; and adjoining &#96;MustAlias&#96;.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -682,7 +635,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -692,7 +645,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct MustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -702,7 +655,7 @@
           <td>
             
             
-            <span class='code'>function _bits_findnext&#40;b::Bits, start::Int&#41;</span>
+            <span class='code'>    parent::𝕃</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -712,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    # start is 0-based</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -722,7 +675,7 @@
           <td>
             
             
-            <span class='code'>    # @assert start &gt;&#61; 0</span>
+            <span class='code'>widenlattice&#40;𝕃::MustAliasesLattice&#41; &#61; 𝕃.parent</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -732,7 +685,7 @@
           <td>
             
             
-            <span class='code'>    _div64&#40;start&#41; &#43; 1 &gt; length&#40;b&#41; &amp;&amp; return -1</span>
+            <span class='code'>is_valid_lattice_norec&#40;::MustAliasesLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, MustAlias&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -742,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61; unsafe_bitfindnext&#40;b, start&#43;1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -752,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61;&#61;&#61; nothing ? -1 : ind - 1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -762,7 +715,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    struct InterMustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -782,7 +735,7 @@
           <td>
             
             
-            <span class='code'>function _bits_findprev&#40;b::Bits, start::Int&#41;</span>
+            <span class='code'>A lattice extending lattice &#96;𝕃&#96; and adjoining &#96;InterMustAlias&#96;.</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -792,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    # start is 0-based</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -802,7 +755,7 @@
           <td>
             
             
-            <span class='code'>    # @assert start &lt;&#61; 64 * length&#40;b&#41; - 1</span>
+            <span class='code'>struct InterMustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -812,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    start &gt;&#61; 0 || return -1</span>
+            <span class='code'>    parent::𝕃</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -822,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61; unsafe_bitfindprev&#40;b, start&#43;1&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -832,7 +785,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61;&#61;&#61; nothing ? -1 : ind - 1</span>
+            <span class='code'>widenlattice&#40;𝕃::InterMustAliasesLattice&#41; &#61; 𝕃.parent</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -842,7 +795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>is_valid_lattice_norec&#40;::InterMustAliasesLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, InterMustAlias&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -862,7 +815,7 @@
           <td>
             
             
-            <span class='code'># An internal function for setting the inclusion bit for a given integer</span>
+            <span class='code'>const AnyConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &#61; Union&#123;ConditionalsLattice&#123;𝕃&#125;, InterConditionalsLattice&#123;𝕃&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -872,7 +825,7 @@
           <td>
             
             
-            <span class='code'>@inline function _setint&#33;&#40;s::BitSet, idx::Int, b::Bool&#41;</span>
+            <span class='code'>const AnyMustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125; &#61; Union&#123;MustAliasesLattice&#123;𝕃&#125;, InterMustAliasesLattice&#123;𝕃&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -882,7 +835,7 @@
           <td>
             
             
-            <span class='code'>    cidx &#61; _div64&#40;idx&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L82'>
@@ -892,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    len &#61; length&#40;s.bits&#41;</span>
+            <span class='code'>const SimpleInferenceLattice &#61; typeof&#40;PartialsLattice&#40;ConstsLattice&#40;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -902,7 +855,7 @@
           <td>
             
             
-            <span class='code'>    diff &#61; cidx - s.offset</span>
+            <span class='code'>const BaseInferenceLattice &#61; typeof&#40;ConditionalsLattice&#40;SimpleInferenceLattice.instance&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -912,7 +865,7 @@
           <td>
             
             
-            <span class='code'>    if diff &gt;&#61; len</span>
+            <span class='code'>const IPOResultLattice &#61; typeof&#40;InterConditionalsLattice&#40;SimpleInferenceLattice.instance&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -922,7 +875,7 @@
           <td>
             
             
-            <span class='code'>        b || return s # setting a bit to zero outside the set&#39;s bits is a no-op</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L86'>
@@ -932,7 +885,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -942,7 +895,7 @@
           <td>
             
             
-            <span class='code'>        # we put the following test within one of the two branches,</span>
+            <span class='code'>    struct InferenceLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -952,7 +905,7 @@
           <td>
             
             
-            <span class='code'>        # with the NO_OFFSET trick, to avoid having to perform it at</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L89'>
@@ -962,7 +915,7 @@
           <td>
             
             
-            <span class='code'>        # each and every call to _setint&#33;</span>
+            <span class='code'>The full lattice used for abstract interpretation during inference.</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -972,7 +925,7 @@
           <td>
             
             
-            <span class='code'>        if s.offset &#61;&#61; NO_OFFSET # initialize the offset</span>
+            <span class='code'>Extends a base lattice &#96;𝕃&#96; and adjoins &#96;LimitedAccuracy&#96;.</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -982,7 +935,7 @@
           <td>
             
             
-            <span class='code'>            # we assume isempty&#40;s.bits&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -992,7 +945,7 @@
           <td>
             
             
-            <span class='code'>            s.offset &#61; cidx</span>
+            <span class='code'>struct InferenceLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -1002,7 +955,7 @@
           <td>
             
             
-            <span class='code'>            diff &#61; 0</span>
+            <span class='code'>    parent::𝕃</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -1012,7 +965,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -1022,7 +975,7 @@
           <td>
             
             
-            <span class='code'>        _growend0&#33;&#40;s.bits, diff - len &#43; 1&#41;</span>
+            <span class='code'>widenlattice&#40;𝕃::InferenceLattice&#41; &#61; 𝕃.parent</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -1032,7 +985,7 @@
           <td>
             
             
-            <span class='code'>    elseif diff &lt; 0</span>
+            <span class='code'>is_valid_lattice_norec&#40;::InferenceLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, LimitedAccuracy&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1042,7 +995,7 @@
           <td>
             
             
-            <span class='code'>        b || return s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1052,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>        _growbeg0&#33;&#40;s.bits, -diff&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1062,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>        s.offset &#43;&#61; diff</span>
+            <span class='code'>    tmeet&#40;𝕃::AbstractLattice, a, b::Type&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1072,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>        diff &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1082,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Compute the lattice meet of lattice elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;.</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1092,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>    _unsafe_bitsetindex&#33;&#40;s.bits, b, diff&#43;1, _mod64&#40;idx&#41;&#41;</span>
+            <span class='code'>If &#96;𝕃&#96; is &#96;JLTypeLattice&#96;, this is equivalent to type intersection.</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1102,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'>Note that currently &#96;b&#96; is restricted to being a type</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1112,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#40;interpreted as a lattice element in the &#96;JLTypeLattice&#96; sub-lattice of &#96;𝕃&#96;&#41;.</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1122,7 +1075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1132,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function tmeet end</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1142,7 +1095,7 @@
           <td>
             
             
-            <span class='code'># An internal function to resize a Bits object and ensure the newly allocated</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1152,7 +1105,7 @@
           <td>
             
             
-            <span class='code'># elements are zeroed &#40;will become unnecessary if this behavior changes&#41;</span>
+            <span class='code'>function tmeet&#40;::JLTypeLattice, @nospecialize&#40;a::Type&#41;, @nospecialize&#40;b::Type&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1162,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>@inline function _growend0&#33;&#40;b::Bits, nchunks::Int&#41;</span>
+            <span class='code'>    ti &#61; typeintersect&#40;a, b&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1172,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>    len &#61; length&#40;b&#41;</span>
+            <span class='code'>    valid_as_lattice&#40;ti&#41; || return Bottom</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1182,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>    _growend&#33;&#40;b, nchunks&#41;</span>
+            <span class='code'>    return ti</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1192,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    for i in len&#43;1:length&#40;b&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1202,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds b&#91;i&#93; &#61; CHK0 # resize&#33; gives dirty memory</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1212,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1222,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    tmerge&#40;𝕃::AbstractLattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1242,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>@inline function _growbeg0&#33;&#40;b::Bits, nchunks::Int&#41;</span>
+            <span class='code'>Compute a lattice join of elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1252,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>    _growbeg&#33;&#40;b, nchunks&#41;</span>
+            <span class='code'>Note that the computed element need not be the least upper bound of &#96;a&#96; and</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1262,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>    for i in 1:nchunks</span>
+            <span class='code'>&#96;b&#96;, but rather, we impose additional limitations on the complexity of the</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1272,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds b&#91;i&#93; &#61; CHK0</span>
+            <span class='code'>joined element, ideally without losing too much precision in common cases and</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1282,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>remaining mostly associative and commutative.</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1292,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1302,7 +1255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function tmerge end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1312,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>function union&#33;&#40;s::BitSet, r::AbstractUnitRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1322,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>    isempty&#40;r&#41; &amp;&amp; return s</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1332,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    a, b &#61; Int&#40;first&#40;r&#41;&#41;, Int&#40;last&#40;r&#41;&#41;</span>
+            <span class='code'>    tmerge_field&#40;𝕃::AbstractLattice, a, b&#41; -&gt; nothing or lattice element</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1342,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    cidxa &#61; _div64&#40;a&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1352,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    cidxb &#61; _div64&#40;b&#41;</span>
+            <span class='code'>Compute a lattice join of elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;,</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1362,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>    if s.offset &#61;&#61; NO_OFFSET</span>
+            <span class='code'>where &#96;a&#96; and &#96;b&#96; are fields of &#96;PartialStruct&#96; or &#96;Const&#96;.</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1372,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>        s.offset &#61; cidxa</span>
+            <span class='code'>This is an opt-in interface to allow external lattice implementation to provide its own</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1382,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>field-merge strategy. If it returns &#96;nothing&#96;, &#96;tmerge&#40;::PartialsLattice, ...&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1392,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>    len &#61; length&#40;s.bits&#41;</span>
+            <span class='code'>will use the default aggressive type merge implementation that does not use &#96;tmerge&#96;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1402,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>    diffa &#61; cidxa - s.offset</span>
+            <span class='code'>recursively to reach convergence.</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1412,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    diffb &#61; cidxb - s.offset</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1422,7 +1375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function tmerge_field end</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1432,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    # grow s.bits as necessary</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1442,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    if diffb &gt;&#61; len</span>
+            <span class='code'>function tmerge_field&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1452,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>        _growend0&#33;&#40;s.bits, diffb - len &#43; 1&#41;</span>
+            <span class='code'>    return tmerge_field&#40;widenlattice&#40;𝕃&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1462,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1472,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    if diffa &lt; 0</span>
+            <span class='code'>tmerge_field&#40;::JLTypeLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1482,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>        _growbeg0&#33;&#40;s.bits, -diffa&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1492,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>        s.offset &#61; cidxa # s.offset &#43;&#61; diffa</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1502,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>        diffb -&#61; diffa</span>
+            <span class='code'>    ⊑&#40;𝕃::AbstractLattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1512,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>        diffa &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1522,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Compute the lattice ordering &#40;i.e. less-than-or-equal&#41; relationship between</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1532,7 +1485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>lattice elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;.</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1542,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>    # update s.bits</span>
+            <span class='code'>If &#96;𝕃&#96; is &#96;JLTypeLattice&#96;, this is equivalent to subtyping.</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1552,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; _mod64&#40;a&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1562,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>    j &#61; _mod64&#40;b&#41;</span>
+            <span class='code'>function ⊑ end</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1572,17 +1525,26 @@
           <td>
             
             
-            <span class='code'>    @inbounds if diffa &#61;&#61; diffb</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L151'>
           <td class='lineno'>151</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in ⊑
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from ⊑
+              <a href='typelattice.jl-17e93855468f3c38ec3425a7374f61845652c009.html#L530'>line 530</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>        s.bits&#91;diffa &#43; 1&#93; |&#61; &#40;&#40;&#40;~CHK0&#41; &gt;&gt; i&#41; &lt;&lt; &#40;i&#43;63-j&#41;&#41; &gt;&gt; &#40;63-j&#41;</span>
+            <span class='code'>@nospecializeinfer ⊑&#40;::JLTypeLattice, @nospecialize&#40;a::Type&#41;, @nospecialize&#40;b::Type&#41;&#41; &#61; a &lt;: b</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1592,7 +1554,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1602,7 +1564,7 @@
           <td>
             
             
-            <span class='code'>        s.bits&#91;diffa &#43; 1&#93; |&#61; &#40;&#40;~CHK0&#41; &gt;&gt; i&#41; &lt;&lt; i</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1612,7 +1574,7 @@
           <td>
             
             
-            <span class='code'>        s.bits&#91;diffb &#43; 1&#93; |&#61; &#40;~CHK0  &lt;&lt; &#40;63-j&#41;&#41; &gt;&gt; &#40;63-j&#41;</span>
+            <span class='code'>    ⊏&#40;𝕃::AbstractLattice, a, b&#41; -&gt; Bool</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1622,7 +1584,7 @@
           <td>
             
             
-            <span class='code'>        for n &#61; diffa&#43;1:diffb-1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1632,7 +1594,7 @@
           <td>
             
             
-            <span class='code'>            s.bits&#91;n&#43;1&#93; &#61; ~CHK0</span>
+            <span class='code'>The strict partial order over the type inference lattice.</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1642,7 +1604,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>This is defined as the irreflexive kernel of &#96;⊑&#96;.</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1652,7 +1614,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1662,7 +1624,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'>@nospecializeinfer ⊏&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; ⊑&#40;𝕃, a, b&#41; &amp;&amp; &#33;⊑&#40;𝕃, b, a&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1672,7 +1634,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1682,7 +1644,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1692,7 +1654,7 @@
           <td>
             
             
-            <span class='code'>function _matched_map&#33;&#40;f, s1::BitSet, s2::BitSet&#41;</span>
+            <span class='code'>    ⋤&#40;𝕃::AbstractLattice, a, b&#41; -&gt; Bool</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1702,7 +1664,7 @@
           <td>
             
             
-            <span class='code'>    left_false_is_false &#61; f&#40;false, false&#41; &#61;&#61; f&#40;false, true&#41; &#61;&#61; false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1712,7 +1674,7 @@
           <td>
             
             
-            <span class='code'>    right_false_is_false &#61; f&#40;false, false&#41; &#61;&#61; f&#40;true, false&#41; &#61;&#61; false</span>
+            <span class='code'>This order could be used as a slightly more efficient version of the strict order &#96;⊏&#96;,</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1722,7 +1684,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>where we can safely assume &#96;a ⊑ b&#96; holds.</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1732,7 +1694,7 @@
           <td>
             
             
-            <span class='code'>    # we must first handle the NO_OFFSET case; we could test for</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1742,7 +1704,7 @@
           <td>
             
             
-            <span class='code'>    # isempty&#40;s1&#41; but it can be costly, so the user has to call</span>
+            <span class='code'>@nospecializeinfer ⋤&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; &#33;⊑&#40;𝕃, b, a&#41;</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1752,7 +1714,7 @@
           <td>
             
             
-            <span class='code'>    # empty&#33;&#40;s1&#41; herself before-hand to re-initialize to NO_OFFSET</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1762,7 +1724,7 @@
           <td>
             
             
-            <span class='code'>    if s1.offset &#61;&#61; NO_OFFSET</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1772,7 +1734,7 @@
           <td>
             
             
-            <span class='code'>        return left_false_is_false ? s1 : copy&#33;&#40;s1, s2&#41;</span>
+            <span class='code'>    is_lattice_equal&#40;𝕃::AbstractLattice, a, b&#41; -&gt; Bool</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1782,7 +1744,7 @@
           <td>
             
             
-            <span class='code'>    elseif s2.offset &#61;&#61; NO_OFFSET</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1792,7 +1754,7 @@
           <td>
             
             
-            <span class='code'>        return right_false_is_false ? empty&#33;&#40;s1&#41; : s1</span>
+            <span class='code'>Check if two lattice elements are partial order equivalent.</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1802,7 +1764,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>This is basically &#96;a ⊑ b &amp;&amp; b ⊑ a&#96; in the lattice of &#96;𝕃&#96;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1812,7 +1774,7 @@
           <td>
             
             
-            <span class='code'>    s1.offset &#61; _matched_map&#33;&#40;f, s1.bits, s1.offset, s2.bits, s2.offset,</span>
+            <span class='code'>but &#40;optionally&#41; with extra performance optimizations.</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1822,7 +1784,7 @@
           <td>
             
             
-            <span class='code'>                              left_false_is_false, right_false_is_false&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1832,7 +1794,7 @@
           <td>
             
             
-            <span class='code'>    s1</span>
+            <span class='code'>@nospecializeinfer function is_lattice_equal&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1842,7 +1804,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    a &#61;&#61;&#61; b &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1852,7 +1814,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return ⊑&#40;𝕃, a, b&#41; &amp;&amp; ⊑&#40;𝕃, b, a&#41;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1862,7 +1824,7 @@
           <td>
             
             
-            <span class='code'># An internal function that takes a pure function &#96;f&#96; and maps across two BitArrays</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1872,7 +1834,7 @@
           <td>
             
             
-            <span class='code'># allowing the lengths and offsets to be different and altering b1 with the result</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1882,7 +1844,7 @@
           <td>
             
             
-            <span class='code'># WARNING: the assumptions written in the else clauses must hold</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1892,7 +1854,7 @@
           <td>
             
             
-            <span class='code'>function _matched_map&#33;&#40;f, a1::Bits, b1::Int, a2::Bits, b2::Int,</span>
+            <span class='code'>    has_nontrivial_extended_info&#40;𝕃::AbstractLattice, t&#41; -&gt; Bool</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1902,7 +1864,7 @@
           <td>
             
             
-            <span class='code'>                       left_false_is_false::Bool, right_false_is_false::Bool&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1912,7 +1874,7 @@
           <td>
             
             
-            <span class='code'>    l1, l2 &#61; length&#40;a1&#41;, length&#40;a2&#41;</span>
+            <span class='code'>Determines whether the given lattice element &#96;t&#96; of &#96;𝕃&#96; has non-trivial extended lattice</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1922,7 +1884,7 @@
           <td>
             
             
-            <span class='code'>    bdiff &#61; b2 - b1</span>
+            <span class='code'>information that would not be available from the type itself.</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1932,7 +1894,7 @@
           <td>
             
             
-            <span class='code'>    e1, e2 &#61; l1&#43;b1, l2&#43;b2</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1942,7 +1904,7 @@
           <td>
             
             
-            <span class='code'>    ediff &#61; e2 - e1</span>
+            <span class='code'>@nospecializeinfer has_nontrivial_extended_info&#40;𝕃::AbstractLattice, @nospecialize t&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1952,7 +1914,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    has_nontrivial_extended_info&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1962,7 +1924,7 @@
           <td>
             
             
-            <span class='code'>    # map&#33; over the common indices</span>
+            <span class='code'>@nospecializeinfer function has_nontrivial_extended_info&#40;𝕃::PartialsLattice, @nospecialize t&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1972,7 +1934,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds for i &#61; max&#40;1, 1&#43;bdiff&#41;:min&#40;l1, l2&#43;bdiff&#41;</span>
+            <span class='code'>    isa&#40;t, PartialStruct&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1982,7 +1944,7 @@
           <td>
             
             
-            <span class='code'>        a1&#91;i&#93; &#61; f&#40;a1&#91;i&#93;, a2&#91;i-bdiff&#93;&#41;</span>
+            <span class='code'>    isa&#40;t, PartialOpaque&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1992,7 +1954,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return has_nontrivial_extended_info&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2002,7 +1964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2012,7 +1974,7 @@
           <td>
             
             
-            <span class='code'>    if ediff &gt; 0</span>
+            <span class='code'>@nospecializeinfer function has_nontrivial_extended_info&#40;𝕃::ConstsLattice, @nospecialize t&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2022,7 +1984,7 @@
           <td>
             
             
-            <span class='code'>        if left_false_is_false</span>
+            <span class='code'>    isa&#40;t, PartialTypeVar&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2032,7 +1994,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
+            <span class='code'>    if isa&#40;t, Const&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2042,7 +2004,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;false, x&#41; &#61;&#61; x</span>
+            <span class='code'>        val &#61; t.val</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2052,7 +2014,7 @@
           <td>
             
             
-            <span class='code'>            _growend&#33;&#40;a1, ediff&#41;</span>
+            <span class='code'>        return &#33;issingletontype&#40;typeof&#40;val&#41;&#41; &amp;&amp; &#33;&#40;isa&#40;val, Type&#41; &amp;&amp; hasuniquerep&#40;val&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2062,7 +2024,7 @@
           <td>
             
             
-            <span class='code'>            # if a1 and a2 are not overlapping, we infer implied &quot;false&quot; values from a2</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2072,7 +2034,7 @@
           <td>
             
             
-            <span class='code'>            for outer l1 &#61; l1&#43;1:bdiff</span>
+            <span class='code'>    return has_nontrivial_extended_info&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2082,7 +2044,7 @@
           <td>
             
             
-            <span class='code'>                @inbounds a1&#91;l1&#93; &#61; CHK0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2092,7 +2054,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@nospecializeinfer has_nontrivial_extended_info&#40;::JLTypeLattice, @nospecialize&#40;t&#41;&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2102,7 +2064,7 @@
           <td>
             
             
-            <span class='code'>            # update ediff in case l1 was updated</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2112,7 +2074,7 @@
           <td>
             
             
-            <span class='code'>            ediff &#61; e2 - l1 - b1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2122,7 +2084,7 @@
           <td>
             
             
-            <span class='code'>            # copy actual chunks from a2</span>
+            <span class='code'>    is_const_prop_profitable_arg&#40;𝕃::AbstractLattice, t&#41; -&gt; Bool</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2132,7 +2094,7 @@
           <td>
             
             
-            <span class='code'>            unsafe_copyto&#33;&#40;a1, l1&#43;1, a2, l2&#43;1-ediff, ediff&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2142,7 +2104,7 @@
           <td>
             
             
-            <span class='code'>            l1 &#61; length&#40;a1&#41;</span>
+            <span class='code'>Determines whether the given lattice element &#96;t&#96; of &#96;𝕃&#96; has new extended lattice information</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2152,7 +2114,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>that should be forwarded along with constant propagation.</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2162,7 +2124,7 @@
           <td>
             
             
-            <span class='code'>    elseif ediff &lt; 0</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2172,7 +2134,7 @@
           <td>
             
             
-            <span class='code'>        if right_false_is_false</span>
+            <span class='code'>@nospecializeinfer is_const_prop_profitable_arg&#40;𝕃::AbstractLattice, @nospecialize t&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2182,7 +2144,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
+            <span class='code'>    is_const_prop_profitable_arg&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2192,7 +2154,7 @@
           <td>
             
             
-            <span class='code'>            _deleteend&#33;&#40;a1, min&#40;l1, -ediff&#41;&#41;</span>
+            <span class='code'>@nospecializeinfer function is_const_prop_profitable_arg&#40;𝕃::PartialsLattice, @nospecialize t&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2202,7 +2164,7 @@
           <td>
             
             
-            <span class='code'>            # no need to update l1, as if bdiff &gt; 0 &#40;case below&#41;, then bdiff will</span>
+            <span class='code'>    if isa&#40;t, PartialStruct&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2212,7 +2174,7 @@
           <td>
             
             
-            <span class='code'>            # be smaller anyway than an updated l1</span>
+            <span class='code'>        return true # might be a bit aggressive, may want to enable some check like follows:</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2222,7 +2184,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;x, false&#41; &#61;&#61; x</span>
+            <span class='code'>        # for i &#61; 1:length&#40;t.fields&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2232,7 +2194,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they already have the</span>
+            <span class='code'>        #     fld &#61; t.fields&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2242,7 +2204,7 @@
           <td>
             
             
-            <span class='code'>            # correct value</span>
+            <span class='code'>        #     isconstType&#40;fld&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2252,7 +2214,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        #     is_const_prop_profitable_arg&#40;fld&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2262,7 +2224,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        #     fld ⊏ fieldtype&#40;t.typ, i&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2272,7 +2234,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        # end</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2282,7 +2244,7 @@
           <td>
             
             
-            <span class='code'>    if bdiff &lt; 0</span>
+            <span class='code'>        # return false</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2292,7 +2254,7 @@
           <td>
             
             
-            <span class='code'>        if left_false_is_false</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2302,7 +2264,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the leading bits — they&#39;re all false</span>
+            <span class='code'>    isa&#40;t, PartialOpaque&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2312,7 +2274,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;false, x&#41; &#61;&#61; x</span>
+            <span class='code'>    return is_const_prop_profitable_arg&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2322,7 +2284,7 @@
           <td>
             
             
-            <span class='code'>            _growbeg&#33;&#40;a1, -bdiff&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2332,7 +2294,7 @@
           <td>
             
             
-            <span class='code'>            # if a1 and a2 are not overlapping, we infer implied &quot;false&quot; values from a2</span>
+            <span class='code'>@nospecializeinfer function is_const_prop_profitable_arg&#40;𝕃::ConstsLattice, @nospecialize t&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2342,7 +2304,7 @@
           <td>
             
             
-            <span class='code'>            for i &#61; l2&#43;1:-bdiff</span>
+            <span class='code'>    if isa&#40;t, Const&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2352,7 +2314,7 @@
           <td>
             
             
-            <span class='code'>                @inbounds a1&#91;i&#93; &#61; CHK0</span>
+            <span class='code'>        # don&#39;t consider mutable values useful constants</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2362,7 +2324,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        val &#61; t.val</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2372,7 +2334,7 @@
           <td>
             
             
-            <span class='code'>            b1 &#43;&#61; bdiff # updated return value</span>
+            <span class='code'>        return isa&#40;val, Symbol&#41; || isa&#40;val, Type&#41; || &#33;ismutable&#40;val&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2382,7 +2344,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2392,7 +2354,7 @@
           <td>
             
             
-            <span class='code'>            # copy actual chunks from a2</span>
+            <span class='code'>    isa&#40;t, PartialTypeVar&#41; &amp;&amp; return false # this isn&#39;t forwardable</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2402,7 +2364,7 @@
           <td>
             
             
-            <span class='code'>            unsafe_copyto&#33;&#40;a1, 1, a2, 1, min&#40;-bdiff, l2&#41;&#41;</span>
+            <span class='code'>    return is_const_prop_profitable_arg&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2412,7 +2374,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2422,7 +2384,7 @@
           <td>
             
             
-            <span class='code'>    elseif bdiff &gt; 0</span>
+            <span class='code'>@nospecializeinfer is_const_prop_profitable_arg&#40;::JLTypeLattice, @nospecialize t&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2432,7 +2394,7 @@
           <td>
             
             
-            <span class='code'>        if right_false_is_false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2442,7 +2404,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
+            <span class='code'>@nospecializeinfer is_forwardable_argtype&#40;𝕃::AbstractLattice, @nospecialize&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2452,7 +2414,7 @@
           <td>
             
             
-            <span class='code'>            _deletebeg&#33;&#40;a1, min&#40;l1, bdiff&#41;&#41;</span>
+            <span class='code'>    is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2462,7 +2424,7 @@
           <td>
             
             
-            <span class='code'>            b1 &#43;&#61; bdiff</span>
+            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;𝕃::ConditionalsLattice, @nospecialize x&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2472,7 +2434,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;x, false&#41; &#61;&#61; x</span>
+            <span class='code'>    isa&#40;x, Conditional&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2482,7 +2444,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they already have the</span>
+            <span class='code'>    return is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2492,7 +2454,7 @@
           <td>
             
             
-            <span class='code'>            # correct value</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2502,7 +2464,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;𝕃::PartialsLattice, @nospecialize x&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2512,7 +2474,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    isa&#40;x, PartialStruct&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2522,7 +2484,7 @@
           <td>
             
             
-            <span class='code'>    b1 # the new offset</span>
+            <span class='code'>    isa&#40;x, PartialOpaque&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2532,7 +2494,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2542,7 +2504,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2552,7 +2514,7 @@
           <td>
             
             
-            <span class='code'>@inline push&#33;&#40;s::BitSet, n::Integer&#41; &#61; _setint&#33;&#40;s, Int&#40;n&#41;, true&#41;</span>
+            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;𝕃::ConstsLattice, @nospecialize x&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2562,7 +2524,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    isa&#40;x, Const&#41; &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2572,7 +2534,7 @@
           <td>
             
             
-            <span class='code'>push&#33;&#40;s::BitSet, ns::Integer...&#41; &#61; &#40;for n in ns; push&#33;&#40;s, n&#41;; end; s&#41;</span>
+            <span class='code'>    return is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2582,7 +2544,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2592,7 +2554,7 @@
           <td>
             
             
-            <span class='code'>@inline pop&#33;&#40;s::BitSet&#41; &#61; pop&#33;&#40;s, last&#40;s&#41;&#41;</span>
+            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;::JLTypeLattice, @nospecialize x&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2602,7 +2564,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return false</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2612,7 +2574,7 @@
           <td>
             
             
-            <span class='code'>@inline function pop&#33;&#40;s::BitSet, n::Integer&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2622,7 +2584,7 @@
           <td>
             
             
-            <span class='code'>    if n in s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2632,7 +2594,7 @@
           <td>
             
             
-            <span class='code'>        delete&#33;&#40;s, n&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2642,7 +2604,7 @@
           <td>
             
             
-            <span class='code'>        n</span>
+            <span class='code'>    widenreturn&#40;𝕃ᵢ::AbstractLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41; -&gt; new_bestguess</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2652,7 +2614,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    widenreturn_noslotwrapper&#40;𝕃ᵢ::AbstractLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41; -&gt; new_bestguess</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2662,7 +2624,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;KeyError&#40;n&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2672,7 +2634,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Appropriately converts inferred type of a return value &#96;rt&#96; to such a type</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2682,7 +2644,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>that we know we can store in the cache and is valid and good inter-procedurally,</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2692,7 +2654,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>E.g. if &#96;rt isa Conditional&#96; then &#96;rt&#96; should be converted to &#96;InterConditional&#96;</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2702,7 +2664,7 @@
           <td>
             
             
-            <span class='code'>@inline function pop&#33;&#40;s::BitSet, n::Integer, default&#41;</span>
+            <span class='code'>or the other cachable lattice element.</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2712,7 +2674,7 @@
           <td>
             
             
-            <span class='code'>    if n in s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2722,7 +2684,7 @@
           <td>
             
             
-            <span class='code'>        delete&#33;&#40;s, n&#41;</span>
+            <span class='code'>External lattice &#96;𝕃ᵢ::ExternalLattice&#96; may overload:</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2732,7 +2694,7 @@
           <td>
             
             
-            <span class='code'>        n</span>
+            <span class='code'>- &#96;widenreturn&#40;𝕃ᵢ::ExternalLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2742,7 +2704,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>- &#96;widenreturn_noslotwrapper&#40;𝕃ᵢ::ExternalLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2752,7 +2714,7 @@
           <td>
             
             
-            <span class='code'>        default</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2762,7 +2724,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function widenreturn end, function widenreturn_noslotwrapper end</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2772,7 +2734,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2782,7 +2744,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@nospecializeinfer is_valid_lattice&#40;𝕃::AbstractLattice, @nospecialize&#40;elem&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2792,7 +2754,7 @@
           <td>
             
             
-            <span class='code'>@inline _is_convertible_Int&#40;n&#41; &#61; typemin&#40;Int&#41; &lt;&#61; n &lt;&#61; typemax&#40;Int&#41;</span>
+            <span class='code'>    is_valid_lattice_norec&#40;𝕃, elem&#41; &amp;&amp; is_valid_lattice&#40;widenlattice&#40;𝕃&#41;, elem&#41;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2802,7 +2764,7 @@
           <td>
             
             
-            <span class='code'>@inline delete&#33;&#40;s::BitSet, n::Int&#41; &#61; _setint&#33;&#40;s, n, false&#41;</span>
+            <span class='code'>@nospecializeinfer is_valid_lattice&#40;𝕃::JLTypeLattice, @nospecialize&#40;elem&#41;&#41; &#61; is_valid_lattice_norec&#40;𝕃, elem&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2812,7 +2774,7 @@
           <td>
             
             
-            <span class='code'>@inline delete&#33;&#40;s::BitSet, n::Integer&#41; &#61; _is_convertible_Int&#40;n&#41; ? delete&#33;&#40;s, Int&#40;n&#41;&#41; : s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2822,7 +2784,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>has_conditional&#40;𝕃::AbstractLattice&#41; &#61; has_conditional&#40;widenlattice&#40;𝕃&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2832,7 +2794,7 @@
           <td>
             
             
-            <span class='code'>popfirst&#33;&#40;s::BitSet&#41; &#61; pop&#33;&#40;s, first&#40;s&#41;&#41;</span>
+            <span class='code'>has_conditional&#40;::AnyConditionalsLattice&#41; &#61; true</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2842,7 +2804,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>has_conditional&#40;::JLTypeLattice&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2852,7 +2814,7 @@
           <td>
             
             
-            <span class='code'>function empty&#33;&#40;s::BitSet&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2862,7 +2824,7 @@
           <td>
             
             
-            <span class='code'>    empty&#33;&#40;s.bits&#41;</span>
+            <span class='code'>has_mustalias&#40;𝕃::AbstractLattice&#41; &#61; has_mustalias&#40;widenlattice&#40;𝕃&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2872,7 +2834,7 @@
           <td>
             
             
-            <span class='code'>    s.offset &#61; NO_OFFSET</span>
+            <span class='code'>has_mustalias&#40;::AnyMustAliasesLattice&#41; &#61; true</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2882,7 +2844,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'>has_mustalias&#40;::JLTypeLattice&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2892,7 +2854,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2902,7 +2864,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>has_extended_unionsplit&#40;𝕃::AbstractLattice&#41; &#61; has_extended_unionsplit&#40;widenlattice&#40;𝕃&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2912,7 +2874,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;s::BitSet&#41; &#61; _check0&#40;s.bits, 1, length&#40;s.bits&#41;&#41;</span>
+            <span class='code'>has_extended_unionsplit&#40;::AnyMustAliasesLattice&#41; &#61; true</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2922,7 +2884,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>has_extended_unionsplit&#40;::JLTypeLattice&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2932,7 +2894,7 @@
           <td>
             
             
-            <span class='code'># Mathematical set functions: union&#33;, intersect&#33;, setdiff&#33;, symdiff&#33;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2942,7 +2904,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Curried versions</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2952,7 +2914,7 @@
           <td>
             
             
-            <span class='code'>union&#40;s::BitSet, sets...&#41; &#61; union&#33;&#40;copy&#40;s&#41;, sets...&#41;</span>
+            <span class='code'>⊑&#40;lattice::AbstractLattice&#41; &#61; &#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; -&gt; ⊑&#40;lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2962,7 +2924,7 @@
           <td>
             
             
-            <span class='code'>union&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;|, s1, s2&#41;</span>
+            <span class='code'>⊏&#40;lattice::AbstractLattice&#41; &#61; &#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; -&gt; ⊏&#40;lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2972,7 +2934,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>⋤&#40;lattice::AbstractLattice&#41; &#61; &#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; -&gt; ⋤&#40;lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2982,7 +2944,7 @@
           <td>
             
             
-            <span class='code'>intersect&#40;s1::BitSet, s2::BitSet&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2992,7 +2954,7 @@
           <td>
             
             
-            <span class='code'>    length&#40;s1.bits&#41; &lt; length&#40;s2.bits&#41; ? intersect&#33;&#40;copy&#40;s1&#41;, s2&#41; : intersect&#33;&#40;copy&#40;s2&#41;, s1&#41;</span>
+            <span class='code'># Fallbacks for external packages using these methods</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -3002,7 +2964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const fallback_lattice &#61; InferenceLattice&#40;BaseInferenceLattice.instance&#41;</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -3012,7 +2974,7 @@
           <td>
             
             
-            <span class='code'>intersect&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;&amp;, s1, s2&#41;</span>
+            <span class='code'>const fallback_ipo_lattice &#61; InferenceLattice&#40;IPOResultLattice.instance&#41;</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -3032,7 +2994,7 @@
           <td>
             
             
-            <span class='code'>setdiff&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;&#40;p, q&#41; -&gt; p &amp; ~q, s1, s2&#41;</span>
+            <span class='code'>@nospecializeinfer @nospecialize&#40;a&#41; ⊑ @nospecialize&#40;b&#41; &#61; ⊑&#40;fallback_lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3042,7 +3004,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@nospecializeinfer @nospecialize&#40;a&#41; ⊏ @nospecialize&#40;b&#41; &#61; ⊏&#40;fallback_lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3052,7 +3014,7 @@
           <td>
             
             
-            <span class='code'>function symdiff&#33;&#40;s::BitSet, ns&#41;</span>
+            <span class='code'>@nospecializeinfer @nospecialize&#40;a&#41; ⋤ @nospecialize&#40;b&#41; &#61; ⋤&#40;fallback_lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3062,17 +3024,31 @@
           <td>
             
             
-            <span class='code'>    for x in ns</span>
+            <span class='code'>@nospecializeinfer tmeet&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; tmeet&#40;fallback_lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
           <td class='lineno'>300</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        int_symdiff&#33;&#40;s, x&#41;</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in tmerge
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from _getfield_tfunc
+              <a href='tfuncs.jl-163a03888ce600d9f7e3c1d6ff96d9eb53d0d41e.html#L1218'>line 1218</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='typelimits.jl-66c93f492dac447ee4386d95c4544db0165616ee.html#L448'>tmerge</a>
+              <br />
+            </div>
+            <span class='code'>@nospecializeinfer tmerge&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; tmerge&#40;fallback_lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3082,7 +3058,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@nospecializeinfer is_lattice_equal&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; is_lattice_equal&#40;fallback_lattice, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3092,7 +3068,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3102,7 +3078,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Widenlattice with argument</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3112,7 +3088,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>widenlattice&#40;::JLTypeLattice, @nospecialize&#40;t&#41;&#41; &#61; widenconst&#40;t&#41;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3122,7 +3098,7 @@
           <td>
             
             
-            <span class='code'>function symdiff&#33;&#40;s::BitSet, ns::AbstractSet&#41;</span>
+            <span class='code'>function widenlattice&#40;𝕃::AbstractLattice, @nospecialize&#40;t&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3132,7 +3108,7 @@
           <td>
             
             
-            <span class='code'>    for x in ns</span>
+            <span class='code'>    is_valid_lattice_norec&#40;𝕃, t&#41; &amp;&amp; return t</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3142,7 +3118,7 @@
           <td>
             
             
-            <span class='code'>        int_symdiff&#33;&#40;s, x&#41;</span>
+            <span class='code'>    widenlattice&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3152,1117 +3128,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L309'>
-          <td class='lineno'>309</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return s</span>
-          </td>
-        </tr>
-        <tr id='L310'>
-          <td class='lineno'>310</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
             <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L311'>
-          <td class='lineno'>311</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L312'>
-          <td class='lineno'>312</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function int_symdiff&#33;&#40;s::BitSet, n::Integer&#41;</span>
-          </td>
-        </tr>
-        <tr id='L313'>
-          <td class='lineno'>313</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    n0 &#61; Int&#40;n&#41;</span>
-          </td>
-        </tr>
-        <tr id='L314'>
-          <td class='lineno'>314</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    val &#61; &#33;&#40;n0 in s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L315'>
-          <td class='lineno'>315</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    _setint&#33;&#40;s, n0, val&#41;</span>
-          </td>
-        </tr>
-        <tr id='L316'>
-          <td class='lineno'>316</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    s</span>
-          </td>
-        </tr>
-        <tr id='L317'>
-          <td class='lineno'>317</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L318'>
-          <td class='lineno'>318</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L319'>
-          <td class='lineno'>319</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>symdiff&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;xor, s1, s2&#41;</span>
-          </td>
-        </tr>
-        <tr id='L320'>
-          <td class='lineno'>320</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L321'>
-          <td class='lineno'>321</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>filter&#33;&#40;f, s::BitSet&#41; &#61; unsafe_filter&#33;&#40;f, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L322'>
-          <td class='lineno'>322</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L323'>
-          <td class='lineno'>323</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline in&#40;n::Int, s::BitSet&#41; &#61; _bits_getindex&#40;s.bits, n, s.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L324'>
-          <td class='lineno'>324</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline in&#40;n::Integer, s::BitSet&#41; &#61; _is_convertible_Int&#40;n&#41; ? in&#40;Int&#40;n&#41;, s&#41; : false</span>
-          </td>
-        </tr>
-        <tr id='L325'>
-          <td class='lineno'>325</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L326'>
-          <td class='lineno'>326</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function iterate&#40;s::BitSet, &#40;word, idx&#41; &#61; &#40;CHK0, 0&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L327'>
-          <td class='lineno'>327</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    while word &#61;&#61; 0</span>
-          </td>
-        </tr>
-        <tr id='L328'>
-          <td class='lineno'>328</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        idx &#61;&#61; length&#40;s.bits&#41; &amp;&amp; return nothing</span>
-          </td>
-        </tr>
-        <tr id='L329'>
-          <td class='lineno'>329</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        idx &#43;&#61; 1</span>
-          </td>
-        </tr>
-        <tr id='L330'>
-          <td class='lineno'>330</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        word &#61; @inbounds s.bits&#91;idx&#93;</span>
-          </td>
-        </tr>
-        <tr id='L331'>
-          <td class='lineno'>331</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L332'>
-          <td class='lineno'>332</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    trailing_zeros&#40;word&#41; &#43; &#40;idx - 1 &#43; s.offset&#41; &lt;&lt; 6, &#40;_blsr&#40;word&#41;, idx&#41;</span>
-          </td>
-        </tr>
-        <tr id='L333'>
-          <td class='lineno'>333</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L334'>
-          <td class='lineno'>334</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L335'>
-          <td class='lineno'>335</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@noinline _throw_bitset_notempty_error&#40;&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L336'>
-          <td class='lineno'>336</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    throw&#40;ArgumentError&#40;&quot;collection must be non-empty&quot;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L337'>
-          <td class='lineno'>337</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L338'>
-          <td class='lineno'>338</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function first&#40;s::BitSet&#41;</span>
-          </td>
-        </tr>
-        <tr id='L339'>
-          <td class='lineno'>339</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    idx &#61; _bits_findnext&#40;s.bits, 0&#41;</span>
-          </td>
-        </tr>
-        <tr id='L340'>
-          <td class='lineno'>340</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    idx &#61;&#61; -1 ? _throw_bitset_notempty_error&#40;&#41; : idx &#43; intoffset&#40;s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L341'>
-          <td class='lineno'>341</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L342'>
-          <td class='lineno'>342</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L343'>
-          <td class='lineno'>343</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function last&#40;s::BitSet&#41;</span>
-          </td>
-        </tr>
-        <tr id='L344'>
-          <td class='lineno'>344</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    idx &#61; _bits_findprev&#40;s.bits, &#40;length&#40;s.bits&#41; &lt;&lt; 6&#41; - 1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L345'>
-          <td class='lineno'>345</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    idx &#61;&#61; -1 ? _throw_bitset_notempty_error&#40;&#41; : idx &#43; intoffset&#40;s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L346'>
-          <td class='lineno'>346</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L347'>
-          <td class='lineno'>347</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L348'>
-          <td class='lineno'>348</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>length&#40;s::BitSet&#41; &#61; bitcount&#40;s.bits&#41; # &#61; mapreduce&#40;count_ones, &#43;, s.bits; init&#61;0&#41;</span>
-          </td>
-        </tr>
-        <tr id='L349'>
-          <td class='lineno'>349</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L350'>
-          <td class='lineno'>350</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function show&#40;io::IO, s::BitSet&#41;</span>
-          </td>
-        </tr>
-        <tr id='L351'>
-          <td class='lineno'>351</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    print&#40;io, &quot;BitSet&#40;&#91;&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L352'>
-          <td class='lineno'>352</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    first &#61; true</span>
-          </td>
-        </tr>
-        <tr id='L353'>
-          <td class='lineno'>353</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    for n in s</span>
-          </td>
-        </tr>
-        <tr id='L354'>
-          <td class='lineno'>354</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#33;first &amp;&amp; print&#40;io, &quot;, &quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L355'>
-          <td class='lineno'>355</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        print&#40;io, n&#41;</span>
-          </td>
-        </tr>
-        <tr id='L356'>
-          <td class='lineno'>356</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        first &#61; false</span>
-          </td>
-        </tr>
-        <tr id='L357'>
-          <td class='lineno'>357</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L358'>
-          <td class='lineno'>358</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    print&#40;io, &quot;&#93;&#41;&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L359'>
-          <td class='lineno'>359</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L360'>
-          <td class='lineno'>360</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L361'>
-          <td class='lineno'>361</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function _check0&#40;a::Vector&#123;UInt64&#125;, b::Int, e::Int&#41;</span>
-          </td>
-        </tr>
-        <tr id='L362'>
-          <td class='lineno'>362</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inbounds for i in b:e</span>
-          </td>
-        </tr>
-        <tr id='L363'>
-          <td class='lineno'>363</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        a&#91;i&#93; &#61;&#61; CHK0 || return false</span>
-          </td>
-        </tr>
-        <tr id='L364'>
-          <td class='lineno'>364</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L365'>
-          <td class='lineno'>365</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    true</span>
-          </td>
-        </tr>
-        <tr id='L366'>
-          <td class='lineno'>366</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L367'>
-          <td class='lineno'>367</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L368'>
-          <td class='lineno'>368</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function &#61;&#61;&#40;s1::BitSet, s2::BitSet&#41;</span>
-          </td>
-        </tr>
-        <tr id='L369'>
-          <td class='lineno'>369</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Swap so s1 has always the smallest offset</span>
-          </td>
-        </tr>
-        <tr id='L370'>
-          <td class='lineno'>370</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if s1.offset &gt; s2.offset</span>
-          </td>
-        </tr>
-        <tr id='L371'>
-          <td class='lineno'>371</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        s1, s2 &#61; s2, s1</span>
-          </td>
-        </tr>
-        <tr id='L372'>
-          <td class='lineno'>372</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L373'>
-          <td class='lineno'>373</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    a1 &#61; s1.bits</span>
-          </td>
-        </tr>
-        <tr id='L374'>
-          <td class='lineno'>374</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    a2 &#61; s2.bits</span>
-          </td>
-        </tr>
-        <tr id='L375'>
-          <td class='lineno'>375</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    b1, b2 &#61; s1.offset, s2.offset</span>
-          </td>
-        </tr>
-        <tr id='L376'>
-          <td class='lineno'>376</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    l1, l2 &#61; length&#40;a1&#41;, length&#40;a2&#41;</span>
-          </td>
-        </tr>
-        <tr id='L377'>
-          <td class='lineno'>377</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    e1 &#61; l1&#43;b1</span>
-          </td>
-        </tr>
-        <tr id='L378'>
-          <td class='lineno'>378</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    overlap0 &#61; max&#40;0, e1 - b2&#41;</span>
-          </td>
-        </tr>
-        <tr id='L379'>
-          <td class='lineno'>379</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    included &#61; overlap0 &gt;&#61; l2  # whether a2&#39;s indices are included in a1&#39;s</span>
-          </td>
-        </tr>
-        <tr id='L380'>
-          <td class='lineno'>380</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    overlap  &#61; included ? l2 : overlap0</span>
-          </td>
-        </tr>
-        <tr id='L381'>
-          <td class='lineno'>381</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L382'>
-          <td class='lineno'>382</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Ensure non-overlap chunks are zero &#40;unlikely&#41;</span>
-          </td>
-        </tr>
-        <tr id='L383'>
-          <td class='lineno'>383</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    _check0&#40;a1, 1, l1-overlap0&#41; || return false</span>
-          </td>
-        </tr>
-        <tr id='L384'>
-          <td class='lineno'>384</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if included</span>
-          </td>
-        </tr>
-        <tr id='L385'>
-          <td class='lineno'>385</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        _check0&#40;a1, b2-b1&#43;l2&#43;1, l1&#41; || return false</span>
-          </td>
-        </tr>
-        <tr id='L386'>
-          <td class='lineno'>386</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    else</span>
-          </td>
-        </tr>
-        <tr id='L387'>
-          <td class='lineno'>387</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        _check0&#40;a2, 1&#43;overlap, l2&#41; || return false</span>
-          </td>
-        </tr>
-        <tr id='L388'>
-          <td class='lineno'>388</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L389'>
-          <td class='lineno'>389</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L390'>
-          <td class='lineno'>390</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # compare overlap values</span>
-          </td>
-        </tr>
-        <tr id='L391'>
-          <td class='lineno'>391</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if overlap &gt; 0</span>
-          </td>
-        </tr>
-        <tr id='L392'>
-          <td class='lineno'>392</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        t1 &#61; @_gc_preserve_begin a1</span>
-          </td>
-        </tr>
-        <tr id='L393'>
-          <td class='lineno'>393</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        t2 &#61; @_gc_preserve_begin a2</span>
-          </td>
-        </tr>
-        <tr id='L394'>
-          <td class='lineno'>394</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        memcmp&#40;pointer&#40;a1, b2-b1&#43;1&#41;, pointer&#40;a2&#41;, overlap&lt;&lt;3&#41; &#61;&#61; 0 || return false</span>
-          </td>
-        </tr>
-        <tr id='L395'>
-          <td class='lineno'>395</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        @_gc_preserve_end t2</span>
-          </td>
-        </tr>
-        <tr id='L396'>
-          <td class='lineno'>396</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        @_gc_preserve_end t1</span>
-          </td>
-        </tr>
-        <tr id='L397'>
-          <td class='lineno'>397</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L398'>
-          <td class='lineno'>398</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L399'>
-          <td class='lineno'>399</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return true</span>
-          </td>
-        </tr>
-        <tr id='L400'>
-          <td class='lineno'>400</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L401'>
-          <td class='lineno'>401</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L402'>
-          <td class='lineno'>402</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function issubset&#40;a::BitSet, b::BitSet&#41;</span>
-          </td>
-        </tr>
-        <tr id='L403'>
-          <td class='lineno'>403</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    n &#61; length&#40;a.bits&#41;</span>
-          </td>
-        </tr>
-        <tr id='L404'>
-          <td class='lineno'>404</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    shift &#61; b.offset - a.offset</span>
-          </td>
-        </tr>
-        <tr id='L405'>
-          <td class='lineno'>405</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    i, j &#61; shift, shift &#43; length&#40;b.bits&#41;</span>
-          </td>
-        </tr>
-        <tr id='L406'>
-          <td class='lineno'>406</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L407'>
-          <td class='lineno'>407</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    f&#40;a, b&#41; &#61; a &#61;&#61; a &amp; b</span>
-          </td>
-        </tr>
-        <tr id='L408'>
-          <td class='lineno'>408</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return &#40;</span>
-          </td>
-        </tr>
-        <tr id='L409'>
-          <td class='lineno'>409</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        all&#40;@inbounds iszero&#40;a.bits&#91;i&#93;&#41; for i in 1:min&#40;n, i&#41;&#41; &amp;&amp;</span>
-          </td>
-        </tr>
-        <tr id='L410'>
-          <td class='lineno'>410</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        all&#40;@inbounds f&#40;a.bits&#91;i&#93;, b.bits&#91;i - shift&#93;&#41; for i in max&#40;1, i&#43;1&#41;:min&#40;n, j&#41;&#41; &amp;&amp;</span>
-          </td>
-        </tr>
-        <tr id='L411'>
-          <td class='lineno'>411</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        all&#40;@inbounds iszero&#40;a.bits&#91;i&#93;&#41; for i in max&#40;1, j&#43;1&#41;:n&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L412'>
-          <td class='lineno'>412</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L413'>
-          <td class='lineno'>413</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>⊊&#40;a::BitSet, b::BitSet&#41; &#61; a &lt;&#61; b &amp;&amp; a &#33;&#61; b</span>
-          </td>
-        </tr>
-        <tr id='L414'>
-          <td class='lineno'>414</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L415'>
-          <td class='lineno'>415</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L416'>
-          <td class='lineno'>416</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>minimum&#40;s::BitSet&#41; &#61; first&#40;s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L417'>
-          <td class='lineno'>417</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>maximum&#40;s::BitSet&#41; &#61; last&#40;s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L418'>
-          <td class='lineno'>418</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>extrema&#40;s::BitSet&#41; &#61; &#40;first&#40;s&#41;, last&#40;s&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L419'>
-          <td class='lineno'>419</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>issorted&#40;s::BitSet&#41; &#61; true</span>
           </td>
         </tr>
       </tbody>
