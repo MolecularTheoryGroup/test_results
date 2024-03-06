@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/cartesian.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/ssair/irinterp.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 06 Mar 2024 17:41:35
+        Generated on Wed, 06 Mar 2024 17:51:27
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>module Cartesian</span>
+            <span class='code'>function collect_limitations&#33;&#40;@nospecialize&#40;typ&#41;, ::IRInterpretationState&#41;</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @assert &#33;isa&#40;typ, LimitedAccuracy&#41; &quot;irinterp is unable to handle heavy recursion&quot;</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>export @nloops, @nref, @ncall, @nexprs, @nextract, @nall, @nany, @ntuple, @nif</span>
+            <span class='code'>    return typ</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>### Cartesian-specific macros</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function concrete_eval_invoke&#40;interp::AbstractInterpreter,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    inst::Expr, mi::MethodInstance, irsv::IRInterpretationState&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    @nloops N itersym rangeexpr bodyexpr</span>
+            <span class='code'>    world &#61; frame_world&#40;irsv&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    @nloops N itersym rangeexpr preexpr bodyexpr</span>
+            <span class='code'>    mi_cache &#61; WorldView&#40;code_cache&#40;interp&#41;, world&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>    @nloops N itersym rangeexpr preexpr postexpr bodyexpr</span>
+            <span class='code'>    code &#61; get&#40;mi_cache, mi, nothing&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    code &#61;&#61;&#61; nothing &amp;&amp; return Pair&#123;Any,Bool&#125;&#40;nothing, false&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>Generate &#96;N&#96; nested loops, using &#96;itersym&#96; as the prefix for the iteration variables.</span>
+            <span class='code'>    argtypes &#61; collect_argtypes&#40;interp, inst.args&#91;2:end&#93;, nothing, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>&#96;rangeexpr&#96; may be an anonymous-function expression, or a simple symbol &#96;var&#96; in which case</span>
+            <span class='code'>    argtypes &#61;&#61;&#61; nothing &amp;&amp; return Pair&#123;Any,Bool&#125;&#40;Bottom, false&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>the range is &#96;axes&#40;var, d&#41;&#96; for dimension &#96;d&#96;.</span>
+            <span class='code'>    effects &#61; decode_effects&#40;code.ipo_purity_bits&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if is_foldable&#40;effects&#41; &amp;&amp; is_all_const_arg&#40;argtypes, #&#61;start&#61;#1&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>Optionally, you can provide &quot;pre&quot; and &quot;post&quot; expressions. These get executed first and last,</span>
+            <span class='code'>        args &#61; collect_const_args&#40;argtypes, #&#61;start&#61;#1&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>respectively, in the body of each loop. For example:</span>
+            <span class='code'>        value &#61; let world &#61; get_world_counter&#40;interp&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            try</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    @nloops 2 i A d -&gt; j_d &#61; min&#40;i_d, 5&#41; begin</span>
+            <span class='code'>                Core._call_in_world_total&#40;world, args...&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>        s &#43;&#61; @nref 2 A j</span>
+            <span class='code'>            catch</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                return Pair&#123;Any,Bool&#125;&#40;Bottom, false&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>would generate:</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return Pair&#123;Any,Bool&#125;&#40;Const&#40;value&#41;, true&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>    for i_2 &#61; axes&#40;A, 2&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>        j_2 &#61; min&#40;i_2, 5&#41;</span>
+            <span class='code'>        if is_constprop_edge_recursed&#40;mi, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>        for i_1 &#61; axes&#40;A, 1&#41;</span>
+            <span class='code'>            return Pair&#123;Any,Bool&#125;&#40;nothing, is_nothrow&#40;effects&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>            j_1 &#61; min&#40;i_1, 5&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>            s &#43;&#61; A&#91;j_1, j_2&#93;</span>
+            <span class='code'>        newirsv &#61; IRInterpretationState&#40;interp, code, mi, argtypes, world&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        if newirsv &#33;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            newirsv.parent &#61; irsv</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            return ir_abstract_constant_propagation&#40;interp, newirsv&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>If you want just a post-expression, supply &#91;&#96;nothing&#96;&#93;&#40;@ref&#41; for the pre-expression. Using</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>parentheses and semicolons, you can supply multi-statement expressions.</span>
+            <span class='code'>        return Pair&#123;Any,Bool&#125;&#40;nothing, is_nothrow&#40;effects&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>macro nloops&#40;N, itersym, rangeexpr, args...&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>    _nloops&#40;N, itersym, rangeexpr, args...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>abstract_eval_ssavalue&#40;s::SSAValue, sv::IRInterpretationState&#41; &#61; abstract_eval_ssavalue&#40;s, sv.ir&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>function _nloops&#40;N::Int, itersym::Symbol, arraysym::Symbol, args::Expr...&#41;</span>
+            <span class='code'>function abstract_eval_phi_stmt&#40;interp::AbstractInterpreter, phi::PhiNode, ::Int, irsv::IRInterpretationState&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>    @gensym d</span>
+            <span class='code'>    return abstract_eval_phi&#40;interp, phi, nothing, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    _nloops&#40;N, itersym, :&#40;&#36;d-&gt;Base.axes&#40;&#36;arraysym, &#36;d&#41;&#41;, args...&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -483,9 +483,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in abstract_call
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from abstract_eval_call
+              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L2370'>line 2370</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>function abstract_call&#40;interp::AbstractInterpreter, arginfo::ArgInfo, irsv::IRInterpretationState&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,17 +504,22 @@
           <td>
             
             
-            <span class='code'>function _nloops&#40;N::Int, itersym::Symbol, rangeexpr::Expr, args::Expr...&#41;</span>
+            <span class='code'>    si &#61; StmtInfo&#40;true&#41; # TODO better job here?</span>
           </td>
         </tr>
         <tr id='L48'>
           <td class='lineno'>48</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>    if rangeexpr.head &#33;&#61;&#61; :-&gt;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L2160'>abstract_call</a>
+              <br />
+            </div>
+            <span class='code'>    &#40;; rt, effects, info&#41; &#61; abstract_call&#40;interp, arginfo, si, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +529,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;second argument must be an anonymous function expression to compute the range&quot;&#41;&#41;</span>
+            <span class='code'>    irsv.ir.stmts&#91;irsv.curridx&#93;&#91;:info&#93; &#61; info</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +539,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return RTEffects&#40;rt, effects&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +549,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;1 &lt;&#61; length&#40;args&#41; &lt;&#61; 3&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +559,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;number of arguments must be 1 ≤ length&#40;args&#41; ≤ 3, got &#36;nargs&quot;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +569,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function update_phi&#33;&#40;irsv::IRInterpretationState, from::Int, to::Int&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +579,7 @@
           <td>
             
             
-            <span class='code'>    body &#61; args&#91;end&#93;</span>
+            <span class='code'>    ir &#61; irsv.ir</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +589,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; Expr&#40;:escape, body&#41;</span>
+            <span class='code'>    if length&#40;ir.cfg.blocks&#91;to&#93;.preds&#41; &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +599,7 @@
           <td>
             
             
-            <span class='code'>    for dim &#61; 1:N</span>
+            <span class='code'>        # Kill the entire block</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +609,7 @@
           <td>
             
             
-            <span class='code'>        itervar &#61; inlineanonymous&#40;itersym, dim&#41;</span>
+            <span class='code'>        for bidx &#61; ir.cfg.blocks&#91;to&#93;.stmts</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +619,7 @@
           <td>
             
             
-            <span class='code'>        rng &#61; inlineanonymous&#40;rangeexpr, dim&#41;</span>
+            <span class='code'>            ir.stmts&#91;bidx&#93;&#91;:inst&#93; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +629,7 @@
           <td>
             
             
-            <span class='code'>        preexpr &#61; length&#40;args&#41; &gt; 1 ? inlineanonymous&#40;args&#91;1&#93;, dim&#41; : &#40;:&#40;nothing&#41;&#41;</span>
+            <span class='code'>            ir.stmts&#91;bidx&#93;&#91;:type&#93; &#61; Bottom</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +639,7 @@
           <td>
             
             
-            <span class='code'>        postexpr &#61; length&#40;args&#41; &gt; 2 ? inlineanonymous&#40;args&#91;2&#93;, dim&#41; : &#40;:&#40;nothing&#41;&#41;</span>
+            <span class='code'>            ir.stmts&#91;bidx&#93;&#91;:flag&#93; &#61; IR_FLAG_EFFECT_FREE | IR_FLAG_NOTHROW</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +649,7 @@
           <td>
             
             
-            <span class='code'>        ex &#61; quote</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +659,7 @@
           <td>
             
             
-            <span class='code'>            for &#36;&#40;esc&#40;itervar&#41;&#41; &#61; &#36;&#40;esc&#40;rng&#41;&#41;</span>
+            <span class='code'>        return</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,31 +669,17 @@
           <td>
             
             
-            <span class='code'>                &#36;&#40;esc&#40;preexpr&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L64'>
           <td class='lineno'>64</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _unsafe_getindex&#33;
-              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L912'>line 912</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L917'>macro expansion</a>
-              <br />
-            </div>
-            <span class='code'>                &#36;ex</span>
+            
+            
+            <span class='code'>    for sidx &#61; ir.cfg.blocks&#91;to&#93;.stmts</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,26 +689,17 @@
           <td>
             
             
-            <span class='code'>                &#36;&#40;esc&#40;postexpr&#41;&#41;</span>
+            <span class='code'>        sinst &#61; ir.stmts&#91;sidx&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L66'>
           <td class='lineno'>66</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _unsafe_getindex&#33;
-              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L912'>line 912</a>
-              <br />
-            </div>
             
-            <span class='code'>            end</span>
+            
+            <span class='code'>        isa&#40;sinst, Nothing&#41; &amp;&amp; continue # allowed between &#96;PhiNode&#96;s</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -718,7 +709,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        isa&#40;sinst, PhiNode&#41; || break</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -728,7 +719,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        for &#40;eidx, edge&#41; in enumerate&#40;sinst.edges&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -738,7 +729,7 @@
           <td>
             
             
-            <span class='code'>    ex</span>
+            <span class='code'>            if edge &#61;&#61; from</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -748,7 +739,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                deleteat&#33;&#40;sinst.edges, eidx&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -758,7 +749,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                deleteat&#33;&#40;sinst.values, eidx&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -768,7 +759,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                push&#33;&#40;irsv.ssa_refined, sidx&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -778,7 +769,7 @@
           <td>
             
             
-            <span class='code'>    @nref N A indexexpr</span>
+            <span class='code'>                break</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -788,7 +779,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -798,7 +789,7 @@
           <td>
             
             
-            <span class='code'>Generate expressions like &#96;A&#91;i_1, i_2, ...&#93;&#96;. &#96;indexexpr&#96; can either be an iteration-symbol</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -808,7 +799,7 @@
           <td>
             
             
-            <span class='code'>prefix, or an anonymous-function expression.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -818,7 +809,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -828,7 +819,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>update_phi&#33;&#40;irsv::IRInterpretationState&#41; &#61; &#40;from::Int, to::Int&#41;-&gt;update_phi&#33;&#40;irsv, from, to&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -838,7 +829,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L80'>
@@ -848,7 +839,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; @macroexpand Base.Cartesian.@nref 3 A i</span>
+            <span class='code'>function kill_terminator_edges&#33;&#40;irsv::IRInterpretationState, term_idx::Int, bb::Int&#61;block_for_inst&#40;irsv.ir, term_idx&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -858,7 +849,7 @@
           <td>
             
             
-            <span class='code'>:&#40;A&#91;i_1, i_2, i_3&#93;&#41;</span>
+            <span class='code'>    ir &#61; irsv.ir</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -868,7 +859,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    inst &#61; ir&#91;SSAValue&#40;term_idx&#41;&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -878,7 +869,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if isa&#40;inst, GotoIfNot&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -888,7 +879,7 @@
           <td>
             
             
-            <span class='code'>macro nref&#40;N::Int, A::Symbol, ex&#41;</span>
+            <span class='code'>        kill_edge&#33;&#40;ir, bb, inst.dest, update_phi&#33;&#40;irsv&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -898,7 +889,7 @@
           <td>
             
             
-            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>        kill_edge&#33;&#40;ir, bb, bb&#43;1, update_phi&#33;&#40;irsv&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -908,7 +899,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:escape, Expr&#40;:ref, A, vars...&#41;&#41;</span>
+            <span class='code'>    elseif isa&#40;inst, GotoNode&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -918,7 +909,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        kill_edge&#33;&#40;ir, bb, inst.label, update_phi&#33;&#40;irsv&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -928,7 +919,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif isa&#40;inst, ReturnNode&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -938,7 +929,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        # Nothing to do</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -948,7 +939,7 @@
           <td>
             
             
-            <span class='code'>    @ncall N f sym...</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -958,7 +949,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        @assert &#33;isexpr&#40;inst, :enter&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -968,7 +959,7 @@
           <td>
             
             
-            <span class='code'>Generate a function call expression. &#96;sym&#96; represents any number of function arguments, the</span>
+            <span class='code'>        kill_edge&#33;&#40;ir, bb, bb&#43;1, update_phi&#33;&#40;irsv&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -978,7 +969,7 @@
           <td>
             
             
-            <span class='code'>last of which may be an anonymous-function expression and is expanded into &#96;N&#96; arguments.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -988,7 +979,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -998,7 +989,7 @@
           <td>
             
             
-            <span class='code'>For example, &#96;@ncall 3 func a&#96; generates</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L96'>
@@ -1006,9 +997,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              2 &#40;0 &#37;&#41;
+              samples spent in reprocess_instruction&#33;
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #_ir_abstract_constant_propagation#511
+              <a href='irinterp.jl-983690215650024fdd7fed01ca28e9ee4a9aaf8d.html#L251'>line 251</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>function reprocess_instruction&#33;&#40;interp::AbstractInterpreter, idx::Int, bb::Union&#123;Int,Nothing&#125;,</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1018,7 +1018,7 @@
           <td>
             
             
-            <span class='code'>    func&#40;a_1, a_2, a_3&#41;</span>
+            <span class='code'>    @nospecialize&#40;inst&#41;, @nospecialize&#40;typ&#41;, irsv::IRInterpretationState&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1028,7 +1028,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ir &#61; irsv.ir</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1038,7 +1038,7 @@
           <td>
             
             
-            <span class='code'>while &#96;@ncall 2 func a b i-&gt;c&#91;i&#93;&#96; yields</span>
+            <span class='code'>    if isa&#40;inst, GotoIfNot&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1048,7 +1048,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        cond &#61; inst.cond</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1058,7 +1058,7 @@
           <td>
             
             
-            <span class='code'>    func&#40;a, b, c&#91;1&#93;, c&#91;2&#93;&#41;</span>
+            <span class='code'>        condval &#61; maybe_extract_const_bool&#40;argextype&#40;cond, ir&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1068,7 +1068,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if condval isa Bool</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1078,7 +1078,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            if isa&#40;cond, SSAValue&#41;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1088,7 +1088,7 @@
           <td>
             
             
-            <span class='code'>macro ncall&#40;N::Int, f, args...&#41;</span>
+            <span class='code'>                kill_def_use&#33;&#40;irsv.tpdum, cond, idx&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1098,7 +1098,7 @@
           <td>
             
             
-            <span class='code'>    pre &#61; args&#91;1:end-1&#93;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1108,7 +1108,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; args&#91;end&#93;</span>
+            <span class='code'>            if bb &#61;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1118,7 +1118,7 @@
           <td>
             
             
-            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>                bb &#61; block_for_inst&#40;ir, idx&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1128,7 +1128,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:escape, Expr&#40;:call, f, pre..., vars...&#41;&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1138,7 +1138,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            ir.stmts&#91;idx&#93;&#91;:flag&#93; |&#61; IR_FLAG_NOTHROW</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1148,7 +1148,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            if condval</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1158,7 +1158,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:inst&#93; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1168,7 +1168,7 @@
           <td>
             
             
-            <span class='code'>    @nexprs N expr</span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:type&#93; &#61; Any</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1178,7 +1178,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                kill_edge&#33;&#40;ir, bb, inst.dest, update_phi&#33;&#40;irsv&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1188,7 +1188,7 @@
           <td>
             
             
-            <span class='code'>Generate &#96;N&#96; expressions. &#96;expr&#96; should be an anonymous-function expression.</span>
+            <span class='code'>            else</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1198,7 +1198,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:inst&#93; &#61; GotoNode&#40;inst.dest&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1208,7 +1208,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>                kill_edge&#33;&#40;ir, bb, bb&#43;1, update_phi&#33;&#40;irsv&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1218,7 +1218,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1228,7 +1228,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; @macroexpand Base.Cartesian.@nexprs 4 i -&gt; y&#91;i&#93; &#61; A&#91;i&#43;j&#93;</span>
+            <span class='code'>            return true</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1238,7 +1238,7 @@
           <td>
             
             
-            <span class='code'>quote</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1248,7 +1248,7 @@
           <td>
             
             
-            <span class='code'>    y&#91;1&#93; &#61; A&#91;1 &#43; j&#93;</span>
+            <span class='code'>        return false</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1258,7 +1258,7 @@
           <td>
             
             
-            <span class='code'>    y&#91;2&#93; &#61; A&#91;2 &#43; j&#93;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1268,7 +1268,7 @@
           <td>
             
             
-            <span class='code'>    y&#91;3&#93; &#61; A&#91;3 &#43; j&#93;</span>
+            <span class='code'>    rt &#61; nothing</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1278,7 +1278,7 @@
           <td>
             
             
-            <span class='code'>    y&#91;4&#93; &#61; A&#91;4 &#43; j&#93;</span>
+            <span class='code'>    if isa&#40;inst, Expr&#41;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1288,7 +1288,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        head &#61; inst.head</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1298,17 +1298,22 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        if head &#61;&#61;&#61; :call || head &#61;&#61;&#61; :foreigncall || head &#61;&#61;&#61; :new || head &#61;&#61;&#61; :splatnew || head &#61;&#61;&#61; :static_parameter || head &#61;&#61;&#61; :isdefined</span>
           </td>
         </tr>
         <tr id='L126'>
           <td class='lineno'>126</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>&quot;&quot;&quot;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L2373'>abstract_eval_statement_expr</a>
+              <br />
+            </div>
+            <span class='code'>            &#40;; rt, effects&#41; &#61; abstract_eval_statement_expr&#40;interp, inst, nothing, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1318,7 +1323,7 @@
           <td>
             
             
-            <span class='code'>macro nexprs&#40;N::Int, ex::Expr&#41;</span>
+            <span class='code'>            ir.stmts&#91;idx&#93;&#91;:flag&#93; |&#61; flags_for_effects&#40;effects&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1328,7 +1333,7 @@
           <td>
             
             
-            <span class='code'>    exs &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>        elseif head &#61;&#61;&#61; :invoke</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1338,7 +1343,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:escape, Expr&#40;:block, exs...&#41;&#41;</span>
+            <span class='code'>            rt, nothrow &#61; concrete_eval_invoke&#40;interp, inst, inst.args&#91;1&#93;::MethodInstance, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1348,7 +1353,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            if nothrow</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1358,7 +1363,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:flag&#93; |&#61; IR_FLAG_NOTHROW</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1368,7 +1373,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1378,7 +1383,7 @@
           <td>
             
             
-            <span class='code'>    @nextract N esym isym</span>
+            <span class='code'>        elseif head &#61;&#61;&#61; :throw_undef_if_not</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1388,7 +1393,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            condval &#61; maybe_extract_const_bool&#40;argextype&#40;inst.args&#91;2&#93;, ir&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1398,7 +1403,7 @@
           <td>
             
             
-            <span class='code'>Generate &#96;N&#96; variables &#96;esym_1&#96;, &#96;esym_2&#96;, ..., &#96;esym_N&#96; to extract values from &#96;isym&#96;.</span>
+            <span class='code'>            condval isa Bool || return false</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1408,7 +1413,7 @@
           <td>
             
             
-            <span class='code'>&#96;isym&#96; can be either a &#96;Symbol&#96; or anonymous-function expression.</span>
+            <span class='code'>            if condval</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1418,7 +1423,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:inst&#93; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1428,7 +1433,7 @@
           <td>
             
             
-            <span class='code'>&#96;@nextract 2 x y&#96; would generate</span>
+            <span class='code'>                # We simplified the IR, but we did not update the type</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1438,7 +1443,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                return false</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1448,7 +1453,7 @@
           <td>
             
             
-            <span class='code'>    x_1 &#61; y&#91;1&#93;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1458,7 +1463,7 @@
           <td>
             
             
-            <span class='code'>    x_2 &#61; y&#91;2&#93;</span>
+            <span class='code'>            rt &#61; Union&#123;&#125;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1468,7 +1473,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        elseif head &#61;&#61;&#61; :gc_preserve_begin ||</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1478,7 +1483,7 @@
           <td>
             
             
-            <span class='code'>while &#96;@nextract 3 x d-&gt;y&#91;2d-1&#93;&#96; yields</span>
+            <span class='code'>               head &#61;&#61;&#61; :gc_preserve_end</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1488,7 +1493,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            return false</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1498,7 +1503,7 @@
           <td>
             
             
-            <span class='code'>    x_1 &#61; y&#91;1&#93;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1508,7 +1513,7 @@
           <td>
             
             
-            <span class='code'>    x_2 &#61; y&#91;3&#93;</span>
+            <span class='code'>            error&#40;&quot;reprocess_instruction&#33;: unhandled expression found&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1518,7 +1523,7 @@
           <td>
             
             
-            <span class='code'>    x_3 &#61; y&#91;5&#93;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1528,7 +1533,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif isa&#40;inst, PhiNode&#41;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1538,7 +1543,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        rt &#61; abstract_eval_phi_stmt&#40;interp, inst, idx, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1548,7 +1553,7 @@
           <td>
             
             
-            <span class='code'>macro nextract&#40;N::Int, esym::Symbol, isym::Symbol&#41;</span>
+            <span class='code'>    elseif isa&#40;inst, ReturnNode&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1558,7 +1563,7 @@
           <td>
             
             
-            <span class='code'>    aexprs &#61; Any&#91; Expr&#40;:escape, Expr&#40;:&#40;&#61;&#41;, inlineanonymous&#40;esym, i&#41;, :&#40;&#40;&#36;isym&#41;&#91;&#36;i&#93;&#41;&#41;&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>        # Handled at the very end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1568,7 +1573,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:block, aexprs...&#41;</span>
+            <span class='code'>        return false</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1578,7 +1583,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    elseif isa&#40;inst, PiNode&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1588,7 +1593,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        rt &#61; tmeet&#40;typeinf_lattice&#40;interp&#41;, argextype&#40;inst.val, ir&#41;, widenconst&#40;inst.typ&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1598,7 +1603,7 @@
           <td>
             
             
-            <span class='code'>macro nextract&#40;N::Int, esym::Symbol, ex::Expr&#41;</span>
+            <span class='code'>    elseif inst &#61;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1608,7 +1613,7 @@
           <td>
             
             
-            <span class='code'>    aexprs &#61; Any&#91; Expr&#40;:escape, Expr&#40;:&#40;&#61;&#41;, inlineanonymous&#40;esym, i&#41;, inlineanonymous&#40;ex,i&#41;&#41;&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>        return false</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1618,7 +1623,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:block, aexprs...&#41;</span>
+            <span class='code'>    elseif isa&#40;inst, GlobalRef&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1628,7 +1633,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        # GlobalRef is not refinable</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1638,7 +1643,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1648,7 +1653,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        rt &#61; argextype&#40;inst, irsv.ir&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1658,7 +1663,7 @@
           <td>
             
             
-            <span class='code'>    @nall N expr</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1668,7 +1673,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if rt &#33;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1678,7 +1683,7 @@
           <td>
             
             
-            <span class='code'>Check whether all of the expressions generated by the anonymous-function expression &#96;expr&#96;</span>
+            <span class='code'>        if isa&#40;rt, Const&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1688,7 +1693,7 @@
           <td>
             
             
-            <span class='code'>evaluate to &#96;true&#96;.</span>
+            <span class='code'>            ir.stmts&#91;idx&#93;&#91;:type&#93; &#61; rt</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1698,7 +1703,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            if is_inlineable_constant&#40;rt.val&#41; &amp;&amp; &#40;ir.stmts&#91;idx&#93;&#91;:flag&#93; &amp; &#40;IR_FLAG_EFFECT_FREE | IR_FLAG_NOTHROW&#41;&#41; &#61;&#61; IR_FLAG_EFFECT_FREE | IR_FLAG_NOTHROW</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1708,7 +1713,7 @@
           <td>
             
             
-            <span class='code'>&#96;@nall 3 d-&gt;&#40;i_d &gt; 1&#41;&#96; would generate the expression &#96;&#40;i_1 &gt; 1 &amp;&amp; i_2 &gt; 1 &amp;&amp; i_3 &gt; 1&#41;&#96;. This</span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:inst&#93; &#61; quoted&#40;rt.val&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1718,7 +1723,7 @@
           <td>
             
             
-            <span class='code'>can be convenient for bounds-checking.</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1728,17 +1733,22 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            return true</span>
           </td>
         </tr>
         <tr id='L169'>
           <td class='lineno'>169</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>macro nall&#40;N::Int, criterion::Expr&#41;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='typelattice.jl-17e93855468f3c38ec3425a7374f61845652c009.html#L397'>⊑</a>
+              <br />
+            </div>
+            <span class='code'>        elseif &#33;⊑&#40;typeinf_lattice&#40;interp&#41;, typ, rt&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1748,7 +1758,7 @@
           <td>
             
             
-            <span class='code'>    if criterion.head &#33;&#61;&#61; :-&gt;</span>
+            <span class='code'>            ir.stmts&#91;idx&#93;&#91;:type&#93; &#61; rt</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1758,7 +1768,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;second argument must be an anonymous function expression yielding the criterion&quot;&#41;&#41;</span>
+            <span class='code'>            return true</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1768,7 +1778,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1778,7 +1788,7 @@
           <td>
             
             
-            <span class='code'>    conds &#61; Any&#91; Expr&#40;:escape, inlineanonymous&#40;criterion, i&#41;&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1788,7 +1798,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:&amp;&amp;, conds...&#41;</span>
+            <span class='code'>    return false</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1818,7 +1828,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Process the terminator and add the successor to &#96;bb_ip&#96;. Returns whether a backedge was seen.</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1828,7 +1838,7 @@
           <td>
             
             
-            <span class='code'>    @nany N expr</span>
+            <span class='code'>function process_terminator&#33;&#40;ir::IRCode, @nospecialize&#40;inst&#41;, idx::Int, bb::Int,</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1838,7 +1848,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    all_rets::Vector&#123;Int&#125;, bb_ip::BitSetBoundedMinPrioritySet&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1848,7 +1858,7 @@
           <td>
             
             
-            <span class='code'>Check whether any of the expressions generated by the anonymous-function expression &#96;expr&#96;</span>
+            <span class='code'>    if isa&#40;inst, ReturnNode&#41;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1858,7 +1868,7 @@
           <td>
             
             
-            <span class='code'>evaluate to &#96;true&#96;.</span>
+            <span class='code'>        if isdefined&#40;inst, :val&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1868,7 +1878,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            push&#33;&#40;all_rets, idx&#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1878,7 +1888,7 @@
           <td>
             
             
-            <span class='code'>&#96;@nany 3 d-&gt;&#40;i_d &gt; 1&#41;&#96; would generate the expression &#96;&#40;i_1 &gt; 1 || i_2 &gt; 1 || i_3 &gt; 1&#41;&#96;.</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1888,7 +1898,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        return false</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1898,7 +1908,7 @@
           <td>
             
             
-            <span class='code'>macro nany&#40;N::Int, criterion::Expr&#41;</span>
+            <span class='code'>    elseif isa&#40;inst, GotoNode&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1908,7 +1918,7 @@
           <td>
             
             
-            <span class='code'>    if criterion.head &#33;&#61;&#61; :-&gt;</span>
+            <span class='code'>        backedge &#61; inst.label &lt;&#61; bb</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1918,7 +1928,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;Second argument must be an anonymous function expression yielding the criterion&quot;&#41;</span>
+            <span class='code'>        backedge || push&#33;&#40;bb_ip, inst.label&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1928,7 +1938,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        return backedge</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1938,7 +1948,7 @@
           <td>
             
             
-            <span class='code'>    conds &#61; Any&#91; Expr&#40;:escape, inlineanonymous&#40;criterion, i&#41;&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>    elseif isa&#40;inst, GotoIfNot&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1948,7 +1958,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:||, conds...&#41;</span>
+            <span class='code'>        backedge &#61; inst.dest &lt;&#61; bb</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1958,7 +1968,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        backedge || push&#33;&#40;bb_ip, inst.dest&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1968,7 +1978,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        push&#33;&#40;bb_ip, bb&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1978,7 +1988,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        return backedge</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1988,7 +1998,7 @@
           <td>
             
             
-            <span class='code'>    @ntuple N expr</span>
+            <span class='code'>    elseif isexpr&#40;inst, :enter&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1998,7 +2008,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        dest &#61; inst.args&#91;1&#93;::Int</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2008,7 +2018,7 @@
           <td>
             
             
-            <span class='code'>Generates an &#96;N&#96;-tuple. &#96;@ntuple 2 i&#96; would generate &#96;&#40;i_1, i_2&#41;&#96;, and &#96;@ntuple 2 k-&gt;k&#43;1&#96;</span>
+            <span class='code'>        @assert dest &gt; bb</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2018,7 +2028,7 @@
           <td>
             
             
-            <span class='code'>would generate &#96;&#40;2,3&#41;&#96;.</span>
+            <span class='code'>        push&#33;&#40;bb_ip, dest&#41;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2028,7 +2038,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        push&#33;&#40;bb_ip, bb&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2038,7 +2048,7 @@
           <td>
             
             
-            <span class='code'>macro ntuple&#40;N::Int, ex&#41;</span>
+            <span class='code'>        return false</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2048,7 +2058,7 @@
           <td>
             
             
-            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2058,7 +2068,7 @@
           <td>
             
             
-            <span class='code'>    Expr&#40;:escape, Expr&#40;:tuple, vars...&#41;&#41;</span>
+            <span class='code'>        push&#33;&#40;bb_ip, bb&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2068,7 +2078,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return false</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2078,7 +2088,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2088,7 +2098,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2098,17 +2108,36 @@
           <td>
             
             
-            <span class='code'>    @nif N conditionexpr expr</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L206'>
           <td class='lineno'>206</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    @nif N conditionexpr expr elseexpr</span>
+            <div class='call-sites'>
+              4 &#40;0 &#37;&#41;
+              samples spent in _ir_abstract_constant_propagation
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from ir_abstract_constant_propagation
+              <a href='irinterp.jl-983690215650024fdd7fed01ca28e9ee4a9aaf8d.html#L384'>line 384</a>
+              <br />
+              
+              2 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from _ir_abstract_constant_propagation
+              <a href='irinterp.jl-983690215650024fdd7fed01ca28e9ee4a9aaf8d.html#L206'>line 206</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='irinterp.jl-983690215650024fdd7fed01ca28e9ee4a9aaf8d.html#L206'>#_ir_abstract_constant_propagation#511</a>
+              <br />
+            </div>
+            <span class='code'>function _ir_abstract_constant_propagation&#40;interp::AbstractInterpreter, irsv::IRInterpretationState;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2118,7 +2147,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        externally_refined::Union&#123;Nothing,BitSet&#125; &#61; nothing&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2128,7 +2157,7 @@
           <td>
             
             
-            <span class='code'>Generates a sequence of &#96;if ... elseif ... else ... end&#96; statements. For example:</span>
+            <span class='code'>    interp &#61; switch_to_irinterp&#40;interp&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2148,7 +2177,7 @@
           <td>
             
             
-            <span class='code'>    @nif 3 d-&gt;&#40;i_d &gt;&#61; size&#40;A,d&#41;&#41; d-&gt;&#40;error&#40;&quot;Dimension &quot;, d, &quot; too big&quot;&#41;&#41; d-&gt;println&#40;&quot;All OK&quot;&#41;</span>
+            <span class='code'>    &#40;; ir, tpdum, ssa_refined&#41; &#61; irsv</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2168,7 +2197,7 @@
           <td>
             
             
-            <span class='code'>would generate:</span>
+            <span class='code'>    bbs &#61; ir.cfg.blocks</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2178,7 +2207,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    bb_ip &#61; BitSetBoundedMinPrioritySet&#40;length&#40;bbs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2188,7 +2217,7 @@
           <td>
             
             
-            <span class='code'>    if i_1 &gt; size&#40;A, 1&#41;</span>
+            <span class='code'>    push&#33;&#40;bb_ip, 1&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2198,7 +2227,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;Dimension &quot;, 1, &quot; too big&quot;&#41;</span>
+            <span class='code'>    all_rets &#61; Int&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2208,7 +2237,7 @@
           <td>
             
             
-            <span class='code'>    elseif i_2 &gt; size&#40;A, 2&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2218,7 +2247,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;Dimension &quot;, 2, &quot; too big&quot;&#41;</span>
+            <span class='code'>    # Fast path: Scan both use counts and refinement in one single pass of</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2228,7 +2257,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    #            of the instructions. In the absence of backedges, this will</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2238,7 +2267,7 @@
           <td>
             
             
-            <span class='code'>        println&#40;&quot;All OK&quot;&#41;</span>
+            <span class='code'>    #            converge.</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2248,7 +2277,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    while &#33;isempty&#40;bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2258,7 +2287,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        bb &#61; popfirst&#33;&#40;bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2268,7 +2297,7 @@
           <td>
             
             
-            <span class='code'>macro nif&#40;N, condition, operation...&#41;</span>
+            <span class='code'>        stmts &#61; bbs&#91;bb&#93;.stmts</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2278,7 +2307,7 @@
           <td>
             
             
-            <span class='code'>    # Handle the final &quot;else&quot;</span>
+            <span class='code'>        lstmt &#61; last&#40;stmts&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2288,7 +2317,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; esc&#40;inlineanonymous&#40;length&#40;operation&#41; &gt; 1 ? operation&#91;2&#93; : operation&#91;1&#93;, N&#41;&#41;</span>
+            <span class='code'>        for idx &#61; stmts</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2298,7 +2327,7 @@
           <td>
             
             
-            <span class='code'>    # Make the nested if statements</span>
+            <span class='code'>            irsv.curridx &#61; idx</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2308,7 +2337,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; N-1:-1:1</span>
+            <span class='code'>            inst &#61; ir.stmts&#91;idx&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2318,7 +2347,7 @@
           <td>
             
             
-            <span class='code'>        ex &#61; Expr&#40;:if, esc&#40;inlineanonymous&#40;condition,i&#41;&#41;, esc&#40;inlineanonymous&#40;operation&#91;1&#93;,i&#41;&#41;, ex&#41;</span>
+            <span class='code'>            typ &#61; ir.stmts&#91;idx&#93;&#91;:type&#93;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2328,7 +2357,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            flag &#61; ir.stmts&#91;idx&#93;&#91;:flag&#93;</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2338,7 +2367,7 @@
           <td>
             
             
-            <span class='code'>    ex</span>
+            <span class='code'>            any_refined &#61; false</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2348,7 +2377,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            if &#40;flag &amp; IR_FLAG_REFINED&#41; &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2358,7 +2387,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                any_refined &#61; true</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2368,7 +2397,7 @@
           <td>
             
             
-            <span class='code'>## Utilities</span>
+            <span class='code'>                ir.stmts&#91;idx&#93;&#91;:flag&#93; &amp;&#61; ~IR_FLAG_REFINED</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2378,7 +2407,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2388,7 +2417,7 @@
           <td>
             
             
-            <span class='code'># Simplify expressions like :&#40;d-&gt;3:size&#40;A,d&#41;-3&#41; given an explicit value for d</span>
+            <span class='code'>            for ur in userefs&#40;inst&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2398,7 +2427,7 @@
           <td>
             
             
-            <span class='code'>function inlineanonymous&#40;ex::Expr, val&#41;</span>
+            <span class='code'>                val &#61; ur&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2408,7 +2437,7 @@
           <td>
             
             
-            <span class='code'>    if ex.head &#33;&#61;&#61; :-&gt;</span>
+            <span class='code'>                if isa&#40;val, Argument&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2418,7 +2447,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;not an anonymous function&quot;&#41;&#41;</span>
+            <span class='code'>                    any_refined |&#61; irsv.argtypes_refined&#91;val.n&#93;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2428,7 +2457,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                elseif isa&#40;val, SSAValue&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2438,7 +2467,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isa&#40;ex.args&#91;1&#93;, Symbol&#41;</span>
+            <span class='code'>                    any_refined |&#61; val.id in ssa_refined</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2448,7 +2477,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;not a single-argument anonymous function&quot;&#41;&#41;</span>
+            <span class='code'>                    count&#33;&#40;tpdum, val&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2458,7 +2487,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2468,7 +2497,7 @@
           <td>
             
             
-            <span class='code'>    sym &#61; ex.args&#91;1&#93;::Symbol</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2478,7 +2507,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; ex.args&#91;2&#93;::Expr</span>
+            <span class='code'>            if isa&#40;inst, PhiNode&#41; &amp;&amp; idx in ssa_refined</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2488,7 +2517,7 @@
           <td>
             
             
-            <span class='code'>    exout &#61; lreplace&#40;ex, sym, val&#41;</span>
+            <span class='code'>                any_refined &#61; true</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2498,7 +2527,7 @@
           <td>
             
             
-            <span class='code'>    exout &#61; poplinenum&#40;exout&#41;</span>
+            <span class='code'>                delete&#33;&#40;ssa_refined, idx&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2508,7 +2537,7 @@
           <td>
             
             
-            <span class='code'>    exprresolve&#40;exout&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2518,7 +2547,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            is_terminator_or_phi &#61; isa&#40;inst, PhiNode&#41; || isa&#40;inst, GotoNode&#41; || isa&#40;inst, GotoIfNot&#41; || isa&#40;inst, ReturnNode&#41; || isexpr&#40;inst, :enter&#41;</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2528,7 +2557,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            if typ &#61;&#61;&#61; Bottom &amp;&amp; &#40;idx &#33;&#61; lstmt || &#33;is_terminator_or_phi&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2538,7 +2567,7 @@
           <td>
             
             
-            <span class='code'># Given :i and 3, this generates :i_3</span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2548,17 +2577,22 @@
           <td>
             
             
-            <span class='code'>inlineanonymous&#40;base::Symbol, ext&#41; &#61; Symbol&#40;base,&#39;_&#39;,ext&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L251'>
           <td class='lineno'>251</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'></span>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='irinterp.jl-983690215650024fdd7fed01ca28e9ee4a9aaf8d.html#L96'>reprocess_instruction&#33;</a>
+              <br />
+            </div>
+            <span class='code'>            if &#40;any_refined &amp;&amp; reprocess_instruction&#33;&#40;interp,</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2568,7 +2602,7 @@
           <td>
             
             
-            <span class='code'># Replace a symbol by a value or a &quot;coded&quot; symbol</span>
+            <span class='code'>                    idx, bb, inst, typ, irsv&#41;&#41; ||</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2578,7 +2612,7 @@
           <td>
             
             
-            <span class='code'># E.g., for d &#61; 3,</span>
+            <span class='code'>               &#40;externally_refined &#33;&#61;&#61; nothing &amp;&amp; idx in externally_refined&#41;</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2588,7 +2622,7 @@
           <td>
             
             
-            <span class='code'>#    lreplace&#40;:d, :d, 3&#41; -&gt; 3</span>
+            <span class='code'>                push&#33;&#40;ssa_refined, idx&#41;</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2598,7 +2632,7 @@
           <td>
             
             
-            <span class='code'>#    lreplace&#40;:i_d, :d, 3&#41; -&gt; :i_3</span>
+            <span class='code'>                inst &#61; ir.stmts&#91;idx&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2608,7 +2642,7 @@
           <td>
             
             
-            <span class='code'>#    lreplace&#40;:i_&#123;d-1&#125;, :d, 3&#41; -&gt; :i_2</span>
+            <span class='code'>                typ &#61; ir.stmts&#91;idx&#93;&#91;:type&#93;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2618,7 +2652,7 @@
           <td>
             
             
-            <span class='code'># This follows LaTeX notation.</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2628,7 +2662,7 @@
           <td>
             
             
-            <span class='code'>struct LReplace&#123;S&lt;:AbstractString&#125;</span>
+            <span class='code'>            if typ &#61;&#61;&#61; Bottom &amp;&amp; &#33;is_terminator_or_phi</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2638,7 +2672,7 @@
           <td>
             
             
-            <span class='code'>    pat_sym::Symbol</span>
+            <span class='code'>                kill_terminator_edges&#33;&#40;irsv, lstmt, bb&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2648,7 +2682,7 @@
           <td>
             
             
-            <span class='code'>    pat_str::S</span>
+            <span class='code'>                if idx &#33;&#61; lstmt</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2658,7 +2692,7 @@
           <td>
             
             
-            <span class='code'>    val::Int</span>
+            <span class='code'>                    for idx2 in &#40;idx&#43;1:lstmt-1&#41;</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2668,7 +2702,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                        ir&#91;SSAValue&#40;idx2&#41;&#93; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2678,7 +2712,7 @@
           <td>
             
             
-            <span class='code'>LReplace&#40;sym::Symbol, val::Integer&#41; &#61; LReplace&#40;sym, string&#40;sym&#41;, val&#41;</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2688,7 +2722,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    ir&#91;SSAValue&#40;lstmt&#41;&#93;&#91;:inst&#93; &#61; ReturnNode&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2698,7 +2732,7 @@
           <td>
             
             
-            <span class='code'>lreplace&#40;ex::Expr, sym::Symbol, val&#41; &#61; lreplace&#33;&#40;copy&#40;ex&#41;, LReplace&#40;sym, val&#41;&#41;</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2708,7 +2742,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                break</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2718,7 +2752,7 @@
           <td>
             
             
-            <span class='code'>function lreplace&#33;&#40;sym::Symbol, r::LReplace&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2728,7 +2762,7 @@
           <td>
             
             
-            <span class='code'>    sym &#61;&#61; r.pat_sym &amp;&amp; return r.val</span>
+            <span class='code'>            if idx &#61;&#61; lstmt</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2738,7 +2772,7 @@
           <td>
             
             
-            <span class='code'>    Symbol&#40;lreplace&#33;&#40;string&#40;sym&#41;, r&#41;&#41;</span>
+            <span class='code'>                process_terminator&#33;&#40;ir, inst, idx, bb, all_rets, bb_ip&#41; &amp;&amp; @goto residual_scan</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2748,7 +2782,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2758,7 +2792,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2768,7 +2802,7 @@
           <td>
             
             
-            <span class='code'>function lreplace&#33;&#40;str::AbstractString, r::LReplace&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2778,7 +2812,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; firstindex&#40;str&#41;</span>
+            <span class='code'>    @goto compute_rt</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2788,7 +2822,7 @@
           <td>
             
             
-            <span class='code'>    pat &#61; r.pat_str</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2798,7 +2832,7 @@
           <td>
             
             
-            <span class='code'>    j &#61; firstindex&#40;pat&#41;</span>
+            <span class='code'>    # Slow path</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2808,7 +2842,7 @@
           <td>
             
             
-            <span class='code'>    matching &#61; false</span>
+            <span class='code'>    begin @label residual_scan</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2818,7 +2852,7 @@
           <td>
             
             
-            <span class='code'>    local istart::Int</span>
+            <span class='code'>        stmt_ip &#61; BitSetBoundedMinPrioritySet&#40;length&#40;ir.stmts&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2828,7 +2862,7 @@
           <td>
             
             
-            <span class='code'>    while i &lt;&#61; ncodeunits&#40;str&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2838,7 +2872,7 @@
           <td>
             
             
-            <span class='code'>        cstr &#61; str&#91;i&#93;</span>
+            <span class='code'>        # Slow Path Phase 1.A: Complete use scanning</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2848,7 +2882,7 @@
           <td>
             
             
-            <span class='code'>        i &#61; nextind&#40;str, i&#41;</span>
+            <span class='code'>        while &#33;isempty&#40;bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2858,7 +2892,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;matching</span>
+            <span class='code'>            bb &#61; popfirst&#33;&#40;bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2868,7 +2902,7 @@
           <td>
             
             
-            <span class='code'>            if cstr &#33;&#61; &#39;_&#39; || i &gt; ncodeunits&#40;str&#41;</span>
+            <span class='code'>            stmts &#61; bbs&#91;bb&#93;.stmts</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2878,7 +2912,7 @@
           <td>
             
             
-            <span class='code'>                continue</span>
+            <span class='code'>            lstmt &#61; last&#40;stmts&#41;</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2888,7 +2922,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            for idx &#61; stmts</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2898,7 +2932,7 @@
           <td>
             
             
-            <span class='code'>            istart &#61; i</span>
+            <span class='code'>                irsv.curridx &#61; idx</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2908,7 +2942,7 @@
           <td>
             
             
-            <span class='code'>            cstr &#61; str&#91;i&#93;</span>
+            <span class='code'>                inst &#61; ir.stmts&#91;idx&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2918,7 +2952,7 @@
           <td>
             
             
-            <span class='code'>            i &#61; nextind&#40;str, i&#41;</span>
+            <span class='code'>                flag &#61; ir.stmts&#91;idx&#93;&#91;:flag&#93;</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2928,7 +2962,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                if &#40;flag &amp; IR_FLAG_REFINED&#41; &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2938,7 +2972,7 @@
           <td>
             
             
-            <span class='code'>        if j &lt;&#61; lastindex&#40;pat&#41;</span>
+            <span class='code'>                    ir.stmts&#91;idx&#93;&#91;:flag&#93; &amp;&#61; ~IR_FLAG_REFINED</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2948,7 +2982,7 @@
           <td>
             
             
-            <span class='code'>            cr &#61; pat&#91;j&#93;</span>
+            <span class='code'>                    push&#33;&#40;stmt_ip, idx&#41;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2958,7 +2992,7 @@
           <td>
             
             
-            <span class='code'>            j &#61; nextind&#40;pat, j&#41;</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2968,7 +3002,7 @@
           <td>
             
             
-            <span class='code'>            if cstr &#61;&#61; cr</span>
+            <span class='code'>                for ur in userefs&#40;inst&#41;</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2978,7 +3012,7 @@
           <td>
             
             
-            <span class='code'>                matching &#61; true</span>
+            <span class='code'>                    val &#61; ur&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2988,7 +3022,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>                    if isa&#40;val, Argument&#41;</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2998,7 +3032,7 @@
           <td>
             
             
-            <span class='code'>                matching &#61; false</span>
+            <span class='code'>                        if irsv.argtypes_refined&#91;val.n&#93;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -3008,7 +3042,7 @@
           <td>
             
             
-            <span class='code'>                j &#61; firstindex&#40;pat&#41;</span>
+            <span class='code'>                            push&#33;&#40;stmt_ip, idx&#41;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3018,7 +3052,7 @@
           <td>
             
             
-            <span class='code'>                i &#61; istart</span>
+            <span class='code'>                        end</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3028,7 +3062,7 @@
           <td>
             
             
-            <span class='code'>                continue</span>
+            <span class='code'>                    elseif isa&#40;val, SSAValue&#41;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3038,7 +3072,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>                        count&#33;&#40;tpdum, val&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3048,7 +3082,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3058,7 +3092,7 @@
           <td>
             
             
-            <span class='code'>        if matching &amp;&amp; j &gt; lastindex&#40;pat&#41;</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3068,7 +3102,7 @@
           <td>
             
             
-            <span class='code'>            if i &gt; lastindex&#40;str&#41; || str&#91;i&#93; &#61;&#61; &#39;_&#39;</span>
+            <span class='code'>                idx &#61;&#61; lstmt &amp;&amp; process_terminator&#33;&#40;ir, inst, idx, bb, all_rets, bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3078,7 +3112,7 @@
           <td>
             
             
-            <span class='code'>                # We have a match</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3088,7 +3122,7 @@
           <td>
             
             
-            <span class='code'>                return string&#40;str&#91;1:prevind&#40;str, istart&#41;&#93;, r.val, lreplace&#33;&#40;str&#91;i:end&#93;, r&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3098,7 +3132,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3108,7 +3142,7 @@
           <td>
             
             
-            <span class='code'>            matching &#61; false</span>
+            <span class='code'>        # Slow Path Phase 1.B: Assemble def-use map</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3118,7 +3152,7 @@
           <td>
             
             
-            <span class='code'>            j &#61; firstindex&#40;pat&#41;</span>
+            <span class='code'>        complete&#33;&#40;tpdum&#41;</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3128,7 +3162,7 @@
           <td>
             
             
-            <span class='code'>            i &#61; istart</span>
+            <span class='code'>        push&#33;&#40;bb_ip, 1&#41;</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3138,7 +3172,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        while &#33;isempty&#40;bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3148,7 +3182,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            bb &#61; popfirst&#33;&#40;bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3158,7 +3192,7 @@
           <td>
             
             
-            <span class='code'>    str</span>
+            <span class='code'>            stmts &#61; bbs&#91;bb&#93;.stmts</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3168,7 +3202,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            lstmt &#61; last&#40;stmts&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3178,7 +3212,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            for idx &#61; stmts</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3188,7 +3222,7 @@
           <td>
             
             
-            <span class='code'>function lreplace&#33;&#40;ex::Expr, r::LReplace&#41;</span>
+            <span class='code'>                irsv.curridx &#61; idx</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3198,7 +3232,7 @@
           <td>
             
             
-            <span class='code'>    # Curly-brace notation, which acts like parentheses</span>
+            <span class='code'>                inst &#61; ir.stmts&#91;idx&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3208,7 +3242,7 @@
           <td>
             
             
-            <span class='code'>    if ex.head &#61;&#61;&#61; :curly &amp;&amp; length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, Symbol&#41; &amp;&amp; endswith&#40;string&#40;ex.args&#91;1&#93;::Symbol&#41;, &quot;_&quot;&#41;</span>
+            <span class='code'>                for ur in userefs&#40;inst&#41;</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3218,7 +3252,7 @@
           <td>
             
             
-            <span class='code'>        excurly &#61; exprresolve&#40;lreplace&#33;&#40;ex.args&#91;2&#93;, r&#41;&#41;</span>
+            <span class='code'>                    val &#61; ur&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3228,7 +3262,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;excurly, Int&#41;</span>
+            <span class='code'>                    if isa&#40;val, SSAValue&#41;</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3238,7 +3272,7 @@
           <td>
             
             
-            <span class='code'>            return Symbol&#40;ex.args&#91;1&#93;::Symbol, excurly&#41;</span>
+            <span class='code'>                        push&#33;&#40;tpdum&#91;val.id&#93;, idx&#41;</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3248,7 +3282,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3258,7 +3292,7 @@
           <td>
             
             
-            <span class='code'>            ex.args&#91;2&#93; &#61; excurly</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3268,7 +3302,7 @@
           <td>
             
             
-            <span class='code'>            return ex</span>
+            <span class='code'>                idx &#61;&#61; lstmt &amp;&amp; process_terminator&#33;&#40;ir, inst, idx, bb, all_rets, bb_ip&#41;</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3278,7 +3312,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3288,7 +3322,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3298,7 +3332,7 @@
           <td>
             
             
-            <span class='code'>    for i in 1:length&#40;ex.args&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3308,7 +3342,7 @@
           <td>
             
             
-            <span class='code'>        ex.args&#91;i&#93; &#61; lreplace&#33;&#40;ex.args&#91;i&#93;, r&#41;</span>
+            <span class='code'>        # Slow Path Phase 2: Use def-use map to converge cycles.</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3318,7 +3352,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        # TODO: It would be possible to return to the fast path after converging</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3328,7 +3362,7 @@
           <td>
             
             
-            <span class='code'>    ex</span>
+            <span class='code'>        #       each cycle, but that&#39;s somewhat complicated.</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3338,7 +3372,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        for val in ssa_refined</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3348,7 +3382,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            append&#33;&#40;stmt_ip, tpdum&#91;val&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3358,7 +3392,7 @@
           <td>
             
             
-            <span class='code'>lreplace&#33;&#40;arg, r::LReplace&#41; &#61; arg</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3368,7 +3402,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        while &#33;isempty&#40;stmt_ip&#41;</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3378,7 +3412,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            idx &#61; popfirst&#33;&#40;stmt_ip&#41;</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3388,7 +3422,7 @@
           <td>
             
             
-            <span class='code'>poplinenum&#40;arg&#41; &#61; arg</span>
+            <span class='code'>            irsv.curridx &#61; idx</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3398,7 +3432,7 @@
           <td>
             
             
-            <span class='code'>function poplinenum&#40;ex::Expr&#41;</span>
+            <span class='code'>            inst &#61; ir.stmts&#91;idx&#93;&#91;:inst&#93;</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3408,7 +3442,7 @@
           <td>
             
             
-            <span class='code'>    if ex.head &#61;&#61;&#61; :block</span>
+            <span class='code'>            typ &#61; ir.stmts&#91;idx&#93;&#91;:type&#93;</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3418,7 +3452,7 @@
           <td>
             
             
-            <span class='code'>        if length&#40;ex.args&#41; &#61;&#61; 1</span>
+            <span class='code'>            if reprocess_instruction&#33;&#40;interp,</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3428,7 +3462,7 @@
           <td>
             
             
-            <span class='code'>            return ex.args&#91;1&#93;</span>
+            <span class='code'>                idx, nothing, inst, typ, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3438,7 +3472,7 @@
           <td>
             
             
-            <span class='code'>        elseif length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, LineNumberNode&#41;</span>
+            <span class='code'>                append&#33;&#40;stmt_ip, tpdum&#91;idx&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3448,7 +3482,7 @@
           <td>
             
             
-            <span class='code'>            return ex.args&#91;2&#93;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3458,7 +3492,7 @@
           <td>
             
             
-            <span class='code'>        elseif &#40;length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, Expr&#41; &amp;&amp; ex.args&#91;1&#93;.head &#61;&#61;&#61; :line&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3468,7 +3502,7 @@
           <td>
             
             
-            <span class='code'>            return ex.args&#91;2&#93;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3478,7 +3512,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3488,7 +3522,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    begin @label compute_rt</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3498,7 +3532,7 @@
           <td>
             
             
-            <span class='code'>    ex</span>
+            <span class='code'>        ultimate_rt &#61; Bottom</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3508,7 +3542,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        for idx in all_rets</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3518,7 +3552,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            bb &#61; block_for_inst&#40;ir.cfg, idx&#41;</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3528,7 +3562,7 @@
           <td>
             
             
-            <span class='code'>## Resolve expressions at parsing time ##</span>
+            <span class='code'>            if bb &#33;&#61; 1 &amp;&amp; length&#40;ir.cfg.blocks&#91;bb&#93;.preds&#41; &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3538,7 +3572,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                # Could have discovered this block is dead after the initial scan</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3548,7 +3582,7 @@
           <td>
             
             
-            <span class='code'>const exprresolve_arith_dict &#61; Dict&#123;Symbol,Function&#125;&#40;:&#43; &#61;&gt; &#43;,</span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3558,7 +3592,7 @@
           <td>
             
             
-            <span class='code'>    :- &#61;&gt; -, :* &#61;&gt; *, :/ &#61;&gt; /, :^ &#61;&gt; ^, :div &#61;&gt; div&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3568,7 +3602,7 @@
           <td>
             
             
-            <span class='code'>const exprresolve_cond_dict &#61; Dict&#123;Symbol,Function&#125;&#40;:&#40;&#61;&#61;&#41; &#61;&gt; &#61;&#61;,</span>
+            <span class='code'>            inst &#61; ir.stmts&#91;idx&#93;&#91;:inst&#93;::ReturnNode</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3578,7 +3612,7 @@
           <td>
             
             
-            <span class='code'>    :&#40;&lt;&#41; &#61;&gt; &lt;, :&#40;&gt;&#41; &#61;&gt; &gt;, :&#40;&lt;&#61;&#41; &#61;&gt; &lt;&#61;, :&#40;&gt;&#61;&#41; &#61;&gt; &gt;&#61;&#41;</span>
+            <span class='code'>            rt &#61; argextype&#40;inst.val, ir&#41;</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3588,7 +3622,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            ultimate_rt &#61; tmerge&#40;typeinf_lattice&#40;interp&#41;, ultimate_rt, rt&#41;</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3598,7 +3632,7 @@
           <td>
             
             
-            <span class='code'>function exprresolve_arith&#40;ex::Expr&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3608,7 +3642,7 @@
           <td>
             
             
-            <span class='code'>    if ex.head &#61;&#61;&#61; :call</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3618,7 +3652,7 @@
           <td>
             
             
-            <span class='code'>        callee &#61; ex.args&#91;1&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3628,7 +3662,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;callee, Symbol&#41;</span>
+            <span class='code'>    nothrow &#61; true</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3638,7 +3672,7 @@
           <td>
             
             
-            <span class='code'>            if haskey&#40;exprresolve_arith_dict, callee&#41; &amp;&amp; all&#40;Bool&#91;isa&#40;ex.args&#91;i&#93;, Number&#41; for i &#61; 2:length&#40;ex.args&#41;&#93;&#41;</span>
+            <span class='code'>    for idx &#61; 1:length&#40;ir.stmts&#41;</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3648,7 +3682,7 @@
           <td>
             
             
-            <span class='code'>                return true, exprresolve_arith_dict&#91;callee&#93;&#40;ex.args&#91;2:end&#93;...&#41;</span>
+            <span class='code'>        if &#40;ir.stmts&#91;idx&#93;&#91;:flag&#93; &amp; IR_FLAG_NOTHROW&#41; &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3658,7 +3692,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>            nothrow &#61; false</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3668,7 +3702,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            break</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3678,7 +3712,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3688,7 +3722,7 @@
           <td>
             
             
-            <span class='code'>    false, 0</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3698,7 +3732,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3708,7 +3742,7 @@
           <td>
             
             
-            <span class='code'>exprresolve_arith&#40;arg&#41; &#61; false, 0</span>
+            <span class='code'>    if last&#40;irsv.valid_worlds&#41; &gt;&#61; get_world_counter&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3718,7 +3752,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        # if we aren&#39;t cached, we don&#39;t need this edge</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3728,7 +3762,7 @@
           <td>
             
             
-            <span class='code'>exprresolve_conditional&#40;b::Bool&#41; &#61; true, b</span>
+            <span class='code'>        # but our caller might, so let&#39;s just make it anyways</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3738,7 +3772,7 @@
           <td>
             
             
-            <span class='code'>function exprresolve_conditional&#40;ex::Expr&#41;</span>
+            <span class='code'>        store_backedges&#40;frame_instance&#40;irsv&#41;, irsv.edges&#41;</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3748,7 +3782,7 @@
           <td>
             
             
-            <span class='code'>    if ex.head &#61;&#61;&#61; :call</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3758,7 +3792,7 @@
           <td>
             
             
-            <span class='code'>        callee &#61; ex.args&#91;1&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3768,7 +3802,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;callee, Symbol&#41;</span>
+            <span class='code'>    return Pair&#123;Any,Bool&#125;&#40;maybe_singleton_const&#40;ultimate_rt&#41;, nothrow&#41;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3778,7 +3812,7 @@
           <td>
             
             
-            <span class='code'>            if callee ∈ keys&#40;exprresolve_cond_dict&#41; &amp;&amp; isa&#40;ex.args&#91;2&#93;, Number&#41; &amp;&amp; isa&#40;ex.args&#91;3&#93;, Number&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3788,7 +3822,7 @@
           <td>
             
             
-            <span class='code'>                return true, exprresolve_cond_dict&#91;callee&#93;&#40;ex.args&#91;2&#93;, ex.args&#91;3&#93;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3796,9 +3830,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              2 &#40;0 &#37;&#41;
+              samples spent in ir_abstract_constant_propagation
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from semi_concrete_eval_call
+              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L1168'>line 1168</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>            end</span>
+            <span class='code'>function ir_abstract_constant_propagation&#40;interp::NativeInterpreter, irsv::IRInterpretationState&#41;</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3808,7 +3851,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    if __measure_typeinf__&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3818,7 +3861,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        inf_frame &#61; Timings.InferenceFrameInfo&#40;irsv.mi, irsv.world, VarState&#91;&#93;, Any&#91;&#93;, length&#40;irsv.ir.argtypes&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3828,7 +3871,7 @@
           <td>
             
             
-            <span class='code'>    false, false</span>
+            <span class='code'>        Timings.enter_new_timer&#40;inf_frame&#41;</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3838,7 +3881,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        ret &#61; _ir_abstract_constant_propagation&#40;interp, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3848,7 +3891,7 @@
           <td>
             
             
-            <span class='code'>exprresolve_conditional&#40;arg&#41; &#61; false, false</span>
+            <span class='code'>        append&#33;&#40;inf_frame.slottypes, irsv.ir.argtypes&#41;</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3858,7 +3901,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        Timings.exit_current_timer&#40;inf_frame&#41;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3868,7 +3911,7 @@
           <td>
             
             
-            <span class='code'>exprresolve&#40;arg&#41; &#61; arg</span>
+            <span class='code'>        return ret</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3878,17 +3921,22 @@
           <td>
             
             
-            <span class='code'>function exprresolve&#40;ex::Expr&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L384'>
           <td class='lineno'>384</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>    for i &#61; 1:length&#40;ex.args&#41;</span>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='irinterp.jl-983690215650024fdd7fed01ca28e9ee4a9aaf8d.html#L206'>_ir_abstract_constant_propagation</a>
+              <br />
+            </div>
+            <span class='code'>        return _ir_abstract_constant_propagation&#40;interp, irsv&#41;</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3898,7 +3946,7 @@
           <td>
             
             
-            <span class='code'>        ex.args&#91;i&#93; &#61; exprresolve&#40;ex.args&#91;i&#93;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3908,7 +3956,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3918,7 +3966,7 @@
           <td>
             
             
-            <span class='code'>    # Handle simple arithmetic</span>
+            <span class='code'>ir_abstract_constant_propagation&#40;interp::AbstractInterpreter, irsv::IRInterpretationState&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3928,267 +3976,7 @@
           <td>
             
             
-            <span class='code'>    can_eval, result &#61; exprresolve_arith&#40;ex&#41;</span>
-          </td>
-        </tr>
-        <tr id='L389'>
-          <td class='lineno'>389</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if can_eval</span>
-          </td>
-        </tr>
-        <tr id='L390'>
-          <td class='lineno'>390</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return result</span>
-          </td>
-        </tr>
-        <tr id='L391'>
-          <td class='lineno'>391</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    elseif ex.head &#61;&#61;&#61; :call &amp;&amp; &#40;ex.args&#91;1&#93; &#61;&#61;&#61; :&#43; || ex.args&#91;1&#93; &#61;&#61;&#61; :-&#41; &amp;&amp; length&#40;ex.args&#41; &#61;&#61; 3 &amp;&amp; ex.args&#91;3&#93; &#61;&#61; 0</span>
-          </td>
-        </tr>
-        <tr id='L392'>
-          <td class='lineno'>392</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # simplify x&#43;0 and x-0</span>
-          </td>
-        </tr>
-        <tr id='L393'>
-          <td class='lineno'>393</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return ex.args&#91;2&#93;</span>
-          </td>
-        </tr>
-        <tr id='L394'>
-          <td class='lineno'>394</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L395'>
-          <td class='lineno'>395</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Resolve array references</span>
-          </td>
-        </tr>
-        <tr id='L396'>
-          <td class='lineno'>396</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if ex.head &#61;&#61;&#61; :ref &amp;&amp; isa&#40;ex.args&#91;1&#93;, Array&#41;</span>
-          </td>
-        </tr>
-        <tr id='L397'>
-          <td class='lineno'>397</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        for i &#61; 2:length&#40;ex.args&#41;</span>
-          </td>
-        </tr>
-        <tr id='L398'>
-          <td class='lineno'>398</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            if &#33;isa&#40;ex.args&#91;i&#93;, Real&#41;</span>
-          </td>
-        </tr>
-        <tr id='L399'>
-          <td class='lineno'>399</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                return ex</span>
-          </td>
-        </tr>
-        <tr id='L400'>
-          <td class='lineno'>400</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            end</span>
-          </td>
-        </tr>
-        <tr id='L401'>
-          <td class='lineno'>401</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L402'>
-          <td class='lineno'>402</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return ex.args&#91;1&#93;&#91;ex.args&#91;2:end&#93;...&#93;</span>
-          </td>
-        </tr>
-        <tr id='L403'>
-          <td class='lineno'>403</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L404'>
-          <td class='lineno'>404</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Resolve conditionals</span>
-          </td>
-        </tr>
-        <tr id='L405'>
-          <td class='lineno'>405</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if ex.head &#61;&#61;&#61; :if</span>
-          </td>
-        </tr>
-        <tr id='L406'>
-          <td class='lineno'>406</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        can_eval, tf &#61; exprresolve_conditional&#40;ex.args&#91;1&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L407'>
-          <td class='lineno'>407</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        if can_eval</span>
-          </td>
-        </tr>
-        <tr id='L408'>
-          <td class='lineno'>408</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            ex &#61; tf ? ex.args&#91;2&#93; : ex.args&#91;3&#93;</span>
-          </td>
-        </tr>
-        <tr id='L409'>
-          <td class='lineno'>409</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L410'>
-          <td class='lineno'>410</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L411'>
-          <td class='lineno'>411</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ex</span>
-          </td>
-        </tr>
-        <tr id='L412'>
-          <td class='lineno'>412</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L413'>
-          <td class='lineno'>413</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L414'>
-          <td class='lineno'>414</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
+            <span class='code'>    _ir_abstract_constant_propagation&#40;interp, irsv&#41;</span>
           </td>
         </tr>
       </tbody>
