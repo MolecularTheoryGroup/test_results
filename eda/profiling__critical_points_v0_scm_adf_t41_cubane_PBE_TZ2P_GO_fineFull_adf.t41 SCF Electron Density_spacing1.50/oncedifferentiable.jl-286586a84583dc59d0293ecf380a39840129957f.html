@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/OffsetArrays/rMTtC/src/axes.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/NLSolversBase/kavn7/src/objective_types/oncedifferentiable.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 06 Mar 2024 17:51:27
+        Generated on Wed, 06 Mar 2024 18:48:20
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Used for objectives and solvers where the gradient is available/exists</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>    ro &#61; IdOffsetRange&#40;r::AbstractUnitRange, offset&#61;0&#41;</span>
+            <span class='code'>mutable struct OnceDifferentiable&#123;TF, TDF, TX&#125; &lt;: AbstractObjective</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f # objective</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>Construct an &quot;identity offset range&quot;. Numerically, &#96;collect&#40;ro&#41; &#61;&#61; collect&#40;r&#41; .&#43; offset&#96;,</span>
+            <span class='code'>    df # &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>with the additional property that &#96;axes&#40;ro, 1&#41; &#61; axes&#40;r, 1&#41; .&#43; offset&#96;.</span>
+            <span class='code'>    fdf # objective and &#40;partial&#41; derivative of objective</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>When &#96;r&#96; starts at 1, then &#96;ro&#91;i&#93; &#61;&#61; i&#96; and even &#96;ro&#91;ro&#93; &#61;&#61; ro&#96;,</span>
+            <span class='code'>    F::TF # cache for f output</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>i.e., it&#39;s the &quot;identity,&quot; which is the origin of the &quot;Id&quot; in &#96;IdOffsetRange&#96;.</span>
+            <span class='code'>    DF::TDF # cache for df output</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x_f::TX # x used to evaluate f &#40;stored in F&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    x_df::TX # x used to evaluate df &#40;stored in DF&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    f_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>The most common case is shifting a range that starts at 1 &#40;either &#96;1:n&#96; or &#96;Base.OneTo&#40;n&#41;&#96;&#41;:</span>
+            <span class='code'>    df_calls::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest ior</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; using OffsetArrays: IdOffsetRange</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>### Only the objective</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; ro &#61; IdOffsetRange&#40;1:3, -2&#41;</span>
+            <span class='code'># Ambiguity</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#40;values&#61;-1:1, indices&#61;-1:1&#41;</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; axes&#40;ro, 1&#41;</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;; inplace &#61; true, autodiff &#61; :finite,  </span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#40;values&#61;-1:1, indices&#61;-1:1&#41;</span>
+            <span class='code'>                   chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, DF, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; ro&#91;-1&#93;</span>
+            <span class='code'>#OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray; autodiff &#61; :finite&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>-1</span>
+            <span class='code'>#    OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, alloc_DF&#40;x, F&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; ro&#91;3&#93;</span>
+            <span class='code'>                   F::AbstractArray, DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>ERROR: BoundsError: attempt to access 3-element &#36;&#40;IdOffsetRange&#123;Int, UnitRange&#123;Int&#125;&#125;&#41; with indices -1:1 at index &#91;3&#93;</span>
+            <span class='code'>                   inplace &#61; true, autodiff &#61; :finite&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>If the range doesn&#39;t start at 1, the values may be different from the indices:</span>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, x::AbstractArray, F::AbstractArray, DF, autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest ior</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; ro &#61; IdOffsetRange&#40;11:13, -2&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#40;values&#61;9:11, indices&#61;-1:1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray&#123;T&#125;,</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; axes&#40;ro, 1&#41;     # 11:13 is indexed by 1:3, and the offset is also applied to the axes</span>
+            <span class='code'>                            F::Real,</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#40;values&#61;-1:1, indices&#61;-1:1&#41;</span>
+            <span class='code'>                            DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                            autodiff, chunk&#41; where T</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; ro&#91;-1&#93;</span>
+            <span class='code'>    # When here, at the constructor with positional autodiff, it should already</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>9</span>
+            <span class='code'>    # be the case, that f is inplace.</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; ro&#91;3&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>ERROR: BoundsError: attempt to access 3-element &#36;&#40;IdOffsetRange&#123;Int, UnitRange&#123;Int&#125;&#125;&#41; with indices -1:1 at index &#91;3&#93;</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'># Extended help</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>Construction/coercion preserves the &#40;shifted&#41; values of the input range, but may modify</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>the indices if required by the specified types. For example,</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    r &#61; OffsetArrays.IdOffsetRange&#123;Int,UnitRange&#123;Int&#125;&#125;&#40;3:4&#41;</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>has &#96;r&#91;1&#93; &#61;&#61; 3&#96; and &#96;r&#91;2&#93; &#61;&#61; 4&#96;, whereas</span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            df_array_spec &#61; DF</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>    r &#61; OffsetArrays.IdOffsetRange&#123;Int,Base.OneTo&#123;Int&#125;&#125;&#40;3:4&#41;</span>
+            <span class='code'>            x_array_spec &#61; x_seed</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            return_spec &#61; typeof&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>has &#96;r&#91;3&#93; &#61;&#61; 3&#96; and &#96;r&#91;4&#93; &#61;&#61; 4&#96;, and &#96;r&#91;1&#93;&#96; would throw a &#96;BoundsError&#96;.</span>
+            <span class='code'>            gcache &#61; FiniteDiff.GradientCache&#40;df_array_spec, x_array_spec, fdtype, return_spec&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>In this latter case, a shift in the axes was needed because &#96;Base.OneTo&#96; ranges</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>must start with value 1.</span>
+            <span class='code'>            function g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                FiniteDiff.finite_difference_gradient&#33;&#40;storage, f, x, gcache&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; warning</span>
+            <span class='code'>                return</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>    In the future, *conversion* will preserve both the values and</span>
+            <span class='code'>            function fg&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>    the indices, throwing an error when this is not achievable. For instance,</span>
+            <span class='code'>                g&#33;&#40;storage, x&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                return f&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>        r &#61; convert&#40;OffsetArrays.IdOffsetRange&#123;Int,UnitRange&#123;Int&#125;&#125;, 3:4&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>    has &#96;r&#91;1&#93; &#61;&#61; 3&#96; and &#96;r&#91;2&#93; &#61;&#61; 4&#96; and would satisfy &#96;r &#61;&#61; 3:4&#96;, whereas</span>
+            <span class='code'>            gcfg &#61; ForwardDiff.GradientConfig&#40;f, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            g&#33; &#61; &#40;out, x&#41; -&gt; ForwardDiff.gradient&#33;&#40;out, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    &#96;&#96;&#96;julia</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    julia&gt; convert&#40;OffsetArrays.IdOffsetRange&#123;Int,Base.OneTo&#123;Int&#125;&#125;, 3:4&#41;    # future behavior, not present behavior</span>
+            <span class='code'>            fg&#33; &#61; &#40;out, x&#41; -&gt; begin</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>    ERROR: ArgumentError: first element must be 1, got 3</span>
+            <span class='code'>                gr_res &#61; DiffResults.DiffResult&#40;zero&#40;T&#41;, out&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>    &#96;&#96;&#96;</span>
+            <span class='code'>                ForwardDiff.gradient&#33;&#40;gr_res, f, x, gcfg&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                DiffResults.value&#40;gr_res&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    where the error will arise because the result could not have the same axes as the input.</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    An important corollary is that &#96;typeof&#40;r1&#41;&#40;r2&#41;&#96; and &#96;oftype&#40;r1, r2&#41;&#96; will behave differently:</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;autodiff is not support. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    the first coerces &#96;r2&#96; to be of the type of &#96;r1&#96;, whereas the second converts.</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>    Developers are urged to future-proof their code by choosing the behavior appropriate for each usage.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        return OnceDifferentiable&#40;f, g&#33;, fg&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>struct IdOffsetRange&#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125; &lt;: AbstractUnitRange&#123;T&#125;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>    parent::I</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>    offset::T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>has_not_dep_symbol_in_ad &#61; Ref&#123;Bool&#125;&#40;true&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    function IdOffsetRange&#123;T,I&#125;&#40;r::I, offset::T&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125;</span>
+            <span class='code'>OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray, autodiff::Symbol, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>        _bool_check&#40;T, r, offset&#41;</span>
+            <span class='code'>OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, autodiff, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>        new&#123;T,I&#125;&#40;r, offset&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x::AbstractArray, F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                            autodiff::Bool, chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if autodiff &#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>    #&#61; This method is necessary to avoid a StackOverflowError in IdOffsetRange&#123;T,I&#125;&#40;r::IdOffsetRange, offset::Integer&#41;.</span>
+            <span class='code'>        throw&#40;ErrorException&#40;&quot;It is not possible to set the &#96;autodiff&#96; keyword to &#96;false&#96; when constructing a OnceDifferentiable instance from only one function. Pass in the &#40;partial&#41; derivative or specify a valid &#96;autodiff&#96; symbol.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>    The type signature in that method is more specific than IdOffsetRange&#123;T,I&#125;&#40;r::I, offset::T&#41;,</span>
+            <span class='code'>    elseif has_not_dep_symbol_in_ad&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>    so it ends up calling itself if I &lt;: IdOffsetRange.</span>
+            <span class='code'>        @warn&#40;&quot;Setting the &#96;autodiff&#96; keyword to &#96;true&#96; is deprecated. Please use a valid symbol instead.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>    &#61;#</span>
+            <span class='code'>        has_not_dep_symbol_in_ad&#91;&#93; &#61; false</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>    function IdOffsetRange&#123;T,IdOffsetRange&#123;T,I&#125;&#125;&#40;r::IdOffsetRange&#123;T,I&#125;, offset::T&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>        _bool_check&#40;T, r, offset&#41;</span>
+            <span class='code'>    OnceDifferentiable&#40;f, x, F, alloc_DF&#40;x, F&#41;, :forward, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>        new&#123;T,IdOffsetRange&#123;T,I&#125;&#125;&#40;r, offset&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function OnceDifferentiable&#40;f, x_seed::AbstractArray, F::AbstractArray, DF::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    autodiff::Symbol , chunk::ForwardDiff.Chunk &#61; ForwardDiff.Chunk&#40;x_seed&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if  typeof&#40;f&#41; &lt;: Union&#123;InplaceObjective, NotInplaceObjective&#125;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>function _bool_check&#40;::Type&#123;Bool&#125;, r, offset&#41;</span>
+            <span class='code'>        fF &#61; make_f&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>    # disallow the construction of IdOffsetRange&#123;Bool, UnitRange&#123;Bool&#125;&#125;&#40;true:true, true&#41;</span>
+            <span class='code'>        dfF &#61; make_df&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>    if offset &amp;&amp; &#40;first&#40;r&#41; || last&#40;r&#41;&#41;</span>
+            <span class='code'>        fdfF &#61; make_fdf&#40;f, x_seed, F&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;values &#61; &#36;r and offset &#61; &#36;offset can not produce a boolean range&quot;&#41;&#41;</span>
+            <span class='code'>        return OnceDifferentiable&#40;fF, dfF, fdfF, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>        if is_finitediff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            # Figure out which Val-type to use for FiniteDiff based on our</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>_bool_check&#40;::Type, r, offset&#41; &#61; nothing</span>
+            <span class='code'>            # symbol interface.</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            fdtype &#61; finitediff_fdtype&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'># Construction/coercion from arbitrary AbstractUnitRanges</span>
+            <span class='code'>            # Apparently only the third input is aliased.</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>function IdOffsetRange&#123;T,I&#125;&#40;r::AbstractUnitRange, offset::Integer &#61; 0&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125;</span>
+            <span class='code'>            j_finitediff_cache &#61; FiniteDiff.JacobianCache&#40;copy&#40;x_seed&#41;, copy&#40;F&#41;, copy&#40;F&#41;, fdtype&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>    rc, o &#61; offset_coerce&#40;I, r&#41;</span>
+            <span class='code'>            if autodiff &#61;&#61; :finiteforward</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>    return IdOffsetRange&#123;T,I&#125;&#40;rc, convert&#40;T, o&#43;offset&#41;::T&#41;</span>
+            <span class='code'>                # These copies can be done away with if we add a keyword for</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                # reusing arrays instead for overwriting them.</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>function IdOffsetRange&#123;T&#125;&#40;r::AbstractUnitRange, offset::Integer &#61; 0&#41; where T&lt;:Integer</span>
+            <span class='code'>                Fx &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    rc &#61; convert&#40;AbstractUnitRange&#123;T&#125;, r&#41;::AbstractUnitRange&#123;T&#125;</span>
+            <span class='code'>                DF &#61; copy&#40;DF&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>    return IdOffsetRange&#123;T,typeof&#40;rc&#41;&#125;&#40;rc, convert&#40;T, offset&#41;::T&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                x_f, x_df &#61; x_of_nans&#40;x_seed&#41;, x_of_nans&#40;x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#40;r::AbstractUnitRange&#123;T&#125;, offset::Integer &#61; 0&#41; where T&lt;:Integer &#61;</span>
+            <span class='code'>                f_calls, j_calls &#61; &#91;0,&#93;, &#91;0,&#93;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>    IdOffsetRange&#123;T,typeof&#40;r&#41;&#125;&#40;r, convert&#40;T, offset&#41;::T&#41;</span>
+            <span class='code'>                function j_finiteforward&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    # Exploit the possibility that it might be that x_f &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1205,7 @@
           <td>
             
             
-            <span class='code'># Coercion from other IdOffsetRanges</span>
+            <span class='code'>                    # then we don&#39;t have to call f again.</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#123;T,I&#125;&#40;r::IdOffsetRange&#123;T,I&#125;&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125; &#61; r</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>function IdOffsetRange&#123;T,I&#125;&#40;r::IdOffsetRange, offset::Integer &#61; 0&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125;</span>
+            <span class='code'>                    # if at least one element of x_f is different from x, update</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>    rc, offset_rc &#61; offset_coerce&#40;I, r.parent&#41;</span>
+            <span class='code'>                    if any&#40;x_f .&#33;&#61; x&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>    return IdOffsetRange&#123;T,I&#125;&#40;rc, convert&#40;T, r.offset &#43; offset &#43; offset_rc&#41;::T&#41;</span>
+            <span class='code'>                        f&#40;Fx, x&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                        f_calls .&#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#123;T&#125;&#40;r::IdOffsetRange&#123;T&#125;&#41; where &#123;T&lt;:Integer&#125; &#61; r</span>
+            <span class='code'>                    end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>function IdOffsetRange&#123;T&#125;&#40;r::IdOffsetRange, offset::Integer &#61; 0&#41; where T&lt;:Integer</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    return IdOffsetRange&#123;T&#125;&#40;r.parent, r.offset &#43; offset&#41;</span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, Fx&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>IdOffsetRange&#40;r::IdOffsetRange&#41; &#61; r</span>
+            <span class='code'>                function fj_finiteforward&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                    f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'># Constructor to make &#96;show&#96; round-trippable</span>
+            <span class='code'>                    FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache, F&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1335,7 @@
           <td>
             
             
-            <span class='code'># try to preserve typeof&#40;values&#41; if the indices are known to be 1-based</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>_subtractindexoffset&#40;values, indices::Union&#123;Base.OneTo, IdentityUnitRange&#123;&lt;:Base.OneTo&#125;&#125;, offset&#41; &#61; values</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>_subtractindexoffset&#40;values, indices, offset&#41; &#61; _subtractoffset&#40;values, offset&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>function IdOffsetRange&#40;; values::AbstractUnitRange&#123;&lt;:Integer&#125;, indices::AbstractUnitRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>                return OnceDifferentiable&#40;f, j_finiteforward&#33;, fj_finiteforward&#33;, Fx, DF, x_f, x_df, f_calls, j_calls&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>    length&#40;values&#41; &#61;&#61; length&#40;indices&#41; || throw&#40;ArgumentError&#40;&quot;values and indices must have the same length&quot;&#41;&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    values_nooffset &#61; no_offset_view&#40;values&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    offset &#61; first&#40;indices&#41; - 1</span>
+            <span class='code'>            function fj_finitediff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>    values_minus_offset &#61; _subtractindexoffset&#40;values_nooffset, indices, offset&#41;</span>
+            <span class='code'>                f&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    return IdOffsetRange&#40;values_minus_offset, offset&#41;</span>
+            <span class='code'>                FiniteDiff.finite_difference_jacobian&#33;&#40;J, f, x, j_finitediff_cache&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                F</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1435,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1445,7 @@
           <td>
             
             
-            <span class='code'># Conversions to an AbstractUnitRange&#123;Int&#125; &#40;and to an OrdinalRange&#123;Int,Int&#125; on Julia v&quot;1.6&quot;&#41; are necessary</span>
+            <span class='code'>            function j_finitediff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1455,7 @@
           <td>
             
             
-            <span class='code'># to evaluate CartesianIndices for BigInt ranges, as their axes are also BigInt ranges</span>
+            <span class='code'>                F_cache &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>Base.AbstractUnitRange&#123;T&#125;&#40;r::IdOffsetRange&#41; where &#123;T&lt;:Integer&#125; &#61; IdOffsetRange&#123;T&#125;&#40;r&#41;</span>
+            <span class='code'>                fj_finitediff&#33;&#40;F_cache, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1475,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1485,7 @@
           <td>
             
             
-            <span class='code'># https://github.com/JuliaLang/julia/pull/40038</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>if v&quot;1.6&quot; &lt;&#61; VERSION &lt; v&quot;1.9.0-DEV.642&quot;</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_finitediff&#33;, fj_finitediff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>    Base.OrdinalRange&#123;T,T&#125;&#40;r::IdOffsetRange&#41; where &#123;T&lt;:Integer&#125; &#61; IdOffsetRange&#123;T&#125;&#40;r&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        elseif is_forwarddiff&#40;autodiff&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1535,7 +1535,7 @@
           <td>
             
             
-            <span class='code'># TODO: uncomment these when Julia is ready</span>
+            <span class='code'>            jac_cfg &#61; ForwardDiff.JacobianConfig&#40;f, F, x_seed, chunk&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1545,7 @@
           <td>
             
             
-            <span class='code'># # Conversion preserves both the values and the indices, throwing an InexactError if this</span>
+            <span class='code'>            ForwardDiff.checktag&#40;jac_cfg, f, x_seed&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1555,7 @@
           <td>
             
             
-            <span class='code'># # is not possible.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1565,7 @@
           <td>
             
             
-            <span class='code'># Base.convert&#40;::Type&#123;IdOffsetRange&#123;T,I&#125;&#125;, r::IdOffsetRange&#123;T,I&#125;&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125; &#61; r</span>
+            <span class='code'>            F2 &#61; copy&#40;F&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1575,7 @@
           <td>
             
             
-            <span class='code'># Base.convert&#40;::Type&#123;IdOffsetRange&#123;T,I&#125;&#125;, r::IdOffsetRange&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125; &#61;</span>
+            <span class='code'>            function j_forwarddiff&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>#     IdOffsetRange&#123;T,I&#125;&#40;convert&#40;I, r.parent&#41;, r.offset&#41;</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;J, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1595,7 @@
           <td>
             
             
-            <span class='code'># Base.convert&#40;::Type&#123;IdOffsetRange&#123;T,I&#125;&#125;, r::AbstractUnitRange&#41; where &#123;T&lt;:Integer,I&lt;:AbstractUnitRange&#123;T&#125;&#125; &#61;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>#     IdOffsetRange&#123;T,I&#125;&#40;convert&#40;I, r&#41;, 0&#41;</span>
+            <span class='code'>            function fj_forwarddiff&#33;&#40;F, J, x&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1615,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                jac_res &#61; DiffResults.DiffResult&#40;F, J&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>offset_coerce&#40;::Type&#123;Base.OneTo&#123;T&#125;&#125;, r::Base.OneTo&#41; where T&lt;:Integer &#61; convert&#40;Base.OneTo&#123;T&#125;, r&#41;, 0</span>
+            <span class='code'>                ForwardDiff.jacobian&#33;&#40;jac_res, f, F2, x, jac_cfg, Val&#123;false&#125;&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>function offset_coerce&#40;::Type&#123;Base.OneTo&#123;T&#125;&#125;, r::AbstractUnitRange&#41; where T&lt;:Integer</span>
+            <span class='code'>                DiffResults.value&#40;jac_res&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>    o &#61; first&#40;r&#41; - 1</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>    return Base.OneTo&#123;T&#125;&#40;last&#40;r&#41; - o&#41;, o</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            return OnceDifferentiable&#40;f, j_forwarddiff&#33;, fj_forwarddiff&#33;, x_seed, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1675,7 @@
           <td>
             
             
-            <span class='code'># function offset_coerce&#40;::Type&#123;Base.OneTo&#123;T&#125;&#125;, r::IdOffsetRange&#41; where T&lt;:Integer</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>#     rc, o &#61; offset_coerce&#40;Base.OneTo&#123;T&#125;, r.parent&#41;</span>
+            <span class='code'>            error&#40;&quot;The autodiff value &#36;&#40;autodiff&#41; is not supported. Use :finite or :forward.&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1695,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1705,7 @@
           <td>
             
             
-            <span class='code'># Fallback, specialze this method if &#96;convert&#40;I, r&#41;&#96; doesn&#39;t do what you need</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>offset_coerce&#40;::Type&#123;I&#125;, r::AbstractUnitRange&#41; where I&lt;:AbstractUnitRange &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>    convert&#40;I, r&#41;::I, 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1735,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>### Objective and derivative</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.parent&#40;r::IdOffsetRange&#41; &#61; r.parent</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df,</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.axes&#40;r::IdOffsetRange&#41; &#61; &#40;axes1&#40;r&#41;,&#41;</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>@inline axes1&#40;r::IdOffsetRange&#41; &#61; IdOffsetRange&#40;Base.axes1&#40;r.parent&#41;, r.offset&#41;</span>
+            <span class='code'>                   F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>if VERSION &lt; v&quot;1.8.2&quot;</span>
+            <span class='code'>                   DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>    Base.axes1&#40;r::IdOffsetRange&#41; &#61; axes1&#40;r&#41;</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.unsafe_indices&#40;r::IdOffsetRange&#41; &#61; &#40;axes1&#40;r&#41;,&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.length&#40;r::IdOffsetRange&#41; &#61; length&#40;r.parent&#41;</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.isempty&#40;r::IdOffsetRange&#41; &#61; isempty&#40;r.parent&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>#&#61; We specialize on reduced_indices to work around cases where the parent axis type doesn&#39;t</span>
+            <span class='code'>    fdf&#33; &#61; make_fdf&#40;x, F, f, df&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>support reduced_index, but the axes do support reduced_indices</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>The difference is that reduced_index expects the axis type to remain unchanged,</span>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, x, F, DF&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>which may not always be possible, eg. for statically sized axes</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,17 +1875,40 @@
           <td>
             
             
-            <span class='code'>See https://github.com/JuliaArrays/OffsetArrays.jl/issues/204</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
           <td class='lineno'>186</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;11 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>&#61;#</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #nlsolve#31
+              <a href='nlsolve.jl-3c09a6fa7d2424bc9f872603c9ab10e1a8478a03.html#L62'>line 62</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>OnceDifferentiable</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L196'>#OnceDifferentiable#26</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, j,</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1918,7 @@
           <td>
             
             
-            <span class='code'>function Base.reduced_indices&#40;inds::Tuple&#123;IdOffsetRange, Vararg&#123;IdOffsetRange&#125;&#125;, d::Int&#41;</span>
+            <span class='code'>                   x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1928,7 @@
           <td>
             
             
-            <span class='code'>    parents_reduced &#61; Base.reduced_indices&#40;map&#40;parent, inds&#41;, d&#41;</span>
+            <span class='code'>                   F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1938,7 @@
           <td>
             
             
-            <span class='code'>    ntuple&#40;i -&gt; IdOffsetRange&#40;parents_reduced&#91;i&#93;, inds&#91;i&#93;.offset&#41;, Val&#40;length&#40;inds&#41;&#41;&#41;</span>
+            <span class='code'>                   J::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1948,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                   inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1958,7 @@
           <td>
             
             
-            <span class='code'>Base.reduced_index&#40;i::IdOffsetRange&#41; &#61; typeof&#40;i&#41;&#40;first&#40;i&#41;:first&#40;i&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1968,7 @@
           <td>
             
             
-            <span class='code'># Workaround for #92 on Julia &lt; 1.4</span>
+            <span class='code'>    f&#33; &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1978,7 @@
           <td>
             
             
-            <span class='code'>Base.reduced_index&#40;i::IdentityUnitRange&#123;&lt;:IdOffsetRange&#125;&#41; &#61; typeof&#40;i&#41;&#40;first&#40;i&#41;:first&#40;i&#41;&#41;</span>
+            <span class='code'>    j&#33; &#61; df&#33;_from_df&#40;j, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1988,7 @@
           <td>
             
             
-            <span class='code'>if VERSION &lt; v&quot;1.8.2&quot;</span>
+            <span class='code'>    fj&#33; &#61; make_fdf&#40;x, F, f&#33;, j&#33;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,17 +1998,31 @@
           <td>
             
             
-            <span class='code'>    for f in &#91;:firstindex, :lastindex&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L196'>
           <td class='lineno'>196</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        @eval @inline Base.&#36;f&#40;r::IdOffsetRange&#41; &#61; &#36;f&#40;r.parent&#41; &#43; r.offset</span>
+            <div class='call-sites'>
+              1 &#40;5 &#37;&#41;
+              samples spent in #OnceDifferentiable#26
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L186'>line 186</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>OnceDifferentiable</a>
+              <br />
+            </div>
+            <span class='code'>    OnceDifferentiable&#40;f&#33;, j&#33;, fj&#33;, x, F, J&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2032,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2042,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2052,7 @@
           <td>
             
             
-            <span class='code'>for f in &#91;:first, :last&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2062,7 @@
           <td>
             
             
-            <span class='code'>    # coerce the type to deal with values that get promoted on addition &#40;eg. Bool&#41;</span>
+            <span class='code'>### Objective, derivative and combination</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2072,7 @@
           <td>
             
             
-            <span class='code'>    @eval @inline Base.&#36;f&#40;r::IdOffsetRange&#41; &#61; eltype&#40;r&#41;&#40;&#36;f&#40;r.parent&#41; &#43; r.offset&#41;</span>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2082,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2092,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    F::Real &#61; real&#40;zero&#40;eltype&#40;x&#41;&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2102,7 @@
           <td>
             
             
-            <span class='code'># Iteration for an IdOffsetRange</span>
+            <span class='code'>    DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2112,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.iterate&#40;r::IdOffsetRange, i...&#41; &#61; _iterate&#40;r, i...&#41;</span>
+            <span class='code'>    inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2122,7 @@
           <td>
             
             
-            <span class='code'># In general we iterate over the parent term by term and add the offset.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2132,7 @@
           <td>
             
             
-            <span class='code'># This might have some performance degradation when coupled with bounds-checking</span>
+            <span class='code'>    # f is never &quot;inplace&quot; since F is scalar</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2142,7 @@
           <td>
             
             
-            <span class='code'># See https://github.com/JuliaArrays/OffsetArrays.jl/issues/214</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2152,7 @@
           <td>
             
             
-            <span class='code'>@inline function _iterate&#40;r::IdOffsetRange, i...&#41;</span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2162,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61; iterate&#40;r.parent, i...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2172,7 @@
           <td>
             
             
-            <span class='code'>    ret &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2182,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;eltype&#40;r&#41;&#40;ret&#91;1&#93; &#43; r.offset&#41;, ret&#91;2&#93;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2192,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    OnceDifferentiable&#123;typeof&#40;F&#41;,typeof&#40;DF&#41;,typeof&#40;x&#41;&#125;&#40;f, df&#33;, fdf&#33;,</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2202,7 @@
           <td>
             
             
-            <span class='code'># Base.OneTo&#40;n&#41; is known to be exactly equivalent to the range 1:n,</span>
+            <span class='code'>    copy&#40;F&#41;, copy&#40;DF&#41;,</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2212,7 @@
           <td>
             
             
-            <span class='code'># and has no specialized iteration defined for it,</span>
+            <span class='code'>    x_f, x_df,</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2222,7 @@
           <td>
             
             
-            <span class='code'># so we may add the offset to the range directly and iterate over the result</span>
+            <span class='code'>    &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2232,7 @@
           <td>
             
             
-            <span class='code'># This gets around the performance issue described in issue #214</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,17 +2242,36 @@
           <td>
             
             
-            <span class='code'># We use the helper function _addoffset to evaluate the range instead of broadcasting</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L219'>
           <td class='lineno'>219</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'># just in case this makes it easy for the compiler.</span>
+            <div class='call-sites'>
+              2 &#40;11 &#37;&#41;
+              samples spent in OnceDifferentiable
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from OnceDifferentiable
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>line 219</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from #OnceDifferentiable#26
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L196'>line 196</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='oncedifferentiable.jl-286586a84583dc59d0293ecf380a39840129957f.html#L219'>#OnceDifferentiable#28</a>
+              <br />
+            </div>
+            <span class='code'>function OnceDifferentiable&#40;f, df, fdf,</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2281,7 @@
           <td>
             
             
-            <span class='code'>@inline _iterate&#40;r::IdOffsetRange&#123;&lt;:Integer, &lt;:Base.OneTo&#125;, i...&#41; &#61; iterate&#40;_addoffset&#40;r.parent, r.offset&#41;, i...&#41;</span>
+            <span class='code'>                            x::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2291,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                            F::AbstractArray,</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2301,7 @@
           <td>
             
             
-            <span class='code'>@inline function Base.getindex&#40;r::IdOffsetRange, i::Integer&#41;</span>
+            <span class='code'>                            DF::AbstractArray &#61; alloc_DF&#40;x, F&#41;;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2311,7 @@
           <td>
             
             
-            <span class='code'>    i isa Bool &amp;&amp; throw&#40;ArgumentError&#40;&quot;invalid index: &#36;i of type Bool&quot;&#41;&#41;</span>
+            <span class='code'>                            inplace &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2321,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck checkbounds&#40;r, i&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2331,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds eltype&#40;r&#41;&#40;r.parent&#91;i - r.offset&#93; &#43; r.offset&#41;</span>
+            <span class='code'>    f &#61; f&#33;_from_f&#40;f, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2341,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    df&#33; &#61; df&#33;_from_df&#40;df, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2351,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    fdf&#33; &#61; fdf&#33;_from_fdf&#40;fdf, F, inplace&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2305,7 +2361,7 @@
           <td>
             
             
-            <span class='code'># Logical indexing following https://github.com/JuliaLang/julia/pull/31829</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2315,7 +2371,7 @@
           <td>
             
             
-            <span class='code'>#&#61; Helper function to perform logical indxeing for boolean ranges</span>
+            <span class='code'>    x_f, x_df &#61; x_of_nans&#40;x&#41;, x_of_nans&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2325,17 +2381,22 @@
           <td>
             
             
-            <span class='code'>The code implemented is a branch-free version of the following:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L231'>
           <td class='lineno'>231</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;5 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'></span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L163'>vect</a>
+              <br />
+            </div>
+            <span class='code'>    OnceDifferentiable&#40;f, df&#33;, fdf&#33;, copy&#40;F&#41;, copy&#40;DF&#41;, x_f, x_df, &#91;0,&#93;, &#91;0,&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2345,651 +2406,7 @@
           <td>
             
             
-            <span class='code'>    range&#40;first&#40;s&#41; ? first&#40;r&#41; : last&#40;r&#41;, length&#61;Int&#40;last&#40;s&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L233'>
-          <td class='lineno'>233</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L234'>
-          <td class='lineno'>234</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>See https://github.com/JuliaArrays/OffsetArrays.jl/pull/224#discussion_r595635143</span>
-          </td>
-        </tr>
-        <tr id='L235'>
-          <td class='lineno'>235</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L236'>
-          <td class='lineno'>236</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Logical indexing does not preserve indices, unlike other forms of vector indexing</span>
-          </td>
-        </tr>
-        <tr id='L237'>
-          <td class='lineno'>237</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#61;#</span>
-          </td>
-        </tr>
-        <tr id='L238'>
-          <td class='lineno'>238</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function _getindex&#40;r, s::AbstractUnitRange&#123;Bool&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L239'>
-          <td class='lineno'>239</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    range&#40;first&#40;r&#41; * first&#40;s&#41; &#43; last&#40;r&#41; * &#33;first&#40;s&#41;, length&#61;Int&#40;last&#40;s&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L240'>
-          <td class='lineno'>240</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
             <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L241'>
-          <td class='lineno'>241</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function _getindex&#40;r, s::StepRange&#123;Bool&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L242'>
-          <td class='lineno'>242</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    range&#40;first&#40;r&#41; * first&#40;s&#41; &#43; last&#40;r&#41; * &#33;first&#40;s&#41;, step &#61; oneunit&#40;step&#40;s&#41;&#41;, length&#61;Int&#40;last&#40;s&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L243'>
-          <td class='lineno'>243</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L244'>
-          <td class='lineno'>244</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function _getindex&#40;r, s::AbstractUnitRange&#41;</span>
-          </td>
-        </tr>
-        <tr id='L245'>
-          <td class='lineno'>245</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inbounds rs &#61; r.parent&#91;_subtractoffset&#40;s, r.offset&#41;&#93; .&#43; r.offset</span>
-          </td>
-        </tr>
-        <tr id='L246'>
-          <td class='lineno'>246</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    _indexedby&#40;rs, axes&#40;s&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L247'>
-          <td class='lineno'>247</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L248'>
-          <td class='lineno'>248</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function _getindex&#40;r, s::StepRange&#41;</span>
-          </td>
-        </tr>
-        <tr id='L249'>
-          <td class='lineno'>249</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    rs &#61; @inbounds r.parent&#91;s .- r.offset&#93; .&#43; r.offset</span>
-          </td>
-        </tr>
-        <tr id='L250'>
-          <td class='lineno'>250</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    _indexedby&#40;rs, axes&#40;s&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L251'>
-          <td class='lineno'>251</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>for T in &#91;:AbstractUnitRange, :StepRange&#93;</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @eval @inline function Base.getindex&#40;r::IdOffsetRange, s::&#36;T&#123;&lt;:Integer&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        @boundscheck checkbounds&#40;r, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return _getindex&#40;r, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L260'>
-          <td class='lineno'>260</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># These methods are necessary to avoid ambiguity</span>
-          </td>
-        </tr>
-        <tr id='L261'>
-          <td class='lineno'>261</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>for R in &#91;:IIUR, :IdOffsetRange&#93;</span>
-          </td>
-        </tr>
-        <tr id='L262'>
-          <td class='lineno'>262</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @eval @inline function Base.getindex&#40;r::IdOffsetRange, s::&#36;R&#41;</span>
-          </td>
-        </tr>
-        <tr id='L263'>
-          <td class='lineno'>263</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        @boundscheck checkbounds&#40;r, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L264'>
-          <td class='lineno'>264</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return _getindex&#40;r, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L265'>
-          <td class='lineno'>265</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># offset-preserve broadcasting</span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Broadcast.broadcasted&#40;::Base.Broadcast.DefaultArrayStyle&#123;1&#125;, ::typeof&#40;-&#41;, r::IdOffsetRange, x::Integer&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IdOffsetRange&#40;r.parent .- x, r.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Broadcast.broadcasted&#40;::Base.Broadcast.DefaultArrayStyle&#123;1&#125;, ::typeof&#40;&#43;&#41;, r::IdOffsetRange, x::Integer&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L272'>
-          <td class='lineno'>272</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IdOffsetRange&#40;r.parent .&#43; x, r.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L273'>
-          <td class='lineno'>273</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Broadcast.broadcasted&#40;::Base.Broadcast.DefaultArrayStyle&#123;1&#125;, ::typeof&#40;&#43;&#41;, x::Integer, r::IdOffsetRange&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L274'>
-          <td class='lineno'>274</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IdOffsetRange&#40;x .&#43; r.parent, r.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L275'>
-          <td class='lineno'>275</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Broadcast.broadcasted&#40;::Base.Broadcast.DefaultArrayStyle&#123;1&#125;, ::typeof&#40;big&#41;, r::IdOffsetRange&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L276'>
-          <td class='lineno'>276</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IdOffsetRange&#40;big.&#40;r.parent&#41;, r.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L277'>
-          <td class='lineno'>277</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L278'>
-          <td class='lineno'>278</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.show&#40;io::IO, r::IdOffsetRange&#41; &#61; print&#40;io, IdOffsetRange, &quot;&#40;values&#61;&quot;,first&#40;r&#41;, &#39;:&#39;, last&#40;r&#41;,&quot;, indices&#61;&quot;,first&#40;eachindex&#40;r&#41;&#41;,&#39;:&#39;,last&#40;eachindex&#40;r&#41;&#41;, &quot;&#41;&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L279'>
-          <td class='lineno'>279</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L280'>
-          <td class='lineno'>280</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># Optimizations</span>
-          </td>
-        </tr>
-        <tr id='L281'>
-          <td class='lineno'>281</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>5 &#40;0 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              5 &#40;0 &#37;&#41;
-              samples spent in checkindex
-              <br />
-              
-              5 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from checkbounds_indices
-              <a href='abstractarray.jl-e767fe302ea89b0d053b8709e04b4c2c34b44ff9.html#L728'>line 728</a>
-              <br />
-            </div>
-            <div class='callees'>
-              5 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='abstractarray.jl-e767fe302ea89b0d053b8709e04b4c2c34b44ff9.html#L763'>checkindex</a>
-              <br />
-            </div>
-            <span class='code'>@inline Base.checkindex&#40;::Type&#123;Bool&#125;, inds::IdOffsetRange, i::Real&#41; &#61; Base.checkindex&#40;Bool, inds.parent, i - inds.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L282'>
-          <td class='lineno'>282</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L283'>
-          <td class='lineno'>283</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>if VERSION &lt; v&quot;1.5.2&quot;</span>
-          </td>
-        </tr>
-        <tr id='L284'>
-          <td class='lineno'>284</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # issue 100, 133: IdOffsetRange as another index-preserving case shouldn&#39;t comtribute offsets</span>
-          </td>
-        </tr>
-        <tr id='L285'>
-          <td class='lineno'>285</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # fixed by https://github.com/JuliaLang/julia/pull/37204</span>
-          </td>
-        </tr>
-        <tr id='L286'>
-          <td class='lineno'>286</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inline Base.compute_offset1&#40;parent, stride1::Integer, dims::Tuple&#123;Int&#125;, inds::Tuple&#123;IdOffsetRange&#125;, I::Tuple&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L287'>
-          <td class='lineno'>287</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        Base.compute_linindex&#40;parent, I&#41; - stride1*first&#40;Base.axes1&#40;inds&#91;1&#93;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L288'>
-          <td class='lineno'>288</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L289'>
-          <td class='lineno'>289</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L290'>
-          <td class='lineno'>290</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># This was deemed &quot;too private&quot; to extend: see issue #184</span>
-          </td>
-        </tr>
-        <tr id='L291'>
-          <td class='lineno'>291</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># # Fixes an inference failure in Base.mapfirst&#33;</span>
-          </td>
-        </tr>
-        <tr id='L292'>
-          <td class='lineno'>292</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># # Test: A &#61; OffsetArray&#40;rand&#40;4,4&#41;, &#40;-3,5&#41;&#41;; R &#61; similar&#40;A, &#40;1:1, 6:9&#41;&#41;; maximum&#33;&#40;R, A&#41;</span>
-          </td>
-        </tr>
-        <tr id='L293'>
-          <td class='lineno'>293</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># if isdefined&#40;Base, :_firstslice&#41;</span>
-          </td>
-        </tr>
-        <tr id='L294'>
-          <td class='lineno'>294</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>#     Base._firstslice&#40;i::IdOffsetRange&#41; &#61; IdOffsetRange&#40;Base._firstslice&#40;i.parent&#41;, i.offset&#41;</span>
-          </td>
-        </tr>
-        <tr id='L295'>
-          <td class='lineno'>295</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># end</span>
           </td>
         </tr>
       </tbody>
