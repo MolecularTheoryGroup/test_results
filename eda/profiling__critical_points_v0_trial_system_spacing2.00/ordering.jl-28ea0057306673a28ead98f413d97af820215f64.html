@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/refpointer.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/ordering.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Fri, 15 Mar 2024 00:55:01
+        Generated on Fri, 15 Mar 2024 00:55:27
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>module Order</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#123;T&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>An object that safely references data of type &#96;T&#96;. This type is guaranteed to point to</span>
+            <span class='code'>import ..@__MODULE__, ..parentmodule</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>valid, Julia-allocated memory of the correct type. The underlying data is protected from</span>
+            <span class='code'>const Base &#61; parentmodule&#40;@__MODULE__&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>freeing by the garbage collector as long as the &#96;Ref&#96; itself is referenced.</span>
+            <span class='code'>import .Base:</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    AbstractVector, @propagate_inbounds, isless, identity, getindex, reverse,</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>In Julia, &#96;Ref&#96; objects are dereferenced &#40;loaded or stored&#41; with &#96;&#91;&#93;&#96;.</span>
+            <span class='code'>    &#43;, -, &#33;, &amp;, &lt;, |</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>Creation of a &#96;Ref&#96; to a value &#96;x&#96; of type &#96;T&#96; is usually written &#96;Ref&#40;x&#41;&#96;.</span>
+            <span class='code'>## notions of element ordering ##</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>Additionally, for creating interior pointers to containers &#40;such as Array or Ptr&#41;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>it can be written &#96;Ref&#40;a, i&#41;&#96; for creating a reference to the &#96;i&#96;-th element of &#96;a&#96;.</span>
+            <span class='code'>export # not exported by Base</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Ordering, Forward, Reverse,</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ref&#123;T&#125;&#40;&#41;&#96; creates a reference to a value of type &#96;T&#96; without initialization.</span>
+            <span class='code'>    By, Lt, Perm,</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>For a bitstype &#96;T&#96;, the value will be whatever currently resides in the memory</span>
+            <span class='code'>    ReverseOrdering, ForwardOrdering,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>allocated. For a non-bitstype &#96;T&#96;, the reference will be undefined and attempting to</span>
+            <span class='code'>    DirectOrdering,</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>dereference it will result in an error, &quot;UndefRefError: access to undefined reference&quot;.</span>
+            <span class='code'>    lt, ord, ordtype</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>To check if a &#96;Ref&#96; is an undefined reference, use &#91;&#96;isassigned&#40;ref::RefValue&#41;&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>For example, &#96;isassigned&#40;Ref&#123;T&#125;&#40;&#41;&#41;&#96; is &#96;false&#96; if &#96;T&#96; is not a bitstype.</span>
+            <span class='code'>    Base.Order.Ordering</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>If &#96;T&#96; is a bitstype, &#96;isassigned&#40;Ref&#123;T&#125;&#40;&#41;&#41;&#96; will always be true.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Abstract type which represents a total order on some set of elements.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>When passed as a &#96;ccall&#96; argument &#40;either as a &#96;Ptr&#96; or &#96;Ref&#96; type&#41;, a &#96;Ref&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>object will be converted to a native pointer to the data it references.</span>
+            <span class='code'>Use &#91;&#96;Base.Order.lt&#96;&#93;&#40;@ref&#41; to compare two elements according to the ordering.</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>For most &#96;T&#96;, or when converted to a &#96;Ptr&#123;Cvoid&#125;&#96;, this is a pointer to the</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>object data. When &#96;T&#96; is an &#96;isbits&#96; type, this value may be safely mutated,</span>
+            <span class='code'>abstract type Ordering end</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>otherwise mutation is strictly undefined behavior.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct ForwardOrdering &lt;: Ordering end</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>As a special case, setting &#96;T &#61; Any&#96; will instead cause the creation of a</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>pointer to the reference itself when converted to a &#96;Ptr&#123;Any&#125;&#96;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>&#40;a &#96;jl_value_t const* const*&#96; if T is immutable, else a &#96;jl_value_t *const *&#96;&#41;.</span>
+            <span class='code'>    ReverseOrdering&#40;fwd::Ordering&#61;Forward&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>When converted to a &#96;Ptr&#123;Cvoid&#125;&#96;, it will still return a pointer to the data</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>region as for any other &#96;T&#96;.</span>
+            <span class='code'>A wrapper which reverses an ordering.</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>A &#96;C_NULL&#96; instance of &#96;Ptr&#96; can be passed to a &#96;ccall&#96; &#96;Ref&#96; argument to initialize it.</span>
+            <span class='code'>For a given &#96;Ordering&#96; &#96;o&#96;, the following holds for all  &#96;a&#96;, &#96;b&#96;:</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'># Use in broadcasting</span>
+            <span class='code'>    lt&#40;ReverseOrdering&#40;o&#41;, a, b&#41; &#61;&#61; lt&#40;o, b, a&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ref&#96; is sometimes used in broadcasting in order to treat the referenced values as a scalar.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct ReverseOrdering&#123;Fwd&lt;:Ordering&#125; &lt;: Ordering</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    fwd::Fwd</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#40;5&#41;</span>
+            <span class='code'>ReverseOrdering&#40;rev::ReverseOrdering&#41; &#61; rev.fwd</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>Base.RefValue&#123;Int64&#125;&#40;5&#41;</span>
+            <span class='code'>ReverseOrdering&#40;fwd::Fwd&#41; where &#123;Fwd&#125; &#61; ReverseOrdering&#123;Fwd&#125;&#40;fwd&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>ReverseOrdering&#40;&#41; &#61; ReverseOrdering&#40;ForwardOrdering&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isa.&#40;Ref&#40;&#91;1,2,3&#93;&#41;, &#91;Array, Dict, Int&#93;&#41; # Treat reference values as scalar during broadcasting</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>3-element BitVector:</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'> 1</span>
+            <span class='code'>    reverse&#40;o::Base.Ordering&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'> 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'> 0</span>
+            <span class='code'>reverses ordering specified by &#96;o&#96;.</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#123;Function&#125;&#40;&#41;  # Undefined reference to a non-bitstype, Function</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>Base.RefValue&#123;Function&#125;&#40;#undef&#41;</span>
+            <span class='code'>reverse&#40;o::Ordering&#41; &#61; ReverseOrdering&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; try</span>
+            <span class='code'>const DirectOrdering &#61; Union&#123;ForwardOrdering,ReverseOrdering&#123;ForwardOrdering&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>           Ref&#123;Function&#125;&#40;&#41;&#91;&#93; # Dereferencing an undefined reference will result in an error</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>       catch e</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>           println&#40;e&#41;</span>
+            <span class='code'>    Base.Order.Forward</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>UndefRefError&#40;&#41;</span>
+            <span class='code'>Default ordering according to &#91;&#96;isless&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#123;Int64&#125;&#40;&#41;&#91;&#93;; # A reference to a bitstype refers to an undetermined value if not given</span>
+            <span class='code'>const Forward &#61; ForwardOrdering&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isassigned&#40;Ref&#123;Int64&#125;&#40;&#41;&#41; # A reference to a bitstype is always assigned</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    Base.Order.Reverse</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Ref&#123;Int64&#125;&#40;0&#41;&#91;&#93; &#61;&#61; 0 # Explicitly give a value for a bitstype reference</span>
+            <span class='code'>Reverse ordering according to &#91;&#96;isless&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>const Reverse &#61; ReverseOrdering&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>Ref</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    By&#40;by, order::Ordering&#61;Forward&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'># C NUL-terminated string pointers; these can be used in ccall</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'># instead of Ptr&#123;Cchar&#125; and Ptr&#123;Cwchar_t&#125;, respectively, to enforce</span>
+            <span class='code'>&#96;Ordering&#96; which applies &#96;order&#96; to elements after they have been transformed</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'># a check for embedded NUL chars in the string &#40;to avoid silent truncation&#41;.</span>
+            <span class='code'>by the function &#96;by&#96;.</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'>if Int &#61;&#61;&#61; Int64</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cstring  64 end</span>
+            <span class='code'>struct By&#123;T, O&#125; &lt;: Ordering</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cwstring 64 end</span>
+            <span class='code'>    by::T</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>else</span>
+            <span class='code'>    order::O</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cstring  32 end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>    primitive type Cwstring 32 end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># backwards compatibility with VERSION &lt; v&quot;1.5-&quot;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>By&#40;by&#41; &#61; By&#40;by, Forward&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>### General Methods for Ref&#123;T&#125; type</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Lt&#40;lt&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>eltype&#40;x::Type&#123;&lt;:Ref&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; @isdefined&#40;T&#41; ? T : Any</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x::Ref&#123;T&#125;&#41; where &#123;T&#125; &#61; x</span>
+            <span class='code'>&#96;Ordering&#96; that calls &#96;lt&#40;a, b&#41;&#96; to compare elements. &#96;lt&#96; must</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>size&#40;x::Ref&#41; &#61; &#40;&#41;</span>
+            <span class='code'>obey the same rules as the &#96;lt&#96; parameter of &#91;&#96;sort&#33;&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;x::Ref&#41; &#61; &#40;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>length&#40;x::Ref&#41; &#61; 1</span>
+            <span class='code'>struct Lt&#123;T&#125; &lt;: Ordering</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;x::Ref&#41; &#61; false</span>
+            <span class='code'>    lt::T</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;x::Ref&#41; &#61; 0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;::Type&#123;&lt;:Ref&#125;&#41; &#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>iterate&#40;r::Ref&#41; &#61; &#40;r&#91;&#93;, nothing&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>iterate&#40;r::Ref, s&#41; &#61; nothing</span>
+            <span class='code'>    Perm&#40;order::Ordering, data::AbstractVector&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Ref&#125;&#41; &#61; HasShape&#123;0&#125;&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;Ordering&#96; on the indices of &#96;data&#96; where &#96;i&#96; is less than &#96;j&#96; if &#96;data&#91;i&#93;&#96; is</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'># create Ref objects for general object conversion</span>
+            <span class='code'>less than &#96;data&#91;j&#93;&#96; according to &#96;order&#96;. In the case that &#96;data&#91;i&#93;&#96; and</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x::Ref&#123;T&#125;&#41; where &#123;T&#125; &#61; unsafe_convert&#40;Ptr&#123;T&#125;, x&#41;</span>
+            <span class='code'>&#96;data&#91;j&#93;&#96; are equal, &#96;i&#96; and &#96;j&#96; are compared by numeric value.</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x&#41; where &#123;T&#125; &#61; unsafe_convert&#40;Ptr&#123;T&#125;, x&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>struct Perm&#123;O&lt;:Ordering,V&lt;:AbstractVector&#125; &lt;: Ordering</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x&#41; where &#123;T&#125; &#61; RefValue&#123;T&#125;&#40;x&#41;::RefValue&#123;T&#125;</span>
+            <span class='code'>    order::O</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    data::V</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>### Methods for a Ref object that is backed by an array at index i</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>struct RefArray&#123;T,A&lt;:AbstractArray&#123;T&#125;,R&#125; &lt;: Ref&#123;T&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>    x::A</span>
+            <span class='code'>ReverseOrdering&#40;by::By&#41; &#61; By&#40;by.by, ReverseOrdering&#40;by.order&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>    i::Int</span>
+            <span class='code'>ReverseOrdering&#40;perm::Perm&#41; &#61; Perm&#40;ReverseOrdering&#40;perm.order&#41;, perm.data&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>    roots::R # should be either ::Nothing or ::Any</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    RefArray&#123;T,A,R&#125;&#40;x,i,roots&#61;nothing&#41; where &#123;T,A&lt;:AbstractArray&#123;T&#125;,R&#125; &#61; new&#40;x,i,roots&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    lt&#40;o::Ordering, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Int, roots::Any&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Any&#125;&#40;x, i, roots&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Int&#61;1, roots::Nothing&#61;nothing&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Nothing&#125;&#40;x, i, nothing&#41;</span>
+            <span class='code'>Test whether &#96;a&#96; is less than &#96;b&#96; according to the ordering &#96;o&#96;.</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Integer, roots::Any&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Any&#125;&#40;x, Int&#40;i&#41;, roots&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>RefArray&#40;x::AbstractArray&#123;T&#125;, i::Integer, roots::Nothing&#61;nothing&#41; where &#123;T&#125; &#61; RefArray&#123;T,typeof&#40;x&#41;,Nothing&#125;&#40;x, Int&#40;i&#41;, nothing&#41;</span>
+            <span class='code'>lt&#40;o::ForwardOrdering,       a, b&#41; &#61; isless&#40;a,b&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,17 +1205,31 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, x::AbstractArray&#123;T&#125;&#41; where &#123;T&#125; &#61; RefArray&#40;x, 1&#41;</span>
+            <span class='code'>lt&#40;o::ReverseOrdering,       a, b&#41; &#61; lt&#40;o.fwd,b,a&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
           <td class='lineno'>119</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;20 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              1 &#40;20 &#37;&#41;
+              samples spent in lt
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from _issorted
+              <a href='sort.jl-48c5f55a21c6d3f05b4485199deefefdefffe1cd.html#L1201'>line 1201</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L380'>#37</a>
+              <br />
+            </div>
+            <span class='code'>lt&#40;o::By,                    a, b&#41; &#61; lt&#40;o.order,o.by&#40;a&#41;,o.by&#40;b&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1239,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_convert&#40;P::Union&#123;Type&#123;Ptr&#123;T&#125;&#125;,Type&#123;Ptr&#123;Cvoid&#125;&#125;&#125;, b::RefArray&#123;T&#125;&#41;::P where T</span>
+            <span class='code'>lt&#40;o::Lt,                    a, b&#41; &#61; o.lt&#40;a,b&#41;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1249,7 @@
           <td>
             
             
-            <span class='code'>    if allocatedinline&#40;T&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1259,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; pointer&#40;b.x, b.i&#41;</span>
+            <span class='code'>@propagate_inbounds function lt&#40;p::Perm, a::Integer, b::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1269,7 @@
           <td>
             
             
-            <span class='code'>    elseif isconcretetype&#40;T&#41; &amp;&amp; ismutabletype&#40;T&#41;</span>
+            <span class='code'>    da &#61; p.data&#91;a&#93;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1279,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; pointer_from_objref&#40;b.x&#91;b.i&#93;&#41;</span>
+            <span class='code'>    db &#61; p.data&#91;b&#93;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1289,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    &#40;lt&#40;p.order, da, db&#41;::Bool&#41; | &#40;&#33;&#40;lt&#40;p.order, db, da&#41;::Bool&#41; &amp; &#40;a &lt; b&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1299,7 @@
           <td>
             
             
-            <span class='code'>        # see comment on equivalent branch for RefValue</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1309,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; pointerref&#40;Ptr&#123;Ptr&#123;Cvoid&#125;&#125;&#40;pointer&#40;b.x, b.i&#41;&#41;, 1, Core.sizeof&#40;Ptr&#123;Cvoid&#125;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1319,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>_ord&#40;lt::typeof&#40;isless&#41;, by::typeof&#40;identity&#41;, order::Ordering&#41; &#61; order</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1329,7 @@
           <td>
             
             
-            <span class='code'>    return p</span>
+            <span class='code'>_ord&#40;lt::typeof&#40;isless&#41;, by,                   order::Ordering&#41; &#61; By&#40;by, order&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1339,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1349,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_convert&#40;::Type&#123;Ptr&#123;Any&#125;&#125;, b::RefArray&#123;Any&#125;&#41;::Ptr&#123;Any&#125;</span>
+            <span class='code'>function _ord&#40;lt, by, order::Ordering&#41;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1359,7 @@
           <td>
             
             
-            <span class='code'>    return pointer&#40;b.x, b.i&#41;</span>
+            <span class='code'>    if order &#61;&#61;&#61; Forward</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return Lt&#40;&#40;x, y&#41; -&gt; lt&#40;by&#40;x&#41;, by&#40;y&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1379,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif order &#61;&#61;&#61; Reverse</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>###</span>
+            <span class='code'>        return Lt&#40;&#40;x, y&#41; -&gt; lt&#40;by&#40;y&#41;, by&#40;x&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,31 +1399,17 @@
           <td>
             
             
-            <span class='code'>if is_primary_base_module</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L137'>
           <td class='lineno'>137</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>4 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              4 &#40;0 &#37;&#41;
-              samples spent in Ref
-              <br />
-              
-              4 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from broadcastable
-              <a href='broadcast.jl-452d9d2e3a2787f40b88516ed5b304de3fe060e3.html#L739'>line 739</a>
-              <br />
-            </div>
-            <div class='callees'>
-              4 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='refvalue.jl-3e98c76d36d007f49ee43e2292d24772401abdc0.html#L10'>RefValue</a>
-              <br />
-            </div>
-            <span class='code'>    Ref&#40;x::Any&#41; &#61; RefValue&#40;x&#41;</span>
+            
+            
+            <span class='code'>        error&#40;&quot;Passing both lt&#61; and order&#61; arguments is ambiguous; please pass order&#61;Forward or order&#61;Reverse &#40;or leave default&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1419,7 +1419,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#123;T&#125;&#40;&#41; where &#123;T&#125; &#61; RefValue&#123;T&#125;&#40;&#41; # Ref&#123;T&#125;&#40;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1429,7 +1429,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#123;T&#125;&#40;x&#41; where &#123;T&#125; &#61; RefValue&#123;T&#125;&#40;x&#41; # Ref&#123;T&#125;&#40;x&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1449,7 +1449,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#40;x::Ref, i::Integer&#41; &#61; &#40;i &#33;&#61; 1 &amp;&amp; error&#40;&quot;Ref only has one element&quot;&#41;; x&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#40;x::Ptr&#123;T&#125;, i::Integer&#41; where &#123;T&#125; &#61; x &#43; &#40;i - 1&#41; * Core.sizeof&#40;T&#41;</span>
+            <span class='code'>    ord&#40;lt, by, rev::Union&#123;Bool, Nothing&#125;, order::Ordering&#61;Forward&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1479,7 +1479,7 @@
           <td>
             
             
-            <span class='code'>    # convert Arrays to pointer arrays for ccall</span>
+            <span class='code'>Construct an &#91;&#96;Ordering&#96;&#93;&#40;@ref&#41; object from the same arguments used by</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1489,7 @@
           <td>
             
             
-            <span class='code'>    function Ref&#123;P&#125;&#40;a::Array&#123;&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;&#125;&#41; where P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;</span>
+            <span class='code'>&#91;&#96;sort&#33;&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1499,7 @@
           <td>
             
             
-            <span class='code'>        return RefArray&#40;a&#41; # effectively a no-op</span>
+            <span class='code'>Elements are first transformed by the function &#96;by&#96; &#40;which may be</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1509,7 +1509,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&#91;&#96;identity&#96;&#93;&#40;@ref&#41;&#41; and are then compared according to either the function &#96;lt&#96;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1519,7 +1519,7 @@
           <td>
             
             
-            <span class='code'>    function Ref&#123;P&#125;&#40;a::Array&#123;T&#125;&#41; where P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125; where T</span>
+            <span class='code'>or an existing ordering &#96;order&#96;. &#96;lt&#96; should be &#91;&#96;isless&#96;&#93;&#40;@ref&#41; or a function</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1529,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>        if &#40;&#33;isbitstype&#40;T&#41; &amp;&amp; T &lt;: eltype&#40;P&#41;&#41;</span>
+            <span class='code'>that obeys the same rules as the &#96;lt&#96; parameter of &#91;&#96;sort&#33;&#96;&#93;&#40;@ref&#41;. Finally,</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1539,7 +1539,7 @@
           <td>
             
             
-            <span class='code'>            # this Array already has the right memory layout for the requested Ref</span>
+            <span class='code'>the resulting order is reversed if &#96;rev&#61;true&#96;.</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1549,7 +1549,7 @@
           <td>
             
             
-            <span class='code'>            return RefArray&#40;a,1,false&#41; # root something, so that this function is type-stable</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1559,7 +1559,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>Passing an &#96;lt&#96; other than &#96;isless&#96; along with an &#96;order&#96; other than</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1569,7 +1569,7 @@
           <td>
             
             
-            <span class='code'>            ptrs &#61; Vector&#123;P&#125;&#40;undef, length&#40;a&#41;&#43;1&#41;</span>
+            <span class='code'>&#91;&#96;Base.Order.Forward&#96;&#93;&#40;@ref&#41; or &#91;&#96;Base.Order.Reverse&#96;&#93;&#40;@ref&#41; is not permitted,</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1579,7 +1579,7 @@
           <td>
             
             
-            <span class='code'>            roots &#61; Vector&#123;Any&#125;&#40;undef, length&#40;a&#41;&#41;</span>
+            <span class='code'>otherwise all options are independent and can be used together in all possible</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1589,7 +1589,7 @@
           <td>
             
             
-            <span class='code'>            for i &#61; 1:length&#40;a&#41;</span>
+            <span class='code'>combinations.</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1599,7 +1599,7 @@
           <td>
             
             
-            <span class='code'>                root &#61; cconvert&#40;P, a&#91;i&#93;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1609,7 +1609,7 @@
           <td>
             
             
-            <span class='code'>                ptrs&#91;i&#93; &#61; unsafe_convert&#40;P, root&#41;::P</span>
+            <span class='code'>ord&#40;lt, by, rev::Nothing, order::Ordering&#61;Forward&#41; &#61; _ord&#40;lt, by, order&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1619,7 +1619,7 @@
           <td>
             
             
-            <span class='code'>                roots&#91;i&#93; &#61; root</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1629,7 +1629,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>function ord&#40;lt, by, rev::Bool, order::Ordering&#61;Forward&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1639,7 +1639,7 @@
           <td>
             
             
-            <span class='code'>            ptrs&#91;length&#40;a&#41;&#43;1&#93; &#61; C_NULL</span>
+            <span class='code'>    o &#61; _ord&#40;lt, by, order&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1649,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>            return RefArray&#40;ptrs,1,roots&#41;</span>
+            <span class='code'>    return rev ? ReverseOrdering&#40;o&#41; : o</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1659,7 +1659,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1669,7 +1669,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1679,7 +1679,7 @@
           <td>
             
             
-            <span class='code'>    Ref&#40;x::AbstractArray, i::Integer&#41; &#61; RefArray&#40;x, i&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1689,7 +1689,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># This function is not in use anywhere in Base but we observed</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1699,7 +1699,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># use in sorting-related packages &#40;#34719&#41;. It&#39;s probably best to move</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1709,7 +1709,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ptr&#123;P&#125;&#125;, a::Array&#123;&lt;:Ptr&#125;&#41; where &#123;P&lt;:Ptr&#125; &#61; a</span>
+            <span class='code'># this functionality to those packages in the future; let&#39;s remind/force</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1719,7 +1719,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;P&#125;&#125;, a::Array&#123;&lt;:Ptr&#125;&#41; where &#123;P&lt;:Ptr&#125; &#61; a</span>
+            <span class='code'># ourselves to deprecate this in v2.0.</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1729,7 +1729,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ptr&#123;P&#125;&#125;, a::Array&#41; where &#123;P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;&#125; &#61; Ref&#123;P&#125;&#40;a&#41;</span>
+            <span class='code'># The following clause means &#96;if VERSION &lt; v&quot;2.0-&quot;&#96; but it also works during</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1739,7 +1739,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;P&#125;&#125;, a::Array&#41; where &#123;P&lt;:Union&#123;Ptr,Cwstring,Cstring&#125;&#125; &#61; Ref&#123;P&#125;&#40;a&#41;</span>
+            <span class='code'># bootstrap. For the same reason, we need to write &#96;Int32&#96; instead of &#96;Cint&#96;.</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1749,7 +1749,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>if ccall&#40;:jl_ver_major, Int32, &#40;&#41;&#41; &lt; 2</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1759,7 +1759,7 @@
           <td>
             
             
-            <span class='code'># pass NTuple&#123;N,T&#125; as Ptr&#123;T&#125;/Ref&#123;T&#125;</span>
+            <span class='code'>    ordtype&#40;o::ReverseOrdering, vs::AbstractArray&#41; &#61; ordtype&#40;o.fwd, vs&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1769,7 +1769,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;T&#125;&#125;, t::NTuple&#123;N,T&#125;&#41; where &#123;N,T&#125; &#61; Ref&#123;NTuple&#123;N,T&#125;&#125;&#40;t&#41;</span>
+            <span class='code'>    ordtype&#40;o::Perm,            vs::AbstractArray&#41; &#61; ordtype&#40;o.order, o.data&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1779,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ref&#123;T&#125;&#125;, r::Ref&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61; r</span>
+            <span class='code'>    # TODO: here, we really want the return type of o.by, without calling it</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1789,7 +1789,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ref&#123;T&#125;&#125;, r::Ref&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61;</span>
+            <span class='code'>    ordtype&#40;o::By,              vs::AbstractArray&#41; &#61; try typeof&#40;o.by&#40;vs&#91;1&#93;&#41;&#41; catch; Any end</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1799,7 +1799,7 @@
           <td>
             
             
-            <span class='code'>    convert&#40;Ptr&#123;T&#125;, unsafe_convert&#40;Ptr&#123;NTuple&#123;N,T&#125;&#125;, r&#41;&#41;</span>
+            <span class='code'>    ordtype&#40;o::Ordering,        vs::AbstractArray&#41; &#61; eltype&#40;vs&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1809,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, r::Ref&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1819,7 +1819,7 @@
           <td>
             
             
-            <span class='code'>    convert&#40;Ptr&#123;T&#125;, unsafe_convert&#40;Ptr&#123;NTuple&#123;N,T&#125;&#125;, r&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1829,207 +1829,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, r::Ptr&#123;NTuple&#123;N,T&#125;&#125;&#41; where &#123;N,T&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L180'>
-          <td class='lineno'>180</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    convert&#40;Ptr&#123;T&#125;, r&#41;</span>
-          </td>
-        </tr>
-        <tr id='L181'>
-          <td class='lineno'>181</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L182'>
-          <td class='lineno'>182</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>###</span>
-          </td>
-        </tr>
-        <tr id='L183'>
-          <td class='lineno'>183</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L184'>
-          <td class='lineno'>184</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>getindex&#40;b::RefArray&#41; &#61; b.x&#91;b.i&#93;</span>
-          </td>
-        </tr>
-        <tr id='L185'>
-          <td class='lineno'>185</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>setindex&#33;&#40;b::RefArray, x&#41; &#61; &#40;b.x&#91;b.i&#93; &#61; x; b&#41;</span>
-          </td>
-        </tr>
-        <tr id='L186'>
-          <td class='lineno'>186</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L187'>
-          <td class='lineno'>187</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>###</span>
-          </td>
-        </tr>
-        <tr id='L188'>
-          <td class='lineno'>188</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L189'>
-          <td class='lineno'>189</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L190'>
-          <td class='lineno'>190</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    LLVMPtr&#123;T, AS&#125;</span>
-          </td>
-        </tr>
-        <tr id='L191'>
-          <td class='lineno'>191</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L192'>
-          <td class='lineno'>192</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>A pointer type that more closely resembles LLVM semantics: It includes the pointer address</span>
-          </td>
-        </tr>
-        <tr id='L193'>
-          <td class='lineno'>193</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>space, and will be passed as an actual pointer instead of an integer.</span>
-          </td>
-        </tr>
-        <tr id='L194'>
-          <td class='lineno'>194</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L195'>
-          <td class='lineno'>195</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>This type is mainly used to interface with code that has strict requirements about pointers,</span>
-          </td>
-        </tr>
-        <tr id='L196'>
-          <td class='lineno'>196</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>e.g., intrinsics that are selected based on the address space, or back-ends that require</span>
-          </td>
-        </tr>
-        <tr id='L197'>
-          <td class='lineno'>197</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pointers to be identifiable by their types.</span>
-          </td>
-        </tr>
-        <tr id='L198'>
-          <td class='lineno'>198</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L199'>
-          <td class='lineno'>199</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Core.LLVMPtr</span>
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>

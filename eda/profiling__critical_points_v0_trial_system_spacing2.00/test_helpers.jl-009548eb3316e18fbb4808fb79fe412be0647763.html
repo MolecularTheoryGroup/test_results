@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/inferenceresult.jl</title>
+    <title>StatProfilerHTML - test_helpers.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Fri, 15 Mar 2024 00:55:01
+        Generated on Fri, 15 Mar 2024 00:55:27
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>using Dates</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using Interpolations</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    matching_cache_argtypes&#40;𝕃::AbstractLattice, linfo::MethodInstance&#41; -&gt;</span>
+            <span class='code'>using ZipFile</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>        &#40;cache_argtypes::Vector&#123;Any&#125;, overridden_by_const::BitVector&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># only import ElectronDensityAnalysis if it is not already imported</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>Returns argument types &#96;cache_argtypes::Vector&#123;Any&#125;&#96; for &#96;linfo&#96; that are in the native</span>
+            <span class='code'>if &#33;isdefined&#40;Main, :ElectronDensityAnalysis&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>Julia type domain. &#96;overridden_by_const::BitVector&#96; is all &#96;false&#96; meaning that</span>
+            <span class='code'>    using ElectronDensityAnalysis</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>there is no additional extended lattice information there.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    matching_cache_argtypes&#40;𝕃::AbstractLattice, linfo::MethodInstance, argtypes::ForwardableArgtypes&#41; -&gt;</span>
+            <span class='code'># Define path to test data directory</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>        &#40;cache_argtypes::Vector&#123;Any&#125;, overridden_by_const::BitVector&#41;</span>
+            <span class='code'>DATA_DIR &#61; joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;test_data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># get full path of all files in DATA_DIR with .zip extension removed</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>Returns cache-correct extended lattice argument types &#96;cache_argtypes::Vector&#123;Any&#125;&#96;</span>
+            <span class='code'>DATA_FILES &#61; map&#40;x -&gt; joinpath&#40;DATA_DIR, replace&#40;x, &quot;.zip&quot; &#61;&gt; &quot;&quot;&#41;&#41;, readdir&#40;DATA_DIR&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>for &#96;linfo&#96; given some &#96;argtypes&#96; accompanied by &#96;overridden_by_const::BitVector&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>that marks which argument contains additional extended lattice information.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    unzip&#40;file::AbstractString, exdir::AbstractString&#61;&quot;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>In theory, there could be a &#96;cache&#96; containing a matching &#96;InferenceResult&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>for the provided &#96;linfo&#96; and &#96;given_argtypes&#96;. The purpose of this function is</span>
+            <span class='code'>Unzips the specified zip file to the specified directory.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>to return a valid value for &#96;cache_lookup&#40;𝕃, linfo, argtypes, cache&#41;.argtypes&#96;,</span>
+            <span class='code'>Taken from: https://discourse.julialang.org/t/how-to-extract-a-file-in-a-zip-archive-without-using-os-specific-tools/34585/4</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>so that we can construct cache-correct &#96;InferenceResult&#96;s in the first place.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>function matching_cache_argtypes end</span>
+            <span class='code'>- &#96;file::AbstractString&#96;: The path to the zip file to unzip.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;exdir::AbstractString&#61;&quot;&quot;&#41;&#96;: The path to the directory to extract the zip file to. If not specified, the zip file will be extracted to the same directory as the zip file.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>function matching_cache_argtypes&#40;𝕃::AbstractLattice, linfo::MethodInstance&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,31 +285,17 @@
           <td>
             
             
-            <span class='code'>    mthd &#61; isa&#40;linfo.def, Method&#41; ? linfo.def::Method : nothing</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L27'>
           <td class='lineno'>27</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in matching_cache_argtypes
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from inflate_ir&#33;
-              <a href='legacy.jl-d7b64f0d37fe7dcb374faa87fdf9dd7bac05180e.html#L13'>line 13</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='inferenceresult.jl-b67c5c21f19352110fc94069b5c7c444e9c8ba12.html#L109'>most_general_argtypes</a>
-              <br />
-            </div>
-            <span class='code'>    cache_argtypes &#61; most_general_argtypes&#40;mthd, linfo.specTypes&#41;</span>
+            
+            
+            <span class='code'>- &#96;ZipFile.Reader&#96;: A &#96;ZipFile.Reader&#96; object representing the unzipped files.</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -319,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    return cache_argtypes, falses&#40;length&#40;cache_argtypes&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -329,7 +315,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -339,7 +325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -349,7 +335,7 @@
           <td>
             
             
-            <span class='code'>struct SimpleArgtypes &lt;: ForwardableArgtypes</span>
+            <span class='code'>julia&gt; unzip&#40;&quot;data.zip&quot;, &quot;data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -359,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    argtypes::Vector&#123;Any&#125;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -369,7 +355,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -379,7 +365,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function unzip&#40;file::String, exdir&#61;&quot;&quot;&#41;::Nothing</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -389,7 +375,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @assert isfile&#40;file&#41; &quot;File does not exist: &#36;file&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -399,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    matching_cache_argtypes&#40;𝕃::AbstractLattice, linfo::MethodInstance, argtypes::SimpleArgtypes&#41;</span>
+            <span class='code'>    fileFullPath &#61; isabspath&#40;file&#41; ? file : joinpath&#40;pwd&#40;&#41;, file&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -409,7 +395,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    basePath &#61; dirname&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -419,7 +405,7 @@
           <td>
             
             
-            <span class='code'>The implementation for &#96;argtypes&#96; with general extended lattice information.</span>
+            <span class='code'>    outPath &#61; &#40;exdir &#61;&#61; &quot;&quot; ? basePath : &#40;isabspath&#40;exdir&#41; ? exdir : joinpath&#40;pwd&#40;&#41;, exdir&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -429,7 +415,7 @@
           <td>
             
             
-            <span class='code'>This is supposed to be used for debugging and testing or external &#96;AbstractInterpreter&#96;</span>
+            <span class='code'>    isdir&#40;outPath&#41; ? &quot;&quot; : mkdir&#40;outPath&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -439,7 +425,7 @@
           <td>
             
             
-            <span class='code'>usages and in general &#96;matching_cache_argtypes&#40;::MethodInstance, ::ConditionalArgtypes&#41;&#96;</span>
+            <span class='code'>    zarchive &#61; ZipFile.Reader&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -449,7 +435,7 @@
           <td>
             
             
-            <span class='code'>is more preferred it can forward &#96;Conditional&#96; information.</span>
+            <span class='code'>    for f in zarchive.files</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -459,7 +445,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        fullFilePath &#61; joinpath&#40;outPath, f.name&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -469,7 +455,7 @@
           <td>
             
             
-            <span class='code'>function matching_cache_argtypes&#40;𝕃::AbstractLattice, linfo::MethodInstance, simple_argtypes::SimpleArgtypes&#41;</span>
+            <span class='code'>        if &#40;endswith&#40;f.name, &quot;/&quot;&#41; || endswith&#40;f.name, &quot;\\&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -479,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    &#40;; argtypes&#41; &#61; simple_argtypes</span>
+            <span class='code'>            mkpath&#40;fullFilePath&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    given_argtypes &#61; Vector&#123;Any&#125;&#40;undef, length&#40;argtypes&#41;&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -499,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:length&#40;argtypes&#41;</span>
+            <span class='code'>            try</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -509,7 +495,7 @@
           <td>
             
             
-            <span class='code'>        given_argtypes&#91;i&#93; &#61; widenslotwrapper&#40;argtypes&#91;i&#93;&#41;</span>
+            <span class='code'>                write&#40;fullFilePath, read&#40;f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            catch e</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    given_argtypes &#61; va_process_argtypes&#40;𝕃, given_argtypes, linfo&#41;</span>
+            <span class='code'>                @debug &quot;Error writing file in unzip&#40;&#41;: &#36;e&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    return pick_const_args&#40;𝕃, linfo, given_argtypes&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +535,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +545,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +555,7 @@
           <td>
             
             
-            <span class='code'>function pick_const_args&#40;𝕃::AbstractLattice, linfo::MethodInstance, given_argtypes::Vector&#123;Any&#125;&#41;</span>
+            <span class='code'>    return close&#40;zarchive&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +565,7 @@
           <td>
             
             
-            <span class='code'>    cache_argtypes, overridden_by_const &#61; matching_cache_argtypes&#40;𝕃, linfo&#41;</span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +575,7 @@
           <td>
             
             
-            <span class='code'>    return pick_const_args&#33;&#40;𝕃, cache_argtypes, overridden_by_const, given_argtypes&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +585,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +595,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +605,7 @@
           <td>
             
             
-            <span class='code'>function pick_const_args&#33;&#40;𝕃::AbstractLattice, cache_argtypes::Vector&#123;Any&#125;, overridden_by_const::BitVector, given_argtypes::Vector&#123;Any&#125;&#41;</span>
+            <span class='code'>    with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +615,7 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1:length&#40;given_argtypes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +625,7 @@
           <td>
             
             
-            <span class='code'>        given_argtype &#61; given_argtypes&#91;i&#93;</span>
+            <span class='code'>The &#96;with_zip_file&#96; function is a utility function that takes a file path and a function as inputs. It first appends the &quot;.zip&quot; extension to the file path to get the path of the corresponding zip file. Then, it tries to unzip the zip file using the &#96;unzip&#96; function. If the unzipping is successful, it calls the provided function with the original file path as an argument. If any error occurs during the unzipping or function execution, the error is rethrown. Finally, it removes the original file using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +635,7 @@
           <td>
             
             
-            <span class='code'>        cache_argtype &#61; cache_argtypes&#91;i&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +645,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;is_argtype_match&#40;𝕃, given_argtype, cache_argtype, false&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +655,7 @@
           <td>
             
             
-            <span class='code'>            # prefer the argtype we were given over the one computed from &#96;linfo&#96;</span>
+            <span class='code'>- &#96;f_path::AbstractString&#96;: The file path of the file to be unzipped and processed.</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +665,7 @@
           <td>
             
             
-            <span class='code'>            cache_argtypes&#91;i&#93; &#61; given_argtype</span>
+            <span class='code'>- &#96;func::Function&#96;: The function to be executed with the unzipped file.</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +675,7 @@
           <td>
             
             
-            <span class='code'>            overridden_by_const&#91;i&#93; &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +685,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    return cache_argtypes, overridden_by_const</span>
+            <span class='code'># Define a function to be executed with the unzipped file</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +715,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function process_file&#40;file_path&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +725,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Process the file here</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +735,7 @@
           <td>
             
             
-            <span class='code'>function is_argtype_match&#40;𝕃::AbstractLattice,</span>
+            <span class='code'>    println&#40;&quot;Processing file&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +745,7 @@
           <td>
             
             
-            <span class='code'>                          @nospecialize&#40;given_argtype&#41;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +755,7 @@
           <td>
             
             
-            <span class='code'>                          @nospecialize&#40;cache_argtype&#41;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +765,7 @@
           <td>
             
             
-            <span class='code'>                          overridden_by_const::Bool&#41;</span>
+            <span class='code'># Call the with_zip_file function</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    if is_forwardable_argtype&#40;𝕃, given_argtype&#41;</span>
+            <span class='code'>with_zip_file&#40;&quot;path/to/file&quot;, process_file&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +785,7 @@
           <td>
             
             
-            <span class='code'>        return is_lattice_equal&#40;𝕃, given_argtype, cache_argtype&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +795,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>In this example, the &#96;with_zip_file&#96; function is called with the file path &quot;path/to/file&quot; and the &#96;process_file&#96; function as arguments. The zip file &quot;path/to/file.zip&quot; is unzipped, and then the &#96;process_file&#96; function is called with the original file path &quot;path/to/file&quot;. The function &#96;process_file&#96; can perform any desired operations on the unzipped file.</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +805,7 @@
           <td>
             
             
-            <span class='code'>    return &#33;overridden_by_const</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +815,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Exceptions</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +825,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- If any error occurs during the unzipping or function execution, the error is rethrown.</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +835,7 @@
           <td>
             
             
-            <span class='code'>va_process_argtypes&#40;𝕃::AbstractLattice, given_argtypes::Vector&#123;Any&#125;, mi::MethodInstance&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    va_process_argtypes&#40;Returns&#40;nothing&#41;, 𝕃, given_argtypes, mi&#41;</span>
+            <span class='code'># Side Effects</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +855,7 @@
           <td>
             
             
-            <span class='code'>function va_process_argtypes&#40;@nospecialize&#40;va_handler&#33;&#41;, 𝕃::AbstractLattice, given_argtypes::Vector&#123;Any&#125;, mi::MethodInstance&#41;</span>
+            <span class='code'>- The original file specified by &#96;f_path&#96; is removed using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +865,7 @@
           <td>
             
             
-            <span class='code'>    def &#61; mi.def</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +875,7 @@
           <td>
             
             
-            <span class='code'>    isva &#61; isa&#40;def, Method&#41; ? def.isva : false</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +885,7 @@
           <td>
             
             
-            <span class='code'>    nargs &#61; isa&#40;def, Method&#41; ? Int&#40;def.nargs&#41; : length&#40;mi.specTypes.parameters&#41;</span>
+            <span class='code'>- Passes the returned value from &#96;func&#96;.</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +895,7 @@
           <td>
             
             
-            <span class='code'>    if isva || isvarargtype&#40;given_argtypes&#91;end&#93;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +905,7 @@
           <td>
             
             
-            <span class='code'>        isva_given_argtypes &#61; Vector&#123;Any&#125;&#40;undef, nargs&#41;</span>
+            <span class='code'>function with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +915,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 1:&#40;nargs-isva&#41;</span>
+            <span class='code'>    z_path &#61; f_path * &quot;.zip&quot;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +925,7 @@
           <td>
             
             
-            <span class='code'>            isva_given_argtypes&#91;i&#93; &#61; argtype_by_index&#40;given_argtypes, i&#41;</span>
+            <span class='code'>    out &#61; nothing</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +935,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    if isfile&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +945,7 @@
           <td>
             
             
-            <span class='code'>        if isva</span>
+            <span class='code'>        try</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +955,7 @@
           <td>
             
             
-            <span class='code'>            if length&#40;given_argtypes&#41; &lt; nargs &amp;&amp; isvarargtype&#40;given_argtypes&#91;end&#93;&#41;</span>
+            <span class='code'>            unzip&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +965,7 @@
           <td>
             
             
-            <span class='code'>                last &#61; length&#40;given_argtypes&#41;</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -989,7 +975,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>        catch e</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +985,7 @@
           <td>
             
             
-            <span class='code'>                last &#61; nargs</span>
+            <span class='code'>            rethrow&#40;e&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +995,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        finally</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>            isva_given_argtypes&#91;nargs&#93; &#61; tuple_tfunc&#40;𝕃, given_argtypes&#91;last:end&#93;&#41;</span>
+            <span class='code'>            for f in readdir&#40;dirname&#40;f_path&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>            va_handler&#33;&#40;isva_given_argtypes, last&#41;</span>
+            <span class='code'>                if startswith&#40;f, basename&#40;f_path&#41;&#41; &amp;&amp; &#33;endswith&#40;f, &quot;.zip&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                    rm&#40;joinpath&#40;dirname&#40;f_path&#41;, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>        return isva_given_argtypes</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>    @assert length&#40;given_argtypes&#41; &#61;&#61; nargs &quot;invalid &#96;given_argtypes&#96; for &#96;mi&#96;&quot;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>    return given_argtypes</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        if isfile&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1107,18 +1093,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in most_general_argtypes
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from most_general_argtypes
-              <a href='inferenceresult.jl-b67c5c21f19352110fc94069b5c7c444e9c8ba12.html#L109'>line 109</a>
-              <br />
-            </div>
             
-            <span class='code'>function most_general_argtypes&#40;method::Union&#123;Method, Nothing&#125;, @nospecialize&#40;specTypes&#41;,</span>
+            
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1128,31 +1105,17 @@
           <td>
             
             
-            <span class='code'>    withfirst::Bool &#61; true&#41;</span>
+            <span class='code'>            error&#40;&quot;File does not exist: &#36;f_path&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
           <td class='lineno'>109</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in most_general_argtypes
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from matching_cache_argtypes
-              <a href='inferenceresult.jl-b67c5c21f19352110fc94069b5c7c444e9c8ba12.html#L27'>line 27</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='inferenceresult.jl-b67c5c21f19352110fc94069b5c7c444e9c8ba12.html#L107'>most_general_argtypes</a>
-              <br />
-            </div>
-            <span class='code'>    toplevel &#61; method &#61;&#61;&#61; nothing</span>
+            
+            
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1162,17 +1125,17 @@
           <td>
             
             
-            <span class='code'>    isva &#61; &#33;toplevel &amp;&amp; method.isva</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L111'>
           <td class='lineno'>111</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
             
-            <span class='code'>    linfo_argtypes &#61; Any&#91;&#40;unwrap_unionall&#40;specTypes&#41;::DataType&#41;.parameters...&#93;</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1182,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    nargs::Int &#61; toplevel ? 0 : method.nargs</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1192,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>    # For opaque closure, the closure environment is processed elsewhere</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1202,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>    withfirst || &#40;nargs -&#61; 1&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1212,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>    cache_argtypes &#61; Vector&#123;Any&#125;&#40;undef, nargs&#41;</span>
+            <span class='code'>    create_trial_3D_system&#40;&#41;::System</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1222,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>    # First, if we&#39;re dealing with a varargs method, then we set the last element of &#96;args&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1232,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>    # to the appropriate &#96;Tuple&#96; type or &#96;PartialStruct&#96; instance.</span>
+            <span class='code'>Create a 3D system with a sin function and specified atoms and grid specifications.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1242,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;toplevel &amp;&amp; isva</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1252,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>        if specTypes::Type &#61;&#61; Tuple</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1262,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>            linfo_argtypes &#61; Any&#91;Any for i &#61; 1:nargs&#93;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1272,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>            if nargs &gt; 1</span>
+            <span class='code'>system &#61; create_trial_3D_system&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1282,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>                linfo_argtypes&#91;end&#93; &#61; Tuple</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1292,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1302,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>            vargtype &#61; Tuple</span>
+            <span class='code'># Inputs</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1312,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>- None</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1322,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>            linfo_argtypes_length &#61; length&#40;linfo_argtypes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1332,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>            if nargs &gt; linfo_argtypes_length</span>
+            <span class='code'># Outputs</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1342,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>                va &#61; linfo_argtypes&#91;linfo_argtypes_length&#93;</span>
+            <span class='code'>- A &#96;System&#96; object representing a 3D system with the specified functions, atoms, and grid specifications.</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1352,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>                if isvarargtype&#40;va&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1362,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>                    new_va &#61; rewrap_unionall&#40;unconstrain_vararg_length&#40;va&#41;, specTypes&#41;</span>
+            <span class='code'>function create_trial_3D_system&#40;;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1372,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>                    vargtype &#61; Tuple&#123;new_va&#125;</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1382,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1392,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>                    vargtype &#61; Tuple&#123;&#125;</span>
+            <span class='code'>    # Define a 3D sin function to be used as rho, grad, and hess functions</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1402,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1412,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    f3d_xyz&#40;x, y, z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1422,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>                vargtype_elements &#61; Any&#91;&#93;</span>
+            <span class='code'>    grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1432,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>                for i in nargs:linfo_argtypes_length</span>
+            <span class='code'>    function hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1442,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>                    p &#61; linfo_argtypes&#91;i&#93;</span>
+            <span class='code'>        return &#91;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1452,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>                    p &#61; unwraptv&#40;isvarargtype&#40;p&#41; ? unconstrain_vararg_length&#40;p&#41; : p&#41;</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1462,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>                    push&#33;&#40;vargtype_elements, elim_free_typevars&#40;rewrap_unionall&#40;p, specTypes&#41;&#41;&#41;</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1472,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1482,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>                for i in 1:length&#40;vargtype_elements&#41;</span>
+            <span class='code'>        &#93;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1492,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>                    atyp &#61; vargtype_elements&#91;i&#93;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1502,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>                    if issingletontype&#40;atyp&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1512,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>                        # replace singleton types with their equivalent Const object</span>
+            <span class='code'>    # Make in-place versions using the above versions</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1522,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>                        vargtype_elements&#91;i&#93; &#61; Const&#40;atyp.instance&#41;</span>
+            <span class='code'>    function rho&#33;&#40;f, r&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1532,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>                    elseif isconstType&#40;atyp&#41;</span>
+            <span class='code'>        return f&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1542,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>                        vargtype_elements&#91;i&#93; &#61; Const&#40;atyp.parameters&#91;1&#93;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1552,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>    function grad&#33;&#40;g, r&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1562,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>        return g&#91;:&#93; &#61; grad3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1572,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>                vargtype &#61; tuple_tfunc&#40;fallback_lattice, vargtype_elements&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1582,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    function hess&#33;&#40;h, r&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1592,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        return h&#91;:&#93; &#61; hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1602,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>        cache_argtypes&#91;nargs&#93; &#61; vargtype</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1612,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>        nargs -&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1622,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    # Define the extent, origin, and spacing for the GridSpec</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1632,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>    # Now, we propagate type info from &#96;linfo_argtypes&#96; into &#96;cache_argtypes&#96;, improving some</span>
+            <span class='code'>    e &#61; 2π * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1642,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>    # type info as we go &#40;where possible&#41;. Note that if we&#39;re dealing with a varargs method,</span>
+            <span class='code'>    o &#61; zeros&#40;3&#41; .- e / 2</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1652,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    # we already handled the last element of &#96;cache_argtypes&#96; &#40;and decremented &#96;nargs&#96; so that</span>
+            <span class='code'>    s &#61; π / 10 * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1662,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    # we don&#39;t overwrite the result of that work here&#41;.</span>
+            <span class='code'>    n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1672,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>    linfo_argtypes_length &#61; length&#40;linfo_argtypes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1682,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>    if linfo_argtypes_length &gt; 0</span>
+            <span class='code'>    # Define the lattice for the GridSpec</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1692,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>        n &#61; linfo_argtypes_length &gt; nargs ? nargs : linfo_argtypes_length</span>
+            <span class='code'>    l &#61; zeros&#40;3, 3&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1702,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>        tail_index &#61; n</span>
+            <span class='code'>    for i in 1:3</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1712,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>        local lastatype</span>
+            <span class='code'>        l&#91;i, i&#93; &#61; s&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1722,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 1:n</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1732,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>            atyp &#61; linfo_argtypes&#91;i&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1742,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>            if i &#61;&#61; n &amp;&amp; isvarargtype&#40;atyp&#41;</span>
+            <span class='code'>    # Create a GridSpec with the defined origin, lattice, and number of points</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1752,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>                atyp &#61; unwrapva&#40;atyp&#41;</span>
+            <span class='code'>    g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1762,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>                tail_index -&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1772,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    # Create 3D Array of rho values based on the GridSpec</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1782,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>            atyp &#61; unwraptv&#40;atyp&#41;</span>
+            <span class='code'>    rho_data &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1792,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>            if issingletontype&#40;atyp&#41;</span>
+            <span class='code'>        f3d&#40;o &#43; l * &#91;i, j, k&#93;&#41; for i in 1:n_pts&#91;1&#93;, j in 1:n_pts&#91;2&#93;, k in 1:n_pts&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1802,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>                # replace singleton types with their equivalent Const object</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1812,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>                atyp &#61; Const&#40;atyp.instance&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1822,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>            elseif isconstType&#40;atyp&#41;</span>
+            <span class='code'>    # Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1832,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>                atyp &#61; Const&#40;atyp.parameters&#91;1&#93;&#41;</span>
+            <span class='code'>    atoms &#61; &#91;NuclearCoordinate&#40;&#91;π / 2, π / 2, π / 2&#93;, 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1842,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1852,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>                atyp &#61; elim_free_typevars&#40;rewrap_unionall&#40;atyp, specTypes&#41;&#41;</span>
+            <span class='code'>    # Create a System with the 3D sin function and the defined atoms and GridSpec</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1862,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    system &#61; System&#40;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1872,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>            i &#61;&#61; n &amp;&amp; &#40;lastatype &#61; atyp&#41;</span>
+            <span class='code'>        name, source, atoms, g, rho_data, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1882,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>            cache_argtypes&#91;i&#93; &#61; atyp</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1892,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return system, f3d, f3d_xyz, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1902,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; &#40;tail_index &#43; 1&#41;:nargs</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1912,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>            cache_argtypes&#91;i&#93; &#61; lastatype</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1922,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1932,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    create_trial_3D_system_interpolated&#40;; name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;&#41; -&gt; Tuple&#123;System, Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1942,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>        @assert nargs &#61;&#61; 0 &quot;invalid specialization of method&quot; # wrong number of arguments</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1952,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Create a 3D system that interpolates using grid data generated with a trial 3d &#96;sin&#96; function.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1962,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>    cache_argtypes</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1972,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1982,7 +1945,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;name::AbstractString&#96; &#40;optional&#41;: The name of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1992,7 +1955,7 @@
           <td>
             
             
-            <span class='code'># eliminate free &#96;TypeVar&#96;s in order to make the life much easier down the road:</span>
+            <span class='code'>- &#96;source::AbstractString&#96; &#40;optional&#41;: The source of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2002,7 +1965,7 @@
           <td>
             
             
-            <span class='code'># at runtime only &#96;Type&#123;...&#125;::DataType&#96; can contain invalid type parameters, and other</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2012,7 +1975,7 @@
           <td>
             
             
-            <span class='code'># malformed types here are user-constructed type arguments given at an inference entry</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2022,7 +1985,7 @@
           <td>
             
             
-            <span class='code'># so this function will replace only the malformed &#96;Type&#123;...&#125;::DataType&#96; with &#96;Type&#96;</span>
+            <span class='code'>- &#96;system&#96;: A &#96;System&#96; object representing a 3D system with the interpolated functions and grid specifications.</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2032,7 +1995,7 @@
           <td>
             
             
-            <span class='code'># and simply replace other possibilities with &#96;Any&#96;</span>
+            <span class='code'>- &#96;f&#96;: The interpolated function &#96;f&#40;x&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2042,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>function elim_free_typevars&#40;@nospecialize t&#41;</span>
+            <span class='code'>- &#96;f_xyz&#96;: The interpolated function &#96;f_xyz&#40;x, y, z&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2052,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>    if has_free_typevars&#40;t&#41;</span>
+            <span class='code'>- &#96;grad&#96;: The gradient function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2062,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>        return isType&#40;t&#41; ? Type : Any</span>
+            <span class='code'>- &#96;hess&#96;: The Hessian function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2072,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>- &#96;f&#33;&#96;: An in-place version of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2082,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>        return t</span>
+            <span class='code'>- &#96;grad&#33;&#96;: An in-place version of the gradient function.</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2092,7 +2055,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>- &#96;hess&#33;&#96;: An in-place version of the Hessian function.</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2102,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2112,7 +2075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2122,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>function cache_lookup&#40;lattice::AbstractLattice, linfo::MethodInstance, given_argtypes::Vector&#123;Any&#125;, cache::Vector&#123;InferenceResult&#125;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2132,7 +2095,7 @@
           <td>
             
             
-            <span class='code'>    method &#61; linfo.def::Method</span>
+            <span class='code'>system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33; &#61; create_trial_3D_system_interpolated&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2142,7 +2105,7 @@
           <td>
             
             
-            <span class='code'>    nargs::Int &#61; method.nargs</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2152,7 +2115,7 @@
           <td>
             
             
-            <span class='code'>    method.isva &amp;&amp; &#40;nargs -&#61; 1&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2162,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>    length&#40;given_argtypes&#41; &gt;&#61; nargs || return nothing</span>
+            <span class='code'>function create_trial_3D_system_interpolated&#40;;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2172,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>    for cached_result in cache</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2182,7 +2145,7 @@
           <td>
             
             
-            <span class='code'>        cached_result.linfo &#61;&#61;&#61; linfo || continue</span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2192,7 +2155,7 @@
           <td>
             
             
-            <span class='code'>        cache_match &#61; true</span>
+            <span class='code'>    g1 &#61; &#40;-3π&#41;:&#40;π / 10&#41;:&#40;3π&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2202,7 +2165,7 @@
           <td>
             
             
-            <span class='code'>        cache_argtypes &#61; cached_result.argtypes</span>
+            <span class='code'>    n_pts &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2212,7 +2175,7 @@
           <td>
             
             
-            <span class='code'>        cache_overridden_by_const &#61; cached_result.overridden_by_const</span>
+            <span class='code'>    spacing &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2222,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>        for i in 1:nargs</span>
+            <span class='code'>    gs &#61; GridSpec&#40;&#91;-2π, -2π, -2π&#93;, spacing, &#91;n_pts, n_pts, n_pts&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2232,7 +2195,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;is_argtype_match&#40;lattice, widenmustalias&#40;given_argtypes&#91;i&#93;&#41;,</span>
+            <span class='code'>    sin_data &#61; &#91;3.0 &#43; sum&#40;sin.&#40;&#91;xi, yi, zi&#93;&#41;&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2242,17 +2205,26 @@
           <td>
             
             
-            <span class='code'>                                 cache_argtypes&#91;i&#93;,</span>
+            <span class='code'>    fz &#61; scale&#40;interpolate&#40;sin_data, BSpline&#40;Cubic&#40;Reflect&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g1, g1, g1&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
           <td class='lineno'>219</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;20 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;20 &#37;&#41;
+              samples spent in f
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #37
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L380'>line 380</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>                                 cache_overridden_by_const&#91;i&#93;&#41;</span>
+            <span class='code'>    f&#40;x&#41; &#61; fz&#40;x...&#41; # pointer for later</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2262,7 +2234,7 @@
           <td>
             
             
-            <span class='code'>                cache_match &#61; false</span>
+            <span class='code'>    f_xyz&#40;x, y, z&#41; &#61; f&#40;&#91;x, y, z&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2272,7 +2244,7 @@
           <td>
             
             
-            <span class='code'>                break</span>
+            <span class='code'>    f&#33;&#40;F, x&#41; &#61; F&#91;:&#93; &#61; &#91;f&#40;x&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2282,7 +2254,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    function grad&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2292,7 +2264,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        return Interpolations.gradient&#40;fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2302,7 +2274,7 @@
           <td>
             
             
-            <span class='code'>        if method.isva &amp;&amp; cache_match</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2312,7 +2284,7 @@
           <td>
             
             
-            <span class='code'>            cache_match &#61; is_argtype_match&#40;lattice, tuple_tfunc&#40;lattice, given_argtypes&#91;&#40;nargs &#43; 1&#41;:end&#93;&#41;,</span>
+            <span class='code'>    function hess&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2322,7 +2294,7 @@
           <td>
             
             
-            <span class='code'>                                           cache_argtypes&#91;end&#93;,</span>
+            <span class='code'>        return Interpolations.hessian&#40;fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2332,7 +2304,7 @@
           <td>
             
             
-            <span class='code'>                                           cache_overridden_by_const&#91;end&#93;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2342,7 +2314,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2352,7 +2324,7 @@
           <td>
             
             
-            <span class='code'>        cache_match || continue</span>
+            <span class='code'>    function grad&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2362,7 +2334,7 @@
           <td>
             
             
-            <span class='code'>        return cached_result</span>
+            <span class='code'>        return Interpolations.gradient&#33;&#40;F, fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2382,11 +2354,191 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>    function hess&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
           <td class='lineno'>233</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return Interpolations.hessian&#33;&#40;J, fz, x...&#41;</span>
+          </td>
+        </tr>
+        <tr id='L234'>
+          <td class='lineno'>234</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L235'>
+          <td class='lineno'>235</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L236'>
+          <td class='lineno'>236</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    g1 &#61; &#40;-2π&#41;:&#40;π / 8&#41;:&#40;2π&#41;</span>
+          </td>
+        </tr>
+        <tr id='L237'>
+          <td class='lineno'>237</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    n_pts1 &#61; length&#40;g1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L238'>
+          <td class='lineno'>238</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    spacing1 &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L239'>
+          <td class='lineno'>239</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    gs1 &#61; GridSpec&#40;-2pi * ones&#40;3&#41;, spacing1, &#91;n_pts1, n_pts1, n_pts1&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L240'>
+          <td class='lineno'>240</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L241'>
+          <td class='lineno'>241</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Define the atoms for the System</span>
+          </td>
+        </tr>
+        <tr id='L242'>
+          <td class='lineno'>242</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    atoms &#61; &#91;&#93; #&#91;NuclearCoordinate&#40;&#91;π/2, π/2, π/2&#93;, 1&#41;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L243'>
+          <td class='lineno'>243</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L244'>
+          <td class='lineno'>244</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # make 3D array of f values</span>
+          </td>
+        </tr>
+        <tr id='L245'>
+          <td class='lineno'>245</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    f_xyz_data &#61; &#91;f_xyz&#40;xi, yi, zi&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
+          </td>
+        </tr>
+        <tr id='L246'>
+          <td class='lineno'>246</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L247'>
+          <td class='lineno'>247</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    system &#61; System&#40;</span>
+          </td>
+        </tr>
+        <tr id='L248'>
+          <td class='lineno'>248</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        name, source, atoms, gs1, f_xyz_data, f_xyz, f, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
+          </td>
+        </tr>
+        <tr id='L249'>
+          <td class='lineno'>249</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#41;</span>
+          </td>
+        </tr>
+        <tr id='L250'>
+          <td class='lineno'>250</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
+          </td>
+        </tr>
+        <tr id='L251'>
+          <td class='lineno'>251</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
