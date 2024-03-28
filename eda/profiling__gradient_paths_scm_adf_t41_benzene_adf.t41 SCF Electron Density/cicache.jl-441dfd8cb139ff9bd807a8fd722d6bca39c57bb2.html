@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/sort.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/cicache.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Thu, 28 Mar 2024 18:32:44
+        Generated on Thu, 28 Mar 2024 19:39:52
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'># reference on sorted binary search:</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>#   http://www.tbray.org/ongoing/When/200x/2003/03/22/Binary</span>
+            <span class='code'>    struct InternalCodeCache</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'># index of the first value of vector a that is greater than or equal to x;</span>
+            <span class='code'>Internally, each &#96;MethodInstance&#96; keep a unique global cache of code instances</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'># returns lastindex&#40;v&#41;&#43;1 if x is greater than all values in v.</span>
+            <span class='code'>that have been created for the given method instance, stratified by world age</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>function searchsortedfirst&#40;v::AbstractVector, x, lo::T, hi::T, o::Ordering&#41;::keytype&#40;v&#41; where T&lt;:Integer</span>
+            <span class='code'>ranges. This struct abstracts over access to this cache.</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    hi &#61; hi &#43; T&#40;1&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    len &#61; hi - lo</span>
+            <span class='code'>struct InternalCodeCache end</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds while len &#33;&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>        half_len &#61; len &gt;&gt;&gt; 0x01</span>
+            <span class='code'>function setindex&#33;&#40;cache::InternalCodeCache, ci::CodeInstance, mi::MethodInstance&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>        m &#61; lo &#43; half_len</span>
+            <span class='code'>    ccall&#40;:jl_mi_cache_insert, Cvoid, &#40;Any, Any&#41;, mi, ci&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>        if lt&#40;o, v&#91;m&#93;, x&#41;</span>
+            <span class='code'>    return cache</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>            lo &#61; m &#43; 1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -183,18 +183,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in inflate_ir&#33;
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from inflate_ir&#33;
-              <a href='legacy.jl-d7b64f0d37fe7dcb374faa87fdf9dd7bac05180e.html#L14'>line 14</a>
-              <br />
-            </div>
             
-            <span class='code'>            len -&#61; half_len &#43; 1</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L17'>
@@ -204,7 +195,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>const GLOBAL_CI_CACHE &#61; InternalCodeCache&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -214,7 +205,7 @@
           <td>
             
             
-            <span class='code'>            hi &#61; m</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -224,7 +215,7 @@
           <td>
             
             
-            <span class='code'>            len &#61; half_len</span>
+            <span class='code'>struct WorldRange</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -234,7 +225,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    min_world::UInt</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -244,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    max_world::UInt</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -254,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    return lo</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -264,7 +255,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>WorldRange&#40;&#41; &#61; WorldRange&#40;typemin&#40;UInt&#41;, typemax&#40;UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -274,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>WorldRange&#40;w::UInt&#41; &#61; WorldRange&#40;w, w&#41;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -284,7 +275,7 @@
           <td>
             
             
-            <span class='code'># index of the last value of vector a that is less than or equal to x;</span>
+            <span class='code'>WorldRange&#40;r::UnitRange&#41; &#61; WorldRange&#40;first&#40;r&#41;, last&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -294,7 +285,7 @@
           <td>
             
             
-            <span class='code'># returns firstindex&#40;v&#41;-1 if x is less than all values of v.</span>
+            <span class='code'>first&#40;wr::WorldRange&#41; &#61; wr.min_world</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -304,7 +295,7 @@
           <td>
             
             
-            <span class='code'>function searchsortedlast&#40;v::AbstractVector, x, lo::T, hi::T, o::Ordering&#41;::keytype&#40;v&#41; where T&lt;:Integer</span>
+            <span class='code'>last&#40;wr::WorldRange&#41; &#61; wr.max_world</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -314,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    u &#61; T&#40;1&#41;</span>
+            <span class='code'>in&#40;world::UInt, wr::WorldRange&#41; &#61; wr.min_world &lt;&#61; world &lt;&#61; wr.max_world</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -324,7 +315,7 @@
           <td>
             
             
-            <span class='code'>    lo &#61; lo - u</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L30'>
@@ -334,7 +325,7 @@
           <td>
             
             
-            <span class='code'>    hi &#61; hi &#43; u</span>
+            <span class='code'>function intersect&#40;a::WorldRange, b::WorldRange&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -344,7 +335,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds while lo &lt; hi - u</span>
+            <span class='code'>    ret &#61; WorldRange&#40;max&#40;a.min_world, b.min_world&#41;, min&#40;a.max_world, b.max_world&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -354,7 +345,7 @@
           <td>
             
             
-            <span class='code'>        m &#61; midpoint&#40;lo, hi&#41;</span>
+            <span class='code'>    @assert ret.min_world &lt;&#61; ret.max_world</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -364,7 +355,7 @@
           <td>
             
             
-            <span class='code'>        if lt&#40;o, x, v&#91;m&#93;&#41;</span>
+            <span class='code'>    return ret</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -374,7 +365,7 @@
           <td>
             
             
-            <span class='code'>            hi &#61; m</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -384,7 +375,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L36'>
@@ -394,7 +385,7 @@
           <td>
             
             
-            <span class='code'>            lo &#61; m</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -404,7 +395,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    struct WorldView</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -414,7 +405,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L39'>
@@ -424,7 +415,7 @@
           <td>
             
             
-            <span class='code'>    return lo</span>
+            <span class='code'>Takes a given cache and provides access to the cache contents for the given</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -434,7 +425,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>range of world ages, rather than defaulting to the current active world age.</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -444,7 +435,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -454,7 +445,7 @@
           <td>
             
             
-            <span class='code'># returns the range of indices of v equal to x</span>
+            <span class='code'>struct WorldView&#123;Cache&#125;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -464,7 +455,7 @@
           <td>
             
             
-            <span class='code'># if v does not contain x, returns a 0-length range</span>
+            <span class='code'>    cache::Cache</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -474,7 +465,7 @@
           <td>
             
             
-            <span class='code'># indicating the insertion point of x</span>
+            <span class='code'>    worlds::WorldRange</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -484,7 +475,7 @@
           <td>
             
             
-            <span class='code'>function searchsorted&#40;v::AbstractVector, x, ilo::T, ihi::T, o::Ordering&#41;::UnitRange&#123;keytype&#40;v&#41;&#125; where T&lt;:Integer</span>
+            <span class='code'>    WorldView&#40;cache::Cache, range::WorldRange&#41; where Cache &#61; new&#123;Cache&#125;&#40;cache, range&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -494,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    u &#61; T&#40;1&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -504,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    lo &#61; ilo - u</span>
+            <span class='code'>WorldView&#40;cache, args...&#41; &#61; WorldView&#40;cache, WorldRange&#40;args...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -514,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    hi &#61; ihi &#43; u</span>
+            <span class='code'>WorldView&#40;wvc::WorldView, wr::WorldRange&#41; &#61; WorldView&#40;wvc.cache, wr&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -524,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds while lo &lt; hi - u</span>
+            <span class='code'>WorldView&#40;wvc::WorldView, args...&#41; &#61; WorldView&#40;wvc.cache, args...&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -534,7 +525,7 @@
           <td>
             
             
-            <span class='code'>        m &#61; midpoint&#40;lo, hi&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L51'>
@@ -544,7 +535,7 @@
           <td>
             
             
-            <span class='code'>        if lt&#40;o, v&#91;m&#93;, x&#41;</span>
+            <span class='code'>function haskey&#40;wvc::WorldView&#123;InternalCodeCache&#125;, mi::MethodInstance&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -554,7 +545,7 @@
           <td>
             
             
-            <span class='code'>            lo &#61; m</span>
+            <span class='code'>    return ccall&#40;:jl_rettype_inferred, Any, &#40;Any, UInt, UInt&#41;, mi, first&#40;wvc.worlds&#41;, last&#40;wvc.worlds&#41;&#41; &#33;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -564,7 +555,7 @@
           <td>
             
             
-            <span class='code'>        elseif lt&#40;o, x, v&#91;m&#93;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -574,7 +565,7 @@
           <td>
             
             
-            <span class='code'>            hi &#61; m</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L55'>
@@ -584,17 +575,26 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>function get&#40;wvc::WorldView&#123;InternalCodeCache&#125;, mi::MethodInstance, default&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
           <td class='lineno'>56</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in get
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from const_prop_methodinstance_heuristic
+              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L1147'>line 1147</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>            a &#61; searchsortedfirst&#40;v, x, max&#40;lo,ilo&#41;, m, o&#41;</span>
+            <span class='code'>    r &#61; ccall&#40;:jl_rettype_inferred, Any, &#40;Any, UInt, UInt&#41;, mi, first&#40;wvc.worlds&#41;, last&#40;wvc.worlds&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -604,7 +604,7 @@
           <td>
             
             
-            <span class='code'>            b &#61; searchsortedlast&#40;v, x, m, min&#40;hi,ihi&#41;, o&#41;</span>
+            <span class='code'>    if r &#61;&#61;&#61; nothing</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -614,7 +614,7 @@
           <td>
             
             
-            <span class='code'>            return a : b</span>
+            <span class='code'>        return default</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -624,7 +624,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -634,7 +634,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return r::CodeInstance</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -644,7 +644,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;lo &#43; 1&#41; : &#40;hi - 1&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -654,7 +654,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L63'>
@@ -664,7 +664,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function getindex&#40;wvc::WorldView&#123;InternalCodeCache&#125;, mi::MethodInstance&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -674,7 +674,7 @@
           <td>
             
             
-            <span class='code'>for s in &#91;:searchsortedfirst, :searchsortedlast, :searchsorted&#93;</span>
+            <span class='code'>    r &#61; get&#40;wvc, mi, nothing&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -684,7 +684,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>    r &#61;&#61;&#61; nothing &amp;&amp; throw&#40;KeyError&#40;mi&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -694,7 +694,7 @@
           <td>
             
             
-            <span class='code'>        &#36;s&#40;v::AbstractVector, x, o::Ordering&#41; &#61; &#36;s&#40;v,x,firstindex&#40;v&#41;,lastindex&#40;v&#41;,o&#41;</span>
+            <span class='code'>    return r::CodeInstance</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -704,7 +704,7 @@
           <td>
             
             
-            <span class='code'>        &#36;s&#40;v::AbstractVector, x;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -714,7 +714,7 @@
           <td>
             
             
-            <span class='code'>           lt&#61;isless, by&#61;identity, rev::Union&#123;Bool,Nothing&#125;&#61;nothing, order::Ordering&#61;Forward&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L69'>
@@ -724,7 +724,7 @@
           <td>
             
             
-            <span class='code'>            &#36;s&#40;v,x,ord&#40;lt,by,rev,order&#41;&#41;</span>
+            <span class='code'>function setindex&#33;&#40;wvc::WorldView&#123;InternalCodeCache&#125;, ci::CodeInstance, mi::MethodInstance&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -734,7 +734,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    setindex&#33;&#40;wvc.cache, ci, mi&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -744,291 +744,11 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return wvc</span>
           </td>
         </tr>
         <tr id='L72'>
           <td class='lineno'>72</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L73'>
-          <td class='lineno'>73</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># An unstable sorting algorithm for internal use</span>
-          </td>
-        </tr>
-        <tr id='L74'>
-          <td class='lineno'>74</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function sort&#33;&#40;v::Vector; by::Function&#61;identity, &#40;&lt;&#41;::Function&#61;&lt;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L75'>
-          <td class='lineno'>75</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    isempty&#40;v&#41; &amp;&amp; return v # This branch is hit 95&#37; of the time</span>
-          </td>
-        </tr>
-        <tr id='L76'>
-          <td class='lineno'>76</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L77'>
-          <td class='lineno'>77</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # Of the remaining 5&#37;, this branch is hit less than 1&#37; of the time</span>
-          </td>
-        </tr>
-        <tr id='L78'>
-          <td class='lineno'>78</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if length&#40;v&#41; &gt; 200 # Heap sort prevents quadratic runtime</span>
-          </td>
-        </tr>
-        <tr id='L79'>
-          <td class='lineno'>79</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        o &#61; ord&#40;&lt;, by, true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L80'>
-          <td class='lineno'>80</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        heapify&#33;&#40;v, o&#41;</span>
-          </td>
-        </tr>
-        <tr id='L81'>
-          <td class='lineno'>81</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        for i in lastindex&#40;v&#41;:-1:2</span>
-          </td>
-        </tr>
-        <tr id='L82'>
-          <td class='lineno'>82</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            y &#61; v&#91;i&#93;</span>
-          </td>
-        </tr>
-        <tr id='L83'>
-          <td class='lineno'>83</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            v&#91;i&#93; &#61; v&#91;1&#93;</span>
-          </td>
-        </tr>
-        <tr id='L84'>
-          <td class='lineno'>84</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            percolate_down&#33;&#40;v, 1, y, o, i-1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L85'>
-          <td class='lineno'>85</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L86'>
-          <td class='lineno'>86</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        return v</span>
-          </td>
-        </tr>
-        <tr id='L87'>
-          <td class='lineno'>87</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L88'>
-          <td class='lineno'>88</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L89'>
-          <td class='lineno'>89</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inbounds for i in 2:length&#40;v&#41; # Insertion sort</span>
-          </td>
-        </tr>
-        <tr id='L90'>
-          <td class='lineno'>90</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        x &#61; v&#91;i&#93;</span>
-          </td>
-        </tr>
-        <tr id='L91'>
-          <td class='lineno'>91</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        y &#61; by&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L92'>
-          <td class='lineno'>92</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        while i &gt; 1 &amp;&amp; y &lt; by&#40;v&#91;i-1&#93;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L93'>
-          <td class='lineno'>93</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            v&#91;i&#93; &#61; v&#91;i-1&#93;</span>
-          </td>
-        </tr>
-        <tr id='L94'>
-          <td class='lineno'>94</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            i -&#61; 1</span>
-          </td>
-        </tr>
-        <tr id='L95'>
-          <td class='lineno'>95</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L96'>
-          <td class='lineno'>96</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        v&#91;i&#93; &#61; x</span>
-          </td>
-        </tr>
-        <tr id='L97'>
-          <td class='lineno'>97</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L98'>
-          <td class='lineno'>98</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L99'>
-          <td class='lineno'>99</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    v</span>
-          </td>
-        </tr>
-        <tr id='L100'>
-          <td class='lineno'>100</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>

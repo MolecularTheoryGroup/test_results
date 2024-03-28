@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/ordering.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/DiffEqBase/8vI1R/src/calculate_residuals.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Thu, 28 Mar 2024 18:32:30
+        Generated on Thu, 28 Mar 2024 19:39:52
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    calculate_residuals&#40;ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>module Order</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Calculate element-wise residuals</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;math</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>import ..@__MODULE__, ..parentmodule</span>
+            <span class='code'>\\frac&#123;ũ&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>const Base &#61; parentmodule&#40;@__MODULE__&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>import .Base:</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    AbstractVector, @propagate_inbounds, isless, identity, getindex, reverse,</span>
+            <span class='code'>@inline @muladd function calculate_residuals&#40;ũ::Number, u₀::Number, u₁::Number,</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,17 +125,31 @@
           <td>
             
             
-            <span class='code'>    &#43;, -, &#33;, &amp;, &lt;, |</span>
+            <span class='code'>        α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
           <td class='lineno'>11</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'></span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in calculate_residuals
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='calculate_residuals.jl-699fa2243bfe1599b75362b6700c1789b9a7eccd.html#L107'>line 107</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='common_defaults.jl-716dd1c34ba816a49f54141a5d180bac3655562f.html#L36'>ODE_DEFAULT_NORM</a>
+              <br />
+            </div>
+            <span class='code'>    @fastmath ũ / &#40;α &#43; max&#40;internalnorm&#40;u₀, t&#41;, internalnorm&#40;u₁, t&#41;&#41; * ρ&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +159,7 @@
           <td>
             
             
-            <span class='code'>## notions of element ordering ##</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -165,7 +179,7 @@
           <td>
             
             
-            <span class='code'>export # not exported by Base</span>
+            <span class='code'>@inline function calculate_residuals&#40;ũ::Array&#123;T&#125;, u₀::Array&#123;T&#125;, u₁::Array&#123;T&#125;, α::T2,</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +189,7 @@
           <td>
             
             
-            <span class='code'>    Ordering, Forward, Reverse,</span>
+            <span class='code'>        ρ::Real, internalnorm,</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +199,7 @@
           <td>
             
             
-            <span class='code'>    By, Lt, Perm,</span>
+            <span class='code'>        t&#41; where</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +209,7 @@
           <td>
             
             
-            <span class='code'>    ReverseOrdering, ForwardOrdering,</span>
+            <span class='code'>        &#123;T &lt;: Number, T2 &lt;: Number&#125;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +219,7 @@
           <td>
             
             
-            <span class='code'>    DirectOrdering,</span>
+            <span class='code'>    out &#61; similar&#40;ũ&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +229,7 @@
           <td>
             
             
-            <span class='code'>    lt, ord, ordtype</span>
+            <span class='code'>    calculate_residuals&#33;&#40;out, ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +239,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    out</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +249,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +259,7 @@
           <td>
             
             
-            <span class='code'>    Base.Order.Ordering</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +269,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function calculate_residuals&#40;ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +279,7 @@
           <td>
             
             
-            <span class='code'>Abstract type which represents a total order on some set of elements.</span>
+            <span class='code'>    @.. broadcast&#61;false calculate_residuals&#40;ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +289,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +299,7 @@
           <td>
             
             
-            <span class='code'>Use &#91;&#96;Base.Order.lt&#96;&#93;&#40;@ref&#41; to compare two elements according to the ordering.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -305,7 +319,7 @@
           <td>
             
             
-            <span class='code'>abstract type Ordering end</span>
+            <span class='code'>    calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -325,7 +339,7 @@
           <td>
             
             
-            <span class='code'>struct ForwardOrdering &lt;: Ordering end</span>
+            <span class='code'>Calculate element-wise residuals</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +349,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;math</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +359,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>\\frac&#123;u₁ - u₀&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +369,7 @@
           <td>
             
             
-            <span class='code'>    ReverseOrdering&#40;fwd::Ordering&#61;Forward&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +379,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +389,7 @@
           <td>
             
             
-            <span class='code'>A wrapper which reverses an ordering.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +399,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline @muladd function calculate_residuals&#40;u₀::Number, u₁::Number,</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +409,7 @@
           <td>
             
             
-            <span class='code'>For a given &#96;Ordering&#96; &#96;o&#96;, the following holds for all  &#96;a&#96;, &#96;b&#96;:</span>
+            <span class='code'>        α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +419,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @fastmath &#40;u₁ - u₀&#41; / &#40;α &#43; max&#40;internalnorm&#40;u₀, t&#41;, internalnorm&#40;u₁, t&#41;&#41; * ρ&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +429,7 @@
           <td>
             
             
-            <span class='code'>    lt&#40;ReverseOrdering&#40;o&#41;, a, b&#41; &#61;&#61; lt&#40;o, b, a&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +439,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +449,7 @@
           <td>
             
             
-            <span class='code'>struct ReverseOrdering&#123;Fwd&lt;:Ordering&#125; &lt;: Ordering</span>
+            <span class='code'>@inline function calculate_residuals&#40;u₀::Array&#123;T&#125;, u₁::Array&#123;T&#125;, α::T2,</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +459,7 @@
           <td>
             
             
-            <span class='code'>    fwd::Fwd</span>
+            <span class='code'>        ρ::Real, internalnorm,</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +469,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        t&#41; where &#123;T &lt;: Number, T2 &lt;: Number&#125;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +479,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    out &#61; similar&#40;u₀&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +489,7 @@
           <td>
             
             
-            <span class='code'>ReverseOrdering&#40;rev::ReverseOrdering&#41; &#61; rev.fwd</span>
+            <span class='code'>    calculate_residuals&#33;&#40;out, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +499,7 @@
           <td>
             
             
-            <span class='code'>ReverseOrdering&#40;fwd::Fwd&#41; where &#123;Fwd&#125; &#61; ReverseOrdering&#123;Fwd&#125;&#40;fwd&#41;</span>
+            <span class='code'>    out</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +509,7 @@
           <td>
             
             
-            <span class='code'>ReverseOrdering&#40;&#41; &#61; ReverseOrdering&#40;ForwardOrdering&#40;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -515,7 +529,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@inline function calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +539,7 @@
           <td>
             
             
-            <span class='code'>    reverse&#40;o::Base.Ordering&#41;</span>
+            <span class='code'>    @.. broadcast&#61;false calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +549,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +559,7 @@
           <td>
             
             
-            <span class='code'>reverses ordering specified by &#96;o&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +569,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +579,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +589,7 @@
           <td>
             
             
-            <span class='code'>reverse&#40;o::Ordering&#41; &#61; ReverseOrdering&#40;o&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Return element-wise residuals</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +609,7 @@
           <td>
             
             
-            <span class='code'>const DirectOrdering &#61; Union&#123;ForwardOrdering,ReverseOrdering&#123;ForwardOrdering&#125;&#125;</span>
+            <span class='code'>&#96;&#96;&#96;math</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +619,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>\\frac&#123;δ E₁ &#43; E₂&#125;&#123;α&#43;\\max&#123;scalarnorm&#40;u₀&#41;,scalarnorm&#40;u₁&#41;&#125;*ρ&#125;.</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +629,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +639,7 @@
           <td>
             
             
-            <span class='code'>    Base.Order.Forward</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +649,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline @muladd function calculate_residuals&#40;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +659,7 @@
           <td>
             
             
-            <span class='code'>Default ordering according to &#91;&#96;isless&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>        E₁::Number, E₂::Number, u₀::Number, u₁::Number,</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +669,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        α::Real, ρ::Real, δ::Number, scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +679,7 @@
           <td>
             
             
-            <span class='code'>const Forward &#61; ForwardOrdering&#40;&#41;</span>
+            <span class='code'>    @fastmath &#40;δ * E₁ &#43; E₂&#41; / &#40;α &#43; max&#40;scalarnorm&#40;u₀, t&#41;, scalarnorm&#40;u₁, t&#41;&#41; * ρ&#41;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +689,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +699,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +709,7 @@
           <td>
             
             
-            <span class='code'>    Base.Order.Reverse</span>
+            <span class='code'>@inline function calculate_residuals&#40;E₁::Array&#123;&lt;:Number&#125;, E₂::Array&#123;&lt;:Number&#125;,</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +719,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        u₀::Array&#123;&lt;:Number&#125;, u₁::Array&#123;&lt;:Number&#125;, α::Real,</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +729,7 @@
           <td>
             
             
-            <span class='code'>Reverse ordering according to &#91;&#96;isless&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>        ρ::Real, δ::Number, scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +739,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    out &#61; similar&#40;u₀&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +749,7 @@
           <td>
             
             
-            <span class='code'>const Reverse &#61; ReverseOrdering&#40;&#41;</span>
+            <span class='code'>    calculate_residuals&#33;&#40;out, E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +759,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    out</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +769,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +779,7 @@
           <td>
             
             
-            <span class='code'>    By&#40;by, order::Ordering&#61;Forward&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ordering&#96; which applies &#96;order&#96; to elements after they have been transformed</span>
+            <span class='code'>    @.. broadcast&#61;false calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>by the function &#96;by&#96;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>struct By&#123;T, O&#125; &lt;: Ordering</span>
+            <span class='code'># Inplace Versions</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>    by::T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'>    order::O</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    DiffEqBase.calculate_residuals&#33;&#40;out, ũ, u₀, u₁, α, ρ, thread&#61;False&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'># backwards compatibility with VERSION &lt; v&quot;1.5-&quot;</span>
+            <span class='code'>Save element-wise residuals</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'>By&#40;by&#41; &#61; By&#40;by, Forward&#41;</span>
+            <span class='code'>&#96;&#96;&#96;math</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>\\frac&#123;ũ&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>    Lt&#40;lt&#41;</span>
+            <span class='code'>in &#96;out&#96;.</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ordering&#96; that calls &#96;lt&#40;a, b&#41;&#96; to compare elements. &#96;lt&#96; must</span>
+            <span class='code'>The argument &#96;thread&#96; determines whether internal broadcasting on</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>obey the same rules as the &#96;lt&#96; parameter of &#91;&#96;sort&#33;&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>appropriate CPU arrays should be serial &#40;&#96;thread &#61; False&#40;&#41;&#96;, default&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>or use multiple threads &#40;&#96;thread &#61; True&#40;&#41;&#96;&#41; when Julia is started</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>struct Lt&#123;T&#125; &lt;: Ordering</span>
+            <span class='code'>with multiple threads.</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>    lt::T</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function calculate_residuals&#33;&#40;out, ũ, u₀, u₁, α, ρ, internalnorm, t,</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        thread::Union&#123;False, True&#125; &#61; False&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @.. broadcast&#61;false thread&#61;thread out&#61;calculate_residuals&#40;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>    Perm&#40;order::Ordering, data::AbstractVector&#41;</span>
+            <span class='code'>        ũ, u₀, u₁, α, ρ, internalnorm,</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        t&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1039,7 @@
           <td>
             
             
-            <span class='code'>&#96;Ordering&#96; on the indices of &#96;data&#96; where &#96;i&#96; is less than &#96;j&#96; if &#96;data&#91;i&#93;&#96; is</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>less than &#96;data&#91;j&#93;&#96; according to &#96;order&#96;. In the case that &#96;data&#91;i&#93;&#96; and</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1059,7 @@
           <td>
             
             
-            <span class='code'>&#96;data&#91;j&#93;&#96; are equal, &#96;i&#96; and &#96;j&#96; are compared by numeric value.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>@inline function calculate_residuals&#33;&#40;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1079,7 @@
           <td>
             
             
-            <span class='code'>struct Perm&#123;O&lt;:Ordering,V&lt;:AbstractVector&#125; &lt;: Ordering</span>
+            <span class='code'>        out::Array, ũ::Array, u₀::Array, u₁::Array, α::Number,</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,27 +1089,59 @@
           <td>
             
             
-            <span class='code'>    order::O</span>
+            <span class='code'>        ρ::Number, internalnorm::F, t, ::False&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L106'>
           <td class='lineno'>106</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    data::V</span>
+            <div class='call-sites'>
+              2 &#40;0 &#37;&#41;
+              samples spent in calculate_residuals&#33;
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from perform_step&#33;
+              <a href='verner_rk_perform_step.jl-55620588fe68123bfc8e280b7835ae1887aafc30.html#L1170'>line 1170</a>
+              <br />
+            </div>
+            <div class='callees'>
+              2 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='simdloop.jl-efd454aa3470da7c915b27e3f52722227d648fc8.html#L77'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>    @inbounds @simd ivdep for i in eachindex&#40;out, ũ, u₀, u₁&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
           <td class='lineno'>107</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>end</span>
+            <div class='call-sites'>
+              2 &#40;0 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='simdloop.jl-efd454aa3470da7c915b27e3f52722227d648fc8.html#L77'>line 77</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L1021'>setindex&#33;</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='calculate_residuals.jl-699fa2243bfe1599b75362b6700c1789b9a7eccd.html#L11'>calculate_residuals</a>
+              <br />
+            </div>
+            <span class='code'>        out&#91;i&#93; &#61; calculate_residuals&#40;ũ&#91;i&#93;, u₀&#91;i&#93;, u₁&#91;i&#93;, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1151,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1161,7 @@
           <td>
             
             
-            <span class='code'>ReverseOrdering&#40;by::By&#41; &#61; By&#40;by.by, ReverseOrdering&#40;by.order&#41;&#41;</span>
+            <span class='code'>    nothing</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1171,7 @@
           <td>
             
             
-            <span class='code'>ReverseOrdering&#40;perm::Perm&#41; &#61; Perm&#40;ReverseOrdering&#40;perm.order&#41;, perm.data&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1155,7 +1201,7 @@
           <td>
             
             
-            <span class='code'>    lt&#40;o::Ordering, a, b&#41;</span>
+            <span class='code'>    calculate_residuals&#33;&#40;out, u₀, u₁, α, ρ, thread&#61;False&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1175,7 +1221,7 @@
           <td>
             
             
-            <span class='code'>Test whether &#96;a&#96; is less than &#96;b&#96; according to the ordering &#96;o&#96;.</span>
+            <span class='code'>Save element-wise residuals</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1231,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;math</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1241,7 @@
           <td>
             
             
-            <span class='code'>lt&#40;o::ForwardOrdering,       a, b&#41; &#61; isless&#40;a,b&#41;</span>
+            <span class='code'>\\frac&#123;u₁ - u₀&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,31 +1251,17 @@
           <td>
             
             
-            <span class='code'>lt&#40;o::ReverseOrdering,       a, b&#41; &#61; lt&#40;o.fwd,b,a&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L119'>
           <td class='lineno'>119</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;8 &#37;&#41;
-              samples spent in lt
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from partition&#33;
-              <a href='sort.jl-48c5f55a21c6d3f05b4485199deefefdefffe1cd.html#L1039'>line 1039</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L380'>#37</a>
-              <br />
-            </div>
-            <span class='code'>lt&#40;o::By,                    a, b&#41; &#61; lt&#40;o.order,o.by&#40;a&#41;,o.by&#40;b&#41;&#41;</span>
+            
+            
+            <span class='code'>in &#96;out&#96;.</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1239,7 +1271,7 @@
           <td>
             
             
-            <span class='code'>lt&#40;o::Lt,                    a, b&#41; &#61; o.lt&#40;a,b&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1249,7 +1281,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>The argument &#96;thread&#96; determines whether internal broadcasting on</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1259,7 +1291,7 @@
           <td>
             
             
-            <span class='code'>@propagate_inbounds function lt&#40;p::Perm, a::Integer, b::Integer&#41;</span>
+            <span class='code'>appropriate CPU arrays should be serial &#40;&#96;thread &#61; False&#40;&#41;&#96;, default&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1269,7 +1301,7 @@
           <td>
             
             
-            <span class='code'>    da &#61; p.data&#91;a&#93;</span>
+            <span class='code'>or use multiple threads &#40;&#96;thread &#61; True&#40;&#41;&#96;&#41; when Julia is started</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1279,7 +1311,7 @@
           <td>
             
             
-            <span class='code'>    db &#61; p.data&#91;b&#93;</span>
+            <span class='code'>with multiple threads.</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1289,7 +1321,7 @@
           <td>
             
             
-            <span class='code'>    &#40;lt&#40;p.order, da, db&#41;::Bool&#41; | &#40;&#33;&#40;lt&#40;p.order, db, da&#41;::Bool&#41; &amp; &#40;a &lt; b&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1299,7 +1331,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function calculate_residuals&#33;&#40;out, u₀, u₁, α, ρ, internalnorm, t,</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1309,7 +1341,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        thread::Union&#123;False, True&#125; &#61; False&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1319,7 +1351,7 @@
           <td>
             
             
-            <span class='code'>_ord&#40;lt::typeof&#40;isless&#41;, by::typeof&#40;identity&#41;, order::Ordering&#41; &#61; order</span>
+            <span class='code'>    @.. broadcast&#61;false thread&#61;thread out&#61;calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1329,7 +1361,7 @@
           <td>
             
             
-            <span class='code'>_ord&#40;lt::typeof&#40;isless&#41;, by,                   order::Ordering&#41; &#61; By&#40;by, order&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1349,7 +1381,7 @@
           <td>
             
             
-            <span class='code'>function _ord&#40;lt, by, order::Ordering&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1359,7 +1391,7 @@
           <td>
             
             
-            <span class='code'>    if order &#61;&#61;&#61; Forward</span>
+            <span class='code'>    calculate_residuals&#33;&#40;out, E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, thread&#61;False&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1369,7 +1401,7 @@
           <td>
             
             
-            <span class='code'>        return Lt&#40;&#40;x, y&#41; -&gt; lt&#40;by&#40;x&#41;, by&#40;y&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1379,7 +1411,7 @@
           <td>
             
             
-            <span class='code'>    elseif order &#61;&#61;&#61; Reverse</span>
+            <span class='code'>Calculate element-wise residuals</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1389,7 +1421,7 @@
           <td>
             
             
-            <span class='code'>        return Lt&#40;&#40;x, y&#41; -&gt; lt&#40;by&#40;y&#41;, by&#40;x&#41;&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;math</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1399,7 +1431,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>\\frac&#123;δ E₁ &#43; E₂&#125;&#123;α&#43;\\max&#123;scalarnorm&#40;u₀&#41;,scalarnorm&#40;u₁&#41;&#125;*ρ&#125;.</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1409,7 +1441,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;Passing both lt&#61; and order&#61; arguments is ambiguous; please pass order&#61;Forward or order&#61;Reverse &#40;or leave default&#41;&quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1419,7 +1451,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1429,7 +1461,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>The argument &#96;thread&#96; determines whether internal broadcasting on</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1439,7 +1471,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>appropriate CPU arrays should be serial &#40;&#96;thread &#61; False&#40;&#41;&#96;, default&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1449,7 +1481,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>or use multiple threads &#40;&#96;thread &#61; True&#40;&#41;&#96;&#41; when Julia is started</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1491,7 @@
           <td>
             
             
-            <span class='code'>    ord&#40;lt, by, rev::Union&#123;Bool, Nothing&#125;, order::Ordering&#61;Forward&#41;</span>
+            <span class='code'>with multiple threads.</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1469,7 +1501,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1479,7 +1511,7 @@
           <td>
             
             
-            <span class='code'>Construct an &#91;&#96;Ordering&#96;&#93;&#40;@ref&#41; object from the same arguments used by</span>
+            <span class='code'>@inline function calculate_residuals&#33;&#40;out, E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t,</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1521,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;sort&#33;&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>        thread::Union&#123;False, True&#125; &#61; False&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1531,7 @@
           <td>
             
             
-            <span class='code'>Elements are first transformed by the function &#96;by&#96; &#40;which may be</span>
+            <span class='code'>    @.. broadcast&#61;false thread&#61;thread out&#61;calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ,</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1509,7 +1541,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;identity&#96;&#93;&#40;@ref&#41;&#41; and are then compared according to either the function &#96;lt&#96;</span>
+            <span class='code'>        scalarnorm, t&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1519,311 +1551,11 @@
           <td>
             
             
-            <span class='code'>or an existing ordering &#96;order&#96;. &#96;lt&#96; should be &#91;&#96;isless&#96;&#93;&#40;@ref&#41; or a function</span>
+            <span class='code'>    out</span>
           </td>
         </tr>
         <tr id='L149'>
           <td class='lineno'>149</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>that obeys the same rules as the &#96;lt&#96; parameter of &#91;&#96;sort&#33;&#96;&#93;&#40;@ref&#41;. Finally,</span>
-          </td>
-        </tr>
-        <tr id='L150'>
-          <td class='lineno'>150</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>the resulting order is reversed if &#96;rev&#61;true&#96;.</span>
-          </td>
-        </tr>
-        <tr id='L151'>
-          <td class='lineno'>151</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L152'>
-          <td class='lineno'>152</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Passing an &#96;lt&#96; other than &#96;isless&#96; along with an &#96;order&#96; other than</span>
-          </td>
-        </tr>
-        <tr id='L153'>
-          <td class='lineno'>153</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#91;&#96;Base.Order.Forward&#96;&#93;&#40;@ref&#41; or &#91;&#96;Base.Order.Reverse&#96;&#93;&#40;@ref&#41; is not permitted,</span>
-          </td>
-        </tr>
-        <tr id='L154'>
-          <td class='lineno'>154</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>otherwise all options are independent and can be used together in all possible</span>
-          </td>
-        </tr>
-        <tr id='L155'>
-          <td class='lineno'>155</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>combinations.</span>
-          </td>
-        </tr>
-        <tr id='L156'>
-          <td class='lineno'>156</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L157'>
-          <td class='lineno'>157</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>ord&#40;lt, by, rev::Nothing, order::Ordering&#61;Forward&#41; &#61; _ord&#40;lt, by, order&#41;</span>
-          </td>
-        </tr>
-        <tr id='L158'>
-          <td class='lineno'>158</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L159'>
-          <td class='lineno'>159</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function ord&#40;lt, by, rev::Bool, order::Ordering&#61;Forward&#41;</span>
-          </td>
-        </tr>
-        <tr id='L160'>
-          <td class='lineno'>160</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    o &#61; _ord&#40;lt, by, order&#41;</span>
-          </td>
-        </tr>
-        <tr id='L161'>
-          <td class='lineno'>161</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return rev ? ReverseOrdering&#40;o&#41; : o</span>
-          </td>
-        </tr>
-        <tr id='L162'>
-          <td class='lineno'>162</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L163'>
-          <td class='lineno'>163</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L164'>
-          <td class='lineno'>164</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L165'>
-          <td class='lineno'>165</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># This function is not in use anywhere in Base but we observed</span>
-          </td>
-        </tr>
-        <tr id='L166'>
-          <td class='lineno'>166</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># use in sorting-related packages &#40;#34719&#41;. It&#39;s probably best to move</span>
-          </td>
-        </tr>
-        <tr id='L167'>
-          <td class='lineno'>167</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># this functionality to those packages in the future; let&#39;s remind/force</span>
-          </td>
-        </tr>
-        <tr id='L168'>
-          <td class='lineno'>168</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># ourselves to deprecate this in v2.0.</span>
-          </td>
-        </tr>
-        <tr id='L169'>
-          <td class='lineno'>169</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># The following clause means &#96;if VERSION &lt; v&quot;2.0-&quot;&#96; but it also works during</span>
-          </td>
-        </tr>
-        <tr id='L170'>
-          <td class='lineno'>170</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># bootstrap. For the same reason, we need to write &#96;Int32&#96; instead of &#96;Cint&#96;.</span>
-          </td>
-        </tr>
-        <tr id='L171'>
-          <td class='lineno'>171</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>if ccall&#40;:jl_ver_major, Int32, &#40;&#41;&#41; &lt; 2</span>
-          </td>
-        </tr>
-        <tr id='L172'>
-          <td class='lineno'>172</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ordtype&#40;o::ReverseOrdering, vs::AbstractArray&#41; &#61; ordtype&#40;o.fwd, vs&#41;</span>
-          </td>
-        </tr>
-        <tr id='L173'>
-          <td class='lineno'>173</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ordtype&#40;o::Perm,            vs::AbstractArray&#41; &#61; ordtype&#40;o.order, o.data&#41;</span>
-          </td>
-        </tr>
-        <tr id='L174'>
-          <td class='lineno'>174</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # TODO: here, we really want the return type of o.by, without calling it</span>
-          </td>
-        </tr>
-        <tr id='L175'>
-          <td class='lineno'>175</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ordtype&#40;o::By,              vs::AbstractArray&#41; &#61; try typeof&#40;o.by&#40;vs&#91;1&#93;&#41;&#41; catch; Any end</span>
-          </td>
-        </tr>
-        <tr id='L176'>
-          <td class='lineno'>176</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ordtype&#40;o::Ordering,        vs::AbstractArray&#41; &#61; eltype&#40;vs&#41;</span>
-          </td>
-        </tr>
-        <tr id='L177'>
-          <td class='lineno'>177</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L178'>
-          <td class='lineno'>178</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L179'>
-          <td class='lineno'>179</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>

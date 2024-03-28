@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/pointer.jl</title>
+    <title>StatProfilerHTML - test_helpers.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Thu, 28 Mar 2024 18:32:44
+        Generated on Thu, 28 Mar 2024 19:39:37
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>using Dates</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using Interpolations</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Ptr&#123;T&#125;</span>
+            <span class='code'>using ZipFile</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>A memory address referring to data of type &#96;T&#96;.  However, there is no guarantee that the</span>
+            <span class='code'># only import ElectronDensityAnalysis if it is not already imported</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>memory is actually valid, or that it actually represents data of the specified type.</span>
+            <span class='code'>if &#33;isdefined&#40;Main, :ElectronDensityAnalysis&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    using ElectronDensityAnalysis</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>Ptr</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>## converting pointers to an appropriate unsigned ##</span>
+            <span class='code'># Define path to test data directory</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>DATA_DIR &#61; joinpath&#40;dirname&#40;dirname&#40;@__FILE__&#41;&#41;, &quot;test_data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># get full path of all files in DATA_DIR with .zip extension removed</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    C_NULL</span>
+            <span class='code'>DATA_FILES &#61; map&#40;x -&gt; joinpath&#40;DATA_DIR, replace&#40;x, &quot;.zip&quot; &#61;&gt; &quot;&quot;&#41;&#41;, readdir&#40;DATA_DIR&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>The C null pointer constant, sometimes used when calling external code.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    unzip&#40;file::AbstractString, exdir::AbstractString&#61;&quot;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>const C_NULL &#61; bitcast&#40;Ptr&#123;Cvoid&#125;, 0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Unzips the specified zip file to the specified directory.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'># TODO: deprecate these conversions. C doesn&#39;t even allow them.</span>
+            <span class='code'>Taken from: https://discourse.julialang.org/t/how-to-extract-a-file-in-a-zip-archive-without-using-os-specific-tools/34585/4</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'># pointer to integer</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;T&#125;, x::Ptr&#41; where &#123;T&lt;:Integer&#125; &#61; T&#40;UInt&#40;x&#41;&#41;::T</span>
+            <span class='code'>- &#96;file::AbstractString&#96;: The path to the zip file to unzip.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;exdir::AbstractString&#61;&quot;&quot;&#41;&#96;: The path to the directory to extract the zip file to. If not specified, the zip file will be extracted to the same directory as the zip file.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'># integer to pointer</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, x::Union&#123;Int,UInt&#125;&#41; where &#123;T&#125; &#61; Ptr&#123;T&#125;&#40;x&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;ZipFile.Reader&#96;: A &#96;ZipFile.Reader&#96; object representing the unzipped files.</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'># pointer to pointer</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, p::Ptr&#123;T&#125;&#41; where &#123;T&#125; &#61; p</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, p::Ptr&#41; where &#123;T&#125; &#61; bitcast&#40;Ptr&#123;T&#125;, p&#41;::Ptr&#123;T&#125;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>julia&gt; unzip&#40;&quot;data.zip&quot;, &quot;data&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'># object to pointer &#40;when used with ccall&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>function unzip&#40;file::String, exdir&#61;&quot;&quot;&#41;::Nothing</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_convert&#40;T, x&#41;</span>
+            <span class='code'>    @assert isfile&#40;file&#41; &quot;File does not exist: &#36;file&quot;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    fileFullPath &#61; isabspath&#40;file&#41; ? file : joinpath&#40;pwd&#40;&#41;, file&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>Convert &#96;x&#96; to a C argument of type &#96;T&#96;</span>
+            <span class='code'>    basePath &#61; dirname&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>where the input &#96;x&#96; must be the return value of &#96;cconvert&#40;T, ...&#41;&#96;.</span>
+            <span class='code'>    outPath &#61; &#40;exdir &#61;&#61; &quot;&quot; ? basePath : &#40;isabspath&#40;exdir&#41; ? exdir : joinpath&#40;pwd&#40;&#41;, exdir&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    isdir&#40;outPath&#41; ? &quot;&quot; : mkdir&#40;outPath&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>In cases where &#91;&#96;convert&#96;&#93;&#40;@ref&#41; would need to take a Julia object</span>
+            <span class='code'>    zarchive &#61; ZipFile.Reader&#40;fileFullPath&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>and turn it into a &#96;Ptr&#96;, this function should be used to define and perform</span>
+            <span class='code'>    for f in zarchive.files</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>that conversion.</span>
+            <span class='code'>        fullFilePath &#61; joinpath&#40;outPath, f.name&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if &#40;endswith&#40;f.name, &quot;/&quot;&#41; || endswith&#40;f.name, &quot;\\&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>Be careful to ensure that a Julia reference to &#96;x&#96; exists as long as the result of this</span>
+            <span class='code'>            mkpath&#40;fullFilePath&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>function will be used. Accordingly, the argument &#96;x&#96; to this function should never be an</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>expression, only a variable name or field reference. For example, &#96;x&#61;a.b.c&#96; is acceptable,</span>
+            <span class='code'>            try</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>but &#96;x&#61;&#91;a,b,c&#93;&#96; is not.</span>
+            <span class='code'>                write&#40;fullFilePath, read&#40;f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            catch e</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>The &#96;unsafe&#96; prefix on this function indicates that using the result of this function after</span>
+            <span class='code'>                @debug &quot;Error writing file in unzip&#40;&#41;: &#36;e&quot;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>the &#96;x&#96; argument to this function is no longer accessible to the program may cause undefined</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>behavior, including program corruption or segfaults, at any later time.</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;cconvert&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>    return close&#40;zarchive&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_convert end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;UInt8&#125;&#125;, x::Symbol&#41; &#61; ccall&#40;:jl_symbol_name, Ptr&#123;UInt8&#125;, &#40;Any,&#41;, x&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;Int8&#125;&#125;, x::Symbol&#41; &#61; ccall&#40;:jl_symbol_name, Ptr&#123;Int8&#125;, &#40;Any,&#41;, x&#41;</span>
+            <span class='code'>    with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;UInt8&#125;&#125;, s::String&#41; &#61; ccall&#40;:jl_string_ptr, Ptr&#123;UInt8&#125;, &#40;Any,&#41;, s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;Int8&#125;&#125;, s::String&#41; &#61; ccall&#40;:jl_string_ptr, Ptr&#123;Int8&#125;, &#40;Any,&#41;, s&#41;</span>
+            <span class='code'>The &#96;with_zip_file&#96; function is a utility function that takes a file path and a function as inputs. It first appends the &quot;.zip&quot; extension to the file path to get the path of the corresponding zip file. Then, it tries to unzip the zip file using the &#96;unzip&#96; function. If the unzipping is successful, it calls the provided function with the original file path as an argument. If any error occurs during the unzipping or function execution, the error is rethrown. Finally, it removes the original file using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'># convert strings to String etc. to pass as pointers</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ptr&#123;UInt8&#125;&#125;, s::AbstractString&#41; &#61; String&#40;s&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>cconvert&#40;::Type&#123;Ptr&#123;Int8&#125;&#125;, s::AbstractString&#41; &#61; String&#40;s&#41;</span>
+            <span class='code'>- &#96;f_path::AbstractString&#96;: The file path of the file to be unzipped and processed.</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;func::Function&#96;: The function to be executed with the unzipped file.</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, a::Array&#123;T&#125;&#41; where &#123;T&#125; &#61; ccall&#40;:jl_array_ptr, Ptr&#123;T&#125;, &#40;Any,&#41;, a&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;S&#125;&#125;, a::AbstractArray&#123;T&#125;&#41; where &#123;S,T&#125; &#61; convert&#40;Ptr&#123;S&#125;, unsafe_convert&#40;Ptr&#123;T&#125;, a&#41;&#41;</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>unsafe_convert&#40;::Type&#123;Ptr&#123;T&#125;&#125;, a::AbstractArray&#123;T&#125;&#41; where &#123;T&#125; &#61; error&#40;&quot;conversion to pointer not defined for &#36;&#40;typeof&#40;a&#41;&#41;&quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Define a function to be executed with the unzipped file</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'># unsafe pointer to array conversions</span>
+            <span class='code'>function process_file&#40;file_path&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # Process the file here</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_wrap&#40;Array, pointer::Ptr&#123;T&#125;, dims; own &#61; false&#41;</span>
+            <span class='code'>    println&#40;&quot;Processing file&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>Wrap a Julia &#96;Array&#96; object around the data at the address given by &#96;pointer&#96;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>without making a copy.  The pointer element type &#96;T&#96; determines the array</span>
+            <span class='code'># Call the with_zip_file function</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>element type. &#96;dims&#96; is either an integer &#40;for a 1d array&#41; or a tuple of the array dimensions.</span>
+            <span class='code'>with_zip_file&#40;&quot;path/to/file&quot;, process_file&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>&#96;own&#96; optionally specifies whether Julia should take ownership of the memory,</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>calling &#96;free&#96; on the pointer when the array is no longer referenced.</span>
+            <span class='code'>In this example, the &#96;with_zip_file&#96; function is called with the file path &quot;path/to/file&quot; and the &#96;process_file&#96; function as arguments. The zip file &quot;path/to/file.zip&quot; is unzipped, and then the &#96;process_file&#96; function is called with the original file path &quot;path/to/file&quot;. The function &#96;process_file&#96; can perform any desired operations on the unzipped file.</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>This function is labeled &quot;unsafe&quot; because it will crash if &#96;pointer&#96; is not</span>
+            <span class='code'># Exceptions</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>a valid memory address to data of the requested length. Unlike &#91;&#96;unsafe_load&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>- If any error occurs during the unzipping or function execution, the error is rethrown.</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>and &#91;&#96;unsafe_store&#33;&#96;&#93;&#40;@ref&#41;, the programmer is responsible also for ensuring that the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>underlying data is not accessed through two arrays of different element type, similar</span>
+            <span class='code'># Side Effects</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>to the strict aliasing rule in C.</span>
+            <span class='code'>- The original file specified by &#96;f_path&#96; is removed using the &#96;rm&#96; function.</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_wrap&#40;::Union&#123;Type&#123;Array&#125;,Type&#123;Array&#123;T&#125;&#125;,Type&#123;Array&#123;T,N&#125;&#125;&#125;,</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'>                     p::Ptr&#123;T&#125;, dims::NTuple&#123;N,Int&#125;; own::Bool &#61; false&#41; where &#123;T,N&#125;</span>
+            <span class='code'>- Passes the returned value from &#96;func&#96;.</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_ptr_to_array, Array&#123;T,N&#125;, &#40;Any, Ptr&#123;Cvoid&#125;, Any, Int32&#41;,</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>          Array&#123;T,N&#125;, p, dims, own&#41;</span>
+            <span class='code'>function with_zip_file&#40;f_path::AbstractString, func::Function&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    z_path &#61; f_path * &quot;.zip&quot;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_wrap&#40;::Union&#123;Type&#123;Array&#125;,Type&#123;Array&#123;T&#125;&#125;,Type&#123;Array&#123;T,1&#125;&#125;&#125;,</span>
+            <span class='code'>    out &#61; nothing</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>                     p::Ptr&#123;T&#125;, d::Integer; own::Bool &#61; false&#41; where &#123;T&#125;</span>
+            <span class='code'>    if isfile&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_ptr_to_array_1d, Array&#123;T,1&#125;,</span>
+            <span class='code'>        try</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>          &#40;Any, Ptr&#123;Cvoid&#125;, Csize_t, Cint&#41;, Array&#123;T,1&#125;, p, d, own&#41;</span>
+            <span class='code'>            unzip&#40;z_path&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>unsafe_wrap&#40;Atype::Union&#123;Type&#123;Array&#125;,Type&#123;Array&#123;T&#125;&#125;,Type&#123;Array&#123;T,N&#125;&#125;&#125;,</span>
+            <span class='code'>        catch e</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>            p::Ptr&#123;T&#125;, dims::NTuple&#123;N,&lt;:Integer&#125;; own::Bool &#61; false&#41; where &#123;T,N&#125; &#61;</span>
+            <span class='code'>            rethrow&#40;e&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_wrap&#40;Atype, p, convert&#40;Tuple&#123;Vararg&#123;Int&#125;&#125;, dims&#41;, own &#61; own&#41;</span>
+            <span class='code'>        finally</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            for f in readdir&#40;dirname&#40;f_path&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                if startswith&#40;f, basename&#40;f_path&#41;&#41; &amp;&amp; &#33;endswith&#40;f, &quot;.zip&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_load&#40;p::Ptr&#123;T&#125;, i::Integer&#61;1&#41;</span>
+            <span class='code'>                    rm&#40;joinpath&#40;dirname&#40;f_path&#41;, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_load&#40;p::Ptr&#123;T&#125;, order::Symbol&#41;</span>
+            <span class='code'>                end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_load&#40;p::Ptr&#123;T&#125;, i::Integer, order::Symbol&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>Load a value of type &#96;T&#96; from the address of the &#96;i&#96;th element &#40;1-indexed&#41; starting at &#96;p&#96;.</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>This is equivalent to the C expression &#96;p&#91;i-1&#93;&#96;. Optionally, an atomic memory ordering can</span>
+            <span class='code'>        if isfile&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>be provided.</span>
+            <span class='code'>            out &#61; func&#40;f_path&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>The &#96;unsafe&#96; prefix on this function indicates that no validation is performed on the</span>
+            <span class='code'>            error&#40;&quot;File does not exist: &#36;f_path&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>pointer &#96;p&#96; to ensure that it is valid. Like C, the programmer is responsible for ensuring</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>that referenced memory is not freed or garbage collected while invoking this function.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>Incorrect usage may segfault your program or return garbage answers. Unlike C, dereferencing</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>memory region allocated as different type may be valid provided that the types are compatible.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.10&quot;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>     The &#96;order&#96; argument is available as of Julia 1.10.</span>
+            <span class='code'>    create_trial_3D_system&#40;&#41;::System</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1195,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>See also: &#91;&#96;atomic&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>Create a 3D system with a sin function and specified atoms and grid specifications.</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>unsafe_load&#40;p::Ptr, i::Integer&#61;1&#41; &#61; pointerref&#40;p, Int&#40;i&#41;, 1&#41;</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>unsafe_load&#40;p::Ptr, order::Symbol&#41; &#61; atomic_pointerref&#40;p, order&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_load&#40;p::Ptr, i::Integer, order::Symbol&#41;</span>
+            <span class='code'>system &#61; create_trial_3D_system&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_load&#40;p &#43; &#40;elsize&#40;typeof&#40;p&#41;&#41; * &#40;Int&#40;i&#41; - 1&#41;&#41;, order&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Inputs</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- None</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_store&#33;&#40;p::Ptr&#123;T&#125;, x, i::Integer&#61;1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_store&#33;&#40;p::Ptr&#123;T&#125;, x, order::Symbol&#41;</span>
+            <span class='code'># Outputs</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_store&#33;&#40;p::Ptr&#123;T&#125;, x, i::Integer, order::Symbol&#41;</span>
+            <span class='code'>- A &#96;System&#96; object representing a 3D system with the specified functions, atoms, and grid specifications.</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>Store a value of type &#96;T&#96; to the address of the &#96;i&#96;th element &#40;1-indexed&#41; starting at &#96;p&#96;.</span>
+            <span class='code'>function create_trial_3D_system&#40;;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>This is equivalent to the C expression &#96;p&#91;i-1&#93; &#61; x&#96;. Optionally, an atomic memory ordering</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>can be provided.</span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1355,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Define a 3D sin function to be used as rho, grad, and hess functions</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>The &#96;unsafe&#96; prefix on this function indicates that no validation is performed on the</span>
+            <span class='code'>    f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>pointer &#96;p&#96; to ensure that it is valid. Like C, the programmer is responsible for ensuring</span>
+            <span class='code'>    f3d_xyz&#40;x, y, z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>that referenced memory is not freed or garbage collected while invoking this function.</span>
+            <span class='code'>    grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>Incorrect usage may segfault your program. Unlike C, storing memory region allocated as</span>
+            <span class='code'>    function hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>different type may be valid provided that that the types are compatible.</span>
+            <span class='code'>        return &#91;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.10&quot;</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>     The &#96;order&#96; argument is available as of Julia 1.10.</span>
+            <span class='code'>            -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1445,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#93;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>See also: &#91;&#96;atomic&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>unsafe_store&#33;&#40;p::Ptr&#123;Any&#125;, @nospecialize&#40;x&#41;, i::Integer&#61;1&#41; &#61; pointerset&#40;p, x, Int&#40;i&#41;, 1&#41;</span>
+            <span class='code'>    # Make in-place versions using the above versions</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>unsafe_store&#33;&#40;p::Ptr&#123;T&#125;, x, i::Integer&#61;1&#41; where &#123;T&#125; &#61; pointerset&#40;p, convert&#40;T,x&#41;, Int&#40;i&#41;, 1&#41;</span>
+            <span class='code'>    function rho&#33;&#40;f, r&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>unsafe_store&#33;&#40;p::Ptr&#123;T&#125;, x, order::Symbol&#41; where &#123;T&#125; &#61; atomic_pointerset&#40;p, x isa T ? x : convert&#40;T,x&#41;, order&#41;</span>
+            <span class='code'>        return f&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_store&#33;&#40;p::Ptr, x, i::Integer, order::Symbol&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_store&#33;&#40;p &#43; &#40;elsize&#40;typeof&#40;p&#41;&#41; * &#40;Int&#40;i&#41; - 1&#41;&#41;, x, order&#41;</span>
+            <span class='code'>    function grad&#33;&#40;g, r&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return g&#91;:&#93; &#61; grad3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1535,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    function hess&#33;&#40;h, r&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_modify&#33;&#40;p::Ptr&#123;T&#125;, op, x, &#91;order::Symbol&#93;&#41; -&gt; Pair</span>
+            <span class='code'>        return h&#91;:&#93; &#61; hess3d&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>These atomically perform the operations to get and set a memory address after applying</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>the function &#96;op&#96;. If supported by the hardware &#40;for example, atomic increment&#41;, this may be</span>
+            <span class='code'>    # Define the extent, origin, and spacing for the GridSpec</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>optimized to the appropriate hardware instruction, otherwise its execution will be</span>
+            <span class='code'>    e &#61; 2π * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>similar to:</span>
+            <span class='code'>    o &#61; zeros&#40;3&#41; .- e / 2</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1615,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    s &#61; π / 10 * ones&#40;3&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; unsafe_load&#40;p&#41;</span>
+            <span class='code'>    n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>    z &#61; op&#40;y, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_store&#33;&#40;p, z&#41;</span>
+            <span class='code'>    # Define the lattice for the GridSpec</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>    return y &#61;&gt; z</span>
+            <span class='code'>    l &#61; zeros&#40;3, 3&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1665,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    for i in 1:3</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>The &#96;unsafe&#96; prefix on this function indicates that no validation is performed on the</span>
+            <span class='code'>        l&#91;i, i&#93; &#61; s&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>pointer &#96;p&#96; to ensure that it is valid. Like C, the programmer is responsible for ensuring</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>that referenced memory is not freed or garbage collected while invoking this function.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>Incorrect usage may segfault your program.</span>
+            <span class='code'>    # Create a GridSpec with the defined origin, lattice, and number of points</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.10&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>     This function requires at least Julia 1.10.</span>
+            <span class='code'>    # Create 3D Array of rho values based on the GridSpec</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1745,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    rho_data &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>See also: &#91;&#96;modifyproperty&#33;&#96;&#93;&#40;@ref Base.modifyproperty&#33;&#41;, &#91;&#96;atomic&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>        f3d&#40;o &#43; l * &#91;i, j, k&#93;&#41; for i in 1:n_pts&#91;1&#93;, j in 1:n_pts&#91;2&#93;, k in 1:n_pts&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    &#93;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_modify&#33;&#40;p::Ptr, op, x, order::Symbol&#61;:not_atomic&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>    return atomic_pointermodify&#40;p, op, x, order&#41;</span>
+            <span class='code'>    # Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    atoms &#61; &#91;NuclearCoordinate&#40;&#91;π / 2, π / 2, π / 2&#93;, 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1815,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # Create a System with the 3D sin function and the defined atoms and GridSpec</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_replace&#33;&#40;p::Ptr&#123;T&#125;, expected, desired,</span>
+            <span class='code'>    system &#61; System&#40;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>                   &#91;success_order::Symbol&#91;, fail_order::Symbol&#61;success_order&#93;&#93;&#41; -&gt; &#40;; old, success::Bool&#41;</span>
+            <span class='code'>        name, source, atoms, g, rho_data, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1845,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>These atomically perform the operations to get and conditionally set a memory address to</span>
+            <span class='code'>    return system, f3d, f3d_xyz, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>a given value. If supported by the hardware, this may be optimized to the appropriate</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>hardware instruction, otherwise its execution will be similar to:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1885,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; unsafe_load&#40;p, fail_order&#41;</span>
+            <span class='code'>    create_trial_3D_system_interpolated&#40;; name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;&#41; -&gt; Tuple&#123;System, Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>    ok &#61; y &#61;&#61;&#61; expected</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>    if ok</span>
+            <span class='code'>Create a 3D system that interpolates using grid data generated with a trial 3d &#96;sin&#96; function.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>        unsafe_store&#33;&#40;p, desired, success_order&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;; old &#61; y, success &#61; ok&#41;</span>
+            <span class='code'>- &#96;name::AbstractString&#96; &#40;optional&#41;: The name of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1955,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;source::AbstractString&#96; &#40;optional&#41;: The source of the system. Default is &quot;Test System&quot;.</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>The &#96;unsafe&#96; prefix on this function indicates that no validation is performed on the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>pointer &#96;p&#96; to ensure that it is valid. Like C, the programmer is responsible for ensuring</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>that referenced memory is not freed or garbage collected while invoking this function.</span>
+            <span class='code'>- &#96;system&#96;: A &#96;System&#96; object representing a 3D system with the interpolated functions and grid specifications.</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>Incorrect usage may segfault your program.</span>
+            <span class='code'>- &#96;f&#96;: The interpolated function &#96;f&#40;x&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2005,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;f_xyz&#96;: The interpolated function &#96;f_xyz&#40;x, y, z&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.10&quot;</span>
+            <span class='code'>- &#96;grad&#96;: The gradient function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>     This function requires at least Julia 1.10.</span>
+            <span class='code'>- &#96;hess&#96;: The Hessian function of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2035,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;f&#33;&#96;: An in-place version of the interpolated function.</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>See also: &#91;&#96;replaceproperty&#33;&#96;&#93;&#40;@ref Base.replaceproperty&#33;&#41;, &#91;&#96;atomic&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>- &#96;grad&#33;&#96;: An in-place version of the gradient function.</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2055,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;hess&#33;&#96;: An in-place version of the Hessian function.</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_replace&#33;&#40;p::Ptr&#123;T&#125;, expected, desired, success_order::Symbol&#61;:not_atomic, fail_order::Symbol&#61;success_order&#41; where &#123;T&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2075,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2085,7 @@
           <td>
             
             
-            <span class='code'>    xT &#61; desired isa T ? desired : convert&#40;T, desired&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2095,7 @@
           <td>
             
             
-            <span class='code'>    return atomic_pointerreplace&#40;p, expected, xT, success_order, fail_order&#41;</span>
+            <span class='code'>system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33; &#61; create_trial_3D_system_interpolated&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2105,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2115,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_replace&#33;&#40;p::Ptr&#123;Any&#125;, @nospecialize&#40;expected&#41;, @nospecialize&#40;desired&#41;, success_order::Symbol&#61;:not_atomic, fail_order::Symbol&#61;success_order&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>    return atomic_pointerreplace&#40;p, expected, desired, success_order, fail_order&#41;</span>
+            <span class='code'>function create_trial_3D_system_interpolated&#40;;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    name::AbstractString&#61;&quot;Test System&quot;, source::AbstractString&#61;&quot;Test System&quot;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41;::Tuple&#123;System,Vararg&#123;Function&#125;&#125;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2155,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    g1 &#61; &#40;-3π&#41;:&#40;π / 10&#41;:&#40;3π&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2165,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_swap&#33;&#40;p::Ptr&#123;T&#125;, x, &#91;order::Symbol&#93;&#41;</span>
+            <span class='code'>    n_pts &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2175,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    spacing &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>These atomically perform the operations to simultaneously get and set a memory address.</span>
+            <span class='code'>    gs &#61; GridSpec&#40;&#91;-2π, -2π, -2π&#93;, spacing, &#91;n_pts, n_pts, n_pts&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2195,7 @@
           <td>
             
             
-            <span class='code'>If supported by the hardware, this may be optimized to the appropriate hardware</span>
+            <span class='code'>    sin_data &#61; &#91;3.0 &#43; sum&#40;sin.&#40;&#91;xi, yi, zi&#93;&#41;&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,17 +2205,26 @@
           <td>
             
             
-            <span class='code'>instruction, otherwise its execution will be similar to:</span>
+            <span class='code'>    fz &#61; scale&#40;interpolate&#40;sin_data, BSpline&#40;Cubic&#40;Reflect&#40;OnCell&#40;&#41;&#41;&#41;&#41;&#41;, g1, g1, g1&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
           <td class='lineno'>219</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;20 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;20 &#37;&#41;
+              samples spent in f
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from macro expansion
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L304'>line 304</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>    f&#40;x&#41; &#61; fz&#40;x...&#41; # pointer for later</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2234,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; unsafe_load&#40;p&#41;</span>
+            <span class='code'>    f_xyz&#40;x, y, z&#41; &#61; f&#40;&#91;x, y, z&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2244,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_store&#33;&#40;p, x&#41;</span>
+            <span class='code'>    f&#33;&#40;F, x&#41; &#61; F&#91;:&#93; &#61; &#91;f&#40;x&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2254,7 @@
           <td>
             
             
-            <span class='code'>    return y</span>
+            <span class='code'>    function grad&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2264,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return Interpolations.gradient&#40;fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2274,7 @@
           <td>
             
             
-            <span class='code'>The &#96;unsafe&#96; prefix on this function indicates that no validation is performed on the</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2284,7 @@
           <td>
             
             
-            <span class='code'>pointer &#96;p&#96; to ensure that it is valid. Like C, the programmer is responsible for ensuring</span>
+            <span class='code'>    function hess&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2294,7 @@
           <td>
             
             
-            <span class='code'>that referenced memory is not freed or garbage collected while invoking this function.</span>
+            <span class='code'>        return Interpolations.hessian&#40;fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2304,7 @@
           <td>
             
             
-            <span class='code'>Incorrect usage may segfault your program.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2315,7 +2324,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.10&quot;</span>
+            <span class='code'>    function grad&#33;&#40;F, x&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2325,7 +2334,7 @@
           <td>
             
             
-            <span class='code'>     This function requires at least Julia 1.10.</span>
+            <span class='code'>        return Interpolations.gradient&#33;&#40;F, fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2335,7 +2344,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2343,19 +2352,33 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;20 &#37;&#41;
+              samples spent in hess&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from jb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L331'>line 331</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>See also: &#91;&#96;swapproperty&#33;&#96;&#93;&#40;@ref Base.swapproperty&#33;&#41;, &#91;&#96;atomic&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'>    function hess&#33;&#40;J, x&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
           <td class='lineno'>233</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;20 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>&quot;&quot;&quot;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='Interpolations.jl-5ec6d1bf16949196986d4991ba174a27828f0c3e.html#L395'>hessian&#33;</a>
+              <br />
+            </div>
+            <span class='code'>        return Interpolations.hessian&#33;&#40;J, fz, x...&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2388,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_swap&#33;&#40;p::Ptr&#123;Any&#125;, x, order::Symbol&#61;:not_atomic&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2398,7 @@
           <td>
             
             
-            <span class='code'>    return atomic_pointerswap&#40;p, x, order&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2408,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    g1 &#61; &#40;-2π&#41;:&#40;π / 8&#41;:&#40;2π&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2395,7 +2418,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_swap&#33;&#40;p::Ptr&#123;T&#125;, x, order::Symbol&#61;:not_atomic&#41; where &#123;T&#125;</span>
+            <span class='code'>    n_pts1 &#61; length&#40;g1&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2428,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    spacing1 &#61; diagm&#40;&#91;g1&#91;2&#93; - g1&#91;1&#93; for i in 1:3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2438,7 @@
           <td>
             
             
-            <span class='code'>    xT &#61; x isa T ? x : convert&#40;T, x&#41;</span>
+            <span class='code'>    gs1 &#61; GridSpec&#40;-2pi * ones&#40;3&#41;, spacing1, &#91;n_pts1, n_pts1, n_pts1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2448,7 @@
           <td>
             
             
-            <span class='code'>    return atomic_pointerswap&#40;p, xT, order&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2458,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Define the atoms for the System</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2468,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    atoms &#61; &#91;&#93; #&#91;NuclearCoordinate&#40;&#91;π/2, π/2, π/2&#93;, 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,7 +2478,7 @@
           <td>
             
             
-            <span class='code'># convert a raw Ptr to an object reference, and vice-versa</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2465,7 +2488,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    # make 3D array of f values</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2475,7 +2498,7 @@
           <td>
             
             
-            <span class='code'>    unsafe_pointer_to_objref&#40;p::Ptr&#41;</span>
+            <span class='code'>    f_xyz_data &#61; &#91;f_xyz&#40;xi, yi, zi&#41; for xi in g1, yi in g1, zi in g1&#93;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2495,7 +2518,7 @@
           <td>
             
             
-            <span class='code'>Convert a &#96;Ptr&#96; to an object reference. Assumes the pointer refers to a valid heap-allocated</span>
+            <span class='code'>    system &#61; System&#40;</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2505,7 +2528,7 @@
           <td>
             
             
-            <span class='code'>Julia object. If this is not the case, undefined behavior results, hence this function is</span>
+            <span class='code'>        name, source, atoms, gs1, f_xyz_data, f_xyz, f, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2515,7 +2538,7 @@
           <td>
             
             
-            <span class='code'>considered &quot;unsafe&quot; and should be used with care.</span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2525,7 +2548,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return system, f, f_xyz, grad, hess, f&#33;, grad&#33;, hess&#33;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2535,386 +2558,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;pointer_from_objref&#96;&#93;&#40;@ref&#41;.</span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>unsafe_pointer_to_objref&#40;x::Ptr&#41; &#61; ccall&#40;:jl_value_ptr, Any, &#40;Ptr&#123;Cvoid&#125;,&#41;, x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pointer_from_objref&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Get the memory address of a Julia object as a &#96;Ptr&#96;. The existence of the resulting &#96;Ptr&#96;</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>will not protect the object from garbage collection, so you must ensure that the object</span>
-          </td>
-        </tr>
-        <tr id='L260'>
-          <td class='lineno'>260</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>remains referenced for the whole time that the &#96;Ptr&#96; will be used.</span>
-          </td>
-        </tr>
-        <tr id='L261'>
-          <td class='lineno'>261</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L262'>
-          <td class='lineno'>262</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>This function may not be called on immutable objects, since they do not have</span>
-          </td>
-        </tr>
-        <tr id='L263'>
-          <td class='lineno'>263</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>stable memory addresses.</span>
-          </td>
-        </tr>
-        <tr id='L264'>
-          <td class='lineno'>264</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L265'>
-          <td class='lineno'>265</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>See also &#91;&#96;unsafe_pointer_to_objref&#96;&#93;&#40;@ref&#41;.</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function pointer_from_objref&#40;@nospecialize&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @inline</span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ismutable&#40;x&#41; || error&#40;&quot;pointer_from_objref cannot be used on immutable objects&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ccall&#40;:jl_value_ptr, Ptr&#123;Cvoid&#125;, &#40;Any,&#41;, x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
             <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L272'>
-          <td class='lineno'>272</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L273'>
-          <td class='lineno'>273</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>## limited pointer arithmetic &amp; comparison ##</span>
-          </td>
-        </tr>
-        <tr id='L274'>
-          <td class='lineno'>274</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L275'>
-          <td class='lineno'>275</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>isequal&#40;x::Ptr, y::Ptr&#41; &#61; &#40;x &#61;&#61;&#61; y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L276'>
-          <td class='lineno'>276</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>isless&#40;x::Ptr&#123;T&#125;, y::Ptr&#123;T&#125;&#41; where &#123;T&#125; &#61; x &lt; y</span>
-          </td>
-        </tr>
-        <tr id='L277'>
-          <td class='lineno'>277</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L278'>
-          <td class='lineno'>278</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              2 &#40;0 &#37;&#41;
-              samples spent in &#61;&#61;
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from &#33;&#61;
-              <a href='operators.jl-0054139395a34c781abded689a7b73c8dab0d8d5.html#L276'>line 276</a>
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from sroa_pass&#33;
-              <a href='passes.jl-e059ec6c07573962717f4af094aff083d0a8662c.html#L1058'>line 1058</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='promotion.jl-44ebf2f4984ea9f5732597165bf7a9648777f045.html#L521'>&#61;&#61;</a>
-              <br />
-            </div>
-            <span class='code'>&#61;&#61;&#40;x::Ptr, y::Ptr&#41; &#61; UInt&#40;x&#41; &#61;&#61; UInt&#40;y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L279'>
-          <td class='lineno'>279</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&lt;&#40;x::Ptr,  y::Ptr&#41; &#61; UInt&#40;x&#41; &lt; UInt&#40;y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L280'>
-          <td class='lineno'>280</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>-&#40;x::Ptr,  y::Ptr&#41; &#61; UInt&#40;x&#41; - UInt&#40;y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L281'>
-          <td class='lineno'>281</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L282'>
-          <td class='lineno'>282</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#43;&#40;x::Ptr, y::Integer&#41; &#61; oftype&#40;x, add_ptr&#40;UInt&#40;x&#41;, &#40;y &#37; UInt&#41; &#37; UInt&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L283'>
-          <td class='lineno'>283</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>-&#40;x::Ptr, y::Integer&#41; &#61; oftype&#40;x, sub_ptr&#40;UInt&#40;x&#41;, &#40;y &#37; UInt&#41; &#37; UInt&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L284'>
-          <td class='lineno'>284</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#43;&#40;x::Integer, y::Ptr&#41; &#61; y &#43; x</span>
-          </td>
-        </tr>
-        <tr id='L285'>
-          <td class='lineno'>285</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L286'>
-          <td class='lineno'>286</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>unsigned&#40;x::Ptr&#41; &#61; UInt&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L287'>
-          <td class='lineno'>287</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>signed&#40;x::Ptr&#41; &#61; Int&#40;x&#41;</span>
           </td>
         </tr>
       </tbody>

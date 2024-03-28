@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/bitset.jl</title>
+    <title>StatProfilerHTML - ../src/systems.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Thu, 28 Mar 2024 18:32:44
+        Generated on Thu, 28 Mar 2024 19:39:40
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>import Base: show, &#61;&#61;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using PeriodicTable: Element, elements</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>const Bits &#61; Vector&#123;UInt64&#125;</span>
+            <span class='code'>using LinearAlgebra: diagm</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>const CHK0 &#61; zero&#40;UInt64&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>const NO_OFFSET &#61; Int &#61;&#61;&#61; Int64 ? -one&#40;Int&#41; &lt;&lt; 60 : -one&#40;Int&#41; &lt;&lt; 29</span>
+            <span class='code'>export GridSpec,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'># &#43; NO_OFFSET must be small enough to stay &lt; 0 when added with any offset.</span>
+            <span class='code'>    in_grid,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>#   An offset is in the range -2^57:2^57 &#40;64-bits architectures&#41;</span>
+            <span class='code'>    in_bounding_box,</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>#   or -2^26:2^26 &#40;32-bits architectures&#41;</span>
+            <span class='code'>    clamp_to_bounding_box,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'># &#43; when the offset is NO_OFFSET, the bits field *must* be empty</span>
+            <span class='code'>    apply_translational_symmetry,</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'># &#43; NO_OFFSET could be made to be &gt; 0, but a negative one allows</span>
+            <span class='code'>    generate_interpolation_grid,</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>#   a small optimization in the in&#40;x, ::BitSet&#41; method</span>
+            <span class='code'>    NuclearCoordinate,</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    System</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>mutable struct BitSet &lt;: AbstractSet&#123;Int&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    const bits::Vector&#123;UInt64&#125;</span>
+            <span class='code'># Inner data types</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    # 1st stored Int equals 64*offset</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    offset::Int</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    GridSpec&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    BitSet&#40;&#41; &#61; new&#40;resize&#33;&#40;Vector&#123;UInt64&#125;&#40;undef, 4&#41;, 0&#41;, NO_OFFSET&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>A struct representing a grid specification for analysis.</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>This provides bounds on the analysis grid extent.</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>For grid data this will be the same as that defined by the grid.</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    BitSet&#40;&#91;itr&#93;&#41;</span>
+            <span class='code'>For analytical functions, it can be specified manually, or</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#40;eventually&#41; it will be determined by a bounding box of the</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>Construct a sorted set of &#96;Int&#96;s generated by the given iterable object, or an</span>
+            <span class='code'>atoms in the system.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>empty set. Implemented as a bit string, and therefore designed for dense integer sets.</span>
+            <span class='code'>Note that this works for 2D grids as well as 3D grids.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>If the set will be sparse &#40;for example, holding a few</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>very large integers&#41;, use &#91;&#96;Set&#96;&#93;&#40;@ref&#41; instead.</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;origin::Vector&#123;T&#125;&#96;: The origin of the grid.</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>BitSet&#40;itr&#41; &#61; union&#33;&#40;BitSet&#40;&#41;, itr&#41;</span>
+            <span class='code'>- &#96;lattice::Matrix&#123;T&#125;&#96;: The lattice of the grid.</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;lattice_full::Matrix&#123;T&#125;&#96;: The full lattice of the grid, including the periodic boundary conditions.</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'># Special implementation for BitSet, which lacks a fast &#96;length&#96; method.</span>
+            <span class='code'>- &#96;lattice_full_inv::Matrix&#123;T&#125;&#96;: The inverse of the full lattice of the grid.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>function union&#33;&#40;s::BitSet, itr&#41;</span>
+            <span class='code'>- &#96;n_pts::Vector&#123;Int&#125;&#96;: The number of grid points in each dimension of the grid.</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>    for x in itr</span>
+            <span class='code'>- &#96;n_pts_float::Vector&#123;T&#125;&#96;: The number of grid points in each dimension of the grid, as a vector of floating-point values.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;s, x&#41;</span>
+            <span class='code'>- &#96;n_pts_total::Int&#96;: The total number of grid points in the grid.</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'># Example using the convenience constructor that makes derived fields.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>origin &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>@inline intoffset&#40;s::BitSet&#41; &#61; s.offset &lt;&lt; 6</span>
+            <span class='code'>lattice &#61; &#91;0.1 0.0 0.0; 0.0 0.1 0.0; 0.0 0.0 0.1&#93;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>n_pts &#61; &#91;10, 10, 10&#93;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>empty&#40;s::BitSet, ::Type&#123;Int&#125;&#61;Int&#41; &#61; BitSet&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>emptymutable&#40;s::BitSet, ::Type&#123;Int&#125;&#61;Int&#41; &#61; BitSet&#40;&#41;</span>
+            <span class='code'>gs &#61; GridSpec&#123;Float64&#125;&#40;origin, lattice, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>copy&#40;s1::BitSet&#41; &#61; copy&#33;&#40;BitSet&#40;&#41;, s1&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>copymutable&#40;s::BitSet&#41; &#61; copy&#40;s&#41;</span>
+            <span class='code'>struct GridSpec&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # fields for grid data representation</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>function copy&#33;&#40;dest::BitSet, src::BitSet&#41;</span>
+            <span class='code'>    origin::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    resize&#33;&#40;dest.bits, length&#40;src.bits&#41;&#41;</span>
+            <span class='code'>    lattice::Matrix&#123;T&#125; # lattice vectors as &quot;steps&quot;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    copyto&#33;&#40;dest.bits, src.bits&#41;</span>
+            <span class='code'>    lattice_full::Matrix&#123;T&#125; # lattice vectors with full lattice extent</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    dest.offset &#61; src.offset</span>
+            <span class='code'>    lattice_full_inv::Matrix&#123;T&#125; # inverse of lattice_full</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>    dest</span>
+            <span class='code'>    n_pts::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    n_pts_float::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    n_pts_total::Int</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>sizehint&#33;&#40;s::BitSet, n::Integer&#41; &#61; &#40;sizehint&#33;&#40;s.bits, &#40;n&#43;63&#41; &gt;&gt; 6&#41;; s&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>function _bits_getindex&#40;b::Bits, n::Int, offset::Int&#41;</span>
+            <span class='code'># Overload Base.show to print GridSpec as key:value pairs</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>    ci &#61; _div64&#40;n&#41; - offset &#43; 1</span>
+            <span class='code'>function show&#40;io::IO, gs::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>    1 &lt;&#61; ci &lt;&#61; length&#40;b&#41; || return false</span>
+            <span class='code'>    s &#61; join&#40;&#91;&quot;&#36;k: &#36;&#40;getfield&#40;gs, k&#41;&#41;&quot; for k in fieldnames&#40;GridSpec&#41;&#93;, &quot;, &quot;&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds r &#61; &#40;b&#91;ci&#93; &amp; &#40;one&#40;UInt64&#41; &lt;&lt; _mod64&#40;n&#41;&#41;&#41; &#33;&#61; 0</span>
+            <span class='code'>    return show&#40;io, s&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>    r</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># overload &#61;&#61; operator</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>function _bits_findnext&#40;b::Bits, start::Int&#41;</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;a::GridSpec, b::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    # start is 0-based</span>
+            <span class='code'>    return a.n_pts &#61;&#61; b.n_pts &amp;&amp; a.origin &#61;&#61; b.origin &amp;&amp; a.lattice &#61;&#61; b.lattice</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>    # @assert start &gt;&#61; 0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>    _div64&#40;start&#41; &#43; 1 &gt; length&#40;b&#41; &amp;&amp; return -1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61; unsafe_bitfindnext&#40;b, start&#43;1&#41;</span>
+            <span class='code'># Convenience constructor that calculates the derived veriables</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61;&#61;&#61; nothing ? -1 : ind - 1</span>
+            <span class='code'>function GridSpec&#40;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    origin::Vector&#123;T&#125;, lattice::Matrix&#123;T&#125;, n_pts::Vector&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>function _bits_findprev&#40;b::Bits, start::Int&#41;</span>
+            <span class='code'>    n_pts &#61; max.&#40;1, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>    # start is 0-based</span>
+            <span class='code'>    n_pts_float &#61; convert&#40;Vector&#123;eltype&#40;origin&#41;&#125;, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>    # @assert start &lt;&#61; 64 * length&#40;b&#41; - 1</span>
+            <span class='code'>    n_pts_total &#61; prod&#40;n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    start &gt;&#61; 0 || return -1</span>
+            <span class='code'>    lattice_full &#61; diagm&#40;n_pts_float&#41; * lattice</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61; unsafe_bitfindprev&#40;b, start&#43;1&#41;</span>
+            <span class='code'>    lattice_full_inv &#61; inv&#40;lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>    ind &#61;&#61;&#61; nothing ? -1 : ind - 1</span>
+            <span class='code'>    return GridSpec&#40;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        origin, lattice, lattice_full, lattice_full_inv, n_pts, n_pts_float, n_pts_total</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'># An internal function for setting the inclusion bit for a given integer</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>@inline function _setint&#33;&#40;s::BitSet, idx::Int, b::Bool&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>    cidx &#61; _div64&#40;idx&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    len &#61; length&#40;s.bits&#41;</span>
+            <span class='code'>    generate_interpolation_grid&#40;gs::GridSpec&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>    diff &#61; cidx - s.offset</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>    if diff &gt;&#61; len</span>
+            <span class='code'>Calculate a grid for interpolation based on a &#96;GridSpec&#96; object.</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>        b || return s # setting a bit to zero outside the set&#39;s bits is a no-op</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>## Arguments</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'>        # we put the following test within one of the two branches,</span>
+            <span class='code'>- &#96;gs&#96;: A &#96;GridSpec&#96; object that defines the grid.</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>        # with the NO_OFFSET trick, to avoid having to perform it at</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>        # each and every call to _setint&#33;</span>
+            <span class='code'>## Returns</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>        if s.offset &#61;&#61; NO_OFFSET # initialize the offset</span>
+            <span class='code'>- &#96;g&#96;: A grid of points corresponding to density data, represented as a list of three ranges &#40;one for each dimension&#41;.</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>            # we assume isempty&#40;s.bits&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>            s.offset &#61; cidx</span>
+            <span class='code'>## Example</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>            diff &#61; 0</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,31 +965,17 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>gs &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
           <td class='lineno'>95</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in _setint&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from push&#33;
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L248'>line 248</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L111'>_growend0&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        _growend0&#33;&#40;s.bits, diff - len &#43; 1&#41;</span>
+            
+            
+            <span class='code'>generate_interpolation_grid&#40;gs&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +985,7 @@
           <td>
             
             
-            <span class='code'>    elseif diff &lt; 0</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +995,7 @@
           <td>
             
             
-            <span class='code'>        b || return s</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>        _growbeg0&#33;&#40;s.bits, -diff&#41;</span>
+            <span class='code'>function generate_interpolation_grid&#40;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>        s.offset &#43;&#61; diff</span>
+            <span class='code'>    gs::GridSpec; n_pts::Vector&#123;Int&#125;&#61;gs.n_pts</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>        diff &#61; 0</span>
+            <span class='code'>&#41;::Vector&#123;StepRangeLen&#125;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    # # Calculate grid for interpolation &#40;xyz points corresponding to density data&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>    _unsafe_bitsetindex&#33;&#40;s.bits, b, diff&#43;1, _mod64&#40;idx&#41;&#41;</span>
+            <span class='code'>    # # For each dimension, create the set of points, and check the count against the</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'>    # # corresponding gs.n_pts &#40;integer&#41; value, and remake the set of points if necessary</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # # with a higher or lower stop value in order to control the number of points.</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # # This is hacky but I don&#39;t care.</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1085,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @assert length&#40;n_pts&#41; &#61;&#61; 3 &quot;Only 3D systems are supported&quot;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1109,7 +1095,7 @@
           <td>
             
             
-            <span class='code'># An internal function to resize a Bits object and ensure the newly allocated</span>
+            <span class='code'>    g &#61; Vector&#123;StepRangeLen&#125;&#40;undef, 3&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1119,7 +1105,7 @@
           <td>
             
             
-            <span class='code'># elements are zeroed &#40;will become unnecessary if this behavior changes&#41;</span>
+            <span class='code'>    n_pts_float &#61; convert&#40;Vector&#123;eltype&#40;gs.origin&#41;&#125;, n_pts&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1129,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>@inline function _growend0&#33;&#40;b::Bits, nchunks::Int&#41;</span>
+            <span class='code'>    for i in 1:3</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1139,31 +1125,17 @@
           <td>
             
             
-            <span class='code'>    len &#61; length&#40;b&#41;</span>
+            <span class='code'>        offset &#61; 0.2</span>
           </td>
         </tr>
         <tr id='L111'>
           <td class='lineno'>111</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in _growend0&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _setint&#33;
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L95'>line 95</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L1072'>_growend&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    _growend&#33;&#40;b, nchunks&#41;</span>
+            
+            
+            <span class='code'>        offset_step &#61; 0.01</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1173,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    for i in len&#43;1:length&#40;b&#41;</span>
+            <span class='code'>        start &#61; gs.origin&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1183,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds b&#91;i&#93; &#61; CHK0 # resize&#33; gives dirty memory</span>
+            <span class='code'>        first_iter &#61; true</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1193,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        while first_iter || length&#40;g&#91;i&#93;&#41; &#33;&#61; n_pts&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1203,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            first_iter &#61; false</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1213,7 +1185,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            stop &#61; &#40;gs.origin &#43; gs.lattice * &#40;n_pts_float .&#43; offset&#41;&#41;&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1223,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>@inline function _growbeg0&#33;&#40;b::Bits, nchunks::Int&#41;</span>
+            <span class='code'>            step &#61; &#40;stop - start&#41; / n_pts_float&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1233,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>    _growbeg&#33;&#40;b, nchunks&#41;</span>
+            <span class='code'>            g&#91;i&#93; &#61; &#40;start:step:stop&#41;&#91;1:&#40;end - 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1243,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>    for i in 1:nchunks</span>
+            <span class='code'>            if length&#40;g&#91;i&#93;&#41; &gt; n_pts&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1253,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds b&#91;i&#93; &#61; CHK0</span>
+            <span class='code'>                offset -&#61; offset_step</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1263,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>            elseif length&#40;g&#91;i&#93;&#41; &lt; n_pts&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1273,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                offset &#43;&#61; offset_step</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1283,7 +1255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1293,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>function union&#33;&#40;s::BitSet, r::AbstractUnitRange&#123;&lt;:Integer&#125;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1303,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>    isempty&#40;r&#41; &amp;&amp; return s</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1313,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    a, b &#61; Int&#40;first&#40;r&#41;&#41;, Int&#40;last&#40;r&#41;&#41;</span>
+            <span class='code'>    # g &#61; &#91;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1323,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    cidxa &#61; _div64&#40;a&#41;</span>
+            <span class='code'>    #     begin</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1333,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>    cidxb &#61; _div64&#40;b&#41;</span>
+            <span class='code'>    #         start &#61; gs.origin&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1343,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>    if s.offset &#61;&#61; NO_OFFSET</span>
+            <span class='code'>    #         stop &#61; &#40;gs.origin &#43; gs.lattice * &#40;gs.n_pts_float .&#43; 0.25&#41;&#41;&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1353,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>        s.offset &#61; cidxa</span>
+            <span class='code'>    #         step &#61; &#40;stop - start&#41; / gs.n_pts_float&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1363,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    #         &#40;start:step:stop&#41;&#91;1:&#40;end - 1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1373,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>    len &#61; length&#40;s.bits&#41;</span>
+            <span class='code'>    #     end for i in 1:3</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1383,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>    diffa &#61; cidxa - s.offset</span>
+            <span class='code'>    # &#93;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1393,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>    diffb &#61; cidxb - s.offset</span>
+            <span class='code'>    return g</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1403,7 +1375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1413,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>    # grow s.bits as necessary</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1423,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>    if diffb &gt;&#61; len</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1433,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>        _growend0&#33;&#40;s.bits, diffb - len &#43; 1&#41;</span>
+            <span class='code'>    function apply_translational_symmetry&#40;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1443,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        r::Vector&#123;T&#125;, grid::GridSpec, is_periodic::Vector&#123;Bool&#125;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1453,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>    if diffa &lt; 0</span>
+            <span class='code'>    &#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1463,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>        _growbeg0&#33;&#40;s.bits, -diffa&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1473,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>        s.offset &#61; cidxa # s.offset &#43;&#61; diffa</span>
+            <span class='code'>Apply translational symmetry to a given position vector &#96;r&#96; based on the grid specification &#96;grid&#96;. If the grid is periodic, the function adjusts the position vector to ensure it falls within the grid boundaries.</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1483,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>        diffb -&#61; diffa</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1493,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>        diffa &#61; 0</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1503,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector to apply translational symmetry to.</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1513,7 +1485,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;grid::GridSpec&#96;: The grid specification that defines the boundaries and periodicity of the grid.</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1523,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>    # update s.bits</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1533,7 +1505,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; _mod64&#40;a&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1543,7 +1515,7 @@
           <td>
             
             
-            <span class='code'>    j &#61; _mod64&#40;b&#41;</span>
+            <span class='code'>- &#96;r_new::Vector&#123;T&#125;&#96;: The position vector with translational symmetry applied, ensuring it falls within the grid boundaries.</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1553,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds if diffa &#61;&#61; diffb</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1563,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>        s.bits&#91;diffa &#43; 1&#93; |&#61; &#40;&#40;&#40;~CHK0&#41; &gt;&gt; i&#41; &lt;&lt; &#40;i&#43;63-j&#41;&#41; &gt;&gt; &#40;63-j&#41;</span>
+            <span class='code'># Example Usage</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1573,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1583,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>        s.bits&#91;diffa &#43; 1&#93; |&#61; &#40;&#40;~CHK0&#41; &gt;&gt; i&#41; &lt;&lt; i</span>
+            <span class='code'>r &#61; &#91;1.5, 2.5, 3.5&#93;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1593,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>        s.bits&#91;diffb &#43; 1&#93; |&#61; &#40;~CHK0  &lt;&lt; &#40;63-j&#41;&#41; &gt;&gt; &#40;63-j&#41;</span>
+            <span class='code'>grid &#61; GridSpec&#123;Float64&#125;&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1603,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>        for n &#61; diffa&#43;1:diffb-1</span>
+            <span class='code'>apply_translational_symmetry&#40;r, grid, &#91;true, true, true&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1613,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>            s.bits&#91;n&#43;1&#93; &#61; ~CHK0</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1623,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1633,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function apply_translational_symmetry&#40;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1643,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'>    r::Vector&#123;T&#125;, grid::GridSpec, is_periodic::Vector&#123;Bool&#125;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1653,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#41;::Vector&#123;T&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1663,7 +1635,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1673,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>function _matched_map&#33;&#40;f, s1::BitSet, s2::BitSet&#41;</span>
+            <span class='code'>    r1 &#61; grid.lattice_full_inv * &#40;r - grid.origin&#41;</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1683,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>    left_false_is_false &#61; f&#40;false, false&#41; &#61;&#61; f&#40;false, true&#41; &#61;&#61; false</span>
+            <span class='code'>    # @debug &quot;Transformed to lattice basis&quot; r r1</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1693,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>    right_false_is_false &#61; f&#40;false, false&#41; &#61;&#61; f&#40;true, false&#41; &#61;&#61; false</span>
+            <span class='code'>    # Now make a copy of grid.lattice_full with the non-periodic </span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1703,7 +1675,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # apply periodicity by taking the fractional part of dimensions for which is_periodic is true. This also works for values below 0.</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1713,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>    # we must first handle the NO_OFFSET case; we could test for</span>
+            <span class='code'>    r1&#91;is_periodic&#93; &#61; mod.&#40;r1&#91;is_periodic&#93;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1723,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>    # isempty&#40;s1&#41; but it can be costly, so the user has to call</span>
+            <span class='code'>    # transform back to cartesian basis</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1733,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>    # empty&#33;&#40;s1&#41; herself before-hand to re-initialize to NO_OFFSET</span>
+            <span class='code'>    out &#61; grid.lattice_full * r1 &#43; grid.origin</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1743,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>    if s1.offset &#61;&#61; NO_OFFSET</span>
+            <span class='code'>    # @debug &quot;Applied symmetry and transformed back to cartesian basis&quot; r1 out</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1753,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>        return left_false_is_false ? s1 : copy&#33;&#40;s1, s2&#41;</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1763,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>    elseif s2.offset &#61;&#61; NO_OFFSET</span>
+            <span class='code'>    # FIXME: Fix translational symmetry for grad/hess calculations</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1773,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>        return right_false_is_false ? empty&#33;&#40;s1&#41; : s1</span>
+            <span class='code'>    #  Interpolations.jl currently doesn&#39;t support periodic hessian calculation.</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1783,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    #  The current implementation suffers from boundary condition effects as you approach the edge of the grid.</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1793,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>    s1.offset &#61; _matched_map&#33;&#40;f, s1.bits, s1.offset, s2.bits, s2.offset,</span>
+            <span class='code'>    #  A proper workaround would:</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1803,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>                              left_false_is_false, right_false_is_false&#41;</span>
+            <span class='code'>    #  1. Use an Interplations.jl interpolant with periodic boundary conditions for rho and grad, which it currently supports, and then</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1813,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>    s1</span>
+            <span class='code'>    #  2. Use a finite difference approximation for the hessian at the periodic boundary, using the interpolated gradients and manually applied translational symmetry.</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1823,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    #  I do worry that even that type of work around would suffer from hessian error at the boundaries unless the calculation was accurate on par with that used by Interpolations.jl for rho/grad.</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1833,7 +1805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1843,7 +1815,7 @@
           <td>
             
             
-            <span class='code'># An internal function that takes a pure function &#96;f&#96; and maps across two BitArrays</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1853,7 +1825,7 @@
           <td>
             
             
-            <span class='code'># allowing the lengths and offsets to be different and altering b1 with the result</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1863,7 +1835,7 @@
           <td>
             
             
-            <span class='code'># WARNING: the assumptions written in the else clauses must hold</span>
+            <span class='code'>    in_bounding_box&#40;p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V::Matrix&#123;T&#125;&#41;::Bool</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1873,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>function _matched_map&#33;&#40;f, a1::Bits, b1::Int, a2::Bits, b2::Int,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1883,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>                       left_false_is_false::Bool, right_false_is_false::Bool&#41;</span>
+            <span class='code'>Returns &#96;true&#96; if the point &#96;p&#96; is inside the bounding box defined by the origin &#96;o&#96; and the inverse lattice &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1893,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>    l1, l2 &#61; length&#40;a1&#41;, length&#40;a2&#41;</span>
+            <span class='code'>Dimensions must match between &#96;p&#96;, &#96;o&#96;, and &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1903,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>    bdiff &#61; b2 - b1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1913,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>    e1, e2 &#61; l1&#43;b1, l2&#43;b2</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1923,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>    ediff &#61; e2 - e1</span>
+            <span class='code'>- &#96;p::Vector&#123;T&#125;&#96;: The point to test for containment in the bounding box.</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1933,7 +1905,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;o::Vector&#123;T&#125;&#96;: The origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1943,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>    # map&#33; over the common indices</span>
+            <span class='code'>- &#96;V::Matrix&#123;T&#125;&#96;: The inverse lattice of the lattice vector which describes the extent of the bounding box.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1953,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds for i &#61; max&#40;1, 1&#43;bdiff&#41;:min&#40;l1, l2&#43;bdiff&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1963,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>        a1&#91;i&#93; &#61; f&#40;a1&#91;i&#93;, a2&#91;i-bdiff&#93;&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1973,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>- &#96;Bool&#96;: &#96;true&#96; if the point &#96;p&#96; is inside the bounding box, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1993,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>    if ediff &gt; 0</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2003,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>        if left_false_is_false</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2013,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
+            <span class='code'>julia&gt; p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2023,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;false, x&#41; &#61;&#61; x</span>
+            <span class='code'>julia&gt; o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2033,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>            _growend&#33;&#40;a1, ediff&#41;</span>
+            <span class='code'>julia&gt; V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2043,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>            # if a1 and a2 are not overlapping, we infer implied &quot;false&quot; values from a2</span>
+            <span class='code'>julia&gt; in_bounding_box&#40;p, o, V&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2053,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>            for outer l1 &#61; l1&#43;1:bdiff</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2063,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>                @inbounds a1&#91;l1&#93; &#61; CHK0</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2073,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2081,9 +2053,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in in_bounding_box
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from in_bounding_box
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L236'>line 236</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>            # update ediff in case l1 was updated</span>
+            <span class='code'>function in_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2093,7 +2074,7 @@
           <td>
             
             
-            <span class='code'>            ediff &#61; e2 - l1 - b1</span>
+            <span class='code'>    p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2103,7 +2084,7 @@
           <td>
             
             
-            <span class='code'>            # copy actual chunks from a2</span>
+            <span class='code'>&#41;::Bool where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2113,7 +2094,7 @@
           <td>
             
             
-            <span class='code'>            unsafe_copyto&#33;&#40;a1, l1&#43;1, a2, l2&#43;1-ediff, ediff&#41;</span>
+            <span class='code'>    D &#61; length&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2123,7 +2104,7 @@
           <td>
             
             
-            <span class='code'>            l1 &#61; length&#40;a1&#41;</span>
+            <span class='code'>    @assert D &#61;&#61; size&#40;V_inv, 1&#41; &#61;&#61; size&#40;p, 1&#41; &quot;Dimension mismatch&quot;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2133,7 +2114,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2143,7 +2124,7 @@
           <td>
             
             
-            <span class='code'>    elseif ediff &lt; 0</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2153,7 +2134,7 @@
           <td>
             
             
-            <span class='code'>        if right_false_is_false</span>
+            <span class='code'>    x &#61; V_inv * &#40;p - o&#41;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2163,17 +2144,22 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L212'>
           <td class='lineno'>212</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>            _deleteend&#33;&#40;a1, min&#40;l1, -ediff&#41;&#41;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='broadcast.jl-452d9d2e3a2787f40b88516ed5b304de3fe060e3.html#L903'>materialize</a>
+              <br />
+            </div>
+            <span class='code'>    return all&#40;0 .&lt;&#61; x .&lt;&#61; 1&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2183,7 +2169,7 @@
           <td>
             
             
-            <span class='code'>            # no need to update l1, as if bdiff &gt; 0 &#40;case below&#41;, then bdiff will</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2193,7 +2179,7 @@
           <td>
             
             
-            <span class='code'>            # be smaller anyway than an updated l1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2203,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;x, false&#41; &#61;&#61; x</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2213,7 +2199,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they already have the</span>
+            <span class='code'>    in_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#41;::Bool</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2223,7 +2209,7 @@
           <td>
             
             
-            <span class='code'>            # correct value</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2233,7 +2219,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>Check if a point &#96;p&#96; is within the bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2243,7 +2229,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2253,7 +2239,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2263,7 +2249,7 @@
           <td>
             
             
-            <span class='code'>    if bdiff &lt; 0</span>
+            <span class='code'>- &#96;p&#96;: A Vector&#123;T&#125; representing the coordinates of a point.</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2273,7 +2259,7 @@
           <td>
             
             
-            <span class='code'>        if left_false_is_false</span>
+            <span class='code'>- &#96;gs&#96;: A GridSpec object representing the specifications of a grid.</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2283,7 +2269,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the leading bits — they&#39;re all false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2293,7 +2279,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;false, x&#41; &#61;&#61; x</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2303,7 +2289,7 @@
           <td>
             
             
-            <span class='code'>            _growbeg&#33;&#40;a1, -bdiff&#41;</span>
+            <span class='code'>A boolean value indicating whether the point &#96;p&#96; is within the bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2313,7 +2299,7 @@
           <td>
             
             
-            <span class='code'>            # if a1 and a2 are not overlapping, we infer implied &quot;false&quot; values from a2</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2323,7 +2309,7 @@
           <td>
             
             
-            <span class='code'>            for i &#61; l2&#43;1:-bdiff</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2333,7 +2319,7 @@
           <td>
             
             
-            <span class='code'>                @inbounds a1&#91;i&#93; &#61; CHK0</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2343,7 +2329,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>p &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2353,7 +2339,7 @@
           <td>
             
             
-            <span class='code'>            b1 &#43;&#61; bdiff # updated return value</span>
+            <span class='code'>gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2363,7 +2349,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>in_bounding_box&#40;p, gs&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2373,7 +2359,7 @@
           <td>
             
             
-            <span class='code'>            # copy actual chunks from a2</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2383,7 +2369,7 @@
           <td>
             
             
-            <span class='code'>            unsafe_copyto&#33;&#40;a1, 1, a2, 1, min&#40;-bdiff, l2&#41;&#41;</span>
+            <span class='code'>The expected output is a boolean value indicating whether the point is within the bounding box or not.</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2393,7 +2379,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2403,17 +2389,31 @@
           <td>
             
             
-            <span class='code'>    elseif bdiff &gt; 0</span>
+            <span class='code'>function in_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#41;::Bool where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L236'>
           <td class='lineno'>236</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        if right_false_is_false</span>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in in_bounding_box
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from jb&#33;
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L330'>line 330</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='systems.jl-aad801bccb2afccee29bd505d52e993c028f1145.html#L203'>in_bounding_box</a>
+              <br />
+            </div>
+            <span class='code'>    return in_bounding_box&#40;p, gs.origin, gs.lattice_full_inv&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2423,7 +2423,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2433,7 +2433,7 @@
           <td>
             
             
-            <span class='code'>            _deletebeg&#33;&#40;a1, min&#40;l1, bdiff&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2443,7 +2443,7 @@
           <td>
             
             
-            <span class='code'>            b1 &#43;&#61; bdiff</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2453,7 +2453,7 @@
           <td>
             
             
-            <span class='code'>        else # @assert f&#40;x, false&#41; &#61;&#61; x</span>
+            <span class='code'>    clamp_to_bounding_box&#33;&#40;p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2463,7 +2463,7 @@
           <td>
             
             
-            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they already have the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2473,7 +2473,7 @@
           <td>
             
             
-            <span class='code'>            # correct value</span>
+            <span class='code'>Clip a point &#96;p&#96; to a bounding box defined by an origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2483,7 +2483,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2493,7 +2493,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2503,7 +2503,7 @@
           <td>
             
             
-            <span class='code'>    b1 # the new offset</span>
+            <span class='code'>- &#96;p&#96;: A vector representing the coordinates of a point, which will be modified in-place.</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2513,7 +2513,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;o&#96;: A vector representing the origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2523,31 +2523,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;V_inv&#96;: A matrix representing the inverse of the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L248'>
           <td class='lineno'>248</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in push&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from basic_blocks_starts
-              <a href='ir.jl-99f4bb597df652b28f172808c2a641e0ee1afd99.html#L49'>line 49</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='bitset.jl-f6a73adffb9b907607cbf78cabc5c8f4f2ba8955.html#L95'>_setint&#33;</a>
-              <br />
-            </div>
-            <span class='code'>@inline push&#33;&#40;s::BitSet, n::Integer&#41; &#61; _setint&#33;&#40;s, Int&#40;n&#41;, true&#41;</span>
+            
+            
+            <span class='code'>- &#96;V&#96;: A matrix representing the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2567,7 +2553,7 @@
           <td>
             
             
-            <span class='code'>push&#33;&#40;s::BitSet, ns::Integer...&#41; &#61; &#40;for n in ns; push&#33;&#40;s, n&#41;; end; s&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2577,7 +2563,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Nothing</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2587,7 +2573,7 @@
           <td>
             
             
-            <span class='code'>@inline pop&#33;&#40;s::BitSet&#41; &#61; pop&#33;&#40;s, last&#40;s&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2597,7 +2583,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2607,7 +2593,7 @@
           <td>
             
             
-            <span class='code'>@inline function pop&#33;&#40;s::BitSet, n::Integer&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2617,7 +2603,7 @@
           <td>
             
             
-            <span class='code'>    if n in s</span>
+            <span class='code'>p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2627,7 +2613,7 @@
           <td>
             
             
-            <span class='code'>        delete&#33;&#40;s, n&#41;</span>
+            <span class='code'>o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2637,7 +2623,7 @@
           <td>
             
             
-            <span class='code'>        n</span>
+            <span class='code'>V_inv &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2647,7 +2633,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2657,7 +2643,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;KeyError&#40;n&#41;&#41;</span>
+            <span class='code'>clamp_to_bounding_box&#33;&#40;p, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2667,7 +2653,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2677,7 +2663,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2687,7 +2673,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function clamp_to_bounding_box&#33;&#40;</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2697,7 +2683,7 @@
           <td>
             
             
-            <span class='code'>@inline function pop&#33;&#40;s::BitSet, n::Integer, default&#41;</span>
+            <span class='code'>    p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2707,7 +2693,7 @@
           <td>
             
             
-            <span class='code'>    if n in s</span>
+            <span class='code'>&#41;::Nothing where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2717,7 +2703,7 @@
           <td>
             
             
-            <span class='code'>        delete&#33;&#40;s, n&#41;</span>
+            <span class='code'>    D &#61; length&#40;o&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2727,7 +2713,7 @@
           <td>
             
             
-            <span class='code'>        n</span>
+            <span class='code'>    @assert D &#61;&#61; size&#40;V_inv, 1&#41; &#61;&#61; size&#40;p, 1&#41; &quot;Dimension mismatch&quot;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2737,7 +2723,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2747,7 +2733,7 @@
           <td>
             
             
-            <span class='code'>        default</span>
+            <span class='code'>    # transform to lattice basis, using grid.lattice_full_inv</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2757,7 +2743,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    x &#61; V_inv * &#40;p - o&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2767,7 +2753,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2777,7 +2763,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x .&#61; clamp.&#40;x, 0, 1&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2787,7 +2773,7 @@
           <td>
             
             
-            <span class='code'>@inline _is_convertible_Int&#40;n&#41; &#61; typemin&#40;Int&#41; &lt;&#61; n &lt;&#61; typemax&#40;Int&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2797,7 +2783,7 @@
           <td>
             
             
-            <span class='code'>@inline delete&#33;&#40;s::BitSet, n::Int&#41; &#61; _setint&#33;&#40;s, n, false&#41;</span>
+            <span class='code'>    # transform back to cartesian basis</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2807,7 +2793,7 @@
           <td>
             
             
-            <span class='code'>@inline delete&#33;&#40;s::BitSet, n::Integer&#41; &#61; _is_convertible_Int&#40;n&#41; ? delete&#33;&#40;s, Int&#40;n&#41;&#41; : s</span>
+            <span class='code'>    p .&#61; V * x &#43; o</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2827,7 +2813,7 @@
           <td>
             
             
-            <span class='code'>popfirst&#33;&#40;s::BitSet&#41; &#61; pop&#33;&#40;s, first&#40;s&#41;&#41;</span>
+            <span class='code'>    return nothing</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2837,7 +2823,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2847,7 +2833,7 @@
           <td>
             
             
-            <span class='code'>function empty&#33;&#40;s::BitSet&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2857,7 +2843,7 @@
           <td>
             
             
-            <span class='code'>    empty&#33;&#40;s.bits&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2867,7 +2853,7 @@
           <td>
             
             
-            <span class='code'>    s.offset &#61; NO_OFFSET</span>
+            <span class='code'>    clamp_to_bounding_box&#40;p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;&#41;::Vector&#123;T&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2877,7 +2863,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2887,7 +2873,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Clip a point &#96;p&#96; to a bounding box defined by an origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2907,7 +2893,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;s::BitSet&#41; &#61; _check0&#40;s.bits, 1, length&#40;s.bits&#41;&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2917,7 +2903,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;p&#96;: A vector representing the coordinates of a point.</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2927,7 +2913,7 @@
           <td>
             
             
-            <span class='code'># Mathematical set functions: union&#33;, intersect&#33;, setdiff&#33;, symdiff&#33;</span>
+            <span class='code'>- &#96;o&#96;: A vector representing the origin of the bounding box.</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2937,7 +2923,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;V_inv&#96;: A matrix representing the inverse of the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2947,7 +2933,7 @@
           <td>
             
             
-            <span class='code'>union&#40;s::BitSet, sets...&#41; &#61; union&#33;&#40;copy&#40;s&#41;, sets...&#41;</span>
+            <span class='code'>- &#96;V&#96;: A matrix representing the vertices of the bounding box.</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2957,7 +2943,7 @@
           <td>
             
             
-            <span class='code'>union&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;|, s1, s2&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2967,7 +2953,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2977,7 +2963,7 @@
           <td>
             
             
-            <span class='code'>intersect&#40;s1::BitSet, s2::BitSet&#41; &#61;</span>
+            <span class='code'>The clipped point that falls within the bounding box defined by the origin &#96;o&#96; and vertices &#96;V&#96;.</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2987,7 +2973,7 @@
           <td>
             
             
-            <span class='code'>    length&#40;s1.bits&#41; &lt; length&#40;s2.bits&#41; ? intersect&#33;&#40;copy&#40;s1&#41;, s2&#41; : intersect&#33;&#40;copy&#40;s2&#41;, s1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2997,7 +2983,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -3007,7 +2993,7 @@
           <td>
             
             
-            <span class='code'>intersect&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;&amp;, s1, s2&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -3017,7 +3003,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>p &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -3027,7 +3013,7 @@
           <td>
             
             
-            <span class='code'>setdiff&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;&#40;p, q&#41; -&gt; p &amp; ~q, s1, s2&#41;</span>
+            <span class='code'>o &#61; &#91;0.0, 0.0, 0.0&#93;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3037,7 +3023,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>V_inv &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3047,7 +3033,7 @@
           <td>
             
             
-            <span class='code'>function symdiff&#33;&#40;s::BitSet, ns&#41;</span>
+            <span class='code'>V &#61; &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3057,7 +3043,7 @@
           <td>
             
             
-            <span class='code'>    for x in ns</span>
+            <span class='code'>clamp_to_bounding_box&#40;p, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3067,7 +3053,7 @@
           <td>
             
             
-            <span class='code'>        int_symdiff&#33;&#40;s, x&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3077,7 +3063,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3087,7 +3073,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'>function clamp_to_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3097,7 +3083,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    p::Vector&#123;T&#125;, o::Vector&#123;T&#125;, V_inv::Matrix&#123;T&#125;, V::Matrix&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3107,7 +3093,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#41;::Vector&#123;T&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3117,7 +3103,7 @@
           <td>
             
             
-            <span class='code'>function symdiff&#33;&#40;s::BitSet, ns::AbstractSet&#41;</span>
+            <span class='code'>    p1 &#61; copy&#40;p&#41;</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3127,7 +3113,7 @@
           <td>
             
             
-            <span class='code'>    for x in ns</span>
+            <span class='code'>    clamp_to_bounding_box&#33;&#40;p1, o, V_inv, V&#41;</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3137,7 +3123,7 @@
           <td>
             
             
-            <span class='code'>        int_symdiff&#33;&#40;s, x&#41;</span>
+            <span class='code'>    return p1</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3147,7 +3133,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3157,7 +3143,7 @@
           <td>
             
             
-            <span class='code'>    return s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3167,7 +3153,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3177,7 +3163,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    clamp_to_bounding_box&#40;p::Vector&#123;T&#125;, gs::GridSpec&#41;::Vector&#123;T&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3187,7 +3173,7 @@
           <td>
             
             
-            <span class='code'>function int_symdiff&#33;&#40;s::BitSet, n::Integer&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3197,7 +3183,7 @@
           <td>
             
             
-            <span class='code'>    n0 &#61; Int&#40;n&#41;</span>
+            <span class='code'>Clip the vector &#96;p&#96; to a bounding box defined by the &#96;GridSpec&#96; object &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3207,7 +3193,7 @@
           <td>
             
             
-            <span class='code'>    val &#61; &#33;&#40;n0 in s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3217,7 +3203,7 @@
           <td>
             
             
-            <span class='code'>    _setint&#33;&#40;s, n0, val&#41;</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3227,7 +3213,7 @@
           <td>
             
             
-            <span class='code'>    s</span>
+            <span class='code'>- &#96;p&#96;: A vector of AbstractFloat values representing a point in space.</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3237,7 +3223,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;gs&#96;: A GridSpec object containing information about the bounding box.</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3257,7 +3243,7 @@
           <td>
             
             
-            <span class='code'>symdiff&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;xor, s1, s2&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3267,7 +3253,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>A vector representing the clipped point in the original basis.</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3277,7 +3263,7 @@
           <td>
             
             
-            <span class='code'>filter&#33;&#40;f, s::BitSet&#41; &#61; unsafe_filter&#33;&#40;f, s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3287,7 +3273,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3297,7 +3283,7 @@
           <td>
             
             
-            <span class='code'>@inline in&#40;n::Int, s::BitSet&#41; &#61; _bits_getindex&#40;s.bits, n, s.offset&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3307,7 +3293,7 @@
           <td>
             
             
-            <span class='code'>@inline in&#40;n::Integer, s::BitSet&#41; &#61; _is_convertible_Int&#40;n&#41; ? in&#40;Int&#40;n&#41;, s&#41; : false</span>
+            <span class='code'>p &#61; &#91;1.5, 2.0, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3317,7 +3303,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3327,7 +3313,7 @@
           <td>
             
             
-            <span class='code'>function iterate&#40;s::BitSet, &#40;word, idx&#41; &#61; &#40;CHK0, 0&#41;&#41;</span>
+            <span class='code'>result &#61; clamp_to_bounding_box&#40;p, gs&#41;</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3337,7 +3323,7 @@
           <td>
             
             
-            <span class='code'>    while word &#61;&#61; 0</span>
+            <span class='code'>println&#40;result&#41;</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3347,7 +3333,7 @@
           <td>
             
             
-            <span class='code'>        idx &#61;&#61; length&#40;s.bits&#41; &amp;&amp; return nothing</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3357,7 +3343,7 @@
           <td>
             
             
-            <span class='code'>        idx &#43;&#61; 1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3367,7 +3353,7 @@
           <td>
             
             
-            <span class='code'>        word &#61; @inbounds s.bits&#91;idx&#93;</span>
+            <span class='code'>function clamp_to_bounding_box&#40;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3377,7 +3363,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    p::Vector&#123;T&#125;, gs::GridSpec</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3387,7 +3373,7 @@
           <td>
             
             
-            <span class='code'>    trailing_zeros&#40;word&#41; &#43; &#40;idx - 1 &#43; s.offset&#41; &lt;&lt; 6, &#40;_blsr&#40;word&#41;, idx&#41;</span>
+            <span class='code'>&#41;::Vector&#123;T&#125; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3397,7 +3383,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return clamp_to_bounding_box&#40;p, gs.origin, gs.lattice_full_inv, gs.lattice_full&#41;</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3407,7 +3393,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3417,7 +3403,7 @@
           <td>
             
             
-            <span class='code'>@noinline _throw_bitset_notempty_error&#40;&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3427,7 +3413,7 @@
           <td>
             
             
-            <span class='code'>    throw&#40;ArgumentError&#40;&quot;collection must be non-empty&quot;&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3437,7 +3423,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    in_grid&#40;gs::GridSpec, r::Vector&#123;T&#125;&#41;::Bool where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3447,7 +3433,7 @@
           <td>
             
             
-            <span class='code'>function first&#40;s::BitSet&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3457,7 +3443,7 @@
           <td>
             
             
-            <span class='code'>    idx &#61; _bits_findnext&#40;s.bits, 0&#41;</span>
+            <span class='code'>Returns &#96;true&#96; if the point &#96;r&#96; is inside the grid defined by the &#96;GridSpec&#96; &#96;gs&#96;.</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3467,7 +3453,7 @@
           <td>
             
             
-            <span class='code'>    idx &#61;&#61; -1 ? _throw_bitset_notempty_error&#40;&#41; : idx &#43; intoffset&#40;s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3477,7 +3463,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3487,7 +3473,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;gs&#96;: The &#96;GridSpec&#96; defining the grid.</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3497,7 +3483,7 @@
           <td>
             
             
-            <span class='code'>function last&#40;s::BitSet&#41;</span>
+            <span class='code'>- &#96;r&#96;: The point to test for containment in the grid.</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3507,7 +3493,7 @@
           <td>
             
             
-            <span class='code'>    idx &#61; _bits_findprev&#40;s.bits, &#40;length&#40;s.bits&#41; &lt;&lt; 6&#41; - 1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3517,7 +3503,7 @@
           <td>
             
             
-            <span class='code'>    idx &#61;&#61; -1 ? _throw_bitset_notempty_error&#40;&#41; : idx &#43; intoffset&#40;s&#41;</span>
+            <span class='code'># Returns</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3527,7 +3513,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;Bool&#96;: &#96;true&#96; if the point &#96;r&#96; is inside the grid, &#96;false&#96; otherwise.</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3547,7 +3533,7 @@
           <td>
             
             
-            <span class='code'>length&#40;s::BitSet&#41; &#61; bitcount&#40;s.bits&#41; # &#61; mapreduce&#40;count_ones, &#43;, s.bits; init&#61;0&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3557,7 +3543,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3567,7 +3553,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, s::BitSet&#41;</span>
+            <span class='code'>julia&gt; gs &#61; GridSpec&#40;&#91;0.0, 0.0, 0.0&#93;, &#91;1.0 0.0 0.0; 0.0 1.0 0.0; 0.0 0.0 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;1.0, 1.0, 1.0&#93;, &#91;2, 2, 2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3577,7 +3563,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;BitSet&#40;&#91;&quot;&#41;</span>
+            <span class='code'>julia&gt; r &#61; &#91;0.5, 0.5, 0.5&#93;</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3587,7 +3573,7 @@
           <td>
             
             
-            <span class='code'>    first &#61; true</span>
+            <span class='code'>julia&gt; in_grid&#40;gs, r&#41;</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3597,7 +3583,7 @@
           <td>
             
             
-            <span class='code'>    for n in s</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3607,7 +3593,7 @@
           <td>
             
             
-            <span class='code'>        &#33;first &amp;&amp; print&#40;io, &quot;, &quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3617,7 +3603,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, n&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3627,7 +3613,7 @@
           <td>
             
             
-            <span class='code'>        first &#61; false</span>
+            <span class='code'>function in_grid&#40;gs::GridSpec, r::Vector&#123;T&#125;&#41;::Bool where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3637,7 +3623,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return in_bounding_box&#40;r, gs.origin, gs.lattice_full_inv&#41;</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3647,7 +3633,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&#93;&#41;&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3657,7 +3643,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3667,7 +3653,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3677,7 +3663,7 @@
           <td>
             
             
-            <span class='code'>function _check0&#40;a::Vector&#123;UInt64&#125;, b::Int, e::Int&#41;</span>
+            <span class='code'>    NuclearCoordinate</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3687,7 +3673,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds for i in b:e</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3697,7 +3683,7 @@
           <td>
             
             
-            <span class='code'>        a&#91;i&#93; &#61;&#61; CHK0 || return false</span>
+            <span class='code'>A struct representing a nuclear coordinate in 3D space.</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3707,7 +3693,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3717,7 +3703,7 @@
           <td>
             
             
-            <span class='code'>    true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3727,7 +3713,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Fields</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3737,7 +3723,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3747,7 +3733,7 @@
           <td>
             
             
-            <span class='code'>function &#61;&#61;&#40;s1::BitSet, s2::BitSet&#41;</span>
+            <span class='code'>- &#96;data::Element&#96;: The element associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3757,7 +3743,7 @@
           <td>
             
             
-            <span class='code'>    # Swap so s1 has always the smallest offset</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3767,7 +3753,7 @@
           <td>
             
             
-            <span class='code'>    if s1.offset &gt; s2.offset</span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3777,7 +3763,7 @@
           <td>
             
             
-            <span class='code'>        s1, s2 &#61; s2, s1</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3787,7 +3773,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3797,7 +3783,7 @@
           <td>
             
             
-            <span class='code'>    a1 &#61; s1.bits</span>
+            <span class='code'>data &#61; PeriodicTable.elements&#91;6&#93; # Carbon</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3807,7 +3793,7 @@
           <td>
             
             
-            <span class='code'>    a2 &#61; s2.bits</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3817,7 +3803,7 @@
           <td>
             
             
-            <span class='code'>    b1, b2 &#61; s1.offset, s2.offset</span>
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, data&#41;</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3827,7 +3813,7 @@
           <td>
             
             
-            <span class='code'>    l1, l2 &#61; length&#40;a1&#41;, length&#40;a2&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3837,7 +3823,7 @@
           <td>
             
             
-            <span class='code'>    e1 &#61; l1&#43;b1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3847,7 +3833,7 @@
           <td>
             
             
-            <span class='code'>    overlap0 &#61; max&#40;0, e1 - b2&#41;</span>
+            <span class='code'>struct NuclearCoordinate&#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3857,7 +3843,7 @@
           <td>
             
             
-            <span class='code'>    included &#61; overlap0 &gt;&#61; l2  # whether a2&#39;s indices are included in a1&#39;s</span>
+            <span class='code'>    r::Vector&#123;T&#125;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3867,7 +3853,7 @@
           <td>
             
             
-            <span class='code'>    overlap  &#61; included ? l2 : overlap0</span>
+            <span class='code'>    data::Element</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3877,7 +3863,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3887,7 +3873,7 @@
           <td>
             
             
-            <span class='code'>    # Ensure non-overlap chunks are zero &#40;unlikely&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3897,7 +3883,7 @@
           <td>
             
             
-            <span class='code'>    _check0&#40;a1, 1, l1-overlap0&#41; || return false</span>
+            <span class='code'># overload Base.&#61;&#61; for NuclearCoordinate</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3907,7 +3893,7 @@
           <td>
             
             
-            <span class='code'>    if included</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;a::NuclearCoordinate, b::NuclearCoordinate&#41;</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3917,7 +3903,7 @@
           <td>
             
             
-            <span class='code'>        _check0&#40;a1, b2-b1&#43;l2&#43;1, l1&#41; || return false</span>
+            <span class='code'>    return a.r &#61;&#61; b.r &amp;&amp; a.data &#61;&#61; b.data</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3927,7 +3913,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3937,7 +3923,7 @@
           <td>
             
             
-            <span class='code'>        _check0&#40;a2, 1&#43;overlap, l2&#41; || return false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3947,7 +3933,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># overload Base.show for NuclearCoordinate to print data.symbol and r</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3957,7 +3943,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>show&#40;io::IO, nc::NuclearCoordinate&#41; &#61; show&#40;io, &quot;&#36;&#40;nc.data.symbol&#41; &#36;&#40;nc.r&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3967,7 +3953,7 @@
           <td>
             
             
-            <span class='code'>    # compare overlap values</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3977,7 +3963,7 @@
           <td>
             
             
-            <span class='code'>    if overlap &gt; 0</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3987,7 +3973,7 @@
           <td>
             
             
-            <span class='code'>        t1 &#61; @_gc_preserve_begin a1</span>
+            <span class='code'>    NuclearCoordinate&#40;r::Vector&#123;T&#125;, n::Integer&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3997,7 +3983,7 @@
           <td>
             
             
-            <span class='code'>        t2 &#61; @_gc_preserve_begin a2</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L394'>
@@ -4007,7 +3993,7 @@
           <td>
             
             
-            <span class='code'>        memcmp&#40;pointer&#40;a1, b2-b1&#43;1&#41;, pointer&#40;a2&#41;, overlap&lt;&lt;3&#41; &#61;&#61; 0 || return false</span>
+            <span class='code'>A convenience constructor for creating a &#96;NuclearCoordinate&#96; from a position vector and an element index.</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -4017,7 +4003,7 @@
           <td>
             
             
-            <span class='code'>        @_gc_preserve_end t2</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -4027,7 +4013,7 @@
           <td>
             
             
-            <span class='code'>        @_gc_preserve_end t1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4037,7 +4023,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Arguments</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4047,7 +4033,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4057,7 +4043,7 @@
           <td>
             
             
-            <span class='code'>    return true</span>
+            <span class='code'>- &#96;n::Integer&#96;: The index of the element associated with the nuclear coordinate.</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4067,7 +4053,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4077,7 +4063,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Example</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4087,7 +4073,7 @@
           <td>
             
             
-            <span class='code'>function issubset&#40;a::BitSet, b::BitSet&#41;</span>
+            <span class='code'>&#96;&#96;&#96;julia</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4097,7 +4083,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; length&#40;a.bits&#41;</span>
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4107,7 +4093,7 @@
           <td>
             
             
-            <span class='code'>    shift &#61; b.offset - a.offset</span>
+            <span class='code'>n &#61; 6 # Carbon</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4117,7 +4103,7 @@
           <td>
             
             
-            <span class='code'>    i, j &#61; shift, shift &#43; length&#40;b.bits&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4127,7 +4113,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, n&#41;</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4137,7 +4123,7 @@
           <td>
             
             
-            <span class='code'>    f&#40;a, b&#41; &#61; a &#61;&#61; a &amp; b</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4147,7 +4133,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4157,7 +4143,7 @@
           <td>
             
             
-            <span class='code'>        all&#40;@inbounds iszero&#40;a.bits&#91;i&#93;&#41; for i in 1:min&#40;n, i&#41;&#41; &amp;&amp;</span>
+            <span class='code'>function NuclearCoordinate&#40;r::Vector&#123;T&#125;, n::Integer&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4167,7 +4153,7 @@
           <td>
             
             
-            <span class='code'>        all&#40;@inbounds f&#40;a.bits&#91;i&#93;, b.bits&#91;i - shift&#93;&#41; for i in max&#40;1, i&#43;1&#41;:min&#40;n, j&#41;&#41; &amp;&amp;</span>
+            <span class='code'>    @assert 1 ≤ n ≤ 119 &quot;Invalid element index&quot;</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4177,7 +4163,7 @@
           <td>
             
             
-            <span class='code'>        all&#40;@inbounds iszero&#40;a.bits&#91;i&#93;&#41; for i in max&#40;1, j&#43;1&#41;:n&#41;&#41;</span>
+            <span class='code'>    return NuclearCoordinate&#40;r, elements&#91;n&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4197,7 +4183,7 @@
           <td>
             
             
-            <span class='code'>⊊&#40;a::BitSet, b::BitSet&#41; &#61; a &lt;&#61; b &amp;&amp; a &#33;&#61; b</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4207,7 +4193,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4217,7 +4203,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    NuclearCoordinate&#40;r::Vector&#123;T&#125;, s::Symbol&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4227,7 +4213,7 @@
           <td>
             
             
-            <span class='code'>minimum&#40;s::BitSet&#41; &#61; first&#40;s&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4237,7 +4223,7 @@
           <td>
             
             
-            <span class='code'>maximum&#40;s::BitSet&#41; &#61; last&#40;s&#41;</span>
+            <span class='code'>A convenience constructor for creating a &#96;NuclearCoordinate&#96; from a position vector and an element symbol.</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4247,7 +4233,7 @@
           <td>
             
             
-            <span class='code'>extrema&#40;s::BitSet&#41; &#61; &#40;first&#40;s&#41;, last&#40;s&#41;&#41;</span>
+            <span class='code'>This is used to represent the position of an atom in a system.</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4257,7 +4243,1097 @@
           <td>
             
             
-            <span class='code'>issorted&#40;s::BitSet&#41; &#61; true</span>
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L420'>
+          <td class='lineno'>420</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Arguments</span>
+          </td>
+        </tr>
+        <tr id='L421'>
+          <td class='lineno'>421</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;r::Vector&#123;T&#125;&#96;: The position vector of the nuclear coordinate.</span>
+          </td>
+        </tr>
+        <tr id='L422'>
+          <td class='lineno'>422</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;s::Symbol&#96;: The element symbol associated with the nuclear coordinate.</span>
+          </td>
+        </tr>
+        <tr id='L423'>
+          <td class='lineno'>423</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L424'>
+          <td class='lineno'>424</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Example</span>
+          </td>
+        </tr>
+        <tr id='L425'>
+          <td class='lineno'>425</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&#96;&#96;&#96;julia</span>
+          </td>
+        </tr>
+        <tr id='L426'>
+          <td class='lineno'>426</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>r &#61; &#91;1.0, 2.0, 3.0&#93;</span>
+          </td>
+        </tr>
+        <tr id='L427'>
+          <td class='lineno'>427</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>s &#61; :C</span>
+          </td>
+        </tr>
+        <tr id='L428'>
+          <td class='lineno'>428</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L429'>
+          <td class='lineno'>429</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>nc &#61; NuclearCoordinate&#40;r, s&#41;</span>
+          </td>
+        </tr>
+        <tr id='L430'>
+          <td class='lineno'>430</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&#96;&#96;&#96;</span>
+          </td>
+        </tr>
+        <tr id='L431'>
+          <td class='lineno'>431</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L432'>
+          <td class='lineno'>432</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function NuclearCoordinate&#40;r::Vector&#123;T&#125;, s::Symbol&#41; where &#123;T&lt;:AbstractFloat&#125;</span>
+          </td>
+        </tr>
+        <tr id='L433'>
+          <td class='lineno'>433</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return NuclearCoordinate&#40;r, elements&#91;s&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L434'>
+          <td class='lineno'>434</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L435'>
+          <td class='lineno'>435</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L436'>
+          <td class='lineno'>436</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L437'>
+          <td class='lineno'>437</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    System</span>
+          </td>
+        </tr>
+        <tr id='L438'>
+          <td class='lineno'>438</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L439'>
+          <td class='lineno'>439</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>A struct representing a system for analysis.</span>
+          </td>
+        </tr>
+        <tr id='L440'>
+          <td class='lineno'>440</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>It contains the system name, grid extent, atoms, and</span>
+          </td>
+        </tr>
+        <tr id='L441'>
+          <td class='lineno'>441</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>functions for &#96;rho&#96;, &#96;grad&#96;, and &#96;hess&#96; that can be queried</span>
+          </td>
+        </tr>
+        <tr id='L442'>
+          <td class='lineno'>442</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>arbitrarily.</span>
+          </td>
+        </tr>
+        <tr id='L443'>
+          <td class='lineno'>443</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Note that this works for 2D systems as well as 3D systems.</span>
+          </td>
+        </tr>
+        <tr id='L444'>
+          <td class='lineno'>444</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L445'>
+          <td class='lineno'>445</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Fields</span>
+          </td>
+        </tr>
+        <tr id='L446'>
+          <td class='lineno'>446</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;name::String&#96;: The name of the system.</span>
+          </td>
+        </tr>
+        <tr id='L447'>
+          <td class='lineno'>447</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;source::String&#96;: The source of the system &#40;e.g. program name and file type&#41;.</span>
+          </td>
+        </tr>
+        <tr id='L448'>
+          <td class='lineno'>448</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;atoms::Vector&#123;NuclearCoordinate&#125;&#96;: The atoms of the system.</span>
+          </td>
+        </tr>
+        <tr id='L449'>
+          <td class='lineno'>449</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;grid::GridSpec&#96;: The grid specification of the system.</span>
+          </td>
+        </tr>
+        <tr id='L450'>
+          <td class='lineno'>450</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;data::AbstractArray&#96;: The data of the system, represented as a N-D array.</span>
+          </td>
+        </tr>
+        <tr id='L451'>
+          <td class='lineno'>451</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;rho::Function&#96;: The rho function of the system.</span>
+          </td>
+        </tr>
+        <tr id='L452'>
+          <td class='lineno'>452</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;grad::Function&#96;: The grad function of the system.</span>
+          </td>
+        </tr>
+        <tr id='L453'>
+          <td class='lineno'>453</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;hess::Function&#96;: The hess function of the system.</span>
+          </td>
+        </tr>
+        <tr id='L454'>
+          <td class='lineno'>454</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;rho&#33;::Function&#96;: The rho&#33; function of the system.</span>
+          </td>
+        </tr>
+        <tr id='L455'>
+          <td class='lineno'>455</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;grad&#33;::Function&#96;: The grad&#33; function of the system.</span>
+          </td>
+        </tr>
+        <tr id='L456'>
+          <td class='lineno'>456</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>- &#96;hess&#33;::Function&#96;: The hess&#33; function of the system.</span>
+          </td>
+        </tr>
+        <tr id='L457'>
+          <td class='lineno'>457</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L458'>
+          <td class='lineno'>458</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Example</span>
+          </td>
+        </tr>
+        <tr id='L459'>
+          <td class='lineno'>459</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&#96;&#96;&#96;julia</span>
+          </td>
+        </tr>
+        <tr id='L460'>
+          <td class='lineno'>460</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Define a 3D sin function to be used as rho, grad, and hess functions</span>
+          </td>
+        </tr>
+        <tr id='L461'>
+          <td class='lineno'>461</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>f3d&#40;r&#41; &#61; sin&#40;r&#91;1&#93;&#41; &#43; sin&#40;r&#91;2&#93;&#41; &#43; sin&#40;r&#91;3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L462'>
+          <td class='lineno'>462</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>f3d_xyz&#40;x,y,z&#41; &#61; sin&#40;x&#41; &#43; sin&#40;y&#41; &#43; sin&#40;z&#41;</span>
+          </td>
+        </tr>
+        <tr id='L463'>
+          <td class='lineno'>463</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>grad3d&#40;r&#41; &#61; &#91;cos&#40;r&#91;1&#93;&#41;, cos&#40;r&#91;2&#93;&#41;, cos&#40;r&#91;3&#93;&#41;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L464'>
+          <td class='lineno'>464</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>hess3d&#40;r&#41; &#61; &#91;-sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;; -sin&#40;r&#91;1&#93;&#41; sin&#40;r&#91;2&#93;&#41; -sin&#40;r&#91;3&#93;&#41;; -sin&#40;r&#91;1&#93;&#41; -sin&#40;r&#91;2&#93;&#41; sin&#40;r&#91;3&#93;&#41;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L465'>
+          <td class='lineno'>465</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L466'>
+          <td class='lineno'>466</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Define in-place versions of the functions</span>
+          </td>
+        </tr>
+        <tr id='L467'>
+          <td class='lineno'>467</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>rho&#33;&#40;v::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125; &#61; &#40;v&#91;:&#93; &#61; &#91;f3d&#40;r&#41;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L468'>
+          <td class='lineno'>468</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>grad&#33;&#40;g::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125; &#61; &#40;g&#91;:&#93; &#61; grad3d&#40;r&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L469'>
+          <td class='lineno'>469</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>hess&#33;&#40;h::Matrix&#123;T&#125;, r::Vector&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125; &#61; &#40;h&#91;:&#93; &#61; hess3d&#40;r&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L470'>
+          <td class='lineno'>470</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L471'>
+          <td class='lineno'>471</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Define the origin, lattice, and number of ijk points for the GridSpec</span>
+          </td>
+        </tr>
+        <tr id='L472'>
+          <td class='lineno'>472</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>o &#61; zeros&#40;3&#41;</span>
+          </td>
+        </tr>
+        <tr id='L473'>
+          <td class='lineno'>473</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>n_pts &#61; &#91;10, 10, 10&#93;</span>
+          </td>
+        </tr>
+        <tr id='L474'>
+          <td class='lineno'>474</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L475'>
+          <td class='lineno'>475</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Define the lattice for the GridSpec</span>
+          </td>
+        </tr>
+        <tr id='L476'>
+          <td class='lineno'>476</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>l &#61; zeros&#40;3, 3&#41;</span>
+          </td>
+        </tr>
+        <tr id='L477'>
+          <td class='lineno'>477</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>for i in 1:3</span>
+          </td>
+        </tr>
+        <tr id='L478'>
+          <td class='lineno'>478</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    l&#91;i, i&#93; &#61; 0.1</span>
+          </td>
+        </tr>
+        <tr id='L479'>
+          <td class='lineno'>479</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L480'>
+          <td class='lineno'>480</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L481'>
+          <td class='lineno'>481</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Create a GridSpec with the defined origin, lattice</span>
+          </td>
+        </tr>
+        <tr id='L482'>
+          <td class='lineno'>482</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>g &#61; GridSpec&#40;o, l, n_pts&#41;</span>
+          </td>
+        </tr>
+        <tr id='L483'>
+          <td class='lineno'>483</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L484'>
+          <td class='lineno'>484</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Define the atoms for the System</span>
+          </td>
+        </tr>
+        <tr id='L485'>
+          <td class='lineno'>485</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>atoms &#61; &#91;NuclearCoordinate&#40;&#91;0.0, 0.0, 0.0&#93;, 6&#41;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L486'>
+          <td class='lineno'>486</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L487'>
+          <td class='lineno'>487</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Create a System with the 3D sin function and the defined atoms and GridSpec</span>
+          </td>
+        </tr>
+        <tr id='L488'>
+          <td class='lineno'>488</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>system &#61; System&#40;&quot;Test System&quot;, &quot;user-defined&quot;, atoms, g, Array&#123;Float64&#125;&#40;&#41;, f3d_xyz, f3d, grad3d, hess3d, rho&#33;, grad&#33;, hess&#33;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L489'>
+          <td class='lineno'>489</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&#96;&#96;&#96;</span>
+          </td>
+        </tr>
+        <tr id='L490'>
+          <td class='lineno'>490</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L491'>
+          <td class='lineno'>491</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>struct System</span>
+          </td>
+        </tr>
+        <tr id='L492'>
+          <td class='lineno'>492</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    name::String</span>
+          </td>
+        </tr>
+        <tr id='L493'>
+          <td class='lineno'>493</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    source::String</span>
+          </td>
+        </tr>
+        <tr id='L494'>
+          <td class='lineno'>494</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    atoms::Vector&#123;NuclearCoordinate&#125;</span>
+          </td>
+        </tr>
+        <tr id='L495'>
+          <td class='lineno'>495</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    grid::GridSpec</span>
+          </td>
+        </tr>
+        <tr id='L496'>
+          <td class='lineno'>496</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    data::AbstractArray</span>
+          </td>
+        </tr>
+        <tr id='L497'>
+          <td class='lineno'>497</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L498'>
+          <td class='lineno'>498</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # functions for accessing field variables and their derivatives</span>
+          </td>
+        </tr>
+        <tr id='L499'>
+          <td class='lineno'>499</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # at a point &#96;r&#96;</span>
+          </td>
+        </tr>
+        <tr id='L500'>
+          <td class='lineno'>500</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    rho_xyz::Function # &#40;x, y, z&#41; -&gt; AbstractFloat</span>
+          </td>
+        </tr>
+        <tr id='L501'>
+          <td class='lineno'>501</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    rho::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; AbstractFloat</span>
+          </td>
+        </tr>
+        <tr id='L502'>
+          <td class='lineno'>502</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    grad::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; Vector&#123;T&#125;</span>
+          </td>
+        </tr>
+        <tr id='L503'>
+          <td class='lineno'>503</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    hess::Function # &#40;r::Vector&#123;T&#125;&#41; -&gt; Matrix&#123;T&#125;</span>
+          </td>
+        </tr>
+        <tr id='L504'>
+          <td class='lineno'>504</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L505'>
+          <td class='lineno'>505</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # in-place versions of the above functions &#40;for efficiency&#41;</span>
+          </td>
+        </tr>
+        <tr id='L506'>
+          <td class='lineno'>506</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # &#40;The reason rho&#33; takes a vector of length one here is due to</span>
+          </td>
+        </tr>
+        <tr id='L507'>
+          <td class='lineno'>507</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # the way that mutating functions work in Julia, where they can</span>
+          </td>
+        </tr>
+        <tr id='L508'>
+          <td class='lineno'>508</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # modify the contents of their arguments, but not reassign the</span>
+          </td>
+        </tr>
+        <tr id='L509'>
+          <td class='lineno'>509</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # the arguuments to a new symbol. see https://stackoverflow.com/a/39294877/2620767&#41;</span>
+          </td>
+        </tr>
+        <tr id='L510'>
+          <td class='lineno'>510</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    rho&#33;::Function # &#40;v::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
+          </td>
+        </tr>
+        <tr id='L511'>
+          <td class='lineno'>511</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    grad&#33;::Function # &#40;g::Vector&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
+          </td>
+        </tr>
+        <tr id='L512'>
+          <td class='lineno'>512</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    hess&#33;::Function # &#40;h::Matrix&#123;T&#125;, r::Vector&#123;T&#125;&#41; -&gt; Nothing</span>
+          </td>
+        </tr>
+        <tr id='L513'>
+          <td class='lineno'>513</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L514'>
+          <td class='lineno'>514</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L515'>
+          <td class='lineno'>515</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># overload Base.show for System to print name and summarize atoms and grid.</span>
+          </td>
+        </tr>
+        <tr id='L516'>
+          <td class='lineno'>516</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># should print number of atoms of each symbol type, and grid.n_pts</span>
+          </td>
+        </tr>
+        <tr id='L517'>
+          <td class='lineno'>517</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function show&#40;io::IO, system::System&#41;</span>
+          </td>
+        </tr>
+        <tr id='L518'>
+          <td class='lineno'>518</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    return show&#40;</span>
+          </td>
+        </tr>
+        <tr id='L519'>
+          <td class='lineno'>519</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        io,</span>
+          </td>
+        </tr>
+        <tr id='L520'>
+          <td class='lineno'>520</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        &quot;&#36;&#40;system.name&#41; with &#36;&#40;length&#40;system.atoms&#41;&#41; atom&#36;&#40;length&#40;system.atoms&#41;&#61;&#61;1 ? &quot;&quot; : &quot;s&quot;&#41; and &#36;&#40;system.grid.n_pts&#41; grid points &#40;Lattice &#61; &#36;&#40;system.grid.lattice&#41;&#41;&quot;,</span>
+          </td>
+        </tr>
+        <tr id='L521'>
+          <td class='lineno'>521</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#41;</span>
+          </td>
+        </tr>
+        <tr id='L522'>
+          <td class='lineno'>522</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L523'>
+          <td class='lineno'>523</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># TODO: Create &#96;SystemSet&#96; type to represent multiple systems/variables.</span>
+          </td>
+        </tr>
+        <tr id='L524'>
+          <td class='lineno'>524</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>#  This will allow for conducting analysis on transient systems, such as a chemical reaction or mechanical perturbation.</span>
+          </td>
+        </tr>
+        <tr id='L525'>
+          <td class='lineno'>525</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>#  It also allows for representing multiple variables from a single system by making copies of the same system but with &quot;rho&quot; pointed to whatever variable is desired. This part will require modifying the data loaders to be able to specify which variable to load.</span>
+          </td>
+        </tr>
+        <tr id='L526'>
+          <td class='lineno'>526</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># TODO: Add aux_data field to &#96;System&#96; to store auxiliary data that is not used for analysis.</span>
+          </td>
+        </tr>
+        <tr id='L527'>
+          <td class='lineno'>527</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>#  SCM and VASP data, at least, contains some potentially useful information, but it&#39;s not immediately used in analysis. </span>
+          </td>
+        </tr>
+        <tr id='L528'>
+          <td class='lineno'>528</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>#  This data should be saved to a &#96;aux_data::Dict&#123;String, Any&#125;&#96; field in &#96;System&#96; so that it can be accessed later if needed. Then, each data loader will fetch and pass it to the &#96;System&#96; constructor as necessary.</span>
           </td>
         </tr>
       </tbody>
