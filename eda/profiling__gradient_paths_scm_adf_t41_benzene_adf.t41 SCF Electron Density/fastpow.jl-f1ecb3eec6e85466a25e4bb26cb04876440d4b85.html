@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/options.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/DiffEqBase/8vI1R/src/fastpow.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Thu, 28 Mar 2024 17:45:10
+        Generated on Thu, 28 Mar 2024 18:32:44
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'># From David Goldberg&#39;s blog post</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># https://tech.ebayinc.com/engineering/fast-approximate-logarithms-part-iii-the-formulas/</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'># NOTE: This type needs to be kept in sync with jl_options in src/jloptions.h</span>
+            <span class='code'>@inline function fastlog2&#40;x::Float32&#41;::Float32</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>struct JLOptions</span>
+            <span class='code'>    # &#40;x-1&#41;*&#40;a*&#40;x-1&#41; &#43; b&#41;/&#40;&#40;x-1&#41; &#43; c&#41; &#40;line 8 of table 2&#41;</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>    quiet::Int8</span>
+            <span class='code'>    a &#61; 0.338953f0</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>    banner::Int8</span>
+            <span class='code'>    b &#61; 2.198599f0</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    julia_bindir::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    c &#61; 1.523692f0</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    julia_bin::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    #</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    commands::Ptr&#123;Ptr&#123;UInt8&#125;&#125; # &#40;e&#41;eval, &#40;E&#41;print, &#40;L&#41;load</span>
+            <span class='code'>    # Assume IEEE representation, which is sgn&#40;1&#41;:exp&#40;8&#41;:frac&#40;23&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    image_file::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    # representing &#40;1&#43;frac&#41;*2^&#40;exp-127&#41;  Call 1&#43;frac the significand</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    cpu_target::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    #</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>    nthreadpools::Int16</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>    nthreads::Int16</span>
+            <span class='code'>    # get exponent</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    nmarkthreads::Int16</span>
+            <span class='code'>    ux1i &#61; reinterpret&#40;UInt32, x&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    nsweepthreads::Int8</span>
+            <span class='code'>    exp &#61; &#40;ux1i &amp; 0x7F800000&#41; &gt;&gt; 23</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    nthreads_per_pool::Ptr&#123;Int16&#125;</span>
+            <span class='code'>    # actual exponent is exp-127, will subtract 127 later</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    nprocs::Int32</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    machine_file::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    greater &#61; ux1i &amp; 0x00400000  # true if signif &gt; 1.5</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    project::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    if greater &#33;&#61;&#61; 0x00000000</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    isinteractive::Int8</span>
+            <span class='code'>        ux2i &#61; &#40;ux1i &amp; 0x007FFFFF&#41; | 0x3f000000</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    color::Int8</span>
+            <span class='code'>        signif &#61; reinterpret&#40;Float32, ux2i&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    historyfile::Int8</span>
+            <span class='code'>        fexp &#61; exp - 126.0f0    # 126 instead of 127 compensates for division by 2</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    startupfile::Int8</span>
+            <span class='code'>        signif &#61; signif - 1.0f0</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    compile_enabled::Int8</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>    code_coverage::Int8</span>
+            <span class='code'>        ux2i &#61; &#40;ux1i &amp; 0x007FFFFF&#41; | 0x3f800000</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>    malloc_log::Int8</span>
+            <span class='code'>        signif &#61; reinterpret&#40;Float32, ux2i&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>    tracked_path::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>        fexp &#61; exp - 127.0f0</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    opt_level::Int8</span>
+            <span class='code'>        signif &#61; signif - 1.0f0</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,17 +315,31 @@
           <td>
             
             
-            <span class='code'>    opt_level_min::Int8</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L30'>
           <td class='lineno'>30</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    debug_level::Int8</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in fastlog2
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from fastpow
+              <a href='fastpow.jl-f1ecb3eec6e85466a25e4bb26cb04876440d4b85.html#L106'>line 106</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='float.jl-49d9930abb632842e20bd7b01e9e0414f4b71f47.html#L409'>&#43;</a>
+              <br />
+            </div>
+            <span class='code'>    lg2 &#61; fexp &#43; signif * &#40;a * signif &#43; b&#41; / &#40;signif &#43; c&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +349,7 @@
           <td>
             
             
-            <span class='code'>    check_bounds::Int8</span>
+            <span class='code'>    return lg2</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +359,7 @@
           <td>
             
             
-            <span class='code'>    depwarn::Int8</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +369,7 @@
           <td>
             
             
-            <span class='code'>    warn_overwrite::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +379,7 @@
           <td>
             
             
-            <span class='code'>    can_inline::Int8</span>
+            <span class='code'># Translated from OpenLibm but less accurate because I forced the tableau to be</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +389,7 @@
           <td>
             
             
-            <span class='code'>    polly::Int8</span>
+            <span class='code'># Float32, whereas OpenLibm uses Float64</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +399,7 @@
           <td>
             
             
-            <span class='code'>    trace_compile::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>#</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +409,7 @@
           <td>
             
             
-            <span class='code'>    fast_math::Int8</span>
+            <span class='code'># https://github.com/JuliaMath/openlibm/blob/cca41bc1abd01804afa4862bbd2c79cc9803171a/src/s_exp2f.c</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +419,7 @@
           <td>
             
             
-            <span class='code'>    worker::Int8</span>
+            <span class='code'>const EXP2FT &#61; &#40;Float32&#40;0x1.6a09e667f3bcdp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +429,7 @@
           <td>
             
             
-            <span class='code'>    cookie::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.7a11473eb0187p-1&#41;,</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +439,7 @@
           <td>
             
             
-            <span class='code'>    handle_signals::Int8</span>
+            <span class='code'>    Float32&#40;0x1.8ace5422aa0dbp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +449,7 @@
           <td>
             
             
-            <span class='code'>    use_sysimage_native_code::Int8</span>
+            <span class='code'>    Float32&#40;0x1.9c49182a3f090p-1&#41;,</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +459,7 @@
           <td>
             
             
-            <span class='code'>    use_compiled_modules::Int8</span>
+            <span class='code'>    Float32&#40;0x1.ae89f995ad3adp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +469,7 @@
           <td>
             
             
-            <span class='code'>    use_pkgimages::Int8</span>
+            <span class='code'>    Float32&#40;0x1.c199bdd85529cp-1&#41;,</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +479,7 @@
           <td>
             
             
-            <span class='code'>    bindto::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.d5818dcfba487p-1&#41;,</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +489,7 @@
           <td>
             
             
-            <span class='code'>    outputbc::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.ea4afa2a490dap-1&#41;,</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +499,7 @@
           <td>
             
             
-            <span class='code'>    outputunoptbc::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.0000000000000p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +509,7 @@
           <td>
             
             
-            <span class='code'>    outputo::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.0b5586cf9890fp&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +519,7 @@
           <td>
             
             
-            <span class='code'>    outputasm::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.172b83c7d517bp&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +529,7 @@
           <td>
             
             
-            <span class='code'>    outputji::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.2387a6e756238p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +539,7 @@
           <td>
             
             
-            <span class='code'>    output_code_coverage::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    Float32&#40;0x1.306fe0a31b715p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +549,7 @@
           <td>
             
             
-            <span class='code'>    incremental::Int8</span>
+            <span class='code'>    Float32&#40;0x1.3dea64c123422p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +559,7 @@
           <td>
             
             
-            <span class='code'>    image_file_specified::Int8</span>
+            <span class='code'>    Float32&#40;0x1.4bfdad5362a27p&#43;0&#41;,</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +569,7 @@
           <td>
             
             
-            <span class='code'>    warn_scope::Int8</span>
+            <span class='code'>    Float32&#40;0x1.5ab07dd485429p&#43;0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +579,7 @@
           <td>
             
             
-            <span class='code'>    image_codegen::Int8</span>
+            <span class='code'>@inline function _exp2&#40;x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +589,7 @@
           <td>
             
             
-            <span class='code'>    rr_detach::Int8</span>
+            <span class='code'>    TBLBITS &#61; UInt32&#40;4&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +599,7 @@
           <td>
             
             
-            <span class='code'>    strip_metadata::Int8</span>
+            <span class='code'>    TBLSIZE &#61; UInt32&#40;1 &lt;&lt; TBLBITS&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +609,7 @@
           <td>
             
             
-            <span class='code'>    strip_ir::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +619,7 @@
           <td>
             
             
-            <span class='code'>    permalloc_pkgimg::Int8</span>
+            <span class='code'>    redux &#61; Float32&#40;0x1.8p23&#41; / TBLSIZE</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +629,7 @@
           <td>
             
             
-            <span class='code'>    heap_size_hint::UInt64</span>
+            <span class='code'>    P1 &#61; Float32&#40;0x1.62e430p-1&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +639,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    P2 &#61; Float32&#40;0x1.ebfbe0p-3&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +649,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    P3 &#61; Float32&#40;0x1.c6b348p-5&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +659,7 @@
           <td>
             
             
-            <span class='code'># This runs early in the sysimage &#33;&#61; is not defined yet</span>
+            <span class='code'>    P4 &#61; Float32&#40;0x1.3b2c9cp-7&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +669,7 @@
           <td>
             
             
-            <span class='code'>if sizeof&#40;JLOptions&#41; &#61;&#61;&#61; ccall&#40;:jl_sizeof_jl_options, Int, &#40;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +679,7 @@
           <td>
             
             
-            <span class='code'>else</span>
+            <span class='code'>    # Reduce x, computing z, i0, and k.</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +689,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_throw, Cvoid, &#40;Any,&#41;, &quot;Option structure mismatch&quot;&#41;</span>
+            <span class='code'>    t::Float32 &#61; x &#43; redux</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +699,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    i0 &#61; reinterpret&#40;UInt32, t&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +709,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    i0 &#43;&#61; TBLSIZE ÷ UInt32&#40;2&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +719,7 @@
           <td>
             
             
-            <span class='code'>JLOptions&#40;&#41; &#61; unsafe_load&#40;cglobal&#40;:jl_options, JLOptions&#41;&#41;</span>
+            <span class='code'>    k::UInt32 &#61; unsafe_trunc&#40;UInt32, &#40;i0 &gt;&gt; TBLBITS&#41; &lt;&lt; 20&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +729,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    i0 &amp;&#61; TBLSIZE - UInt32&#40;1&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +739,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, opt::JLOptions&#41;</span>
+            <span class='code'>    t -&#61; redux</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +749,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;JLOptions&#40;&quot;&#41;</span>
+            <span class='code'>    z &#61; x - t</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +759,7 @@
           <td>
             
             
-            <span class='code'>    fields &#61; fieldnames&#40;JLOptions&#41;</span>
+            <span class='code'>    twopk &#61; Float32&#40;reinterpret&#40;Float64, UInt64&#40;0x3ff00000 &#43; k&#41; &lt;&lt; 32&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +769,7 @@
           <td>
             
             
-            <span class='code'>    nfields &#61; length&#40;fields&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +779,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;i, f&#41; in enumerate&#40;fields&#41;</span>
+            <span class='code'>    # Compute r &#61; exp2&#40;y&#41; &#61; exp2ft&#91;i0&#93; * p&#40;z&#41;.</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'>        v &#61; getfield&#40;opt, i&#41;</span>
+            <span class='code'>    tv &#61; EXP2FT&#91;i0 &#43; UInt32&#40;1&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;v, Ptr&#123;UInt8&#125;&#41;</span>
+            <span class='code'>    u &#61; tv * z</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>            v &#61; &#40;v &#33;&#61; C_NULL&#41; ? unsafe_string&#40;v&#41; : &quot;&quot;</span>
+            <span class='code'>    tv &#61; tv &#43; u * &#40;P1 &#43; z * P2&#41; &#43; u * &#40;z * z&#41; * &#40;P3 &#43; z * P4&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'>        elseif isa&#40;v, Ptr&#123;Ptr&#123;UInt8&#125;&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>            v &#61; unsafe_load_commands&#40;v&#41;</span>
+            <span class='code'>    # Scale by 2**&#40;k&gt;&gt;20&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return tv * twopk</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, f, &quot; &#61; &quot;, repr&#40;v&#41;, i &lt; nfields ? &quot;, &quot; : &quot;&quot;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&#41;&quot;&#41;</span>
+            <span class='code'>if VERSION &lt; v&quot;1.7.0&quot;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        fastpow&#40;x::Real, y::Real&#41; -&gt; Float32</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'>function unsafe_load_commands&#40;v::Ptr&#123;Ptr&#123;UInt8&#125;&#125;&#41;</span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>    cmds &#61; Pair&#123;Char, String&#125;&#91;&#93;</span>
+            <span class='code'>    @inline function fastpow&#40;x::Real, y::Real&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>    v &#61;&#61; C_NULL &amp;&amp; return cmds</span>
+            <span class='code'>        if iszero&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +929,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; 1</span>
+            <span class='code'>            return 0.0f0</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>    while true</span>
+            <span class='code'>        elseif isinf&#40;x&#41; &amp;&amp; isinf&#40;y&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>        s &#61; unsafe_load&#40;v, i&#41;</span>
+            <span class='code'>            return Float32&#40;Inf&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'>        s &#61;&#61; C_NULL &amp;&amp; break</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>        e &#61; Char&#40;unsafe_load&#40;s&#41;&#41;</span>
+            <span class='code'>            return _exp2&#40;convert&#40;Float32, y&#41; * fastlog2&#40;convert&#40;Float32, x&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;cmds, e &#61;&gt; unsafe_string&#40;s &#43; 1&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>        i &#43;&#61; 1</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>else</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>    return cmds</span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        fastpow&#40;x::Real, y::Real&#41; -&gt; Float32</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,26 +1039,17 @@
           <td>
             
             
-            <span class='code'>function is_file_tracked&#40;file::Symbol&#41;</span>
+            <span class='code'>    @inline function fastpow&#40;x::Real, y::Real&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
           <td class='lineno'>101</td>
-          <td class='tracecount excl'>2 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;0 &#37;&#41;
-              samples spent in is_file_tracked
-              <br />
-              2 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from ir_inline_linetable&#33;
-              <a href='inlining.jl-0bb634c8d52bd8cb0118a62473876d952ba8e5ff.html#L338'>line 338</a>
-              <br />
-            </div>
             
-            <span class='code'>    return ccall&#40;:jl_is_file_tracked, Cint, &#40;Any,&#41;, file&#41; &#61;&#61; 1</span>
+            
+            <span class='code'>        if iszero&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1054,7 +1059,110 @@
           <td>
             
             
+            <span class='code'>            return 0.0f0</span>
+          </td>
+        </tr>
+        <tr id='L103'>
+          <td class='lineno'>103</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        elseif isinf&#40;x&#41; &amp;&amp; isinf&#40;y&#41;</span>
+          </td>
+        </tr>
+        <tr id='L104'>
+          <td class='lineno'>104</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            return Float32&#40;Inf&#41;</span>
+          </td>
+        </tr>
+        <tr id='L105'>
+          <td class='lineno'>105</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        else</span>
+          </td>
+        </tr>
+        <tr id='L106'>
+          <td class='lineno'>106</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td>
+            <div class='call-sites'>
+              2 &#40;0 &#37;&#41;
+              samples spent in fastpow
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from stepsize_controller&#33;
+              <a href='controllers.jl-4280c50fb2fb5fcabdec6d1d0e8b88b6ae09041a.html#L141'>line 141</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from stepsize_controller&#33;
+              <a href='controllers.jl-4280c50fb2fb5fcabdec6d1d0e8b88b6ae09041a.html#L140'>line 140</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='fastpow.jl-f1ecb3eec6e85466a25e4bb26cb04876440d4b85.html#L30'>fastlog2</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='number.jl-83c9ac07900f97ab9e4398dcf3258ad9bfab3194.html#L7'>convert</a>
+              <br />
+            </div>
+            <span class='code'>            return @fastmath exp2&#40;convert&#40;Float32, y&#41; * fastlog2&#40;convert&#40;Float32, x&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L107'>
+          <td class='lineno'>107</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L108'>
+          <td class='lineno'>108</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L109'>
+          <td class='lineno'>109</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
             <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L110'>
+          <td class='lineno'>110</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline fastpow&#40;x, y&#41; &#61; x^y</span>
           </td>
         </tr>
       </tbody>

@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/generator.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/sort.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Thu, 28 Mar 2024 17:44:55
+        Generated on Thu, 28 Mar 2024 18:32:44
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># reference on sorted binary search:</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    Generator&#40;f, iter&#41;</span>
+            <span class='code'>#   http://www.tbray.org/ongoing/When/200x/2003/03/22/Binary</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>Given a function &#96;f&#96; and an iterator &#96;iter&#96;, construct an iterator that yields</span>
+            <span class='code'># index of the first value of vector a that is greater than or equal to x;</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>the values of &#96;f&#96; applied to the elements of &#96;iter&#96;.</span>
+            <span class='code'># returns lastindex&#40;v&#41;&#43;1 if x is greater than all values in v.</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>The syntax for constructing an instance of this type is &#96;f&#40;x&#41; for x in iter &#91;if cond&#40;x&#41;::Bool&#93; &#96;.</span>
+            <span class='code'>function searchsortedfirst&#40;v::AbstractVector, x, lo::T, hi::T, o::Ordering&#41;::keytype&#40;v&#41; where T&lt;:Integer</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>The &#96;&#91;if cond&#40;x&#41;::Bool&#93;&#96; expression is optional and acts as a &quot;guard&quot;, effectively</span>
+            <span class='code'>    hi &#61; hi &#43; T&#40;1&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>filtering out values where the condition is false.</span>
+            <span class='code'>    len &#61; hi - lo</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @inbounds while len &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>        half_len &#61; len &gt;&gt;&gt; 0x01</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; g &#61; &#40;abs2&#40;x&#41; for x in 1:5 if x &#33;&#61; 3&#41;;</span>
+            <span class='code'>        m &#61; lo &#43; half_len</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if lt&#40;o, v&#91;m&#93;, x&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; for x in g</span>
+            <span class='code'>            lo &#61; m &#43; 1</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -183,9 +183,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in inflate_ir&#33;
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from inflate_ir&#33;
+              <a href='legacy.jl-d7b64f0d37fe7dcb374faa87fdf9dd7bac05180e.html#L14'>line 14</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>           println&#40;x&#41;</span>
+            <span class='code'>            len -&#61; half_len &#43; 1</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +204,7 @@
           <td>
             
             
-            <span class='code'>       end</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +214,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>            hi &#61; m</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +224,7 @@
           <td>
             
             
-            <span class='code'>4</span>
+            <span class='code'>            len &#61; half_len</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +234,7 @@
           <td>
             
             
-            <span class='code'>16</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +244,7 @@
           <td>
             
             
-            <span class='code'>25</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +254,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return lo</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +264,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; collect&#40;g&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +274,7 @@
           <td>
             
             
-            <span class='code'>4-element Vector&#123;Int64&#125;:</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +284,7 @@
           <td>
             
             
-            <span class='code'>  1</span>
+            <span class='code'># index of the last value of vector a that is less than or equal to x;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +294,7 @@
           <td>
             
             
-            <span class='code'>  4</span>
+            <span class='code'># returns firstindex&#40;v&#41;-1 if x is less than all values of v.</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +304,7 @@
           <td>
             
             
-            <span class='code'> 16</span>
+            <span class='code'>function searchsortedlast&#40;v::AbstractVector, x, lo::T, hi::T, o::Ordering&#41;::keytype&#40;v&#41; where T&lt;:Integer</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +314,7 @@
           <td>
             
             
-            <span class='code'> 25</span>
+            <span class='code'>    u &#61; T&#40;1&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +324,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    lo &#61; lo - u</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +334,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    hi &#61; hi &#43; u</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +344,7 @@
           <td>
             
             
-            <span class='code'>struct Generator&#123;I,F&#125;</span>
+            <span class='code'>    @inbounds while lo &lt; hi - u</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +354,7 @@
           <td>
             
             
-            <span class='code'>    f::F</span>
+            <span class='code'>        m &#61; midpoint&#40;lo, hi&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +364,7 @@
           <td>
             
             
-            <span class='code'>    iter::I</span>
+            <span class='code'>        if lt&#40;o, x, v&#91;m&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +374,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            hi &#61; m</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +384,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +394,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;f, I1, I2, Is...&#41; &#61; Generator&#40;a-&gt;f&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>            lo &#61; m</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +404,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +414,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, iter::I&#41; where &#123;T,I&#125; &#61; Generator&#123;I,Type&#123;T&#125;&#125;&#40;T, iter&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +424,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return lo</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +434,7 @@
           <td>
             
             
-            <span class='code'>Generator&#40;::Type&#123;T&#125;, I1, I2, Is...&#41; where &#123;T&#125; &#61; Generator&#40;a-&gt;T&#40;a...&#41;, zip&#40;I1, I2, Is...&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -445,7 +454,7 @@
           <td>
             
             
-            <span class='code'>function iterate&#40;g::Generator, s...&#41;</span>
+            <span class='code'># returns the range of indices of v equal to x</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,31 +464,17 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'># if v does not contain x, returns a 0-length range</span>
           </td>
         </tr>
         <tr id='L44'>
           <td class='lineno'>44</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;20 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;20 &#37;&#41;
-              samples spent in iterate
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from grow_to&#33;
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L907'>line 907</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='iterators.jl-fb6d2336136637c6888a5eab660d47449e5343ee.html#L515'>iterate</a>
-              <br />
-            </div>
-            <span class='code'>    y &#61; iterate&#40;g.iter, s...&#41;</span>
+            
+            
+            <span class='code'># indicating the insertion point of x</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +484,7 @@
           <td>
             
             
-            <span class='code'>    y &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
+            <span class='code'>function searchsorted&#40;v::AbstractVector, x, ilo::T, ihi::T, o::Ordering&#41;::UnitRange&#123;keytype&#40;v&#41;&#125; where T&lt;:Integer</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -499,7 +494,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; y::Tuple&#123;Any, Any&#125; # try to give inference some idea of what to expect about the behavior of the next line</span>
+            <span class='code'>    u &#61; T&#40;1&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -509,7 +504,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;g.f&#40;y&#91;1&#93;&#41;, y&#91;2&#93;&#41;</span>
+            <span class='code'>    lo &#61; ilo - u</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +514,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    hi &#61; ihi &#43; u</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +524,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @inbounds while lo &lt; hi - u</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +534,7 @@
           <td>
             
             
-            <span class='code'>length&#40;g::Generator&#41; &#61; length&#40;g.iter&#41;</span>
+            <span class='code'>        m &#61; midpoint&#40;lo, hi&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +544,7 @@
           <td>
             
             
-            <span class='code'>size&#40;g::Generator&#41; &#61; size&#40;g.iter&#41;</span>
+            <span class='code'>        if lt&#40;o, v&#91;m&#93;, x&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +554,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;g::Generator&#41; &#61; axes&#40;g.iter&#41;</span>
+            <span class='code'>            lo &#61; m</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +564,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;g::Generator&#41; &#61; ndims&#40;g.iter&#41;</span>
+            <span class='code'>        elseif lt&#40;o, x, v&#91;m&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +574,7 @@
           <td>
             
             
-            <span class='code'>keys&#40;g::Generator&#41; &#61; keys&#40;g.iter&#41;</span>
+            <span class='code'>            hi &#61; m</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +584,7 @@
           <td>
             
             
-            <span class='code'>last&#40;g::Generator&#41; &#61; g.f&#40;last&#40;g.iter&#41;&#41;</span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +594,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;g::Generator&#41; &#61; isempty&#40;g.iter&#41;</span>
+            <span class='code'>            a &#61; searchsortedfirst&#40;v, x, max&#40;lo,ilo&#41;, m, o&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +604,7 @@
           <td>
             
             
-            <span class='code'>isdone&#40;g::Generator, state...&#41; &#61; isdone&#40;g.iter, state...&#41;</span>
+            <span class='code'>            b &#61; searchsortedlast&#40;v, x, m, min&#40;hi,ihi&#41;, o&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +614,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            return a : b</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +624,7 @@
           <td>
             
             
-            <span class='code'>## iterator traits</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +634,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +644,7 @@
           <td>
             
             
-            <span class='code'>abstract type IteratorSize end</span>
+            <span class='code'>    return &#40;lo &#43; 1&#41; : &#40;hi - 1&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +654,7 @@
           <td>
             
             
-            <span class='code'>struct SizeUnknown &lt;: IteratorSize end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,7 +664,7 @@
           <td>
             
             
-            <span class='code'>struct HasLength &lt;: IteratorSize end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L64'>
@@ -679,7 +674,7 @@
           <td>
             
             
-            <span class='code'>struct HasShape&#123;N&#125; &lt;: IteratorSize end</span>
+            <span class='code'>for s in &#91;:searchsortedfirst, :searchsortedlast, :searchsorted&#93;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +684,7 @@
           <td>
             
             
-            <span class='code'>struct IsInfinite &lt;: IteratorSize end</span>
+            <span class='code'>    @eval begin</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +694,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#36;s&#40;v::AbstractVector, x, o::Ordering&#41; &#61; &#36;s&#40;v,x,firstindex&#40;v&#41;,lastindex&#40;v&#41;,o&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +704,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        &#36;s&#40;v::AbstractVector, x;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +714,7 @@
           <td>
             
             
-            <span class='code'>    IteratorSize&#40;itertype::Type&#41; -&gt; IteratorSize</span>
+            <span class='code'>           lt&#61;isless, by&#61;identity, rev::Union&#123;Bool,Nothing&#125;&#61;nothing, order::Ordering&#61;Forward&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +724,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            &#36;s&#40;v,x,ord&#40;lt,by,rev,order&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +734,7 @@
           <td>
             
             
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +744,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +754,7 @@
           <td>
             
             
-            <span class='code'>* &#96;SizeUnknown&#40;&#41;&#96; if the length &#40;number of elements&#41; cannot be determined in advance.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +764,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasLength&#40;&#41;&#96; if there is a fixed, finite length.</span>
+            <span class='code'># An unstable sorting algorithm for internal use</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +774,7 @@
           <td>
             
             
-            <span class='code'>* &#96;HasShape&#123;N&#125;&#40;&#41;&#96; if there is a known length plus a notion of multidimensional shape &#40;as for an array&#41;.</span>
+            <span class='code'>function sort&#33;&#40;v::Vector; by::Function&#61;identity, &#40;&lt;&#41;::Function&#61;&lt;&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +784,7 @@
           <td>
             
             
-            <span class='code'>   In this case &#96;N&#96; should give the number of dimensions, and the &#91;&#96;axes&#96;&#93;&#40;@ref&#41; function is valid</span>
+            <span class='code'>    isempty&#40;v&#41; &amp;&amp; return v # This branch is hit 95&#37; of the time</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +794,7 @@
           <td>
             
             
-            <span class='code'>   for the iterator.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +804,7 @@
           <td>
             
             
-            <span class='code'>* &#96;IsInfinite&#40;&#41;&#96; if the iterator yields values forever.</span>
+            <span class='code'>    # Of the remaining 5&#37;, this branch is hit less than 1&#37; of the time</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +814,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if length&#40;v&#41; &gt; 200 # Heap sort prevents quadratic runtime</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +824,7 @@
           <td>
             
             
-            <span class='code'>The default value &#40;for iterators that do not define this function&#41; is &#96;HasLength&#40;&#41;&#96;.</span>
+            <span class='code'>        o &#61; ord&#40;&lt;, by, true&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +834,7 @@
           <td>
             
             
-            <span class='code'>This means that most iterators are assumed to implement &#91;&#96;length&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>        heapify&#33;&#40;v, o&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +844,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        for i in lastindex&#40;v&#41;:-1:2</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +854,7 @@
           <td>
             
             
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate space for their</span>
+            <span class='code'>            y &#61; v&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +864,7 @@
           <td>
             
             
-            <span class='code'>result, and algorithms that resize their result incrementally.</span>
+            <span class='code'>            v&#91;i&#93; &#61; v&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +874,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            percolate_down&#33;&#40;v, 1, y, o, i-1&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +884,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +894,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;1:5&#41;</span>
+            <span class='code'>        return v</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +904,7 @@
           <td>
             
             
-            <span class='code'>Base.HasShape&#123;1&#125;&#40;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -929,7 +924,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; Base.IteratorSize&#40;&#40;2,3&#41;&#41;</span>
+            <span class='code'>    @inbounds for i in 2:length&#40;v&#41; # Insertion sort</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +934,7 @@
           <td>
             
             
-            <span class='code'>Base.HasLength&#40;&#41;</span>
+            <span class='code'>        x &#61; v&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +944,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        y &#61; by&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +954,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        while i &gt; 1 &amp;&amp; y &lt; by&#40;v&#91;i-1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +964,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;x&#41; &#61; IteratorSize&#40;typeof&#40;x&#41;&#41;</span>
+            <span class='code'>            v&#91;i&#93; &#61; v&#91;i-1&#93;</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -979,7 +974,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#41; &#61; HasLength&#40;&#41;  # HasLength is the default</span>
+            <span class='code'>            i -&#61; 1</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -989,7 +984,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Union&#123;&#125;&#125;, slurp...&#41; &#61; throw&#40;ArgumentError&#40;&quot;Union&#123;&#125; does not have elements&quot;&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +994,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Any&#125;&#41; &#61; SizeUnknown&#40;&#41;</span>
+            <span class='code'>        v&#91;i&#93; &#61; x</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +1004,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1014,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Tuple&#125;&#41; &#61; HasLength&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1024,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:AbstractArray&#123;&lt;:Any,N&#125;&#125;&#41;  where &#123;N&#125; &#61; HasShape&#123;N&#125;&#40;&#41;</span>
+            <span class='code'>    v</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,327 +1034,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;Generator&#123;I,F&#125;&#125;&#41; where &#123;I,F&#125; &#61; IteratorSize&#40;I&#41;</span>
-          </td>
-        </tr>
-        <tr id='L101'>
-          <td class='lineno'>101</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L102'>
-          <td class='lineno'>102</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>haslength&#40;iter&#41; &#61; IteratorSize&#40;iter&#41; isa Union&#123;HasShape, HasLength&#125;</span>
-          </td>
-        </tr>
-        <tr id='L103'>
-          <td class='lineno'>103</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L104'>
-          <td class='lineno'>104</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>abstract type IteratorEltype end</span>
-          </td>
-        </tr>
-        <tr id='L105'>
-          <td class='lineno'>105</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>struct EltypeUnknown &lt;: IteratorEltype end</span>
-          </td>
-        </tr>
-        <tr id='L106'>
-          <td class='lineno'>106</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>struct HasEltype &lt;: IteratorEltype end</span>
-          </td>
-        </tr>
-        <tr id='L107'>
-          <td class='lineno'>107</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L108'>
-          <td class='lineno'>108</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L109'>
-          <td class='lineno'>109</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    IteratorEltype&#40;itertype::Type&#41; -&gt; IteratorEltype</span>
-          </td>
-        </tr>
-        <tr id='L110'>
-          <td class='lineno'>110</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L111'>
-          <td class='lineno'>111</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Given the type of an iterator, return one of the following values:</span>
-          </td>
-        </tr>
-        <tr id='L112'>
-          <td class='lineno'>112</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L113'>
-          <td class='lineno'>113</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>* &#96;EltypeUnknown&#40;&#41;&#96; if the type of elements yielded by the iterator is not known in advance.</span>
-          </td>
-        </tr>
-        <tr id='L114'>
-          <td class='lineno'>114</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>* &#96;HasEltype&#40;&#41;&#96; if the element type is known, and &#91;&#96;eltype&#96;&#93;&#40;@ref&#41; would return a meaningful value.</span>
-          </td>
-        </tr>
-        <tr id='L115'>
-          <td class='lineno'>115</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L116'>
-          <td class='lineno'>116</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;HasEltype&#40;&#41;&#96; is the default, since iterators are assumed to implement &#91;&#96;eltype&#96;&#93;&#40;@ref&#41;.</span>
-          </td>
-        </tr>
-        <tr id='L117'>
-          <td class='lineno'>117</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L118'>
-          <td class='lineno'>118</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>This trait is generally used to select between algorithms that pre-allocate a specific</span>
-          </td>
-        </tr>
-        <tr id='L119'>
-          <td class='lineno'>119</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>type of result, and algorithms that pick a result type based on the types of yielded</span>
-          </td>
-        </tr>
-        <tr id='L120'>
-          <td class='lineno'>120</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>values.</span>
-          </td>
-        </tr>
-        <tr id='L121'>
-          <td class='lineno'>121</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L122'>
-          <td class='lineno'>122</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
-          </td>
-        </tr>
-        <tr id='L123'>
-          <td class='lineno'>123</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>julia&gt; Base.IteratorEltype&#40;1:5&#41;</span>
-          </td>
-        </tr>
-        <tr id='L124'>
-          <td class='lineno'>124</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.HasEltype&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L125'>
-          <td class='lineno'>125</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;</span>
-          </td>
-        </tr>
-        <tr id='L126'>
-          <td class='lineno'>126</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L127'>
-          <td class='lineno'>127</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;x&#41; &#61; IteratorEltype&#40;typeof&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L128'>
-          <td class='lineno'>128</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#41; &#61; HasEltype&#40;&#41;  # HasEltype is the default</span>
-          </td>
-        </tr>
-        <tr id='L129'>
-          <td class='lineno'>129</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#123;Union&#123;&#125;&#125;, slurp...&#41; &#61; throw&#40;ArgumentError&#40;&quot;Union&#123;&#125; does not have elements&quot;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L130'>
-          <td class='lineno'>130</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#123;Any&#125;&#41; &#61; EltypeUnknown&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L131'>
-          <td class='lineno'>131</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L132'>
-          <td class='lineno'>132</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>IteratorEltype&#40;::Type&#123;Generator&#123;I,T&#125;&#125;&#41; where &#123;I,T&#125; &#61; EltypeUnknown&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>
