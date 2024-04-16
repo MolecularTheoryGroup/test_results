@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/OrdinaryDiffEq/ZbQoo/src/integrators/integrator_utils.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/StaticArrays/EHHaF/src/linalg.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>function save_idxsinitialize&#40;integrator, cache::OrdinaryDiffEqCache,</span>
+            <span class='code'>import Base: &#43;, -, *, /, \</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;uType&#125;&#41; where &#123;uType&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>    error&#40;&quot;This algorithm does not have an initialization function&quot;&#41;</span>
+            <span class='code'>#--------------------------------------------------</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Vector space algebra</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -80,26 +80,12 @@
         </tr>
         <tr id='L6'>
           <td class='lineno'>6</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              8 &#40;1 &#37;&#41;
-              samples spent in loopheader&#33;
-              <br />
-              3 &#40;38 &#37;&#41; &#40;ex.&#41;,
-              7 &#40;88 &#37;&#41; &#40;incl.&#41;
-              when called from solve&#33;
-              <a href='solve.jl-a38d532689c456f177a4c93c8501ed308015c158.html#L540'>line 540</a>
-              <br />
-              1 &#40;12 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;12 &#37;&#41; &#40;incl.&#41;
-              when called from #__solve#761
-              <a href='solve.jl-a38d532689c456f177a4c93c8501ed308015c158.html#L7'>line 7</a>
-              <br />
-            </div>
             
-            <span class='code'>function loopheader&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'># Unary ops</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -109,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    # Apply right after iterators / callbacks</span>
+            <span class='code'>@inline &#43;&#40;a::StaticArray&#41; &#61; map&#40;&#43;, a&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -119,7 +105,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline -&#40;a::StaticArray&#41; &#61; map&#40;-, a&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -129,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    # Accept or reject the step</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L10'>
@@ -139,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.iter &gt; 0</span>
+            <span class='code'># Binary ops</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -149,7 +135,7 @@
           <td>
             
             
-            <span class='code'>        if &#40;&#40;integrator.opts.adaptive &amp;&amp; integrator.accept_step&#41; ||</span>
+            <span class='code'># Between arrays</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -159,7 +145,7 @@
           <td>
             
             
-            <span class='code'>            &#33;integrator.opts.adaptive&#41; &amp;&amp; &#33;integrator.force_stepfail</span>
+            <span class='code'>@inline &#43;&#40;a::StaticArray, b::StaticArray&#41; &#61; map&#40;&#43;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -169,22 +155,17 @@
           <td>
             
             
-            <span class='code'>            integrator.success_iter &#43;&#61; 1</span>
+            <span class='code'>@inline &#43;&#40;a::AbstractArray, b::StaticArray&#41; &#61; map&#40;&#43;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
           <td class='lineno'>14</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L383'>apply_step&#33;</a>
-              <br />
-            </div>
-            <span class='code'>            apply_step&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'>@inline &#43;&#40;a::StaticArray, b::AbstractArray&#41; &#61; map&#40;&#43;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -194,7 +175,7 @@
           <td>
             
             
-            <span class='code'>        elseif integrator.opts.adaptive &amp;&amp; &#33;integrator.accept_step</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L16'>
@@ -204,7 +185,7 @@
           <td>
             
             
-            <span class='code'>            if integrator.isout</span>
+            <span class='code'>@inline -&#40;a::StaticArray, b::StaticArray&#41; &#61; map&#40;-, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -214,7 +195,7 @@
           <td>
             
             
-            <span class='code'>                integrator.dt &#61; integrator.dt * integrator.opts.qmin</span>
+            <span class='code'>@inline -&#40;a::AbstractArray, b::StaticArray&#41; &#61; map&#40;-, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -224,7 +205,7 @@
           <td>
             
             
-            <span class='code'>            elseif &#33;integrator.force_stepfail</span>
+            <span class='code'>@inline -&#40;a::StaticArray, b::AbstractArray&#41; &#61; map&#40;-, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -234,7 +215,7 @@
           <td>
             
             
-            <span class='code'>                step_reject_controller&#33;&#40;integrator, integrator.alg&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L20'>
@@ -244,7 +225,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># Scalar-array</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -254,7 +235,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>@inline *&#40;a::Number, b::StaticArray&#41; &#61; map&#40;c-&gt;a*c, b&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -264,7 +245,7 @@
           <td>
             
             
-            <span class='code'>    elseif integrator.u_modified # &amp;&amp; integrator.iter &#61;&#61; 0</span>
+            <span class='code'>@inline *&#40;a::StaticArray, b::Number&#41; &#61; map&#40;c-&gt;c*b, a&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -274,7 +255,7 @@
           <td>
             
             
-            <span class='code'>        update_uprev&#33;&#40;integrator&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L24'>
@@ -284,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@inline /&#40;a::StaticArray, b::Number&#41; &#61; map&#40;c-&gt;c/b, a&#41;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -294,7 +275,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline \&#40;a::Number, b::StaticArray&#41; &#61; map&#40;c-&gt;a\c, b&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -304,37 +285,27 @@
           <td>
             
             
-            <span class='code'>    integrator.iter &#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
           <td class='lineno'>27</td>
-          <td class='tracecount excl'>2 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>4 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='composite_perform_step.jl-9f5e0c09c1f9d6b4d06d16ecb0729c93b3ccf932.html#L99'>choose_algorithm&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    choose_algorithm&#33;&#40;integrator, integrator.cache&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L28'>
           <td class='lineno'>28</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L442'>fix_dt_at_bounds&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    fix_dt_at_bounds&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'># With UniformScaling</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -344,7 +315,7 @@
           <td>
             
             
-            <span class='code'>    modify_dt_for_tstops&#33;&#40;integrator&#41;</span>
+            <span class='code'>@inline &#43;&#40;a::StaticMatrix, b::UniformScaling&#41; &#61; _plus_uniform&#40;Size&#40;a&#41;, a, b.λ&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -354,7 +325,7 @@
           <td>
             
             
-            <span class='code'>    integrator.force_stepfail &#61; false</span>
+            <span class='code'>@inline &#43;&#40;a::UniformScaling, b::StaticMatrix&#41; &#61; _plus_uniform&#40;Size&#40;b&#41;, b, a.λ&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -364,7 +335,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>@inline -&#40;a::StaticMatrix, b::UniformScaling&#41; &#61; _plus_uniform&#40;Size&#40;a&#41;, a, -b.λ&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -374,7 +345,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline -&#40;a::UniformScaling, b::StaticMatrix&#41; &#61; _plus_uniform&#40;Size&#40;b&#41;, -b, a.λ&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -394,7 +365,7 @@
           <td>
             
             
-            <span class='code'>function last_step_failed&#40;integrator::ODEIntegrator&#41;</span>
+            <span class='code'>@generated function _plus_uniform&#40;::Size&#123;S&#125;, a::StaticMatrix, λ&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -404,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    integrator.last_stepfail &amp;&amp; &#33;integrator.opts.adaptive</span>
+            <span class='code'>    n &#61; checksquare&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -414,7 +385,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    exprs &#61; &#91;i &#61;&#61; j ? :&#40;a&#91;&#36;&#40;LinearIndices&#40;S&#41;&#91;i, j&#93;&#41;&#93; &#43; λ&#41; : :&#40;a&#91;&#36;&#40;LinearIndices&#40;S&#41;&#91;i, j&#93;&#41;&#93;&#41; for i &#61; 1:n, j &#61; 1:n&#93;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -424,7 +395,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -434,7 +405,7 @@
           <td>
             
             
-            <span class='code'>function modify_dt_for_tstops&#33;&#40;integrator&#41;</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -444,7 +415,7 @@
           <td>
             
             
-            <span class='code'>    if has_tstop&#40;integrator&#41;</span>
+            <span class='code'>        @inbounds return similar_type&#40;a, promote_type&#40;eltype&#40;a&#41;, typeof&#40;λ&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;exprs...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -454,7 +425,7 @@
           <td>
             
             
-            <span class='code'>        tdir_t &#61; integrator.tdir * integrator.t</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -464,7 +435,7 @@
           <td>
             
             
-            <span class='code'>        tdir_tstop &#61; first_tstop&#40;integrator&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -474,7 +445,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.opts.adaptive</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L43'>
@@ -484,7 +455,7 @@
           <td>
             
             
-            <span class='code'>            integrator.dt &#61; integrator.tdir *</span>
+            <span class='code'>@inline *&#40;a::UniformScaling, b::Union&#123;StaticMatrix,StaticVector&#125;&#41; &#61; a.λ * b</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -494,7 +465,7 @@
           <td>
             
             
-            <span class='code'>                            min&#40;abs&#40;integrator.dt&#41;, abs&#40;tdir_tstop - tdir_t&#41;&#41; # step&#33; to the end</span>
+            <span class='code'>@inline *&#40;a::StaticMatrix, b::UniformScaling&#41; &#61; a * b.λ</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -504,7 +475,7 @@
           <td>
             
             
-            <span class='code'>        elseif iszero&#40;integrator.dtcache&#41; &amp;&amp; integrator.dtchangeable</span>
+            <span class='code'>@inline \&#40;a::UniformScaling, b::Union&#123;StaticMatrix,StaticVector&#125;&#41; &#61; a.λ \ b</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -514,7 +485,7 @@
           <td>
             
             
-            <span class='code'>            integrator.dt &#61; integrator.tdir * abs&#40;tdir_tstop - tdir_t&#41;</span>
+            <span class='code'>@inline /&#40;a::StaticMatrix, b::UniformScaling&#41; &#61; a / b.λ</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -524,7 +495,7 @@
           <td>
             
             
-            <span class='code'>        elseif integrator.dtchangeable &amp;&amp; &#33;integrator.force_stepfail</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -534,7 +505,7 @@
           <td>
             
             
-            <span class='code'>            # always try to step&#33; with dtcache, but lower if a tstop</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L49'>
@@ -544,7 +515,7 @@
           <td>
             
             
-            <span class='code'>            # however, if force_stepfail then don&#39;t set to dtcache, and no tstop worry</span>
+            <span class='code'># Ternary ops</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -554,7 +525,7 @@
           <td>
             
             
-            <span class='code'>            integrator.dt &#61; integrator.tdir *</span>
+            <span class='code'>@inline Base.muladd&#40;scalar::Number, a::StaticArray, b::StaticArray&#41; &#61; map&#40;&#40;ai, bi&#41; -&gt; muladd&#40;scalar, ai, bi&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -564,7 +535,7 @@
           <td>
             
             
-            <span class='code'>                            min&#40;abs&#40;integrator.dtcache&#41;, abs&#40;tdir_tstop - tdir_t&#41;&#41; # step&#33; to the end</span>
+            <span class='code'>@inline Base.muladd&#40;a::StaticArray, scalar::Number, b::StaticArray&#41; &#61; map&#40;&#40;ai, bi&#41; -&gt; muladd&#40;ai, scalar, bi&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -574,7 +545,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L53'>
@@ -584,7 +555,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -594,7 +565,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># @fastmath operators</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -604,7 +575,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline Base.FastMath.mul_fast&#40;a::Number, b::StaticArray&#41; &#61; map&#40;c -&gt; Base.FastMath.mul_fast&#40;a, c&#41;, b&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -614,7 +585,7 @@
           <td>
             
             
-            <span class='code'># Want to extend savevalues&#33; for DDEIntegrator</span>
+            <span class='code'>@inline Base.FastMath.mul_fast&#40;a::StaticArray, b::Number&#41; &#61; map&#40;c -&gt; Base.FastMath.mul_fast&#40;c, b&#41;, a&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -624,40 +595,17 @@
           <td>
             
             
-            <span class='code'>function savevalues&#33;&#40;integrator::ODEIntegrator, force_save &#61; false, reduce_size &#61; true&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
           <td class='lineno'>58</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>30 &#40;2 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              30 &#40;2 &#37;&#41;
-              samples spent in savevalues&#33;
-              <br />
-              
-              15 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from handle_callbacks&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L353'>line 353</a>
-              <br />
-              
-              15 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from savevalues&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L58'>line 58</a>
-              <br />
-            </div>
-            <div class='callees'>
-              15 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L58'>savevalues&#33;</a>
-              <br />
-              15 &#40;50 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L61'>_savevalues&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    _savevalues&#33;&#40;integrator, force_save, reduce_size&#41;</span>
+            
+            
+            <span class='code'>@inline Base.FastMath.add_fast&#40;a::StaticArray, b::StaticArray&#41; &#61; map&#40;Base.FastMath.add_fast, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -667,7 +615,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline Base.FastMath.sub_fast&#40;a::StaticArray, b::StaticArray&#41; &#61; map&#40;Base.FastMath.sub_fast, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -682,21 +630,12 @@
         </tr>
         <tr id='L61'>
           <td class='lineno'>61</td>
-          <td class='tracecount excl'>2 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              15 &#40;1 &#37;&#41;
-              samples spent in _savevalues&#33;
-              <br />
-              4 &#40;27 &#37;&#41; &#40;ex.&#41;,
-              15 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from savevalues&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L58'>line 58</a>
-              <br />
-            </div>
             
-            <span class='code'>function _savevalues&#33;&#40;integrator, force_save, reduce_size&#41;::Tuple&#123;Bool, Bool&#125;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -706,7 +645,7 @@
           <td>
             
             
-            <span class='code'>    saved, savedexactly &#61; false, false</span>
+            <span class='code'>#--------------------------------------------------</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -716,7 +655,7 @@
           <td>
             
             
-            <span class='code'>    &#33;integrator.opts.save_on &amp;&amp; return saved, savedexactly</span>
+            <span class='code'># Matrix algebra</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -726,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    tdir_t &#61; integrator.tdir * integrator.t</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L65'>
@@ -736,17 +675,17 @@
           <td>
             
             
-            <span class='code'>    saveat &#61; integrator.opts.saveat</span>
+            <span class='code'># _adjointtype returns the eltype of the container when computing the adjoint/transpose</span>
           </td>
         </tr>
         <tr id='L66'>
           <td class='lineno'>66</td>
-          <td class='tracecount excl'>2 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
             
             
-            <span class='code'>    while &#33;isempty&#40;saveat&#41; &amp;&amp; first&#40;saveat&#41; &lt;&#61; tdir_t # Perform saveat</span>
+            <span class='code'># of a static array. Using this method instead of calling &#96;Base.promote_op&#96; directly</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -756,7 +695,7 @@
           <td>
             
             
-            <span class='code'>        integrator.saveiter &#43;&#61; 1</span>
+            <span class='code'># helps with type-inference, particularly for nested static arrays,</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -766,22 +705,17 @@
           <td>
             
             
-            <span class='code'>        saved &#61; true</span>
+            <span class='code'># where the adjoint is applied recursively.</span>
           </td>
         </tr>
         <tr id='L69'>
           <td class='lineno'>69</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>3 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              3 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='binary_heap.jl-82b6cffc80ca566fe27a3cb50d05645c7230ad6d.html#L107'>pop&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        curt &#61; integrator.tdir * pop&#33;&#40;saveat&#41;</span>
+            
+            <span class='code'>@inline _adjointtype&#40;f, ::Type&#123;T&#125;&#41; where &#123;T&#125; &#61; Base.promote_op&#40;f, T&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -791,22 +725,17 @@
           <td>
             
             
-            <span class='code'>        if curt &#33;&#61; integrator.t # If &lt;t, interpolate</span>
+            <span class='code'>for S in &#40;:SMatrix, :MMatrix&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
           <td class='lineno'>71</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='generic_dense.jl-ea216fad01aa76b9203c7be4649d9782daedd471.html#L108'>addsteps&#33;</a>
-              <br />
-            </div>
-            <span class='code'>            DiffEqBase.addsteps&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'>    @eval @inline _adjointtype&#40;f, ::Type&#123;&#36;S&#123;M,N,T,L&#125;&#125;&#41; where &#123;M,N,T,L&#125; &#61; &#36;S&#123;N,M,_adjointtype&#40;f, T&#41;,L&#125;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -816,26 +745,17 @@
           <td>
             
             
-            <span class='code'>            Θ &#61; &#40;curt - integrator.tprev&#41; / integrator.dt</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L73'>
           <td class='lineno'>73</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>5 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              3 &#40;60 &#37;&#41;
-              samples spent calling
-              <a href='generic_dense.jl-ea216fad01aa76b9203c7be4649d9782daedd471.html#L117'>ode_interpolant</a>
-              <br />
-              2 &#40;40 &#37;&#41;
-              samples spent calling
-              <a href='generic_dense.jl-ea216fad01aa76b9203c7be4649d9782daedd471.html#L112'>ode_interpolant</a>
-              <br />
-            </div>
-            <span class='code'>            val &#61; ode_interpolant&#40;Θ, integrator, integrator.opts.save_idxs, Val&#123;0&#125;&#41; # out of place, but no force copy later</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L74'>
@@ -845,7 +765,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.t, integrator.saveiter, curt&#41;</span>
+            <span class='code'># Transpose, etc</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -855,7 +775,7 @@
           <td>
             
             
-            <span class='code'>            save_val &#61; val</span>
+            <span class='code'>@inline transpose&#40;m::StaticMatrix&#41; &#61; _transpose&#40;Size&#40;m&#41;, m&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -865,7 +785,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter, save_val, false&#41;</span>
+            <span class='code'># note: transpose of StaticVector is a Transpose, handled by Base</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -875,22 +795,17 @@
           <td>
             
             
-            <span class='code'>            if integrator.alg isa OrdinaryDiffEqCompositeAlgorithm</span>
+            <span class='code'>@inline transpose&#40;a::Transpose&#123;&lt;:Any,&lt;:Union&#123;StaticVector,StaticMatrix&#125;&#125;&#41; &#61; a.parent</span>
           </td>
         </tr>
         <tr id='L78'>
           <td class='lineno'>78</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='utils.jl-af97ff37b8d7ee8bc71030dd2ee31d565fe91996.html#L208'>copyat_or_push&#33;</a>
-              <br />
-            </div>
-            <span class='code'>                copyat_or_push&#33;&#40;integrator.sol.alg_choice, integrator.saveiter,</span>
+            
+            <span class='code'>@inline transpose&#40;a::Adjoint&#123;&lt;:Any,&lt;:Union&#123;StaticVector,StaticMatrix&#125;&#125;&#41; &#61; conj&#40;a.parent&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -900,7 +815,7 @@
           <td>
             
             
-            <span class='code'>                    integrator.cache.current&#41;</span>
+            <span class='code'>@inline transpose&#40;a::Adjoint&#123;&lt;:Real,&lt;:Union&#123;StaticVector,StaticMatrix&#125;&#125;&#41; &#61; a.parent</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -910,7 +825,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L81'>
@@ -920,7 +835,7 @@
           <td>
             
             
-            <span class='code'>        else # &#61;&#61;t, just save</span>
+            <span class='code'>@generated function _transpose&#40;::Size&#123;S&#125;, m::StaticMatrix&#123;n1, n2, T&#125;&#41; where &#123;n1, n2, S, T&#125;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -930,7 +845,7 @@
           <td>
             
             
-            <span class='code'>            if curt &#61;&#61; integrator.sol.prob.tspan&#91;2&#93; &amp;&amp; &#33;integrator.opts.save_end</span>
+            <span class='code'>    exprs &#61; &#91;:&#40;transpose&#40;m&#91;&#36;&#40;LinearIndices&#40;S&#41;&#91;j1, j2&#93;&#41;&#93;&#41;&#41; for j2 in 1:n2, j1 in 1:n1&#93;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -940,7 +855,7 @@
           <td>
             
             
-            <span class='code'>                integrator.saveiter -&#61; 1</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -950,7 +865,7 @@
           <td>
             
             
-            <span class='code'>                continue</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -960,7 +875,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        elements &#61; tuple&#40;&#36;&#40;exprs...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -970,7 +885,7 @@
           <td>
             
             
-            <span class='code'>            savedexactly &#61; true</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;m, _adjointtype&#40;transpose, T&#41;, Size&#40;&#36;&#40;n2,n1&#41;&#41;&#41;&#40;elements&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -980,7 +895,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.t, integrator.saveiter, integrator.t&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -990,7 +905,7 @@
           <td>
             
             
-            <span class='code'>            if integrator.opts.save_idxs &#61;&#61;&#61; nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -1000,7 +915,7 @@
           <td>
             
             
-            <span class='code'>                copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter, integrator.u&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L90'>
@@ -1010,7 +925,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>@inline adjoint&#40;m::StaticMatrix&#41; &#61; _adjoint&#40;Size&#40;m&#41;, m&#41;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -1020,7 +935,7 @@
           <td>
             
             
-            <span class='code'>                copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter,</span>
+            <span class='code'>@inline adjoint&#40;a::Transpose&#123;&lt;:Any,&lt;:Union&#123;StaticVector,StaticMatrix&#125;&#125;&#41; &#61; conj&#40;a.parent&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -1030,7 +945,7 @@
           <td>
             
             
-            <span class='code'>                    integrator.u&#91;integrator.opts.save_idxs&#93;, false&#41;</span>
+            <span class='code'>@inline adjoint&#40;a::Transpose&#123;&lt;:Real,&lt;:Union&#123;StaticVector,StaticMatrix&#125;&#125;&#41; &#61; a.parent</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -1040,7 +955,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@inline adjoint&#40;a::Adjoint&#123;&lt;:Any,&lt;:Union&#123;StaticVector,StaticMatrix&#125;&#125;&#41; &#61; a.parent</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -1050,7 +965,7 @@
           <td>
             
             
-            <span class='code'>            if integrator.alg isa FunctionMap || integrator.opts.dense</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L95'>
@@ -1060,7 +975,7 @@
           <td>
             
             
-            <span class='code'>                integrator.saveiter_dense &#43;&#61; 1</span>
+            <span class='code'>@generated function _adjoint&#40;::Size&#123;S&#125;, m::StaticMatrix&#123;n1, n2, T&#125;&#41; where &#123;n1, n2, S, T&#125;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -1070,7 +985,7 @@
           <td>
             
             
-            <span class='code'>                if integrator.opts.dense</span>
+            <span class='code'>    exprs &#61; &#91;:&#40;adjoint&#40;m&#91;&#36;&#40;LinearIndices&#40;S&#41;&#91;j1, j2&#93;&#41;&#93;&#41;&#41; for j2 in 1:n2, j1 in 1:n1&#93;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1080,7 +995,7 @@
           <td>
             
             
-            <span class='code'>                    if integrator.opts.save_idxs &#61;&#61;&#61; nothing</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1090,7 +1005,7 @@
           <td>
             
             
-            <span class='code'>                        copyat_or_push&#33;&#40;integrator.sol.k, integrator.saveiter_dense,</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1100,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>                            integrator.k&#41;</span>
+            <span class='code'>        elements &#61; tuple&#40;&#36;&#40;exprs...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1110,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>                    else</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;m, _adjointtype&#40;adjoint, T&#41;, Size&#40;&#36;&#40;n2,n1&#41;&#41;&#41;&#40;elements&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1120,7 +1035,7 @@
           <td>
             
             
-            <span class='code'>                        copyat_or_push&#33;&#40;integrator.sol.k, integrator.saveiter_dense,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1130,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>                            &#91;k&#91;integrator.opts.save_idxs&#93; for k in integrator.k&#93;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1140,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>                            false&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1150,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>@inline Base.zero&#40;a::SA&#41; where &#123;SA &lt;: StaticArray&#125; &#61; zeros&#40;SA&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1160,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>@inline Base.zero&#40;a::Type&#123;SA&#125;&#41; where &#123;SA &lt;: StaticArray&#125; &#61; zeros&#40;SA&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1170,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1180,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>            if integrator.alg isa OrdinaryDiffEqCompositeAlgorithm</span>
+            <span class='code'>@inline _construct_sametype&#40;a::Type, elements&#41; &#61; a&#40;elements&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1190,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>                copyat_or_push&#33;&#40;integrator.sol.alg_choice, integrator.saveiter,</span>
+            <span class='code'>@inline _construct_sametype&#40;a, elements&#41; &#61; typeof&#40;a&#41;&#40;elements&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1200,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>                    integrator.cache.current&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1210,7 +1125,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@inline one&#40;m::StaticMatrixLike&#41; &#61; _one&#40;Size&#40;m&#41;, m&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1220,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>@inline one&#40;::Type&#123;SM&#125;&#41; where &#123;SM&lt;:StaticMatrixLike&#125;&#61; _one&#40;Size&#40;SM&#41;, SM&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1230,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function _one&#40;s::Size, m_or_SM&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1240,7 +1155,7 @@
           <td>
             
             
-            <span class='code'>    if force_save || &#40;integrator.opts.save_everystep &amp;&amp;</span>
+            <span class='code'>    if &#40;length&#40;s&#41; &#33;&#61; 2&#41; || &#40;s&#91;1&#93; &#33;&#61; s&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1250,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>        &#40;isempty&#40;integrator.sol.t&#41; ||</span>
+            <span class='code'>        throw&#40;DimensionMismatch&#40;&quot;multiplicative identity defined only for square matrices&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1260,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>         &#40;integrator.t &#33;&#61;&#61; integrator.sol.t&#91;end&#93;&#41; &amp;&amp;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1270,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>         &#40;integrator.opts.save_end || integrator.t &#33;&#61;&#61; integrator.sol.prob.tspan&#91;2&#93;&#41;</span>
+            <span class='code'>    λ &#61; one&#40;_eltype_or&#40;m_or_SM, Float64&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1280,7 +1195,7 @@
           <td>
             
             
-            <span class='code'>    &#41;&#41;</span>
+            <span class='code'>    _construct_sametype&#40;m_or_SM, _scalar_matrix_elements&#40;s, λ&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1290,7 +1205,7 @@
           <td>
             
             
-            <span class='code'>        integrator.saveiter &#43;&#61; 1</span>
+            <span class='code'>    # TODO: Bring back the use of _construct_similar here:</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1300,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>        saved, savedexactly &#61; true, true</span>
+            <span class='code'>    # _construct_similar&#40;m_or_SM, s, _scalar_matrix_elements&#40;s, λ&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1310,7 +1225,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.opts.save_idxs &#61;&#61;&#61; nothing</span>
+            <span class='code'>    #</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1320,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter, integrator.u&#41;</span>
+            <span class='code'>    # However, because _construct_similar uses &#96;similar_type&#96;, it will be</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1330,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    # breaking for some StaticMatrix types &#40;in particular Rotations.RotMatrix&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1340,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter,</span>
+            <span class='code'>    # which must have similar_type return a general type able to hold any</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1350,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>                integrator.u&#91;integrator.opts.save_idxs&#93;, false&#41;</span>
+            <span class='code'>    # matrix in the full general linear group.</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1360,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    #</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1370,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>        copyat_or_push&#33;&#40;integrator.sol.t, integrator.saveiter, integrator.t&#41;</span>
+            <span class='code'>    # &#40;Generally we&#39;re stuck here and things like RotMatrix really need to</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1380,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.alg isa FunctionMap || integrator.opts.dense</span>
+            <span class='code'>    # override one&#40;&#41; and zero&#40;&#41; themselves: on the one hand, one&#40;RotMatrix&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1390,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>            integrator.saveiter_dense &#43;&#61; 1</span>
+            <span class='code'>    # should return a RotMatrix, but zero&#40;RotMatrix&#41; can not be a RotMatrix.</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1400,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>            if integrator.opts.dense</span>
+            <span class='code'>    # The best StaticArrays can do is to use similar_type to return an SMatrix</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1410,7 +1325,7 @@
           <td>
             
             
-            <span class='code'>                if integrator.opts.save_idxs &#61;&#61;&#61; nothing</span>
+            <span class='code'>    # for both of these, and let the more specialized library define the</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1420,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>                    copyat_or_push&#33;&#40;integrator.sol.k, integrator.saveiter_dense,</span>
+            <span class='code'>    # correct algebraic properties.&#41;</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1430,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>                        integrator.k&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1440,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1450,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>                    copyat_or_push&#33;&#40;integrator.sol.k, integrator.saveiter_dense,</span>
+            <span class='code'># StaticMatrix&#40;I::UniformScaling&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1460,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>                        &#91;k&#91;integrator.opts.save_idxs&#93; for k in integrator.k&#93;,</span>
+            <span class='code'>&#40;::Type&#123;SM&#125;&#41;&#40;I::UniformScaling&#41; where &#123;SM&lt;:StaticMatrix&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1470,7 +1385,7 @@
           <td>
             
             
-            <span class='code'>                        false&#41;</span>
+            <span class='code'>    SM&#40;_scalar_matrix_elements&#40;Size&#40;SM&#41;, I.λ&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1480,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'># The following oddity is needed if we want &#96;SArray&#123;Tuple&#123;2,3&#125;&#125;&#40;I&#41;&#96; to work</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1490,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># because we do not have &#96;SArray&#123;Tuple&#123;2,3&#125;&#125; &lt;: StaticMatrix&#96;.</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1500,7 +1415,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>&#40;::Type&#123;SM&#125;&#41;&#40;I::UniformScaling&#41; where &#123;SM&lt;:&#40;StaticArray&#123;Tuple&#123;N,M&#125;&#125; where &#123;N,M&#125;&#41;&#125; &#61;</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1510,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.alg isa OrdinaryDiffEqCompositeAlgorithm</span>
+            <span class='code'>    SM&#40;_scalar_matrix_elements&#40;Size&#40;SM&#41;, I.λ&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1520,7 +1435,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.alg_choice, integrator.saveiter,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1530,7 +1445,7 @@
           <td>
             
             
-            <span class='code'>                integrator.cache.current&#41;</span>
+            <span class='code'># Construct a matrix with the scalar λ on the diagonal and zeros off the</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1540,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># diagonal. The matrix can be non-square.</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1550,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@generated function _scalar_matrix_elements&#40;s::Size&#123;S&#125;, λ&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1560,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>    reduce_size &amp;&amp; resize&#33;&#40;integrator.k, integrator.kshortsize&#41;</span>
+            <span class='code'>    elements &#61; Symbol&#91;i &#61;&#61; j ? :λ : :λzero for i in 1:S&#91;1&#93;, j in 1:S&#91;2&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1570,7 +1485,7 @@
           <td>
             
             
-            <span class='code'>    return saved, savedexactly</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1580,7 +1495,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1590,7 +1505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        λzero &#61; zero&#40;λ&#41;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1600,7 +1515,7 @@
           <td>
             
             
-            <span class='code'># Want to extend postamble&#33; for DDEIntegrator</span>
+            <span class='code'>        tuple&#40;&#36;&#40;elements...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1610,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>postamble&#33;&#40;integrator::ODEIntegrator&#41; &#61; _postamble&#33;&#40;integrator&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1620,7 +1535,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1630,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>function _postamble&#33;&#40;integrator&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1640,7 +1555,7 @@
           <td>
             
             
-            <span class='code'>    DiffEqBase.finalize&#33;&#40;integrator.opts.callback, integrator.u, integrator.t, integrator&#41;</span>
+            <span class='code'>@generated function diagm&#40;kv1::Pair&#123;&lt;:Val,&lt;:StaticVector&#125;, other_kvs::Pair&#123;&lt;:Val,&lt;:StaticVector&#125;...&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1650,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>    solution_endpoint_match_cur_integrator&#33;&#40;integrator&#41;</span>
+            <span class='code'>    kvs &#61; &#40;kv1, other_kvs...&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1660,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>    resize&#33;&#40;integrator.sol.t, integrator.saveiter&#41;</span>
+            <span class='code'>    diag_ind_and_length &#61; &#91;&#40;kv.parameters&#91;1&#93;.parameters&#91;1&#93;, length&#40;kv.parameters&#91;2&#93;&#41;&#41; for kv in kvs&#93;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1670,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>    resize&#33;&#40;integrator.sol.u, integrator.saveiter&#41;</span>
+            <span class='code'>    N &#61; maximum&#40;abs&#40;di&#41; &#43; dl for &#40;di,dl&#41; in diag_ind_and_length&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1680,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;integrator.sol isa DAESolution&#41;</span>
+            <span class='code'>    vs &#61; &#91;Symbol&#40;&quot;v&#36;i&quot;&#41; for i&#61;1:length&#40;kvs&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1690,7 +1605,7 @@
           <td>
             
             
-            <span class='code'>        resize&#33;&#40;integrator.sol.k, integrator.saveiter_dense&#41;</span>
+            <span class='code'>    vs_exprs &#61; &#91;:&#40;@inbounds &#36;&#40;vs&#91;i&#93;&#41; &#61; kvs&#91;&#36;i&#93;.second&#41; for i&#61;eachindex&#40;kvs&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1700,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    element_exprs &#61; Any&#91;false for _&#61;1:N*N&#93;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1710,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.opts.progress</span>
+            <span class='code'>    for &#40;i, &#40;di, dl&#41;&#41; in enumerate&#40;diag_ind_and_length&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1720,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>        @logmsg&#40;LogLevel&#40;-1&#41;,</span>
+            <span class='code'>        diaginds &#61; diagind&#40;N, N, di&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1730,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>            integrator.opts.progress_name,</span>
+            <span class='code'>        for n &#61; 1:dl</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1740,7 +1655,7 @@
           <td>
             
             
-            <span class='code'>            _id&#61;integrator.opts.progress_id,</span>
+            <span class='code'>            element_exprs&#91;diaginds&#91;n&#93;&#93; &#61; :&#40;&#36;&#40;vs_exprs&#91;i&#93;&#41;&#91;&#36;n&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1750,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>            message&#61;integrator.opts.progress_message&#40;integrator.dt, integrator.u,</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1760,7 +1675,7 @@
           <td>
             
             
-            <span class='code'>                integrator.p, integrator.t&#41;,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1770,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>            progress&#61;&quot;done&quot;&#41;</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1780,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1790,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        kvs &#61; &#40;kv1, other_kvs...&#41;</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1800,7 +1715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#36;&#40;vs_exprs...&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1810,7 +1725,7 @@
           <td>
             
             
-            <span class='code'>function solution_endpoint_match_cur_integrator&#33;&#40;integrator&#41;</span>
+            <span class='code'>        @inbounds elements &#61; tuple&#40;&#36;&#40;element_exprs...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1820,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.opts.save_end &amp;&amp;</span>
+            <span class='code'>        T &#61; promote_tuple_eltype&#40;elements&#41;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1830,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>       &#40;integrator.saveiter &#61;&#61; 0 ||</span>
+            <span class='code'>        @inbounds return similar_type&#40;v1, T, Size&#40;&#36;N,&#36;N&#41;&#41;&#40;elements&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1840,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>        integrator.sol.t&#91;integrator.saveiter&#93; &#33;&#61; integrator.t &amp;&amp;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1850,7 +1765,7 @@
           <td>
             
             
-            <span class='code'>        &#40;&#40;integrator.opts.save_end_user isa Bool &amp;&amp; integrator.opts.save_end_user&#41; ||</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1860,7 +1775,7 @@
           <td>
             
             
-            <span class='code'>         integrator.t ∈ integrator.opts.saveat_cache ||</span>
+            <span class='code'>@inline diagm&#40;v::StaticVector&#41; &#61; diagm&#40;Val&#40;0&#41;&#61;&gt;v&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1870,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>         integrator.t &#61;&#61; integrator.sol.prob.tspan&#91;2&#93; ||</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1880,7 +1795,7 @@
           <td>
             
             
-            <span class='code'>         isempty&#40;integrator.opts.saveat_cache&#41;&#41;&#41;</span>
+            <span class='code'>@inline diag&#40;m::StaticMatrix, k::Type&#123;Val&#123;D&#125;&#125;&#61;Val&#123;0&#125;&#41; where &#123;D&#125; &#61; _diag&#40;Size&#40;m&#41;, m, k&#41;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1890,7 +1805,7 @@
           <td>
             
             
-            <span class='code'>        integrator.saveiter &#43;&#61; 1</span>
+            <span class='code'>@generated function _diag&#40;::Size&#123;S&#125;, m::StaticMatrix, ::Type&#123;Val&#123;D&#125;&#125;&#41; where &#123;S,D&#125;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1900,7 +1815,7 @@
           <td>
             
             
-            <span class='code'>        copyat_or_push&#33;&#40;integrator.sol.t, integrator.saveiter, integrator.t&#41;</span>
+            <span class='code'>    S1, S2 &#61; S</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1910,7 +1825,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.opts.save_idxs &#61;&#61;&#61; nothing</span>
+            <span class='code'>    rng &#61; D ≤ 0 ? range&#40;1-D, step&#61;S1&#43;1, length&#61;min&#40;S1&#43;D, S2&#41;&#41; :</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1920,7 +1835,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter, integrator.u&#41;</span>
+            <span class='code'>                  range&#40;D*S1&#43;1, step&#61;S1&#43;1, length&#61;min&#40;S1, S2-D&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1930,7 +1845,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    Snew &#61; length&#40;rng&#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1940,7 +1855,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.u, integrator.saveiter,</span>
+            <span class='code'>    T &#61; eltype&#40;m&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1950,7 +1865,7 @@
           <td>
             
             
-            <span class='code'>                integrator.u&#91;integrator.opts.save_idxs&#93;, false&#41;</span>
+            <span class='code'>    exprs &#61; &#91;:&#40;m&#91;&#36;i&#93;&#41; for i &#61; rng&#93;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1960,7 +1875,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1970,7 +1885,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.alg isa FunctionMap || integrator.opts.dense</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1980,7 +1895,7 @@
           <td>
             
             
-            <span class='code'>            integrator.saveiter_dense &#43;&#61; 1</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;m, Size&#40;&#36;Snew&#41;&#41;&#40;tuple&#40;&#36;&#40;exprs...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1990,7 +1905,7 @@
           <td>
             
             
-            <span class='code'>            if integrator.opts.dense</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -2000,7 +1915,7 @@
           <td>
             
             
-            <span class='code'>                if integrator.opts.save_idxs &#61;&#61;&#61; nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -2010,7 +1925,7 @@
           <td>
             
             
-            <span class='code'>                    copyat_or_push&#33;&#40;integrator.sol.k, integrator.saveiter_dense,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L191'>
@@ -2020,7 +1935,7 @@
           <td>
             
             
-            <span class='code'>                        integrator.k&#41;</span>
+            <span class='code'>#--------------------------------------------------</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -2030,7 +1945,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'># Vector products</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2040,7 +1955,7 @@
           <td>
             
             
-            <span class='code'>                    copyat_or_push&#33;&#40;integrator.sol.k, integrator.saveiter_dense,</span>
+            <span class='code'>@inline cross&#40;a::StaticVector, b::StaticVector&#41; &#61; _cross&#40;same_size&#40;a, b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2050,7 +1965,7 @@
           <td>
             
             
-            <span class='code'>                        &#91;k&#91;integrator.opts.save_idxs&#93; for k in integrator.k&#93;,</span>
+            <span class='code'>_cross&#40;::Size&#123;S&#125;, a::StaticVector, b::StaticVector&#41; where &#123;S&#125; &#61; error&#40;&quot;Cross product not defined for &#36;&#40;S&#91;1&#93;&#41;-vectors&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2060,7 +1975,7 @@
           <td>
             
             
-            <span class='code'>                        false&#41;</span>
+            <span class='code'>@inline function _cross&#40;::Size&#123;&#40;2,&#41;&#125;, a::StaticVector, b::StaticVector&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2070,7 +1985,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    @inbounds return a&#91;1&#93;*b&#91;2&#93; - a&#91;2&#93;*b&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2080,7 +1995,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2090,7 +2005,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>@inline function _cross&#40;::Size&#123;&#40;3,&#41;&#125;, a::StaticVector, b::StaticVector&#41;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2100,7 +2015,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.alg isa OrdinaryDiffEqCompositeAlgorithm</span>
+            <span class='code'>    @inbounds return similar_type&#40;a, typeof&#40;a&#91;2&#93;*b&#91;3&#93;-a&#91;3&#93;*b&#91;2&#93;&#41;&#41;&#40;&#40;a&#91;2&#93;*b&#91;3&#93;-a&#91;3&#93;*b&#91;2&#93;, a&#91;3&#93;*b&#91;1&#93;-a&#91;1&#93;*b&#91;3&#93;, a&#91;1&#93;*b&#91;2&#93;-a&#91;2&#93;*b&#91;1&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2110,7 +2025,7 @@
           <td>
             
             
-            <span class='code'>            copyat_or_push&#33;&#40;integrator.sol.alg_choice, integrator.saveiter,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2120,7 +2035,7 @@
           <td>
             
             
-            <span class='code'>                integrator.cache.current&#41;</span>
+            <span class='code'>@inline function _cross&#40;::Size&#123;&#40;2,&#41;&#125;, a::StaticVector&#123;&lt;:Any, &lt;:Unsigned&#125;, b::StaticVector&#123;&lt;:Any, &lt;:Unsigned&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2130,7 +2045,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    @inbounds return Signed&#40;a&#91;1&#93;*b&#91;2&#93;&#41; - Signed&#40;a&#91;2&#93;*b&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2140,7 +2055,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2150,7 +2065,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function _cross&#40;::Size&#123;&#40;3,&#41;&#125;, a::StaticVector&#123;&lt;:Any, &lt;:Unsigned&#125;, b::StaticVector&#123;&lt;:Any, &lt;:Unsigned&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2160,7 +2075,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @inbounds return similar_type&#40;a, typeof&#40;Signed&#40;a&#91;2&#93;*b&#91;3&#93;&#41;-Signed&#40;a&#91;3&#93;*b&#91;2&#93;&#41;&#41;&#41;&#40;&#40;&#40;Signed&#40;a&#91;2&#93;*b&#91;3&#93;&#41;-Signed&#40;a&#91;3&#93;*b&#91;2&#93;&#41;, Signed&#40;a&#91;3&#93;*b&#91;1&#93;&#41;-Signed&#40;a&#91;1&#93;*b&#91;3&#93;&#41;, Signed&#40;a&#91;1&#93;*b&#91;2&#93;&#41;-Signed&#40;a&#91;2&#93;*b&#91;1&#93;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2170,31 +2085,17 @@
           <td>
             
             
-            <span class='code'># Want to extend loopfooter&#33; for DDEIntegrator</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L207'>
           <td class='lineno'>207</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>523 &#40;43 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              523 &#40;43 &#37;&#41;
-              samples spent in loopfooter&#33;
-              <br />
-              
-              523 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from solve&#33;
-              <a href='solve.jl-a38d532689c456f177a4c93c8501ed308015c158.html#L545'>line 545</a>
-              <br />
-            </div>
-            <div class='callees'>
-              523 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L209'>_loopfooter&#33;</a>
-              <br />
-            </div>
-            <span class='code'>loopfooter&#33;&#40;integrator::ODEIntegrator&#41; &#61; _loopfooter&#33;&#40;integrator&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2204,26 +2105,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline dot&#40;a::StaticArray, b::StaticArray&#41; &#61; _vecdot&#40;same_size&#40;a, b&#41;, a, b, dot&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
           <td class='lineno'>209</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              523 &#40;43 &#37;&#41;
-              samples spent in _loopfooter&#33;
-              <br />
-              1 &#40;0 &#37;&#41; &#40;ex.&#41;,
-              523 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from loopfooter&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L207'>line 207</a>
-              <br />
-            </div>
             
-            <span class='code'>function _loopfooter&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'>@inline bilinear_vecdot&#40;a::StaticArray, b::StaticArray&#41; &#61; _vecdot&#40;same_size&#40;a, b&#41;, a, b, *&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2233,7 +2125,7 @@
           <td>
             
             
-            <span class='code'>    # Carry-over from callback</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2243,7 +2135,7 @@
           <td>
             
             
-            <span class='code'>    # This is set to true if u_modified requires callback FSAL reset</span>
+            <span class='code'>@inline function _vecdot&#40;::Size&#123;S&#125;, a::StaticArray, b::StaticArray, product&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2253,7 +2145,7 @@
           <td>
             
             
-            <span class='code'>    # But not set to false when reset so algorithms can check if reset occurred</span>
+            <span class='code'>    if prod&#40;S&#41; &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2263,7 +2155,7 @@
           <td>
             
             
-            <span class='code'>    integrator.reeval_fsal &#61; false</span>
+            <span class='code'>        za, zb &#61; zero&#40;eltype&#40;a&#41;&#41;, zero&#40;eltype&#40;b&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2273,7 +2165,7 @@
           <td>
             
             
-            <span class='code'>    integrator.u_modified &#61; false</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2283,7 +2175,7 @@
           <td>
             
             
-            <span class='code'>    integrator.do_error_check &#61; true</span>
+            <span class='code'>        # Use an actual element if there is one, to support e.g. Vector&#123;&lt;:Number&#125;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2293,7 +2185,7 @@
           <td>
             
             
-            <span class='code'>    ttmp &#61; integrator.t &#43; integrator.dt</span>
+            <span class='code'>        # element types for which runtime size information is required to construct</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2303,7 +2195,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.force_stepfail</span>
+            <span class='code'>        # a zero element.</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2313,7 +2205,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.opts.adaptive</span>
+            <span class='code'>        za, zb &#61; zero&#40;a&#91;1&#93;&#41;, zero&#40;b&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2323,7 +2215,7 @@
           <td>
             
             
-            <span class='code'>            post_newton_controller&#33;&#40;integrator, integrator.alg&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2333,7 +2225,7 @@
           <td>
             
             
-            <span class='code'>        elseif integrator.last_stepfail</span>
+            <span class='code'>    ret &#61; product&#40;za, zb&#41; &#43; product&#40;za, zb&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2343,7 +2235,7 @@
           <td>
             
             
-            <span class='code'>            return</span>
+            <span class='code'>    @inbounds @simd for j &#61; 1 : prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2353,7 +2245,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        ret &#43;&#61; product&#40;a&#91;j&#93;, b&#91;j&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2363,7 +2255,7 @@
           <td>
             
             
-            <span class='code'>        integrator.last_stepfail &#61; true</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2373,7 +2265,7 @@
           <td>
             
             
-            <span class='code'>        integrator.accept_step &#61; false</span>
+            <span class='code'>    return ret</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2383,22 +2275,17 @@
           <td>
             
             
-            <span class='code'>    elseif integrator.opts.adaptive</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L226'>
           <td class='lineno'>226</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='controllers.jl-4280c50fb2fb5fcabdec6d1d0e8b88b6ae09041a.html#L5'>stepsize_controller&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        q &#61; stepsize_controller&#33;&#40;integrator, integrator.alg&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2408,7 +2295,7 @@
           <td>
             
             
-            <span class='code'>        integrator.isout &#61; integrator.opts.isoutofdomain&#40;integrator.u, integrator.p, ttmp&#41;</span>
+            <span class='code'>#--------------------------------------------------</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2418,7 +2305,7 @@
           <td>
             
             
-            <span class='code'>        integrator.accept_step &#61; &#40;&#33;integrator.isout &amp;&amp;</span>
+            <span class='code'># Norms</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2428,7 +2315,7 @@
           <td>
             
             
-            <span class='code'>                                  accept_step_controller&#40;integrator,</span>
+            <span class='code'>_inner_eltype&#40;v::AbstractArray&#41; &#61; isempty&#40;v&#41; ? eltype&#40;v&#41; : _inner_eltype&#40;first&#40;v&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2438,7 +2325,7 @@
           <td>
             
             
-            <span class='code'>            integrator.opts.controller&#41;&#41; ||</span>
+            <span class='code'>_inner_eltype&#40;x::Number&#41; &#61; typeof&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2448,7 +2335,7 @@
           <td>
             
             
-            <span class='code'>                                 &#40;integrator.opts.force_dtmin &amp;&amp;</span>
+            <span class='code'>@inline _init_zero&#40;v::AbstractArray&#41; &#61; float&#40;norm&#40;zero&#40;_inner_eltype&#40;v&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2458,7 +2345,7 @@
           <td>
             
             
-            <span class='code'>                                  abs&#40;integrator.dt&#41; &lt;&#61; timedepentdtmin&#40;integrator&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2468,7 +2355,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.accept_step # Accept</span>
+            <span class='code'>@inline function LinearAlgebra.norm_sqr&#40;v::StaticArray&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2478,7 +2365,7 @@
           <td>
             
             
-            <span class='code'>            integrator.stats.naccept &#43;&#61; 1</span>
+            <span class='code'>    return mapreduce&#40;LinearAlgebra.norm_sqr, &#43;, v; init&#61;_init_zero&#40;v&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2488,7 +2375,7 @@
           <td>
             
             
-            <span class='code'>            integrator.last_stepfail &#61; false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2498,7 +2385,7 @@
           <td>
             
             
-            <span class='code'>            dtnew &#61; DiffEqBase.value&#40;step_accept_controller&#33;&#40;integrator,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2508,7 +2395,7 @@
           <td>
             
             
-            <span class='code'>                integrator.alg,</span>
+            <span class='code'>@inline maxabs_nested&#40;a::Number&#41; &#61; abs&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2518,7 +2405,7 @@
           <td>
             
             
-            <span class='code'>                q&#41;&#41; *</span>
+            <span class='code'>@inline function maxabs_nested&#40;a::AbstractArray&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2528,7 +2415,7 @@
           <td>
             
             
-            <span class='code'>                    oneunit&#40;integrator.dt&#41;</span>
+            <span class='code'>    prod&#40;size&#40;a&#41;&#41; &#61;&#61; 0 &amp;&amp; &#40;return _init_zero&#40;a&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2538,7 +2425,7 @@
           <td>
             
             
-            <span class='code'>            integrator.tprev &#61; integrator.t</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2548,7 +2435,7 @@
           <td>
             
             
-            <span class='code'>            integrator.t &#61; if has_tstop&#40;integrator&#41;</span>
+            <span class='code'>    m &#61; maxabs_nested&#40;a&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2558,7 +2445,7 @@
           <td>
             
             
-            <span class='code'>                tstop &#61; integrator.tdir * first_tstop&#40;integrator&#41;</span>
+            <span class='code'>    for j &#61; 2:prod&#40;size&#40;a&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2568,7 +2455,7 @@
           <td>
             
             
-            <span class='code'>                if abs&#40;ttmp - tstop&#41; &lt;</span>
+            <span class='code'>        m &#61; max&#40;m, maxabs_nested&#40;a&#91;j&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2578,7 +2465,7 @@
           <td>
             
             
-            <span class='code'>                   100eps&#40;float&#40;max&#40;integrator.t, tstop&#41; / oneunit&#40;integrator.t&#41;&#41;&#41; *</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2588,7 +2475,7 @@
           <td>
             
             
-            <span class='code'>                   oneunit&#40;integrator.t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2598,7 +2485,7 @@
           <td>
             
             
-            <span class='code'>                    tstop</span>
+            <span class='code'>    return m</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2608,7 +2495,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2618,7 +2505,7 @@
           <td>
             
             
-            <span class='code'>                    ttmp</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2628,7 +2515,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>@generated function _norm_scaled&#40;::Size&#123;S&#125;, a::StaticArray&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2638,7 +2525,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    expr &#61; :&#40;LinearAlgebra.norm_sqr&#40;a&#91;1&#93;/scale&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2648,7 +2535,7 @@
           <td>
             
             
-            <span class='code'>                ttmp</span>
+            <span class='code'>    for j &#61; 2:prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2658,7 +2545,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        expr &#61; :&#40;&#36;expr &#43; LinearAlgebra.norm_sqr&#40;a&#91;&#36;j&#93;/scale&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2668,30 +2555,17 @@
           <td>
             
             
-            <span class='code'>            calc_dt_propose&#33;&#40;integrator, dtnew&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L254'>
           <td class='lineno'>254</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>520 &#40;43 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              503 &#40;97 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L332'>handle_callbacks&#33;</a>
-              <br />
-              15 &#40;3 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L353'>handle_callbacks&#33;</a>
-              <br />
-              2 &#40;0 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L325'>handle_callbacks&#33;</a>
-              <br />
-            </div>
-            <span class='code'>            handle_callbacks&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2701,7 +2575,7 @@
           <td>
             
             
-            <span class='code'>        else # Reject</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2711,7 +2585,7 @@
           <td>
             
             
-            <span class='code'>            integrator.stats.nreject &#43;&#61; 1</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2721,7 +2595,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        scale &#61; maxabs_nested&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2731,7 +2605,7 @@
           <td>
             
             
-            <span class='code'>    elseif &#33;integrator.opts.adaptive #Not adaptive</span>
+            <span class='code'>        &#33;isfinite&#40;scale&#41; &amp;&amp; return scale</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2741,7 +2615,7 @@
           <td>
             
             
-            <span class='code'>        integrator.stats.naccept &#43;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2751,7 +2625,7 @@
           <td>
             
             
-            <span class='code'>        integrator.tprev &#61; integrator.t</span>
+            <span class='code'>        iszero&#40;scale&#41; &amp;&amp; return _init_zero&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2761,7 +2635,7 @@
           <td>
             
             
-            <span class='code'>        integrator.t &#61; if has_tstop&#40;integrator&#41;</span>
+            <span class='code'>        return @inbounds scale * sqrt&#40;&#36;expr&#41;</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2771,7 +2645,7 @@
           <td>
             
             
-            <span class='code'>            tstop &#61; integrator.tdir * first_tstop&#40;integrator&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2781,7 +2655,7 @@
           <td>
             
             
-            <span class='code'>            if abs&#40;ttmp - tstop&#41; &lt;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2791,27 +2665,55 @@
           <td>
             
             
-            <span class='code'>               100eps&#40;float&#40;integrator.t / oneunit&#40;integrator.t&#41;&#41;&#41; * oneunit&#40;integrator.t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L265'>
           <td class='lineno'>265</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>                tstop</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in norm
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from term_by_grad_check
+              <a href='gradient_paths.jl-ea8c1cbd92d406dc1b164035f4b23ea19165b640.html#L585'>line 585</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='linalg.jl-82a05a81cad133026530a3146821c6adca60b652.html#L266'>_norm</a>
+              <br />
+            </div>
+            <span class='code'>@inline norm&#40;a::StaticArray&#41; &#61; _norm&#40;Size&#40;a&#41;, a&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
           <td class='lineno'>266</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            else</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in _norm
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from norm
+              <a href='linalg.jl-82a05a81cad133026530a3146821c6adca60b652.html#L265'>line 265</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='linalg.jl-82a05a81cad133026530a3146821c6adca60b652.html#L276'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>@generated function _norm&#40;::Size&#123;S&#125;, a::StaticArray&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2821,7 +2723,7 @@
           <td>
             
             
-            <span class='code'>                ttmp</span>
+            <span class='code'>    prod&#40;S&#41; &#61;&#61; 0 &amp;&amp; return :&#40;_init_zero&#40;a&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2831,7 +2733,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2841,7 +2743,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    expr &#61; :&#40;LinearAlgebra.norm_sqr&#40;a&#91;1&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2851,7 +2753,7 @@
           <td>
             
             
-            <span class='code'>            ttmp</span>
+            <span class='code'>    for j &#61; 2:prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2861,7 +2763,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        expr &#61; :&#40;&#36;expr &#43; LinearAlgebra.norm_sqr&#40;a&#91;&#36;j&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2871,7 +2773,7 @@
           <td>
             
             
-            <span class='code'>        integrator.last_stepfail &#61; false</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2881,7 +2783,7 @@
           <td>
             
             
-            <span class='code'>        integrator.accept_step &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2891,7 +2793,7 @@
           <td>
             
             
-            <span class='code'>        integrator.dtpropose &#61; integrator.dt</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2901,17 +2803,31 @@
           <td>
             
             
-            <span class='code'>        handle_callbacks&#33;&#40;integrator&#41;</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L276'>
           <td class='lineno'>276</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    end</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from _norm
+              <a href='linalg.jl-82a05a81cad133026530a3146821c6adca60b652.html#L266'>line 266</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='generic.jl-753086b42f58fd1c61d30c28b7b9c296bf4f85ea.html#L459'>norm_sqr</a>
+              <br />
+            </div>
+            <span class='code'>        l &#61; @inbounds sqrt&#40;&#36;expr&#41;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2921,7 +2837,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.opts.progress &amp;&amp; integrator.iter &#37; integrator.opts.progress_steps &#61;&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2931,7 +2847,7 @@
           <td>
             
             
-            <span class='code'>        t1, t2 &#61; integrator.sol.prob.tspan</span>
+            <span class='code'>        zero&#40;l&#41; &lt; l &amp;&amp; isfinite&#40;l&#41; &amp;&amp; return l</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2941,7 +2857,7 @@
           <td>
             
             
-            <span class='code'>        @logmsg&#40;LogLevel&#40;-1&#41;,</span>
+            <span class='code'>        return _norm_scaled&#40;Size&#40;a&#41;, a&#41;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2951,7 +2867,7 @@
           <td>
             
             
-            <span class='code'>            integrator.opts.progress_name,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2961,7 +2877,7 @@
           <td>
             
             
-            <span class='code'>            _id&#61;integrator.opts.progress_id,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2971,7 +2887,7 @@
           <td>
             
             
-            <span class='code'>            message&#61;integrator.opts.progress_message&#40;integrator.dt, integrator.u,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2981,7 +2897,7 @@
           <td>
             
             
-            <span class='code'>                integrator.p, integrator.t&#41;,</span>
+            <span class='code'>function _norm_p0&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2991,7 +2907,7 @@
           <td>
             
             
-            <span class='code'>            progress&#61;&#40;integrator.t - t1&#41; / &#40;t2 - t1&#41;&#41;</span>
+            <span class='code'>    T &#61; _inner_eltype&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -3001,7 +2917,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    return float&#40;norm&#40;iszero&#40;x&#41; ? zero&#40;T&#41; : one&#40;T&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -3011,7 +2927,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -3021,7 +2937,7 @@
           <td>
             
             
-            <span class='code'>    # Take value because if t is dual then maxeig can be dual</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L288'>
@@ -3031,7 +2947,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.cache isa CompositeCache</span>
+            <span class='code'># Do not need to deal with p &#61;&#61; 0, 2, Inf; see norm&#40;a, p&#41;.</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -3041,7 +2957,7 @@
           <td>
             
             
-            <span class='code'>        cur_eigen_est &#61; integrator.opts.internalnorm&#40;</span>
+            <span class='code'>@generated function _norm_scaled&#40;::Size&#123;S&#125;, a::StaticArray, p::Real&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -3051,7 +2967,7 @@
           <td>
             
             
-            <span class='code'>            DiffEqBase.value&#40;integrator.eigen_est&#41;,</span>
+            <span class='code'>    expr &#61; :&#40;norm&#40;a&#91;1&#93;/scale&#41;^p&#41;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -3061,7 +2977,7 @@
           <td>
             
             
-            <span class='code'>            integrator.t&#41;</span>
+            <span class='code'>    for j &#61; 2:prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -3071,7 +2987,7 @@
           <td>
             
             
-            <span class='code'>        cur_eigen_est &gt; integrator.stats.maxeig &amp;&amp;</span>
+            <span class='code'>        expr &#61; :&#40;&#36;expr &#43; norm&#40;a&#91;&#36;j&#93;/scale&#41;^p&#41;</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -3081,7 +2997,7 @@
           <td>
             
             
-            <span class='code'>            &#40;integrator.stats.maxeig &#61; cur_eigen_est&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -3091,7 +3007,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L295'>
@@ -3101,7 +3017,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>    expr_p1 &#61; :&#40;norm&#40;a&#91;1&#93;/scale&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -3111,7 +3027,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    for j &#61; 2:prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3121,7 +3037,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        expr_p1 &#61; :&#40;&#36;expr_p1 &#43; norm&#40;a&#91;&#36;j&#93;/scale&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3131,7 +3047,7 @@
           <td>
             
             
-            <span class='code'># Use a generated function to call apply_callback&#33; in a type-stable way</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3141,7 +3057,7 @@
           <td>
             
             
-            <span class='code'>@generated function apply_ith_callback&#33;&#40;integrator,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3151,7 +3067,7 @@
           <td>
             
             
-            <span class='code'>        time, upcrossing, event_idx, cb_idx,</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3161,7 +3077,7 @@
           <td>
             
             
-            <span class='code'>        callbacks::NTuple&#123;N,</span>
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3171,7 +3087,7 @@
           <td>
             
             
-            <span class='code'>            Union&#123;ContinuousCallback,</span>
+            <span class='code'>        scale &#61; maxabs_nested&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3181,7 +3097,7 @@
           <td>
             
             
-            <span class='code'>                VectorContinuousCallback&#125;&#125;&#41; where &#123;N&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3191,7 +3107,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; quote</span>
+            <span class='code'>        scale&#61;&#61;0 &amp;&amp; return _init_zero&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3201,7 +3117,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;BoundsError&#40;callbacks, cb_idx&#41;&#41;</span>
+            <span class='code'>        p &#61;&#61; 1 &amp;&amp; return @inbounds scale * &#36;expr_p1</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3211,7 +3127,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        return @inbounds scale * &#40;&#36;expr&#41;^&#40;inv&#40;p&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3221,7 +3137,7 @@
           <td>
             
             
-            <span class='code'>    for i in 1:N</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3231,7 +3147,7 @@
           <td>
             
             
-            <span class='code'>        # N.B: doing this as an explicit if &#40;return&#41; else &#40;rest of expression&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3241,7 +3157,7 @@
           <td>
             
             
-            <span class='code'>        # means that LLVM compiles this into a switch.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3251,7 +3167,7 @@
           <td>
             
             
-            <span class='code'>        # This seemingly isn&#39;t the case with just if &#40;return&#41; end &#40;rest of expression&#41;</span>
+            <span class='code'>@inline norm&#40;a::StaticArray, p::Real&#41; &#61; _norm&#40;Size&#40;a&#41;, a, p&#41;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3261,7 +3177,7 @@
           <td>
             
             
-            <span class='code'>        ex &#61; quote</span>
+            <span class='code'>@generated function _norm&#40;::Size&#123;S&#125;, a::StaticArray, p::Real&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3271,7 +3187,7 @@
           <td>
             
             
-            <span class='code'>            if &#40;cb_idx &#61;&#61; &#36;i&#41;</span>
+            <span class='code'>    prod&#40;S&#41; &#61;&#61; 0 &amp;&amp; return :&#40;_init_zero&#40;a&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3281,7 +3197,7 @@
           <td>
             
             
-            <span class='code'>                return DiffEqBase.apply_callback&#33;&#40;integrator, callbacks&#91;&#36;i&#93;, time,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3291,7 +3207,7 @@
           <td>
             
             
-            <span class='code'>                    upcrossing, event_idx&#41;</span>
+            <span class='code'>    expr &#61; :&#40;norm&#40;a&#91;1&#93;&#41;^p&#41;</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3301,7 +3217,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    for j &#61; 2:prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3311,7 +3227,7 @@
           <td>
             
             
-            <span class='code'>                &#36;ex</span>
+            <span class='code'>        expr &#61; :&#40;&#36;expr &#43; norm&#40;a&#91;&#36;j&#93;&#41;^p&#41;</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3321,7 +3237,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3331,7 +3247,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3341,7 +3257,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    expr_p1 &#61; :&#40;norm&#40;a&#91;1&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3351,7 +3267,7 @@
           <td>
             
             
-            <span class='code'>    ex</span>
+            <span class='code'>    for j &#61; 2:prod&#40;S&#41;</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3361,7 +3277,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        expr_p1 &#61; :&#40;&#36;expr_p1 &#43; norm&#40;a&#91;&#36;j&#93;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3371,7 +3287,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3381,7 +3297,7 @@
           <td>
             
             
-            <span class='code'>function handle_callbacks&#33;&#40;integrator&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3391,31 +3307,17 @@
           <td>
             
             
-            <span class='code'>    discrete_callbacks &#61; integrator.opts.callback.discrete_callbacks</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L325'>
           <td class='lineno'>325</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;0 &#37;&#41;
-              samples spent in handle_callbacks&#33;
-              <br />
-              
-              2 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _loopfooter&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L254'>line 254</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='Base.jl-51dba2a43288cb54706ca54330b3383e47780f61.html#L37'>getproperty</a>
-              <br />
-            </div>
-            <span class='code'>    continuous_callbacks &#61; integrator.opts.callback.continuous_callbacks</span>
+            
+            
+            <span class='code'>        &#36;&#40;Expr&#40;:meta, :inline&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3425,7 +3327,7 @@
           <td>
             
             
-            <span class='code'>    atleast_one_callback &#61; false</span>
+            <span class='code'>        p &#61;&#61; 0 &amp;&amp; return mapreduce&#40;_norm_p0, &#43;, a&#41;  # no need for scaling</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3435,7 +3337,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        p &#61;&#61; 2 &amp;&amp; return norm&#40;a&#41;  # norm&#40;a&#41; takes care of scaling</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3445,7 +3347,7 @@
           <td>
             
             
-            <span class='code'>    continuous_modified &#61; false</span>
+            <span class='code'>        p &#61;&#61; Inf &amp;&amp; return mapreduce&#40;norm, max, a&#41;  # no need for scaling</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3455,7 +3357,7 @@
           <td>
             
             
-            <span class='code'>    discrete_modified &#61; false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3465,7 +3367,7 @@
           <td>
             
             
-            <span class='code'>    saved_in_cb &#61; false</span>
+            <span class='code'>        l &#61; p&#61;&#61;1 ? @inbounds&#40;&#36;expr_p1&#41; : @inbounds&#40;&#40;&#36;expr&#41;^&#40;inv&#40;p&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3475,31 +3377,17 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;continuous_callbacks isa Tuple&#123;&#125;&#41;</span>
+            <span class='code'>        0&lt;l&lt;Inf &amp;&amp; return l</span>
           </td>
         </tr>
         <tr id='L332'>
           <td class='lineno'>332</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>503 &#40;41 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              503 &#40;41 &#37;&#41;
-              samples spent in handle_callbacks&#33;
-              <br />
-              
-              503 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _loopfooter&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L254'>line 254</a>
-              <br />
-            </div>
-            <div class='callees'>
-              503 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='callbacks.jl-d1552fb3723e250a91896cf72d353921697fa2aa.html#L125'>find_first_continuous_callback</a>
-              <br />
-            </div>
-            <span class='code'>        time, upcrossing, event_occurred, event_idx, idx, counter &#61; DiffEqBase.find_first_continuous_callback&#40;</span>
+            
+            
+            <span class='code'>        return _norm_scaled&#40;Size&#40;a&#41;, a, p&#41;  # p &#33;&#61; 0, 2, Inf</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3509,7 +3397,7 @@
           <td>
             
             
-            <span class='code'>            integrator,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3519,7 +3407,7 @@
           <td>
             
             
-            <span class='code'>            continuous_callbacks...&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3529,7 +3417,7 @@
           <td>
             
             
-            <span class='code'>        if event_occurred</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3539,7 +3427,7 @@
           <td>
             
             
-            <span class='code'>            integrator.event_last_time &#61; idx</span>
+            <span class='code'>@inline normalize&#40;a::StaticArray&#41; &#61; inv&#40;norm&#40;a&#41;&#41;*a</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3549,7 +3437,7 @@
           <td>
             
             
-            <span class='code'>            integrator.vector_event_last_time &#61; event_idx</span>
+            <span class='code'>@inline normalize&#40;a::StaticArray, p::Real&#41; &#61; inv&#40;norm&#40;a, p&#41;&#41;*a</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3559,7 +3447,7 @@
           <td>
             
             
-            <span class='code'>            continuous_modified, saved_in_cb &#61; apply_ith_callback&#33;&#40;integrator,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3569,7 +3457,7 @@
           <td>
             
             
-            <span class='code'>                time, upcrossing,</span>
+            <span class='code'>@inline normalize&#33;&#40;a::StaticArray&#41; &#61; &#40;a .*&#61; inv&#40;norm&#40;a&#41;&#41;; return a&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3579,7 +3467,7 @@
           <td>
             
             
-            <span class='code'>                event_idx,</span>
+            <span class='code'>@inline normalize&#33;&#40;a::StaticArray, p::Real&#41; &#61; &#40;a .*&#61; inv&#40;norm&#40;a, p&#41;&#41;; return a&#41;</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3589,7 +3477,7 @@
           <td>
             
             
-            <span class='code'>                idx,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3599,7 +3487,7 @@
           <td>
             
             
-            <span class='code'>                continuous_callbacks&#41;</span>
+            <span class='code'>@inline tr&#40;a::StaticMatrix&#41; &#61; _tr&#40;Size&#40;a&#41;, a&#41;</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3609,7 +3497,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>@generated function _tr&#40;::Size&#123;S&#125;, a::StaticMatrix&#41; where &#123;S&#125;</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3619,7 +3507,7 @@
           <td>
             
             
-            <span class='code'>            integrator.event_last_time &#61; 0</span>
+            <span class='code'>    checksquare&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3629,7 +3517,7 @@
           <td>
             
             
-            <span class='code'>            integrator.vector_event_last_time &#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3639,7 +3527,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    if S&#91;1&#93; &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3649,7 +3537,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        return :&#40;zero&#40;eltype&#40;a&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3659,7 +3547,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;integrator.force_stepfail &amp;&amp; &#33;&#40;discrete_callbacks isa Tuple&#123;&#125;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3669,7 +3557,7 @@
           <td>
             
             
-            <span class='code'>        discrete_modified, saved_in_cb &#61; DiffEqBase.apply_discrete_callback&#33;&#40;integrator,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3679,7 +3567,7 @@
           <td>
             
             
-            <span class='code'>            discrete_callbacks...&#41;</span>
+            <span class='code'>    exprs &#61; &#91;:&#40;a&#91;&#36;&#40;LinearIndices&#40;S&#41;&#91;i, i&#93;&#41;&#93;&#41; for i &#61; 1:S&#91;1&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3689,7 +3577,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    total &#61; reduce&#40;&#40;ex1, ex2&#41; -&gt; :&#40;&#36;ex1 &#43; &#36;ex2&#41;, exprs&#41;</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3699,31 +3587,17 @@
           <td>
             
             
-            <span class='code'>    if &#33;saved_in_cb</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L353'>
           <td class='lineno'>353</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>15 &#40;1 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              15 &#40;1 &#37;&#41;
-              samples spent in handle_callbacks&#33;
-              <br />
-              
-              15 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _loopfooter&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L254'>line 254</a>
-              <br />
-            </div>
-            <div class='callees'>
-              15 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L58'>savevalues&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        savevalues&#33;&#40;integrator&#41;</span>
+            
+            
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3733,7 +3607,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3743,7 +3617,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        @inbounds return &#36;total</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3753,7 +3627,7 @@
           <td>
             
             
-            <span class='code'>    integrator.u_modified &#61; continuous_modified | discrete_modified</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3763,7 +3637,7 @@
           <td>
             
             
-            <span class='code'>    integrator.reeval_fsal &amp;&amp; handle_callback_modifiers&#33;&#40;integrator&#41; # Hook for DDEs to add discontinuities</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3773,7 +3647,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3783,7 +3657,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3793,7 +3667,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>#--------------------------------------------------</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3803,7 +3677,7 @@
           <td>
             
             
-            <span class='code'>function update_uprev&#33;&#40;integrator&#41;</span>
+            <span class='code'># Outer products</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3813,7 +3687,7 @@
           <td>
             
             
-            <span class='code'>    if alg_extrapolates&#40;integrator.alg&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3823,7 +3697,7 @@
           <td>
             
             
-            <span class='code'>        if isinplace&#40;integrator.sol.prob&#41;</span>
+            <span class='code'>const _length_limit &#61; Length&#40;200&#41;</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3833,7 +3707,7 @@
           <td>
             
             
-            <span class='code'>            recursivecopy&#33;&#40;integrator.uprev2, integrator.uprev&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3843,7 +3717,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>@inline kron&#40;a::StaticMatrix, b::StaticMatrix&#41; &#61; _kron&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3853,7 +3727,7 @@
           <td>
             
             
-            <span class='code'>            integrator.uprev2 &#61; integrator.uprev</span>
+            <span class='code'>@generated function _kron&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3863,7 +3737,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    outsize &#61; SA .* SB</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3873,7 +3747,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3883,31 +3757,17 @@
           <td>
             
             
-            <span class='code'>    if isinplace&#40;integrator.sol.prob&#41;</span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L370'>
           <td class='lineno'>370</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in update_uprev&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from apply_step&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L386'>line 386</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='utils.jl-af97ff37b8d7ee8bc71030dd2ee31d565fe91996.html#L62'>recursivecopy&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        recursivecopy&#33;&#40;integrator.uprev, integrator.u&#41;</span>
+            
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3917,7 +3777,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.alg isa DAEAlgorithm</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3927,7 +3787,7 @@
           <td>
             
             
-            <span class='code'>            recursivecopy&#33;&#40;integrator.duprev, integrator.du&#41;</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia,&#36;ja&#93; * b&#91;&#36;ib,&#36;jb&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;1&#93;, jb in 1:SB&#91;2&#93;, ja in 1:SA&#91;2&#93; &#93;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3937,7 +3797,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3947,7 +3807,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3957,7 +3817,7 @@
           <td>
             
             
-            <span class='code'>        integrator.uprev &#61; integrator.u</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3967,7 +3827,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.alg isa DAEAlgorithm</span>
+            <span class='code'>        @inbounds return  similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3977,7 +3837,7 @@
           <td>
             
             
-            <span class='code'>            integrator.duprev &#61; integrator.du</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3987,7 +3847,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3997,7 +3857,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L380'>
@@ -4007,7 +3867,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>@inline kron&#40;a::StaticVector, b::StaticVector&#41; &#61; _kron_vec_x_vec&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -4017,7 +3877,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@generated function _kron_vec_x_vec&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -4027,7 +3887,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    outsize &#61; SA .* SB</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -4035,18 +3895,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in apply_step&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from loopheader&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L14'>line 14</a>
-              <br />
-            </div>
             
-            <span class='code'>function apply_step&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -4056,7 +3907,7 @@
           <td>
             
             
-            <span class='code'>    integrator.accept_step &#61; false # yay we got here, don&#39;t need this no more</span>
+            <span class='code'>        return :&#40; SizedVector&#123;&#36;&#40;outsize&#91;1&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -4066,22 +3917,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L386'>
           <td class='lineno'>386</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L370'>update_uprev&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    update_uprev&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L387'>
@@ -4091,7 +3937,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    m &#61; &#91; :&#40;a&#91;&#36;ia&#93; * b&#91;&#36;ib&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;1&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -4101,7 +3947,7 @@
           <td>
             
             
-            <span class='code'>    #Update dt if adaptive or if fixed and the dt is allowed to change</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L389'>
@@ -4111,7 +3957,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.opts.adaptive || integrator.dtchangeable</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -4121,7 +3967,7 @@
           <td>
             
             
-            <span class='code'>        integrator.dt &#61; integrator.dtpropose</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -4131,7 +3977,7 @@
           <td>
             
             
-            <span class='code'>    elseif integrator.dt &#33;&#61; integrator.dtpropose &amp;&amp; &#33;integrator.dtchangeable</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;m...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -4141,7 +3987,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;The current setup does not allow for changing dt.&quot;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -4151,7 +3997,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -4171,7 +4017,7 @@
           <td>
             
             
-            <span class='code'>    # Update fsal if needed</span>
+            <span class='code'>@inline function kron&#40;</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -4181,7 +4027,7 @@
           <td>
             
             
-            <span class='code'>    if has_discontinuity&#40;integrator&#41; &amp;&amp;</span>
+            <span class='code'>        a::Union&#123;Transpose&#123;&lt;:Number,&lt;:StaticVector&#125;, Adjoint&#123;&lt;:Number,&lt;:StaticVector&#125;&#125;,</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4191,7 +4037,7 @@
           <td>
             
             
-            <span class='code'>       first_discontinuity&#40;integrator&#41; &#61;&#61; integrator.tdir * integrator.t</span>
+            <span class='code'>        b::Union&#123;Transpose&#123;&lt;:Number,&lt;:StaticVector&#125;, Adjoint&#123;&lt;:Number,&lt;:StaticVector&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4201,7 +4047,7 @@
           <td>
             
             
-            <span class='code'>        handle_discontinuities&#33;&#40;integrator&#41;</span>
+            <span class='code'>    _kron_tvec_x_tvec&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4211,7 +4057,7 @@
           <td>
             
             
-            <span class='code'>        get_current_isfsal&#40;integrator.alg, integrator.cache&#41; &amp;&amp; reset_fsal&#33;&#40;integrator&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4221,7 +4067,7 @@
           <td>
             
             
-            <span class='code'>    elseif all_fsal&#40;integrator.alg, integrator.cache&#41; ||</span>
+            <span class='code'>@generated function _kron_tvec_x_tvec&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4231,7 +4077,7 @@
           <td>
             
             
-            <span class='code'>           get_current_isfsal&#40;integrator.alg, integrator.cache&#41;</span>
+            <span class='code'>    outsize &#61; SA .* SB</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4241,7 +4087,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.reeval_fsal || integrator.u_modified ||</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4251,7 +4097,7 @@
           <td>
             
             
-            <span class='code'>           &#40;integrator.alg isa DP8 &amp;&amp; &#33;integrator.opts.calck&#41; ||</span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4261,7 +4107,7 @@
           <td>
             
             
-            <span class='code'>           &#40;integrator.alg isa Union&#123;Rosenbrock23, Rosenbrock32&#125; &amp;&amp;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4271,7 +4117,7 @@
           <td>
             
             
-            <span class='code'>            &#33;integrator.opts.adaptive&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4281,7 +4127,7 @@
           <td>
             
             
-            <span class='code'>            reset_fsal&#33;&#40;integrator&#41;</span>
+            <span class='code'>    m &#61; &#91; :&#40;a&#91;&#36;ia&#93; * b&#91;&#36;ib&#93;&#41; for ib in 1:SB&#91;2&#93;, ia in 1:SA&#91;2&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4291,7 +4137,7 @@
           <td>
             
             
-            <span class='code'>        else # Do not reeval_fsal, instead copyto&#33; over</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4301,7 +4147,7 @@
           <td>
             
             
-            <span class='code'>            if isinplace&#40;integrator.sol.prob&#41;</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4311,7 +4157,7 @@
           <td>
             
             
-            <span class='code'>                recursivecopy&#33;&#40;integrator.fsalfirst, integrator.fsallast&#41;</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4321,7 +4167,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;m...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4331,7 +4177,7 @@
           <td>
             
             
-            <span class='code'>                integrator.fsalfirst &#61; integrator.fsallast</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4341,7 +4187,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4351,7 +4197,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4361,7 +4207,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@inline function kron&#40;</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4371,7 +4217,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>        a::Union&#123;Transpose&#123;&lt;:Number,&lt;:StaticVector&#125;, Adjoint&#123;&lt;:Number,&lt;:StaticVector&#125;&#125;,</span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4381,7 +4227,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        b::StaticVector&#41;</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4391,7 +4237,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    _kron_tvec_x_vec&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4401,7 +4247,7 @@
           <td>
             
             
-            <span class='code'>handle_discontinuities&#33;&#40;integrator&#41; &#61; pop_discontinuity&#33;&#40;integrator&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4411,7 +4257,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@generated function _kron_tvec_x_vec&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4421,7 +4267,7 @@
           <td>
             
             
-            <span class='code'>function calc_dt_propose&#33;&#40;integrator, dtnew&#41;</span>
+            <span class='code'>    outsize &#61; &#40;SA&#91;1&#93; * SB&#91;1&#93;, SA&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4431,7 +4277,7 @@
           <td>
             
             
-            <span class='code'>    if &#40;integrator.alg isa Union&#123;ROCK2, ROCK4, SERK2, ESERK4, ESERK5&#125;&#41; &amp;&amp;</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4441,7 +4287,7 @@
           <td>
             
             
-            <span class='code'>       integrator.opts.adaptive &amp;&amp; &#40;integrator.iter &gt;&#61; 1&#41;</span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4451,7 +4297,7 @@
           <td>
             
             
-            <span class='code'>        &#40;integrator.alg isa ROCK2&#41; &amp;&amp; &#40;dtnew &#61; min&#40;dtnew,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4461,7 +4307,7 @@
           <td>
             
             
-            <span class='code'>            typeof&#40;dtnew&#41;&#40;&#40;&#40;&#40;min&#40;integrator.alg.max_stages, 200&#41;^2.0&#41; * 0.811 -</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4471,7 +4317,7 @@
           <td>
             
             
-            <span class='code'>                            1.5&#41; / integrator.eigen_est&#41;&#41;&#41;&#41;</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia&#93; * b&#91;&#36;ib&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;2&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4481,7 +4327,7 @@
           <td>
             
             
-            <span class='code'>        &#40;integrator.alg isa ROCK4&#41; &amp;&amp; &#40;dtnew &#61; min&#40;dtnew,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4491,7 +4337,7 @@
           <td>
             
             
-            <span class='code'>            typeof&#40;dtnew&#41;&#40;&#40;&#40;&#40;min&#40;integrator.alg.max_stages, 152&#41;^2.0&#41; * 0.353 - 3&#41; /</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4501,7 +4347,7 @@
           <td>
             
             
-            <span class='code'>                           integrator.eigen_est&#41;&#41;&#41;&#41;</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4511,7 +4357,7 @@
           <td>
             
             
-            <span class='code'>        &#40;integrator.alg isa SERK2&#41; &amp;&amp; &#40;dtnew &#61; min&#40;dtnew,</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4521,7 +4367,7 @@
           <td>
             
             
-            <span class='code'>            typeof&#40;dtnew&#41;&#40;&#40;0.8 * 250 * 250 / &#40;integrator.eigen_est &#43; 1.0&#41;&#41;&#41;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4531,7 +4377,7 @@
           <td>
             
             
-            <span class='code'>        &#40;integrator.alg isa ESERK4&#41; &amp;&amp;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4541,7 +4387,7 @@
           <td>
             
             
-            <span class='code'>            &#40;dtnew &#61; min&#40;dtnew, typeof&#40;dtnew&#41;&#40;&#40;0.98 * 4000 * 4000 / integrator.eigen_est&#41;&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4551,7 +4397,7 @@
           <td>
             
             
-            <span class='code'>        &#40;integrator.alg isa ESERK5&#41; &amp;&amp;</span>
+            <span class='code'>@inline function kron&#40;</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4561,7 +4407,7 @@
           <td>
             
             
-            <span class='code'>            &#40;dtnew &#61; min&#40;dtnew, typeof&#40;dtnew&#41;&#40;&#40;0.98 * 2000 * 2000 / integrator.eigen_est&#41;&#41;&#41;&#41;</span>
+            <span class='code'>        a::StaticVector,</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4571,7 +4417,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        b::Union&#123;Transpose&#123;&lt;:Number,&lt;:StaticVector&#125;, Adjoint&#123;&lt;:Number,&lt;:StaticVector&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4581,7 +4427,7 @@
           <td>
             
             
-            <span class='code'>    dtpropose &#61; integrator.tdir * min&#40;abs&#40;integrator.opts.dtmax&#41;, abs&#40;dtnew&#41;&#41;</span>
+            <span class='code'>    _kron_vec_x_tvec&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4591,7 +4437,7 @@
           <td>
             
             
-            <span class='code'>    dtpropose &#61; integrator.tdir * max&#40;abs&#40;dtpropose&#41;, timedepentdtmin&#40;integrator&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4601,7 +4447,7 @@
           <td>
             
             
-            <span class='code'>    integrator.dtpropose &#61; dtpropose</span>
+            <span class='code'>@generated function _kron_vec_x_tvec&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4611,7 +4457,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>    outsize &#61; &#40;SA&#91;1&#93; * SB&#91;1&#93;, SB&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4621,7 +4467,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4631,7 +4477,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4639,33 +4485,19 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in fix_dt_at_bounds&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from loopheader&#33;
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L28'>line 28</a>
-              <br />
-            </div>
             
-            <span class='code'>function fix_dt_at_bounds&#33;&#40;integrator&#41;</span>
+            
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L443'>
           <td class='lineno'>443</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_interface.jl-8ae223071991f7f7e6342eb6b2c5e5d3bd2e4e6c.html#L464'>getproperty</a>
-              <br />
-            </div>
-            <span class='code'>    if integrator.tdir &gt; 0</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4675,7 +4507,7 @@
           <td>
             
             
-            <span class='code'>        integrator.dt &#61; min&#40;integrator.opts.dtmax, integrator.dt&#41;</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia&#93; * b&#91;&#36;ib&#93;&#41; for  ia in 1:SA&#91;1&#93;, ib in 1:SB&#91;2&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4685,7 +4517,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4695,7 +4527,7 @@
           <td>
             
             
-            <span class='code'>        integrator.dt &#61; max&#40;integrator.opts.dtmax, integrator.dt&#41;</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4705,7 +4537,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4715,7 +4547,7 @@
           <td>
             
             
-            <span class='code'>    dtmin &#61; timedepentdtmin&#40;integrator&#41;</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4725,7 +4557,7 @@
           <td>
             
             
-            <span class='code'>    if integrator.tdir &gt; 0</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L450'>
@@ -4735,7 +4567,7 @@
           <td>
             
             
-            <span class='code'>        integrator.dt &#61; max&#40;integrator.dt, dtmin&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L451'>
@@ -4745,7 +4577,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L452'>
@@ -4755,7 +4587,7 @@
           <td>
             
             
-            <span class='code'>        integrator.dt &#61; min&#40;integrator.dt, dtmin&#41;</span>
+            <span class='code'>@inline kron&#40;a::StaticVector, b::StaticMatrix&#41; &#61; _kron_vec_x_mat&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L453'>
@@ -4765,7 +4597,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@generated function _kron_vec_x_mat&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L454'>
@@ -4775,7 +4607,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>    outsize &#61; &#40;SA&#91;1&#93; * SB&#91;1&#93;, SB&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L455'>
@@ -4785,7 +4617,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L456'>
@@ -4795,7 +4627,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L457'>
@@ -4805,7 +4637,7 @@
           <td>
             
             
-            <span class='code'>function handle_tstop&#33;&#40;integrator&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L458'>
@@ -4815,7 +4647,7 @@
           <td>
             
             
-            <span class='code'>    if has_tstop&#40;integrator&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L459'>
@@ -4825,7 +4657,7 @@
           <td>
             
             
-            <span class='code'>        tdir_t &#61; integrator.tdir * integrator.t</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia&#93; * b&#91;&#36;ib,&#36;jb&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;1&#93;, jb in 1:SB&#91;2&#93;&#93;</span>
           </td>
         </tr>
         <tr id='L460'>
@@ -4835,7 +4667,7 @@
           <td>
             
             
-            <span class='code'>        tdir_tstop &#61; first_tstop&#40;integrator&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L461'>
@@ -4845,7 +4677,7 @@
           <td>
             
             
-            <span class='code'>        if tdir_t &#61;&#61; tdir_tstop</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L462'>
@@ -4855,7 +4687,7 @@
           <td>
             
             
-            <span class='code'>            while tdir_t &#61;&#61; tdir_tstop #remove all redundant copies</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L463'>
@@ -4865,7 +4697,7 @@
           <td>
             
             
-            <span class='code'>                res &#61; pop_tstop&#33;&#40;integrator&#41;</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;b, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L464'>
@@ -4875,7 +4707,7 @@
           <td>
             
             
-            <span class='code'>                has_tstop&#40;integrator&#41; ? &#40;tdir_tstop &#61; first_tstop&#40;integrator&#41;&#41; : break</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L465'>
@@ -4885,7 +4717,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L466'>
@@ -4895,7 +4727,7 @@
           <td>
             
             
-            <span class='code'>            integrator.just_hit_tstop &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L467'>
@@ -4905,7 +4737,7 @@
           <td>
             
             
-            <span class='code'>        elseif tdir_t &gt; tdir_tstop</span>
+            <span class='code'>@inline kron&#40;a::StaticMatrix, b::StaticVector&#41; &#61; _kron_mat_x_vec&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L468'>
@@ -4915,7 +4747,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;integrator.dtchangeable</span>
+            <span class='code'>@generated function _kron_mat_x_vec&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L469'>
@@ -4925,7 +4757,7 @@
           <td>
             
             
-            <span class='code'>                DiffEqBase.change_t_via_interpolation&#33;&#40;integrator,</span>
+            <span class='code'>    outsize &#61; &#40;SA&#91;1&#93; * SB&#91;1&#93;, SA&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L470'>
@@ -4935,7 +4767,7 @@
           <td>
             
             
-            <span class='code'>                    integrator.tdir *</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L471'>
@@ -4945,7 +4777,7 @@
           <td>
             
             
-            <span class='code'>                    pop_tstop&#33;&#40;integrator&#41;, Val&#123;true&#125;&#41;</span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L472'>
@@ -4955,7 +4787,7 @@
           <td>
             
             
-            <span class='code'>                integrator.just_hit_tstop &#61; true</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L473'>
@@ -4965,7 +4797,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L474'>
@@ -4975,7 +4807,7 @@
           <td>
             
             
-            <span class='code'>                error&#40;&quot;Something went wrong. Integrator stepped past tstops but the algorithm was dtchangeable. Please report this error.&quot;&#41;</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia,&#36;ja&#93; * b&#91;&#36;ib&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;1&#93;, ja in 1:SA&#91;2&#93; &#93;</span>
           </td>
         </tr>
         <tr id='L475'>
@@ -4985,7 +4817,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L476'>
@@ -4995,7 +4827,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L477'>
@@ -5005,7 +4837,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L478'>
@@ -5015,7 +4847,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>        @inbounds return similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L479'>
@@ -5025,7 +4857,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L480'>
@@ -5035,7 +4867,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L481'>
@@ -5045,7 +4877,7 @@
           <td>
             
             
-            <span class='code'>handle_callback_modifiers&#33;&#40;integrator::ODEIntegrator&#41; &#61; nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L482'>
@@ -5055,7 +4887,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function kron&#40;</span>
           </td>
         </tr>
         <tr id='L483'>
@@ -5065,7 +4897,7 @@
           <td>
             
             
-            <span class='code'>function reset_fsal&#33;&#40;integrator&#41;</span>
+            <span class='code'>        a::StaticMatrix,</span>
           </td>
         </tr>
         <tr id='L484'>
@@ -5075,7 +4907,7 @@
           <td>
             
             
-            <span class='code'>    # Under these conditions, these algorithms are not FSAL anymore</span>
+            <span class='code'>        b::Union&#123;Transpose&#123;&lt;:Number,&lt;:StaticVector&#125;, Adjoint&#123;&lt;:Number,&lt;:StaticVector&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L485'>
@@ -5085,7 +4917,7 @@
           <td>
             
             
-            <span class='code'>    integrator.stats.nf &#43;&#61; 1</span>
+            <span class='code'>    _kron_mat_x_tvec&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L486'>
@@ -5095,7 +4927,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L487'>
@@ -5105,7 +4937,7 @@
           <td>
             
             
-            <span class='code'>    # Ignore DAEs but they already re-ran initialization</span>
+            <span class='code'>@generated function _kron_mat_x_tvec&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L488'>
@@ -5115,7 +4947,7 @@
           <td>
             
             
-            <span class='code'>    # Mass matrix DAEs do need to reset FSAL if available</span>
+            <span class='code'>    outsize &#61; SA .* SB</span>
           </td>
         </tr>
         <tr id='L489'>
@@ -5125,7 +4957,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;integrator.sol.prob isa DAEProblem&#41;</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L490'>
@@ -5135,7 +4967,7 @@
           <td>
             
             
-            <span class='code'>        if integrator.cache isa OrdinaryDiffEqMutableCache ||</span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L491'>
@@ -5145,7 +4977,7 @@
           <td>
             
             
-            <span class='code'>           &#40;integrator.cache isa CompositeCache &amp;&amp;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L492'>
@@ -5155,7 +4987,7 @@
           <td>
             
             
-            <span class='code'>            integrator.cache.caches&#91;1&#93; isa OrdinaryDiffEqMutableCache&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L493'>
@@ -5165,7 +4997,7 @@
           <td>
             
             
-            <span class='code'>            integrator.f&#40;integrator.fsalfirst, integrator.u, integrator.p, integrator.t&#41;</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia,&#36;ja&#93; * b&#91;&#36;ib,&#36;jb&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;1&#93;, jb in 1:SB&#91;2&#93;, ja in 1:SA&#91;2&#93; &#93;</span>
           </td>
         </tr>
         <tr id='L494'>
@@ -5175,7 +5007,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L495'>
@@ -5185,7 +5017,7 @@
           <td>
             
             
-            <span class='code'>            integrator.fsalfirst &#61; integrator.f&#40;integrator.u, integrator.p, integrator.t&#41;</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L496'>
@@ -5195,7 +5027,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L497'>
@@ -5205,7 +5037,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        @inbounds return  similar_type&#40;&#36;a, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L498'>
@@ -5215,7 +5047,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L499'>
@@ -5225,7 +5057,7 @@
           <td>
             
             
-            <span class='code'>    # Do not set false here so it can be checked in the algorithm</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L500'>
@@ -5235,7 +5067,7 @@
           <td>
             
             
-            <span class='code'>    # integrator.reeval_fsal &#61; false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L501'>
@@ -5245,7 +5077,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function kron&#40;</span>
           </td>
         </tr>
         <tr id='L502'>
@@ -5255,7 +5087,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        a::Union&#123;Transpose&#123;&lt;:Number,&lt;:StaticVector&#125;, Adjoint&#123;&lt;:Number,&lt;:StaticVector&#125;&#125;,</span>
           </td>
         </tr>
         <tr id='L503'>
@@ -5265,7 +5097,7 @@
           <td>
             
             
-            <span class='code'>function nlsolve_f&#40;f, alg::OrdinaryDiffEqAlgorithm&#41;</span>
+            <span class='code'>        b::StaticMatrix&#41;</span>
           </td>
         </tr>
         <tr id='L504'>
@@ -5275,7 +5107,7 @@
           <td>
             
             
-            <span class='code'>    f isa SplitFunction &amp;&amp; issplit&#40;alg&#41; ? f.f1 : f</span>
+            <span class='code'>    _kron_tvec_x_mat&#40;_length_limit, Size&#40;a&#41;, Size&#40;b&#41;, a, b&#41;</span>
           </td>
         </tr>
         <tr id='L505'>
@@ -5295,7 +5127,7 @@
           <td>
             
             
-            <span class='code'>nlsolve_f&#40;f, alg::DAEAlgorithm&#41; &#61; f</span>
+            <span class='code'>@generated function _kron_tvec_x_mat&#40;::Length&#123;length_limit&#125;, ::Size&#123;SA&#125;, ::Size&#123;SB&#125;, a, b&#41; where &#123;length_limit,SA,SB&#125;</span>
           </td>
         </tr>
         <tr id='L507'>
@@ -5305,7 +5137,7 @@
           <td>
             
             
-            <span class='code'>function nlsolve_f&#40;integrator::ODEIntegrator&#41;</span>
+            <span class='code'>    outsize &#61; SA .* SB</span>
           </td>
         </tr>
         <tr id='L508'>
@@ -5315,7 +5147,7 @@
           <td>
             
             
-            <span class='code'>    nlsolve_f&#40;integrator.f, unwrap_alg&#40;integrator, true&#41;&#41;</span>
+            <span class='code'>    if prod&#40;outsize&#41; &gt; length_limit</span>
           </td>
         </tr>
         <tr id='L509'>
@@ -5325,7 +5157,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        return :&#40; SizedMatrix&#123;&#36;&#40;outsize&#91;1&#93;&#41;,&#36;&#40;outsize&#91;2&#93;&#41;&#125;&#40; kron&#40;drop_sdims&#40;a&#41;, drop_sdims&#40;b&#41;&#41; &#41; &#41;</span>
           </td>
         </tr>
         <tr id='L510'>
@@ -5335,7 +5167,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L511'>
@@ -5345,7 +5177,7 @@
           <td>
             
             
-            <span class='code'>function &#40;integrator::ODEIntegrator&#41;&#40;t, ::Type&#123;deriv&#125; &#61; Val&#123;0&#125;;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L512'>
@@ -5355,7 +5187,7 @@
           <td>
             
             
-            <span class='code'>        idxs &#61; nothing&#41; where &#123;deriv&#125;</span>
+            <span class='code'>    M &#61; &#91; :&#40;a&#91;&#36;ia,&#36;ja&#93; * b&#91;&#36;ib,&#36;jb&#93;&#41; for ib in 1:SB&#91;1&#93;, ia in 1:SA&#91;1&#93;, jb in 1:SB&#91;2&#93;, ja in 1:SA&#91;2&#93; &#93;</span>
           </td>
         </tr>
         <tr id='L513'>
@@ -5365,7 +5197,7 @@
           <td>
             
             
-            <span class='code'>    current_interpolant&#40;t, integrator, idxs, deriv&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L514'>
@@ -5375,7 +5207,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return quote</span>
           </td>
         </tr>
         <tr id='L515'>
@@ -5385,36 +5217,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        @_inline_meta</span>
           </td>
         </tr>
         <tr id='L516'>
           <td class='lineno'>516</td>
-          <td class='tracecount excl'>3 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>120 &#40;10 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              234 &#40;19 &#37;&#41;
-              samples spent in ODEIntegrator
-              <br />
-              3 &#40;1 &#37;&#41; &#40;ex.&#41;,
-              117 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from ODEIntegrator
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L516'>line 516</a>
-              <br />
-              
-              117 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from get_condition
-              <a href='callbacks.jl-d1552fb3723e250a91896cf72d353921697fa2aa.html#L95'>line 95</a>
-              <br />
-            </div>
-            <div class='callees'>
-              117 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L516'>#_#530</a>
-              <br />
-            </div>
-            <span class='code'>function &#40;integrator::ODEIntegrator&#41;&#40;val::AbstractArray, t::Union&#123;Number, AbstractArray&#125;,</span>
+            
+            
+            <span class='code'>        @inbounds return  similar_type&#40;&#36;b, promote_type&#40;eltype&#40;a&#41;,eltype&#40;b&#41;&#41;, Size&#40;&#36;&#40;outsize&#41;&#41;&#41;&#40;tuple&#40;&#36;&#40;M...&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L517'>
@@ -5424,26 +5237,17 @@
           <td>
             
             
-            <span class='code'>        ::Type&#123;deriv&#125; &#61; Val&#123;0&#125;; idxs &#61; nothing&#41; where &#123;deriv&#125;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L518'>
           <td class='lineno'>518</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>114 &#40;9 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              112 &#40;98 &#37;&#41;
-              samples spent calling
-              <a href='generic_dense.jl-ea216fad01aa76b9203c7be4649d9782daedd471.html#L190'>current_interpolant&#33;</a>
-              <br />
-              2 &#40;2 &#37;&#41;
-              samples spent calling
-              <a href='generic_dense.jl-ea216fad01aa76b9203c7be4649d9782daedd471.html#L0'>current_interpolant&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    current_interpolant&#33;&#40;val, t, integrator, idxs, deriv&#41;</span>
+            
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L519'>
@@ -5453,7 +5257,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L520'>
@@ -5473,7 +5277,7 @@
           <td>
             
             
-            <span class='code'>has_discontinuity&#40;integrator&#41; &#61; &#33;isempty&#40;integrator.opts.d_discontinuities&#41;</span>
+            <span class='code'>#--------------------------------------------------</span>
           </td>
         </tr>
         <tr id='L522'>
@@ -5483,7 +5287,7 @@
           <td>
             
             
-            <span class='code'>first_discontinuity&#40;integrator&#41; &#61; first&#40;integrator.opts.d_discontinuities&#41;</span>
+            <span class='code'># Some shimming for special linear algebra matrix types</span>
           </td>
         </tr>
         <tr id='L523'>
@@ -5493,7 +5297,17 @@
           <td>
             
             
-            <span class='code'>pop_discontinuity&#33;&#40;integrator&#41; &#61; pop&#33;&#40;integrator.opts.d_discontinuities&#41;</span>
+            <span class='code'>@inline LinearAlgebra.Symmetric&#40;A::StaticMatrix, uplo::Char&#61;&#39;U&#39;&#41; &#61; &#40;checksquare&#40;A&#41;; Symmetric&#123;eltype&#40;A&#41;,typeof&#40;A&#41;&#125;&#40;A, uplo&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L524'>
+          <td class='lineno'>524</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@inline LinearAlgebra.Hermitian&#40;A::StaticMatrix, uplo::Char&#61;&#39;U&#39;&#41; &#61; &#40;checksquare&#40;A&#41;; Hermitian&#123;eltype&#40;A&#41;,typeof&#40;A&#41;&#125;&#40;A, uplo&#41;&#41;</span>
           </td>
         </tr>
       </tbody>
