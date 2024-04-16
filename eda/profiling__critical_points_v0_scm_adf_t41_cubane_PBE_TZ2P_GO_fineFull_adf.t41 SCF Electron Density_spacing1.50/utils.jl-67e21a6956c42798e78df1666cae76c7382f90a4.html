@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/options.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/NLsolve/gJL1I/src/nlsolve/utils.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 16 Apr 2024 17:22:10
+        Generated on Tue, 16 Apr 2024 18:11:46
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
+            <span class='code'>wdot&#40;wx, x, wy, y&#41; &#61; dot&#40;wx.*x, wy.*y&#41;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>wnorm&#40;w, x&#41; &#61; norm&#40;w.*x&#41;</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'># NOTE: This type needs to be kept in sync with jl_options in src/jloptions.h</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>struct JLOptions</span>
+            <span class='code'>assess_convergence&#40;f, ftol&#41; &#61; assess_convergence&#40;NaN, NaN, f, NaN, ftol&#41;</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>    quiet::Int8</span>
+            <span class='code'>function assess_convergence&#40;x,</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>    banner::Int8</span>
+            <span class='code'>                            x_previous,</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    julia_bindir::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>                            f,</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    julia_bin::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>                            xtol,</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    commands::Ptr&#123;Ptr&#123;UInt8&#125;&#125; # &#40;e&#41;eval, &#40;E&#41;print, &#40;L&#41;load</span>
+            <span class='code'>                            ftol&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,17 +125,31 @@
           <td>
             
             
-            <span class='code'>    image_file::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    x_converged, f_converged &#61; false, false</span>
           </td>
         </tr>
         <tr id='L11'>
           <td class='lineno'>11</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    cpu_target::Ptr&#123;UInt8&#125;</span>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in assess_convergence
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from trust_region_
+              <a href='trust_region.jl-9b52720b2bb1702e582e5314de8a96a64cbbe5da.html#L124'>line 124</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='generic.jl-753086b42f58fd1c61d30c28b7b9c296bf4f85ea.html#L596'>norm</a>
+              <br />
+            </div>
+            <span class='code'>    if norm&#40;x-x_previous&#41; &lt;&#61; xtol</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +159,7 @@
           <td>
             
             
-            <span class='code'>    nthreadpools::Int16</span>
+            <span class='code'>        x_converged &#61; true</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +169,7 @@
           <td>
             
             
-            <span class='code'>    nthreads::Int16</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +179,7 @@
           <td>
             
             
-            <span class='code'>    nmarkthreads::Int16</span>
+            <span class='code'>    if maximum&#40;abs, f&#41; &lt;&#61; ftol</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +189,7 @@
           <td>
             
             
-            <span class='code'>    nsweepthreads::Int8</span>
+            <span class='code'>        f_converged &#61; true</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +199,7 @@
           <td>
             
             
-            <span class='code'>    nthreads_per_pool::Ptr&#123;Int16&#125;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +209,7 @@
           <td>
             
             
-            <span class='code'>    nprocs::Int32</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +219,7 @@
           <td>
             
             
-            <span class='code'>    machine_file::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    return x_converged, f_converged</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +229,7 @@
           <td>
             
             
-            <span class='code'>    project::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +239,7 @@
           <td>
             
             
-            <span class='code'>    isinteractive::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +249,7 @@
           <td>
             
             
-            <span class='code'>    color::Int8</span>
+            <span class='code'>function check_isfinite&#40;x::AbstractArray&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +259,7 @@
           <td>
             
             
-            <span class='code'>    historyfile::Int8</span>
+            <span class='code'>    if any&#40;&#33;isfinite, x&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +269,7 @@
           <td>
             
             
-            <span class='code'>    startupfile::Int8</span>
+            <span class='code'>        i &#61; findall&#40;&#33;isfinite, x&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +279,7 @@
           <td>
             
             
-            <span class='code'>    compile_enabled::Int8</span>
+            <span class='code'>        throw&#40;IsFiniteException&#40;i&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +289,7 @@
           <td>
             
             
-            <span class='code'>    code_coverage::Int8</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +299,7 @@
           <td>
             
             
-            <span class='code'>    malloc_log::Int8</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +309,7 @@
           <td>
             
             
-            <span class='code'>    tracked_path::Ptr&#123;UInt8&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +319,7 @@
           <td>
             
             
-            <span class='code'>    opt_level::Int8</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +329,7 @@
           <td>
             
             
-            <span class='code'>    opt_level_min::Int8</span>
+            <span class='code'>    qrdelete&#33;&#40;Q, R, k&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +339,7 @@
           <td>
             
             
-            <span class='code'>    debug_level::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +349,7 @@
           <td>
             
             
-            <span class='code'>    check_bounds::Int8</span>
+            <span class='code'>Delete the left-most column of F &#61; Q&#91;:, 1:k&#93; * R&#91;1:k, 1:k&#93; by updating Q and R.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +359,7 @@
           <td>
             
             
-            <span class='code'>    depwarn::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +369,7 @@
           <td>
             
             
-            <span class='code'>    warn_overwrite::Int8</span>
+            <span class='code'>Only Q&#91;:, 1:&#40;k-1&#41;&#93; and R&#91;1:&#40;k-1&#41;, 1:&#40;k-1&#41;&#93; are valid on exit.</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +379,7 @@
           <td>
             
             
-            <span class='code'>    can_inline::Int8</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +389,7 @@
           <td>
             
             
-            <span class='code'>    polly::Int8</span>
+            <span class='code'>function qrdelete&#33;&#40;Q::AbstractMatrix, R::AbstractMatrix, k::Int&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +399,7 @@
           <td>
             
             
-            <span class='code'>    trace_compile::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>  n, m &#61; size&#40;Q&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +409,7 @@
           <td>
             
             
-            <span class='code'>    fast_math::Int8</span>
+            <span class='code'>  m &#61;&#61; LinearAlgebra.checksquare&#40;R&#41; || throw&#40;DimensionMismatch&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +419,7 @@
           <td>
             
             
-            <span class='code'>    worker::Int8</span>
+            <span class='code'>  1 ≤ k ≤ m || throw&#40;ArgumentError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +429,7 @@
           <td>
             
             
-            <span class='code'>    cookie::Ptr&#123;UInt8&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +439,7 @@
           <td>
             
             
-            <span class='code'>    handle_signals::Int8</span>
+            <span class='code'>  # apply Givens rotations</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +449,7 @@
           <td>
             
             
-            <span class='code'>    use_sysimage_native_code::Int8</span>
+            <span class='code'>  for i in 2:k</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +459,7 @@
           <td>
             
             
-            <span class='code'>    use_compiled_modules::Int8</span>
+            <span class='code'>      g &#61; first&#40;givens&#40;R, i - 1, i, i&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +469,7 @@
           <td>
             
             
-            <span class='code'>    use_pkgimages::Int8</span>
+            <span class='code'>      lmul&#33;&#40;g, R&#41;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +479,7 @@
           <td>
             
             
-            <span class='code'>    bindto::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>      rmul&#33;&#40;Q, g&#39;&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +489,7 @@
           <td>
             
             
-            <span class='code'>    outputbc::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>  end</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +499,7 @@
           <td>
             
             
-            <span class='code'>    outputunoptbc::Ptr&#123;UInt8&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +509,7 @@
           <td>
             
             
-            <span class='code'>    outputo::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>  # move columns of R</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +519,7 @@
           <td>
             
             
-            <span class='code'>    outputasm::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>  @inbounds for j in 1:&#40;k-1&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +529,7 @@
           <td>
             
             
-            <span class='code'>    outputji::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>    for i in 1:&#40;k-1&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +539,7 @@
           <td>
             
             
-            <span class='code'>    output_code_coverage::Ptr&#123;UInt8&#125;</span>
+            <span class='code'>      R&#91;i, j&#93; &#61; R&#91;i, j &#43; 1&#93;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +549,7 @@
           <td>
             
             
-            <span class='code'>    incremental::Int8</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +559,7 @@
           <td>
             
             
-            <span class='code'>    image_file_specified::Int8</span>
+            <span class='code'>  end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +569,7 @@
           <td>
             
             
-            <span class='code'>    warn_scope::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +579,7 @@
           <td>
             
             
-            <span class='code'>    image_codegen::Int8</span>
+            <span class='code'>  Q, R</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +589,7 @@
           <td>
             
             
-            <span class='code'>    rr_detach::Int8</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +599,7 @@
           <td>
             
             
-            <span class='code'>    strip_metadata::Int8</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +609,7 @@
           <td>
             
             
-            <span class='code'>    strip_ir::Int8</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +619,7 @@
           <td>
             
             
-            <span class='code'>    permalloc_pkgimg::Int8</span>
+            <span class='code'>    qradd&#33;&#40;Q, R, v, k&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +629,7 @@
           <td>
             
             
-            <span class='code'>    heap_size_hint::UInt64</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +639,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Replace the right-most column of F &#61; Q&#91;:, 1:k&#93; * R&#91;1:k, 1:k&#93; with v by updating Q and R.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -645,7 +659,7 @@
           <td>
             
             
-            <span class='code'># This runs early in the sysimage &#33;&#61; is not defined yet</span>
+            <span class='code'>This implementation modifies vector v as well. Only Q&#91;:, 1:k&#93; and R&#91;1:k, 1:k&#93; are valid on</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +669,7 @@
           <td>
             
             
-            <span class='code'>if sizeof&#40;JLOptions&#41; &#61;&#61;&#61; ccall&#40;:jl_sizeof_jl_options, Int, &#40;&#41;&#41;</span>
+            <span class='code'>exit.</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +679,7 @@
           <td>
             
             
-            <span class='code'>else</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +689,7 @@
           <td>
             
             
-            <span class='code'>    ccall&#40;:jl_throw, Cvoid, &#40;Any,&#41;, &quot;Option structure mismatch&quot;&#41;</span>
+            <span class='code'>function qradd&#33;&#40;Q::AbstractMatrix, R::AbstractMatrix, v::AbstractVector, k::Int&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +699,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>  n, m &#61; size&#40;Q&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +709,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  n &#61;&#61; length&#40;v&#41; || throw&#40;DimensionMismatch&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +719,7 @@
           <td>
             
             
-            <span class='code'>JLOptions&#40;&#41; &#61; unsafe_load&#40;cglobal&#40;:jl_options, JLOptions&#41;&#41;</span>
+            <span class='code'>  m &#61;&#61; LinearAlgebra.checksquare&#40;R&#41; || throw&#40;DimensionMismatch&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +729,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  1 ≤ k ≤ m || throw&#40;ArgumentError&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +739,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, opt::JLOptions&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +749,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;JLOptions&#40;&quot;&#41;</span>
+            <span class='code'>  @inbounds for i in 1:&#40;k-1&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +759,7 @@
           <td>
             
             
-            <span class='code'>    fields &#61; fieldnames&#40;JLOptions&#41;</span>
+            <span class='code'>    q &#61; view&#40;Q, :, i&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +769,7 @@
           <td>
             
             
-            <span class='code'>    nfields &#61; length&#40;fields&#41;</span>
+            <span class='code'>    r &#61; dot&#40;q, v&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +779,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;i, f&#41; in enumerate&#40;fields&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'>        v &#61; getfield&#40;opt, i&#41;</span>
+            <span class='code'>    R&#91;i, k&#93; &#61; r</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;v, Ptr&#123;UInt8&#125;&#41;</span>
+            <span class='code'>    axpy&#33;&#40;-r, q, v&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>            v &#61; &#40;v &#33;&#61; C_NULL&#41; ? unsafe_string&#40;v&#41; : &quot;&quot;</span>
+            <span class='code'>  end</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'>        elseif isa&#40;v, Ptr&#123;Ptr&#123;UInt8&#125;&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>            v &#61; unsafe_load_commands&#40;v&#41;</span>
+            <span class='code'>  @inbounds begin</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    d &#61; norm&#40;v&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, f, &quot; &#61; &quot;, repr&#40;v&#41;, i &lt; nfields ? &quot;, &quot; : &quot;&quot;&#41;</span>
+            <span class='code'>    R&#91;k, k&#93; &#61; d</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    @. Q&#91;:, k&#93; &#61; v / d</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&#41;&quot;&#41;</span>
+            <span class='code'>  end</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,180 +889,11 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  Q, R</span>
           </td>
         </tr>
         <tr id='L86'>
           <td class='lineno'>86</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function unsafe_load_commands&#40;v::Ptr&#123;Ptr&#123;UInt8&#125;&#125;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L87'>
-          <td class='lineno'>87</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    cmds &#61; Pair&#123;Char, String&#125;&#91;&#93;</span>
-          </td>
-        </tr>
-        <tr id='L88'>
-          <td class='lineno'>88</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    v &#61;&#61; C_NULL &amp;&amp; return cmds</span>
-          </td>
-        </tr>
-        <tr id='L89'>
-          <td class='lineno'>89</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    i &#61; 1</span>
-          </td>
-        </tr>
-        <tr id='L90'>
-          <td class='lineno'>90</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    while true</span>
-          </td>
-        </tr>
-        <tr id='L91'>
-          <td class='lineno'>91</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        s &#61; unsafe_load&#40;v, i&#41;</span>
-          </td>
-        </tr>
-        <tr id='L92'>
-          <td class='lineno'>92</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        s &#61;&#61; C_NULL &amp;&amp; break</span>
-          </td>
-        </tr>
-        <tr id='L93'>
-          <td class='lineno'>93</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        e &#61; Char&#40;unsafe_load&#40;s&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L94'>
-          <td class='lineno'>94</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        push&#33;&#40;cmds, e &#61;&gt; unsafe_string&#40;s &#43; 1&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L95'>
-          <td class='lineno'>95</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        i &#43;&#61; 1</span>
-          </td>
-        </tr>
-        <tr id='L96'>
-          <td class='lineno'>96</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L97'>
-          <td class='lineno'>97</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return cmds</span>
-          </td>
-        </tr>
-        <tr id='L98'>
-          <td class='lineno'>98</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L99'>
-          <td class='lineno'>99</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L100'>
-          <td class='lineno'>100</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function is_file_tracked&#40;file::Symbol&#41;</span>
-          </td>
-        </tr>
-        <tr id='L101'>
-          <td class='lineno'>101</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in is_file_tracked
-              <br />
-              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from ir_inline_linetable&#33;
-              <a href='inlining.jl-0bb634c8d52bd8cb0118a62473876d952ba8e5ff.html#L338'>line 338</a>
-              <br />
-            </div>
-            
-            <span class='code'>    return ccall&#40;:jl_is_file_tracked, Cint, &#40;Any,&#41;, file&#41; &#61;&#61; 1</span>
-          </td>
-        </tr>
-        <tr id='L102'>
-          <td class='lineno'>102</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>

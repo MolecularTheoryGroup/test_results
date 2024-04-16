@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/io-ams-spin-polarized-t41`
-*Generated on 2024-04-16@17:22:32 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8709304646)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
+*Generated on 2024-04-16@18:12:22 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8709517447)*
 
 ---
 

@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/number.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/cartesian.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>## generic operations on numbers ##</span>
+            <span class='code'>module Cartesian</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'># Numbers are convertible</span>
+            <span class='code'>export @nloops, @nref, @ncall, @nexprs, @nextract, @nall, @nany, @ntuple, @nif</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,31 +85,17 @@
           <td>
             
             
-            <span class='code'>convert&#40;::Type&#123;T&#125;, x::T&#41;      where &#123;T&lt;:Number&#125; &#61; x</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
           <td class='lineno'>7</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>6 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              6 &#40;0 &#37;&#41;
-              samples spent in convert
-              <br />
-              
-              6 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _promote
-              <a href='promotion.jl-44ebf2f4984ea9f5732597165bf7a9648777f045.html#L370'>line 370</a>
-              <br />
-            </div>
-            <div class='callees'>
-              6 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='float.jl-49d9930abb632842e20bd7b01e9e0414f4b71f47.html#L159'>Float64</a>
-              <br />
-            </div>
-            <span class='code'>convert&#40;::Type&#123;T&#125;, x::Number&#41; where &#123;T&lt;:Number&#125; &#61; T&#40;x&#41;::T</span>
+            
+            
+            <span class='code'>### Cartesian-specific macros</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -139,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    isinteger&#40;x&#41; -&gt; Bool</span>
+            <span class='code'>    @nloops N itersym rangeexpr bodyexpr</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -149,7 +135,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @nloops N itersym rangeexpr preexpr bodyexpr</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -159,7 +145,7 @@
           <td>
             
             
-            <span class='code'>Test whether &#96;x&#96; is numerically equal to some integer.</span>
+            <span class='code'>    @nloops N itersym rangeexpr preexpr postexpr bodyexpr</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -179,7 +165,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>Generate &#96;N&#96; nested loops, using &#96;itersym&#96; as the prefix for the iteration variables.</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -189,7 +175,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>&#96;rangeexpr&#96; may be an anonymous-function expression, or a simple symbol &#96;var&#96; in which case</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -199,7 +185,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isinteger&#40;4.0&#41;</span>
+            <span class='code'>the range is &#96;axes&#40;var, d&#41;&#96; for dimension &#96;d&#96;.</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -209,7 +195,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -219,7 +205,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>Optionally, you can provide &quot;pre&quot; and &quot;post&quot; expressions. These get executed first and last,</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -229,7 +215,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>respectively, in the body of each loop. For example:</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -239,7 +225,7 @@
           <td>
             
             
-            <span class='code'>isinteger&#40;x::Integer&#41; &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
@@ -249,7 +235,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @nloops 2 i A d -&gt; j_d &#61; min&#40;i_d, 5&#41; begin</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -259,7 +245,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        s &#43;&#61; @nref 2 A j</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -269,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    iszero&#40;x&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -289,7 +275,7 @@
           <td>
             
             
-            <span class='code'>Return &#96;true&#96; if &#96;x &#61;&#61; zero&#40;x&#41;&#96;; if &#96;x&#96; is an array, this checks whether</span>
+            <span class='code'>would generate:</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -299,7 +285,7 @@
           <td>
             
             
-            <span class='code'>all of the elements of &#96;x&#96; are zero.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -309,7 +295,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    for i_2 &#61; axes&#40;A, 2&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -319,7 +305,7 @@
           <td>
             
             
-            <span class='code'>See also: &#91;&#96;isone&#96;&#93;&#40;@ref&#41;, &#91;&#96;isinteger&#96;&#93;&#40;@ref&#41;, &#91;&#96;isfinite&#96;&#93;&#40;@ref&#41;, &#91;&#96;isnan&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>        j_2 &#61; min&#40;i_2, 5&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -329,7 +315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        for i_1 &#61; axes&#40;A, 1&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -339,7 +325,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>            j_1 &#61; min&#40;i_1, 5&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -349,7 +335,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>            s &#43;&#61; A&#91;j_1, j_2&#93;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -359,7 +345,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; iszero&#40;0.0&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -369,7 +355,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -389,7 +375,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; iszero&#40;&#91;1, 9, 0&#93;&#41;</span>
+            <span class='code'>If you want just a post-expression, supply &#91;&#96;nothing&#96;&#93;&#40;@ref&#41; for the pre-expression. Using</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -399,7 +385,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'>parentheses and semicolons, you can supply multi-statement expressions.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -409,7 +395,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -419,7 +405,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; iszero&#40;&#91;false, 0, 0&#93;&#41;</span>
+            <span class='code'>macro nloops&#40;N, itersym, rangeexpr, args...&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -429,7 +415,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    _nloops&#40;N, itersym, rangeexpr, args...&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -439,7 +425,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -449,7 +435,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -459,7 +445,7 @@
           <td>
             
             
-            <span class='code'>iszero&#40;x&#41; &#61; x &#61;&#61; zero&#40;x&#41; # fallback method</span>
+            <span class='code'>function _nloops&#40;N::Int, itersym::Symbol, arraysym::Symbol, args::Expr...&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -469,7 +455,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @gensym d</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -479,7 +465,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    _nloops&#40;N, itersym, :&#40;&#36;d-&gt;Base.axes&#40;&#36;arraysym, &#36;d&#41;&#41;, args...&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -489,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    isone&#40;x&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -509,7 +495,7 @@
           <td>
             
             
-            <span class='code'>Return &#96;true&#96; if &#96;x &#61;&#61; one&#40;x&#41;&#96;; if &#96;x&#96; is an array, this checks whether</span>
+            <span class='code'>function _nloops&#40;N::Int, itersym::Symbol, rangeexpr::Expr, args::Expr...&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -519,7 +505,7 @@
           <td>
             
             
-            <span class='code'>&#96;x&#96; is an identity matrix.</span>
+            <span class='code'>    if rangeexpr.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -529,7 +515,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;second argument must be an anonymous function expression to compute the range&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -539,7 +525,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -549,7 +535,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    if &#33;&#40;1 &lt;&#61; length&#40;args&#41; &lt;&#61; 3&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -559,7 +545,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isone&#40;1.0&#41;</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;number of arguments must be 1 ≤ length&#40;args&#41; ≤ 3, got &#36;nargs&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -569,7 +555,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -579,7 +565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    body &#61; args&#91;end&#93;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -589,7 +575,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isone&#40;&#91;1 0; 0 2&#93;&#41;</span>
+            <span class='code'>    ex &#61; Expr&#40;:escape, body&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -599,7 +585,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'>    for dim &#61; 1:N</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -609,7 +595,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        itervar &#61; inlineanonymous&#40;itersym, dim&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -619,7 +605,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isone&#40;&#91;1 0; 0 true&#93;&#41;</span>
+            <span class='code'>        rng &#61; inlineanonymous&#40;rangeexpr, dim&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -629,7 +615,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>        preexpr &#61; length&#40;args&#41; &gt; 1 ? inlineanonymous&#40;args&#91;1&#93;, dim&#41; : &#40;:&#40;nothing&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -639,7 +625,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        postexpr &#61; length&#40;args&#41; &gt; 2 ? inlineanonymous&#40;args&#91;2&#93;, dim&#41; : &#40;:&#40;nothing&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -649,7 +635,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        ex &#61; quote</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -659,7 +645,7 @@
           <td>
             
             
-            <span class='code'>isone&#40;x&#41; &#61; x &#61;&#61; one&#40;x&#41; # fallback method</span>
+            <span class='code'>            for &#36;&#40;esc&#40;itervar&#41;&#41; &#61; &#36;&#40;esc&#40;rng&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -669,17 +655,31 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                &#36;&#40;esc&#40;preexpr&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
           <td class='lineno'>64</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from _unsafe_getindex&#33;
+              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L912'>line 912</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L917'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>                &#36;ex</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -689,7 +689,7 @@
           <td>
             
             
-            <span class='code'>    isfinite&#40;f&#41; -&gt; Bool</span>
+            <span class='code'>                &#36;&#40;esc&#40;postexpr&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -699,7 +699,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -709,7 +709,7 @@
           <td>
             
             
-            <span class='code'>Test whether a number is finite.</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -719,7 +719,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -729,7 +729,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    ex</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -739,7 +739,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -749,7 +749,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isfinite&#40;5&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L72'>
@@ -759,7 +759,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -769,7 +769,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @nref N A indexexpr</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -779,7 +779,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isfinite&#40;NaN32&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -789,7 +789,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'>Generate expressions like &#96;A&#91;i_1, i_2, ...&#93;&#96;. &#96;indexexpr&#96; can either be an iteration-symbol</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -799,7 +799,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>prefix, or an anonymous-function expression.</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -809,7 +809,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L78'>
@@ -819,7 +819,7 @@
           <td>
             
             
-            <span class='code'>isfinite&#40;x::Number&#41; &#61; iszero&#40;x - x&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -829,7 +829,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -839,7 +839,7 @@
           <td>
             
             
-            <span class='code'>size&#40;x::Number&#41; &#61; &#40;&#41;</span>
+            <span class='code'>julia&gt; @macroexpand Base.Cartesian.@nref 3 A i</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -849,7 +849,7 @@
           <td>
             
             
-            <span class='code'>size&#40;x::Number, d::Integer&#41; &#61; d &lt; 1 ? throw&#40;BoundsError&#40;&#41;&#41; : 1</span>
+            <span class='code'>:&#40;A&#91;i_1, i_2, i_3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -859,7 +859,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;x::Number&#41; &#61; &#40;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -869,7 +869,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;x::Number, d::Integer&#41; &#61; d &lt; 1 ? throw&#40;BoundsError&#40;&#41;&#41; : OneTo&#40;1&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -879,7 +879,7 @@
           <td>
             
             
-            <span class='code'>eltype&#40;::Type&#123;T&#125;&#41; where &#123;T&lt;:Number&#125; &#61; T</span>
+            <span class='code'>macro nref&#40;N::Int, A::Symbol, ex&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -889,7 +889,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;x::Number&#41; &#61; 0</span>
+            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -899,7 +899,7 @@
           <td>
             
             
-            <span class='code'>ndims&#40;::Type&#123;&lt;:Number&#125;&#41; &#61; 0</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:ref, A, vars...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -909,7 +909,7 @@
           <td>
             
             
-            <span class='code'>length&#40;x::Number&#41; &#61; 1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -919,7 +919,7 @@
           <td>
             
             
-            <span class='code'>firstindex&#40;x::Number&#41; &#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L89'>
@@ -929,7 +929,7 @@
           <td>
             
             
-            <span class='code'>firstindex&#40;x::Number, d::Int&#41; &#61; d &lt; 1 ? throw&#40;BoundsError&#40;&#41;&#41; : 1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -939,7 +939,7 @@
           <td>
             
             
-            <span class='code'>lastindex&#40;x::Number&#41; &#61; 1</span>
+            <span class='code'>    @ncall N f sym...</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -949,7 +949,7 @@
           <td>
             
             
-            <span class='code'>lastindex&#40;x::Number, d::Int&#41; &#61; d &lt; 1 ? throw&#40;BoundsError&#40;&#41;&#41; : 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L92'>
@@ -959,7 +959,7 @@
           <td>
             
             
-            <span class='code'>IteratorSize&#40;::Type&#123;&lt;:Number&#125;&#41; &#61; HasShape&#123;0&#125;&#40;&#41;</span>
+            <span class='code'>Generate a function call expression. &#96;sym&#96; represents any number of function arguments, the</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -969,7 +969,7 @@
           <td>
             
             
-            <span class='code'>keys&#40;::Number&#41; &#61; OneTo&#40;1&#41;</span>
+            <span class='code'>last of which may be an anonymous-function expression and is expanded into &#96;N&#96; arguments.</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -989,7 +989,7 @@
           <td>
             
             
-            <span class='code'>getindex&#40;x::Number&#41; &#61; x</span>
+            <span class='code'>For example, &#96;@ncall 3 func a&#96; generates</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -999,7 +999,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;x::Number, i::Integer&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L97'>
@@ -1009,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'>    func&#40;a_1, a_2, a_3&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1019,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck i &#61;&#61; 1 || throw&#40;BoundsError&#40;x, i&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1029,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>    x</span>
+            <span class='code'>while &#96;@ncall 2 func a b i-&gt;c&#91;i&#93;&#96; yields</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1039,7 +1039,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1049,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>function getindex&#40;x::Number, I::Integer...&#41;</span>
+            <span class='code'>    func&#40;a, b, c&#91;1&#93;, c&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1059,7 +1059,7 @@
           <td>
             
             
-            <span class='code'>    @inline</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1069,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>    @boundscheck all&#40;isone, I&#41; || throw&#40;BoundsError&#40;x, I&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1079,7 +1079,7 @@
           <td>
             
             
-            <span class='code'>    x</span>
+            <span class='code'>macro ncall&#40;N::Int, f, args...&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1089,7 +1089,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    pre &#61; args&#91;1:end-1&#93;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1099,7 +1099,7 @@
           <td>
             
             
-            <span class='code'>get&#40;x::Number, i::Integer, default&#41; &#61; isone&#40;i&#41; ? x : default</span>
+            <span class='code'>    ex &#61; args&#91;end&#93;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1109,7 +1109,7 @@
           <td>
             
             
-            <span class='code'>get&#40;x::Number, ind::Tuple, default&#41; &#61; all&#40;isone, ind&#41; ? x : default</span>
+            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1119,7 +1119,7 @@
           <td>
             
             
-            <span class='code'>get&#40;f::Callable, x::Number, i::Integer&#41; &#61; isone&#40;i&#41; ? x : f&#40;&#41;</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:call, f, pre..., vars...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1129,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>get&#40;f::Callable, x::Number, ind::Tuple&#41; &#61; all&#40;isone, ind&#41; ? x : f&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1149,7 +1149,7 @@
           <td>
             
             
-            <span class='code'>first&#40;x::Number&#41; &#61; x</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1159,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>last&#40;x::Number&#41; &#61; x</span>
+            <span class='code'>    @nexprs N expr</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1169,7 +1169,7 @@
           <td>
             
             
-            <span class='code'>copy&#40;x::Number&#41; &#61; x # some code treats numbers as collection-like</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1179,7 +1179,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Generate &#96;N&#96; expressions. &#96;expr&#96; should be an anonymous-function expression.</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1189,7 +1189,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1199,7 +1199,7 @@
           <td>
             
             
-            <span class='code'>    signbit&#40;x&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1209,7 +1209,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1219,7 +1219,7 @@
           <td>
             
             
-            <span class='code'>Return &#96;true&#96; if the value of the sign of &#96;x&#96; is negative, otherwise &#96;false&#96;.</span>
+            <span class='code'>julia&gt; @macroexpand Base.Cartesian.@nexprs 4 i -&gt; y&#91;i&#93; &#61; A&#91;i&#43;j&#93;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1229,7 +1229,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>quote</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1239,7 +1239,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;sign&#96;&#93;&#40;@ref&#41; and &#91;&#96;copysign&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    y&#91;1&#93; &#61; A&#91;1 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1249,7 +1249,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    y&#91;2&#93; &#61; A&#91;2 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1259,7 +1259,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    y&#91;3&#93; &#61; A&#91;3 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1269,7 +1269,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    y&#91;4&#93; &#61; A&#91;4 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1279,7 +1279,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; signbit&#40;-4&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1289,7 +1289,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1299,7 +1299,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1309,7 +1309,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; signbit&#40;5&#41;</span>
+            <span class='code'>macro nexprs&#40;N::Int, ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1319,7 +1319,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'>    exs &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1329,7 +1329,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:block, exs...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1339,7 +1339,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; signbit&#40;5.5&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1349,7 +1349,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1359,7 +1359,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1369,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; signbit&#40;-4.1&#41;</span>
+            <span class='code'>    @nextract N esym isym</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1379,7 +1379,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1389,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>Generate &#96;N&#96; variables &#96;esym_1&#96;, &#96;esym_2&#96;, ..., &#96;esym_N&#96; to extract values from &#96;isym&#96;.</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1399,7 +1399,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;isym&#96; can be either a &#96;Symbol&#96; or anonymous-function expression.</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1409,7 +1409,7 @@
           <td>
             
             
-            <span class='code'>signbit&#40;x::Real&#41; &#61; x &lt; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1419,7 +1419,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;@nextract 2 x y&#96; would generate</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1429,7 +1429,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1439,7 +1439,7 @@
           <td>
             
             
-            <span class='code'>    sign&#40;x&#41;</span>
+            <span class='code'>    x_1 &#61; y&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1449,7 +1449,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x_2 &#61; y&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>Return zero if &#96;x&#61;&#61;0&#96; and &#96;&#96;x/|x|&#96;&#96; otherwise &#40;i.e., ±1 for real &#96;x&#96;&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1469,7 +1469,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>while &#96;@nextract 3 x d-&gt;y&#91;2d-1&#93;&#96; yields</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1479,7 +1479,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;signbit&#96;&#93;&#40;@ref&#41;, &#91;&#96;zero&#96;&#93;&#40;@ref&#41;, &#91;&#96;copysign&#96;&#93;&#40;@ref&#41;, &#91;&#96;flipsign&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1489,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x_1 &#61; y&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1499,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    x_2 &#61; y&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1509,7 +1509,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    x_3 &#61; y&#91;5&#93;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1519,7 +1519,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; sign&#40;-4.0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1529,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>-1.0</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1539,7 +1539,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>macro nextract&#40;N::Int, esym::Symbol, isym::Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1549,7 +1549,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; sign&#40;99&#41;</span>
+            <span class='code'>    aexprs &#61; Any&#91; Expr&#40;:escape, Expr&#40;:&#40;&#61;&#41;, inlineanonymous&#40;esym, i&#41;, :&#40;&#40;&#36;isym&#41;&#91;&#36;i&#93;&#41;&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1559,7 +1559,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>    Expr&#40;:block, aexprs...&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1569,7 +1569,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1579,7 +1579,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; sign&#40;-0.0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1589,7 +1589,7 @@
           <td>
             
             
-            <span class='code'>-0.0</span>
+            <span class='code'>macro nextract&#40;N::Int, esym::Symbol, ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1599,7 +1599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    aexprs &#61; Any&#91; Expr&#40;:escape, Expr&#40;:&#40;&#61;&#41;, inlineanonymous&#40;esym, i&#41;, inlineanonymous&#40;ex,i&#41;&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1609,7 +1609,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; sign&#40;0 &#43; im&#41;</span>
+            <span class='code'>    Expr&#40;:block, aexprs...&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1619,7 +1619,7 @@
           <td>
             
             
-            <span class='code'>0.0 &#43; 1.0im</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1629,7 +1629,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1649,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>sign&#40;x::Number&#41; &#61; iszero&#40;x&#41; ? x/abs&#40;oneunit&#40;x&#41;&#41; : x/abs&#40;x&#41;</span>
+            <span class='code'>    @nall N expr</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1659,7 +1659,7 @@
           <td>
             
             
-            <span class='code'>sign&#40;x::Real&#41; &#61; ifelse&#40;x &lt; zero&#40;x&#41;, oftype&#40;one&#40;x&#41;,-1&#41;, ifelse&#40;x &gt; zero&#40;x&#41;, one&#40;x&#41;, typeof&#40;one&#40;x&#41;&#41;&#40;x&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1669,7 +1669,7 @@
           <td>
             
             
-            <span class='code'>sign&#40;x::Unsigned&#41; &#61; ifelse&#40;x &gt; zero&#40;x&#41;, one&#40;x&#41;, oftype&#40;one&#40;x&#41;,0&#41;&#41;</span>
+            <span class='code'>Check whether all of the expressions generated by the anonymous-function expression &#96;expr&#96;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1679,7 +1679,7 @@
           <td>
             
             
-            <span class='code'>abs&#40;x::Real&#41; &#61; ifelse&#40;signbit&#40;x&#41;, -x, x&#41;</span>
+            <span class='code'>evaluate to &#96;true&#96;.</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1699,7 +1699,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;@nall 3 d-&gt;&#40;i_d &gt; 1&#41;&#96; would generate the expression &#96;&#40;i_1 &gt; 1 &amp;&amp; i_2 &gt; 1 &amp;&amp; i_3 &gt; 1&#41;&#96;. This</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1709,7 +1709,7 @@
           <td>
             
             
-            <span class='code'>    abs2&#40;x&#41;</span>
+            <span class='code'>can be convenient for bounds-checking.</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1719,7 +1719,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1729,7 +1729,7 @@
           <td>
             
             
-            <span class='code'>Squared absolute value of &#96;x&#96;.</span>
+            <span class='code'>macro nall&#40;N::Int, criterion::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1739,7 +1739,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if criterion.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1749,7 +1749,7 @@
           <td>
             
             
-            <span class='code'>This can be faster than &#96;abs&#40;x&#41;^2&#96;, especially for complex</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;second argument must be an anonymous function expression yielding the criterion&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1759,7 +1759,7 @@
           <td>
             
             
-            <span class='code'>numbers where &#96;abs&#40;x&#41;&#96; requires a square root via &#91;&#96;hypot&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1769,7 +1769,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    conds &#61; Any&#91; Expr&#40;:escape, inlineanonymous&#40;criterion, i&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1779,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;abs&#96;&#93;&#40;@ref&#41;, &#91;&#96;conj&#96;&#93;&#40;@ref&#41;, &#91;&#96;real&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    Expr&#40;:&amp;&amp;, conds...&#41;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1789,7 +1789,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1799,7 +1799,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1809,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1819,7 +1819,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; abs2&#40;-3&#41;</span>
+            <span class='code'>    @nany N expr</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1829,7 +1829,7 @@
           <td>
             
             
-            <span class='code'>9</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1839,7 +1839,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Check whether any of the expressions generated by the anonymous-function expression &#96;expr&#96;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1849,7 +1849,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; abs2&#40;3.0 &#43; 4.0im&#41;</span>
+            <span class='code'>evaluate to &#96;true&#96;.</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1859,7 +1859,7 @@
           <td>
             
             
-            <span class='code'>25.0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1869,7 +1869,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;@nany 3 d-&gt;&#40;i_d &gt; 1&#41;&#96; would generate the expression &#96;&#40;i_1 &gt; 1 || i_2 &gt; 1 || i_3 &gt; 1&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1879,7 +1879,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; sum&#40;abs2, &#91;1&#43;2im, 3&#43;4im&#93;&#41;  # LinearAlgebra.norm&#40;x&#41;^2</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1889,7 +1889,7 @@
           <td>
             
             
-            <span class='code'>30</span>
+            <span class='code'>macro nany&#40;N::Int, criterion::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1899,7 +1899,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    if criterion.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1909,7 +1909,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        error&#40;&quot;Second argument must be an anonymous function expression yielding the criterion&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1919,7 +1919,7 @@
           <td>
             
             
-            <span class='code'>abs2&#40;x::Number&#41; &#61; abs&#40;x&#41;^2</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1929,7 +1929,7 @@
           <td>
             
             
-            <span class='code'>abs2&#40;x::Real&#41; &#61; x*x</span>
+            <span class='code'>    conds &#61; Any&#91; Expr&#40;:escape, inlineanonymous&#40;criterion, i&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1939,7 +1939,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Expr&#40;:||, conds...&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1949,7 +1949,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1959,7 +1959,7 @@
           <td>
             
             
-            <span class='code'>    flipsign&#40;x, y&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1969,7 +1969,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1979,7 +1979,7 @@
           <td>
             
             
-            <span class='code'>Return &#96;x&#96; with its sign flipped if &#96;y&#96; is negative. For example &#96;abs&#40;x&#41; &#61; flipsign&#40;x,x&#41;&#96;.</span>
+            <span class='code'>    @ntuple N expr</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1999,7 +1999,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>Generates an &#96;N&#96;-tuple. &#96;@ntuple 2 i&#96; would generate &#96;&#40;i_1, i_2&#41;&#96;, and &#96;@ntuple 2 k-&gt;k&#43;1&#96;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2009,7 +2009,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>would generate &#96;&#40;2,3&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2019,7 +2019,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; flipsign&#40;5, 3&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2029,7 +2029,7 @@
           <td>
             
             
-            <span class='code'>5</span>
+            <span class='code'>macro ntuple&#40;N::Int, ex&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2039,7 +2039,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2049,7 +2049,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; flipsign&#40;5, -3&#41;</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:tuple, vars...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2059,7 +2059,7 @@
           <td>
             
             
-            <span class='code'>-5</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2069,7 +2069,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2089,7 +2089,7 @@
           <td>
             
             
-            <span class='code'>flipsign&#40;x::Real, y::Real&#41; &#61; ifelse&#40;signbit&#40;y&#41;, -x, &#43;x&#41; # the &#43; is for type-stability on Bool</span>
+            <span class='code'>    @nif N conditionexpr expr</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2099,7 +2099,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @nif N conditionexpr expr elseexpr</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2109,7 +2109,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2119,7 +2119,7 @@
           <td>
             
             
-            <span class='code'>    copysign&#40;x, y&#41; -&gt; z</span>
+            <span class='code'>Generates a sequence of &#96;if ... elseif ... else ... end&#96; statements. For example:</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2139,7 +2139,7 @@
           <td>
             
             
-            <span class='code'>Return &#96;z&#96; which has the magnitude of &#96;x&#96; and the same sign as &#96;y&#96;.</span>
+            <span class='code'>    @nif 3 d-&gt;&#40;i_d &gt;&#61; size&#40;A,d&#41;&#41; d-&gt;&#40;error&#40;&quot;Dimension &quot;, d, &quot; too big&quot;&#41;&#41; d-&gt;println&#40;&quot;All OK&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2159,7 +2159,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>would generate:</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2169,7 +2169,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2179,7 +2179,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; copysign&#40;1, -2&#41;</span>
+            <span class='code'>    if i_1 &gt; size&#40;A, 1&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2189,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>-1</span>
+            <span class='code'>        error&#40;&quot;Dimension &quot;, 1, &quot; too big&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2199,7 +2199,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif i_2 &gt; size&#40;A, 2&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2209,7 +2209,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; copysign&#40;-1, 2&#41;</span>
+            <span class='code'>        error&#40;&quot;Dimension &quot;, 2, &quot; too big&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2219,7 +2219,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2229,7 +2229,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        println&#40;&quot;All OK&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2239,7 +2239,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2249,7 +2249,7 @@
           <td>
             
             
-            <span class='code'>copysign&#40;x::Real, y::Real&#41; &#61; ifelse&#40;signbit&#40;x&#41;&#33;&#61;signbit&#40;y&#41;, -x, &#43;x&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2259,7 +2259,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>macro nif&#40;N, condition, operation...&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2269,7 +2269,7 @@
           <td>
             
             
-            <span class='code'>conj&#40;x::Real&#41; &#61; x</span>
+            <span class='code'>    # Handle the final &quot;else&quot;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2279,7 +2279,7 @@
           <td>
             
             
-            <span class='code'>transpose&#40;x::Number&#41; &#61; x</span>
+            <span class='code'>    ex &#61; esc&#40;inlineanonymous&#40;length&#40;operation&#41; &gt; 1 ? operation&#91;2&#93; : operation&#91;1&#93;, N&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2289,7 +2289,7 @@
           <td>
             
             
-            <span class='code'>adjoint&#40;x::Number&#41; &#61; conj&#40;x&#41;</span>
+            <span class='code'>    # Make the nested if statements</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2299,7 +2299,7 @@
           <td>
             
             
-            <span class='code'>angle&#40;z::Real&#41; &#61; atan&#40;zero&#40;z&#41;, z&#41;</span>
+            <span class='code'>    for i &#61; N-1:-1:1</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2309,7 +2309,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        ex &#61; Expr&#40;:if, esc&#40;inlineanonymous&#40;condition,i&#41;&#41;, esc&#40;inlineanonymous&#40;operation&#91;1&#93;,i&#41;&#41;, ex&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2319,7 +2319,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2329,7 +2329,7 @@
           <td>
             
             
-            <span class='code'>    inv&#40;x&#41;</span>
+            <span class='code'>    ex</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2339,7 +2339,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2349,7 +2349,7 @@
           <td>
             
             
-            <span class='code'>Return the multiplicative inverse of &#96;x&#96;, such that &#96;x*inv&#40;x&#41;&#96; or &#96;inv&#40;x&#41;*x&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2359,7 +2359,7 @@
           <td>
             
             
-            <span class='code'>yields &#91;&#96;one&#40;x&#41;&#96;&#93;&#40;@ref&#41; &#40;the multiplicative identity&#41; up to roundoff errors.</span>
+            <span class='code'>## Utilities</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2379,7 +2379,7 @@
           <td>
             
             
-            <span class='code'>If &#96;x&#96; is a number, this is essentially the same as &#96;one&#40;x&#41;/x&#96;, but for</span>
+            <span class='code'># Simplify expressions like :&#40;d-&gt;3:size&#40;A,d&#41;-3&#41; given an explicit value for d</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2389,7 +2389,7 @@
           <td>
             
             
-            <span class='code'>some types &#96;inv&#40;x&#41;&#96; may be slightly more efficient.</span>
+            <span class='code'>function inlineanonymous&#40;ex::Expr, val&#41;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2399,7 +2399,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if ex.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2409,7 +2409,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;not an anonymous function&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2419,7 +2419,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2429,7 +2429,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; inv&#40;2&#41;</span>
+            <span class='code'>    if &#33;isa&#40;ex.args&#91;1&#93;, Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2439,7 +2439,7 @@
           <td>
             
             
-            <span class='code'>0.5</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;not a single-argument anonymous function&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2449,7 +2449,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2459,7 +2459,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; inv&#40;1 &#43; 2im&#41;</span>
+            <span class='code'>    sym &#61; ex.args&#91;1&#93;::Symbol</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2469,7 +2469,7 @@
           <td>
             
             
-            <span class='code'>0.2 - 0.4im</span>
+            <span class='code'>    ex &#61; ex.args&#91;2&#93;::Expr</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2479,7 +2479,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    exout &#61; lreplace&#40;ex, sym, val&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2489,7 +2489,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; inv&#40;1 &#43; 2im&#41; * &#40;1 &#43; 2im&#41;</span>
+            <span class='code'>    exout &#61; poplinenum&#40;exout&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2499,7 +2499,7 @@
           <td>
             
             
-            <span class='code'>1.0 &#43; 0.0im</span>
+            <span class='code'>    exprresolve&#40;exout&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2509,7 +2509,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2519,7 +2519,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; inv&#40;2//3&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2529,7 +2529,7 @@
           <td>
             
             
-            <span class='code'>3//2</span>
+            <span class='code'># Given :i and 3, this generates :i_3</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2539,7 +2539,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>inlineanonymous&#40;base::Symbol, ext&#41; &#61; Symbol&#40;base,&#39;_&#39;,ext&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2559,7 +2559,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.2&quot;</span>
+            <span class='code'># Replace a symbol by a value or a &quot;coded&quot; symbol</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2569,7 +2569,7 @@
           <td>
             
             
-            <span class='code'>    &#96;inv&#40;::Missing&#41;&#96; requires at least Julia 1.2.</span>
+            <span class='code'># E.g., for d &#61; 3,</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2579,7 +2579,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>#    lreplace&#40;:d, :d, 3&#41; -&gt; 3</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2589,7 +2589,7 @@
           <td>
             
             
-            <span class='code'>inv&#40;x::Number&#41; &#61; one&#40;x&#41;/x</span>
+            <span class='code'>#    lreplace&#40;:i_d, :d, 3&#41; -&gt; :i_3</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2599,7 +2599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>#    lreplace&#40;:i_&#123;d-1&#125;, :d, 3&#41; -&gt; :i_2</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2609,7 +2609,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># This follows LaTeX notation.</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2619,7 +2619,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>struct LReplace&#123;S&lt;:AbstractString&#125;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2629,7 +2629,7 @@
           <td>
             
             
-            <span class='code'>    widemul&#40;x, y&#41;</span>
+            <span class='code'>    pat_sym::Symbol</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2639,7 +2639,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    pat_str::S</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2649,7 +2649,7 @@
           <td>
             
             
-            <span class='code'>Multiply &#96;x&#96; and &#96;y&#96;, giving the result as a larger type.</span>
+            <span class='code'>    val::Int</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2659,7 +2659,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2669,7 +2669,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;promote&#96;&#93;&#40;@ref&#41;, &#91;&#96;Base.add_sum&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>LReplace&#40;sym::Symbol, val::Integer&#41; &#61; LReplace&#40;sym, string&#40;sym&#41;, val&#41;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2689,7 +2689,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>lreplace&#40;ex::Expr, sym::Symbol, val&#41; &#61; lreplace&#33;&#40;copy&#40;ex&#41;, LReplace&#40;sym, val&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2699,7 +2699,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2709,7 +2709,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; widemul&#40;Float32&#40;3.0&#41;, 4.0&#41; isa BigFloat</span>
+            <span class='code'>function lreplace&#33;&#40;sym::Symbol, r::LReplace&#41;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2719,7 +2719,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>    sym &#61;&#61; r.pat_sym &amp;&amp; return r.val</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2729,7 +2729,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Symbol&#40;lreplace&#33;&#40;string&#40;sym&#41;, r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2739,7 +2739,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; typemax&#40;Int8&#41; * typemax&#40;Int8&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2749,7 +2749,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2759,7 +2759,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function lreplace&#33;&#40;str::AbstractString, r::LReplace&#41;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2769,7 +2769,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; widemul&#40;typemax&#40;Int8&#41;, typemax&#40;Int8&#41;&#41;  # &#61;&#61; 127^2</span>
+            <span class='code'>    i &#61; firstindex&#40;str&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2779,7 +2779,7 @@
           <td>
             
             
-            <span class='code'>16129</span>
+            <span class='code'>    pat &#61; r.pat_str</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2789,7 +2789,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    j &#61; firstindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2799,7 +2799,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    matching &#61; false</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2809,7 +2809,7 @@
           <td>
             
             
-            <span class='code'>widemul&#40;x::Number, y::Number&#41; &#61; widen&#40;x&#41;*widen&#40;y&#41;</span>
+            <span class='code'>    local istart::Int</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2819,7 +2819,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    while i &lt;&#61; ncodeunits&#40;str&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2829,7 +2829,7 @@
           <td>
             
             
-            <span class='code'>iterate&#40;x::Number&#41; &#61; &#40;x, nothing&#41;</span>
+            <span class='code'>        cstr &#61; str&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2839,7 +2839,7 @@
           <td>
             
             
-            <span class='code'>iterate&#40;x::Number, ::Any&#41; &#61; nothing</span>
+            <span class='code'>        i &#61; nextind&#40;str, i&#41;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2849,7 +2849,7 @@
           <td>
             
             
-            <span class='code'>isempty&#40;x::Number&#41; &#61; false</span>
+            <span class='code'>        if &#33;matching</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2859,7 +2859,7 @@
           <td>
             
             
-            <span class='code'>in&#40;x::Number, y::Number&#41; &#61; x &#61;&#61; y</span>
+            <span class='code'>            if cstr &#33;&#61; &#39;_&#39; || i &gt; ncodeunits&#40;str&#41;</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2869,7 +2869,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2879,7 +2879,7 @@
           <td>
             
             
-            <span class='code'>map&#40;f, x::Number, ys::Number...&#41; &#61; f&#40;x, ys...&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2889,7 +2889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            istart &#61; i</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2899,7 +2899,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            cstr &#61; str&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2909,7 +2909,7 @@
           <td>
             
             
-            <span class='code'>    zero&#40;x&#41;</span>
+            <span class='code'>            i &#61; nextind&#40;str, i&#41;</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2919,7 +2919,7 @@
           <td>
             
             
-            <span class='code'>    zero&#40;::Type&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2929,7 +2929,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if j &lt;&#61; lastindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2939,7 +2939,7 @@
           <td>
             
             
-            <span class='code'>Get the additive identity element for the type of &#96;x&#96; &#40;&#96;x&#96; can also specify the type itself&#41;.</span>
+            <span class='code'>            cr &#61; pat&#91;j&#93;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2949,7 +2949,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            j &#61; nextind&#40;pat, j&#41;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2959,7 +2959,7 @@
           <td>
             
             
-            <span class='code'>See also &#91;&#96;iszero&#96;&#93;&#40;@ref&#41;, &#91;&#96;one&#96;&#93;&#40;@ref&#41;, &#91;&#96;oneunit&#96;&#93;&#40;@ref&#41;, &#91;&#96;oftype&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>            if cstr &#61;&#61; cr</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2969,7 +2969,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                matching &#61; true</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2979,7 +2979,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>            else</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2989,7 +2989,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>                matching &#61; false</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2999,7 +2999,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; zero&#40;1&#41;</span>
+            <span class='code'>                j &#61; firstindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3009,7 +3009,7 @@
           <td>
             
             
-            <span class='code'>0</span>
+            <span class='code'>                i &#61; istart</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3019,7 +3019,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3029,7 +3029,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; zero&#40;big&quot;2.0&quot;&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3039,7 +3039,7 @@
           <td>
             
             
-            <span class='code'>0.0</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3049,7 +3049,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if matching &amp;&amp; j &gt; lastindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3059,7 +3059,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; zero&#40;rand&#40;2,2&#41;&#41;</span>
+            <span class='code'>            if i &gt; lastindex&#40;str&#41; || str&#91;i&#93; &#61;&#61; &#39;_&#39;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3069,7 +3069,7 @@
           <td>
             
             
-            <span class='code'>2×2 Matrix&#123;Float64&#125;:</span>
+            <span class='code'>                # We have a match</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3079,7 +3079,7 @@
           <td>
             
             
-            <span class='code'> 0.0  0.0</span>
+            <span class='code'>                return string&#40;str&#91;1:prevind&#40;str, istart&#41;&#93;, r.val, lreplace&#33;&#40;str&#91;i:end&#93;, r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3089,7 +3089,7 @@
           <td>
             
             
-            <span class='code'> 0.0  0.0</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3099,7 +3099,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>            matching &#61; false</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3109,7 +3109,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            j &#61; firstindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3119,7 +3119,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;x::Number&#41; &#61; oftype&#40;x,0&#41;</span>
+            <span class='code'>            i &#61; istart</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3129,7 +3129,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;::Type&#123;T&#125;&#41; where &#123;T&lt;:Number&#125; &#61; convert&#40;T,0&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3139,7 +3139,7 @@
           <td>
             
             
-            <span class='code'>zero&#40;::Type&#123;Union&#123;&#125;&#125;, slurp...&#41; &#61; Union&#123;&#125;&#40;0&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3149,7 +3149,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    str</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3159,7 +3159,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3169,7 +3169,7 @@
           <td>
             
             
-            <span class='code'>    one&#40;x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3179,7 +3179,7 @@
           <td>
             
             
-            <span class='code'>    one&#40;T::type&#41;</span>
+            <span class='code'>function lreplace&#33;&#40;ex::Expr, r::LReplace&#41;</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3189,7 +3189,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Curly-brace notation, which acts like parentheses</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3199,7 +3199,7 @@
           <td>
             
             
-            <span class='code'>Return a multiplicative identity for &#96;x&#96;: a value such that</span>
+            <span class='code'>    if ex.head &#61;&#61;&#61; :curly &amp;&amp; length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, Symbol&#41; &amp;&amp; endswith&#40;string&#40;ex.args&#91;1&#93;::Symbol&#41;, &quot;_&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3209,7 +3209,7 @@
           <td>
             
             
-            <span class='code'>&#96;one&#40;x&#41;*x &#61;&#61; x*one&#40;x&#41; &#61;&#61; x&#96;.  Alternatively &#96;one&#40;T&#41;&#96; can</span>
+            <span class='code'>        excurly &#61; exprresolve&#40;lreplace&#33;&#40;ex.args&#91;2&#93;, r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3219,7 +3219,7 @@
           <td>
             
             
-            <span class='code'>take a type &#96;T&#96;, in which case &#96;one&#96; returns a multiplicative</span>
+            <span class='code'>        if isa&#40;excurly, Int&#41;</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3229,7 +3229,7 @@
           <td>
             
             
-            <span class='code'>identity for any &#96;x&#96; of type &#96;T&#96;.</span>
+            <span class='code'>            return Symbol&#40;ex.args&#91;1&#93;::Symbol, excurly&#41;</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3239,7 +3239,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        else</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3249,7 +3249,7 @@
           <td>
             
             
-            <span class='code'>If possible, &#96;one&#40;x&#41;&#96; returns a value of the same type as &#96;x&#96;,</span>
+            <span class='code'>            ex.args&#91;2&#93; &#61; excurly</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3259,7 +3259,7 @@
           <td>
             
             
-            <span class='code'>and &#96;one&#40;T&#41;&#96; returns a value of type &#96;T&#96;.  However, this may</span>
+            <span class='code'>            return ex</span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3269,7 +3269,7 @@
           <td>
             
             
-            <span class='code'>not be the case for types representing dimensionful quantities</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3279,7 +3279,7 @@
           <td>
             
             
-            <span class='code'>&#40;e.g. time in days&#41;, since the multiplicative</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3289,7 +3289,7 @@
           <td>
             
             
-            <span class='code'>identity must be dimensionless.  In that case, &#96;one&#40;x&#41;&#96;</span>
+            <span class='code'>    for i in 1:length&#40;ex.args&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3299,7 +3299,7 @@
           <td>
             
             
-            <span class='code'>should return an identity value of the same precision</span>
+            <span class='code'>        ex.args&#91;i&#93; &#61; lreplace&#33;&#40;ex.args&#91;i&#93;, r&#41;</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3309,7 +3309,7 @@
           <td>
             
             
-            <span class='code'>&#40;and shape, for matrices&#41; as &#96;x&#96;.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3319,7 +3319,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ex</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3329,7 +3329,7 @@
           <td>
             
             
-            <span class='code'>If you want a quantity that is of the same type as &#96;x&#96;, or of type &#96;T&#96;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3339,7 +3339,7 @@
           <td>
             
             
-            <span class='code'>even if &#96;x&#96; is dimensionful, use &#91;&#96;oneunit&#96;&#93;&#40;@ref&#41; instead.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3349,7 +3349,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>lreplace&#33;&#40;arg, r::LReplace&#41; &#61; arg</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3359,7 +3359,7 @@
           <td>
             
             
-            <span class='code'>See also the &#91;&#96;identity&#96;&#93;&#40;@ref&#41; function,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3369,7 +3369,7 @@
           <td>
             
             
-            <span class='code'>and &#96;I&#96; in &#91;&#96;LinearAlgebra&#96;&#93;&#40;@ref man-linalg&#41; for the identity matrix.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3379,7 +3379,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>poplinenum&#40;arg&#41; &#61; arg</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3389,7 +3389,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>function poplinenum&#40;ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3399,7 +3399,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    if ex.head &#61;&#61;&#61; :block</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3409,7 +3409,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; one&#40;3.7&#41;</span>
+            <span class='code'>        if length&#40;ex.args&#41; &#61;&#61; 1</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3419,7 +3419,7 @@
           <td>
             
             
-            <span class='code'>1.0</span>
+            <span class='code'>            return ex.args&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3429,7 +3429,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        elseif length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, LineNumberNode&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3439,7 +3439,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; one&#40;Int&#41;</span>
+            <span class='code'>            return ex.args&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3449,7 +3449,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>        elseif &#40;length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, Expr&#41; &amp;&amp; ex.args&#91;1&#93;.head &#61;&#61;&#61; :line&#41;</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3459,7 +3459,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            return ex.args&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3469,7 +3469,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; import Dates; one&#40;Dates.Day&#40;1&#41;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3479,7 +3479,7 @@
           <td>
             
             
-            <span class='code'>1</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3489,7 +3489,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    ex</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3499,7 +3499,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3509,7 +3509,7 @@
           <td>
             
             
-            <span class='code'>one&#40;::Type&#123;T&#125;&#41; where &#123;T&lt;:Number&#125; &#61; convert&#40;T,1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3519,7 +3519,7 @@
           <td>
             
             
-            <span class='code'>one&#40;x::T&#41; where &#123;T&lt;:Number&#125; &#61; one&#40;T&#41;</span>
+            <span class='code'>## Resolve expressions at parsing time ##</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3529,7 +3529,7 @@
           <td>
             
             
-            <span class='code'>one&#40;::Type&#123;Union&#123;&#125;&#125;, slurp...&#41; &#61; Union&#123;&#125;&#40;1&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3539,7 +3539,7 @@
           <td>
             
             
-            <span class='code'># note that convert&#40;T, 1&#41; should throw an error if T is dimensionful,</span>
+            <span class='code'>const exprresolve_arith_dict &#61; Dict&#123;Symbol,Function&#125;&#40;:&#43; &#61;&gt; &#43;,</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3549,7 +3549,7 @@
           <td>
             
             
-            <span class='code'># so this fallback definition should be okay.</span>
+            <span class='code'>    :- &#61;&gt; -, :* &#61;&gt; *, :/ &#61;&gt; /, :^ &#61;&gt; ^, :div &#61;&gt; div&#41;</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3559,7 +3559,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const exprresolve_cond_dict &#61; Dict&#123;Symbol,Function&#125;&#40;:&#40;&#61;&#61;&#41; &#61;&gt; &#61;&#61;,</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3569,7 +3569,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    :&#40;&lt;&#41; &#61;&gt; &lt;, :&#40;&gt;&#41; &#61;&gt; &gt;, :&#40;&lt;&#61;&#41; &#61;&gt; &lt;&#61;, :&#40;&gt;&#61;&#41; &#61;&gt; &gt;&#61;&#41;</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3579,7 +3579,7 @@
           <td>
             
             
-            <span class='code'>    oneunit&#40;x::T&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3589,7 +3589,7 @@
           <td>
             
             
-            <span class='code'>    oneunit&#40;T::Type&#41;</span>
+            <span class='code'>function exprresolve_arith&#40;ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3599,7 +3599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if ex.head &#61;&#61;&#61; :call</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3609,7 +3609,7 @@
           <td>
             
             
-            <span class='code'>Return &#96;T&#40;one&#40;x&#41;&#41;&#96;, where &#96;T&#96; is either the type of the argument or</span>
+            <span class='code'>        callee &#61; ex.args&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3619,7 +3619,7 @@
           <td>
             
             
-            <span class='code'>&#40;if a type is passed&#41; the argument.  This differs from &#91;&#96;one&#96;&#93;&#40;@ref&#41; for</span>
+            <span class='code'>        if isa&#40;callee, Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3629,7 +3629,7 @@
           <td>
             
             
-            <span class='code'>dimensionful quantities: &#96;one&#96; is dimensionless &#40;a multiplicative identity&#41;</span>
+            <span class='code'>            if haskey&#40;exprresolve_arith_dict, callee&#41; &amp;&amp; all&#40;Bool&#91;isa&#40;ex.args&#91;i&#93;, Number&#41; for i &#61; 2:length&#40;ex.args&#41;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3639,7 +3639,7 @@
           <td>
             
             
-            <span class='code'>while &#96;oneunit&#96; is dimensionful &#40;of the same type as &#96;x&#96;, or of type &#96;T&#96;&#41;.</span>
+            <span class='code'>                return true, exprresolve_arith_dict&#91;callee&#93;&#40;ex.args&#91;2:end&#93;...&#41;</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3649,7 +3649,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3659,7 +3659,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3669,7 +3669,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3679,7 +3679,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; oneunit&#40;3.7&#41;</span>
+            <span class='code'>    false, 0</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3689,7 +3689,7 @@
           <td>
             
             
-            <span class='code'>1.0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3699,7 +3699,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>exprresolve_arith&#40;arg&#41; &#61; false, 0</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3709,7 +3709,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; import Dates; oneunit&#40;Dates.Day&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3719,7 +3719,7 @@
           <td>
             
             
-            <span class='code'>1 day</span>
+            <span class='code'>exprresolve_conditional&#40;b::Bool&#41; &#61; true, b</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3729,7 +3729,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>function exprresolve_conditional&#40;ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3739,7 +3739,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if ex.head &#61;&#61;&#61; :call</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3749,7 +3749,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;x::T&#41; where &#123;T&#125; &#61; T&#40;one&#40;x&#41;&#41;</span>
+            <span class='code'>        callee &#61; ex.args&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3759,7 +3759,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;::Type&#123;T&#125;&#41; where &#123;T&#125; &#61; T&#40;one&#40;T&#41;&#41;</span>
+            <span class='code'>        if isa&#40;callee, Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3769,7 +3769,7 @@
           <td>
             
             
-            <span class='code'>oneunit&#40;::Type&#123;Union&#123;&#125;&#125;, slurp...&#41; &#61; Union&#123;&#125;&#40;1&#41;</span>
+            <span class='code'>            if callee ∈ keys&#40;exprresolve_cond_dict&#41; &amp;&amp; isa&#40;ex.args&#91;2&#93;, Number&#41; &amp;&amp; isa&#40;ex.args&#91;3&#93;, Number&#41;</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3779,7 +3779,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                return true, exprresolve_cond_dict&#91;callee&#93;&#40;ex.args&#91;2&#93;, ex.args&#91;3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3789,7 +3789,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3799,7 +3799,7 @@
           <td>
             
             
-            <span class='code'>    big&#40;T::Type&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3809,7 +3809,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3819,7 +3819,7 @@
           <td>
             
             
-            <span class='code'>Compute the type that represents the numeric type &#96;T&#96; with arbitrary precision.</span>
+            <span class='code'>    false, false</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3829,7 +3829,7 @@
           <td>
             
             
-            <span class='code'>Equivalent to &#96;typeof&#40;big&#40;zero&#40;T&#41;&#41;&#41;&#96;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3839,7 +3839,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>exprresolve_conditional&#40;arg&#41; &#61; false, false</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3849,7 +3849,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3859,7 +3859,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>exprresolve&#40;arg&#41; &#61; arg</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3869,7 +3869,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; big&#40;Rational&#41;</span>
+            <span class='code'>function exprresolve&#40;ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3879,7 +3879,7 @@
           <td>
             
             
-            <span class='code'>Rational&#123;BigInt&#125;</span>
+            <span class='code'>    for i &#61; 1:length&#40;ex.args&#41;</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3889,7 +3889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        ex.args&#91;i&#93; &#61; exprresolve&#40;ex.args&#91;i&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3899,7 +3899,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; big&#40;Float64&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3909,7 +3909,7 @@
           <td>
             
             
-            <span class='code'>BigFloat</span>
+            <span class='code'>    # Handle simple arithmetic</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3919,7 +3919,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    can_eval, result &#61; exprresolve_arith&#40;ex&#41;</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3929,7 +3929,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; big&#40;Complex&#123;Int&#125;&#41;</span>
+            <span class='code'>    if can_eval</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3939,7 +3939,7 @@
           <td>
             
             
-            <span class='code'>Complex&#123;BigInt&#125;</span>
+            <span class='code'>        return result</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3949,7 +3949,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    elseif ex.head &#61;&#61;&#61; :call &amp;&amp; &#40;ex.args&#91;1&#93; &#61;&#61;&#61; :&#43; || ex.args&#91;1&#93; &#61;&#61;&#61; :-&#41; &amp;&amp; length&#40;ex.args&#41; &#61;&#61; 3 &amp;&amp; ex.args&#91;3&#93; &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3959,7 +3959,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        # simplify x&#43;0 and x-0</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3969,7 +3969,7 @@
           <td>
             
             
-            <span class='code'>big&#40;::Type&#123;T&#125;&#41; where &#123;T&lt;:Number&#125; &#61; typeof&#40;big&#40;zero&#40;T&#41;&#41;&#41;</span>
+            <span class='code'>        return ex.args&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3979,7 +3979,207 @@
           <td>
             
             
-            <span class='code'>big&#40;::Type&#123;Union&#123;&#125;&#125;, slurp...&#41; &#61; Union&#123;&#125;&#40;0&#41;</span>
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L395'>
+          <td class='lineno'>395</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Resolve array references</span>
+          </td>
+        </tr>
+        <tr id='L396'>
+          <td class='lineno'>396</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :ref &amp;&amp; isa&#40;ex.args&#91;1&#93;, Array&#41;</span>
+          </td>
+        </tr>
+        <tr id='L397'>
+          <td class='lineno'>397</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        for i &#61; 2:length&#40;ex.args&#41;</span>
+          </td>
+        </tr>
+        <tr id='L398'>
+          <td class='lineno'>398</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if &#33;isa&#40;ex.args&#91;i&#93;, Real&#41;</span>
+          </td>
+        </tr>
+        <tr id='L399'>
+          <td class='lineno'>399</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                return ex</span>
+          </td>
+        </tr>
+        <tr id='L400'>
+          <td class='lineno'>400</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L401'>
+          <td class='lineno'>401</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L402'>
+          <td class='lineno'>402</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return ex.args&#91;1&#93;&#91;ex.args&#91;2:end&#93;...&#93;</span>
+          </td>
+        </tr>
+        <tr id='L403'>
+          <td class='lineno'>403</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L404'>
+          <td class='lineno'>404</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Resolve conditionals</span>
+          </td>
+        </tr>
+        <tr id='L405'>
+          <td class='lineno'>405</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :if</span>
+          </td>
+        </tr>
+        <tr id='L406'>
+          <td class='lineno'>406</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        can_eval, tf &#61; exprresolve_conditional&#40;ex.args&#91;1&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L407'>
+          <td class='lineno'>407</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if can_eval</span>
+          </td>
+        </tr>
+        <tr id='L408'>
+          <td class='lineno'>408</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            ex &#61; tf ? ex.args&#91;2&#93; : ex.args&#91;3&#93;</span>
+          </td>
+        </tr>
+        <tr id='L409'>
+          <td class='lineno'>409</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L410'>
+          <td class='lineno'>410</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L411'>
+          <td class='lineno'>411</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    ex</span>
+          </td>
+        </tr>
+        <tr id='L412'>
+          <td class='lineno'>412</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L413'>
+          <td class='lineno'>413</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L414'>
+          <td class='lineno'>414</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>
