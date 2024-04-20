@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/methodshow.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/special/exp.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sat, 20 Apr 2024 22:32:07
+        Generated on Sat, 20 Apr 2024 23:39:54
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'># Method and method table pretty-printing</span>
+            <span class='code'># magic rounding constant: 1.5*2^52 Adding, then subtracting it from a float rounds it to an Int.</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># This works because eps&#40;MAGIC_ROUND_CONST&#40;T&#41;&#41; &#61;&#61; one&#40;T&#41;, so adding it to a smaller number aligns the lsb to the 1s place.</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>const empty_sym &#61; Symbol&#40;&quot;&quot;&#41;</span>
+            <span class='code'># Values for which this trick doesn&#39;t work are going to have outputs of 0 or Inf.</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>function strip_gensym&#40;sym&#41;</span>
+            <span class='code'>MAGIC_ROUND_CONST&#40;::Type&#123;Float64&#125;&#41; &#61; 6.755399441055744e15</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    if sym &#61;&#61;&#61; :var&quot;#self#&quot; || sym &#61;&#61;&#61; :var&quot;#unused#&quot;</span>
+            <span class='code'>MAGIC_ROUND_CONST&#40;::Type&#123;Float32&#125;&#41; &#61; 1.048576f7</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>        return empty_sym</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># max, min, and subnormal arguments</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>    return Symbol&#40;replace&#40;String&#40;sym&#41;, r&quot;^&#40;.*&#41;#&#40;.*#&#41;?\d&#43;&#36;&quot;sa &#61;&gt; s&quot;\1&quot;&#41;&#41;</span>
+            <span class='code'># max_exp &#61; T&#40;exponent_bias&#40;T&#41;*log&#40;base, big&#40;2&#41;&#41; &#43; log&#40;base, 2 - big&#40;2.0&#41;^-significand_bits&#40;T&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>MAX_EXP&#40;n::Val&#123;2&#125;, ::Type&#123;Float32&#125;&#41; &#61; 128.0f0</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>MAX_EXP&#40;n::Val&#123;2&#125;, ::Type&#123;Float64&#125;&#41; &#61; 1024.0</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>function argtype_decl&#40;env, n, @nospecialize&#40;sig::DataType&#41;, i::Int, nargs, isva::Bool&#41; # -&gt; &#40;argname, argtype&#41;</span>
+            <span class='code'>MAX_EXP&#40;n::Val&#123;:ℯ&#125;, ::Type&#123;Float32&#125;&#41; &#61; 88.72284f0</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>    t &#61; unwrapva&#40;sig.parameters&#91;min&#40;i, end&#41;&#93;&#41;</span>
+            <span class='code'>MAX_EXP&#40;n::Val&#123;:ℯ&#125;, ::Type&#123;Float64&#125;&#41; &#61; 709.7827128933841</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    if i &#61;&#61; nargs &amp;&amp; isva</span>
+            <span class='code'>MAX_EXP&#40;n::Val&#123;10&#125;, ::Type&#123;Float32&#125;&#41; &#61; 38.53184f0</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>        va &#61; sig.parameters&#91;end&#93;</span>
+            <span class='code'>MAX_EXP&#40;n::Val&#123;10&#125;, ::Type&#123;Float64&#125;&#41; &#61; 308.25471555991675</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>        if isvarargtype&#40;va&#41; &amp;&amp; &#40;&#33;isdefined&#40;va, :N&#41; || &#33;isa&#40;va.N, Int&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>            t &#61; va</span>
+            <span class='code'># min_exp &#61; T&#40;-&#40;exponent_bias&#40;T&#41;&#43;significand_bits&#40;T&#41;&#41; * log&#40;base, big&#40;2&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>MIN_EXP&#40;n::Val&#123;2&#125;, ::Type&#123;Float32&#125;&#41; &#61; -150.0f0</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>            ntotal &#61; length&#40;sig.parameters&#41;</span>
+            <span class='code'>MIN_EXP&#40;n::Val&#123;2&#125;, ::Type&#123;Float64&#125;&#41; &#61; -1075.0</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>            isvarargtype&#40;va&#41; &amp;&amp; &#40;ntotal &#43;&#61; va.N - 1&#41;</span>
+            <span class='code'>MIN_EXP&#40;n::Val&#123;:ℯ&#125;, ::Type&#123;Float32&#125;&#41; &#61; -103.97208f0</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>            t &#61; Vararg&#123;t,ntotal-nargs&#43;1&#125;</span>
+            <span class='code'>MIN_EXP&#40;n::Val&#123;:ℯ&#125;, ::Type&#123;Float64&#125;&#41; &#61; -745.1332191019412</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>MIN_EXP&#40;n::Val&#123;10&#125;, ::Type&#123;Float32&#125;&#41; &#61; -45.1545f0</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>MIN_EXP&#40;n::Val&#123;10&#125;, ::Type&#123;Float64&#125;&#41; &#61; -323.60724533877976</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>    if isa&#40;n,Expr&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>        n &#61; n.args&#91;1&#93;  # handle n::T in arg list</span>
+            <span class='code'># subnorm_exp &#61; abs&#40;log&#40;base, floatmin&#40;T&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># these vals are positive since it&#39;s easier to take abs&#40;x&#41; than -abs&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; strip_gensym&#40;n&#41;</span>
+            <span class='code'>SUBNORM_EXP&#40;n::Val&#123;2&#125;, ::Type&#123;Float32&#125;&#41; &#61; 126.00001f0</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>    local s</span>
+            <span class='code'>SUBNORM_EXP&#40;n::Val&#123;2&#125;, ::Type&#123;Float64&#125;&#41; &#61; 1022.0</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>    if n &#61;&#61;&#61; empty_sym</span>
+            <span class='code'>SUBNORM_EXP&#40;n::Val&#123;:ℯ&#125;, ::Type&#123;Float32&#125;&#41; &#61; 87.33655f0</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>        s &#61; &quot;&quot;</span>
+            <span class='code'>SUBNORM_EXP&#40;n::Val&#123;:ℯ&#125;, ::Type&#123;Float64&#125;&#41; &#61; 708.3964185322641</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>SUBNORM_EXP&#40;n::Val&#123;10&#125;, ::Type&#123;Float32&#125;&#41; &#61; 37.92978f0</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>        s &#61; sprint&#40;show_sym, n&#41;</span>
+            <span class='code'>SUBNORM_EXP&#40;n::Val&#123;10&#125;, ::Type&#123;Float64&#125;&#41; &#61; 307.6526555685887</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>        t &#61;&#61;&#61; Any &amp;&amp; return s, &quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># 256/log&#40;base, 2&#41; &#40;For Float64 reductions&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    if isvarargtype&#40;t&#41;</span>
+            <span class='code'>LogBo256INV&#40;::Val&#123;2&#125;, ::Type&#123;Float64&#125;&#41; &#61; 256.0</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;isdefined&#40;t, :N&#41;</span>
+            <span class='code'>LogBo256INV&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float64&#125;&#41; &#61; 369.3299304675746</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>            if unwrapva&#40;t&#41; &#61;&#61;&#61; Any</span>
+            <span class='code'>LogBo256INV&#40;::Val&#123;10&#125;, ::Type&#123;Float64&#125;&#41; &#61; 850.4135922911647</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>                return string&#40;s, &quot;...&quot;&#41;, &quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'># -log&#40;base, 2&#41;/256 in upper and lower bits</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>                return s, string_with_env&#40;env, unwrapva&#40;t&#41;&#41; * &quot;...&quot;</span>
+            <span class='code'># Upper is truncated to only have 34 bits of significand since N has at most</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'># ceil&#40;log2&#40;-MIN_EXP&#40;base, Float64&#41;*LogBo256INV&#40;Val&#40;2&#41;, Float64&#41;&#41;&#41; &#61; 19 bits.</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'># This ensures no rounding when multiplying LogBo256U*N for FMAless hardware</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>        return s, string_with_env&#40;env, &quot;Vararg&#123;&quot;, t.T, &quot;, &quot;, t.N, &quot;&#125;&quot;&#41;</span>
+            <span class='code'>LogBo256U&#40;::Val&#123;2&#125;, ::Type&#123;Float64&#125;&#41; &#61; -0.00390625</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>LogBo256U&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float64&#125;&#41; &#61; -0.002707606173999011</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    return s, string_with_env&#40;env, t&#41;</span>
+            <span class='code'>LogBo256U&#40;::Val&#123;10&#125;, ::Type&#123;Float64&#125;&#41; &#61; -0.0011758984204561784</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>LogBo256L&#40;::Val&#123;2&#125;, ::Type&#123;Float64&#125;&#41; &#61; 0.0</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>LogBo256L&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float64&#125;&#41; &#61; -6.327543041662719e-14</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>function method_argnames&#40;m::Method&#41;</span>
+            <span class='code'>LogBo256L&#40;::Val&#123;10&#125;, ::Type&#123;Float64&#125;&#41; &#61; -1.0624811566412999e-13</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    argnames &#61; ccall&#40;:jl_uncompress_argnames, Vector&#123;Symbol&#125;, &#40;Any,&#41;, m.slot_syms&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>    isempty&#40;argnames&#41; &amp;&amp; return argnames</span>
+            <span class='code'># 1/log&#40;base, 2&#41; &#40;For Float32 reductions&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>    return argnames&#91;1:m.nargs&#93;</span>
+            <span class='code'>LogBINV&#40;::Val&#123;2&#125;, ::Type&#123;Float32&#125;&#41; &#61; 1.0f0</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>LogBINV&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float32&#125;&#41; &#61; 1.442695f0</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>LogBINV&#40;::Val&#123;10&#125;, ::Type&#123;Float32&#125;&#41; &#61; 3.321928f0</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>function arg_decl_parts&#40;m::Method, html&#61;false&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>    tv &#61; Any&#91;&#93;</span>
+            <span class='code'># -log&#40;base, 2&#41; in upper and lower bits</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>    sig &#61; m.sig</span>
+            <span class='code'># Upper is truncated to only have 16 bits of significand since N has at most</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>    while isa&#40;sig, UnionAll&#41;</span>
+            <span class='code'># ceil&#40;log2&#40;-MIN_EXP&#40;n, Float32&#41;*LogBINV&#40;Val&#40;2&#41;, Float32&#41;&#41;&#41; &#61; 8 bits.</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>        push&#33;&#40;tv, sig.var&#41;</span>
+            <span class='code'># This ensures no rounding when multiplying LogBU*N for FMAless hardware</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>        sig &#61; sig.body</span>
+            <span class='code'>LogBU&#40;::Val&#123;2&#125;, ::Type&#123;Float32&#125;&#41; &#61; -1.0f0</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>LogBU&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float32&#125;&#41; &#61; -0.69314575f0</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>    file, line &#61; updated_methodloc&#40;m&#41;</span>
+            <span class='code'>LogBU&#40;::Val&#123;10&#125;, ::Type&#123;Float32&#125;&#41; &#61; -0.3010254f0</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>    argnames &#61; method_argnames&#40;m&#41;</span>
+            <span class='code'>LogBL&#40;::Val&#123;2&#125;, ::Type&#123;Float32&#125;&#41; &#61; 0.0f0</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;argnames&#41; &gt;&#61; m.nargs</span>
+            <span class='code'>LogBL&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float32&#125;&#41; &#61; -1.4286068f-6</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>        show_env &#61; ImmutableDict&#123;Symbol, Any&#125;&#40;&#41;</span>
+            <span class='code'>LogBL&#40;::Val&#123;10&#125;, ::Type&#123;Float32&#125;&#41; &#61; -4.605039f-6</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>        for t in tv</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>            show_env &#61; ImmutableDict&#40;show_env, :unionall_env &#61;&gt; t&#41;</span>
+            <span class='code'># -log&#40;base, 2&#41; as a Float32 for Float16 version.</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>LogB&#40;::Val&#123;2&#125;, ::Type&#123;Float16&#125;&#41; &#61; -1.0f0</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>        decls &#61; Tuple&#123;String,String&#125;&#91;argtype_decl&#40;show_env, argnames&#91;i&#93;, sig, i, m.nargs, m.isva&#41;</span>
+            <span class='code'>LogB&#40;::Val&#123;:ℯ&#125;, ::Type&#123;Float16&#125;&#41; &#61; -0.6931472f0</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>                    for i &#61; 1:m.nargs&#93;</span>
+            <span class='code'>LogB&#40;::Val&#123;10&#125;, ::Type&#123;Float16&#125;&#41; &#61; -0.30103f0</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>        decls&#91;1&#93; &#61; &#40;&quot;&quot;, sprint&#40;show_signature_function, unwrapva&#40;sig.parameters&#91;1&#93;&#41;, false, decls&#91;1&#93;&#91;1&#93;, html,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>                               context &#61; show_env&#41;&#41;</span>
+            <span class='code'># Range reduced kernels</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>function expm1b_kernel&#40;::Val&#123;2&#125;, x::Float64&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>        decls &#61; Tuple&#123;String,String&#125;&#91;&#40;&quot;&quot;, &quot;&quot;&#41; for i &#61; 1:length&#40;sig.parameters::SimpleVector&#41;&#93;</span>
+            <span class='code'>    return x * evalpoly&#40;x, &#40;0.6931471805599393, 0.24022650695910058,</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                            0.05550411502333161, 0.009618129548366803&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>    return tv, decls, file, line</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function expm1b_kernel&#40;::Val&#123;:ℯ&#125;, x::Float64&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return x * evalpoly&#40;x, &#40;0.9999999999999912, 0.4999999999999997,</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'># NOTE: second argument is deprecated and is no longer used</span>
+            <span class='code'>                            0.1666666857598779, 0.04166666857598777&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>function kwarg_decl&#40;m::Method, kwtype &#61; nothing&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>    if m.sig &#33;&#61;&#61; Tuple # OpaqueClosure or Builtin</span>
+            <span class='code'>function expm1b_kernel&#40;::Val&#123;10&#125;, x::Float64&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>        kwtype &#61; typeof&#40;Core.kwcall&#41;</span>
+            <span class='code'>    return x * evalpoly&#40;x, &#40;2.3025850929940255, 2.6509490552391974,</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>        sig &#61; rewrap_unionall&#40;Tuple&#123;kwtype, NamedTuple, &#40;unwrap_unionall&#40;m.sig&#41;::DataType&#41;.parameters...&#125;, m.sig&#41;</span>
+            <span class='code'>                            2.034678825384765, 1.1712552025835192&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'>        kwli &#61; ccall&#40;:jl_methtable_lookup, Any, &#40;Any, Any, UInt&#41;, kwtype.name.mt, sig, get_world_counter&#40;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>        if kwli &#33;&#61;&#61; nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,17 +885,31 @@
           <td>
             
             
-            <span class='code'>            kwli &#61; kwli::Method</span>
+            <span class='code'>function expb_kernel&#40;::Val&#123;2&#125;, x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
           <td class='lineno'>87</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            slotnames &#61; ccall&#40;:jl_uncompress_argnames, Vector&#123;Symbol&#125;, &#40;Any,&#41;, kwli.slot_syms&#41;</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in expb_kernel
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from exp_impl_fast
+              <a href='exp.jl-c67dddffae57131cd7be44f6ecc066c9dca99f82.html#L303'>line 303</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='math.jl-54e86873e015c5108e97738bea3c09630473a7c0.html#L186'>evalpoly</a>
+              <br />
+            </div>
+            <span class='code'>    return evalpoly&#40;x, &#40;1.0f0, 0.6931472f0, 0.2402265f0,</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>            kws &#61; filter&#40;x -&gt; &#33;&#40;x &#61;&#61;&#61; empty_sym || &#39;#&#39; in string&#40;x&#41;&#41;, slotnames&#91;&#40;kwli.nargs &#43; 1&#41;:end&#93;&#41;</span>
+            <span class='code'>                        0.05550411f0, 0.009618025f0,</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +929,7 @@
           <td>
             
             
-            <span class='code'>            # ensure the kwarg... is always printed last. The order of the arguments are not</span>
+            <span class='code'>                        0.0013333423f0, 0.00015469732f0, 1.5316464f-5&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>            # necessarily the same as defined in the function</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>            i &#61; findfirst&#40;x -&gt; endswith&#40;string&#40;x&#41;::String, &quot;...&quot;&#41;, kws&#41;</span>
+            <span class='code'>function expb_kernel&#40;::Val&#123;:ℯ&#125;, x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'>            if i &#33;&#61;&#61; nothing</span>
+            <span class='code'>    return evalpoly&#40;x, &#40;1.0f0, 1.0f0, 0.5f0, 0.16666667f0,</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>                push&#33;&#40;kws, kws&#91;i&#93;&#41;</span>
+            <span class='code'>                        0.041666217f0, 0.008333249f0,</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>                deleteat&#33;&#40;kws, i&#41;</span>
+            <span class='code'>                        0.001394858f0, 0.00019924171f0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'>            isempty&#40;kws&#41; &amp;&amp; push&#33;&#40;kws,  :var&quot;...&quot;&#41;</span>
+            <span class='code'>function expb_kernel&#40;::Val&#123;10&#125;, x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>            return kws</span>
+            <span class='code'>    return evalpoly&#40;x, &#40;1.0f0, 2.3025851f0, 2.650949f0,</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                        2.0346787f0, 1.1712426f0, 0.53937745f0,</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                        0.20788547f0, 0.06837386f0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1039,7 @@
           <td>
             
             
-            <span class='code'>    return Symbol&#91;&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1059,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Table stores data with 60 sig figs by using the fact that the first 12 bits of all the</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>function show_method_params&#40;io::IO, tv&#41;</span>
+            <span class='code'># values would be the same if stored as regular Float64.</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1079,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;tv&#41;</span>
+            <span class='code'># This only gains 8 bits since the least significant 4 bits of the exponent</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1089,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot; where &quot;&#41;</span>
+            <span class='code'># of the small part are not the same for all table entries</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1099,7 @@
           <td>
             
             
-            <span class='code'>        if length&#40;tv&#41; &#61;&#61; 1</span>
+            <span class='code'>const JU_MASK &#61; typemax&#40;UInt64&#41;&gt;&gt;12</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1109,7 @@
           <td>
             
             
-            <span class='code'>            show&#40;io, tv&#91;1&#93;&#41;</span>
+            <span class='code'>const JL_MASK &#61; typemax&#40;UInt64&#41;&gt;&gt;8</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1119,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>const JU_CONST &#61; 0x3FF0000000000000</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;&#123;&quot;&#41;</span>
+            <span class='code'>const JL_CONST &#61; 0x3C00000000000000</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1139,7 @@
           <td>
             
             
-            <span class='code'>            for i &#61; 1:length&#40;tv&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1149,7 @@
           <td>
             
             
-            <span class='code'>                if i &gt; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>                    print&#40;io, &quot;, &quot;&#41;</span>
+            <span class='code'>#function make_table&#40;size&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1169,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>#    t_array &#61; zeros&#40;UInt64, size&#41;;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1179,7 @@
           <td>
             
             
-            <span class='code'>                x &#61; tv&#91;i&#93;</span>
+            <span class='code'>#    for j in 1:size</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1189,7 @@
           <td>
             
             
-            <span class='code'>                show&#40;io, x&#41;</span>
+            <span class='code'>#        val &#61; 2.0^&#40;BigFloat&#40;j-1&#41;/size&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1199,7 @@
           <td>
             
             
-            <span class='code'>                io &#61; IOContext&#40;io, :unionall_env &#61;&gt; x&#41;</span>
+            <span class='code'>#        valU &#61; Float64&#40;val, RoundDown&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1209,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>#        valL &#61; Float64&#40;val-valU&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1219,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;&#125;&quot;&#41;</span>
+            <span class='code'>#        valU &#61; reinterpret&#40;UInt64, valU&#41; &amp; JU_MASK</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1229,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>#        valL &#61; &#40;&#40;reinterpret&#40;UInt64, valL&#41; &amp; JL_MASK&#41;&gt;&gt;44&#41;&lt;&lt;52</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1239,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>#        t_array&#91;j&#93; &#61; valU | valL</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1249,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>#    end</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1259,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>#    return Tuple&#40;t_array&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1269,7 @@
           <td>
             
             
-            <span class='code'># In case the line numbers in the source code have changed since the code was compiled,</span>
+            <span class='code'>#end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1279,7 @@
           <td>
             
             
-            <span class='code'># allow packages to set a callback function that corrects them.</span>
+            <span class='code'>#const J_TABLE &#61; make_table&#40;256&#41;;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1289,7 @@
           <td>
             
             
-            <span class='code'># &#40;Used by Revise and perhaps other packages.&#41;</span>
+            <span class='code'>const J_TABLE &#61; &#40;0x0000000000000000, 0xaac00b1afa5abcbe, 0x9b60163da9fb3335, 0xab502168143b0280, 0xadc02c9a3e778060,</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1299,7 @@
           <td>
             
             
-            <span class='code'># Any function &#96;f&#96; stored here must be consistent with the signature</span>
+            <span class='code'>                 0x656037d42e11bbcc, 0xa7a04315e86e7f84, 0x84c04e5f72f654b1, 0x8d7059b0d3158574, 0xa510650a0e3c1f88,</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1309,7 @@
           <td>
             
             
-            <span class='code'>#    f&#40;m::Method&#41;::Tuple&#123;Union&#123;Symbol,String&#125;, Union&#123;Int32,Int64&#125;&#125;</span>
+            <span class='code'>                 0xa8d0706b29ddf6dd, 0x83207bd42b72a836, 0x6180874518759bc8, 0xa4b092bdf66607df, 0x91409e3ecac6f383,</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1319,7 @@
           <td>
             
             
-            <span class='code'>const methodloc_callback &#61; Ref&#123;Union&#123;Function, Nothing&#125;&#125;&#40;nothing&#41;</span>
+            <span class='code'>                 0x85d0a9c79b1f3919, 0x98a0b5586cf9890f, 0x94f0c0f145e46c85, 0x9010cc922b7247f7, 0xa210d83b23395deb,</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1329,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                 0x4030e3ec32d3d1a2, 0xa5b0efa55fdfa9c4, 0xae40fb66affed31a, 0x8d41073028d7233e, 0xa4911301d0125b50,</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1339,7 @@
           <td>
             
             
-            <span class='code'>function fixup_stdlib_path&#40;path::String&#41;</span>
+            <span class='code'>                 0xa1a11edbab5e2ab5, 0xaf712abdc06c31cb, 0xae8136a814f204aa, 0xa661429aaea92ddf, 0xa9114e95934f312d,</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1349,7 @@
           <td>
             
             
-            <span class='code'>    # The file defining Base.Sys gets included after this file is included so make sure</span>
+            <span class='code'>                 0x82415a98c8a58e51, 0x58f166a45471c3c2, 0xab9172b83c7d517a, 0x70917ed48695bbc0, 0xa7718af9388c8de9,</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1359,7 @@
           <td>
             
             
-            <span class='code'>    # this function is valid even in this intermediary state</span>
+            <span class='code'>                 0x94a1972658375d2f, 0x8e51a35beb6fcb75, 0x97b1af99f8138a1c, 0xa351bbe084045cd3, 0x9001c82f95281c6b,</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>    if isdefined&#40;@__MODULE__, :Sys&#41;</span>
+            <span class='code'>                 0x9e01d4873168b9aa, 0xa481e0e75eb44026, 0xa711ed5022fcd91c, 0xa201f9c18438ce4c, 0x8dc2063b88628cd6,</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1379,7 @@
           <td>
             
             
-            <span class='code'>        BUILD_STDLIB_PATH &#61; Sys.BUILD_STDLIB_PATH::String</span>
+            <span class='code'>                 0x935212be3578a819, 0x82a21f49917ddc96, 0x8d322bdda27912d1, 0x99b2387a6e756238, 0x8ac2451ffb82140a,</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>        STDLIB &#61; Sys.STDLIB::String</span>
+            <span class='code'>                 0x8ac251ce4fb2a63f, 0x93e25e85711ece75, 0x82b26b4565e27cdd, 0x9e02780e341ddf29, 0xa2d284dfe1f56380,</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1399,7 @@
           <td>
             
             
-            <span class='code'>        if BUILD_STDLIB_PATH &#33;&#61; STDLIB</span>
+            <span class='code'>                 0xab4291ba7591bb6f, 0x86129e9df51fdee1, 0xa352ab8a66d10f12, 0xafb2b87fd0dad98f, 0xa572c57e39771b2e,</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1409,7 @@
           <td>
             
             
-            <span class='code'>            # BUILD_STDLIB_PATH gets defined in sysinfo.jl</span>
+            <span class='code'>                 0x9002d285a6e4030b, 0x9d12df961f641589, 0x71c2ecafa93e2f56, 0xaea2f9d24abd886a, 0x86f306fe0a31b715,</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,31 +1419,17 @@
           <td>
             
             
-            <span class='code'>            npath &#61; normpath&#40;path&#41;</span>
+            <span class='code'>                 0x89531432edeeb2fd, 0x8a932170fc4cd831, 0xa1d32eb83ba8ea31, 0x93233c08b26416ff, 0xab23496266e3fa2c,</span>
           </td>
         </tr>
         <tr id='L139'>
           <td class='lineno'>139</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in fixup_stdlib_path
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from macro expansion
-              <a href='logging.jl-f32bd25cdec29e497dc7d4d3516392b553213b4d.html#L397'>line 397</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='util.jl-4de0b09bc6c030dce1a846be883db9d16c289bfe.html#L847'>replace</a>
-              <br />
-            </div>
-            <span class='code'>            npath′ &#61; replace&#40;npath, normpath&#40;BUILD_STDLIB_PATH&#41; &#61;&gt; normpath&#40;STDLIB&#41;&#41;</span>
+            
+            
+            <span class='code'>                 0xa92356c55f929ff0, 0xa8f36431a2de883a, 0xa4e371a7373aa9ca, 0xa3037f26231e7549, 0xa0b38cae6d05d865,</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1439,7 +1439,7 @@
           <td>
             
             
-            <span class='code'>            return npath &#61;&#61; npath′ ? path : npath′</span>
+            <span class='code'>                 0xa3239a401b7140ee, 0xad43a7db34e59ff6, 0x9543b57fbfec6cf4, 0xa083c32dc313a8e4, 0x7fe3d0e544ede173,</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1449,7 +1449,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                 0x8ad3dea64c123422, 0xa943ec70df1c5174, 0xa413fa4504ac801b, 0x8bd40822c367a024, 0xaf04160a21f72e29,</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                 0xa3d423fb27094689, 0xab8431f5d950a896, 0x88843ffa3f84b9d4, 0x48944e086061892d, 0xae745c2042a7d231,</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1469,7 +1469,7 @@
           <td>
             
             
-            <span class='code'>    return path</span>
+            <span class='code'>                 0x9c946a41ed1d0057, 0xa1e4786d668b3236, 0x73c486a2b5c13cd0, 0xab1494e1e192aed1, 0x99c4a32af0d7d3de,</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1479,7 +1479,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                 0xabb4b17dea6db7d6, 0x7d44bfdad5362a27, 0x9054ce41b817c114, 0x98e4dcb299fddd0d, 0xa564eb2d81d8abfe,</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1489,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                 0xa5a4f9b2769d2ca6, 0x7a2508417f4531ee, 0xa82516daa2cf6641, 0xac65257de83f4eee, 0xabe5342b569d4f81,</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1499,7 @@
           <td>
             
             
-            <span class='code'># This function does the method location updating</span>
+            <span class='code'>                 0x879542e2f4f6ad27, 0xa8a551a4ca5d920e, 0xa7856070dde910d1, 0x99b56f4736b527da, 0xa7a57e27dbe2c4ce,</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1509,7 +1509,7 @@
           <td>
             
             
-            <span class='code'>function updated_methodloc&#40;m::Method&#41;::Tuple&#123;String, Int32&#125;</span>
+            <span class='code'>                 0x82958d12d497c7fd, 0xa4059c0827ff07cb, 0x9635ab07dd485429, 0xa245ba11fba87a02, 0x3c45c9268a5946b7,</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1519,7 +1519,7 @@
           <td>
             
             
-            <span class='code'>    file, line &#61; m.file, m.line</span>
+            <span class='code'>                 0xa195d84590998b92, 0x9ba5e76f15ad2148, 0xa985f6a320dceb70, 0xa60605e1b976dc08, 0x9e46152ae6cdf6f4,</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1529,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>    if methodloc_callback&#91;&#93; &#33;&#61;&#61; nothing</span>
+            <span class='code'>                 0xa636247eb03a5584, 0x984633dd1d1929fd, 0xa8e6434634ccc31f, 0xa28652b9febc8fb6, 0xa226623882552224,</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1539,7 +1539,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>                 0xa85671c1c70833f5, 0x60368155d44ca973, 0x880690f4b19e9538, 0xa216a09e667f3bcc, 0x7a36b052fa75173e,</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1549,7 +1549,7 @@
           <td>
             
             
-            <span class='code'>            file, line &#61; invokelatest&#40;methodloc_callback&#91;&#93;, m&#41;::Tuple&#123;Union&#123;Symbol,String&#125;, Union&#123;Int32,Int64&#125;&#125;</span>
+            <span class='code'>                 0xada6c012750bdabe, 0x9c76cfdcddd47645, 0xae46dfb23c651a2e, 0xa7a6ef9298593ae4, 0xa9f6ff7df9519483,</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1559,7 +1559,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>                 0x59d70f7466f42e87, 0xaba71f75e8ec5f73, 0xa6f72f8286ead089, 0xa7a73f9a48a58173, 0x90474fbd35d7cbfd,</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1569,7 +1569,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>                 0xa7e75feb564267c8, 0x9b777024b1ab6e09, 0x986780694fde5d3f, 0x934790b938ac1cf6, 0xaaf7a11473eb0186,</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1579,7 +1579,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                 0xa207b17b0976cfda, 0x9f17c1ed0130c132, 0x91b7d26a62ff86f0, 0x7057e2f336cf4e62, 0xabe7f3878491c490,</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1589,7 +1589,7 @@
           <td>
             
             
-            <span class='code'>    file &#61; fixup_stdlib_path&#40;string&#40;file&#41;&#41;</span>
+            <span class='code'>                 0xa6c80427543e1a11, 0x946814d2add106d9, 0xa1582589994cce12, 0x9998364c1eb941f7, 0xa9c8471a4623c7ac,</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1599,7 +1599,7 @@
           <td>
             
             
-            <span class='code'>    return file, Int32&#40;line&#41;</span>
+            <span class='code'>                 0xaf2857f4179f5b20, 0xa01868d99b4492ec, 0x85d879cad931a436, 0x99988ac7d98a6699, 0x9d589bd0a478580f,</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1609,7 +1609,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                 0x96e8ace5422aa0db, 0x9ec8be05bad61778, 0xade8cf3216b5448b, 0xa478e06a5e0866d8, 0x85c8f1ae99157736,</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1619,7 +1619,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                 0x959902fed0282c8a, 0xa119145b0b91ffc5, 0xab2925c353aa2fe1, 0xae893737b0cdc5e4, 0xa88948b82b5f98e4,</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1629,7 +1629,7 @@
           <td>
             
             
-            <span class='code'>functionloc&#40;m::Core.MethodInstance&#41; &#61; functionloc&#40;m.def&#41;</span>
+            <span class='code'>                 0xad395a44cbc8520e, 0xaf296bdd9a7670b2, 0xa1797d829fde4e4f, 0x7ca98f33e47a22a2, 0xa749a0f170ca07b9,</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1639,7 +1639,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                 0xa119b2bb4d53fe0c, 0x7c79c49182a3f090, 0xa579d674194bb8d4, 0x7829e86319e32323, 0xaad9fa5e8d07f29d,</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1649,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                 0xa65a0c667b5de564, 0x9c6a1e7aed8eb8bb, 0x963a309bec4a2d33, 0xa2aa42c980460ad7, 0xa16a5503b23e255c,</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1659,7 +1659,7 @@
           <td>
             
             
-            <span class='code'>    functionloc&#40;m::Method&#41;</span>
+            <span class='code'>                 0x650a674a8af46052, 0x9bca799e1330b358, 0xa58a8bfe53c12e58, 0x90fa9e6b5579fdbf, 0x889ab0e521356eba,</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1669,7 +1669,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                 0xa81ac36bbfd3f379, 0x97ead5ff3a3c2774, 0x97aae89f995ad3ad, 0xa5aafb4ce622f2fe, 0xa21b0e07298db665,</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1679,7 +1679,7 @@
           <td>
             
             
-            <span class='code'>Return a tuple &#96;&#40;filename,line&#41;&#96; giving the location of a &#96;Method&#96; definition.</span>
+            <span class='code'>                 0x94db20ce6c9a8952, 0xaedb33a2b84f15fa, 0xac1b468415b749b0, 0xa1cb59728de55939, 0x92ab6c6e29f1c52a,</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1689,7 +1689,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                 0xad5b7f76f2fb5e46, 0xa24b928cf22749e3, 0xa08ba5b030a10649, 0xafcbb8e0b79a6f1e, 0x823bcc1e904bc1d2,</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1699,7 +1699,7 @@
           <td>
             
             
-            <span class='code'>function functionloc&#40;m::Method&#41;</span>
+            <span class='code'>                 0xafcbdf69c3f3a206, 0xa08bf2c25bd71e08, 0xa89c06286141b33c, 0x811c199bdd85529c, 0xa48c2d1cd9fa652b,</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1709,7 +1709,7 @@
           <td>
             
             
-            <span class='code'>    file, ln &#61; updated_methodloc&#40;m&#41;</span>
+            <span class='code'>                 0x9b4c40ab5fffd07a, 0x912c544778fafb22, 0x928c67f12e57d14b, 0xa86c7ba88988c932, 0x71ac8f6d9406e7b5,</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1719,7 +1719,7 @@
           <td>
             
             
-            <span class='code'>    if ln &lt;&#61; 0</span>
+            <span class='code'>                 0xaa0ca3405751c4da, 0x750cb720dcef9069, 0xac5ccb0f2e6d1674, 0xa88cdf0b555dc3f9, 0xa2fcf3155b5bab73,</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1729,7 +1729,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;could not determine location of method definition&quot;&#41;</span>
+            <span class='code'>                 0xa1ad072d4a07897b, 0x955d1b532b08c968, 0xa15d2f87080d89f1, 0x93dd43c8eacaa1d6, 0x82ed5818dcfba487,</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1739,7 +1739,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>                 0x5fed6c76e862e6d3, 0xa77d80e316c98397, 0x9a0d955d71ff6075, 0x9c2da9e603db3285, 0xa24dbe7cd63a8314,</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1749,7 +1749,7 @@
           <td>
             
             
-            <span class='code'>    return &#40;find_source_file&#40;string&#40;file&#41;&#41;, ln&#41;</span>
+            <span class='code'>                 0x92ddd321f301b460, 0xa1ade7d5641c0657, 0xa72dfc97337b9b5e, 0xadae11676b197d16, 0xa42e264614f5a128,</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1759,7 +1759,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                 0xa30e3b333b16ee11, 0x839e502ee78b3ff6, 0xaa7e653924676d75, 0x92de7a51fbc74c83, 0xa77e8f7977cdb73f,</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1769,7 +1769,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                 0xa0bea4afa2a490d9, 0x948eb9f4867cca6e, 0xa1becf482d8e67f0, 0x91cee4aaa2188510, 0x9dcefa1bee615a27,</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1779,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                 0xa66f0f9c1cb64129, 0x93af252b376bba97, 0xacdf3ac948dd7273, 0x99df50765b6e4540, 0x9faf6632798844f8,</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1789,7 +1789,7 @@
           <td>
             
             
-            <span class='code'>    functionloc&#40;f::Function, types&#41;</span>
+            <span class='code'>                 0xa12f7bfdad9cbe13, 0xaeef91d802243c88, 0x874fa7c1819e90d8, 0xacdfbdba3692d513, 0x62efd3c22b8f71f1, 0x74afe9d96b2a23d9&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1809,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>Return a tuple &#96;&#40;filename,line&#41;&#96; giving the location of a generic &#96;Function&#96; definition.</span>
+            <span class='code'># :nothrow needed since the compiler can&#39;t prove &#96;ind&#96; is inbounds.</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1819,7 +1819,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>Base.@assume_effects :nothrow function table_unpack&#40;ind::Int32&#41;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1829,7 +1829,7 @@
           <td>
             
             
-            <span class='code'>functionloc&#40;@nospecialize&#40;f&#41;, @nospecialize&#40;types&#41;&#41; &#61; functionloc&#40;which&#40;f,types&#41;&#41;</span>
+            <span class='code'>    ind &#61; ind &amp; 255 &#43; 1 # 255 &#61;&#61; length&#40;J_TABLE&#41; - 1</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1839,7 +1839,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    j &#61; getfield&#40;J_TABLE, ind&#41; # use getfield so the compiler can prove consistent</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1849,7 +1849,7 @@
           <td>
             
             
-            <span class='code'>function functionloc&#40;@nospecialize&#40;f&#41;&#41;</span>
+            <span class='code'>    jU &#61; reinterpret&#40;Float64, JU_CONST | &#40;j&amp;JU_MASK&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1859,7 +1859,7 @@
           <td>
             
             
-            <span class='code'>    mt &#61; methods&#40;f&#41;</span>
+            <span class='code'>    jL &#61; reinterpret&#40;Float64, JL_CONST | &#40;j&gt;&gt;8&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1869,7 +1869,7 @@
           <td>
             
             
-            <span class='code'>    if isempty&#40;mt&#41;</span>
+            <span class='code'>    return jU, jL</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1879,7 +1879,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;f, Function&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1889,7 +1889,7 @@
           <td>
             
             
-            <span class='code'>            error&#40;&quot;function has no definitions&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1899,7 +1899,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'># Method for Float64</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1909,7 +1909,7 @@
           <td>
             
             
-            <span class='code'>            error&#40;&quot;object is not callable&quot;&#41;</span>
+            <span class='code'># 1. Argument reduction: Reduce x to an r so that |r| &lt;&#61; log&#40;b, 2&#41;/512. Given x, base b,</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1919,7 +1919,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>#    find r and integers k, j such that</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1929,7 +1929,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>#       x &#61; &#40;k &#43; j/256&#41;*log&#40;b, 2&#41; &#43; r,  0 &lt;&#61; j &lt; 256, |r| &lt;&#61; log&#40;b,2&#41;/512.</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1939,7 +1939,7 @@
           <td>
             
             
-            <span class='code'>    if length&#40;mt&#41; &gt; 1</span>
+            <span class='code'>#</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1949,7 +1949,7 @@
           <td>
             
             
-            <span class='code'>        error&#40;&quot;function has multiple methods; please specify a type signature&quot;&#41;</span>
+            <span class='code'># 2. Approximate b^r-1 by 3rd-degree minimax polynomial p_b&#40;r&#41; on the interval &#91;-log&#40;b,2&#41;/512, log&#40;b,2&#41;/512&#93;.</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1959,7 +1959,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>#    Since the bounds on r are very tight, this is sufficient to be accurate to floating point epsilon.</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1969,7 +1969,7 @@
           <td>
             
             
-            <span class='code'>    return functionloc&#40;first&#40;mt&#41;&#41;</span>
+            <span class='code'>#</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1979,7 +1979,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># 3. Scale back: b^x &#61; 2^k * 2^&#40;j/256&#41; * &#40;1 &#43; p_b&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1989,7 +1989,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>#    Since the range of possible j is small, 2^&#40;j/256&#41; is stored for all possible values in slightly extended precision.</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1999,7 +1999,7 @@
           <td>
             
             
-            <span class='code'>function sym_to_string&#40;sym&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2009,7 +2009,7 @@
           <td>
             
             
-            <span class='code'>    if sym &#61;&#61;&#61; :var&quot;...&quot;</span>
+            <span class='code'># Method for Float32</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2019,7 +2019,7 @@
           <td>
             
             
-            <span class='code'>        return &quot;...&quot;</span>
+            <span class='code'># 1. Argument reduction: Reduce x to an r so that |r| &lt;&#61; log&#40;b, 2&#41;/2. Given x, base b,</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2029,7 +2029,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>#    find r and integer N such that</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2039,7 +2039,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; String&#40;sym&#41;</span>
+            <span class='code'>#       x &#61; N*log&#40;b, 2&#41; &#43; r,  |r| &lt;&#61; log&#40;b,2&#41;/2.</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2049,7 +2049,7 @@
           <td>
             
             
-            <span class='code'>    if endswith&#40;s, &quot;...&quot;&#41;</span>
+            <span class='code'>#</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2059,7 +2059,7 @@
           <td>
             
             
-            <span class='code'>        return string&#40;sprint&#40;show_sym, Symbol&#40;s&#91;1:end-3&#93;&#41;&#41;, &quot;...&quot;&#41;</span>
+            <span class='code'># 2. Approximate b^r by 7th-degree minimax polynomial p_b&#40;r&#41; on the interval &#91;-log&#40;b,2&#41;/2, log&#40;b,2&#41;/2&#93;.</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2069,7 +2069,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'># 3. Scale back: b^x &#61; 2^N * p_b&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2079,7 +2079,7 @@
           <td>
             
             
-            <span class='code'>        return sprint&#40;show_sym, sym&#41;</span>
+            <span class='code'># For both, a little extra care needs to be taken if b^r is subnormal.</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2089,7 +2089,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># The solution is to do the scaling back in 2 steps as just messing with the exponent wouldn&#39;t work.</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2099,7 +2099,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2109,7 +2109,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function exp_impl&#40;x::Float64, base&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2119,7 +2119,7 @@
           <td>
             
             
-            <span class='code'># default compact view</span>
+            <span class='code'>    T &#61; Float64</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2129,7 +2129,7 @@
           <td>
             
             
-            <span class='code'>show&#40;io::IO, m::Method; kwargs...&#41; &#61; show_method&#40;IOContext&#40;io, :compact&#61;&gt;true&#41;, m; kwargs...&#41;</span>
+            <span class='code'>    N_float &#61; muladd&#40;x, LogBo256INV&#40;base, T&#41;, MAGIC_ROUND_CONST&#40;T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2139,7 +2139,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    N &#61; reinterpret&#40;UInt64, N_float&#41; &#37; Int32</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2149,7 +2149,7 @@
           <td>
             
             
-            <span class='code'>show&#40;io::IO, ::MIME&quot;text/plain&quot;, m::Method; kwargs...&#41; &#61; show_method&#40;io, m; kwargs...&#41;</span>
+            <span class='code'>    N_float -&#61;  MAGIC_ROUND_CONST&#40;T&#41; #N_float now equals round&#40;x*LogBo256INV&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2159,7 +2159,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256U&#40;base, T&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2169,7 +2169,7 @@
           <td>
             
             
-            <span class='code'>function show_method&#40;io::IO, m::Method; modulecolor &#61; :light_black, digit_align_width &#61; 1&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256L&#40;base, T&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2179,7 +2179,7 @@
           <td>
             
             
-            <span class='code'>    tv, decls, file, line &#61; arg_decl_parts&#40;m&#41;</span>
+            <span class='code'>    k &#61; N &gt;&gt; 8</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2189,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>    sig &#61; unwrap_unionall&#40;m.sig&#41;</span>
+            <span class='code'>    jU, jL &#61; table_unpack&#40;N&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2199,7 +2199,7 @@
           <td>
             
             
-            <span class='code'>    if sig &#61;&#61;&#61; Tuple</span>
+            <span class='code'>    small_part &#61;  muladd&#40;jU, expm1b_kernel&#40;base, r&#41;, jL&#41; &#43; jU</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2209,7 +2209,7 @@
           <td>
             
             
-            <span class='code'>        # Builtin</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2219,7 +2219,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, m.name, &quot;&#40;...&#41;&quot;&#41;</span>
+            <span class='code'>    if &#33;&#40;abs&#40;x&#41; &lt;&#61; SUBNORM_EXP&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2229,7 +2229,7 @@
           <td>
             
             
-            <span class='code'>        file &#61; &quot;none&quot;</span>
+            <span class='code'>        x &gt;&#61; MAX_EXP&#40;base, T&#41; &amp;&amp; return Inf</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2239,7 +2239,7 @@
           <td>
             
             
-            <span class='code'>        line &#61; 0</span>
+            <span class='code'>        x &lt;&#61; MIN_EXP&#40;base, T&#41; &amp;&amp; return 0.0</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2249,7 +2249,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        if k &lt;&#61; -53</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2259,7 +2259,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, decls&#91;1&#93;&#91;2&#93;, &quot;&#40;&quot;&#41;</span>
+            <span class='code'>            # The UInt64 forces promotion. &#40;Only matters for 32 bit systems.&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2269,7 +2269,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            twopk &#61; &#40;k &#43; UInt64&#40;53&#41;&#41; &lt;&lt; 52</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2279,7 +2279,7 @@
           <td>
             
             
-            <span class='code'>        # arguments</span>
+            <span class='code'>            return reinterpret&#40;T, twopk &#43; reinterpret&#40;UInt64, small_part&#41;&#41;*0x1p-53</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2289,7 +2289,7 @@
           <td>
             
             
-            <span class='code'>        for &#40;i,d&#41; in enumerate&#40;decls&#91;2:end&#93;&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2299,7 +2299,7 @@
           <td>
             
             
-            <span class='code'>            printstyled&#40;io, d&#91;1&#93;, color&#61;:light_black&#41;</span>
+            <span class='code'>        #k &#61;&#61; 1024 &amp;&amp; return &#40;small_part * 2.0&#41; * 2.0^1023</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2309,7 +2309,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;isempty&#40;d&#91;2&#93;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2319,7 +2319,7 @@
           <td>
             
             
-            <span class='code'>                print&#40;io, &quot;::&quot;&#41;</span>
+            <span class='code'>    twopk &#61; Int64&#40;k&#41; &lt;&lt; 52</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2329,7 +2329,7 @@
           <td>
             
             
-            <span class='code'>                print_type_bicolor&#40;io, d&#91;2&#93;, color&#61;:bold, inner_color&#61;:normal&#41;</span>
+            <span class='code'>    return reinterpret&#40;T, twopk &#43; reinterpret&#40;Int64, small_part&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2339,7 +2339,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2349,7 +2349,7 @@
           <td>
             
             
-            <span class='code'>            i &lt; length&#40;decls&#41;-1 &amp;&amp; print&#40;io, &quot;, &quot;&#41;</span>
+            <span class='code'># Computes base^&#40;x&#43;xlo&#41;. Used for pow.</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2359,7 +2359,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>@inline function exp_impl&#40;x::Float64, xlo::Float64, base&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2369,7 +2369,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    T &#61; Float64</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2379,7 +2379,7 @@
           <td>
             
             
-            <span class='code'>        kwargs &#61; kwarg_decl&#40;m&#41;</span>
+            <span class='code'>    N_float &#61; muladd&#40;x, LogBo256INV&#40;base, T&#41;, MAGIC_ROUND_CONST&#40;T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2389,7 +2389,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;isempty&#40;kwargs&#41;</span>
+            <span class='code'>    N &#61; reinterpret&#40;UInt64, N_float&#41; &#37; Int32</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2399,7 +2399,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;; &quot;&#41;</span>
+            <span class='code'>    N_float -&#61;  MAGIC_ROUND_CONST&#40;T&#41; #N_float now equals round&#40;x*LogBo256INV&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2409,7 +2409,7 @@
           <td>
             
             
-            <span class='code'>            for kw in kwargs</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256U&#40;base, T&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2419,7 +2419,7 @@
           <td>
             
             
-            <span class='code'>                skw &#61; sym_to_string&#40;kw&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256L&#40;base, T&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2429,7 +2429,7 @@
           <td>
             
             
-            <span class='code'>                print&#40;io, skw&#41;</span>
+            <span class='code'>    k &#61; N &gt;&gt; 8</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2439,7 +2439,7 @@
           <td>
             
             
-            <span class='code'>                if kw &#33;&#61; last&#40;kwargs&#41;</span>
+            <span class='code'>    jU, jL &#61; table_unpack&#40;N&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2449,7 +2449,7 @@
           <td>
             
             
-            <span class='code'>                    print&#40;io, &quot;, &quot;&#41;</span>
+            <span class='code'>    kern &#61; expm1b_kernel&#40;base, r&#41;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2459,7 +2459,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    very_small &#61; muladd&#40;kern, jU*xlo, jL&#41;</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2469,7 +2469,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    hi, lo &#61; Base.canonicalize2&#40;1.0, kern&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2479,7 +2479,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    small_part &#61; fma&#40;jU, hi, muladd&#40;jU, &#40;lo&#43;xlo&#41;, very_small&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2489,7 +2489,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;&#41;&quot;&#41;</span>
+            <span class='code'>    if &#33;&#40;abs&#40;x&#41; &lt;&#61; SUBNORM_EXP&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2499,7 +2499,7 @@
           <td>
             
             
-            <span class='code'>        show_method_params&#40;io, tv&#41;</span>
+            <span class='code'>        x &gt;&#61; MAX_EXP&#40;base, T&#41; &amp;&amp; return Inf</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2509,7 +2509,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        x &lt;&#61; MIN_EXP&#40;base, T&#41; &amp;&amp; return 0.0</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2519,7 +2519,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        if k &lt;&#61; -53</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2529,7 +2529,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;&#40;get&#40;io, :compact, false&#41;::Bool&#41; # single-line mode</span>
+            <span class='code'>            # The UInt64 forces promotion. &#40;Only matters for 32 bit systems.&#41;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2539,7 +2539,7 @@
           <td>
             
             
-            <span class='code'>        println&#40;io&#41;</span>
+            <span class='code'>            twopk &#61; &#40;k &#43; UInt64&#40;53&#41;&#41; &lt;&lt; 52</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2549,7 +2549,7 @@
           <td>
             
             
-            <span class='code'>        digit_align_width &#43;&#61; 4</span>
+            <span class='code'>            return reinterpret&#40;T, twopk &#43; reinterpret&#40;UInt64, small_part&#41;&#41;*0x1p-53</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2559,7 +2559,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2569,7 +2569,7 @@
           <td>
             
             
-            <span class='code'>    # module &amp; file, re-using function from errorshow.jl</span>
+            <span class='code'>        #k &#61;&#61; 1024 &amp;&amp; return &#40;small_part * 2.0&#41; * 2.0^1023</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2579,7 +2579,7 @@
           <td>
             
             
-            <span class='code'>    print_module_path_file&#40;io, parentmodule&#40;m&#41;, string&#40;file&#41;, line; modulecolor, digit_align_width&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2589,7 +2589,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    twopk &#61; Int64&#40;k&#41; &lt;&lt; 52</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2599,7 +2599,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return reinterpret&#40;T, twopk &#43; reinterpret&#40;Int64, small_part&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2609,7 +2609,7 @@
           <td>
             
             
-            <span class='code'>function show_method_list_header&#40;io::IO, ms::MethodList, namefmt::Function&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2619,7 +2619,7 @@
           <td>
             
             
-            <span class='code'>    mt &#61; ms.mt</span>
+            <span class='code'>@inline function exp_impl_fast&#40;x::Float64, base&#41;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2629,7 +2629,7 @@
           <td>
             
             
-            <span class='code'>    name &#61; mt.name</span>
+            <span class='code'>    T &#61; Float64</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2639,7 +2639,7 @@
           <td>
             
             
-            <span class='code'>    hasname &#61; isdefined&#40;mt.module, name&#41; &amp;&amp;</span>
+            <span class='code'>    x &gt;&#61; MAX_EXP&#40;base, T&#41; &amp;&amp; return Inf</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2649,7 +2649,7 @@
           <td>
             
             
-            <span class='code'>              typeof&#40;getfield&#40;mt.module, name&#41;&#41; &lt;: Function</span>
+            <span class='code'>    x &lt;&#61; -SUBNORM_EXP&#40;base, T&#41; &amp;&amp; return 0.0</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2659,7 +2659,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; length&#40;ms&#41;</span>
+            <span class='code'>    N_float &#61; muladd&#40;x, LogBo256INV&#40;base, T&#41;, MAGIC_ROUND_CONST&#40;T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2669,7 +2669,7 @@
           <td>
             
             
-            <span class='code'>    m &#61; n&#61;&#61;1 ? &quot;method&quot; : &quot;methods&quot;</span>
+            <span class='code'>    N &#61; reinterpret&#40;UInt64, N_float&#41; &#37; Int32</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2679,7 +2679,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;# &#36;n &#36;m&quot;&#41;</span>
+            <span class='code'>    N_float -&#61;  MAGIC_ROUND_CONST&#40;T&#41; #N_float now equals round&#40;x*LogBo256INV&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2689,7 +2689,7 @@
           <td>
             
             
-            <span class='code'>    sname &#61; string&#40;name&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256U&#40;base, T&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2699,7 +2699,7 @@
           <td>
             
             
-            <span class='code'>    namedisplay &#61; namefmt&#40;sname&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256L&#40;base, T&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2709,7 +2709,7 @@
           <td>
             
             
-            <span class='code'>    if hasname</span>
+            <span class='code'>    k &#61; N &gt;&gt; 8</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2719,7 +2719,7 @@
           <td>
             
             
-            <span class='code'>        what &#61; &#40;startswith&#40;sname, &#39;@&#39;&#41; ?</span>
+            <span class='code'>    jU &#61; reinterpret&#40;Float64, JU_CONST | &#40;@inbounds J_TABLE&#91;N&amp;255 &#43; 1&#93; &amp; JU_MASK&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2729,7 +2729,7 @@
           <td>
             
             
-            <span class='code'>                    &quot;macro&quot;</span>
+            <span class='code'>    small_part &#61;  muladd&#40;jU, expm1b_kernel&#40;base, r&#41;, jU&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2739,7 +2739,7 @@
           <td>
             
             
-            <span class='code'>               : mt.module &#61;&#61;&#61; Core &amp;&amp; mt.defs isa Core.TypeMapEntry &amp;&amp; &#40;mt.defs.func::Method&#41;.sig &#61;&#61;&#61; Tuple ?</span>
+            <span class='code'>    twopk &#61; Int64&#40;k&#41; &lt;&lt; 52</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2749,7 +2749,7 @@
           <td>
             
             
-            <span class='code'>                    &quot;builtin function&quot;</span>
+            <span class='code'>    return reinterpret&#40;T, twopk &#43; reinterpret&#40;Int64, small_part&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2759,7 +2759,7 @@
           <td>
             
             
-            <span class='code'>               : # else</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2769,7 +2769,7 @@
           <td>
             
             
-            <span class='code'>                    &quot;generic function&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2779,7 +2779,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot; for &quot;, what, &quot; &quot;, namedisplay, &quot; from &quot;&#41;</span>
+            <span class='code'>@inline function exp_impl&#40;x::Float32, base&#41;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2789,7 +2789,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    T &#61; Float32</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2799,7 +2799,7 @@
           <td>
             
             
-            <span class='code'>        col &#61; get&#33;&#40;&#40;&#41; -&gt; popfirst&#33;&#40;STACKTRACE_MODULECOLORS&#41;, STACKTRACE_FIXEDCOLORS, parentmodule_before_main&#40;ms.mt.module&#41;&#41;</span>
+            <span class='code'>    N_float &#61; round&#40;x*LogBINV&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2809,7 +2809,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    N &#61; unsafe_trunc&#40;Int32, N_float&#41;</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2819,7 +2819,7 @@
           <td>
             
             
-            <span class='code'>        printstyled&#40;io, ms.mt.module, color&#61;col&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBU&#40;base, T&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2829,7 +2829,7 @@
           <td>
             
             
-            <span class='code'>    elseif &#39;#&#39; in sname</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBL&#40;base, T&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2839,7 +2839,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot; for anonymous function &quot;, namedisplay&#41;</span>
+            <span class='code'>    small_part &#61; expb_kernel&#40;base, r&#41;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2849,7 +2849,7 @@
           <td>
             
             
-            <span class='code'>    elseif mt &#61;&#61;&#61; _TYPE_NAME.mt</span>
+            <span class='code'>    power &#61; &#40;N&#43;Int32&#40;127&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2859,7 +2859,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot; for type constructor&quot;&#41;</span>
+            <span class='code'>    x &gt; MAX_EXP&#40;base, T&#41; &amp;&amp; return Inf32</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2869,7 +2869,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    x &lt; MIN_EXP&#40;base, T&#41; &amp;&amp; return 0.0f0</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2879,7 +2879,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot; for callable object&quot;&#41;</span>
+            <span class='code'>    if x &lt;&#61; -SUBNORM_EXP&#40;base, T&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2889,7 +2889,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        power &#43;&#61; Int32&#40;24&#41;</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2899,7 +2899,7 @@
           <td>
             
             
-            <span class='code'>    &#33;iszero&#40;n&#41; &amp;&amp; print&#40;io, &quot;:&quot;&#41;</span>
+            <span class='code'>        small_part *&#61; Float32&#40;0x1p-24&#41;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2909,7 +2909,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2919,7 +2919,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if N &#61;&#61; 128</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2929,7 +2929,7 @@
           <td>
             
             
-            <span class='code'># Determine the &#96;modulecolor&#96; value to pass to &#96;show_method&#96;</span>
+            <span class='code'>        power -&#61; Int32&#40;1&#41;</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2939,7 +2939,7 @@
           <td>
             
             
-            <span class='code'>function _modulecolor&#40;method::Method&#41;</span>
+            <span class='code'>        small_part *&#61; 2f0</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2949,7 +2949,7 @@
           <td>
             
             
-            <span class='code'>    mmt &#61; get_methodtable&#40;method&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2959,7 +2959,7 @@
           <td>
             
             
-            <span class='code'>    if mmt &#61;&#61;&#61; nothing || mmt.module &#61;&#61;&#61; parentmodule&#40;method&#41;</span>
+            <span class='code'>    return small_part * reinterpret&#40;T, power &lt;&lt; Int32&#40;23&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2969,7 +2969,7 @@
           <td>
             
             
-            <span class='code'>        return nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2979,7 +2979,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2989,7 +2989,7 @@
           <td>
             
             
-            <span class='code'>    # &#96;mmt&#96; is only particularly relevant for external method tables. Since the primary</span>
+            <span class='code'>@inline function exp_impl_fast&#40;x::Float32, base&#41;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2999,7 +2999,7 @@
           <td>
             
             
-            <span class='code'>    # method table is shared, we now need to distinguish &quot;primary&quot; methods by trying to</span>
+            <span class='code'>    T &#61; Float32</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3009,7 +3009,7 @@
           <td>
             
             
-            <span class='code'>    # check if there is a primary &#96;DataType&#96; to identify it with. c.f. how &#96;jl_method_def&#96;</span>
+            <span class='code'>    x &gt;&#61; MAX_EXP&#40;base, T&#41; &amp;&amp; return Inf32</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3019,7 +3019,7 @@
           <td>
             
             
-            <span class='code'>    # would derive this same information &#40;for the name&#41;.</span>
+            <span class='code'>    x &lt;&#61; -SUBNORM_EXP&#40;base, T&#41; &amp;&amp; return 0f0</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3029,7 +3029,7 @@
           <td>
             
             
-            <span class='code'>    ft &#61; argument_datatype&#40;&#40;unwrap_unionall&#40;method.sig&#41;::DataType&#41;.parameters&#91;1&#93;&#41;</span>
+            <span class='code'>    N_float &#61; round&#40;x*LogBINV&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3039,7 +3039,7 @@
           <td>
             
             
-            <span class='code'>    # &#96;ft&#96; should be the type associated with the first argument in the method signature.</span>
+            <span class='code'>    N &#61; unsafe_trunc&#40;Int32, N_float&#41;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3049,7 +3049,7 @@
           <td>
             
             
-            <span class='code'>    # If it&#39;s &#96;Type&#96;, try to unwrap it again.</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBU&#40;base, T&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3059,17 +3059,31 @@
           <td>
             
             
-            <span class='code'>    if isType&#40;ft&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBL&#40;base, T&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
           <td class='lineno'>303</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        ft &#61; argument_datatype&#40;ft.parameters&#91;1&#93;&#41;</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in exp_impl_fast
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from exp2_fast
+              <a href='exp.jl-c67dddffae57131cd7be44f6ecc066c9dca99f82.html#L328'>line 328</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='exp.jl-c67dddffae57131cd7be44f6ecc066c9dca99f82.html#L87'>expb_kernel</a>
+              <br />
+            </div>
+            <span class='code'>    small_part &#61; expb_kernel&#40;base, r&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3079,7 +3093,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    twopk &#61; reinterpret&#40;T, &#40;N&#43;Int32&#40;127&#41;&#41; &lt;&lt; Int32&#40;23&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3089,7 +3103,7 @@
           <td>
             
             
-            <span class='code'>    if ft &#61;&#61;&#61; nothing || parentmodule&#40;method&#41; &#61;&#61;&#61; parentmodule&#40;ft&#41; &#33;&#61;&#61; Core</span>
+            <span class='code'>    return twopk*small_part</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3099,7 +3113,7 @@
           <td>
             
             
-            <span class='code'>        return nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3109,7 +3123,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3119,7 +3133,7 @@
           <td>
             
             
-            <span class='code'>    m &#61; parentmodule_before_main&#40;method&#41;</span>
+            <span class='code'>@inline function exp_impl&#40;a::Float16, base&#41;</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3129,7 +3143,7 @@
           <td>
             
             
-            <span class='code'>    return get&#33;&#40;&#40;&#41; -&gt; popfirst&#33;&#40;STACKTRACE_MODULECOLORS&#41;, STACKTRACE_FIXEDCOLORS, m&#41;</span>
+            <span class='code'>    T &#61; Float32</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3139,7 +3153,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    x &#61; T&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3149,7 +3163,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    N_float &#61; round&#40;x*LogBINV&#40;base, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3159,7 +3173,7 @@
           <td>
             
             
-            <span class='code'>function show_method_table&#40;io::IO, ms::MethodList, max::Int&#61;-1, header::Bool&#61;true&#41;</span>
+            <span class='code'>    N &#61; unsafe_trunc&#40;Int32, N_float&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3169,7 +3183,7 @@
           <td>
             
             
-            <span class='code'>    mt &#61; ms.mt</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogB&#40;base, Float16&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3179,7 +3193,7 @@
           <td>
             
             
-            <span class='code'>    name &#61; mt.name</span>
+            <span class='code'>    small_part &#61; expb_kernel&#40;base, r&#41;</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3189,7 +3203,7 @@
           <td>
             
             
-            <span class='code'>    hasname &#61; isdefined&#40;mt.module, name&#41; &amp;&amp;</span>
+            <span class='code'>    if &#33;&#40;abs&#40;x&#41; &lt;&#61; 25&#41;</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3199,7 +3213,7 @@
           <td>
             
             
-            <span class='code'>              typeof&#40;getfield&#40;mt.module, name&#41;&#41; &lt;: Function</span>
+            <span class='code'>        x &gt; 16 &amp;&amp; return Inf16</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3209,7 +3223,7 @@
           <td>
             
             
-            <span class='code'>    if header</span>
+            <span class='code'>        x &lt; 25 &amp;&amp; return zero&#40;Float16&#41;</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3219,7 +3233,7 @@
           <td>
             
             
-            <span class='code'>        show_method_list_header&#40;io, ms, str -&gt; &quot;\&quot;&quot;*str*&quot;\&quot;&quot;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3229,7 +3243,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    twopk &#61; reinterpret&#40;T, &#40;N&#43;Int32&#40;127&#41;&#41; &lt;&lt; Int32&#40;23&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3239,7 +3253,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; rest &#61; 0</span>
+            <span class='code'>    return Float16&#40;twopk*small_part&#41;</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3249,7 +3263,7 @@
           <td>
             
             
-            <span class='code'>    local last</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3269,7 +3283,7 @@
           <td>
             
             
-            <span class='code'>    last_shown_line_infos &#61; get&#40;io, :last_shown_line_infos, nothing&#41;</span>
+            <span class='code'>for &#40;func, fast_func, base&#41; in &#40;&#40;:exp2,  :exp2_fast,  Val&#40;2&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3279,7 +3293,7 @@
           <td>
             
             
-            <span class='code'>    last_shown_line_infos &#61;&#61;&#61; nothing || empty&#33;&#40;last_shown_line_infos&#41;</span>
+            <span class='code'>                                &#40;:exp,   :exp_fast,   Val&#40;:ℯ&#41;&#41;,</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3289,7 +3303,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                                &#40;:exp10, :exp10_fast, Val&#40;10&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3299,7 +3313,7 @@
           <td>
             
             
-            <span class='code'>    digit_align_width &#61; length&#40;string&#40;max &gt; 0 ? max : length&#40;ms&#41;&#41;&#41;</span>
+            <span class='code'>    @eval begin</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3309,17 +3323,40 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        @noinline &#36;func&#40;x::Union&#123;Float16,Float32,Float64&#125;&#41; &#61; exp_impl&#40;x, &#36;base&#41;</span>
           </td>
         </tr>
         <tr id='L328'>
           <td class='lineno'>328</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>3 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    for meth in ms</span>
+            <div class='call-sites'>
+              3 &#40;0 &#37;&#41;
+              samples spent in exp2_fast
+              <br />
+              
+              2 &#40;67 &#37;&#41; &#40;incl.&#41;
+              when called from exp2_fast
+              <a href='fastmath.jl-aad2f4a2f48618e533c80beb433735c73b5a6cf8.html#L275'>line 275</a>
+              <br />
+              1 &#40;33 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;33 &#37;&#41; &#40;incl.&#41;
+              when called from loopfooter&#33;
+              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L207'>line 207</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='exp.jl-c67dddffae57131cd7be44f6ecc066c9dca99f82.html#L0'>exp_impl_fast</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='exp.jl-c67dddffae57131cd7be44f6ecc066c9dca99f82.html#L303'>exp_impl_fast</a>
+              <br />
+            </div>
+            <span class='code'>        @noinline &#36;fast_func&#40;x::Union&#123;Float32,Float64&#125;&#41; &#61; exp_impl_fast&#40;x, &#36;base&#41;</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3329,7 +3366,7 @@
           <td>
             
             
-            <span class='code'>        if max &#61;&#61; -1 || n &lt; max</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3339,7 +3376,7 @@
           <td>
             
             
-            <span class='code'>            n &#43;&#61; 1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3349,7 +3386,7 @@
           <td>
             
             
-            <span class='code'>            println&#40;io&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3359,7 +3396,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@doc &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3369,7 +3406,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot; &quot;, lpad&#40;&quot;&#91;&#36;n&#93;&quot;, digit_align_width &#43; 2&#41;, &quot; &quot;&#41;</span>
+            <span class='code'>    exp&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3389,7 +3426,7 @@
           <td>
             
             
-            <span class='code'>            show_method&#40;io, meth; modulecolor&#61;_modulecolor&#40;meth&#41;&#41;</span>
+            <span class='code'>Compute the natural base exponential of &#96;x&#96;, in other words &#96;&#96;ℯ^x&#96;&#96;.</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3409,7 +3446,7 @@
           <td>
             
             
-            <span class='code'>            file, line &#61; updated_methodloc&#40;meth&#41;</span>
+            <span class='code'>See also &#91;&#96;exp2&#96;&#93;&#40;@ref&#41;, &#91;&#96;exp10&#96;&#93;&#40;@ref&#41; and &#91;&#96;cis&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3419,7 +3456,7 @@
           <td>
             
             
-            <span class='code'>            if last_shown_line_infos &#33;&#61;&#61; nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3429,7 +3466,7 @@
           <td>
             
             
-            <span class='code'>                push&#33;&#40;last_shown_line_infos, &#40;string&#40;file&#41;, line&#41;&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3439,7 +3476,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3449,7 +3486,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>julia&gt; exp&#40;1.0&#41;</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3459,7 +3496,7 @@
           <td>
             
             
-            <span class='code'>            rest &#43;&#61; 1</span>
+            <span class='code'>2.718281828459045</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3469,7 +3506,7 @@
           <td>
             
             
-            <span class='code'>            last &#61; meth</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3479,7 +3516,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>julia&gt; exp&#40;im * pi&#41; ≈ cis&#40;pi&#41;</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3489,7 +3526,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3499,7 +3536,7 @@
           <td>
             
             
-            <span class='code'>    if rest &gt; 0</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3509,7 +3546,7 @@
           <td>
             
             
-            <span class='code'>        println&#40;io&#41;</span>
+            <span class='code'>&quot;&quot;&quot; exp&#40;x::Real&#41;</span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3519,7 +3556,7 @@
           <td>
             
             
-            <span class='code'>        if rest &#61;&#61; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3529,7 +3566,7 @@
           <td>
             
             
-            <span class='code'>            show_method&#40;io, last&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3539,7 +3576,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    exp2&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3549,7 +3586,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;... &#36;rest methods not shown&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3559,7 +3596,7 @@
           <td>
             
             
-            <span class='code'>            if hasname</span>
+            <span class='code'>Compute the base 2 exponential of &#96;x&#96;, in other words &#96;&#96;2^x&#96;&#96;.</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3569,7 +3606,7 @@
           <td>
             
             
-            <span class='code'>                print&#40;io, &quot; &#40;use methods&#40;&#36;name&#41; to see them all&#41;&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3579,7 +3616,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>See also &#91;&#96;ldexp&#96;&#93;&#40;@ref&#41;, &#91;&#96;&lt;&lt;&#96;&#93;&#40;@ref&#41;.</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3589,7 +3626,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3599,7 +3636,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3609,7 +3646,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3619,7 +3656,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>julia&gt; exp2&#40;5&#41;</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3629,7 +3666,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>32.0</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3639,7 +3676,7 @@
           <td>
             
             
-            <span class='code'>show&#40;io::IO, ms::MethodList&#41; &#61; show_method_table&#40;io, ms&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3649,7 +3686,7 @@
           <td>
             
             
-            <span class='code'>show&#40;io::IO, ::MIME&quot;text/plain&quot;, ms::MethodList&#41; &#61; show_method_table&#40;io, ms&#41;</span>
+            <span class='code'>julia&gt; 2^5</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3659,7 +3696,7 @@
           <td>
             
             
-            <span class='code'>show&#40;io::IO, mt::Core.MethodTable&#41; &#61; show_method_table&#40;io, MethodList&#40;mt&#41;&#41;</span>
+            <span class='code'>32</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3679,7 +3716,7 @@
           <td>
             
             
-            <span class='code'>function inbase&#40;m::Module&#41;</span>
+            <span class='code'>julia&gt; exp2&#40;63&#41; &gt; typemax&#40;Int&#41;</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3689,7 +3726,7 @@
           <td>
             
             
-            <span class='code'>    if m &#61;&#61; Base</span>
+            <span class='code'>true</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3699,7 +3736,7 @@
           <td>
             
             
-            <span class='code'>        true</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3709,7 +3746,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3719,7 +3756,7 @@
           <td>
             
             
-            <span class='code'>        parent &#61; parentmodule&#40;m&#41;</span>
+            <span class='code'>exp2&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3729,7 +3766,7 @@
           <td>
             
             
-            <span class='code'>        parent &#61;&#61;&#61; m ? false : inbase&#40;parent&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3739,7 +3776,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3749,7 +3786,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    exp10&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3759,7 +3796,7 @@
           <td>
             
             
-            <span class='code'>fileurl&#40;file&#41; &#61; let f &#61; find_source_file&#40;file&#41;; f &#61;&#61;&#61; nothing ? &quot;&quot; : &quot;file://&quot;*f; end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3769,7 +3806,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Compute the base 10 exponential of &#96;x&#96;, in other words &#96;&#96;10^x&#96;&#96;.</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3779,7 +3816,7 @@
           <td>
             
             
-            <span class='code'>function url&#40;m::Method&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3789,7 +3826,7 @@
           <td>
             
             
-            <span class='code'>    M &#61; parentmodule&#40;m&#41;</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3799,7 +3836,7 @@
           <td>
             
             
-            <span class='code'>    &#40;m.file &#61;&#61;&#61; :null || m.file &#61;&#61;&#61; :string&#41; &amp;&amp; return &quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3809,7 +3846,7 @@
           <td>
             
             
-            <span class='code'>    file &#61; string&#40;m.file&#41;</span>
+            <span class='code'>julia&gt; exp10&#40;2&#41;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3819,7 +3856,7 @@
           <td>
             
             
-            <span class='code'>    line &#61; m.line</span>
+            <span class='code'>100.0</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3829,7 +3866,7 @@
           <td>
             
             
-            <span class='code'>    line &lt;&#61; 0 || occursin&#40;r&quot;In\&#91;&#91;0-9&#93;&#43;\&#93;&quot;a, file&#41; &amp;&amp; return &quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3839,7 +3876,7 @@
           <td>
             
             
-            <span class='code'>    Sys.iswindows&#40;&#41; &amp;&amp; &#40;file &#61; replace&#40;file, &#39;\\&#39; &#61;&gt; &#39;/&#39;&#41;&#41;</span>
+            <span class='code'>julia&gt; 10^2</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3849,7 +3886,7 @@
           <td>
             
             
-            <span class='code'>    libgit2_id &#61; PkgId&#40;UUID&#40;&#40;0x76f85450_5226_5b5a,0x8eaa_529ad045b433&#41;&#41;, &quot;LibGit2&quot;&#41;</span>
+            <span class='code'>100</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3859,7 +3896,7 @@
           <td>
             
             
-            <span class='code'>    if inbase&#40;M&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3869,7 +3906,7 @@
           <td>
             
             
-            <span class='code'>        if isempty&#40;Base.GIT_VERSION_INFO.commit&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3879,7 +3916,7 @@
           <td>
             
             
-            <span class='code'>            # this url will only work if we&#39;re on a tagged release</span>
+            <span class='code'>exp10&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3889,7 +3926,7 @@
           <td>
             
             
-            <span class='code'>            return &quot;https://github.com/JuliaLang/julia/tree/v&#36;VERSION/base/&#36;file#L&#36;line&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3899,7 +3936,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'># functions with special cases for integer arguments</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3909,7 +3946,7 @@
           <td>
             
             
-            <span class='code'>            return &quot;https://github.com/JuliaLang/julia/tree/&#36;&#40;Base.GIT_VERSION_INFO.commit&#41;/base/&#36;file#L&#36;line&quot;</span>
+            <span class='code'>@inline function exp2&#40;x::Base.BitInteger&#41;</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3919,7 +3956,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    if x &gt; 1023</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3929,7 +3966,7 @@
           <td>
             
             
-            <span class='code'>    elseif root_module_exists&#40;libgit2_id&#41;</span>
+            <span class='code'>        Inf64</span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3939,7 +3976,7 @@
           <td>
             
             
-            <span class='code'>        LibGit2 &#61; root_module&#40;libgit2_id&#41;</span>
+            <span class='code'>    elseif x &lt;&#61; -1023</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3949,7 +3986,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>        # if -1073 &lt; x &lt;&#61; -1023 then Result will be a subnormal number</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3959,7 +3996,7 @@
           <td>
             
             
-            <span class='code'>            d &#61; dirname&#40;file&#41;</span>
+            <span class='code'>        # Hex literal with padding must be used to work on 32bit machine</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3969,7 +4006,7 @@
           <td>
             
             
-            <span class='code'>            return LibGit2.with&#40;LibGit2.GitRepoExt&#40;d&#41;&#41; do repo</span>
+            <span class='code'>        reinterpret&#40;Float64, 0x0000_0000_0000_0001 &lt;&lt; &#40;&#40;x &#43; 1074&#41; &#37; UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3979,7 +4016,7 @@
           <td>
             
             
-            <span class='code'>                LibGit2.with&#40;LibGit2.GitConfig&#40;repo&#41;&#41; do cfg</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3989,7 +4026,7 @@
           <td>
             
             
-            <span class='code'>                    u &#61; LibGit2.get&#40;cfg, &quot;remote.origin.url&quot;, &quot;&quot;&#41;</span>
+            <span class='code'>        # We will cast everything to Int64 to avoid errors in case of Int128</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3999,7 +4036,7 @@
           <td>
             
             
-            <span class='code'>                    u &#61; &#40;match&#40;LibGit2.GITHUB_REGEX,u&#41;::AbstractMatch&#41;.captures&#91;1&#93;</span>
+            <span class='code'>        # If x is a Int128, and is outside the range of Int64, then it is not -1023&lt;x&lt;&#61;1023</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4009,7 +4046,7 @@
           <td>
             
             
-            <span class='code'>                    commit &#61; string&#40;LibGit2.head_oid&#40;repo&#41;&#41;</span>
+            <span class='code'>        reinterpret&#40;Float64, &#40;exponent_bias&#40;Float64&#41; &#43; &#40;x &#37; Int64&#41;&#41; &lt;&lt; &#40;significand_bits&#40;Float64&#41; &#37; UInt&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4019,7 +4056,7 @@
           <td>
             
             
-            <span class='code'>                    root &#61; LibGit2.path&#40;repo&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4029,7 +4066,7 @@
           <td>
             
             
-            <span class='code'>                    if startswith&#40;file, root&#41; || startswith&#40;realpath&#40;file&#41;, root&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4039,7 +4076,7 @@
           <td>
             
             
-            <span class='code'>                        &quot;https://github.com/&#36;u/tree/&#36;commit/&quot;*file&#91;length&#40;root&#41;&#43;1:end&#93;*&quot;#L&#36;line&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4049,7 +4086,7 @@
           <td>
             
             
-            <span class='code'>                    else</span>
+            <span class='code'># min and max arguments for expm1 by type</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4059,7 +4096,7 @@
           <td>
             
             
-            <span class='code'>                        fileurl&#40;file&#41;</span>
+            <span class='code'>MAX_EXP&#40;::Type&#123;Float64&#125;&#41; &#61;  709.7827128933845   # log 2^1023*&#40;2-2^-52&#41;</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4069,7 +4106,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>MIN_EXP&#40;::Type&#123;Float64&#125;&#41; &#61; -37.42994775023705   # log 2^-54</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4079,7 +4116,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>MAX_EXP&#40;::Type&#123;Float32&#125;&#41; &#61;  88.72284f0          # log 2^127 *&#40;2-2^-23&#41;</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4089,7 +4126,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>MIN_EXP&#40;::Type&#123;Float32&#125;&#41; &#61; -17.32868f0          # log 2^-25</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4099,7 +4136,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>MAX_EXP&#40;::Type&#123;Float16&#125;&#41; &#61;  Float16&#40;11.09&#41;      # log 2^15 *&#40;2-2^-10&#41;</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4109,7 +4146,7 @@
           <td>
             
             
-            <span class='code'>            return fileurl&#40;file&#41;</span>
+            <span class='code'>MIN_EXP&#40;::Type&#123;Float16&#125;&#41; &#61; -Float16&#40;8.32&#41;       # log 2^-12</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4119,7 +4156,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4129,7 +4166,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>Ln2INV&#40;::Type&#123;Float64&#125;&#41; &#61; 1.4426950408889634</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4139,7 +4176,7 @@
           <td>
             
             
-            <span class='code'>        return fileurl&#40;file&#41;</span>
+            <span class='code'>Ln2&#40;::Type&#123;Float64&#125;&#41; &#61; -0.6931471805599453</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4149,7 +4186,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Ln2INV&#40;::Type&#123;Float32&#125;&#41; &#61; 1.442695f0</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4159,7 +4196,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Ln2&#40;::Type&#123;Float32&#125;&#41; &#61; -0.6931472f0</span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4179,7 +4216,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, ::MIME&quot;text/html&quot;, m::Method&#41;</span>
+            <span class='code'># log&#40;.75&#41; &lt;&#61; x &lt;&#61; log&#40;1.25&#41;</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4189,7 +4226,7 @@
           <td>
             
             
-            <span class='code'>    tv, decls, file, line &#61; arg_decl_parts&#40;m, true&#41;</span>
+            <span class='code'>@inline function expm1_small&#40;x::Float64&#41;</span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4199,7 +4236,7 @@
           <td>
             
             
-            <span class='code'>    sig &#61; unwrap_unionall&#40;m.sig&#41;</span>
+            <span class='code'>    p &#61; evalpoly&#40;x, &#40;0.16666666666666632, 0.04166666666666556, 0.008333333333401227,</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4209,7 +4246,7 @@
           <td>
             
             
-            <span class='code'>    if sig &#61;&#61;&#61; Tuple</span>
+            <span class='code'>                     0.001388888889068783, 0.00019841269447671544, 2.480157691845342e-5,</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4219,7 +4256,7 @@
           <td>
             
             
-            <span class='code'>        # Builtin</span>
+            <span class='code'>                     2.7558212415361945e-6, 2.758218402815439e-7, 2.4360682937111612e-8&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4229,7 +4266,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, m.name, &quot;&#40;...&#41; in &quot;, parentmodule&#40;m&#41;&#41;</span>
+            <span class='code'>    p2 &#61; exthorner&#40;x, &#40;1.0, .5, p&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4239,7 +4276,7 @@
           <td>
             
             
-            <span class='code'>        return</span>
+            <span class='code'>    return fma&#40;x, p2&#91;1&#93;, x*p2&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4249,7 +4286,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4259,7 +4296,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, decls&#91;1&#93;&#91;2&#93;, &quot;&#40;&quot;&#41;</span>
+            <span class='code'>@inline function expm1_small&#40;x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4269,7 +4306,7 @@
           <td>
             
             
-            <span class='code'>    join&#40;</span>
+            <span class='code'>    p &#61; evalpoly&#40;x, &#40;0.16666666f0, 0.041666627f0, 0.008333682f0,</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4279,7 +4316,7 @@
           <td>
             
             
-            <span class='code'>        io,</span>
+            <span class='code'>                     0.0013908712f0, 0.0001933096f0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4289,7 +4326,7 @@
           <td>
             
             
-            <span class='code'>        String&#91;</span>
+            <span class='code'>    p2 &#61; exthorner&#40;x, &#40;1f0, .5f0, p&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4299,7 +4336,7 @@
           <td>
             
             
-            <span class='code'>            isempty&#40;d&#91;2&#93;&#41; ? string&#40;d&#91;1&#93;&#41; : string&#40;d&#91;1&#93;, &quot;::&lt;b&gt;&quot;, d&#91;2&#93; , &quot;&lt;/b&gt;&quot;&#41; for d in decls&#91;2:end&#93;</span>
+            <span class='code'>    return fma&#40;x, p2&#91;1&#93;, x*p2&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4309,7 +4346,7 @@
           <td>
             
             
-            <span class='code'>        &#93;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4319,7 +4356,7 @@
           <td>
             
             
-            <span class='code'>        &quot;, &quot;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4329,7 +4366,7 @@
           <td>
             
             
-            <span class='code'>        &quot;, &quot;,</span>
+            <span class='code'>function expm1&#40;x::Float64&#41;</span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4339,7 +4376,7 @@
           <td>
             
             
-            <span class='code'>    &#41;</span>
+            <span class='code'>    T &#61; Float64</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4349,7 +4386,7 @@
           <td>
             
             
-            <span class='code'>    kwargs &#61; kwarg_decl&#40;m&#41;</span>
+            <span class='code'>    if -0.2876820724517809 &lt;&#61; x &lt;&#61; 0.22314355131420976</span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4359,7 +4396,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;kwargs&#41;</span>
+            <span class='code'>        return expm1_small&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4369,7 +4406,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;; &lt;i&gt;&quot;&#41;</span>
+            <span class='code'>    elseif &#33;&#40;abs&#40;x&#41;&lt;&#61;MIN_EXP&#40;Float64&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4379,7 +4416,7 @@
           <td>
             
             
-            <span class='code'>        join&#40;io, map&#40;sym_to_string, kwargs&#41;, &quot;, &quot;, &quot;, &quot;&#41;</span>
+            <span class='code'>        isnan&#40;x&#41; &amp;&amp; return x</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4389,7 +4426,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;&lt;/i&gt;&quot;&#41;</span>
+            <span class='code'>        x &gt; MAX_EXP&#40;Float64&#41; &amp;&amp; return Inf</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4399,7 +4436,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        x &lt; MIN_EXP&#40;Float64&#41; &amp;&amp; return -1.0</span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4409,7 +4446,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&#41;&quot;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4419,7 +4456,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;tv&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4429,7 +4466,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io,&quot;&lt;i&gt;&quot;&#41;</span>
+            <span class='code'>    N_float &#61; muladd&#40;x, LogBo256INV&#40;Val&#40;:ℯ&#41;, T&#41;, MAGIC_ROUND_CONST&#40;T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4439,7 +4476,7 @@
           <td>
             
             
-            <span class='code'>        show_method_params&#40;io, tv&#41;</span>
+            <span class='code'>    N &#61; reinterpret&#40;UInt64, N_float&#41; &#37; Int32</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4449,7 +4486,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io,&quot;&lt;/i&gt;&quot;&#41;</span>
+            <span class='code'>    N_float -&#61;  MAGIC_ROUND_CONST&#40;T&#41; #N_float now equals round&#40;x*LogBo256INV&#40;Val&#40;:ℯ&#41;, T&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4459,7 +4496,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256U&#40;Val&#40;:ℯ&#41;, T&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L443'>
@@ -4469,7 +4506,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot; in &quot;, parentmodule&#40;m&#41;&#41;</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, LogBo256L&#40;Val&#40;:ℯ&#41;, T&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4479,7 +4516,7 @@
           <td>
             
             
-            <span class='code'>    if line &gt; 0</span>
+            <span class='code'>    k &#61; Int64&#40;N &gt;&gt; 8&#41;</span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4489,7 +4526,7 @@
           <td>
             
             
-            <span class='code'>        file, line &#61; updated_methodloc&#40;m&#41;</span>
+            <span class='code'>    jU, jL &#61; table_unpack&#40;N&#41;</span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4499,7 +4536,7 @@
           <td>
             
             
-            <span class='code'>        u &#61; url&#40;m&#41;</span>
+            <span class='code'>    p &#61; expm1b_kernel&#40;Val&#40;:ℯ&#41;, r&#41;</span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4509,7 +4546,7 @@
           <td>
             
             
-            <span class='code'>        if isempty&#40;u&#41;</span>
+            <span class='code'>    twopk  &#61; reinterpret&#40;Float64, &#40;1023&#43;k&#41; &lt;&lt; 52&#41;</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4519,7 +4556,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot; at &quot;, file, &quot;:&quot;, line&#41;</span>
+            <span class='code'>    twopnk &#61; reinterpret&#40;Float64, &#40;1023-k&#41; &lt;&lt; 52&#41;</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4529,7 +4566,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    k&gt;&#61;106 &amp;&amp; return reinterpret&#40;Float64, &#40;1022&#43;k&#41; &lt;&lt; 52&#41;*&#40;jU &#43; muladd&#40;jU, p, jL&#41;&#41;*2</span>
           </td>
         </tr>
         <tr id='L450'>
@@ -4539,7 +4576,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;&quot;&quot; at &lt;a href&#61;&quot;&#36;u&quot; target&#61;&quot;_blank&quot;&gt;&quot;&quot;&quot;,</span>
+            <span class='code'>    k&gt;&#61;53 &amp;&amp; return twopk*&#40;jU &#43; muladd&#40;jU, p, &#40;jL-twopnk&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L451'>
@@ -4549,7 +4586,7 @@
           <td>
             
             
-            <span class='code'>                  file, &quot;:&quot;, line, &quot;&lt;/a&gt;&quot;&#41;</span>
+            <span class='code'>    k&lt;&#61;-2 &amp;&amp; return twopk*&#40;jU &#43; muladd&#40;jU, p, jL&#41;&#41;-1</span>
           </td>
         </tr>
         <tr id='L452'>
@@ -4559,7 +4596,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    return twopk*&#40;&#40;jU-twopnk&#41; &#43; fma&#40;jU, p, jL&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L453'>
@@ -4569,7 +4606,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L454'>
@@ -4579,7 +4616,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L455'>
@@ -4589,7 +4626,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function expm1&#40;x::Float32&#41;</span>
           </td>
         </tr>
         <tr id='L456'>
@@ -4599,7 +4636,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, mime::MIME&quot;text/html&quot;, ms::MethodList&#41;</span>
+            <span class='code'>    x &gt; MAX_EXP&#40;Float32&#41; &amp;&amp; return Inf32</span>
           </td>
         </tr>
         <tr id='L457'>
@@ -4609,7 +4646,7 @@
           <td>
             
             
-            <span class='code'>    mt &#61; ms.mt</span>
+            <span class='code'>    x &lt; MIN_EXP&#40;Float32&#41; &amp;&amp; return -1f0</span>
           </td>
         </tr>
         <tr id='L458'>
@@ -4619,7 +4656,7 @@
           <td>
             
             
-            <span class='code'>    show_method_list_header&#40;io, ms, str -&gt; &quot;&lt;b&gt;&quot;*str*&quot;&lt;/b&gt;&quot;&#41;</span>
+            <span class='code'>    if -0.2876821f0 &lt;&#61;x &lt;&#61; 0.22314355f0</span>
           </td>
         </tr>
         <tr id='L459'>
@@ -4629,7 +4666,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&lt;ul&gt;&quot;&#41;</span>
+            <span class='code'>        return expm1_small&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L460'>
@@ -4639,7 +4676,7 @@
           <td>
             
             
-            <span class='code'>    for meth in ms</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L461'>
@@ -4649,7 +4686,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;&lt;li&gt; &quot;&#41;</span>
+            <span class='code'>    x &#61; Float64&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L462'>
@@ -4659,7 +4696,7 @@
           <td>
             
             
-            <span class='code'>        show&#40;io, mime, meth&#41;</span>
+            <span class='code'>    N_float &#61; round&#40;x*Ln2INV&#40;Float64&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L463'>
@@ -4669,7 +4706,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;&lt;/li&gt; &quot;&#41;</span>
+            <span class='code'>    N &#61; unsafe_trunc&#40;Int64, N_float&#41;</span>
           </td>
         </tr>
         <tr id='L464'>
@@ -4679,7 +4716,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, Ln2&#40;Float64&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L465'>
@@ -4689,7 +4726,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&lt;/ul&gt;&quot;&#41;</span>
+            <span class='code'>    hi &#61; evalpoly&#40;r, &#40;1.0, .5, 0.16666667546642386, 0.041666183019487026,</span>
           </td>
         </tr>
         <tr id='L466'>
@@ -4699,7 +4736,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                      0.008332997481506921, 0.0013966479175977883, 0.0002004037059220124&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L467'>
@@ -4709,7 +4746,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    small_part &#61; r*hi</span>
           </td>
         </tr>
         <tr id='L468'>
@@ -4719,7 +4756,7 @@
           <td>
             
             
-            <span class='code'>show&#40;io::IO, mime::MIME&quot;text/html&quot;, mt::Core.MethodTable&#41; &#61; show&#40;io, mime, MethodList&#40;mt&#41;&#41;</span>
+            <span class='code'>    twopk &#61; reinterpret&#40;Float64, &#40;N&#43;1023&#41; &lt;&lt; 52&#41;</span>
           </td>
         </tr>
         <tr id='L469'>
@@ -4729,7 +4766,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return Float32&#40;muladd&#40;twopk, small_part, twopk-1.0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L470'>
@@ -4739,7 +4776,7 @@
           <td>
             
             
-            <span class='code'># pretty-printing of AbstractVector&#123;Method&#125;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L471'>
@@ -4749,7 +4786,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, mime::MIME&quot;text/plain&quot;, mt::AbstractVector&#123;Method&#125;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L472'>
@@ -4759,7 +4796,7 @@
           <td>
             
             
-            <span class='code'>    last_shown_line_infos &#61; get&#40;io, :last_shown_line_infos, nothing&#41;</span>
+            <span class='code'>function expm1&#40;x::Float16&#41;</span>
           </td>
         </tr>
         <tr id='L473'>
@@ -4769,7 +4806,7 @@
           <td>
             
             
-            <span class='code'>    last_shown_line_infos &#61;&#61;&#61; nothing || empty&#33;&#40;last_shown_line_infos&#41;</span>
+            <span class='code'>    x &gt; MAX_EXP&#40;Float16&#41; &amp;&amp; return Inf16</span>
           </td>
         </tr>
         <tr id='L474'>
@@ -4779,7 +4816,7 @@
           <td>
             
             
-            <span class='code'>    first &#61; true</span>
+            <span class='code'>    x &lt; MIN_EXP&#40;Float16&#41; &amp;&amp; return Float16&#40;-1.0&#41;</span>
           </td>
         </tr>
         <tr id='L475'>
@@ -4789,7 +4826,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;i, m&#41; in enumerate&#40;mt&#41;</span>
+            <span class='code'>    x &#61; Float32&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L476'>
@@ -4799,7 +4836,7 @@
           <td>
             
             
-            <span class='code'>        first || println&#40;io&#41;</span>
+            <span class='code'>    if -0.2876821f0 &lt;&#61;x &lt;&#61; 0.22314355f0</span>
           </td>
         </tr>
         <tr id='L477'>
@@ -4809,7 +4846,7 @@
           <td>
             
             
-            <span class='code'>        first &#61; false</span>
+            <span class='code'>        return Float16&#40;x*evalpoly&#40;x, &#40;1f0, .5f0, 0.16666628f0, 0.04166785f0, 0.008351848f0, 0.0013675707f0&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L478'>
@@ -4819,7 +4856,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;&#91;&#36;&#40;i&#41;&#93; &quot;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L479'>
@@ -4829,7 +4866,7 @@
           <td>
             
             
-            <span class='code'>        show&#40;io, m&#41;</span>
+            <span class='code'>    N_float &#61; round&#40;x*Ln2INV&#40;Float32&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L480'>
@@ -4839,7 +4876,7 @@
           <td>
             
             
-            <span class='code'>        file, line &#61; updated_methodloc&#40;m&#41;</span>
+            <span class='code'>    N &#61; unsafe_trunc&#40;Int32, N_float&#41;</span>
           </td>
         </tr>
         <tr id='L481'>
@@ -4849,7 +4886,7 @@
           <td>
             
             
-            <span class='code'>        if last_shown_line_infos &#33;&#61;&#61; nothing</span>
+            <span class='code'>    r &#61; muladd&#40;N_float, Ln2&#40;Float32&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L482'>
@@ -4859,7 +4896,7 @@
           <td>
             
             
-            <span class='code'>            push&#33;&#40;last_shown_line_infos, &#40;string&#40;file&#41;, line&#41;&#41;</span>
+            <span class='code'>    hi &#61; evalpoly&#40;r, &#40;1f0, .5f0, 0.16666667f0, 0.041665863f0, 0.008333111f0, 0.0013981499f0, 0.00019983904f0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L483'>
@@ -4869,7 +4906,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    small_part &#61; r*hi</span>
           </td>
         </tr>
         <tr id='L484'>
@@ -4879,7 +4916,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    twopk &#61; reinterpret&#40;Float32, &#40;N&#43;Int32&#40;127&#41;&#41; &lt;&lt; Int32&#40;23&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L485'>
@@ -4889,7 +4926,7 @@
           <td>
             
             
-            <span class='code'>    first &amp;&amp; summary&#40;io, mt&#41;</span>
+            <span class='code'>    return Float16&#40;muladd&#40;twopk, small_part, twopk-1f0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L486'>
@@ -4899,7 +4936,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L487'>
@@ -4909,7 +4946,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L488'>
@@ -4919,7 +4956,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L489'>
@@ -4929,7 +4966,7 @@
           <td>
             
             
-            <span class='code'>function show&#40;io::IO, mime::MIME&quot;text/html&quot;, mt::AbstractVector&#123;Method&#125;&#41;</span>
+            <span class='code'>    expm1&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L490'>
@@ -4939,7 +4976,7 @@
           <td>
             
             
-            <span class='code'>    summary&#40;io, mt&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L491'>
@@ -4949,7 +4986,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;mt&#41;</span>
+            <span class='code'>Accurately compute &#96;&#96;e^x-1&#96;&#96;. It avoids the loss of precision involved in the direct</span>
           </td>
         </tr>
         <tr id='L492'>
@@ -4959,7 +4996,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;:&lt;ul&gt;&quot;&#41;</span>
+            <span class='code'>evaluation of exp&#40;x&#41;-1 for small values of x.</span>
           </td>
         </tr>
         <tr id='L493'>
@@ -4969,7 +5006,7 @@
           <td>
             
             
-            <span class='code'>        for d in mt</span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L494'>
@@ -4979,7 +5016,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;&lt;li&gt; &quot;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L495'>
@@ -4989,7 +5026,7 @@
           <td>
             
             
-            <span class='code'>            show&#40;io, mime, d&#41;</span>
+            <span class='code'>julia&gt; expm1&#40;1e-16&#41;</span>
           </td>
         </tr>
         <tr id='L496'>
@@ -4999,7 +5036,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>1.0e-16</span>
           </td>
         </tr>
         <tr id='L497'>
@@ -5009,7 +5046,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, &quot;&lt;/ul&gt;&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L498'>
@@ -5019,7 +5056,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>julia&gt; exp&#40;1e-16&#41; - 1</span>
           </td>
         </tr>
         <tr id='L499'>
@@ -5029,7 +5066,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>0.0</span>
           </td>
         </tr>
         <tr id='L500'>
@@ -5039,7 +5076,27 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&#96;&#96;&#96;</span>
+          </td>
+        </tr>
+        <tr id='L501'>
+          <td class='lineno'>501</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>&quot;&quot;&quot;</span>
+          </td>
+        </tr>
+        <tr id='L502'>
+          <td class='lineno'>502</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>expm1&#40;x&#41;</span>
           </td>
         </tr>
       </tbody>

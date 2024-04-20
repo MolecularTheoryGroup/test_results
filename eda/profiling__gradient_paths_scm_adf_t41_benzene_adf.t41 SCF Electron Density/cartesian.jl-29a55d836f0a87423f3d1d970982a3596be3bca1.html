@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/abstractlattice.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/cartesian.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sat, 20 Apr 2024 22:32:07
+        Generated on Sat, 20 Apr 2024 23:39:54
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># TODO add more documentations</span>
+            <span class='code'># This file is a part of Julia. License is MIT: https://julialang.org/license</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>function widenlattice end</span>
+            <span class='code'>module Cartesian</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>function is_valid_lattice_norec end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>export @nloops, @nref, @ncall, @nexprs, @nextract, @nall, @nany, @ntuple, @nif</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    struct JLTypeLattice &lt;: AbstractLattice</span>
+            <span class='code'>### Cartesian-specific macros</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>A singleton type representing the lattice of Julia types, without any inference extensions.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @nloops N itersym rangeexpr bodyexpr</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>struct JLTypeLattice &lt;: AbstractLattice; end</span>
+            <span class='code'>    @nloops N itersym rangeexpr preexpr bodyexpr</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;::JLTypeLattice&#41; &#61; error&#40;&quot;Type lattice is the least-precise lattice available&quot;&#41;</span>
+            <span class='code'>    @nloops N itersym rangeexpr preexpr postexpr bodyexpr</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::JLTypeLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, Type&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Generate &#96;N&#96; nested loops, using &#96;itersym&#96; as the prefix for the iteration variables.</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;rangeexpr&#96; may be an anonymous-function expression, or a simple symbol &#96;var&#96; in which case</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    struct ConstsLattice &lt;: AbstractLattice</span>
+            <span class='code'>the range is &#96;axes&#40;var, d&#41;&#96; for dimension &#96;d&#96;.</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>A lattice extending &#96;JLTypeLattice&#96; and adjoining &#96;Const&#96; and &#96;PartialTypeVar&#96;.</span>
+            <span class='code'>Optionally, you can provide &quot;pre&quot; and &quot;post&quot; expressions. These get executed first and last,</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>respectively, in the body of each loop. For example:</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>struct ConstsLattice &lt;: AbstractLattice; end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;::ConstsLattice&#41; &#61; JLTypeLattice&#40;&#41;</span>
+            <span class='code'>    @nloops 2 i A d -&gt; j_d &#61; min&#40;i_d, 5&#41; begin</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::ConstsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, Const&#41; || isa&#40;elem, PartialTypeVar&#41;</span>
+            <span class='code'>        s &#43;&#61; @nref 2 A j</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>    struct PartialsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>would generate:</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>A lattice extending a base lattice &#96;𝕃&#96; and adjoining &#96;PartialStruct&#96; and &#96;PartialOpaque&#96;.</span>
+            <span class='code'>    for i_2 &#61; axes&#40;A, 2&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        j_2 &#61; min&#40;i_2, 5&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>struct PartialsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>        for i_1 &#61; axes&#40;A, 1&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>    parent::𝕃</span>
+            <span class='code'>            j_1 &#61; min&#40;i_1, 5&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            s &#43;&#61; A&#91;j_1, j_2&#93;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;𝕃::PartialsLattice&#41; &#61; 𝕃.parent</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::PartialsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, PartialStruct&#41; || isa&#40;elem, PartialOpaque&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>If you want just a post-expression, supply &#91;&#96;nothing&#96;&#93;&#40;@ref&#41; for the pre-expression. Using</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>    struct ConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>parentheses and semicolons, you can supply multi-statement expressions.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>A lattice extending a base lattice &#96;𝕃&#96; and adjoining &#96;Conditional&#96;.</span>
+            <span class='code'>macro nloops&#40;N, itersym, rangeexpr, args...&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    _nloops&#40;N, itersym, rangeexpr, args...&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>struct ConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>    parent::𝕃</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function _nloops&#40;N::Int, itersym::Symbol, arraysym::Symbol, args::Expr...&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;𝕃::ConditionalsLattice&#41; &#61; 𝕃.parent</span>
+            <span class='code'>    @gensym d</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::ConditionalsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, Conditional&#41;</span>
+            <span class='code'>    _nloops&#40;N, itersym, :&#40;&#36;d-&gt;Base.axes&#40;&#36;arraysym, &#36;d&#41;&#41;, args...&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    struct InterConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>function _nloops&#40;N::Int, itersym::Symbol, rangeexpr::Expr, args::Expr...&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if rangeexpr.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>A lattice extending a base lattice &#96;𝕃&#96; and adjoining &#96;InterConditional&#96;.</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;second argument must be an anonymous function expression to compute the range&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>struct InterConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>    if &#33;&#40;1 &lt;&#61; length&#40;args&#41; &lt;&#61; 3&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>    parent::𝕃</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;number of arguments must be 1 ≤ length&#40;args&#41; ≤ 3, got &#36;nargs&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;𝕃::InterConditionalsLattice&#41; &#61; 𝕃.parent</span>
+            <span class='code'>    body &#61; args&#91;end&#93;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::InterConditionalsLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, InterConditional&#41;</span>
+            <span class='code'>    ex &#61; Expr&#40;:escape, body&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    for dim &#61; 1:N</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        itervar &#61; inlineanonymous&#40;itersym, dim&#41;</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>    struct MustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125;</span>
+            <span class='code'>        rng &#61; inlineanonymous&#40;rangeexpr, dim&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        preexpr &#61; length&#40;args&#41; &gt; 1 ? inlineanonymous&#40;args&#91;1&#93;, dim&#41; : &#40;:&#40;nothing&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>A lattice extending lattice &#96;𝕃&#96; and adjoining &#96;MustAlias&#96;.</span>
+            <span class='code'>        postexpr &#61; length&#40;args&#41; &gt; 2 ? inlineanonymous&#40;args&#91;2&#93;, dim&#41; : &#40;:&#40;nothing&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>        ex &#61; quote</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>struct MustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>            for &#36;&#40;esc&#40;itervar&#41;&#41; &#61; &#36;&#40;esc&#40;rng&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,17 +655,31 @@
           <td>
             
             
-            <span class='code'>    parent::𝕃</span>
+            <span class='code'>                &#36;&#40;esc&#40;preexpr&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
           <td class='lineno'>64</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>end</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in macro expansion
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from _unsafe_getindex&#33;
+              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L912'>line 912</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='multidimensional.jl-13de23a93aa8580037bae9a85475d6ef9853818f.html#L917'>macro expansion</a>
+              <br />
+            </div>
+            <span class='code'>                &#36;ex</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +689,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;𝕃::MustAliasesLattice&#41; &#61; 𝕃.parent</span>
+            <span class='code'>                &#36;&#40;esc&#40;postexpr&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +699,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::MustAliasesLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, MustAlias&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +709,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +719,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +729,7 @@
           <td>
             
             
-            <span class='code'>    struct InterMustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125;</span>
+            <span class='code'>    ex</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +739,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +749,7 @@
           <td>
             
             
-            <span class='code'>A lattice extending lattice &#96;𝕃&#96; and adjoining &#96;InterMustAlias&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L72'>
@@ -755,7 +769,7 @@
           <td>
             
             
-            <span class='code'>struct InterMustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>    @nref N A indexexpr</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +779,7 @@
           <td>
             
             
-            <span class='code'>    parent::𝕃</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Generate expressions like &#96;A&#91;i_1, i_2, ...&#93;&#96;. &#96;indexexpr&#96; can either be an iteration-symbol</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;𝕃::InterMustAliasesLattice&#41; &#61; 𝕃.parent</span>
+            <span class='code'>prefix, or an anonymous-function expression.</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::InterMustAliasesLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, InterMustAlias&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>const AnyConditionalsLattice&#123;𝕃&lt;:AbstractLattice&#125; &#61; Union&#123;ConditionalsLattice&#123;𝕃&#125;, InterConditionalsLattice&#123;𝕃&#125;&#125;</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>const AnyMustAliasesLattice&#123;𝕃&lt;:AbstractLattice&#125; &#61; Union&#123;MustAliasesLattice&#123;𝕃&#125;, InterMustAliasesLattice&#123;𝕃&#125;&#125;</span>
+            <span class='code'>julia&gt; @macroexpand Base.Cartesian.@nref 3 A i</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>:&#40;A&#91;i_1, i_2, i_3&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'>const SimpleInferenceLattice &#61; typeof&#40;PartialsLattice&#40;ConstsLattice&#40;&#41;&#41;&#41;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>const BaseInferenceLattice &#61; typeof&#40;ConditionalsLattice&#40;SimpleInferenceLattice.instance&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'>const IPOResultLattice &#61; typeof&#40;InterConditionalsLattice&#40;SimpleInferenceLattice.instance&#41;&#41;</span>
+            <span class='code'>macro nref&#40;N::Int, A::Symbol, ex&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:ref, A, vars...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>    struct InferenceLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -915,7 +929,7 @@
           <td>
             
             
-            <span class='code'>The full lattice used for abstract interpretation during inference.</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>Extends a base lattice &#96;𝕃&#96; and adjoins &#96;LimitedAccuracy&#96;.</span>
+            <span class='code'>    @ncall N f sym...</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'>struct InferenceLattice&#123;𝕃&lt;:AbstractLattice&#125; &lt;: AbstractLattice</span>
+            <span class='code'>Generate a function call expression. &#96;sym&#96; represents any number of function arguments, the</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>    parent::𝕃</span>
+            <span class='code'>last of which may be an anonymous-function expression and is expanded into &#96;N&#96; arguments.</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;𝕃::InferenceLattice&#41; &#61; 𝕃.parent</span>
+            <span class='code'>For example, &#96;@ncall 3 func a&#96; generates</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'>is_valid_lattice_norec&#40;::InferenceLattice, @nospecialize&#40;elem&#41;&#41; &#61; isa&#40;elem, LimitedAccuracy&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    func&#40;a_1, a_2, a_3&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>    tmeet&#40;𝕃::AbstractLattice, a, b::Type&#41;</span>
+            <span class='code'>while &#96;@ncall 2 func a b i-&gt;c&#91;i&#93;&#96; yields</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>Compute the lattice meet of lattice elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;.</span>
+            <span class='code'>    func&#40;a, b, c&#91;1&#93;, c&#91;2&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1059,7 @@
           <td>
             
             
-            <span class='code'>If &#96;𝕃&#96; is &#96;JLTypeLattice&#96;, this is equivalent to type intersection.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1069,7 @@
           <td>
             
             
-            <span class='code'>Note that currently &#96;b&#96; is restricted to being a type</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1079,7 @@
           <td>
             
             
-            <span class='code'>&#40;interpreted as a lattice element in the &#96;JLTypeLattice&#96; sub-lattice of &#96;𝕃&#96;&#41;.</span>
+            <span class='code'>macro ncall&#40;N::Int, f, args...&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1089,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    pre &#61; args&#91;1:end-1&#93;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1099,7 @@
           <td>
             
             
-            <span class='code'>function tmeet end</span>
+            <span class='code'>    ex &#61; args&#91;end&#93;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1109,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1119,7 @@
           <td>
             
             
-            <span class='code'>function tmeet&#40;::JLTypeLattice, @nospecialize&#40;a::Type&#41;, @nospecialize&#40;b::Type&#41;&#41;</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:call, f, pre..., vars...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>    ti &#61; typeintersect&#40;a, b&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1139,7 @@
           <td>
             
             
-            <span class='code'>    valid_as_lattice&#40;ti&#41; || return Bottom</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1149,7 @@
           <td>
             
             
-            <span class='code'>    return ti</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    @nexprs N expr</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1165,7 +1179,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>Generate &#96;N&#96; expressions. &#96;expr&#96; should be an anonymous-function expression.</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1189,7 @@
           <td>
             
             
-            <span class='code'>    tmerge&#40;𝕃::AbstractLattice, a, b&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1199,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Examples</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1209,7 @@
           <td>
             
             
-            <span class='code'>Compute a lattice join of elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;.</span>
+            <span class='code'>&#96;&#96;&#96;jldoctest</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1219,7 @@
           <td>
             
             
-            <span class='code'>Note that the computed element need not be the least upper bound of &#96;a&#96; and</span>
+            <span class='code'>julia&gt; @macroexpand Base.Cartesian.@nexprs 4 i -&gt; y&#91;i&#93; &#61; A&#91;i&#43;j&#93;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1229,7 @@
           <td>
             
             
-            <span class='code'>&#96;b&#96;, but rather, we impose additional limitations on the complexity of the</span>
+            <span class='code'>quote</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1239,7 @@
           <td>
             
             
-            <span class='code'>joined element, ideally without losing too much precision in common cases and</span>
+            <span class='code'>    y&#91;1&#93; &#61; A&#91;1 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1249,7 @@
           <td>
             
             
-            <span class='code'>remaining mostly associative and commutative.</span>
+            <span class='code'>    y&#91;2&#93; &#61; A&#91;2 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1259,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    y&#91;3&#93; &#61; A&#91;3 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1269,7 @@
           <td>
             
             
-            <span class='code'>function tmerge end</span>
+            <span class='code'>    y&#91;4&#93; &#61; A&#91;4 &#43; j&#93;</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1279,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1289,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;&#96;&#96;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1299,7 @@
           <td>
             
             
-            <span class='code'>    tmerge_field&#40;𝕃::AbstractLattice, a, b&#41; -&gt; nothing or lattice element</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1309,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>macro nexprs&#40;N::Int, ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1319,7 @@
           <td>
             
             
-            <span class='code'>Compute a lattice join of elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;,</span>
+            <span class='code'>    exs &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1329,7 @@
           <td>
             
             
-            <span class='code'>where &#96;a&#96; and &#96;b&#96; are fields of &#96;PartialStruct&#96; or &#96;Const&#96;.</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:block, exs...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1339,7 @@
           <td>
             
             
-            <span class='code'>This is an opt-in interface to allow external lattice implementation to provide its own</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1349,7 @@
           <td>
             
             
-            <span class='code'>field-merge strategy. If it returns &#96;nothing&#96;, &#96;tmerge&#40;::PartialsLattice, ...&#41;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1359,7 @@
           <td>
             
             
-            <span class='code'>will use the default aggressive type merge implementation that does not use &#96;tmerge&#96;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1369,7 @@
           <td>
             
             
-            <span class='code'>recursively to reach convergence.</span>
+            <span class='code'>    @nextract N esym isym</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1379,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1389,7 @@
           <td>
             
             
-            <span class='code'>function tmerge_field end</span>
+            <span class='code'>Generate &#96;N&#96; variables &#96;esym_1&#96;, &#96;esym_2&#96;, ..., &#96;esym_N&#96; to extract values from &#96;isym&#96;.</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1399,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;isym&#96; can be either a &#96;Symbol&#96; or anonymous-function expression.</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1409,7 @@
           <td>
             
             
-            <span class='code'>function tmerge_field&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1419,7 @@
           <td>
             
             
-            <span class='code'>    return tmerge_field&#40;widenlattice&#40;𝕃&#41;, a, b&#41;</span>
+            <span class='code'>&#96;@nextract 2 x y&#96; would generate</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1429,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1439,7 @@
           <td>
             
             
-            <span class='code'>tmerge_field&#40;::JLTypeLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; nothing</span>
+            <span class='code'>    x_1 &#61; y&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1449,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    x_2 &#61; y&#91;2&#93;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1459,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1469,7 @@
           <td>
             
             
-            <span class='code'>    ⊑&#40;𝕃::AbstractLattice, a, b&#41;</span>
+            <span class='code'>while &#96;@nextract 3 x d-&gt;y&#91;2d-1&#93;&#96; yields</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1475,7 +1489,7 @@
           <td>
             
             
-            <span class='code'>Compute the lattice ordering &#40;i.e. less-than-or-equal&#41; relationship between</span>
+            <span class='code'>    x_1 &#61; y&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1499,7 @@
           <td>
             
             
-            <span class='code'>lattice elements &#96;a&#96; and &#96;b&#96; over the lattice &#96;𝕃&#96;.</span>
+            <span class='code'>    x_2 &#61; y&#91;3&#93;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1509,7 @@
           <td>
             
             
-            <span class='code'>If &#96;𝕃&#96; is &#96;JLTypeLattice&#96;, this is equivalent to subtyping.</span>
+            <span class='code'>    x_3 &#61; y&#91;5&#93;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1519,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1529,7 @@
           <td>
             
             
-            <span class='code'>function ⊑ end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1539,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>macro nextract&#40;N::Int, esym::Symbol, isym::Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1549,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer ⊑&#40;::JLTypeLattice, @nospecialize&#40;a::Type&#41;, @nospecialize&#40;b::Type&#41;&#41; &#61; a &lt;: b</span>
+            <span class='code'>    aexprs &#61; Any&#91; Expr&#40;:escape, Expr&#40;:&#40;&#61;&#41;, inlineanonymous&#40;esym, i&#41;, :&#40;&#40;&#36;isym&#41;&#91;&#36;i&#93;&#41;&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1559,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Expr&#40;:block, aexprs...&#41;</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1569,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1579,7 @@
           <td>
             
             
-            <span class='code'>    ⊏&#40;𝕃::AbstractLattice, a, b&#41; -&gt; Bool</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1589,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>macro nextract&#40;N::Int, esym::Symbol, ex::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1599,7 @@
           <td>
             
             
-            <span class='code'>The strict partial order over the type inference lattice.</span>
+            <span class='code'>    aexprs &#61; Any&#91; Expr&#40;:escape, Expr&#40;:&#40;&#61;&#41;, inlineanonymous&#40;esym, i&#41;, inlineanonymous&#40;ex,i&#41;&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1609,7 @@
           <td>
             
             
-            <span class='code'>This is defined as the irreflexive kernel of &#96;⊑&#96;.</span>
+            <span class='code'>    Expr&#40;:block, aexprs...&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1619,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1629,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer ⊏&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; ⊑&#40;𝕃, a, b&#41; &amp;&amp; &#33;⊑&#40;𝕃, b, a&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1639,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1649,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    @nall N expr</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1659,7 @@
           <td>
             
             
-            <span class='code'>    ⋤&#40;𝕃::AbstractLattice, a, b&#41; -&gt; Bool</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1669,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Check whether all of the expressions generated by the anonymous-function expression &#96;expr&#96;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1679,7 @@
           <td>
             
             
-            <span class='code'>This order could be used as a slightly more efficient version of the strict order &#96;⊏&#96;,</span>
+            <span class='code'>evaluate to &#96;true&#96;.</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1689,7 @@
           <td>
             
             
-            <span class='code'>where we can safely assume &#96;a ⊑ b&#96; holds.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1699,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>&#96;@nall 3 d-&gt;&#40;i_d &gt; 1&#41;&#96; would generate the expression &#96;&#40;i_1 &gt; 1 &amp;&amp; i_2 &gt; 1 &amp;&amp; i_3 &gt; 1&#41;&#96;. This</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1709,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer ⋤&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; &#33;⊑&#40;𝕃, b, a&#41;</span>
+            <span class='code'>can be convenient for bounds-checking.</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1719,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1729,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>macro nall&#40;N::Int, criterion::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1739,7 @@
           <td>
             
             
-            <span class='code'>    is_lattice_equal&#40;𝕃::AbstractLattice, a, b&#41; -&gt; Bool</span>
+            <span class='code'>    if criterion.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1749,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;second argument must be an anonymous function expression yielding the criterion&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1759,7 @@
           <td>
             
             
-            <span class='code'>Check if two lattice elements are partial order equivalent.</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1769,7 @@
           <td>
             
             
-            <span class='code'>This is basically &#96;a ⊑ b &amp;&amp; b ⊑ a&#96; in the lattice of &#96;𝕃&#96;</span>
+            <span class='code'>    conds &#61; Any&#91; Expr&#40;:escape, inlineanonymous&#40;criterion, i&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1779,7 @@
           <td>
             
             
-            <span class='code'>but &#40;optionally&#41; with extra performance optimizations.</span>
+            <span class='code'>    Expr&#40;:&amp;&amp;, conds...&#41;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1789,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1799,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_lattice_equal&#40;𝕃::AbstractLattice, @nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1809,7 @@
           <td>
             
             
-            <span class='code'>    a &#61;&#61;&#61; b &amp;&amp; return true</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1819,7 @@
           <td>
             
             
-            <span class='code'>    return ⊑&#40;𝕃, a, b&#41; &amp;&amp; ⊑&#40;𝕃, b, a&#41;</span>
+            <span class='code'>    @nany N expr</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1829,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1839,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Check whether any of the expressions generated by the anonymous-function expression &#96;expr&#96;</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1849,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>evaluate to &#96;true&#96;.</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1859,7 @@
           <td>
             
             
-            <span class='code'>    has_nontrivial_extended_info&#40;𝕃::AbstractLattice, t&#41; -&gt; Bool</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1869,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&#96;@nany 3 d-&gt;&#40;i_d &gt; 1&#41;&#96; would generate the expression &#96;&#40;i_1 &gt; 1 || i_2 &gt; 1 || i_3 &gt; 1&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1879,7 @@
           <td>
             
             
-            <span class='code'>Determines whether the given lattice element &#96;t&#96; of &#96;𝕃&#96; has non-trivial extended lattice</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1889,7 @@
           <td>
             
             
-            <span class='code'>information that would not be available from the type itself.</span>
+            <span class='code'>macro nany&#40;N::Int, criterion::Expr&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1899,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if criterion.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1909,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer has_nontrivial_extended_info&#40;𝕃::AbstractLattice, @nospecialize t&#41; &#61;</span>
+            <span class='code'>        error&#40;&quot;Second argument must be an anonymous function expression yielding the criterion&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1919,7 @@
           <td>
             
             
-            <span class='code'>    has_nontrivial_extended_info&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1915,7 +1929,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function has_nontrivial_extended_info&#40;𝕃::PartialsLattice, @nospecialize t&#41;</span>
+            <span class='code'>    conds &#61; Any&#91; Expr&#40;:escape, inlineanonymous&#40;criterion, i&#41;&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1939,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;t, PartialStruct&#41; &amp;&amp; return true</span>
+            <span class='code'>    Expr&#40;:||, conds...&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1949,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;t, PartialOpaque&#41; &amp;&amp; return true</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1959,7 @@
           <td>
             
             
-            <span class='code'>    return has_nontrivial_extended_info&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1969,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1979,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function has_nontrivial_extended_info&#40;𝕃::ConstsLattice, @nospecialize t&#41;</span>
+            <span class='code'>    @ntuple N expr</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +1989,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;t, PartialTypeVar&#41; &amp;&amp; return true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +1999,7 @@
           <td>
             
             
-            <span class='code'>    if isa&#40;t, Const&#41;</span>
+            <span class='code'>Generates an &#96;N&#96;-tuple. &#96;@ntuple 2 i&#96; would generate &#96;&#40;i_1, i_2&#41;&#96;, and &#96;@ntuple 2 k-&gt;k&#43;1&#96;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2009,7 @@
           <td>
             
             
-            <span class='code'>        val &#61; t.val</span>
+            <span class='code'>would generate &#96;&#40;2,3&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2019,7 @@
           <td>
             
             
-            <span class='code'>        return &#33;issingletontype&#40;typeof&#40;val&#41;&#41; &amp;&amp; &#33;&#40;isa&#40;val, Type&#41; &amp;&amp; hasuniquerep&#40;val&#41;&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2029,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>macro ntuple&#40;N::Int, ex&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2039,7 @@
           <td>
             
             
-            <span class='code'>    return has_nontrivial_extended_info&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'>    vars &#61; Any&#91; inlineanonymous&#40;ex,i&#41; for i &#61; 1:N &#93;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2049,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    Expr&#40;:escape, Expr&#40;:tuple, vars...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2059,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer has_nontrivial_extended_info&#40;::JLTypeLattice, @nospecialize&#40;t&#41;&#41; &#61; false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2075,7 +2089,7 @@
           <td>
             
             
-            <span class='code'>    is_const_prop_profitable_arg&#40;𝕃::AbstractLattice, t&#41; -&gt; Bool</span>
+            <span class='code'>    @nif N conditionexpr expr</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2099,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @nif N conditionexpr expr elseexpr</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2109,7 @@
           <td>
             
             
-            <span class='code'>Determines whether the given lattice element &#96;t&#96; of &#96;𝕃&#96; has new extended lattice information</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2119,7 @@
           <td>
             
             
-            <span class='code'>that should be forwarded along with constant propagation.</span>
+            <span class='code'>Generates a sequence of &#96;if ... elseif ... else ... end&#96; statements. For example:</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2129,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2139,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer is_const_prop_profitable_arg&#40;𝕃::AbstractLattice, @nospecialize t&#41; &#61;</span>
+            <span class='code'>    @nif 3 d-&gt;&#40;i_d &gt;&#61; size&#40;A,d&#41;&#41; d-&gt;&#40;error&#40;&quot;Dimension &quot;, d, &quot; too big&quot;&#41;&#41; d-&gt;println&#40;&quot;All OK&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2149,7 @@
           <td>
             
             
-            <span class='code'>    is_const_prop_profitable_arg&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2159,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_const_prop_profitable_arg&#40;𝕃::PartialsLattice, @nospecialize t&#41;</span>
+            <span class='code'>would generate:</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2169,7 @@
           <td>
             
             
-            <span class='code'>    if isa&#40;t, PartialStruct&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2179,7 @@
           <td>
             
             
-            <span class='code'>        return true # might be a bit aggressive, may want to enable some check like follows:</span>
+            <span class='code'>    if i_1 &gt; size&#40;A, 1&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2189,7 @@
           <td>
             
             
-            <span class='code'>        # for i &#61; 1:length&#40;t.fields&#41;</span>
+            <span class='code'>        error&#40;&quot;Dimension &quot;, 1, &quot; too big&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2199,7 @@
           <td>
             
             
-            <span class='code'>        #     fld &#61; t.fields&#91;i&#93;</span>
+            <span class='code'>    elseif i_2 &gt; size&#40;A, 2&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2209,7 @@
           <td>
             
             
-            <span class='code'>        #     isconstType&#40;fld&#41; &amp;&amp; return true</span>
+            <span class='code'>        error&#40;&quot;Dimension &quot;, 2, &quot; too big&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2219,7 @@
           <td>
             
             
-            <span class='code'>        #     is_const_prop_profitable_arg&#40;fld&#41; &amp;&amp; return true</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2229,7 @@
           <td>
             
             
-            <span class='code'>        #     fld ⊏ fieldtype&#40;t.typ, i&#41; &amp;&amp; return true</span>
+            <span class='code'>        println&#40;&quot;All OK&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2239,7 @@
           <td>
             
             
-            <span class='code'>        # end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2249,7 @@
           <td>
             
             
-            <span class='code'>        # return false</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2259,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>macro nif&#40;N, condition, operation...&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2269,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;t, PartialOpaque&#41; &amp;&amp; return true</span>
+            <span class='code'>    # Handle the final &quot;else&quot;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2279,7 @@
           <td>
             
             
-            <span class='code'>    return is_const_prop_profitable_arg&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'>    ex &#61; esc&#40;inlineanonymous&#40;length&#40;operation&#41; &gt; 1 ? operation&#91;2&#93; : operation&#91;1&#93;, N&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2289,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    # Make the nested if statements</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2299,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_const_prop_profitable_arg&#40;𝕃::ConstsLattice, @nospecialize t&#41;</span>
+            <span class='code'>    for i &#61; N-1:-1:1</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2309,7 @@
           <td>
             
             
-            <span class='code'>    if isa&#40;t, Const&#41;</span>
+            <span class='code'>        ex &#61; Expr&#40;:if, esc&#40;inlineanonymous&#40;condition,i&#41;&#41;, esc&#40;inlineanonymous&#40;operation&#91;1&#93;,i&#41;&#41;, ex&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2305,7 +2319,7 @@
           <td>
             
             
-            <span class='code'>        # don&#39;t consider mutable values useful constants</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2315,7 +2329,7 @@
           <td>
             
             
-            <span class='code'>        val &#61; t.val</span>
+            <span class='code'>    ex</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2325,7 +2339,7 @@
           <td>
             
             
-            <span class='code'>        return isa&#40;val, Symbol&#41; || isa&#40;val, Type&#41; || &#33;ismutable&#40;val&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2335,7 +2349,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2345,7 +2359,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;t, PartialTypeVar&#41; &amp;&amp; return false # this isn&#39;t forwardable</span>
+            <span class='code'>## Utilities</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2355,7 +2369,7 @@
           <td>
             
             
-            <span class='code'>    return is_const_prop_profitable_arg&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2379,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># Simplify expressions like :&#40;d-&gt;3:size&#40;A,d&#41;-3&#41; given an explicit value for d</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2389,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer is_const_prop_profitable_arg&#40;::JLTypeLattice, @nospecialize t&#41; &#61; false</span>
+            <span class='code'>function inlineanonymous&#40;ex::Expr, val&#41;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2399,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if ex.head &#33;&#61;&#61; :-&gt;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2395,7 +2409,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer is_forwardable_argtype&#40;𝕃::AbstractLattice, @nospecialize&#40;x&#41;&#41; &#61;</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;not an anonymous function&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2419,7 @@
           <td>
             
             
-            <span class='code'>    is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2429,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;𝕃::ConditionalsLattice, @nospecialize x&#41;</span>
+            <span class='code'>    if &#33;isa&#40;ex.args&#91;1&#93;, Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2439,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;x, Conditional&#41; &amp;&amp; return true</span>
+            <span class='code'>        throw&#40;ArgumentError&#40;&quot;not a single-argument anonymous function&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2449,7 @@
           <td>
             
             
-            <span class='code'>    return is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2459,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    sym &#61; ex.args&#91;1&#93;::Symbol</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,7 +2469,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;𝕃::PartialsLattice, @nospecialize x&#41;</span>
+            <span class='code'>    ex &#61; ex.args&#91;2&#93;::Expr</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2465,7 +2479,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;x, PartialStruct&#41; &amp;&amp; return true</span>
+            <span class='code'>    exout &#61; lreplace&#40;ex, sym, val&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2475,7 +2489,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;x, PartialOpaque&#41; &amp;&amp; return true</span>
+            <span class='code'>    exout &#61; poplinenum&#40;exout&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2485,7 +2499,7 @@
           <td>
             
             
-            <span class='code'>    return is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
+            <span class='code'>    exprresolve&#40;exout&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2505,7 +2519,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;𝕃::ConstsLattice, @nospecialize x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2515,7 +2529,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;x, Const&#41; &amp;&amp; return true</span>
+            <span class='code'># Given :i and 3, this generates :i_3</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2525,7 +2539,7 @@
           <td>
             
             
-            <span class='code'>    return is_forwardable_argtype&#40;widenlattice&#40;𝕃&#41;, x&#41;</span>
+            <span class='code'>inlineanonymous&#40;base::Symbol, ext&#41; &#61; Symbol&#40;base,&#39;_&#39;,ext&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2535,7 +2549,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2545,7 +2559,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer function is_forwardable_argtype&#40;::JLTypeLattice, @nospecialize x&#41;</span>
+            <span class='code'># Replace a symbol by a value or a &quot;coded&quot; symbol</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2555,7 +2569,7 @@
           <td>
             
             
-            <span class='code'>    return false</span>
+            <span class='code'># E.g., for d &#61; 3,</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2565,7 +2579,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>#    lreplace&#40;:d, :d, 3&#41; -&gt; 3</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2575,7 +2589,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>#    lreplace&#40;:i_d, :d, 3&#41; -&gt; :i_3</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2585,7 +2599,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>#    lreplace&#40;:i_&#123;d-1&#125;, :d, 3&#41; -&gt; :i_2</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2595,7 +2609,7 @@
           <td>
             
             
-            <span class='code'>    widenreturn&#40;𝕃ᵢ::AbstractLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41; -&gt; new_bestguess</span>
+            <span class='code'># This follows LaTeX notation.</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2605,7 +2619,7 @@
           <td>
             
             
-            <span class='code'>    widenreturn_noslotwrapper&#40;𝕃ᵢ::AbstractLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41; -&gt; new_bestguess</span>
+            <span class='code'>struct LReplace&#123;S&lt;:AbstractString&#125;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2615,7 +2629,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    pat_sym::Symbol</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2625,7 +2639,7 @@
           <td>
             
             
-            <span class='code'>Appropriately converts inferred type of a return value &#96;rt&#96; to such a type</span>
+            <span class='code'>    pat_str::S</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2635,7 +2649,7 @@
           <td>
             
             
-            <span class='code'>that we know we can store in the cache and is valid and good inter-procedurally,</span>
+            <span class='code'>    val::Int</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2645,7 +2659,7 @@
           <td>
             
             
-            <span class='code'>E.g. if &#96;rt isa Conditional&#96; then &#96;rt&#96; should be converted to &#96;InterConditional&#96;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2655,7 +2669,7 @@
           <td>
             
             
-            <span class='code'>or the other cachable lattice element.</span>
+            <span class='code'>LReplace&#40;sym::Symbol, val::Integer&#41; &#61; LReplace&#40;sym, string&#40;sym&#41;, val&#41;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2675,7 +2689,7 @@
           <td>
             
             
-            <span class='code'>External lattice &#96;𝕃ᵢ::ExternalLattice&#96; may overload:</span>
+            <span class='code'>lreplace&#40;ex::Expr, sym::Symbol, val&#41; &#61; lreplace&#33;&#40;copy&#40;ex&#41;, LReplace&#40;sym, val&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2685,7 +2699,7 @@
           <td>
             
             
-            <span class='code'>- &#96;widenreturn&#40;𝕃ᵢ::ExternalLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2695,7 +2709,7 @@
           <td>
             
             
-            <span class='code'>- &#96;widenreturn_noslotwrapper&#40;𝕃ᵢ::ExternalLattice, @nospecialize&#40;rt&#41;, info::BestguessInfo&#41;&#96;</span>
+            <span class='code'>function lreplace&#33;&#40;sym::Symbol, r::LReplace&#41;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2705,7 +2719,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    sym &#61;&#61; r.pat_sym &amp;&amp; return r.val</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2715,7 +2729,7 @@
           <td>
             
             
-            <span class='code'>function widenreturn end, function widenreturn_noslotwrapper end</span>
+            <span class='code'>    Symbol&#40;lreplace&#33;&#40;string&#40;sym&#41;, r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2725,7 +2739,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2735,7 +2749,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer is_valid_lattice&#40;𝕃::AbstractLattice, @nospecialize&#40;elem&#41;&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2745,7 +2759,7 @@
           <td>
             
             
-            <span class='code'>    is_valid_lattice_norec&#40;𝕃, elem&#41; &amp;&amp; is_valid_lattice&#40;widenlattice&#40;𝕃&#41;, elem&#41;</span>
+            <span class='code'>function lreplace&#33;&#40;str::AbstractString, r::LReplace&#41;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2755,7 +2769,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer is_valid_lattice&#40;𝕃::JLTypeLattice, @nospecialize&#40;elem&#41;&#41; &#61; is_valid_lattice_norec&#40;𝕃, elem&#41;</span>
+            <span class='code'>    i &#61; firstindex&#40;str&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2765,7 +2779,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    pat &#61; r.pat_str</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2775,7 +2789,7 @@
           <td>
             
             
-            <span class='code'>has_conditional&#40;𝕃::AbstractLattice&#41; &#61; has_conditional&#40;widenlattice&#40;𝕃&#41;&#41;</span>
+            <span class='code'>    j &#61; firstindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2785,7 +2799,7 @@
           <td>
             
             
-            <span class='code'>has_conditional&#40;::AnyConditionalsLattice&#41; &#61; true</span>
+            <span class='code'>    matching &#61; false</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2795,7 +2809,7 @@
           <td>
             
             
-            <span class='code'>has_conditional&#40;::JLTypeLattice&#41; &#61; false</span>
+            <span class='code'>    local istart::Int</span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2805,7 +2819,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    while i &lt;&#61; ncodeunits&#40;str&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2815,7 +2829,7 @@
           <td>
             
             
-            <span class='code'>has_mustalias&#40;𝕃::AbstractLattice&#41; &#61; has_mustalias&#40;widenlattice&#40;𝕃&#41;&#41;</span>
+            <span class='code'>        cstr &#61; str&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2825,7 +2839,7 @@
           <td>
             
             
-            <span class='code'>has_mustalias&#40;::AnyMustAliasesLattice&#41; &#61; true</span>
+            <span class='code'>        i &#61; nextind&#40;str, i&#41;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2835,7 +2849,7 @@
           <td>
             
             
-            <span class='code'>has_mustalias&#40;::JLTypeLattice&#41; &#61; false</span>
+            <span class='code'>        if &#33;matching</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2845,7 +2859,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            if cstr &#33;&#61; &#39;_&#39; || i &gt; ncodeunits&#40;str&#41;</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2855,7 +2869,7 @@
           <td>
             
             
-            <span class='code'>has_extended_unionsplit&#40;𝕃::AbstractLattice&#41; &#61; has_extended_unionsplit&#40;widenlattice&#40;𝕃&#41;&#41;</span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2865,7 +2879,7 @@
           <td>
             
             
-            <span class='code'>has_extended_unionsplit&#40;::AnyMustAliasesLattice&#41; &#61; true</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2875,7 +2889,7 @@
           <td>
             
             
-            <span class='code'>has_extended_unionsplit&#40;::JLTypeLattice&#41; &#61; false</span>
+            <span class='code'>            istart &#61; i</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2885,7 +2899,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            cstr &#61; str&#91;i&#93;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2895,36 +2909,17 @@
           <td>
             
             
-            <span class='code'># Curried versions</span>
+            <span class='code'>            i &#61; nextind&#40;str, i&#41;</span>
           </td>
         </tr>
         <tr id='L288'>
           <td class='lineno'>288</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              2 &#40;0 &#37;&#41;
-              samples spent in #347
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from typeassert_nothrow
-              <a href='tfuncs.jl-163a03888ce600d9f7e3c1d6ff96d9eb53d0d41e.html#L810'>line 810</a>
-              <br />
-              
-              1 &#40;50 &#37;&#41; &#40;incl.&#41;
-              when called from bool_rt_to_conditional
-              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L2796'>line 2796</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='typelattice.jl-17e93855468f3c38ec3425a7374f61845652c009.html#L396'>⊑</a>
-              <br />
-            </div>
-            <span class='code'>⊑&#40;lattice::AbstractLattice&#41; &#61; &#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; -&gt; ⊑&#40;lattice, a, b&#41;</span>
+            
+            
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2934,7 +2929,7 @@
           <td>
             
             
-            <span class='code'>⊏&#40;lattice::AbstractLattice&#41; &#61; &#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; -&gt; ⊏&#40;lattice, a, b&#41;</span>
+            <span class='code'>        if j &lt;&#61; lastindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2944,7 +2939,7 @@
           <td>
             
             
-            <span class='code'>⋤&#40;lattice::AbstractLattice&#41; &#61; &#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; -&gt; ⋤&#40;lattice, a, b&#41;</span>
+            <span class='code'>            cr &#61; pat&#91;j&#93;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2954,7 +2949,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            j &#61; nextind&#40;pat, j&#41;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2964,7 +2959,7 @@
           <td>
             
             
-            <span class='code'># Fallbacks for external packages using these methods</span>
+            <span class='code'>            if cstr &#61;&#61; cr</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2974,7 +2969,7 @@
           <td>
             
             
-            <span class='code'>const fallback_lattice &#61; InferenceLattice&#40;BaseInferenceLattice.instance&#41;</span>
+            <span class='code'>                matching &#61; true</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2984,7 +2979,7 @@
           <td>
             
             
-            <span class='code'>const fallback_ipo_lattice &#61; InferenceLattice&#40;IPOResultLattice.instance&#41;</span>
+            <span class='code'>            else</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2994,7 +2989,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                matching &#61; false</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -3004,7 +2999,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer @nospecialize&#40;a&#41; ⊑ @nospecialize&#40;b&#41; &#61; ⊑&#40;fallback_lattice, a, b&#41;</span>
+            <span class='code'>                j &#61; firstindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3014,7 +3009,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer @nospecialize&#40;a&#41; ⊏ @nospecialize&#40;b&#41; &#61; ⊏&#40;fallback_lattice, a, b&#41;</span>
+            <span class='code'>                i &#61; istart</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3024,7 +3019,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer @nospecialize&#40;a&#41; ⋤ @nospecialize&#40;b&#41; &#61; ⋤&#40;fallback_lattice, a, b&#41;</span>
+            <span class='code'>                continue</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3034,7 +3029,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer tmeet&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; tmeet&#40;fallback_lattice, a, b&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3044,7 +3039,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer tmerge&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; tmerge&#40;fallback_lattice, a, b&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3054,7 +3049,7 @@
           <td>
             
             
-            <span class='code'>@nospecializeinfer is_lattice_equal&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; &#61; is_lattice_equal&#40;fallback_lattice, a, b&#41;</span>
+            <span class='code'>        if matching &amp;&amp; j &gt; lastindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3064,7 +3059,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            if i &gt; lastindex&#40;str&#41; || str&#91;i&#93; &#61;&#61; &#39;_&#39;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3074,7 +3069,7 @@
           <td>
             
             
-            <span class='code'># Widenlattice with argument</span>
+            <span class='code'>                # We have a match</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3084,7 +3079,7 @@
           <td>
             
             
-            <span class='code'>widenlattice&#40;::JLTypeLattice, @nospecialize&#40;t&#41;&#41; &#61; widenconst&#40;t&#41;</span>
+            <span class='code'>                return string&#40;str&#91;1:prevind&#40;str, istart&#41;&#93;, r.val, lreplace&#33;&#40;str&#91;i:end&#93;, r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3094,7 +3089,7 @@
           <td>
             
             
-            <span class='code'>function widenlattice&#40;𝕃::AbstractLattice, @nospecialize&#40;t&#41;&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3104,7 +3099,7 @@
           <td>
             
             
-            <span class='code'>    is_valid_lattice_norec&#40;𝕃, t&#41; &amp;&amp; return t</span>
+            <span class='code'>            matching &#61; false</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3114,11 +3109,1071 @@
           <td>
             
             
-            <span class='code'>    widenlattice&#40;widenlattice&#40;𝕃&#41;, t&#41;</span>
+            <span class='code'>            j &#61; firstindex&#40;pat&#41;</span>
           </td>
         </tr>
         <tr id='L308'>
           <td class='lineno'>308</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            i &#61; istart</span>
+          </td>
+        </tr>
+        <tr id='L309'>
+          <td class='lineno'>309</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L310'>
+          <td class='lineno'>310</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L311'>
+          <td class='lineno'>311</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    str</span>
+          </td>
+        </tr>
+        <tr id='L312'>
+          <td class='lineno'>312</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L313'>
+          <td class='lineno'>313</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L314'>
+          <td class='lineno'>314</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function lreplace&#33;&#40;ex::Expr, r::LReplace&#41;</span>
+          </td>
+        </tr>
+        <tr id='L315'>
+          <td class='lineno'>315</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Curly-brace notation, which acts like parentheses</span>
+          </td>
+        </tr>
+        <tr id='L316'>
+          <td class='lineno'>316</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :curly &amp;&amp; length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, Symbol&#41; &amp;&amp; endswith&#40;string&#40;ex.args&#91;1&#93;::Symbol&#41;, &quot;_&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L317'>
+          <td class='lineno'>317</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        excurly &#61; exprresolve&#40;lreplace&#33;&#40;ex.args&#91;2&#93;, r&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L318'>
+          <td class='lineno'>318</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if isa&#40;excurly, Int&#41;</span>
+          </td>
+        </tr>
+        <tr id='L319'>
+          <td class='lineno'>319</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            return Symbol&#40;ex.args&#91;1&#93;::Symbol, excurly&#41;</span>
+          </td>
+        </tr>
+        <tr id='L320'>
+          <td class='lineno'>320</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        else</span>
+          </td>
+        </tr>
+        <tr id='L321'>
+          <td class='lineno'>321</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            ex.args&#91;2&#93; &#61; excurly</span>
+          </td>
+        </tr>
+        <tr id='L322'>
+          <td class='lineno'>322</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            return ex</span>
+          </td>
+        </tr>
+        <tr id='L323'>
+          <td class='lineno'>323</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L324'>
+          <td class='lineno'>324</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L325'>
+          <td class='lineno'>325</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for i in 1:length&#40;ex.args&#41;</span>
+          </td>
+        </tr>
+        <tr id='L326'>
+          <td class='lineno'>326</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        ex.args&#91;i&#93; &#61; lreplace&#33;&#40;ex.args&#91;i&#93;, r&#41;</span>
+          </td>
+        </tr>
+        <tr id='L327'>
+          <td class='lineno'>327</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L328'>
+          <td class='lineno'>328</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    ex</span>
+          </td>
+        </tr>
+        <tr id='L329'>
+          <td class='lineno'>329</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L330'>
+          <td class='lineno'>330</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L331'>
+          <td class='lineno'>331</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>lreplace&#33;&#40;arg, r::LReplace&#41; &#61; arg</span>
+          </td>
+        </tr>
+        <tr id='L332'>
+          <td class='lineno'>332</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L333'>
+          <td class='lineno'>333</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L334'>
+          <td class='lineno'>334</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>poplinenum&#40;arg&#41; &#61; arg</span>
+          </td>
+        </tr>
+        <tr id='L335'>
+          <td class='lineno'>335</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function poplinenum&#40;ex::Expr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L336'>
+          <td class='lineno'>336</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :block</span>
+          </td>
+        </tr>
+        <tr id='L337'>
+          <td class='lineno'>337</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if length&#40;ex.args&#41; &#61;&#61; 1</span>
+          </td>
+        </tr>
+        <tr id='L338'>
+          <td class='lineno'>338</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            return ex.args&#91;1&#93;</span>
+          </td>
+        </tr>
+        <tr id='L339'>
+          <td class='lineno'>339</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        elseif length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, LineNumberNode&#41;</span>
+          </td>
+        </tr>
+        <tr id='L340'>
+          <td class='lineno'>340</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            return ex.args&#91;2&#93;</span>
+          </td>
+        </tr>
+        <tr id='L341'>
+          <td class='lineno'>341</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        elseif &#40;length&#40;ex.args&#41; &#61;&#61; 2 &amp;&amp; isa&#40;ex.args&#91;1&#93;, Expr&#41; &amp;&amp; ex.args&#91;1&#93;.head &#61;&#61;&#61; :line&#41;</span>
+          </td>
+        </tr>
+        <tr id='L342'>
+          <td class='lineno'>342</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            return ex.args&#91;2&#93;</span>
+          </td>
+        </tr>
+        <tr id='L343'>
+          <td class='lineno'>343</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L344'>
+          <td class='lineno'>344</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L345'>
+          <td class='lineno'>345</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    ex</span>
+          </td>
+        </tr>
+        <tr id='L346'>
+          <td class='lineno'>346</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L347'>
+          <td class='lineno'>347</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L348'>
+          <td class='lineno'>348</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>## Resolve expressions at parsing time ##</span>
+          </td>
+        </tr>
+        <tr id='L349'>
+          <td class='lineno'>349</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L350'>
+          <td class='lineno'>350</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>const exprresolve_arith_dict &#61; Dict&#123;Symbol,Function&#125;&#40;:&#43; &#61;&gt; &#43;,</span>
+          </td>
+        </tr>
+        <tr id='L351'>
+          <td class='lineno'>351</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    :- &#61;&gt; -, :* &#61;&gt; *, :/ &#61;&gt; /, :^ &#61;&gt; ^, :div &#61;&gt; div&#41;</span>
+          </td>
+        </tr>
+        <tr id='L352'>
+          <td class='lineno'>352</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>const exprresolve_cond_dict &#61; Dict&#123;Symbol,Function&#125;&#40;:&#40;&#61;&#61;&#41; &#61;&gt; &#61;&#61;,</span>
+          </td>
+        </tr>
+        <tr id='L353'>
+          <td class='lineno'>353</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    :&#40;&lt;&#41; &#61;&gt; &lt;, :&#40;&gt;&#41; &#61;&gt; &gt;, :&#40;&lt;&#61;&#41; &#61;&gt; &lt;&#61;, :&#40;&gt;&#61;&#41; &#61;&gt; &gt;&#61;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L354'>
+          <td class='lineno'>354</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L355'>
+          <td class='lineno'>355</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function exprresolve_arith&#40;ex::Expr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L356'>
+          <td class='lineno'>356</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :call</span>
+          </td>
+        </tr>
+        <tr id='L357'>
+          <td class='lineno'>357</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        callee &#61; ex.args&#91;1&#93;</span>
+          </td>
+        </tr>
+        <tr id='L358'>
+          <td class='lineno'>358</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if isa&#40;callee, Symbol&#41;</span>
+          </td>
+        </tr>
+        <tr id='L359'>
+          <td class='lineno'>359</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if haskey&#40;exprresolve_arith_dict, callee&#41; &amp;&amp; all&#40;Bool&#91;isa&#40;ex.args&#91;i&#93;, Number&#41; for i &#61; 2:length&#40;ex.args&#41;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L360'>
+          <td class='lineno'>360</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                return true, exprresolve_arith_dict&#91;callee&#93;&#40;ex.args&#91;2:end&#93;...&#41;</span>
+          </td>
+        </tr>
+        <tr id='L361'>
+          <td class='lineno'>361</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L362'>
+          <td class='lineno'>362</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L363'>
+          <td class='lineno'>363</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L364'>
+          <td class='lineno'>364</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    false, 0</span>
+          </td>
+        </tr>
+        <tr id='L365'>
+          <td class='lineno'>365</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L366'>
+          <td class='lineno'>366</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>exprresolve_arith&#40;arg&#41; &#61; false, 0</span>
+          </td>
+        </tr>
+        <tr id='L367'>
+          <td class='lineno'>367</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L368'>
+          <td class='lineno'>368</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>exprresolve_conditional&#40;b::Bool&#41; &#61; true, b</span>
+          </td>
+        </tr>
+        <tr id='L369'>
+          <td class='lineno'>369</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function exprresolve_conditional&#40;ex::Expr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L370'>
+          <td class='lineno'>370</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :call</span>
+          </td>
+        </tr>
+        <tr id='L371'>
+          <td class='lineno'>371</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        callee &#61; ex.args&#91;1&#93;</span>
+          </td>
+        </tr>
+        <tr id='L372'>
+          <td class='lineno'>372</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if isa&#40;callee, Symbol&#41;</span>
+          </td>
+        </tr>
+        <tr id='L373'>
+          <td class='lineno'>373</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if callee ∈ keys&#40;exprresolve_cond_dict&#41; &amp;&amp; isa&#40;ex.args&#91;2&#93;, Number&#41; &amp;&amp; isa&#40;ex.args&#91;3&#93;, Number&#41;</span>
+          </td>
+        </tr>
+        <tr id='L374'>
+          <td class='lineno'>374</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                return true, exprresolve_cond_dict&#91;callee&#93;&#40;ex.args&#91;2&#93;, ex.args&#91;3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L375'>
+          <td class='lineno'>375</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L376'>
+          <td class='lineno'>376</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L377'>
+          <td class='lineno'>377</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L378'>
+          <td class='lineno'>378</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    false, false</span>
+          </td>
+        </tr>
+        <tr id='L379'>
+          <td class='lineno'>379</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L380'>
+          <td class='lineno'>380</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>exprresolve_conditional&#40;arg&#41; &#61; false, false</span>
+          </td>
+        </tr>
+        <tr id='L381'>
+          <td class='lineno'>381</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L382'>
+          <td class='lineno'>382</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>exprresolve&#40;arg&#41; &#61; arg</span>
+          </td>
+        </tr>
+        <tr id='L383'>
+          <td class='lineno'>383</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function exprresolve&#40;ex::Expr&#41;</span>
+          </td>
+        </tr>
+        <tr id='L384'>
+          <td class='lineno'>384</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for i &#61; 1:length&#40;ex.args&#41;</span>
+          </td>
+        </tr>
+        <tr id='L385'>
+          <td class='lineno'>385</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        ex.args&#91;i&#93; &#61; exprresolve&#40;ex.args&#91;i&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L386'>
+          <td class='lineno'>386</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L387'>
+          <td class='lineno'>387</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Handle simple arithmetic</span>
+          </td>
+        </tr>
+        <tr id='L388'>
+          <td class='lineno'>388</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    can_eval, result &#61; exprresolve_arith&#40;ex&#41;</span>
+          </td>
+        </tr>
+        <tr id='L389'>
+          <td class='lineno'>389</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if can_eval</span>
+          </td>
+        </tr>
+        <tr id='L390'>
+          <td class='lineno'>390</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return result</span>
+          </td>
+        </tr>
+        <tr id='L391'>
+          <td class='lineno'>391</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    elseif ex.head &#61;&#61;&#61; :call &amp;&amp; &#40;ex.args&#91;1&#93; &#61;&#61;&#61; :&#43; || ex.args&#91;1&#93; &#61;&#61;&#61; :-&#41; &amp;&amp; length&#40;ex.args&#41; &#61;&#61; 3 &amp;&amp; ex.args&#91;3&#93; &#61;&#61; 0</span>
+          </td>
+        </tr>
+        <tr id='L392'>
+          <td class='lineno'>392</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        # simplify x&#43;0 and x-0</span>
+          </td>
+        </tr>
+        <tr id='L393'>
+          <td class='lineno'>393</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return ex.args&#91;2&#93;</span>
+          </td>
+        </tr>
+        <tr id='L394'>
+          <td class='lineno'>394</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L395'>
+          <td class='lineno'>395</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Resolve array references</span>
+          </td>
+        </tr>
+        <tr id='L396'>
+          <td class='lineno'>396</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :ref &amp;&amp; isa&#40;ex.args&#91;1&#93;, Array&#41;</span>
+          </td>
+        </tr>
+        <tr id='L397'>
+          <td class='lineno'>397</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        for i &#61; 2:length&#40;ex.args&#41;</span>
+          </td>
+        </tr>
+        <tr id='L398'>
+          <td class='lineno'>398</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if &#33;isa&#40;ex.args&#91;i&#93;, Real&#41;</span>
+          </td>
+        </tr>
+        <tr id='L399'>
+          <td class='lineno'>399</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                return ex</span>
+          </td>
+        </tr>
+        <tr id='L400'>
+          <td class='lineno'>400</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L401'>
+          <td class='lineno'>401</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L402'>
+          <td class='lineno'>402</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        return ex.args&#91;1&#93;&#91;ex.args&#91;2:end&#93;...&#93;</span>
+          </td>
+        </tr>
+        <tr id='L403'>
+          <td class='lineno'>403</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L404'>
+          <td class='lineno'>404</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Resolve conditionals</span>
+          </td>
+        </tr>
+        <tr id='L405'>
+          <td class='lineno'>405</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if ex.head &#61;&#61;&#61; :if</span>
+          </td>
+        </tr>
+        <tr id='L406'>
+          <td class='lineno'>406</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        can_eval, tf &#61; exprresolve_conditional&#40;ex.args&#91;1&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L407'>
+          <td class='lineno'>407</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if can_eval</span>
+          </td>
+        </tr>
+        <tr id='L408'>
+          <td class='lineno'>408</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            ex &#61; tf ? ex.args&#91;2&#93; : ex.args&#91;3&#93;</span>
+          </td>
+        </tr>
+        <tr id='L409'>
+          <td class='lineno'>409</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L410'>
+          <td class='lineno'>410</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L411'>
+          <td class='lineno'>411</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    ex</span>
+          </td>
+        </tr>
+        <tr id='L412'>
+          <td class='lineno'>412</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L413'>
+          <td class='lineno'>413</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L414'>
+          <td class='lineno'>414</td>
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
