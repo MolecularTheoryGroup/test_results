@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/DataStructures/aD5vv/src/heaps/mutable_binary_heap.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/Interpolations/91PhN/src/scaling/scaling.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 16 Apr 2024 18:11:58
+        Generated on Sat, 20 Apr 2024 22:31:56
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'># Binary heap</span>
+            <span class='code'>export ScaledInterpolation, eachvalue</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>struct MutableBinaryHeapNode&#123;T&#125;</span>
+            <span class='code'>import Base: iterate</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    value::T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>    handle::Int</span>
+            <span class='code'>struct ScaledInterpolation&#123;T,N,ITPT,IT,RT&#125; &lt;: AbstractInterpolationWrapper&#123;T,N,ITPT,IT&#125;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    itp::ITPT</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ranges::RT</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>#################################################</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>#   core implementation</span>
+            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;o1::ScaledInterpolation, o2::ScaledInterpolation&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'>    o1.ranges &#61;&#61; o2.ranges &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>#################################################</span>
+            <span class='code'>    o1.itp &#61;&#61; o2.itp</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>function _heap_bubble_up&#33;&#40;ord::Ordering,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    nodes::Vector&#123;MutableBinaryHeapNode&#123;T&#125;&#125;, nodemap::Vector&#123;Int&#125;, nd_id::Int&#41; where T</span>
+            <span class='code'>Base.parent&#40;A::ScaledInterpolation&#41; &#61; A.itp</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>count_interp_dims&#40;::Type&#123;&lt;:ScaledInterpolation&#123;T,N,ITPT&#125;&#125;, n&#41; where &#123;T,N,ITPT&#125; &#61; count_interp_dims&#40;ITPT, n&#41;</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds nd &#61; nodes&#91;nd_id&#93;</span>
+            <span class='code'>BoundsCheckStyle&#40;sitp::ScaledInterpolation&#41; &#61; BoundsCheckStyle&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    v::T &#61; nd.value</span>
+            <span class='code'>coefficients&#40;A::ScaledInterpolation&#41; &#61; coefficients&#40;A.itp&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    swapped &#61; true  # whether swap happens at last step</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; nd_id</span>
+            <span class='code'>&#96;scale&#40;itp, xs, ys, ...&#41;&#96; scales an existing interpolation object to allow for indexing using other coordinate axes than unit ranges, by wrapping the interpolation object and transforming the indices from the provided axes onto unit ranges upon indexing.</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>    while swapped &amp;&amp; i &gt; 1  # nd is not root</span>
+            <span class='code'>The parameters &#96;xs&#96; etc must be either ranges or linspaces, and there must be one coordinate range/linspace for each dimension of the interpolation object.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>        p &#61; i &gt;&gt; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds nd_p &#61; nodes&#91;p&#93;</span>
+            <span class='code'>For every &#96;NoInterp&#96; dimension of the interpolation object, the range must be exactly &#96;1:size&#40;itp, d&#41;&#96;.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>        if Base.lt&#40;ord, v, nd_p.value&#41;</span>
+            <span class='code'>function scale&#40;itp::AbstractInterpolation&#123;T,N,IT&#125;, ranges::Vararg&#123;AbstractRange,N&#125;&#41; where &#123;T,N,IT&#125;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>            # move parent downward</span>
+            <span class='code'>    check_ranges&#40;itpflag&#40;itp&#41;, axes&#40;itp&#41;, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>            @inbounds nodes&#91;i&#93; &#61; nd_p</span>
+            <span class='code'>    ScaledInterpolation&#123;T,N,typeof&#40;itp&#41;,IT,typeof&#40;ranges&#41;&#125;&#40;itp, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>            @inbounds nodemap&#91;nd_p.handle&#93; &#61; i</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>            i &#61; p</span>
+            <span class='code'>scale&#40;itp::AbstractInterpolation&#123;T,N,IT&#125;, ranges::NTuple&#123;N, &lt;:AbstractRange&#125;&#41; where &#123;T,N,IT&#125; &#61; scale&#40;itp, ranges...&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>            swapped &#61; false</span>
+            <span class='code'>function check_ranges&#40;flags, axs, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    check_range&#40;getfirst&#40;flags&#41;, axs&#91;1&#93;, ranges&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    check_range&#40;ranges&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    check_ranges&#40;getrest&#40;flags&#41;, Base.tail&#40;axs&#41;, Base.tail&#40;ranges&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>    if i &#33;&#61; nd_id</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'>        nodes&#91;i&#93; &#61; nd</span>
+            <span class='code'>check_ranges&#40;::Any, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; nothing</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>        nodemap&#91;nd.handle&#93; &#61; i</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>check_range&#40;::NoInterp, ax, r&#41; &#61; ax &#61;&#61; r || throw&#40;ArgumentError&#40;&quot;The range &#36;r did not equal the corresponding axis of the interpolation object &#36;ax&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>check_range&#40;::Any, ax, r&#41; &#61; length&#40;ax&#41; &#61;&#61; length&#40;r&#41; || throw&#40;ArgumentError&#40;&quot;The range &#36;r is incommensurate with the corresponding axis &#36;ax&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>check_range&#40;r::AbstractRange&#41; &#61; step&#40;r&#41; &gt; zero&#40;eltype&#40;r&#41;&#41; || throw&#40;ArgumentError&#40;&quot;The range &#36;r is in decreasing order; only ranges with positive steps are supported by scale&#40;&#41;.&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>function _heap_bubble_down&#33;&#40;ord::Ordering,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'>    nodes::Vector&#123;MutableBinaryHeapNode&#123;T&#125;&#125;, nodemap::Vector&#123;Int&#125;, nd_id::Int&#41; where T</span>
+            <span class='code'># With regards to size and &#91;&#93;, ScaledInterpolation behaves like the underlying interpolation object</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>size&#40;sitp::ScaledInterpolation&#41; &#61; size&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds nd &#61; nodes&#91;nd_id&#93;</span>
+            <span class='code'>axes&#40;sitp::ScaledInterpolation&#41; &#61; axes&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    v::T &#61; nd.value</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>itpflag&#40;sitp::ScaledInterpolation&#41; &#61; itpflag&#40;sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; length&#40;nodes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +525,7 @@
           <td>
             
             
-            <span class='code'>    last_parent &#61; n &gt;&gt; 1</span>
+            <span class='code'>@propagate_inbounds function Base.getindex&#40;sitp::ScaledInterpolation&#123;T,N&#125;, i::Vararg&#123;Int,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    sitp.itp&#91;i...&#93;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>    swapped &#61; true</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; nd_id</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>lbounds&#40;sitp::ScaledInterpolation&#41; &#61; _lbounds&#40;sitp.ranges, itpflag&#40;sitp.itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>    while swapped &amp;&amp; i &lt;&#61; last_parent</span>
+            <span class='code'>ubounds&#40;sitp::ScaledInterpolation&#41; &#61; _ubounds&#40;sitp.ranges, itpflag&#40;sitp.itp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>        il &#61; i &lt;&lt; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>boundstep&#40;r::StepRange&#41; &#61; r.step / 2</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>        if il &lt; n   # contains both left and right children</span>
+            <span class='code'>boundstep&#40;r::UnitRange&#41; &#61; 1//2</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>            ir &#61; il &#43; 1</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Returns *half* the width of one step of the range.</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>            # determine the better child</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>            @inbounds nd_l &#61; nodes&#91;il&#93;</span>
+            <span class='code'>This function is used to calculate the upper and lower bounds of &#96;OnCell&#96; interpolation objects.</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>            @inbounds nd_r &#61; nodes&#91;ir&#93;</span>
+            <span class='code'>&quot;&quot;&quot; boundstep</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>            if Base.lt&#40;ord, nd_r.value, nd_l.value&#41;</span>
+            <span class='code'>lbound&#40;ax::AbstractRange, ::DegreeBC, ::OnCell&#41; &#61; first&#40;ax&#41; - boundstep&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>                # consider right child</span>
+            <span class='code'>ubound&#40;ax::AbstractRange, ::DegreeBC, ::OnCell&#41; &#61; last&#40;ax&#41; &#43; boundstep&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'>                if Base.lt&#40;ord, nd_r.value, v&#41;</span>
+            <span class='code'>lbound&#40;ax::AbstractRange, ::DegreeBC, ::OnGrid&#41; &#61; first&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>                    @inbounds nodes&#91;i&#93; &#61; nd_r</span>
+            <span class='code'>ubound&#40;ax::AbstractRange, ::DegreeBC, ::OnGrid&#41; &#61; last&#40;ax&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'>                    @inbounds nodemap&#91;nd_r.handle&#93; &#61; i</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>                    i &#61; ir</span>
+            <span class='code'># For &#40;&#41;, we scale the evaluation point</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'>@propagate_inbounds function &#40;sitp::ScaledInterpolation&#123;T,N&#125;&#41;&#40;xs::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>                    swapped &#61; false</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, sitp, xs...&#41; || Base.throw_boundserror&#40;sitp, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,17 +755,31 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    xl &#61; maybe_clamp&#40;sitp.itp, coordslookup&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L74'>
           <td class='lineno'>74</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            else</span>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in ScaledInterpolation
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from rho
+              <a href='data_loaders.jl-5718b3453fac82caec1fadc8e45c17b743d045d3.html#L50'>line 50</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='indexing.jl-dca59f6ef60718d19f7a455a26b7811d1bed0b53.html#L8'>BSplineInterpolation</a>
+              <br />
+            </div>
+            <span class='code'>    @inbounds sitp.itp&#40;xl...&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +789,7 @@
           <td>
             
             
-            <span class='code'>                # consider left child</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +799,7 @@
           <td>
             
             
-            <span class='code'>                if Base.lt&#40;ord, nd_l.value, v&#41;</span>
+            <span class='code'>@propagate_inbounds function &#40;itp::ScaledInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Number,M&#125;&#41; where &#123;T,M,N&#125;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +809,7 @@
           <td>
             
             
-            <span class='code'>                    @inbounds nodes&#91;i&#93; &#61; nd_l</span>
+            <span class='code'>    inds, trailing &#61; split_trailing&#40;itp, x&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +819,7 @@
           <td>
             
             
-            <span class='code'>                    @inbounds nodemap&#91;nd_l.handle&#93; &#61; i</span>
+            <span class='code'>    @boundscheck &#40;check1&#40;trailing&#41; || Base.throw_boundserror&#40;itp, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +829,7 @@
           <td>
             
             
-            <span class='code'>                    i &#61; il</span>
+            <span class='code'>    @assert length&#40;inds&#41; &#61;&#61; N</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +839,7 @@
           <td>
             
             
-            <span class='code'>                else</span>
+            <span class='code'>    itp&#40;inds...&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +849,7 @@
           <td>
             
             
-            <span class='code'>                    swapped &#61; false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +859,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>@inline function &#40;sitp::ScaledInterpolation&#41;&#40;x::Vararg&#123;UnexpandedIndexTypes&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +869,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    xis &#61; to_indices&#40;sitp, x&#41;</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +879,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    xis &#61;&#61; x &amp;&amp; error&#40;&quot;evaluation not supported for ScaledInterpolation at positions &#36;x&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +889,7 @@
           <td>
             
             
-            <span class='code'>        else  # contains only left child</span>
+            <span class='code'>    sitp&#40;xis...&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +899,7 @@
           <td>
             
             
-            <span class='code'>            nd_l &#61; nodes&#91;il&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +909,7 @@
           <td>
             
             
-            <span class='code'>            if Base.lt&#40;ord, nd_l.value, v&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +919,7 @@
           <td>
             
             
-            <span class='code'>                @inbounds nodes&#91;i&#93; &#61; nd_l</span>
+            <span class='code'>&#40;sitp::ScaledInterpolation&#123;T,1&#125;, x::Number, y::Int&#41; where &#123;T&#125; &#61; y &#61;&#61; 1 ? sitp&#40;x&#41; : Base.throw_boundserror&#40;sitp, &#40;x, y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +929,7 @@
           <td>
             
             
-            <span class='code'>                @inbounds nodemap&#91;nd_l.handle&#93; &#61; i</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +939,7 @@
           <td>
             
             
-            <span class='code'>                i &#61; il</span>
+            <span class='code'>@inline function &#40;itp::ScaledInterpolation&#123;T,N&#125;&#41;&#40;x::Vararg&#123;Union&#123;Number,AbstractVector&#125;,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +949,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    &#91;itp&#40;i...&#41; for i in Iterators.product&#40;x...&#41;&#93;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +959,7 @@
           <td>
             
             
-            <span class='code'>                swapped &#61; false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +969,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +979,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>@inline function coordslookup&#40;flags, ranges, xs&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +989,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    item &#61; coordlookup&#40;getfirst&#40;flags&#41;, ranges&#91;1&#93;, xs&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +999,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    &#40;item, coordslookup&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;, Base.tail&#40;xs&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1009,7 @@
           <td>
             
             
-            <span class='code'>    if i &#33;&#61; nd_id</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1019,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds nodes&#91;i&#93; &#61; nd</span>
+            <span class='code'>coordslookup&#40;::Any, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1029,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds nodemap&#91;nd.handle&#93; &#61; i</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1039,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>coordlookup&#40;::NoInterp, r, i&#41; &#61; i</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1049,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>coordlookup&#40;::Flag, r, x&#41; &#61; coordlookup&#40;r, x&#41;</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1053,18 +1067,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in _binary_heap_pop&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _binary_heap_pop&#33;
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L107'>line 107</a>
-              <br />
-            </div>
             
-            <span class='code'>function _binary_heap_pop&#33;&#40;ord::Ordering,</span>
+            
+            <span class='code'>coordlookup&#40;r::AbstractUnitRange, x&#41; &#61; &#40;x - first&#40;r&#41;&#41;/oneunit&#40;eltype&#40;r&#41;&#41; &#43; one&#40;eltype&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1074,7 +1079,7 @@
           <td>
             
             
-            <span class='code'>    nodes::Vector&#123;MutableBinaryHeapNode&#123;T&#125;&#125;, nodemap::Vector&#123;Int&#125;, nd_id::Int&#61;1&#41; where T</span>
+            <span class='code'># coordlookup&#40;i::Bool, r::AbstractRange, x&#41; &#61; i ? coordlookup&#40;r, x&#41; : convert&#40;typeof&#40;coordlookup&#40;r,x&#41;&#41;, x&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1084,7 +1089,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>coordlookup&#40;r::StepRange, x&#41; &#61; &#40;x - r.start&#41; / r.step &#43; one&#40;eltype&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1094,31 +1099,17 @@
           <td>
             
             
-            <span class='code'>    # extract node</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L107'>
           <td class='lineno'>107</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in _binary_heap_pop&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from pop&#33;
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L247'>line 247</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L103'>_binary_heap_pop&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    rt &#61; nodes&#91;nd_id&#93;</span>
+            
+            
+            <span class='code'>coordlookup&#40;r::AbstractRange, x&#41; &#61; &#40;x - first&#40;r&#41;&#41; / step&#40;r&#41; &#43; one&#40;eltype&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1128,7 +1119,7 @@
           <td>
             
             
-            <span class='code'>    v &#61; rt.value</span>
+            <span class='code'>boundstep&#40;r::AbstractRange&#41; &#61; 0.5*step&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1138,7 +1129,7 @@
           <td>
             
             
-            <span class='code'>    @inbounds nodemap&#91;rt.handle&#93; &#61; 0</span>
+            <span class='code'>rescale_gradient&#40;r::AbstractRange, g&#41; &#61; g / step&#40;r&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1158,7 +1149,7 @@
           <td>
             
             
-            <span class='code'>    # if node-to-remove is at end, we can just pop it</span>
+            <span class='code'>basetype&#40;::Type&#123;ScaledInterpolation&#123;T,N,ITPT,IT,RT&#125;&#125;&#41; where &#123;T,N,ITPT,IT,RT&#125; &#61; ITPT</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1168,7 +1159,7 @@
           <td>
             
             
-            <span class='code'>    # the same applies to 1-element heaps that are empty after removing the last element</span>
+            <span class='code'>basetype&#40;sitp::ScaledInterpolation&#41; &#61; basetype&#40;typeof&#40;sitp&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1178,7 +1169,7 @@
           <td>
             
             
-            <span class='code'>    if nd_id &#61;&#61; lastindex&#40;nodes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1188,7 +1179,7 @@
           <td>
             
             
-            <span class='code'>        pop&#33;&#40;nodes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1198,7 +1189,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>@propagate_inbounds function gradient&#40;sitp::ScaledInterpolation&#123;T,N&#125;, xs::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1208,7 +1199,7 @@
           <td>
             
             
-            <span class='code'>        # move the last node to the position of the node-to-remove</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, sitp, xs...&#41; || Base.throw_boundserror&#40;sitp, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1218,17 +1209,31 @@
           <td>
             
             
-            <span class='code'>        @inbounds nodes&#91;nd_id&#93; &#61; new_rt &#61; nodes&#91;end&#93;</span>
+            <span class='code'>    xl &#61; maybe_clamp&#40;sitp.itp, coordslookup&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
           <td class='lineno'>118</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        pop&#33;&#40;nodes&#41;</span>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in gradient
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from grad
+              <a href='data_loaders.jl-5718b3453fac82caec1fadc8e45c17b743d045d3.html#L65'>line 65</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='indexing.jl-dca59f6ef60718d19f7a455a26b7811d1bed0b53.html#L28'>gradient</a>
+              <br />
+            </div>
+            <span class='code'>    g &#61; gradient&#40;sitp.itp, xl...&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1238,7 +1243,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds nodemap&#91;new_rt.handle&#93; &#61; nd_id</span>
+            <span class='code'>    SVector&#40;rescale_gradient_components&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, Tuple&#40;g&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1248,7 +1253,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1258,7 +1263,7 @@
           <td>
             
             
-            <span class='code'>        if length&#40;nodes&#41; &gt; 1</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1268,7 +1273,7 @@
           <td>
             
             
-            <span class='code'>            if Base.lt&#40;ord, new_rt.value, v&#41;</span>
+            <span class='code'>function rescale_gradient_components&#40;flags, ranges, g&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1278,7 +1283,7 @@
           <td>
             
             
-            <span class='code'>                _heap_bubble_up&#33;&#40;ord, nodes, nodemap, nd_id&#41;</span>
+            <span class='code'>    if getfirst&#40;flags&#41; isa NoInterp</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1288,22 +1293,17 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>        return rescale_gradient_components&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;, g&#41;    # don&#39;t consume a coordinate of g</span>
           </td>
         </tr>
         <tr id='L125'>
           <td class='lineno'>125</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L43'>_heap_bubble_down&#33;</a>
-              <br />
-            </div>
-            <span class='code'>                _heap_bubble_down&#33;&#40;ord, nodes, nodemap, nd_id&#41;</span>
+            
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1313,7 +1313,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        item &#61; rescale_gradient&#40;ranges&#91;1&#93;, g&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1323,7 +1323,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        return &#40;item, rescale_gradient_components&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;, Base.tail&#40;g&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1343,7 +1343,7 @@
           <td>
             
             
-            <span class='code'>    return v</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1353,7 +1353,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>rescale_gradient_components&#40;flags, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1371,18 +1371,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in _make_mutable_binary_heap
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from MutableBinaryHeap
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L171'>line 171</a>
-              <br />
-            </div>
             
-            <span class='code'>function _make_mutable_binary_heap&#40;ord::Ordering, ty::Type&#123;T&#125;, values&#41; where T</span>
+            
+            <span class='code'>rescale_gradient&#40;r::StepRange, g&#41; &#61; g / r.step</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1392,7 +1383,7 @@
           <td>
             
             
-            <span class='code'>    # make a static binary index tree from a list of values</span>
+            <span class='code'>rescale_gradient&#40;r::UnitRange, g&#41; &#61; g</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1412,7 +1403,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; length&#40;values&#41;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1422,7 +1413,7 @@
           <td>
             
             
-            <span class='code'>    nodes &#61; Vector&#123;MutableBinaryHeapNode&#123;T&#125;&#125;&#40;undef, n&#41;</span>
+            <span class='code'>&#96;rescale_gradient&#40;r::AbstractRange&#41;&#96;</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1432,7 +1423,7 @@
           <td>
             
             
-            <span class='code'>    nodemap &#61; Vector&#123;Int&#125;&#40;undef, n&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1442,7 +1433,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Implements the chain rule dy/dx &#61; dy/du * du/dx for use when calculating gradients with scaled interpolation objects.</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1452,7 +1443,7 @@
           <td>
             
             
-            <span class='code'>    i::Int &#61; 0</span>
+            <span class='code'>&quot;&quot;&quot; rescale_gradient</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1462,7 +1453,7 @@
           <td>
             
             
-            <span class='code'>    for v in values</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1472,7 +1463,7 @@
           <td>
             
             
-            <span class='code'>        i &#43;&#61; 1</span>
+            <span class='code'>@propagate_inbounds function hessian&#40;sitp::ScaledInterpolation&#123;T,N&#125;, xs::Vararg&#123;Number,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1482,7 +1473,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds nodes&#91;i&#93; &#61; MutableBinaryHeapNode&#123;T&#125;&#40;v, i&#41;</span>
+            <span class='code'>    @boundscheck &#40;checkbounds&#40;Bool, sitp, xs...&#41; || Base.throw_boundserror&#40;sitp, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1492,7 +1483,7 @@
           <td>
             
             
-            <span class='code'>        @inbounds nodemap&#91;i&#93; &#61; i</span>
+            <span class='code'>    xl &#61; maybe_clamp&#40;sitp.itp, coordslookup&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, xs&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1502,7 +1493,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    h &#61; hessian&#40;sitp.itp, xl...&#41;</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1512,7 +1503,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return rescale_hessian_components&#40;itpflag&#40;sitp.itp&#41;, sitp.ranges, h&#41;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1522,22 +1513,17 @@
           <td>
             
             
-            <span class='code'>    for i &#61; 1 : n</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L147'>
           <td class='lineno'>147</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='essentials.jl-285e87741f3f8967ea1d94335d28caeff3c6b885.html#L0'>_heap_bubble_up&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        _heap_bubble_up&#33;&#40;ord, nodes, nodemap, i&#41;</span>
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1547,7 +1533,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function rescale_hessian_components&#40;flags, ranges, h&#41;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1557,7 +1543,7 @@
           <td>
             
             
-            <span class='code'>    return nodes, nodemap</span>
+            <span class='code'>    steps &#61; SVector&#40;get_steps&#40;flags, ranges&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1567,7 +1553,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return h ./ &#40;steps .* steps&#39;&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1577,7 +1563,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1597,7 +1583,7 @@
           <td>
             
             
-            <span class='code'>#################################################</span>
+            <span class='code'>function get_steps&#40;flags, ranges&#41;</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1607,7 +1593,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'>    if getfirst&#40;flags&#41; isa NoInterp</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1617,7 +1603,7 @@
           <td>
             
             
-            <span class='code'>#   Binary Heap type and constructors</span>
+            <span class='code'>        return get_steps&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1627,7 +1613,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1637,7 +1623,7 @@
           <td>
             
             
-            <span class='code'>#################################################</span>
+            <span class='code'>        item &#61; step&#40;ranges&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1647,7 +1633,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return &#40;item, get_steps&#40;getrest&#40;flags&#41;, Base.tail&#40;ranges&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1657,7 +1643,7 @@
           <td>
             
             
-            <span class='code'>mutable struct MutableBinaryHeap&#123;T, O &lt;: Base.Ordering&#125; &lt;: AbstractMutableHeap&#123;T, Int&#125;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1667,7 +1653,7 @@
           <td>
             
             
-            <span class='code'>    ordering::O</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1677,7 +1663,7 @@
           <td>
             
             
-            <span class='code'>    nodes::Vector&#123;MutableBinaryHeapNode&#123;T&#125;&#125;</span>
+            <span class='code'>get_steps&#40;flags, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1687,7 +1673,7 @@
           <td>
             
             
-            <span class='code'>    node_map::Vector&#123;Int&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1697,7 +1683,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>### Iteration</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1707,7 +1693,7 @@
           <td>
             
             
-            <span class='code'>    function MutableBinaryHeap&#123;T&#125;&#40;ordering::Base.Ordering&#41; where T</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1717,7 +1703,7 @@
           <td>
             
             
-            <span class='code'>        nodes &#61; Vector&#123;MutableBinaryHeapNode&#123;T&#125;&#125;&#40;&#41;</span>
+            <span class='code'>struct ScaledIterator&#123;SITPT,CI,WIS&#125;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1727,7 +1713,7 @@
           <td>
             
             
-            <span class='code'>        node_map &#61; Vector&#123;Int&#125;&#40;&#41;</span>
+            <span class='code'>    sitp::SITPT   # ScaledInterpolation object</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1737,7 +1723,7 @@
           <td>
             
             
-            <span class='code'>        new&#123;T, typeof&#40;ordering&#41;&#125;&#40;ordering, nodes, node_map&#41;</span>
+            <span class='code'>    ci::CI        # the CartesianIndices object</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1747,7 +1733,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    wis::WIS      # WeightedIndex vectors</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1757,7 +1743,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    breaks1::Vector&#123;Int&#125;   # breaks along dimension 1 where new evaluations must occur</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1767,31 +1753,17 @@
           <td>
             
             
-            <span class='code'>    function MutableBinaryHeap&#123;T&#125;&#40;ordering::Base.Ordering, xs::AbstractVector&#41; where T</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L171'>
           <td class='lineno'>171</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in MutableBinaryHeap
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from MutableBinaryHeap
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L176'>line 176</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L132'>_make_mutable_binary_heap</a>
-              <br />
-            </div>
-            <span class='code'>        nodes, node_map &#61; _make_mutable_binary_heap&#40;ordering, T, xs&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1801,7 +1773,7 @@
           <td>
             
             
-            <span class='code'>        new&#123;T, typeof&#40;ordering&#41;&#125;&#40;ordering, nodes, node_map&#41;</span>
+            <span class='code'>Base.IteratorSize&#40;::Type&#123;ScaledIterator&#123;SITPT,CI,WIS&#125;&#125;&#41; where &#123;SITPT,CI&lt;:CartesianIndices&#123;N&#125;,WIS&#125; where N &#61; Base.HasShape&#123;N&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1811,7 +1783,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>Base.axes&#40;iter::ScaledIterator&#41; &#61; axes&#40;iter.ci&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1821,7 +1793,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>Base.size&#40;iter::ScaledIterator&#41; &#61; size&#40;iter.ci&#41;</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1837,25 +1809,11 @@
         <tr id='L176'>
           <td class='lineno'>176</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in MutableBinaryHeap
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #resample_adaptive#65
-              <a href='gradient_paths.jl-ea8c1cbd92d406dc1b164035f4b23ea19165b640.html#L291'>line 291</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L171'>MutableBinaryHeap</a>
-              <br />
-            </div>
-            <span class='code'>MutableBinaryHeap&#40;ordering::Base.Ordering, xs::AbstractVector&#123;T&#125;&#41; where T &#61; MutableBinaryHeap&#123;T&#125;&#40;ordering, xs&#41;</span>
+            
+            
+            <span class='code'>struct ScaledIterState&#123;N,V,D&#125;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1865,7 +1823,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    cistate::CartesianIndex&#123;N&#125;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1875,7 +1833,7 @@
           <td>
             
             
-            <span class='code'># Constructors using singleton order types as type parameters rather than arguments</span>
+            <span class='code'>    ibreak::Int</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1885,7 +1843,7 @@
           <td>
             
             
-            <span class='code'>MutableBinaryHeap&#123;T, O&#125;&#40;&#41; where &#123;T, O&lt;:Base.Ordering&#125; &#61; MutableBinaryHeap&#123;T&#125;&#40;O&#40;&#41;&#41;</span>
+            <span class='code'>    cached_evaluations::NTuple&#123;D,V&#125;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1895,7 +1853,7 @@
           <td>
             
             
-            <span class='code'>MutableBinaryHeap&#123;T, O&#125;&#40;xs::AbstractVector&#41; where &#123;T, O&lt;:Base.Ordering&#125; &#61; MutableBinaryHeap&#123;T&#125;&#40;O&#40;&#41;, xs&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1915,7 +1873,7 @@
           <td>
             
             
-            <span class='code'># These constructors needed for BinaryMaxHeap, until we have https://github.com/JuliaLang/julia/pull/37822</span>
+            <span class='code'>function eachvalue&#40;sitp::ScaledInterpolation&#123;T,N&#125;&#41; where &#123;T,N&#125;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1925,7 +1883,7 @@
           <td>
             
             
-            <span class='code'>MutableBinaryHeap&#123;T, DefaultReverseOrdering&#125;&#40;&#41; where &#123;T&#125; &#61; MutableBinaryHeap&#123;T&#125;&#40;Base.Reverse&#41;</span>
+            <span class='code'>    itps &#61; tcollect&#40;itpflag, sitp.itp&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1935,7 +1893,7 @@
           <td>
             
             
-            <span class='code'>MutableBinaryHeap&#123;T, DefaultReverseOrdering&#125;&#40;xs::AbstractVector&#41; where &#123;T&#125; &#61; MutableBinaryHeap&#123;T&#125;&#40;Base.Reverse, xs&#41;</span>
+            <span class='code'>    newaxes &#61; map&#40;r-&gt;Base.Slice&#40;ceil&#40;Int, first&#40;r&#41;&#41;:floor&#40;Int, last&#40;r&#41;&#41;&#41;, sitp.ranges&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1945,7 +1903,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    wis &#61; dimension_wis&#40;value_weights, itps, axes&#40;sitp.itp&#41;, newaxes, sitp.ranges&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1955,7 +1913,7 @@
           <td>
             
             
-            <span class='code'># Forward/reverse ordering type aliases</span>
+            <span class='code'>    wis1 &#61; wis&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1965,7 +1923,7 @@
           <td>
             
             
-            <span class='code'>const MutableBinaryMinHeap&#123;T&#125; &#61; MutableBinaryHeap&#123;T, Base.ForwardOrdering&#125;</span>
+            <span class='code'>    i1 &#61; first&#40;axes&#40;wis1, 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1975,7 +1933,7 @@
           <td>
             
             
-            <span class='code'>const MutableBinaryMaxHeap&#123;T&#125; &#61; MutableBinaryHeap&#123;T, DefaultReverseOrdering&#125;</span>
+            <span class='code'>    breaks1 &#61; &#91;i1&#93;</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1985,7 +1943,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    for i in Iterators.drop&#40;axes&#40;wis1, 1&#41;, 1&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1995,7 +1953,7 @@
           <td>
             
             
-            <span class='code'>MutableBinaryMinHeap&#40;xs::AbstractVector&#123;T&#125;&#41; where T &#61; MutableBinaryMinHeap&#123;T&#125;&#40;xs&#41;</span>
+            <span class='code'>        if indexes&#40;wis1&#91;i&#93;&#41; &#33;&#61; indexes&#40;wis1&#91;i-1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -2005,7 +1963,7 @@
           <td>
             
             
-            <span class='code'>MutableBinaryMaxHeap&#40;xs::AbstractVector&#123;T&#125;&#41; where T &#61; MutableBinaryMaxHeap&#123;T&#125;&#40;xs&#41;</span>
+            <span class='code'>            push&#33;&#40;breaks1, i&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -2015,7 +1973,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2025,7 +1983,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2035,7 +1993,7 @@
           <td>
             
             
-            <span class='code'>function Base.show&#40;io::IO, h::MutableBinaryHeap&#41;</span>
+            <span class='code'>    push&#33;&#40;breaks1, last&#40;axes&#40;wis1, 1&#41;&#41;&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2045,7 +2003,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;MutableBinaryHeap&#40;&quot;&#41;</span>
+            <span class='code'>    ScaledIterator&#40;sitp, CartesianIndices&#40;newaxes&#41;, wis, breaks1&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2055,7 +2013,7 @@
           <td>
             
             
-            <span class='code'>    nodes &#61; h.nodes</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2065,7 +2023,7 @@
           <td>
             
             
-            <span class='code'>    n &#61; length&#40;nodes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2075,7 +2033,7 @@
           <td>
             
             
-            <span class='code'>    if n &gt; 0</span>
+            <span class='code'>function dimension_wis&#40;f::F, itps, axs, newaxes, ranges&#41; where F</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2085,7 +2043,7 @@
           <td>
             
             
-            <span class='code'>        print&#40;io, string&#40;nodes&#91;1&#93;.value&#41;&#41;</span>
+            <span class='code'>    itpflag, ax, nax, r &#61; itps&#91;1&#93;, axs&#91;1&#93;, newaxes&#91;1&#93;, ranges&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2095,7 +2053,7 @@
           <td>
             
             
-            <span class='code'>        for i &#61; 2 : n</span>
+            <span class='code'>    function makewi&#40;x&#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2105,7 +2063,7 @@
           <td>
             
             
-            <span class='code'>            print&#40;io, &quot;, &#36;&#40;nodes&#91;i&#93;.value&#41;&quot;&#41;</span>
+            <span class='code'>        pos, coefs &#61; weightedindex_parts&#40;&#40;f,&#41;, itpflag, ax, coordlookup&#40;r, x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2115,7 +2073,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        maybe_weightedindex&#40;pos, coefs&#91;1&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2135,7 +2093,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;&#41;&quot;&#41;</span>
+            <span class='code'>    &#40;makewi.&#40;nax&#41;, dimension_wis&#40;f, Base.tail&#40;itps&#41;, Base.tail&#40;axs&#41;, Base.tail&#40;newaxes&#41;, Base.tail&#40;ranges&#41;&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2155,7 +2113,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>dimension_wis&#40;f, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;, ::Tuple&#123;&#125;&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2175,7 +2133,7 @@
           <td>
             
             
-            <span class='code'>#################################################</span>
+            <span class='code'>function Base.iterate&#40;iter::ScaledIterator&#41;</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2185,7 +2143,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'>    ret &#61; iterate&#40;iter.ci&#41;</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2195,7 +2153,7 @@
           <td>
             
             
-            <span class='code'>#   interfaces</span>
+            <span class='code'>    ret &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2205,7 +2163,7 @@
           <td>
             
             
-            <span class='code'>#</span>
+            <span class='code'>    item, cistate &#61; ret</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2215,7 +2173,7 @@
           <td>
             
             
-            <span class='code'>#################################################</span>
+            <span class='code'>    wis &#61; getindex.&#40;iter.wis, Tuple&#40;item&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2225,7 +2183,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ces &#61; cache_evaluations&#40;InterpGetindex&#40;iter.sitp&#41;, indexes&#40;wis&#91;1&#93;&#41;, weights&#40;wis&#91;1&#93;&#41;, Base.tail&#40;wis&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2235,7 +2193,7 @@
           <td>
             
             
-            <span class='code'>Base.length&#40;h::MutableBinaryHeap&#41; &#61; length&#40;h.nodes&#41;</span>
+            <span class='code'>    return _reduce&#40;&#43;, weights&#40;wis&#91;1&#93;&#41;.*ces&#41;, ScaledIterState&#40;cistate, firstindex&#40;iter.breaks1&#41;, ces&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2245,7 +2203,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2255,7 +2213,7 @@
           <td>
             
             
-            <span class='code'>Base.isempty&#40;h::MutableBinaryHeap&#41; &#61; isempty&#40;h.nodes&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2265,7 +2223,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function Base.iterate&#40;iter::ScaledIterator, state&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2273,18 +2231,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in push&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from create_triangle&#33;
-              <a href='gradient_paths.jl-ea8c1cbd92d406dc1b164035f4b23ea19165b640.html#L250'>line 250</a>
-              <br />
-            </div>
             
-            <span class='code'>function Base.push&#33;&#40;h::MutableBinaryHeap&#123;T&#125;, v&#41; where T</span>
+            
+            <span class='code'>    ret &#61; iterate&#40;iter.ci, state.cistate&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2294,7 +2243,7 @@
           <td>
             
             
-            <span class='code'>    nodes &#61; h.nodes</span>
+            <span class='code'>    ret &#61;&#61;&#61; nothing &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2304,7 +2253,7 @@
           <td>
             
             
-            <span class='code'>    nodemap &#61; h.node_map</span>
+            <span class='code'>    item, cistate &#61; ret</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2314,7 +2263,7 @@
           <td>
             
             
-            <span class='code'>    i &#61; length&#40;nodemap&#41; &#43; 1</span>
+            <span class='code'>    i1 &#61; item&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2324,22 +2273,17 @@
           <td>
             
             
-            <span class='code'>    nd_id &#61; length&#40;nodes&#41; &#43; 1</span>
+            <span class='code'>    isnext1 &#61; i1 &#61;&#61; state.cistate&#91;1&#93;&#43;1</span>
           </td>
         </tr>
         <tr id='L223'>
           <td class='lineno'>223</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L1119'>push&#33;</a>
-              <br />
-            </div>
-            <span class='code'>    push&#33;&#40;nodes, MutableBinaryHeapNode&#40;convert&#40;T, v&#41;, i&#41;&#41;</span>
+            
+            <span class='code'>    if isnext1 &amp;&amp; i1 &lt; iter.breaks1&#91;state.ibreak&#43;1&#93;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2349,7 +2293,7 @@
           <td>
             
             
-            <span class='code'>    push&#33;&#40;nodemap, nd_id&#41;</span>
+            <span class='code'>        # We can use the previously cached values</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2359,7 +2303,7 @@
           <td>
             
             
-            <span class='code'>    _heap_bubble_up&#33;&#40;h.ordering, nodes, nodemap, nd_id&#41;</span>
+            <span class='code'>        wis1 &#61; iter.wis&#91;1&#93;&#91;i1&#93;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2369,7 +2313,7 @@
           <td>
             
             
-            <span class='code'>    return i</span>
+            <span class='code'>        return _reduce&#40;&#43;, weights&#40;wis1&#41;.*state.cached_evaluations&#41;, ScaledIterState&#40;cistate, state.ibreak, state.cached_evaluations&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2379,7 +2323,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2389,7 +2333,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Re-evaluate. We&#39;re being a bit lazy here: in some cases, some of the cached values could be reused</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2399,7 +2343,7 @@
           <td>
             
             
-            <span class='code'>function Base.sizehint&#33;&#40;h::MutableBinaryHeap, s::Integer&#41;</span>
+            <span class='code'>    wis &#61; getindex.&#40;iter.wis, Tuple&#40;item&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2409,7 +2353,7 @@
           <td>
             
             
-            <span class='code'>    sizehint&#33;&#40;h.nodes, s&#41;</span>
+            <span class='code'>    ces &#61; cache_evaluations&#40;InterpGetindex&#40;iter.sitp&#41;, indexes&#40;wis&#91;1&#93;&#41;, weights&#40;wis&#91;1&#93;&#41;, Base.tail&#40;wis&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2419,7 +2363,7 @@
           <td>
             
             
-            <span class='code'>    sizehint&#33;&#40;h.node_map, s&#41;</span>
+            <span class='code'>    return _reduce&#40;&#43;, weights&#40;wis&#91;1&#93;&#41;.*ces&#41;, ScaledIterState&#40;cistate, isnext1 ? state.ibreak&#43;1 : firstindex&#40;iter.breaks1&#41;, ces&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2429,7 +2373,7 @@
           <td>
             
             
-            <span class='code'>    return h</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2439,7 +2383,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2449,7 +2393,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>_reduce&#40;op, list&#41; &#61; op&#40;list&#91;1&#93;, _reduce&#40;op, Base.tail&#40;list&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2459,7 +2403,7 @@
           <td>
             
             
-            <span class='code'>@inline Base.first&#40;h::MutableBinaryHeap&#41; &#61; h.nodes&#91;1&#93;.value</span>
+            <span class='code'>_reduce&#40;op, list::Tuple&#123;Any&#125;&#41; &#61; list&#91;1&#93;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2469,7 +2413,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>_reduce&#40;op, list::Tuple&#123;&#125;&#41; &#61; error&#40;&quot;cannot reduce an empty list&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2479,7 +2423,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2489,7 +2433,7 @@
           <td>
             
             
-            <span class='code'>    top_with_handle&#40;h::MutableBinaryHeap&#41;</span>
+            <span class='code'># We use weights only as a ruler to determine when we are done</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2499,7 +2443,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>cache_evaluations&#40;coefs, i::Int, weights, rest&#41; &#61; &#40;coefs&#91;i, rest...&#93;, cache_evaluations&#40;coefs, i&#43;1, Base.tail&#40;weights&#41;, rest&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2509,7 +2453,7 @@
           <td>
             
             
-            <span class='code'>Returns the element at the top of the heap &#96;h&#96; and its handle.</span>
+            <span class='code'>cache_evaluations&#40;coefs, indexes, weights, rest&#41; &#61; &#40;coefs&#91;indexes&#91;1&#93;, rest...&#93;, cache_evaluations&#40;coefs, Base.tail&#40;indexes&#41;, Base.tail&#40;weights&#41;, rest&#41;...&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2519,7 +2463,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>cache_evaluations&#40;coefs, ::Int, ::Tuple&#123;&#125;, rest&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2529,7 +2473,7 @@
           <td>
             
             
-            <span class='code'>function top_with_handle&#40;h::MutableBinaryHeap&#41;</span>
+            <span class='code'>cache_evaluations&#40;coefs, ::Any, ::Tuple&#123;&#125;, rest&#41; &#61; &#40;&#41;</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2539,7 +2483,7 @@
           <td>
             
             
-            <span class='code'>    el &#61; h.nodes&#91;1&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2549,411 +2493,7 @@
           <td>
             
             
-            <span class='code'>    return el.value, el.handle</span>
-          </td>
-        </tr>
-        <tr id='L245'>
-          <td class='lineno'>245</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L246'>
-          <td class='lineno'>246</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L247'>
-          <td class='lineno'>247</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in pop&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from #resample_adaptive#65
-              <a href='gradient_paths.jl-ea8c1cbd92d406dc1b164035f4b23ea19165b640.html#L297'>line 297</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='mutable_binary_heap.jl-49dd7e1ddc273578d9b5d47b0a15d964bb0cbf79.html#L107'>_binary_heap_pop&#33;</a>
-              <br />
-            </div>
-            <span class='code'>Base.pop&#33;&#40;h::MutableBinaryHeap&#123;T&#125;&#41; where &#123;T&#125; &#61; _binary_heap_pop&#33;&#40;h.ordering, h.nodes, h.node_map&#41;</span>
-          </td>
-        </tr>
-        <tr id='L248'>
-          <td class='lineno'>248</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L249'>
-          <td class='lineno'>249</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L250'>
-          <td class='lineno'>250</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    update&#33;&#123;T&#125;&#40;h::MutableBinaryHeap&#123;T&#125;, i::Int, v::T&#41;</span>
-          </td>
-        </tr>
-        <tr id='L251'>
-          <td class='lineno'>251</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L252'>
-          <td class='lineno'>252</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Replace the element at index &#96;i&#96; in heap &#96;h&#96; with &#96;v&#96;.</span>
-          </td>
-        </tr>
-        <tr id='L253'>
-          <td class='lineno'>253</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>This is equivalent to &#96;h&#91;i&#93;&#61;v&#96;.</span>
-          </td>
-        </tr>
-        <tr id='L254'>
-          <td class='lineno'>254</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L255'>
-          <td class='lineno'>255</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function update&#33;&#40;h::MutableBinaryHeap&#123;T&#125;, i::Int, v&#41; where T</span>
-          </td>
-        </tr>
-        <tr id='L256'>
-          <td class='lineno'>256</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nodes &#61; h.nodes</span>
-          </td>
-        </tr>
-        <tr id='L257'>
-          <td class='lineno'>257</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nodemap &#61; h.node_map</span>
-          </td>
-        </tr>
-        <tr id='L258'>
-          <td class='lineno'>258</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ordering &#61; h.ordering</span>
-          </td>
-        </tr>
-        <tr id='L259'>
-          <td class='lineno'>259</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L260'>
-          <td class='lineno'>260</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nd_id &#61; nodemap&#91;i&#93;</span>
-          </td>
-        </tr>
-        <tr id='L261'>
-          <td class='lineno'>261</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    v0 &#61; nodes&#91;nd_id&#93;.value</span>
-          </td>
-        </tr>
-        <tr id='L262'>
-          <td class='lineno'>262</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    x &#61; convert&#40;T, v&#41;</span>
-          </td>
-        </tr>
-        <tr id='L263'>
-          <td class='lineno'>263</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nodes&#91;nd_id&#93; &#61; MutableBinaryHeapNode&#40;x, i&#41;</span>
-          </td>
-        </tr>
-        <tr id='L264'>
-          <td class='lineno'>264</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if Base.lt&#40;ordering, x, v0&#41;</span>
-          </td>
-        </tr>
-        <tr id='L265'>
-          <td class='lineno'>265</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        _heap_bubble_up&#33;&#40;ordering, nodes, nodemap, nd_id&#41;</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    else</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        _heap_bubble_down&#33;&#40;ordering, nodes, nodemap, nd_id&#41;</span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L272'>
-          <td class='lineno'>272</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    delete&#33;&#123;T&#125;&#40;h::MutableBinaryHeap&#123;T&#125;, i::Int&#41;</span>
-          </td>
-        </tr>
-        <tr id='L273'>
-          <td class='lineno'>273</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L274'>
-          <td class='lineno'>274</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Deletes the element with handle &#96;i&#96; from heap &#96;h&#96; .</span>
-          </td>
-        </tr>
-        <tr id='L275'>
-          <td class='lineno'>275</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L276'>
-          <td class='lineno'>276</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function Base.delete&#33;&#40;h::MutableBinaryHeap&#123;T&#125;, i::Int&#41; where T</span>
-          </td>
-        </tr>
-        <tr id='L277'>
-          <td class='lineno'>277</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>     nd_id &#61; h.node_map&#91;i&#93;</span>
-          </td>
-        </tr>
-        <tr id='L278'>
-          <td class='lineno'>278</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    _binary_heap_pop&#33;&#40;h.ordering, h.nodes, h.node_map, nd_id&#41;</span>
-          </td>
-        </tr>
-        <tr id='L279'>
-          <td class='lineno'>279</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return h</span>
-          </td>
-        </tr>
-        <tr id='L280'>
-          <td class='lineno'>280</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L281'>
-          <td class='lineno'>281</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L282'>
-          <td class='lineno'>282</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.setindex&#33;&#40;h::MutableBinaryHeap, v, i::Int&#41; &#61; update&#33;&#40;h, i, v&#41;</span>
-          </td>
-        </tr>
-        <tr id='L283'>
-          <td class='lineno'>283</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.getindex&#40;h::MutableBinaryHeap, i::Int&#41; &#61; h.nodes&#91;h.node_map&#91;i&#93;&#93;.value</span>
+            <span class='code'>ssize&#40;sitp::ScaledInterpolation&#123;T,N&#125;&#41; where &#123;T,N&#125; &#61; map&#40;r-&gt;round&#40;Int, last&#40;r&#41;-first&#40;r&#41;&#43;1&#41;, sitp.ranges&#41;::NTuple&#123;N,Int&#125;</span>
           </td>
         </tr>
       </tbody>
