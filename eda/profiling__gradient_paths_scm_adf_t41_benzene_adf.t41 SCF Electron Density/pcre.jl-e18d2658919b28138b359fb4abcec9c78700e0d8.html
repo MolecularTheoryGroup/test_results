@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/fastmath.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/pcre.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Sat, 20 Apr 2024 23:39:54
+        Generated on Sun, 21 Apr 2024 00:28:21
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'># Support for @fastmath</span>
+            <span class='code'>## low-level pcre2 interface ##</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'># This module provides versions of math functions that may violate</span>
+            <span class='code'>module PCRE</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'># strict IEEE semantics.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>import ..RefValue</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'># This allows the following transformations. For more information see</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'># http://llvm.org/docs/LangRef.html#fast-math-flags:</span>
+            <span class='code'># include&#40;&#36;BUILDROOT/base/pcre_h.jl&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'># nnan: No NaNs - Allow optimizations to assume the arguments and</span>
+            <span class='code'>include&#40;string&#40;length&#40;Core.ARGS&#41; &gt;&#61; 2 ? Core.ARGS&#91;2&#93; : &quot;&quot;, &quot;pcre_h.jl&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>#       result are not NaN. Such optimizations are required to retain</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>#       defined behavior over NaNs, but the value of the result is</span>
+            <span class='code'>const PCRE_LIB &#61; &quot;libpcre2-8&quot;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>#       undefined.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'># ninf: No Infs - Allow optimizations to assume the arguments and</span>
+            <span class='code'>function create_match_context&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>#       result are not &#43;/-Inf. Such optimizations are required to</span>
+            <span class='code'>    JIT_STACK_START_SIZE &#61; 32768</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>#       retain defined behavior over &#43;/-Inf, but the value of the</span>
+            <span class='code'>    JIT_STACK_MAX_SIZE &#61; 1048576</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>#       result is undefined.</span>
+            <span class='code'>    jit_stack &#61; ccall&#40;&#40;:pcre2_jit_stack_create_8, PCRE_LIB&#41;, Ptr&#123;Cvoid&#125;,</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'># nsz:  No Signed Zeros - Allow optimizations to treat the sign of a</span>
+            <span class='code'>                      &#40;Csize_t, Csize_t, Ptr&#123;Cvoid&#125;&#41;,</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>#       zero argument or result as insignificant.</span>
+            <span class='code'>                      JIT_STACK_START_SIZE, JIT_STACK_MAX_SIZE, C_NULL&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'># arcp: Allow Reciprocal - Allow optimizations to use the reciprocal</span>
+            <span class='code'>    ctx &#61; ccall&#40;&#40;:pcre2_match_context_create_8, PCRE_LIB&#41;,</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>#       of an argument rather than perform division.</span>
+            <span class='code'>                Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;,&#41;, C_NULL&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'># fast: Fast - Allow algebraically equivalent transformations that may</span>
+            <span class='code'>    ccall&#40;&#40;:pcre2_jit_stack_assign_8, PCRE_LIB&#41;, Cvoid,</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>#       dramatically change results in floating point &#40;e.g.</span>
+            <span class='code'>          &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, ctx, C_NULL, jit_stack&#41;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>#       reassociate&#41;. This flag implies all the others.</span>
+            <span class='code'>    return ctx</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>module FastMath</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>THREAD_MATCH_CONTEXTS::Vector&#123;Ptr&#123;Cvoid&#125;&#125; &#61; &#91;C_NULL&#93;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>export @fastmath</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>PCRE_COMPILE_LOCK &#61; nothing</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>import Core.Intrinsics: sqrt_llvm_fast, neg_float_fast,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>    add_float_fast, sub_float_fast, mul_float_fast, div_float_fast,</span>
+            <span class='code'>_tid&#40;&#41; &#61; Int&#40;ccall&#40;:jl_threadid, Int16, &#40;&#41;&#41;&#41; &#43; 1</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>    eq_float_fast, ne_float_fast, lt_float_fast, le_float_fast</span>
+            <span class='code'>_mth&#40;&#41; &#61; Int&#40;Core.Intrinsics.atomic_pointerref&#40;cglobal&#40;:jl_n_threads, Cint&#41;, :acquire&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -360,12 +360,21 @@
         </tr>
         <tr id='L34'>
           <td class='lineno'>34</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in get_local_match_context
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from exec
+              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L203'>line 203</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>const fast_op &#61;</span>
+            <span class='code'>function get_local_match_context&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +384,7 @@
           <td>
             
             
-            <span class='code'>    Dict&#40;# basic arithmetic</span>
+            <span class='code'>    tid &#61; _tid&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +394,7 @@
           <td>
             
             
-            <span class='code'>         :&#43; &#61;&gt; :add_fast,</span>
+            <span class='code'>    ctxs &#61; THREAD_MATCH_CONTEXTS</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +404,7 @@
           <td>
             
             
-            <span class='code'>         :- &#61;&gt; :sub_fast,</span>
+            <span class='code'>    if length&#40;ctxs&#41; &lt; tid</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +414,7 @@
           <td>
             
             
-            <span class='code'>         :* &#61;&gt; :mul_fast,</span>
+            <span class='code'>        # slow path to allocate it</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +424,7 @@
           <td>
             
             
-            <span class='code'>         :/ &#61;&gt; :div_fast,</span>
+            <span class='code'>        l &#61; PCRE_COMPILE_LOCK::Threads.SpinLock</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +434,7 @@
           <td>
             
             
-            <span class='code'>         :&#40;&#61;&#61;&#41; &#61;&gt; :eq_fast,</span>
+            <span class='code'>        lock&#40;l&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +444,7 @@
           <td>
             
             
-            <span class='code'>         :&#33;&#61; &#61;&gt; :ne_fast,</span>
+            <span class='code'>        try</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +454,7 @@
           <td>
             
             
-            <span class='code'>         :&lt; &#61;&gt; :lt_fast,</span>
+            <span class='code'>            ctxs &#61; THREAD_MATCH_CONTEXTS</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +464,7 @@
           <td>
             
             
-            <span class='code'>         :&lt;&#61; &#61;&gt; :le_fast,</span>
+            <span class='code'>            if length&#40;ctxs&#41; &lt; tid</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +474,7 @@
           <td>
             
             
-            <span class='code'>         :&gt; &#61;&gt; :gt_fast,</span>
+            <span class='code'>                global THREAD_MATCH_CONTEXTS &#61; ctxs &#61; copyto&#33;&#40;fill&#40;C_NULL, length&#40;ctxs&#41; &#43; _mth&#40;&#41;&#41;, ctxs&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +484,7 @@
           <td>
             
             
-            <span class='code'>         :&gt;&#61; &#61;&gt; :ge_fast,</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +494,7 @@
           <td>
             
             
-            <span class='code'>         :abs &#61;&gt; :abs_fast,</span>
+            <span class='code'>        finally</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +504,7 @@
           <td>
             
             
-            <span class='code'>         :abs2 &#61;&gt; :abs2_fast,</span>
+            <span class='code'>            unlock&#40;l&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +514,7 @@
           <td>
             
             
-            <span class='code'>         :cmp &#61;&gt; :cmp_fast,</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +524,7 @@
           <td>
             
             
-            <span class='code'>         :conj &#61;&gt; :conj_fast,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +534,7 @@
           <td>
             
             
-            <span class='code'>         :inv &#61;&gt; :inv_fast,</span>
+            <span class='code'>    ctx &#61; @inbounds ctxs&#91;tid&#93;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +544,7 @@
           <td>
             
             
-            <span class='code'>         :rem &#61;&gt; :rem_fast,</span>
+            <span class='code'>    if ctx &#61;&#61; C_NULL</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +554,7 @@
           <td>
             
             
-            <span class='code'>         :sign &#61;&gt; :sign_fast,</span>
+            <span class='code'>        # slow path to allocate it</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +564,7 @@
           <td>
             
             
-            <span class='code'>         :isfinite &#61;&gt; :isfinite_fast,</span>
+            <span class='code'>        ctx &#61; create_match_context&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +574,7 @@
           <td>
             
             
-            <span class='code'>         :isinf &#61;&gt; :isinf_fast,</span>
+            <span class='code'>        THREAD_MATCH_CONTEXTS&#91;tid&#93; &#61; ctx</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +584,7 @@
           <td>
             
             
-            <span class='code'>         :isnan &#61;&gt; :isnan_fast,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +594,7 @@
           <td>
             
             
-            <span class='code'>         :issubnormal &#61;&gt; :issubnormal_fast,</span>
+            <span class='code'>    return ctx</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +604,7 @@
           <td>
             
             
-            <span class='code'>         # math functions</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +614,7 @@
           <td>
             
             
-            <span class='code'>         :^ &#61;&gt; :pow_fast,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +624,7 @@
           <td>
             
             
-            <span class='code'>         :acos &#61;&gt; :acos_fast,</span>
+            <span class='code'># supported options for different use cases</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +634,7 @@
           <td>
             
             
-            <span class='code'>         :acosh &#61;&gt; :acosh_fast,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +644,7 @@
           <td>
             
             
-            <span class='code'>         :angle &#61;&gt; :angle_fast,</span>
+            <span class='code'># arguments to pcre2_compile</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +654,7 @@
           <td>
             
             
-            <span class='code'>         :asin &#61;&gt; :asin_fast,</span>
+            <span class='code'>const COMPILE_MASK      &#61;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +664,7 @@
           <td>
             
             
-            <span class='code'>         :asinh &#61;&gt; :asinh_fast,</span>
+            <span class='code'>      ALT_BSUX          |</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +674,7 @@
           <td>
             
             
-            <span class='code'>         :atan &#61;&gt; :atan_fast,</span>
+            <span class='code'>      ALT_CIRCUMFLEX    |</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +684,7 @@
           <td>
             
             
-            <span class='code'>         :atanh &#61;&gt; :atanh_fast,</span>
+            <span class='code'>      ALT_VERBNAMES     |</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +694,7 @@
           <td>
             
             
-            <span class='code'>         :cbrt &#61;&gt; :cbrt_fast,</span>
+            <span class='code'>      ANCHORED          |</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +704,7 @@
           <td>
             
             
-            <span class='code'>         :cis &#61;&gt; :cis_fast,</span>
+            <span class='code'>      # AUTO_CALLOUT    |</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +714,7 @@
           <td>
             
             
-            <span class='code'>         :cos &#61;&gt; :cos_fast,</span>
+            <span class='code'>      CASELESS          |</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +724,7 @@
           <td>
             
             
-            <span class='code'>         :cosh &#61;&gt; :cosh_fast,</span>
+            <span class='code'>      DOLLAR_ENDONLY    |</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +734,7 @@
           <td>
             
             
-            <span class='code'>         :exp10 &#61;&gt; :exp10_fast,</span>
+            <span class='code'>      DOTALL            |</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +744,7 @@
           <td>
             
             
-            <span class='code'>         :exp2 &#61;&gt; :exp2_fast,</span>
+            <span class='code'>      # DUPNAMES        |</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +754,7 @@
           <td>
             
             
-            <span class='code'>         :exp &#61;&gt; :exp_fast,</span>
+            <span class='code'>      ENDANCHORED       |</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +764,7 @@
           <td>
             
             
-            <span class='code'>         :expm1 &#61;&gt; :expm1_fast,</span>
+            <span class='code'>      EXTENDED          |</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +774,7 @@
           <td>
             
             
-            <span class='code'>         :hypot &#61;&gt; :hypot_fast,</span>
+            <span class='code'>      EXTENDED_MORE     |</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +784,7 @@
           <td>
             
             
-            <span class='code'>         :log10 &#61;&gt; :log10_fast,</span>
+            <span class='code'>      FIRSTLINE         |</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +794,7 @@
           <td>
             
             
-            <span class='code'>         :log1p &#61;&gt; :log1p_fast,</span>
+            <span class='code'>      LITERAL           |</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +804,7 @@
           <td>
             
             
-            <span class='code'>         :log2 &#61;&gt; :log2_fast,</span>
+            <span class='code'>      MATCH_INVALID_UTF |</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +814,7 @@
           <td>
             
             
-            <span class='code'>         :log &#61;&gt; :log_fast,</span>
+            <span class='code'>      MATCH_UNSET_BACKREF |</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +824,7 @@
           <td>
             
             
-            <span class='code'>         :max &#61;&gt; :max_fast,</span>
+            <span class='code'>      MULTILINE         |</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +834,7 @@
           <td>
             
             
-            <span class='code'>         :min &#61;&gt; :min_fast,</span>
+            <span class='code'>      NEVER_BACKSLASH_C |</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +844,7 @@
           <td>
             
             
-            <span class='code'>         :minmax &#61;&gt; :minmax_fast,</span>
+            <span class='code'>      NEVER_UCP         |</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +854,7 @@
           <td>
             
             
-            <span class='code'>         :sin &#61;&gt; :sin_fast,</span>
+            <span class='code'>      NEVER_UTF         |</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +864,7 @@
           <td>
             
             
-            <span class='code'>         :sincos &#61;&gt; :sincos_fast,</span>
+            <span class='code'>      NO_AUTO_CAPTURE   |</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +874,7 @@
           <td>
             
             
-            <span class='code'>         :sinh &#61;&gt; :sinh_fast,</span>
+            <span class='code'>      NO_AUTO_POSSESS   |</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +884,7 @@
           <td>
             
             
-            <span class='code'>         :sqrt &#61;&gt; :sqrt_fast,</span>
+            <span class='code'>      NO_DOTSTAR_ANCHOR |</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +894,7 @@
           <td>
             
             
-            <span class='code'>         :tan &#61;&gt; :tan_fast,</span>
+            <span class='code'>      NO_START_OPTIMIZE |</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +904,7 @@
           <td>
             
             
-            <span class='code'>         :tanh &#61;&gt; :tanh_fast,</span>
+            <span class='code'>      NO_UTF_CHECK      |</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +914,7 @@
           <td>
             
             
-            <span class='code'>         # reductions</span>
+            <span class='code'>      UCP               |</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +924,7 @@
           <td>
             
             
-            <span class='code'>         :maximum &#61;&gt; :maximum_fast,</span>
+            <span class='code'>      UNGREEDY          |</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +934,7 @@
           <td>
             
             
-            <span class='code'>         :minimum &#61;&gt; :minimum_fast,</span>
+            <span class='code'>      USE_OFFSET_LIMIT  |</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +944,7 @@
           <td>
             
             
-            <span class='code'>         :maximum&#33; &#61;&gt; :maximum&#33;_fast,</span>
+            <span class='code'>      UTF</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +954,7 @@
           <td>
             
             
-            <span class='code'>         :minimum&#33; &#61;&gt; :minimum&#33;_fast&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># arguments to pcre2_set_newline</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +974,7 @@
           <td>
             
             
-            <span class='code'>const rewrite_op &#61;</span>
+            <span class='code'>const COMPILE_NEWLINE_MASK &#61; &#40;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +984,7 @@
           <td>
             
             
-            <span class='code'>    Dict&#40;:&#43;&#61; &#61;&gt; :&#43;,</span>
+            <span class='code'>      NEWLINE_CR,</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +994,7 @@
           <td>
             
             
-            <span class='code'>         :-&#61; &#61;&gt; :-,</span>
+            <span class='code'>      NEWLINE_LF,</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1004,7 @@
           <td>
             
             
-            <span class='code'>         :*&#61; &#61;&gt; :*,</span>
+            <span class='code'>      NEWLINE_CRLF,</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1014,7 @@
           <td>
             
             
-            <span class='code'>         :/&#61; &#61;&gt; :/,</span>
+            <span class='code'>      NEWLINE_ANY,</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1024,7 @@
           <td>
             
             
-            <span class='code'>         :^&#61; &#61;&gt; :^&#41;</span>
+            <span class='code'>      NEWLINE_ANYCRLF,</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1034,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>      NEWLINE_NUL&#41;</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1044,7 @@
           <td>
             
             
-            <span class='code'>function make_fastmath&#40;expr::Expr&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1054,7 @@
           <td>
             
             
-            <span class='code'>    if expr.head &#61;&#61;&#61; :quote</span>
+            <span class='code'># arguments to pcre2_set_compile_extra_options</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1064,7 @@
           <td>
             
             
-            <span class='code'>        return expr</span>
+            <span class='code'>const COMPILE_EXTRA_MASK            &#61;</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1074,7 @@
           <td>
             
             
-            <span class='code'>    elseif expr.head &#61;&#61;&#61; :call &amp;&amp; expr.args&#91;1&#93; &#61;&#61;&#61; :^ &amp;&amp; expr.args&#91;3&#93; isa Integer</span>
+            <span class='code'>      EXTRA_ALLOW_SURROGATE_ESCAPES |</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1084,7 @@
           <td>
             
             
-            <span class='code'>        # mimic Julia&#39;s literal_pow lowering of literal integer powers</span>
+            <span class='code'>      EXTRA_ALT_BSUX                |</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1094,7 @@
           <td>
             
             
-            <span class='code'>        return Expr&#40;:call, :&#40;Base.FastMath.pow_fast&#41;, make_fastmath&#40;expr.args&#91;2&#93;&#41;, Val&#123;expr.args&#91;3&#93;&#125;&#40;&#41;&#41;</span>
+            <span class='code'>      EXTRA_BAD_ESCAPE_IS_LITERAL   |</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1104,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>      EXTRA_ESCAPED_CR_IS_LF        |</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1114,7 @@
           <td>
             
             
-            <span class='code'>    op &#61; get&#40;rewrite_op, expr.head, :nothing&#41;</span>
+            <span class='code'>      EXTRA_MATCH_LINE              |</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1124,7 @@
           <td>
             
             
-            <span class='code'>    if op &#33;&#61;&#61; :nothing</span>
+            <span class='code'>      EXTRA_MATCH_WORD</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1134,7 @@
           <td>
             
             
-            <span class='code'>        var &#61; expr.args&#91;1&#93;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1144,7 @@
           <td>
             
             
-            <span class='code'>        rhs &#61; expr.args&#91;2&#93;</span>
+            <span class='code'># arguments to match</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1154,7 @@
           <td>
             
             
-            <span class='code'>        if isa&#40;var, Symbol&#41;</span>
+            <span class='code'>const EXECUTE_MASK      &#61;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1164,7 @@
           <td>
             
             
-            <span class='code'>            # simple assignment</span>
+            <span class='code'>      # ANCHORED        |</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1174,7 @@
           <td>
             
             
-            <span class='code'>            expr &#61; :&#40;&#36;var &#61; &#36;op&#40;&#36;var, &#36;rhs&#41;&#41;</span>
+            <span class='code'>      # COPY_MATCHED_SUBJECT |</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1184,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>      # ENDANCHORED     |</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1194,7 @@
           <td>
             
             
-            <span class='code'>        # It is hard to optimize array&#91;i &#43;&#61; 1&#93; &#43;&#61; 1</span>
+            <span class='code'>      NOTBOL            |</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1204,7 @@
           <td>
             
             
-            <span class='code'>        # and array&#91;end&#93; &#43;&#61; 1 without bugs. &#40;#47241&#41;</span>
+            <span class='code'>      NOTEMPTY          |</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1214,7 @@
           <td>
             
             
-            <span class='code'>        # We settle for not optimizing the op&#61; call.</span>
+            <span class='code'>      NOTEMPTY_ATSTART  |</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1224,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>      NOTEOL            |</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1234,7 @@
           <td>
             
             
-            <span class='code'>    Base.exprarray&#40;make_fastmath&#40;expr.head&#41;, Base.mapany&#40;make_fastmath, expr.args&#41;&#41;</span>
+            <span class='code'>      # NO_JIT          |</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1244,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>      NO_START_OPTIMIZE |</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1254,7 @@
           <td>
             
             
-            <span class='code'>function make_fastmath&#40;symb::Symbol&#41;</span>
+            <span class='code'>      NO_UTF_CHECK      |</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1264,7 @@
           <td>
             
             
-            <span class='code'>    fast_symb &#61; get&#40;fast_op, symb, :nothing&#41;</span>
+            <span class='code'>      PARTIAL_HARD      |</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1274,7 @@
           <td>
             
             
-            <span class='code'>    if fast_symb &#61;&#61;&#61; :nothing</span>
+            <span class='code'>      PARTIAL_SOFT</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1284,7 @@
           <td>
             
             
-            <span class='code'>        return symb</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1294,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1304,7 @@
           <td>
             
             
-            <span class='code'>    :&#40;Base.FastMath.&#36;fast_symb&#41;</span>
+            <span class='code'>const UNSET &#61; ~Csize_t&#40;0&#41;  # Indicates that an output vector element is unset</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1314,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1324,7 @@
           <td>
             
             
-            <span class='code'>make_fastmath&#40;expr&#41; &#61; expr</span>
+            <span class='code'>function info&#40;regex::Ptr&#123;Cvoid&#125;, what::Integer, ::Type&#123;T&#125;&#41; where T</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1334,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    buf &#61; RefValue&#123;T&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1344,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    ret &#61; ccall&#40;&#40;:pcre2_pattern_info_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1354,7 @@
           <td>
             
             
-            <span class='code'>    @fastmath expr</span>
+            <span class='code'>                &#40;Ptr&#123;Cvoid&#125;, UInt32, Ptr&#123;Cvoid&#125;&#41;,</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1364,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                regex, what, buf&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1374,7 @@
           <td>
             
             
-            <span class='code'>Execute a transformed version of the expression, which calls functions that</span>
+            <span class='code'>    if ret &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1384,7 @@
           <td>
             
             
-            <span class='code'>may violate strict IEEE semantics. This allows the fastest possible operation,</span>
+            <span class='code'>        error&#40;ret &#61;&#61; ERROR_NULL      ? &quot;PCRE error: NULL regex object&quot; :</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1394,7 @@
           <td>
             
             
-            <span class='code'>but results are undefined -- be careful when doing this, as it may change numerical</span>
+            <span class='code'>              ret &#61;&#61; ERROR_BADMAGIC  ? &quot;PCRE error: invalid regex object&quot; :</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1404,7 @@
           <td>
             
             
-            <span class='code'>results.</span>
+            <span class='code'>              ret &#61;&#61; ERROR_BADOPTION ? &quot;PCRE error: invalid option flags&quot; :</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1414,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                                       &quot;PCRE error: unknown error &#40;&#36;ret&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1424,7 @@
           <td>
             
             
-            <span class='code'>This sets the &#91;LLVM Fast-Math flags&#93;&#40;http://llvm.org/docs/LangRef.html#fast-math-flags&#41;,</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1434,7 @@
           <td>
             
             
-            <span class='code'>and corresponds to the &#96;-ffast-math&#96; option in clang. See &#91;the notes on performance</span>
+            <span class='code'>    return buf&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1444,7 @@
           <td>
             
             
-            <span class='code'>annotations&#93;&#40;@ref man-performance-annotations&#41; for more details.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1455,7 +1464,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>function ovec_length&#40;match_data&#41;</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1474,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    n &#61; ccall&#40;&#40;:pcre2_get_ovector_count_8, PCRE_LIB&#41;, UInt32,</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1484,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; @fastmath 1&#43;2</span>
+            <span class='code'>              &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1494,7 @@
           <td>
             
             
-            <span class='code'>3</span>
+            <span class='code'>    return 2Int&#40;n&#41;</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1504,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1514,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; @fastmath&#40;sin&#40;3&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1524,7 @@
           <td>
             
             
-            <span class='code'>0.1411200080598672</span>
+            <span class='code'>function ovec_ptr&#40;match_data&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1534,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    ptr &#61; ccall&#40;&#40;:pcre2_get_ovector_pointer_8, PCRE_LIB&#41;, Ptr&#123;Csize_t&#125;,</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1544,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>                &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1554,7 @@
           <td>
             
             
-            <span class='code'>macro fastmath&#40;expr&#41;</span>
+            <span class='code'>    return ptr</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1564,7 @@
           <td>
             
             
-            <span class='code'>    make_fastmath&#40;esc&#40;expr&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1574,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1584,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function compile&#40;pattern::AbstractString, options::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1594,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if &#33;&#40;pattern isa Union&#123;String,SubString&#123;String&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1604,7 @@
           <td>
             
             
-            <span class='code'># Basic arithmetic</span>
+            <span class='code'>        pattern &#61; String&#40;pattern&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1614,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1624,7 @@
           <td>
             
             
-            <span class='code'>const FloatTypes &#61; Union&#123;Float16,Float32,Float64&#125;</span>
+            <span class='code'>    errno &#61; RefValue&#123;Cint&#125;&#40;0&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1634,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    erroff &#61; RefValue&#123;Csize_t&#125;&#40;0&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1644,7 @@
           <td>
             
             
-            <span class='code'>sub_fast&#40;x::FloatTypes&#41; &#61; neg_float_fast&#40;x&#41;</span>
+            <span class='code'>    re_ptr &#61; ccall&#40;&#40;:pcre2_compile_8, PCRE_LIB&#41;, Ptr&#123;Cvoid&#125;,</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1654,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                   &#40;Ptr&#123;UInt8&#125;, Csize_t, UInt32, Ref&#123;Cint&#125;, Ref&#123;Csize_t&#125;, Ptr&#123;Cvoid&#125;&#41;,</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1664,7 @@
           <td>
             
             
-            <span class='code'>add_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; add_float_fast&#40;x, y&#41;</span>
+            <span class='code'>                   pattern, ncodeunits&#40;pattern&#41;, options, errno, erroff, C_NULL&#41;</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1674,7 @@
           <td>
             
             
-            <span class='code'>sub_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; sub_float_fast&#40;x, y&#41;</span>
+            <span class='code'>    if re_ptr &#61;&#61; C_NULL</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1684,7 @@
           <td>
             
             
-            <span class='code'>mul_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; mul_float_fast&#40;x, y&#41;</span>
+            <span class='code'>        error&#40;&quot;PCRE compilation error: &#36;&#40;err_message&#40;errno&#91;&#93;&#41;&#41; at offset &#36;&#40;erroff&#91;&#93;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1694,7 @@
           <td>
             
             
-            <span class='code'>div_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; div_float_fast&#40;x, y&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1704,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return re_ptr</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1714,7 @@
           <td>
             
             
-            <span class='code'>add_fast&#40;x::T, y::T, zs::T...&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1724,7 @@
           <td>
             
             
-            <span class='code'>    add_fast&#40;add_fast&#40;x, y&#41;, zs...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1734,7 @@
           <td>
             
             
-            <span class='code'>mul_fast&#40;x::T, y::T, zs::T...&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>function jit_compile&#40;regex::Ptr&#123;Cvoid&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1744,7 @@
           <td>
             
             
-            <span class='code'>    mul_fast&#40;mul_fast&#40;x, y&#41;, zs...&#41;</span>
+            <span class='code'>    errno &#61; ccall&#40;&#40;:pcre2_jit_compile_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1754,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                  &#40;Ptr&#123;Cvoid&#125;, UInt32&#41;, regex, JIT_COMPLETE&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1764,7 @@
           <td>
             
             
-            <span class='code'>@fastmath begin</span>
+            <span class='code'>    errno &#61;&#61; 0 &amp;&amp; return true</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1774,7 @@
           <td>
             
             
-            <span class='code'>    cmp_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; ifelse&#40;x&#61;&#61;y, 0, ifelse&#40;x&lt;y, -1, &#43;1&#41;&#41;</span>
+            <span class='code'>    errno &#61;&#61; ERROR_JIT_BADOPTION &amp;&amp; return false</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1784,7 @@
           <td>
             
             
-            <span class='code'>    log_fast&#40;b::T, x::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; log_fast&#40;x&#41;/log_fast&#40;b&#41;</span>
+            <span class='code'>    error&#40;&quot;PCRE JIT error: &#36;&#40;err_message&#40;errno&#41;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1805,7 +1814,7 @@
           <td>
             
             
-            <span class='code'>eq_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; eq_float_fast&#40;x, y&#41;</span>
+            <span class='code'>free_match_data&#40;match_data&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1824,7 @@
           <td>
             
             
-            <span class='code'>ne_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; ne_float_fast&#40;x, y&#41;</span>
+            <span class='code'>    ccall&#40;&#40;:pcre2_match_data_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, match_data&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1834,7 @@
           <td>
             
             
-            <span class='code'>lt_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; lt_float_fast&#40;x, y&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1844,7 @@
           <td>
             
             
-            <span class='code'>le_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; le_float_fast&#40;x, y&#41;</span>
+            <span class='code'>free_re&#40;re&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1854,7 @@
           <td>
             
             
-            <span class='code'>gt_fast&#40;x, y&#41; &#61; lt_fast&#40;y, x&#41;</span>
+            <span class='code'>    ccall&#40;&#40;:pcre2_code_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, re&#41;</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1864,7 @@
           <td>
             
             
-            <span class='code'>ge_fast&#40;x, y&#41; &#61; le_fast&#40;y, x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1874,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>free_jit_stack&#40;stack&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1884,7 @@
           <td>
             
             
-            <span class='code'>isinf_fast&#40;x&#41; &#61; false</span>
+            <span class='code'>    ccall&#40;&#40;:pcre2_jit_stack_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, stack&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1894,7 @@
           <td>
             
             
-            <span class='code'>isfinite_fast&#40;x&#41; &#61; true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1904,7 @@
           <td>
             
             
-            <span class='code'>isnan_fast&#40;x&#41; &#61; false</span>
+            <span class='code'>free_match_context&#40;context&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1905,7 +1914,7 @@
           <td>
             
             
-            <span class='code'>issubnormal_fast&#40;x&#41; &#61; false</span>
+            <span class='code'>    ccall&#40;&#40;:pcre2_match_context_free_8, PCRE_LIB&#41;, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, context&#41;</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1925,7 +1934,7 @@
           <td>
             
             
-            <span class='code'># complex numbers</span>
+            <span class='code'>function err_message&#40;errno::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1944,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    buffer &#61; Vector&#123;UInt8&#125;&#40;undef, 1024&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1954,7 @@
           <td>
             
             
-            <span class='code'>ComplexTypes &#61; Union&#123;ComplexF32, ComplexF64&#125;</span>
+            <span class='code'>    ret &#61; ccall&#40;&#40;:pcre2_get_error_message_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +1964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                &#40;Cint, Ptr&#123;UInt8&#125;, Csize_t&#41;, errno, buffer, length&#40;buffer&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +1974,7 @@
           <td>
             
             
-            <span class='code'>@fastmath begin</span>
+            <span class='code'>    ret &#61;&#61; ERROR_BADDATA &amp;&amp; error&#40;&quot;PCRE error: invalid errno &#40;&#36;errno&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +1984,7 @@
           <td>
             
             
-            <span class='code'>    abs_fast&#40;x::ComplexTypes&#41; &#61; hypot&#40;real&#40;x&#41;, imag&#40;x&#41;&#41;</span>
+            <span class='code'>    # TODO: seems like there should be a better way to get this string</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +1994,7 @@
           <td>
             
             
-            <span class='code'>    abs2_fast&#40;x::ComplexTypes&#41; &#61; real&#40;x&#41;*real&#40;x&#41; &#43; imag&#40;x&#41;*imag&#40;x&#41;</span>
+            <span class='code'>    return GC.@preserve buffer unsafe_string&#40;pointer&#40;buffer&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2004,7 @@
           <td>
             
             
-            <span class='code'>    conj_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; T&#40;real&#40;x&#41;, -imag&#40;x&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2014,7 @@
           <td>
             
             
-            <span class='code'>    inv_fast&#40;x::ComplexTypes&#41; &#61; conj&#40;x&#41; / abs2&#40;x&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2013,9 +2022,18 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in exec
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from exec_r_data
+              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L220'>line 220</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>    sign_fast&#40;x::ComplexTypes&#41; &#61; x &#61;&#61; 0 ? float&#40;zero&#40;x&#41;&#41; : x/abs&#40;x&#41;</span>
+            <span class='code'>function exec&#40;re, subject, offset, options, match_data&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2043,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if &#33;&#40;subject isa Union&#123;String,SubString&#123;String&#125;&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2053,7 @@
           <td>
             
             
-            <span class='code'>    add_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
+            <span class='code'>        subject &#61; String&#40;subject&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,17 +2063,22 @@
           <td>
             
             
-            <span class='code'>        T&#40;real&#40;x&#41;&#43;real&#40;y&#41;, imag&#40;x&#41;&#43;imag&#40;y&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L203'>
           <td class='lineno'>203</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
             
-            
-            <span class='code'>    add_fast&#40;x::Complex&#123;T&#125;, b::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L34'>get_local_match_context</a>
+              <br />
+            </div>
+            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_match_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2088,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;real&#40;x&#41;&#43;b, imag&#40;x&#41;&#41;</span>
+            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;UInt8&#125;, Csize_t, Csize_t, UInt32, Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;,</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2098,7 @@
           <td>
             
             
-            <span class='code'>    add_fast&#40;a::T, y::Complex&#123;T&#125;&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>               re, subject, ncodeunits&#40;subject&#41;, offset, options, match_data, get_local_match_context&#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2108,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;a&#43;real&#40;y&#41;, imag&#40;y&#41;&#41;</span>
+            <span class='code'>    # rc &#61;&#61; -1 means no match, -2 means partial match.</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2118,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    rc &lt; -2 &amp;&amp; error&#40;&quot;PCRE.exec error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2128,7 @@
           <td>
             
             
-            <span class='code'>    sub_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
+            <span class='code'>    return rc &gt;&#61; 0</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2138,7 @@
           <td>
             
             
-            <span class='code'>        T&#40;real&#40;x&#41;-real&#40;y&#41;, imag&#40;x&#41;-imag&#40;y&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2148,7 @@
           <td>
             
             
-            <span class='code'>    sub_fast&#40;x::Complex&#123;T&#125;, b::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2158,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;real&#40;x&#41;-b, imag&#40;x&#41;&#41;</span>
+            <span class='code'>function exec_r&#40;re, subject, offset, options&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2168,7 @@
           <td>
             
             
-            <span class='code'>    sub_fast&#40;a::T, y::Complex&#123;T&#125;&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>    match_data &#61; create_match_data&#40;re&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2178,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;a-real&#40;y&#41;, -imag&#40;y&#41;&#41;</span>
+            <span class='code'>    ans &#61; exec&#40;re, subject, offset, options, match_data&#41;</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2188,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    free_match_data&#40;match_data&#41;</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2198,7 @@
           <td>
             
             
-            <span class='code'>    mul_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
+            <span class='code'>    return ans</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2208,7 @@
           <td>
             
             
-            <span class='code'>        T&#40;real&#40;x&#41;*real&#40;y&#41; - imag&#40;x&#41;*imag&#40;y&#41;,</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2218,7 @@
           <td>
             
             
-            <span class='code'>          real&#40;x&#41;*imag&#40;y&#41; &#43; imag&#40;x&#41;*real&#40;y&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2228,7 @@
           <td>
             
             
-            <span class='code'>    mul_fast&#40;x::Complex&#123;T&#125;, b::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>function exec_r_data&#40;re, subject, offset, options&#41;</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,17 +2238,31 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;real&#40;x&#41;*b, imag&#40;x&#41;*b&#41;</span>
+            <span class='code'>    match_data &#61; create_match_data&#40;re&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
           <td class='lineno'>220</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    mul_fast&#40;a::T, y::Complex&#123;T&#125;&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in exec_r_data
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from _findnext_re
+              <a href='regex.jl-3ccc23d2ab4aafbf7466c1a59e7a52d0068e871e.html#L442'>line 442</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='pcre.jl-e18d2658919b28138b359fb4abcec9c78700e0d8.html#L199'>exec</a>
+              <br />
+            </div>
+            <span class='code'>    ans &#61; exec&#40;re, subject, offset, options, match_data&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2272,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;a*real&#40;y&#41;, a*imag&#40;y&#41;&#41;</span>
+            <span class='code'>    return ans, match_data</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2282,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2292,7 @@
           <td>
             
             
-            <span class='code'>    @inline div_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2302,7 @@
           <td>
             
             
-            <span class='code'>        T&#40;real&#40;x&#41;*real&#40;y&#41; &#43; imag&#40;x&#41;*imag&#40;y&#41;,</span>
+            <span class='code'>function create_match_data&#40;re&#41;</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2312,7 @@
           <td>
             
             
-            <span class='code'>          imag&#40;x&#41;*real&#40;y&#41; - real&#40;x&#41;*imag&#40;y&#41;&#41; / abs2&#40;y&#41;</span>
+            <span class='code'>    p &#61; ccall&#40;&#40;:pcre2_match_data_create_from_pattern_8, PCRE_LIB&#41;,</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2322,7 @@
           <td>
             
             
-            <span class='code'>    div_fast&#40;x::Complex&#123;T&#125;, b::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>              Ptr&#123;Cvoid&#125;, &#40;Ptr&#123;Cvoid&#125;, Ptr&#123;Cvoid&#125;&#41;, re, C_NULL&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2332,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;real&#40;x&#41;/b, imag&#40;x&#41;/b&#41;</span>
+            <span class='code'>    p &#61;&#61; C_NULL &amp;&amp; error&#40;&quot;PCRE error: could not allocate memory&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2305,7 +2342,7 @@
           <td>
             
             
-            <span class='code'>    div_fast&#40;a::T, y::Complex&#123;T&#125;&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>    return p</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2315,7 +2352,7 @@
           <td>
             
             
-            <span class='code'>        Complex&#123;T&#125;&#40;a*real&#40;y&#41;, -a*imag&#40;y&#41;&#41; / abs2&#40;y&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2335,7 +2372,7 @@
           <td>
             
             
-            <span class='code'>    eq_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
+            <span class='code'>function substring_number_from_name&#40;re, name&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2345,7 +2382,7 @@
           <td>
             
             
-            <span class='code'>        &#40;real&#40;x&#41;&#61;&#61;real&#40;y&#41;&#41; &amp; &#40;imag&#40;x&#41;&#61;&#61;imag&#40;y&#41;&#41;</span>
+            <span class='code'>    n &#61; ccall&#40;&#40;:pcre2_substring_number_from_name_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2355,7 +2392,7 @@
           <td>
             
             
-            <span class='code'>    eq_fast&#40;x::Complex&#123;T&#125;, b::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Cstring&#41;, re, name&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2365,7 +2402,7 @@
           <td>
             
             
-            <span class='code'>        &#40;real&#40;x&#41;&#61;&#61;b&#41; &amp; &#40;imag&#40;x&#41;&#61;&#61;T&#40;0&#41;&#41;</span>
+            <span class='code'>    return Int&#40;n&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2375,7 +2412,7 @@
           <td>
             
             
-            <span class='code'>    eq_fast&#40;a::T, y::Complex&#123;T&#125;&#41; where &#123;T&lt;:FloatTypes&#125; &#61;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2385,7 +2422,7 @@
           <td>
             
             
-            <span class='code'>        &#40;a&#61;&#61;real&#40;y&#41;&#41; &amp; &#40;T&#40;0&#41;&#61;&#61;imag&#40;y&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2395,7 +2432,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function substring_length_bynumber&#40;match_data, number&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2405,7 +2442,7 @@
           <td>
             
             
-            <span class='code'>    ne_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; &#33;&#40;x&#61;&#61;y&#41;</span>
+            <span class='code'>    s &#61; RefValue&#123;Csize_t&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2415,7 +2452,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_substring_length_bynumber_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2425,7 +2462,7 @@
           <td>
             
             
-            <span class='code'>    # Note: we use the same comparison for min, max, and minmax, so</span>
+            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, Cint, Ref&#123;Csize_t&#125;&#41;, match_data, number, s&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2435,7 +2472,7 @@
           <td>
             
             
-            <span class='code'>    # that the compiler can convert between them</span>
+            <span class='code'>    if rc &lt; 0</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2445,7 +2482,7 @@
           <td>
             
             
-            <span class='code'>    max_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; ifelse&#40;y &gt; x, y, x&#41;</span>
+            <span class='code'>        rc &#61;&#61; ERROR_UNSET &amp;&amp; return 0</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2455,7 +2492,7 @@
           <td>
             
             
-            <span class='code'>    min_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; ifelse&#40;y &gt; x, x, y&#41;</span>
+            <span class='code'>        error&#40;&quot;PCRE error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2465,7 +2502,7 @@
           <td>
             
             
-            <span class='code'>    minmax_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; ifelse&#40;y &gt; x, &#40;x,y&#41;, &#40;y,x&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2475,7 +2512,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return Int&#40;s&#91;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2485,7 +2522,7 @@
           <td>
             
             
-            <span class='code'>    max_fast&#40;x::T, y::T, z::T...&#41; where &#123;T&lt;:FloatTypes&#125; &#61; max_fast&#40;max_fast&#40;x, y&#41;, z...&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2495,7 +2532,7 @@
           <td>
             
             
-            <span class='code'>    min_fast&#40;x::T, y::T, z::T...&#41; where &#123;T&lt;:FloatTypes&#125; &#61; min_fast&#40;min_fast&#40;x, y&#41;, z...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2505,7 +2542,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function substring_copy_bynumber&#40;match_data, number, buf, buf_size&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2515,7 +2552,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    s &#61; RefValue&#123;Csize_t&#125;&#40;buf_size&#41;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2525,7 +2562,7 @@
           <td>
             
             
-            <span class='code'># fall-back implementations and type promotion</span>
+            <span class='code'>    rc &#61; ccall&#40;&#40;:pcre2_substring_copy_bynumber_8, PCRE_LIB&#41;, Cint,</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2535,7 +2572,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>               &#40;Ptr&#123;Cvoid&#125;, UInt32, Ptr&#123;UInt8&#125;, Ref&#123;Csize_t&#125;&#41;,</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2545,7 +2582,7 @@
           <td>
             
             
-            <span class='code'>for op in &#40;:abs, :abs2, :conj, :inv, :sign&#41;</span>
+            <span class='code'>               match_data, number, buf, s&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2555,7 +2592,7 @@
           <td>
             
             
-            <span class='code'>    op_fast &#61; fast_op&#91;op&#93;</span>
+            <span class='code'>    rc &lt; 0 &amp;&amp; error&#40;&quot;PCRE error: &#36;&#40;err_message&#40;rc&#41;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2565,7 +2602,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>    return Int&#40;s&#91;&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2575,7 +2612,7 @@
           <td>
             
             
-            <span class='code'>        # fall-back implementation for non-numeric types</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2585,7 +2622,7 @@
           <td>
             
             
-            <span class='code'>        &#36;op_fast&#40;xs...&#41; &#61; &#36;op&#40;xs...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2595,7 +2632,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function capture_names&#40;re&#41;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2605,7 +2642,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    name_count &#61; info&#40;re, INFO_NAMECOUNT, UInt32&#41;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2615,7 +2652,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    name_entry_size &#61; info&#40;re, INFO_NAMEENTRYSIZE, UInt32&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2625,7 +2662,7 @@
           <td>
             
             
-            <span class='code'>for op in &#40;:&#43;, :-, :*, :/, :&#40;&#61;&#61;&#41;, :&#33;&#61;, :&lt;, :&lt;&#61;, :cmp, :rem, :min, :max, :minmax&#41;</span>
+            <span class='code'>    nametable_ptr &#61; info&#40;re, INFO_NAMETABLE, Ptr&#123;UInt8&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2635,7 +2672,7 @@
           <td>
             
             
-            <span class='code'>    op_fast &#61; fast_op&#91;op&#93;</span>
+            <span class='code'>    names &#61; Dict&#123;Int,String&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2645,7 +2682,7 @@
           <td>
             
             
-            <span class='code'>    @eval begin</span>
+            <span class='code'>    for i &#61; 1:name_count</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2655,7 +2692,7 @@
           <td>
             
             
-            <span class='code'>        # fall-back implementation for non-numeric types</span>
+            <span class='code'>        offset &#61; &#40;i-1&#41;*name_entry_size &#43; 1</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2665,7 +2702,7 @@
           <td>
             
             
-            <span class='code'>        &#36;op_fast&#40;xs...&#41; &#61; &#36;op&#40;xs...&#41;</span>
+            <span class='code'>        # The capture group index corresponding to name &#39;i&#39; is stored as a</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2675,7 +2712,7 @@
           <td>
             
             
-            <span class='code'>        # type promotion</span>
+            <span class='code'>        # big-endian 16-bit value.</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2685,7 +2722,7 @@
           <td>
             
             
-            <span class='code'>        &#36;op_fast&#40;x::Number, y::Number, zs::Number...&#41; &#61;</span>
+            <span class='code'>        high_byte &#61; UInt16&#40;unsafe_load&#40;nametable_ptr, offset&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2695,7 +2732,7 @@
           <td>
             
             
-            <span class='code'>            &#36;op_fast&#40;promote&#40;x,y,zs...&#41;...&#41;</span>
+            <span class='code'>        low_byte &#61; UInt16&#40;unsafe_load&#40;nametable_ptr, offset&#43;1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2705,7 +2742,7 @@
           <td>
             
             
-            <span class='code'>        # fall-back implementation that applies after promotion</span>
+            <span class='code'>        idx &#61; &#40;high_byte &lt;&lt; 8&#41; | low_byte</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2715,7 +2752,7 @@
           <td>
             
             
-            <span class='code'>        &#36;op_fast&#40;x::T,ys::T...&#41; where &#123;T&lt;:Number&#125; &#61; &#36;op&#40;x,ys...&#41;</span>
+            <span class='code'>        # The capture group name is a null-terminated string located directly</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2725,7 +2762,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        # after the index.</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2735,7 +2772,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        names&#91;idx&#93; &#61; unsafe_string&#40;nametable_ptr&#43;offset&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2745,7 +2782,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2755,7 +2792,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return names</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2765,31 +2802,17 @@
           <td>
             
             
-            <span class='code'># Math functions</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L275'>
           <td class='lineno'>275</td>
-          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
-          <td class='tracecount incl'>3 &#40;0 &#37;&#41;</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              3 &#40;0 &#37;&#41;
-              samples spent in exp2_fast
-              <br />
-              1 &#40;33 &#37;&#41; &#40;ex.&#41;,
-              3 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from fastpow
-              <a href='fastpow.jl-42f4783f7843bbb607fb9ef2f54ca5e83031445f.html#L106'>line 106</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='exp.jl-c67dddffae57131cd7be44f6ecc066c9dca99f82.html#L328'>exp2_fast</a>
-              <br />
-            </div>
-            <span class='code'>exp2_fast&#40;x::Union&#123;Float32,Float64&#125;&#41;  &#61; Base.Math.exp2_fast&#40;x&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2799,1167 +2822,7 @@
           <td>
             
             
-            <span class='code'>exp_fast&#40;x::Union&#123;Float32,Float64&#125;&#41;   &#61; Base.Math.exp_fast&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L277'>
-          <td class='lineno'>277</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>exp10_fast&#40;x::Union&#123;Float32,Float64&#125;&#41; &#61; Base.Math.exp10_fast&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L278'>
-          <td class='lineno'>278</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L279'>
-          <td class='lineno'>279</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># builtins</span>
-          </td>
-        </tr>
-        <tr id='L280'>
-          <td class='lineno'>280</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L281'>
-          <td class='lineno'>281</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pow_fast&#40;x::Float32, y::Integer&#41; &#61; ccall&#40;&quot;llvm.powi.f32.i32&quot;, llvmcall, Float32, &#40;Float32, Int32&#41;, x, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L282'>
-          <td class='lineno'>282</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pow_fast&#40;x::Float64, y::Integer&#41; &#61; ccall&#40;&quot;llvm.powi.f64.i32&quot;, llvmcall, Float64, &#40;Float64, Int32&#41;, x, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L283'>
-          <td class='lineno'>283</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>pow_fast&#40;x::FloatTypes, ::Val&#123;p&#125;&#41; where &#123;p&#125; &#61; pow_fast&#40;x, p&#41; # inlines already via llvm.powi</span>
-          </td>
-        </tr>
-        <tr id='L284'>
-          <td class='lineno'>284</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline pow_fast&#40;x, v::Val&#41; &#61; Base.literal_pow&#40;^, x, v&#41;</span>
-          </td>
-        </tr>
-        <tr id='L285'>
-          <td class='lineno'>285</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L286'>
-          <td class='lineno'>286</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>sqrt_fast&#40;x::FloatTypes&#41; &#61; sqrt_llvm_fast&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L287'>
-          <td class='lineno'>287</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>sincos_fast&#40;v::FloatTypes&#41; &#61; sincos&#40;v&#41;</span>
-          </td>
-        </tr>
-        <tr id='L288'>
-          <td class='lineno'>288</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L289'>
-          <td class='lineno'>289</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function sincos_fast&#40;v::Float16&#41;</span>
-          </td>
-        </tr>
-        <tr id='L290'>
-          <td class='lineno'>290</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    s, c &#61; sincos_fast&#40;Float32&#40;v&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L291'>
-          <td class='lineno'>291</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return Float16&#40;s&#41;, Float16&#40;c&#41;</span>
-          </td>
-        </tr>
-        <tr id='L292'>
-          <td class='lineno'>292</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L293'>
-          <td class='lineno'>293</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>sincos_fast&#40;v::AbstractFloat&#41; &#61; &#40;sin_fast&#40;v&#41;, cos_fast&#40;v&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L294'>
-          <td class='lineno'>294</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>sincos_fast&#40;v::Real&#41; &#61; sincos_fast&#40;float&#40;v&#41;::AbstractFloat&#41;</span>
-          </td>
-        </tr>
-        <tr id='L295'>
-          <td class='lineno'>295</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>sincos_fast&#40;v&#41; &#61; &#40;sin_fast&#40;v&#41;, cos_fast&#40;v&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L296'>
-          <td class='lineno'>296</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L297'>
-          <td class='lineno'>297</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L298'>
-          <td class='lineno'>298</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function rem_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125;</span>
-          </td>
-        </tr>
-        <tr id='L299'>
-          <td class='lineno'>299</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    return @fastmath copysign&#40;Base.rem_internal&#40;abs&#40;x&#41;, abs&#40;y&#41;&#41;, x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L300'>
-          <td class='lineno'>300</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L301'>
-          <td class='lineno'>301</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L302'>
-          <td class='lineno'>302</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@fastmath begin</span>
-          </td>
-        </tr>
-        <tr id='L303'>
-          <td class='lineno'>303</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    hypot_fast&#40;x::T, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; sqrt&#40;x*x &#43; y*y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L304'>
-          <td class='lineno'>304</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L305'>
-          <td class='lineno'>305</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # complex numbers</span>
-          </td>
-        </tr>
-        <tr id='L306'>
-          <td class='lineno'>306</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L307'>
-          <td class='lineno'>307</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    function cis_fast&#40;x::T&#41; where &#123;T&lt;:FloatTypes&#125;</span>
-          </td>
-        </tr>
-        <tr id='L308'>
-          <td class='lineno'>308</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        s, c &#61; sincos_fast&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L309'>
-          <td class='lineno'>309</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        Complex&#123;T&#125;&#40;c, s&#41;</span>
-          </td>
-        </tr>
-        <tr id='L310'>
-          <td class='lineno'>310</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L311'>
-          <td class='lineno'>311</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L312'>
-          <td class='lineno'>312</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # See &lt;http://en.cppreference.com/w/cpp/numeric/complex&gt;</span>
-          </td>
-        </tr>
-        <tr id='L313'>
-          <td class='lineno'>313</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pow_fast&#40;x::T, y::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; exp&#40;y*log&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L314'>
-          <td class='lineno'>314</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pow_fast&#40;x::T, y::Complex&#123;T&#125;&#41; where &#123;T&lt;:FloatTypes&#125; &#61; exp&#40;y*log&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L315'>
-          <td class='lineno'>315</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    pow_fast&#40;x::Complex&#123;T&#125;, y::T&#41; where &#123;T&lt;:FloatTypes&#125; &#61; exp&#40;y*log&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L316'>
-          <td class='lineno'>316</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    acos_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L317'>
-          <td class='lineno'>317</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        convert&#40;T,π&#41;/2 &#43; im*log&#40;im*x &#43; sqrt&#40;1-x*x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L318'>
-          <td class='lineno'>318</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    acosh_fast&#40;x::ComplexTypes&#41; &#61; log&#40;x &#43; sqrt&#40;x&#43;1&#41; * sqrt&#40;x-1&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L319'>
-          <td class='lineno'>319</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    angle_fast&#40;x::ComplexTypes&#41; &#61; atan&#40;imag&#40;x&#41;, real&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L320'>
-          <td class='lineno'>320</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    asin_fast&#40;x::ComplexTypes&#41; &#61; -im*asinh&#40;im*x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L321'>
-          <td class='lineno'>321</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    asinh_fast&#40;x::ComplexTypes&#41; &#61; log&#40;x &#43; sqrt&#40;1&#43;x*x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L322'>
-          <td class='lineno'>322</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    atan_fast&#40;x::ComplexTypes&#41; &#61; -im*atanh&#40;im*x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L323'>
-          <td class='lineno'>323</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    atanh_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; convert&#40;T,1&#41;/2*&#40;log&#40;1&#43;x&#41; - log&#40;1-x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L324'>
-          <td class='lineno'>324</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    cis_fast&#40;x::ComplexTypes&#41; &#61; exp&#40;-imag&#40;x&#41;&#41; * cis&#40;real&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L325'>
-          <td class='lineno'>325</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    cos_fast&#40;x::ComplexTypes&#41; &#61; cosh&#40;im*x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L326'>
-          <td class='lineno'>326</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    cosh_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; convert&#40;T,1&#41;/2*&#40;exp&#40;x&#41; &#43; exp&#40;-x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L327'>
-          <td class='lineno'>327</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    exp10_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L328'>
-          <td class='lineno'>328</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        exp10&#40;real&#40;x&#41;&#41; * cis&#40;imag&#40;x&#41;*log&#40;convert&#40;T,10&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L329'>
-          <td class='lineno'>329</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    exp2_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L330'>
-          <td class='lineno'>330</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        exp2&#40;real&#40;x&#41;&#41; * cis&#40;imag&#40;x&#41;*log&#40;convert&#40;T,2&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L331'>
-          <td class='lineno'>331</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    exp_fast&#40;x::ComplexTypes&#41; &#61; exp&#40;real&#40;x&#41;&#41; * cis&#40;imag&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L332'>
-          <td class='lineno'>332</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    expm1_fast&#40;x::ComplexTypes&#41; &#61; exp&#40;x&#41;-1</span>
-          </td>
-        </tr>
-        <tr id='L333'>
-          <td class='lineno'>333</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    log10_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; log&#40;x&#41; / log&#40;convert&#40;T,10&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L334'>
-          <td class='lineno'>334</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    log1p_fast&#40;x::ComplexTypes&#41; &#61; log&#40;1&#43;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L335'>
-          <td class='lineno'>335</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    log2_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; log&#40;x&#41; / log&#40;convert&#40;T,2&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L336'>
-          <td class='lineno'>336</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    log_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; T&#40;log&#40;abs2&#40;x&#41;&#41;/2, angle&#40;x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L337'>
-          <td class='lineno'>337</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    log_fast&#40;b::T, x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; T&#40;log&#40;x&#41;/log&#40;b&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L338'>
-          <td class='lineno'>338</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    sin_fast&#40;x::ComplexTypes&#41; &#61; -im*sinh&#40;im*x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L339'>
-          <td class='lineno'>339</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    sinh_fast&#40;x::T&#41; where &#123;T&lt;:ComplexTypes&#125; &#61; convert&#40;T,1&#41;/2*&#40;exp&#40;x&#41; - exp&#40;-x&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L340'>
-          <td class='lineno'>340</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    sqrt_fast&#40;x::ComplexTypes&#41; &#61; sqrt&#40;abs&#40;x&#41;&#41; * cis&#40;angle&#40;x&#41;/2&#41;</span>
-          </td>
-        </tr>
-        <tr id='L341'>
-          <td class='lineno'>341</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    tan_fast&#40;x::ComplexTypes&#41; &#61; -im*tanh&#40;im*x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L342'>
-          <td class='lineno'>342</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    tanh_fast&#40;x::ComplexTypes&#41; &#61; &#40;a&#61;exp&#40;x&#41;; b&#61;exp&#40;-x&#41;; &#40;a-b&#41;/&#40;a&#43;b&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L343'>
-          <td class='lineno'>343</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L344'>
-          <td class='lineno'>344</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L345'>
-          <td class='lineno'>345</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># fall-back implementations and type promotion</span>
-          </td>
-        </tr>
-        <tr id='L346'>
-          <td class='lineno'>346</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L347'>
-          <td class='lineno'>347</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>for f in &#40;:acos, :acosh, :angle, :asin, :asinh, :atan, :atanh, :cbrt,</span>
-          </td>
-        </tr>
-        <tr id='L348'>
-          <td class='lineno'>348</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>          :cis, :cos, :cosh, :exp10, :exp2, :exp, :expm1,</span>
-          </td>
-        </tr>
-        <tr id='L349'>
-          <td class='lineno'>349</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>          :log10, :log1p, :log2, :log, :sin, :sinh, :sqrt, :tan,</span>
-          </td>
-        </tr>
-        <tr id='L350'>
-          <td class='lineno'>350</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>          :tanh&#41;</span>
-          </td>
-        </tr>
-        <tr id='L351'>
-          <td class='lineno'>351</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    f_fast &#61; fast_op&#91;f&#93;</span>
-          </td>
-        </tr>
-        <tr id='L352'>
-          <td class='lineno'>352</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @eval begin</span>
-          </td>
-        </tr>
-        <tr id='L353'>
-          <td class='lineno'>353</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#36;f_fast&#40;x&#41; &#61; &#36;f&#40;x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L354'>
-          <td class='lineno'>354</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L355'>
-          <td class='lineno'>355</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L356'>
-          <td class='lineno'>356</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L357'>
-          <td class='lineno'>357</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>for f in &#40;:^, :atan, :hypot, :log&#41;</span>
-          </td>
-        </tr>
-        <tr id='L358'>
-          <td class='lineno'>358</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    f_fast &#61; fast_op&#91;f&#93;</span>
-          </td>
-        </tr>
-        <tr id='L359'>
-          <td class='lineno'>359</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @eval begin</span>
-          </td>
-        </tr>
-        <tr id='L360'>
-          <td class='lineno'>360</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # fall-back implementation for non-numeric types</span>
-          </td>
-        </tr>
-        <tr id='L361'>
-          <td class='lineno'>361</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#36;f_fast&#40;x, y&#41; &#61; &#36;f&#40;x, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L362'>
-          <td class='lineno'>362</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # type promotion</span>
-          </td>
-        </tr>
-        <tr id='L363'>
-          <td class='lineno'>363</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#36;f_fast&#40;x::Number, y::Number&#41; &#61; &#36;f_fast&#40;promote&#40;x, y&#41;...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L364'>
-          <td class='lineno'>364</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # fall-back implementation that applies after promotion</span>
-          </td>
-        </tr>
-        <tr id='L365'>
-          <td class='lineno'>365</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        &#36;f_fast&#40;x::T, y::T&#41; where &#123;T&lt;:Number&#125; &#61; &#36;f&#40;x, y&#41;</span>
-          </td>
-        </tr>
-        <tr id='L366'>
-          <td class='lineno'>366</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L367'>
-          <td class='lineno'>367</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L368'>
-          <td class='lineno'>368</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L369'>
-          <td class='lineno'>369</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># Reductions</span>
-          </td>
-        </tr>
-        <tr id='L370'>
-          <td class='lineno'>370</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L371'>
-          <td class='lineno'>371</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>maximum_fast&#40;a; kw...&#41; &#61; Base.reduce&#40;max_fast, a; kw...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L372'>
-          <td class='lineno'>372</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>minimum_fast&#40;a; kw...&#41; &#61; Base.reduce&#40;min_fast, a; kw...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L373'>
-          <td class='lineno'>373</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L374'>
-          <td class='lineno'>374</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>maximum_fast&#40;f, a; kw...&#41; &#61; Base.mapreduce&#40;f, max_fast, a; kw...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L375'>
-          <td class='lineno'>375</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>minimum_fast&#40;f, a; kw...&#41; &#61; Base.mapreduce&#40;f, min_fast, a; kw...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L376'>
-          <td class='lineno'>376</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L377'>
-          <td class='lineno'>377</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.reducedim_init&#40;f, ::typeof&#40;max_fast&#41;, A::AbstractArray, region&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L378'>
-          <td class='lineno'>378</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Base.reducedim_init&#40;f, max, A::AbstractArray, region&#41;</span>
-          </td>
-        </tr>
-        <tr id='L379'>
-          <td class='lineno'>379</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.reducedim_init&#40;f, ::typeof&#40;min_fast&#41;, A::AbstractArray, region&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L380'>
-          <td class='lineno'>380</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Base.reducedim_init&#40;f, min, A::AbstractArray, region&#41;</span>
-          </td>
-        </tr>
-        <tr id='L381'>
-          <td class='lineno'>381</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L382'>
-          <td class='lineno'>382</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>maximum&#33;_fast&#40;r::AbstractArray, A::AbstractArray; kw...&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L383'>
-          <td class='lineno'>383</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    maximum&#33;_fast&#40;identity, r, A; kw...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L384'>
-          <td class='lineno'>384</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>minimum&#33;_fast&#40;r::AbstractArray, A::AbstractArray; kw...&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L385'>
-          <td class='lineno'>385</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    minimum&#33;_fast&#40;identity, r, A; kw...&#41;</span>
-          </td>
-        </tr>
-        <tr id='L386'>
-          <td class='lineno'>386</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L387'>
-          <td class='lineno'>387</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>maximum&#33;_fast&#40;f::Function, r::AbstractArray, A::AbstractArray; init::Bool&#61;true&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L388'>
-          <td class='lineno'>388</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Base.mapreducedim&#33;&#40;f, max_fast, Base.initarray&#33;&#40;r, f, max, init, A&#41;, A&#41;</span>
-          </td>
-        </tr>
-        <tr id='L389'>
-          <td class='lineno'>389</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>minimum&#33;_fast&#40;f::Function, r::AbstractArray, A::AbstractArray; init::Bool&#61;true&#41; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L390'>
-          <td class='lineno'>390</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Base.mapreducedim&#33;&#40;f, min_fast, Base.initarray&#33;&#40;r, f, min, init, A&#41;, A&#41;</span>
-          </td>
-        </tr>
-        <tr id='L391'>
-          <td class='lineno'>391</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L392'>
-          <td class='lineno'>392</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
+            <span class='code'>end # module</span>
           </td>
         </tr>
       </tbody>
