@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
-*Generated on 2024-04-24@15:53:32 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8818384600)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/twilsonco/issue246`
+*Generated on 2024-04-24@18:00:03 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8820366384)*
 
 ---
 
