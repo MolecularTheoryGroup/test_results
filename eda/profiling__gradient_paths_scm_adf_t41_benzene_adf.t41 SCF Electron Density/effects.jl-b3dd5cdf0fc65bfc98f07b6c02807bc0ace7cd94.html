@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/Interpolations/91PhN/src/b-splines/b-splines.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.2/x64/share/julia/base/compiler/effects.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 23 Apr 2024 19:58:14
+        Generated on Wed, 24 Apr 2024 05:33:12
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>export</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>    BSpline,</span>
+            <span class='code'>    effects::Effects</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>    NoInterp,</span>
+            <span class='code'>Represents computational effects of a method call.</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>    Constant,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>    Linear,</span>
+            <span class='code'>The effects are a composition of different effect bits that represent some program property</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>    Quadratic,</span>
+            <span class='code'>of the method being analyzed. They are represented as &#96;Bool&#96; or &#96;UInt8&#96; bits with the</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>    Cubic</span>
+            <span class='code'>following meanings:</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;effects.consistent::UInt8&#96;:</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>abstract type Degree&#123;N&#125; &lt;: Flag end</span>
+            <span class='code'>  * &#96;ALWAYS_TRUE&#96;: this method is guaranteed to return or terminate consistently.</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>abstract type DegreeBC&#123;N&#125; &lt;: Degree&#123;N&#125; end  # degree type supporting a BoundaryCondition</span>
+            <span class='code'>  * &#96;ALWAYS_FALSE&#96;: this method may be not return or terminate consistently, and there is</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>&#40;::Type&#123;D&#125;&#41;&#40;::Type&#123;BC&#125;&#41; where &#123;D &lt;: Degree, BC &lt;: BoundaryCondition&#125; &#61; D&#40;BC&#40;&#41;&#41;</span>
+            <span class='code'>    no need for further analysis with respect to this effect property as this conclusion</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    will not be refined anyway.</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>  * &#96;CONSISTENT_IF_NOTRETURNED&#96;: the &#96;:consistent&#96;-cy of this method can later be refined to</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>    BSpline&#40;degree&#41;</span>
+            <span class='code'>    &#96;ALWAYS_TRUE&#96; in a case when the return value of this method never involves newly</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    allocated mutable objects.</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>A flag signaling &#96;BSpline&#96; &#40;integer-grid b-spline&#41; interpolation along the corresponding axis.</span>
+            <span class='code'>  * &#96;CONSISTENT_IF_INACCESSIBLEMEMONLY&#96;: the &#96;:consistent&#96;-cy of this method can later be</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>&#96;degree&#96; is one of &#91;&#96;Constant&#96;&#93;&#40;@ref&#41;, &#91;&#96;Linear&#96;&#93;&#40;@ref&#41;, &#91;&#96;Quadratic&#96;&#93;&#40;@ref&#41;, or &#91;&#96;Cubic&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    refined to &#96;ALWAYS_TRUE&#96; in a case when &#96;:inaccessiblememonly&#96; is proven.</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>- &#96;effect_free::UInt8&#96;:</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>struct BSpline&#123;D&lt;:Degree&#125; &lt;: InterpolationType</span>
+            <span class='code'>  * &#96;ALWAYS_TRUE&#96;: this method is free from externally semantically visible side effects.</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'>    degree::D</span>
+            <span class='code'>  * &#96;ALWAYS_FALSE&#96;: this method may not be free from externally semantically visible side effects, and there is</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    no need for further analysis with respect to this effect property as this conclusion</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    will not be refined anyway.</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>BSpline&#40;::Type&#123;D&#125;&#41; where D &lt;: Degree &#61; BSpline&#40;D&#40;&#41;&#41;</span>
+            <span class='code'>  * &#96;EFFECT_FREE_IF_INACCESSIBLEMEMONLY&#96;: the &#96;:effect-free&#96;-ness of this method can later be</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>BSpline&#40;&#41; &#61; Linear |&gt; BSpline</span>
+            <span class='code'>    refined to &#96;ALWAYS_TRUE&#96; in a case when &#96;:inaccessiblememonly&#96; is proven.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>- &#96;nothrow::Bool&#96;: this method is guaranteed to not throw an exception.</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>bsplinetype&#40;::Type&#123;BSpline&#123;D&#125;&#125;&#41; where &#123;D&lt;:Degree&#125; &#61; D</span>
+            <span class='code'>- &#96;terminates::Bool&#96;: this method is guaranteed to terminate.</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>bsplinetype&#40;::BS&#41; where &#123;BS&lt;:BSpline&#125; &#61; bsplinetype&#40;BS&#41;</span>
+            <span class='code'>- &#96;notaskstate::Bool&#96;: this method does not access any state bound to the current</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  task and may thus be moved to a different task without changing observable</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>degree&#40;mode::BSpline&#41; &#61; mode.degree</span>
+            <span class='code'>  behavior. Note that this currently implies that &#96;noyield&#96; as well, since</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>degree&#40;::NoInterp&#41; &#61; NoInterp&#40;&#41;</span>
+            <span class='code'>  yielding modifies the state of the current task, though this may be split</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  in the future.</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>iscomplete&#40;mode::BSpline&#41; &#61; iscomplete&#40;degree&#40;mode&#41;&#41;</span>
+            <span class='code'>- &#96;inaccessiblememonly::UInt8&#96;:</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>iscomplete&#40;deg::DegreeBC&#41; &#61; _iscomplete&#40;deg.bc.gt&#41;</span>
+            <span class='code'>  * &#96;ALWAYS_TRUE&#96;: this method does not access or modify externally accessible mutable memory.</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>iscomplete&#40;deg::Degree&#41; &#61; true</span>
+            <span class='code'>    This state corresponds to LLVM&#39;s &#96;inaccessiblememonly&#96; function attribute.</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>_iscomplete&#40;::Nothing&#41; &#61; false</span>
+            <span class='code'>  * &#96;ALWAYS_FALSE&#96;: this method may access or modify externally accessible mutable memory.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>_iscomplete&#40;::GridType&#41; &#61; true</span>
+            <span class='code'>  * &#96;INACCESSIBLEMEM_OR_ARGMEMONLY&#96;: this method does not access or modify externally accessible mutable memory,</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +405,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    except that it may access or modify mutable memory pointed to by its call arguments.</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +415,7 @@
           <td>
             
             
-            <span class='code'>function Base.show&#40;io::IO, bs::BSpline&#41;</span>
+            <span class='code'>    This may later be refined to &#96;ALWAYS_TRUE&#96; in a case when call arguments are known to be immutable.</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +425,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &quot;BSpline&#40;&quot;&#41;</span>
+            <span class='code'>    This state corresponds to LLVM&#39;s &#96;inaccessiblemem_or_argmemonly&#96; function attribute.</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +435,7 @@
           <td>
             
             
-            <span class='code'>    show&#40;io, degree&#40;bs&#41;&#41;</span>
+            <span class='code'>- &#96;nonoverlayed::Bool&#96;: indicates that any methods that may be called within this method</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +445,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &#39;&#41;&#39;&#41;</span>
+            <span class='code'>  are not defined in an &#91;overlayed method table&#93;&#40;@ref OverlayMethodTable&#41;.</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +455,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>- &#96;noinbounds::Bool&#96;: If set, indicates that this method does not read the parent&#39;s &#96;:inbounds&#96;</span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +465,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>  state. In particular, it does not have any reached &#96;:boundscheck&#96; exprs, not propagates inbounds</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +475,7 @@
           <td>
             
             
-            <span class='code'>function Base.show&#40;io::IO, deg::DegreeBC&#41;</span>
+            <span class='code'>  to any children that do.</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +485,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, nameof&#40;typeof&#40;deg&#41;&#41;, &#39;&#40;&#39;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +495,7 @@
           <td>
             
             
-            <span class='code'>    show&#40;io, deg.bc&#41;</span>
+            <span class='code'>Note that the representations above are just internal implementation details and thus likely</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +505,7 @@
           <td>
             
             
-            <span class='code'>    print&#40;io, &#39;&#41;&#39;&#41;</span>
+            <span class='code'>to change in the future. See &#91;&#96;Base.@assume_effects&#96;&#93;&#40;@ref&#41; for more detailed explanation</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +515,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>on the definitions of these properties.</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -535,7 +535,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>Along the abstract interpretation, &#96;Effects&#96; at each statement are analyzed locally and they</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +545,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#123;T,N,TCoefs,IT,Axs&#125;</span>
+            <span class='code'>are merged into the single global &#96;Effects&#96; that represents the entire effects of the</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>analyzed method &#40;see the implementation of &#96;merge_effects&#33;&#96;&#41;. Each effect property is</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +565,7 @@
           <td>
             
             
-            <span class='code'>An interpolant-type for b-spline interpolation on a uniform grid with integer nodes.</span>
+            <span class='code'>initialized with &#96;ALWAYS_TRUE&#96;/&#96;true&#96; and then transitioned towards &#96;ALWAYS_FALSE&#96;/&#96;false&#96;.</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +575,7 @@
           <td>
             
             
-            <span class='code'>&#96;T&#96; indicates the element type for operations like &#96;collect&#40;itp&#41;&#96;, and may also agree with</span>
+            <span class='code'>Note that within the current flow-insensitive analysis design, effects detected by local</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +585,7 @@
           <td>
             
             
-            <span class='code'>the values obtained from &#96;itp&#40;x, y, ...&#41;&#96; at least for certain types of &#96;x&#96; and &#96;y&#96;.</span>
+            <span class='code'>analysis on each statement usually taint the global conclusion conservatively.</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +595,7 @@
           <td>
             
             
-            <span class='code'>&#96;N&#96; is the dimensionality of the interpolant. The remaining type-parameters</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +605,7 @@
           <td>
             
             
-            <span class='code'>describe the types of fields:</span>
+            <span class='code'>## Key for &#96;show&#96; output of Effects:</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +615,7 @@
           <td>
             
             
-            <span class='code'>- the &#96;coefs&#96; field holds the interpolation coefficients. Depending on prefiltering,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +625,7 @@
           <td>
             
             
-            <span class='code'>  these may or may not be the same as the supplied array of interpolant values.</span>
+            <span class='code'>The output represents the state of different effect properties in the following order:</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +635,7 @@
           <td>
             
             
-            <span class='code'>- &#96;parentaxes&#96; holds the axes of the parent. Depending on prefiltering this may be</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +645,7 @@
           <td>
             
             
-            <span class='code'>  &quot;narrower&quot; than the axes of &#96;coefs&#96;.</span>
+            <span class='code'>1. &#96;consistent&#96; &#40;&#96;c&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +655,7 @@
           <td>
             
             
-            <span class='code'>- &#96;it&#96; holds the interpolation type, e.g., &#96;BSpline&#40;Linear&#40;&#41;&#41;&#96; or &#96;&#40;BSpline&#40;Quadratic&#40;OnCell&#40;&#41;&#41;,BSpline&#40;Linear&#40;&#41;&#41;&#41;&#96;.</span>
+            <span class='code'>    - &#96;&#43;c&#96; &#40;green&#41;: &#96;ALWAYS_TRUE&#96;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +665,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    - &#96;-c&#96; &#40;red&#41;: &#96;ALWAYS_FALSE&#96;</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +675,7 @@
           <td>
             
             
-            <span class='code'>&#96;BSplineInterpolation&#96; objects are typically created with &#91;&#96;interpolate&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    - &#96;?c&#96; &#40;yellow&#41;: &#96;CONSISTENT_IF_NOTRETURNED&#96; and/or &#96;CONSISTENT_IF_INACCESSIBLEMEMONLY&#96;</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +685,7 @@
           <td>
             
             
-            <span class='code'>However, for customized control you may also construct them with</span>
+            <span class='code'>2. &#96;effect_free&#96; &#40;&#96;e&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +695,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    - &#96;&#43;e&#96; &#40;green&#41;: &#96;ALWAYS_TRUE&#96;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +705,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#40;TWeights, coefs, it, axs&#41;</span>
+            <span class='code'>    - &#96;-e&#96; &#40;red&#41;: &#96;ALWAYS_FALSE&#96;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +715,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    - &#96;?e&#96; &#40;yellow&#41;: &#96;EFFECT_FREE_IF_INACCESSIBLEMEMONLY&#96;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +725,7 @@
           <td>
             
             
-            <span class='code'>where &#96;T&#96; gets computed from the product of &#96;TWeights&#96; and &#96;eltype&#40;coefs&#41;&#96;.</span>
+            <span class='code'>3. &#96;nothrow&#96; &#40;&#96;n&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +735,7 @@
           <td>
             
             
-            <span class='code'>&#40;This is equivalent to indicating that you&#39;ll be evaluating at locations &#96;itp&#40;x::TWeights, y::TWeights, ...&#41;&#96;.&#41;</span>
+            <span class='code'>    - &#96;&#43;n&#96; &#40;green&#41;: &#96;true&#96;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +745,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    - &#96;-n&#96; &#40;red&#41;: &#96;false&#96;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +755,7 @@
           <td>
             
             
-            <span class='code'>struct BSplineInterpolation&#123;T,N,TCoefs&lt;:AbstractArray,IT&lt;:DimSpec&#123;BSpline&#125;,Axs&lt;:Indices&#123;N&#125;&#125; &lt;: AbstractInterpolation&#123;T,N,IT&#125;</span>
+            <span class='code'>4. &#96;terminates&#96; &#40;&#96;t&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +765,7 @@
           <td>
             
             
-            <span class='code'>    coefs::TCoefs</span>
+            <span class='code'>    - &#96;&#43;t&#96; &#40;green&#41;: &#96;true&#96;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +775,7 @@
           <td>
             
             
-            <span class='code'>    parentaxes::Axs</span>
+            <span class='code'>    - &#96;-t&#96; &#40;red&#41;: &#96;false&#96;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +785,7 @@
           <td>
             
             
-            <span class='code'>    it::IT</span>
+            <span class='code'>5. &#96;notaskstate&#96; &#40;&#96;s&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +795,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    - &#96;&#43;s&#96; &#40;green&#41;: &#96;true&#96;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +805,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    - &#96;-s&#96; &#40;red&#41;: &#96;false&#96;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +815,7 @@
           <td>
             
             
-            <span class='code'>function Base.:&#40;&#61;&#61;&#41;&#40;o1::BSplineInterpolation, o2::BSplineInterpolation&#41;</span>
+            <span class='code'>6. &#96;inaccessiblememonly&#96; &#40;&#96;m&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +825,7 @@
           <td>
             
             
-            <span class='code'>    o1.it &#61;&#61; o2.it &amp;&amp;</span>
+            <span class='code'>    - &#96;&#43;m&#96; &#40;green&#41;: &#96;ALWAYS_TRUE&#96;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +835,7 @@
           <td>
             
             
-            <span class='code'>    o1.parentaxes &#61;&#61; o2.parentaxes &amp;&amp;</span>
+            <span class='code'>    - &#96;-m&#96; &#40;red&#41;: &#96;ALWAYS_FALSE&#96;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +845,7 @@
           <td>
             
             
-            <span class='code'>    o1.coefs &#61;&#61; o2.coefs</span>
+            <span class='code'>    - &#96;?m&#96; &#40;yellow&#41;: &#96;INACCESSIBLEMEM_OR_ARGMEMONLY&#96;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +855,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>7. &#96;noinbounds&#96; &#40;&#96;i&#96;&#41;:</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +865,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    - &#96;&#43;i&#96; &#40;green&#41;: &#96;true&#96;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +875,7 @@
           <td>
             
             
-            <span class='code'>BSplineInterpolation&#123;T,N&#125;&#40;A::AbstractArray, axs::Indices&#123;N&#125;, it::IT&#41; where &#123;T,N,IT&#125; &#61;</span>
+            <span class='code'>    - &#96;-i&#96; &#40;red&#41;: &#96;false&#96;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +885,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#123;T,N,typeof&#40;A&#41;,IT,typeof&#40;axs&#41;&#125;&#40;A, axs, it&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +895,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>Additionally, if the &#96;nonoverlayed&#96; property is false, a red prime symbol &#40;′&#41; is displayed after the tuple.</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +905,7 @@
           <td>
             
             
-            <span class='code'>function BSplineInterpolation&#40;::Type&#123;TWeights&#125;, A::AbstractArray&#123;Tel,N&#125;, it::IT, axs&#41; where &#123;N,Tel,TWeights&lt;:Real,IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +915,7 @@
           <td>
             
             
-            <span class='code'>    # String interpolation causes allocation, noinline avoids that unless they get called</span>
+            <span class='code'>struct Effects</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +925,7 @@
           <td>
             
             
-            <span class='code'>    @noinline err_concrete&#40;IT&#41; &#61; error&#40;&quot;The b-spline type must be a concrete type &#40;was &#36;IT&#41;&quot;&#41;</span>
+            <span class='code'>    consistent::UInt8</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +935,7 @@
           <td>
             
             
-            <span class='code'>    @noinline warn_concrete&#40;A&#41; &#61; @warn&#40;&quot;For performance reasons, consider using an array of a concrete type &#40;typeof&#40;A&#41; &#61;&#61; &#36;&#40;typeof&#40;A&#41;&#41;&#41;&quot;&#41;</span>
+            <span class='code'>    effect_free::UInt8</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +945,7 @@
           <td>
             
             
-            <span class='code'>    @noinline err_incomplete&#40;it&#41; &#61; error&#40;&quot;OnGrid/OnCell is not supplied for some of the interpolation modes in &#36;it&quot;&#41;</span>
+            <span class='code'>    nothrow::Bool</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +955,7 @@
           <td>
             
             
-            <span class='code'>    @noinline err_singleton&#40;A, it&#41; &#61; throw&#40;ArgumentError&#40;&quot;size &#36;&#40;size&#40;A&#41;&#41; is inconsistent with &#36;it, use NoInterp along singleton dimensions&quot;&#41;&#41;</span>
+            <span class='code'>    terminates::Bool</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +965,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    notaskstate::Bool</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +975,7 @@
           <td>
             
             
-            <span class='code'>    isconcretetype&#40;IT&#41; || err_concrete&#40;IT&#41;</span>
+            <span class='code'>    inaccessiblememonly::UInt8</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +985,7 @@
           <td>
             
             
-            <span class='code'>    isconcretetype&#40;typeof&#40;A&#41;&#41; || warn_concrete&#40;A&#41;</span>
+            <span class='code'>    nonoverlayed::Bool</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +995,7 @@
           <td>
             
             
-            <span class='code'>    iscomplete&#40;it&#41; || err_incomplete&#40;it&#41;</span>
+            <span class='code'>    noinbounds::Bool</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1005,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    function Effects&#40;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1015,7 @@
           <td>
             
             
-            <span class='code'>    # Check that dimensions of size 1 are NoInterp</span>
+            <span class='code'>        consistent::UInt8,</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1025,7 @@
           <td>
             
             
-            <span class='code'>    is_singleton_ok&#40;A, it&#41; || err_singleton&#40;A, it&#41;</span>
+            <span class='code'>        effect_free::UInt8,</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1035,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        nothrow::Bool,</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1045,7 @@
           <td>
             
             
-            <span class='code'>    # Compute the output element type when positions have type TWeights</span>
+            <span class='code'>        terminates::Bool,</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1055,7 @@
           <td>
             
             
-            <span class='code'>    if isempty&#40;A&#41;</span>
+            <span class='code'>        notaskstate::Bool,</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1065,7 @@
           <td>
             
             
-            <span class='code'>        T &#61; Base.promote_op&#40;*, TWeights, eltype&#40;A&#41;&#41;</span>
+            <span class='code'>        inaccessiblememonly::UInt8,</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1075,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        nonoverlayed::Bool,</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1085,7 @@
           <td>
             
             
-            <span class='code'>        T &#61; typeof&#40;zero&#40;TWeights&#41; * first&#40;A&#41;&#41;</span>
+            <span class='code'>        noinbounds::Bool&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1095,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        return new&#40;</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1105,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#123;T,N&#125;&#40;A, fix_axis.&#40;axs&#41;, it&#41;</span>
+            <span class='code'>            consistent,</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1115,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            effect_free,</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1125,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            nothrow,</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1135,7 @@
           <td>
             
             
-            <span class='code'>function BSplineInterpolation&#40;A::AbstractArray&#123;Tel,N&#125;, it::IT, axs&#41; where &#123;N,Tel,IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>            terminates,</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1145,7 @@
           <td>
             
             
-            <span class='code'>    @noinline err_axes&#40;A, it, axs&#41; &#61; throw&#40;ArgumentError&#40;&quot;parentaxes &#36;axs are inconsistent with coefficient array axes &#36;&#40;axes&#40;A&#41;&#41; and interpolation type &#36;it&quot;&#41;&#41;</span>
+            <span class='code'>            notaskstate,</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1155,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            inaccessiblememonly,</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1165,7 @@
           <td>
             
             
-            <span class='code'>    paxs &#61; padded_axes&#40;axs, it&#41;</span>
+            <span class='code'>            nonoverlayed,</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1175,7 @@
           <td>
             
             
-            <span class='code'>    all&#40;map&#40;⊆, paxs, axes&#40;A&#41;&#41;&#41; || err_axes&#40;A, it, axs&#41;</span>
+            <span class='code'>            noinbounds&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1185,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#40;tweight&#40;A&#41;, A, it, axs&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1215,7 +1215,7 @@
           <td>
             
             
-            <span class='code'>iscomplete&#40;its::Tuple&#41; &#61; all&#40;iscomplete, its&#41;</span>
+            <span class='code'>const ALWAYS_TRUE  &#61; 0x00</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1225,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const ALWAYS_FALSE &#61; 0x01</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1235,7 @@
           <td>
             
             
-            <span class='code'>is_singleton_ok&#40;A, it&#41; &#61; is_singleton_ok&#40;size&#40;A&#41;, it&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1245,7 @@
           <td>
             
             
-            <span class='code'>@inline function is_singleton_ok&#40;sz::Tuple, it&#41;</span>
+            <span class='code'># :consistent-cy bits</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1255,7 @@
           <td>
             
             
-            <span class='code'>    if sz&#91;1&#93; &#61;&#61; 1</span>
+            <span class='code'>const CONSISTENT_IF_NOTRETURNED         &#61; 0x01 &lt;&lt; 1</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1265,7 @@
           <td>
             
             
-            <span class='code'>        it1 &#61; getfirst&#40;it&#41;</span>
+            <span class='code'>const CONSISTENT_IF_INACCESSIBLEMEMONLY &#61; 0x01 &lt;&lt; 2</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1275,7 @@
           <td>
             
             
-            <span class='code'>        it1 isa NoInterp || return false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1285,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># :effect_free-ness bits</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1295,7 @@
           <td>
             
             
-            <span class='code'>    return is_singleton_ok&#40;Base.tail&#40;sz&#41;, getrest&#40;it&#41;&#41;</span>
+            <span class='code'>const EFFECT_FREE_IF_INACCESSIBLEMEMONLY &#61; 0x01 &lt;&lt; 1</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1305,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1315,7 @@
           <td>
             
             
-            <span class='code'>is_singleton_ok&#40;::Tuple&#123;&#125;, it&#41; &#61; true</span>
+            <span class='code'># :inaccessiblememonly bits</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1325,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const INACCESSIBLEMEM_OR_ARGMEMONLY &#61; 0x01 &lt;&lt; 1</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1335,7 @@
           <td>
             
             
-            <span class='code'>coefficients&#40;itp::BSplineInterpolation&#41; &#61; itp.coefs</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1345,7 @@
           <td>
             
             
-            <span class='code'>interpdegree&#40;itp::BSplineInterpolation&#41; &#61; interpdegree&#40;itpflag&#40;itp&#41;&#41;</span>
+            <span class='code'>const EFFECTS_TOTAL    &#61; Effects&#40;ALWAYS_TRUE,  ALWAYS_TRUE,  true,  true,  true,  ALWAYS_TRUE,  true,  true&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1355,7 @@
           <td>
             
             
-            <span class='code'>interpdegree&#40;::BSpline&#123;T&#125;&#41; where T &#61; T&#40;&#41;</span>
+            <span class='code'>const EFFECTS_THROWS   &#61; Effects&#40;ALWAYS_TRUE,  ALWAYS_TRUE,  false, true,  true,  ALWAYS_TRUE,  true,  true&#41;</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1365,7 @@
           <td>
             
             
-            <span class='code'>interpdegree&#40;it::Tuple&#123;Vararg&#123;Union&#123;BSpline,NoInterp&#125;,N&#125;&#125;&#41; where N &#61; interpdegree.&#40;it&#41;</span>
+            <span class='code'>const EFFECTS_UNKNOWN  &#61; Effects&#40;ALWAYS_FALSE, ALWAYS_FALSE, false, false, false, ALWAYS_FALSE, true,  true&#41;  # unknown mostly, but it&#39;s not overlayed and noinbounds at least &#40;e.g. it&#39;s not a call&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1375,7 @@
           <td>
             
             
-            <span class='code'>itpflag&#40;itp::BSplineInterpolation&#41; &#61; itp.it</span>
+            <span class='code'>const _EFFECTS_UNKNOWN &#61; Effects&#40;ALWAYS_FALSE, ALWAYS_FALSE, false, false, false, ALWAYS_FALSE, false, false&#41; # unknown really</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1395,7 +1395,7 @@
           <td>
             
             
-            <span class='code'>size&#40;itp::BSplineInterpolation&#41; &#61; map&#40;length, itp.parentaxes&#41;</span>
+            <span class='code'>function Effects&#40;e::Effects &#61; _EFFECTS_UNKNOWN;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1405,7 @@
           <td>
             
             
-            <span class='code'>axes&#40;itp::BSplineInterpolation&#41; &#61; itp.parentaxes</span>
+            <span class='code'>    consistent::UInt8 &#61; e.consistent,</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1415,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    effect_free::UInt8 &#61; e.effect_free,</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1425,7 @@
           <td>
             
             
-            <span class='code'>lbounds&#40;itp::BSplineInterpolation&#41; &#61; _lbounds&#40;itp.parentaxes, itpflag&#40;itp&#41;&#41;</span>
+            <span class='code'>    nothrow::Bool &#61; e.nothrow,</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,40 +1435,17 @@
           <td>
             
             
-            <span class='code'>ubounds&#40;itp::BSplineInterpolation&#41; &#61; _ubounds&#40;itp.parentaxes, itpflag&#40;itp&#41;&#41;</span>
+            <span class='code'>    terminates::Bool &#61; e.terminates,</span>
           </td>
         </tr>
         <tr id='L142'>
           <td class='lineno'>142</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>3 &#40;23 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              3 &#40;23 &#37;&#41;
-              samples spent in _lbounds
-              <br />
-              
-              2 &#40;67 &#37;&#41; &#40;incl.&#41;
-              when called from _lbounds
-              <a href='b-splines.jl-83e1662d3a0854821487d0cb5e1cc133d83eca0c.html#L142'>line 142</a>
-              <br />
-              
-              1 &#40;33 &#37;&#41; &#40;incl.&#41;
-              when called from lbounds
-              <a href='scaling.jl-2989922f84d932b2b7a2c7974fb036bfebb6ca9c.html#L54'>line 54</a>
-              <br />
-            </div>
-            <div class='callees'>
-              2 &#40;67 &#37;&#41;
-              samples spent calling
-              <a href='b-splines.jl-83e1662d3a0854821487d0cb5e1cc133d83eca0c.html#L142'>_lbounds</a>
-              <br />
-              1 &#40;33 &#37;&#41;
-              samples spent calling
-              <a href='b-splines.jl-83e1662d3a0854821487d0cb5e1cc133d83eca0c.html#L147'>lbound</a>
-              <br />
-            </div>
-            <span class='code'>_lbounds&#40;axs, itp&#41; &#61; &#40;lbound&#40;axs&#91;1&#93;, getfirst&#40;itp&#41;&#41;, _lbounds&#40;Base.tail&#40;axs&#41;, getrest&#40;itp&#41;&#41;...&#41;</span>
+            
+            
+            <span class='code'>    notaskstate::Bool &#61; e.notaskstate,</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1478,7 +1455,7 @@
           <td>
             
             
-            <span class='code'>_ubounds&#40;axs, itp&#41; &#61; &#40;ubound&#40;axs&#91;1&#93;, getfirst&#40;itp&#41;&#41;, _ubounds&#40;Base.tail&#40;axs&#41;, getrest&#40;itp&#41;&#41;...&#41;</span>
+            <span class='code'>    inaccessiblememonly::UInt8 &#61; e.inaccessiblememonly,</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1488,7 +1465,7 @@
           <td>
             
             
-            <span class='code'>_lbounds&#40;::Tuple&#123;&#125;, itp&#41; &#61; &#40;&#41;</span>
+            <span class='code'>    nonoverlayed::Bool &#61; e.nonoverlayed,</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1498,7 +1475,7 @@
           <td>
             
             
-            <span class='code'>_ubounds&#40;::Tuple&#123;&#125;, itp&#41; &#61; &#40;&#41;</span>
+            <span class='code'>    noinbounds::Bool &#61; e.noinbounds&#41;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1508,31 +1485,17 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return Effects&#40;</span>
           </td>
         </tr>
         <tr id='L147'>
           <td class='lineno'>147</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;8 &#37;&#41;
-              samples spent in lbound
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _lbounds
-              <a href='b-splines.jl-83e1662d3a0854821487d0cb5e1cc133d83eca0c.html#L142'>line 142</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='b-splines.jl-83e1662d3a0854821487d0cb5e1cc133d83eca0c.html#L149'>lbound</a>
-              <br />
-            </div>
-            <span class='code'>lbound&#40;ax::AbstractRange, bs::BSpline&#41;   &#61; lbound&#40;ax, degree&#40;bs&#41;&#41;</span>
+            
+            
+            <span class='code'>        consistent,</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1542,31 +1505,17 @@
           <td>
             
             
-            <span class='code'>lbound&#40;ax::AbstractRange, deg::Degree&#41;   &#61; first&#40;ax&#41;</span>
+            <span class='code'>        effect_free,</span>
           </td>
         </tr>
         <tr id='L149'>
           <td class='lineno'>149</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;8 &#37;&#41;
-              samples spent in lbound
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from lbound
-              <a href='b-splines.jl-83e1662d3a0854821487d0cb5e1cc133d83eca0c.html#L147'>line 147</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='scaling.jl-2989922f84d932b2b7a2c7974fb036bfebb6ca9c.html#L65'>lbound</a>
-              <br />
-            </div>
-            <span class='code'>lbound&#40;ax::AbstractRange, deg::DegreeBC&#41; &#61; lbound&#40;ax, deg, deg.bc.gt&#41;</span>
+            
+            
+            <span class='code'>        nothrow,</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1576,7 +1525,7 @@
           <td>
             
             
-            <span class='code'>ubound&#40;ax::AbstractRange, bs::BSpline&#41;   &#61; ubound&#40;ax, degree&#40;bs&#41;&#41;</span>
+            <span class='code'>        terminates,</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1586,7 +1535,7 @@
           <td>
             
             
-            <span class='code'>ubound&#40;ax::AbstractRange, deg::Degree&#41;   &#61; last&#40;ax&#41;</span>
+            <span class='code'>        notaskstate,</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1596,7 +1545,7 @@
           <td>
             
             
-            <span class='code'>ubound&#40;ax::AbstractRange, deg::DegreeBC&#41; &#61; ubound&#40;ax, deg, deg.bc.gt&#41;</span>
+            <span class='code'>        inaccessiblememonly,</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1606,7 +1555,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        nonoverlayed,</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1616,7 +1565,7 @@
           <td>
             
             
-            <span class='code'>lbound&#40;ax::AbstractUnitRange, ::DegreeBC, ::OnCell&#41; &#61; first&#40;ax&#41; - 0.5</span>
+            <span class='code'>        noinbounds&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1626,7 +1575,7 @@
           <td>
             
             
-            <span class='code'>ubound&#40;ax::AbstractUnitRange, ::DegreeBC, ::OnCell&#41; &#61; last&#40;ax&#41; &#43; 0.5</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1636,7 +1585,7 @@
           <td>
             
             
-            <span class='code'>lbound&#40;ax::AbstractUnitRange, ::DegreeBC, ::OnGrid&#41; &#61; first&#40;ax&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1646,7 +1595,7 @@
           <td>
             
             
-            <span class='code'>ubound&#40;ax::AbstractUnitRange, ::DegreeBC, ::OnGrid&#41; &#61; last&#40;ax&#41;</span>
+            <span class='code'>function merge_effects&#40;old::Effects, new::Effects&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1656,7 +1605,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return Effects&#40;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1666,7 +1615,7 @@
           <td>
             
             
-            <span class='code'>fix_axis&#40;r::Base.OneTo&#41; &#61; r</span>
+            <span class='code'>        merge_effectbits&#40;old.consistent, new.consistent&#41;,</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1676,7 +1625,7 @@
           <td>
             
             
-            <span class='code'>fix_axis&#40;r::Base.Slice&#41; &#61; r</span>
+            <span class='code'>        merge_effectbits&#40;old.effect_free, new.effect_free&#41;,</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1686,7 +1635,7 @@
           <td>
             
             
-            <span class='code'>fix_axis&#40;r::UnitRange&#41; &#61; Base.Slice&#40;r&#41;</span>
+            <span class='code'>        merge_effectbits&#40;old.nothrow, new.nothrow&#41;,</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1696,7 +1645,7 @@
           <td>
             
             
-            <span class='code'>fix_axis&#40;r::AbstractUnitRange&#41; &#61; fix_axis&#40;UnitRange&#40;r&#41;&#41;</span>
+            <span class='code'>        merge_effectbits&#40;old.terminates, new.terminates&#41;,</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1706,7 +1655,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        merge_effectbits&#40;old.notaskstate, new.notaskstate&#41;,</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1716,7 +1665,7 @@
           <td>
             
             
-            <span class='code'>count_interp_dims&#40;::Type&#123;BSI&#125;, n&#41; where BSI&lt;:BSplineInterpolation &#61; count_interp_dims&#40;itptype&#40;BSI&#41;, n&#41;</span>
+            <span class='code'>        merge_effectbits&#40;old.inaccessiblememonly, new.inaccessiblememonly&#41;,</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1726,7 +1675,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        merge_effectbits&#40;old.nonoverlayed, new.nonoverlayed&#41;,</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1736,7 +1685,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#40;::Type&#123;TWeights&#125;, ::Type&#123;TC&#125;, A, it::IT&#41; where &#123;TWeights,TC,IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>        merge_effectbits&#40;old.noinbounds, new.noinbounds&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1746,7 +1695,7 @@
           <td>
             
             
-            <span class='code'>    Apad &#61; prefilter&#40;TWeights, TC, A, it&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1756,7 +1705,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#40;TWeights, Apad, it, axes&#40;A&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1766,7 +1715,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function merge_effectbits&#40;old::UInt8, new::UInt8&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1776,7 +1725,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if old &#61;&#61;&#61; ALWAYS_FALSE || new &#61;&#61;&#61; ALWAYS_FALSE</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1786,7 +1735,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#40;::Type&#123;TWeights&#125;, ::Type&#123;TC&#125;, A, it::IT, λ::Real, k::Int&#41; where &#123;TWeights,TC,IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>        return ALWAYS_FALSE</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1796,7 +1745,7 @@
           <td>
             
             
-            <span class='code'>    Apad &#61; prefilter&#40;TWeights, TC, A, it, λ, k&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1806,7 +1755,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#40;TWeights, Apad, it, axes&#40;A&#41;&#41;</span>
+            <span class='code'>    return old | new</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1826,7 +1775,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>merge_effectbits&#40;old::Bool, new::Bool&#41; &#61; old &amp; new</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1836,7 +1785,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1846,17 +1795,26 @@
           <td>
             
             
-            <span class='code'>    itp &#61; interpolate&#40;A, interpmode&#41;</span>
+            <span class='code'>is_consistent&#40;effects::Effects&#41;          &#61; effects.consistent &#61;&#61;&#61; ALWAYS_TRUE</span>
           </td>
         </tr>
         <tr id='L178'>
           <td class='lineno'>178</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in is_effect_free
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from mark_curr_effect_flags&#33;
+              <a href='abstractinterpretation.jl-4b0d7a005b92c00f5b9aed476ed04a4529b96f83.html#L2334'>line 2334</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>is_effect_free&#40;effects::Effects&#41;         &#61; effects.effect_free &#61;&#61;&#61; ALWAYS_TRUE</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1866,7 +1824,7 @@
           <td>
             
             
-            <span class='code'>Interpolate an array &#96;A&#96; in the mode determined by &#96;interpmode&#96;.</span>
+            <span class='code'>is_nothrow&#40;effects::Effects&#41;             &#61; effects.nothrow</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1876,7 +1834,7 @@
           <td>
             
             
-            <span class='code'>&#96;interpmode&#96; may be one of</span>
+            <span class='code'>is_terminates&#40;effects::Effects&#41;          &#61; effects.terminates</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1886,7 +1844,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_notaskstate&#40;effects::Effects&#41;         &#61; effects.notaskstate</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1896,7 +1854,7 @@
           <td>
             
             
-            <span class='code'>- &#96;NoInterp&#40;&#41;&#96;</span>
+            <span class='code'>is_inaccessiblememonly&#40;effects::Effects&#41; &#61; effects.inaccessiblememonly &#61;&#61;&#61; ALWAYS_TRUE</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1906,7 +1864,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Constant&#40;&#41;&#41;&#96;</span>
+            <span class='code'>is_nonoverlayed&#40;effects::Effects&#41;        &#61; effects.nonoverlayed</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1916,7 +1874,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Linear&#40;&#41;&#41;&#96;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1926,7 +1884,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Quadratic&#40;bc&#41;&#41;&#96; &#40;see &#91;&#96;BoundaryCondition&#96;&#93;&#40;@ref&#41;&#41;</span>
+            <span class='code'># implies &#96;is_notaskstate&#96; &amp; &#96;is_inaccessiblememonly&#96;, but not explicitly checked here</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1936,7 +1894,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Cubic&#40;bc&#41;&#41;&#96;</span>
+            <span class='code'>is_foldable&#40;effects::Effects&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1946,7 +1904,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    is_consistent&#40;effects&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1956,7 +1914,7 @@
           <td>
             
             
-            <span class='code'>It may also be a tuple of such values, if you want to use different interpolation schemes along each axis.</span>
+            <span class='code'>    is_effect_free&#40;effects&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1966,7 +1924,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    is_terminates&#40;effects&#41;</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1976,7 +1934,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#40;A::AbstractArray, it::IT&#41; where &#123;IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1986,7 +1944,7 @@
           <td>
             
             
-            <span class='code'>    interpolate&#40;tweight&#40;A&#41;, tcoef&#40;A&#41;, A, it&#41;</span>
+            <span class='code'>is_foldable_nothrow&#40;effects::Effects&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1996,7 +1954,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    is_foldable&#40;effects&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -2006,7 +1964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    is_nothrow&#40;effects&#41;</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -2016,7 +1974,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L195'>
@@ -2026,7 +1984,7 @@
           <td>
             
             
-            <span class='code'>    itp &#61; interpolate&#40;A, interpmode, gridstyle, λ, k&#41;</span>
+            <span class='code'>is_removable_if_unused&#40;effects::Effects&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -2036,7 +1994,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    is_effect_free&#40;effects&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2046,7 +2004,7 @@
           <td>
             
             
-            <span class='code'>Interpolate an array &#96;A&#96; in the mode determined by &#96;interpmode&#96; and &#96;gridstyle&#96;</span>
+            <span class='code'>    is_terminates&#40;effects&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2056,7 +2014,7 @@
           <td>
             
             
-            <span class='code'>with regularization following &#91;1&#93;, of order &#96;k&#96; and constant &#96;λ&#96;. </span>
+            <span class='code'>    is_nothrow&#40;effects&#41;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2066,7 +2024,7 @@
           <td>
             
             
-            <span class='code'>&#96;interpmode&#96; may be one of</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2076,7 +2034,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_finalizer_inlineable&#40;effects::Effects&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2086,7 +2044,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;NoInterp&#40;&#41;&#41;&#96;</span>
+            <span class='code'>    is_nothrow&#40;effects&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2096,7 +2054,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Linear&#40;&#41;&#41;&#96;</span>
+            <span class='code'>    is_notaskstate&#40;effects&#41;</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2106,7 +2064,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Quadratic&#40;BC&#40;&#41;&#41;&#41;&#96; &#40;see &#91;&#96;BoundaryCondition&#96;&#93;&#40;@ref&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2116,7 +2074,7 @@
           <td>
             
             
-            <span class='code'>- &#96;BSpline&#40;Cubic&#40;BC&#40;&#41;&#41;&#41;&#96;</span>
+            <span class='code'>is_consistent_if_notreturned&#40;effects::Effects&#41;         &#61; &#33;iszero&#40;effects.consistent &amp; CONSISTENT_IF_NOTRETURNED&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2126,7 +2084,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_consistent_if_inaccessiblememonly&#40;effects::Effects&#41; &#61; &#33;iszero&#40;effects.consistent &amp; CONSISTENT_IF_INACCESSIBLEMEMONLY&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2136,7 +2094,7 @@
           <td>
             
             
-            <span class='code'>It may also be a tuple of such values, if you want to use different interpolation schemes along each axis.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2146,7 +2104,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_effect_free_if_inaccessiblememonly&#40;effects::Effects&#41; &#61; &#33;iszero&#40;effects.effect_free &amp; EFFECT_FREE_IF_INACCESSIBLEMEMONLY&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2156,7 +2114,7 @@
           <td>
             
             
-            <span class='code'>&#96;gridstyle&#96; should be one of &#96;OnGrid&#40;&#41;&#96; or &#96;OnCell&#40;&#41;&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2166,7 +2124,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>is_inaccessiblemem_or_argmemonly&#40;effects::Effects&#41; &#61; effects.inaccessiblememonly &#61;&#61;&#61; INACCESSIBLEMEM_OR_ARGMEMONLY</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2176,7 +2134,7 @@
           <td>
             
             
-            <span class='code'>&#96;k&#96; corresponds to the derivative to penalize. In the limit λ-&gt;∞, the interpolation function is</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2186,7 +2144,7 @@
           <td>
             
             
-            <span class='code'>a polynomial of order &#96;k-1&#96;. A value of 2 is the most common.</span>
+            <span class='code'>function encode_effects&#40;e::Effects&#41;</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2196,7 +2154,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return &#40;&#40;e.consistent          &#37; UInt32&#41; &lt;&lt; 0&#41; |</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2206,7 +2164,7 @@
           <td>
             
             
-            <span class='code'>&#96;λ&#96; is non-negative. If its value is zero, it falls back to non-regularized interpolation.</span>
+            <span class='code'>           &#40;&#40;e.effect_free         &#37; UInt32&#41; &lt;&lt; 3&#41; |</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2216,7 +2174,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>           &#40;&#40;e.nothrow             &#37; UInt32&#41; &lt;&lt; 5&#41; |</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2226,7 +2184,7 @@
           <td>
             
             
-            <span class='code'>&#91;1&#93; https://projecteuclid.org/euclid.ss/1038425655.</span>
+            <span class='code'>           &#40;&#40;e.terminates          &#37; UInt32&#41; &lt;&lt; 6&#41; |</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2236,7 +2194,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>           &#40;&#40;e.notaskstate         &#37; UInt32&#41; &lt;&lt; 7&#41; |</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2246,7 +2204,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#40;A::AbstractArray, it::IT, λ::Real, k::Int&#41; where &#123;IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>           &#40;&#40;e.inaccessiblememonly &#37; UInt32&#41; &lt;&lt; 8&#41; |</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2256,7 +2214,7 @@
           <td>
             
             
-            <span class='code'>    interpolate&#40;tweight&#40;A&#41;, tcoef&#40;A&#41;, A, it, λ, k&#41;</span>
+            <span class='code'>           &#40;&#40;e.nonoverlayed        &#37; UInt32&#41; &lt;&lt; 10&#41;|</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2266,7 +2224,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>           &#40;&#40;e.noinbounds          &#37; UInt32&#41; &lt;&lt; 11&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2276,7 +2234,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2286,7 +2244,7 @@
           <td>
             
             
-            <span class='code'># We can&#39;t just return a tuple-of-types due to julia #12500</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2296,7 +2254,7 @@
           <td>
             
             
-            <span class='code'>tweight&#40;A::AbstractArray&#41; &#61; Float64</span>
+            <span class='code'>function decode_effects&#40;e::UInt32&#41;</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2306,7 +2264,7 @@
           <td>
             
             
-            <span class='code'>tweight&#40;A::AbstractArray&#123;T&#125;&#41; where T&lt;:AbstractFloat &#61; T</span>
+            <span class='code'>    return Effects&#40;</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2316,7 +2274,7 @@
           <td>
             
             
-            <span class='code'>tweight&#40;A::AbstractArray&#123;&lt;:AbstractVector&#123;T&#125;&#125;&#41; where &#123;T&#125; &#61; T</span>
+            <span class='code'>        UInt8&#40;&#40;e &gt;&gt; 0&#41; &amp; 0x07&#41;,</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2326,7 +2284,7 @@
           <td>
             
             
-            <span class='code'>tweight&#40;A::AbstractArray&#123;Rational&#123;Int&#125;&#125;&#41; &#61; Rational&#123;Int&#125;</span>
+            <span class='code'>        UInt8&#40;&#40;e &gt;&gt; 3&#41; &amp; 0x03&#41;,</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2336,7 +2294,7 @@
           <td>
             
             
-            <span class='code'>tweight&#40;A::AbstractArray&#123;T&#125;&#41; where &#123;T&lt;:Integer&#125; &#61; typeof&#40;float&#40;zero&#40;T&#41;&#41;&#41;</span>
+            <span class='code'>        _Bool&#40;&#40;e &gt;&gt; 5&#41; &amp; 0x01&#41;,</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2346,7 +2304,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        _Bool&#40;&#40;e &gt;&gt; 6&#41; &amp; 0x01&#41;,</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2356,7 +2314,7 @@
           <td>
             
             
-            <span class='code'>tcoef&#40;A::AbstractArray&#41; &#61; eltype&#40;A&#41;</span>
+            <span class='code'>        _Bool&#40;&#40;e &gt;&gt; 7&#41; &amp; 0x01&#41;,</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2366,7 +2324,7 @@
           <td>
             
             
-            <span class='code'>tcoef&#40;A::AbstractArray&#123;Float32&#125;&#41; &#61; Float32</span>
+            <span class='code'>        UInt8&#40;&#40;e &gt;&gt; 8&#41; &amp; 0x03&#41;,</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2376,7 +2334,7 @@
           <td>
             
             
-            <span class='code'>tcoef&#40;A::AbstractArray&#123;Rational&#123;Int&#125;&#125;&#41; &#61; Rational&#123;Int&#125;</span>
+            <span class='code'>        _Bool&#40;&#40;e &gt;&gt; 10&#41; &amp; 0x01&#41;,</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2386,7 +2344,7 @@
           <td>
             
             
-            <span class='code'>tcoef&#40;A::AbstractArray&#123;T&#125;&#41; where &#123;T&lt;:Integer&#125; &#61; typeof&#40;float&#40;zero&#40;T&#41;&#41;&#41;</span>
+            <span class='code'>        _Bool&#40;&#40;e &gt;&gt; 11&#41; &amp; 0x01&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2396,7 +2354,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2406,7 +2364,7 @@
           <td>
             
             
-            <span class='code'>&quot;In-place version of &#96;interpolate&#96;. It destroys input &#96;A&#96; and may trim the domain at the endpoints.&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2416,7 +2374,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#33;&#40;::Type&#123;TWeights&#125;, A::AbstractArray, it::IT&#41; where &#123;TWeights,IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>struct EffectsOverride</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2426,7 +2384,7 @@
           <td>
             
             
-            <span class='code'>    # Set the bounds of the interpolant inward, if necessary</span>
+            <span class='code'>    consistent::Bool</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2436,7 +2394,7 @@
           <td>
             
             
-            <span class='code'>    axsA &#61; axes&#40;A&#41;</span>
+            <span class='code'>    effect_free::Bool</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2446,7 +2404,7 @@
           <td>
             
             
-            <span class='code'>    axspad &#61; padded_axes&#40;axsA, it&#41;</span>
+            <span class='code'>    nothrow::Bool</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2456,7 +2414,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#40;TWeights, prefilter&#33;&#40;TWeights, A, it&#41;, it, fix_axis.&#40;padinset.&#40;axsA, axspad&#41;&#41;&#41;</span>
+            <span class='code'>    terminates_globally::Bool</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2466,7 +2424,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    terminates_locally::Bool</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2476,7 +2434,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#33;&#40;A::AbstractArray, it::IT&#41; where &#123;IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>    notaskstate::Bool</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2486,7 +2444,7 @@
           <td>
             
             
-            <span class='code'>    interpolate&#33;&#40;tweight&#40;A&#41;, A, it&#41;</span>
+            <span class='code'>    inaccessiblememonly::Bool</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2516,7 +2474,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#33;&#40;::Type&#123;TWeights&#125;, A::AbstractArray, it::IT, λ::Real, k::Int&#41; where &#123;TWeights,IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>function encode_effects_override&#40;eo::EffectsOverride&#41;</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2526,7 +2484,7 @@
           <td>
             
             
-            <span class='code'>    # Set the bounds of the interpolant inward, if necessary</span>
+            <span class='code'>    e &#61; 0x00</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2536,7 +2494,7 @@
           <td>
             
             
-            <span class='code'>    axsA &#61; axes&#40;A&#41;</span>
+            <span class='code'>    eo.consistent          &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2546,7 +2504,7 @@
           <td>
             
             
-            <span class='code'>    axspad &#61; padded_axes&#40;axsA, it&#41;</span>
+            <span class='code'>    eo.effect_free         &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2556,7 +2514,7 @@
           <td>
             
             
-            <span class='code'>    BSplineInterpolation&#40;TWeights, prefilter&#33;&#40;TWeights, A, it, λ, k&#41;, it, fix_axis.&#40;padinset.&#40;axsA, axspad&#41;&#41;&#41;</span>
+            <span class='code'>    eo.nothrow             &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 2&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2566,7 +2524,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    eo.terminates_globally &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 3&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2576,7 +2534,7 @@
           <td>
             
             
-            <span class='code'>function interpolate&#33;&#40;A::AbstractArray, it::IT, λ::Real, k::Int&#41; where &#123;IT&lt;:DimSpec&#123;BSpline&#125;&#125;</span>
+            <span class='code'>    eo.terminates_locally  &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 4&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2586,7 +2544,7 @@
           <td>
             
             
-            <span class='code'>    interpolate&#33;&#40;tweight&#40;A&#41;, A, it, λ, k&#41;</span>
+            <span class='code'>    eo.notaskstate         &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 5&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2596,7 +2554,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    eo.inaccessiblememonly &amp;&amp; &#40;e |&#61; &#40;0x01 &lt;&lt; 6&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2606,7 +2564,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return e</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2616,7 +2574,7 @@
           <td>
             
             
-            <span class='code'>if VERSION &gt;&#61; v&quot;1.7.0-beta1&quot;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2626,7 +2584,7 @@
           <td>
             
             
-            <span class='code'>    # https://github.com/JuliaLang/julia/pull/40623</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2636,7 +2594,7 @@
           <td>
             
             
-            <span class='code'>    lut&#33;&#40;dl, d, du&#41; &#61; lu&#33;&#40;Tridiagonal&#40;dl, d, du&#41;, NoPivot&#40;&#41;&#41;</span>
+            <span class='code'>function decode_effects_override&#40;e::UInt8&#41;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2646,7 +2604,7 @@
           <td>
             
             
-            <span class='code'>else</span>
+            <span class='code'>    return EffectsOverride&#40;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2656,7 +2614,7 @@
           <td>
             
             
-            <span class='code'>    lut&#33;&#40;dl, d, du&#41; &#61; lu&#33;&#40;Tridiagonal&#40;dl, d, du&#41;, Val&#40;false&#41;&#41;</span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 0&#41;&#41; &#33;&#61; 0x00,</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2666,7 +2624,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 1&#41;&#41; &#33;&#61; 0x00,</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2676,7 +2634,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 2&#41;&#41; &#33;&#61; 0x00,</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2686,7 +2644,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;constant.jl&quot;&#41;</span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 3&#41;&#41; &#33;&#61; 0x00,</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2696,7 +2654,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;linear.jl&quot;&#41;</span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 4&#41;&#41; &#33;&#61; 0x00,</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2706,7 +2664,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;quadratic.jl&quot;&#41;</span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 5&#41;&#41; &#33;&#61; 0x00,</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2716,7 +2674,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;cubic.jl&quot;&#41;</span>
+            <span class='code'>        &#40;e &amp; &#40;0x01 &lt;&lt; 6&#41;&#41; &#33;&#61; 0x00&#41;</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2726,67 +2684,7 @@
           <td>
             
             
-            <span class='code'>include&#40;&quot;indexing.jl&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L266'>
-          <td class='lineno'>266</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>include&#40;&quot;prefiltering.jl&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L267'>
-          <td class='lineno'>267</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>include&#40;&quot;../filter1d.jl&quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L268'>
-          <td class='lineno'>268</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L269'>
-          <td class='lineno'>269</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.parent&#40;A::BSplineInterpolation&#123;T,N,TCoefs,UT&#125;&#41; where &#123;T,N,TCoefs,UT&lt;:Union&#123;BSpline&#123;&lt;:Linear&#125;,BSpline&#123;&lt;:Constant&#125;&#125;&#125; &#61; A.coefs</span>
-          </td>
-        </tr>
-        <tr id='L270'>
-          <td class='lineno'>270</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Base.parent&#40;A::BSplineInterpolation&#123;T,N,TCoefs,UT&#125;&#41; where &#123;T,N,TCoefs,UT&#125; &#61;</span>
-          </td>
-        </tr>
-        <tr id='L271'>
-          <td class='lineno'>271</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    throw&#40;ArgumentError&#40;&quot;The given BSplineInterpolation does not serve as a \&quot;view\&quot; for a parent array. This would only be true for Constant and Linear b-splines.&quot;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
       </tbody>

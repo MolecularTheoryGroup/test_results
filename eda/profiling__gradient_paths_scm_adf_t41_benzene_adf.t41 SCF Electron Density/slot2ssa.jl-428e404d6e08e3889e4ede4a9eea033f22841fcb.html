@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Tue, 23 Apr 2024 19:58:26
+        Generated on Wed, 24 Apr 2024 05:33:12
       </div>
     </div>
     <table>
@@ -463,7 +463,16 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in scan_slot_def_use
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from slot2reg
+              <a href='optimize.jl-35081cc776d14cc56cb6859bd8ca32a1cc6d1ff1.html#L624'>line 624</a>
+              <br />
+            </div>
             
             <span class='code'>function scan_slot_def_use&#40;nargs::Int, ci::CodeInfo, code::Vector&#123;Any&#125;&#41;</span>
           </td>
@@ -551,10 +560,15 @@
         <tr id='L53'>
           <td class='lineno'>53</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='ir.jl-99f4bb597df652b28f172808c2a641e0ee1afd99.html#L521'>_advance</a>
+              <br />
+            </div>
             <span class='code'>        scan_entry&#33;&#40;result, idx, stmt&#41;</span>
           </td>
         </tr>
@@ -600,10 +614,19 @@
         </tr>
         <tr id='L58'>
           <td class='lineno'>58</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in renumber_ssa
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #413
+              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L70'>line 70</a>
+              <br />
+            </div>
             
             <span class='code'>function renumber_ssa&#40;stmt::SSAValue, ssanums::Vector&#123;SSAValue&#125;, new_ssa::Bool&#61;false&#41;</span>
           </td>
@@ -711,20 +734,57 @@
         <tr id='L69'>
           <td class='lineno'>69</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in renumber_ssa&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from construct_ssa&#33;
+              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L958'>line 958</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L70'>renumber_ssa&#33;</a>
+              <br />
+            </div>
             <span class='code'>    isa&#40;stmt, SSAValue&#41; &amp;&amp; return renumber_ssa&#40;stmt, ssanums, new_ssa&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
           <td class='lineno'>70</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>2 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
+            <div class='call-sites'>
+              2 &#40;0 &#37;&#41;
+              samples spent in renumber_ssa&#33;
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from ssamap
+              <a href='utilities.jl-b5a7cc40ca78ac325ac2cc622ae294f1cbe37788.html#L360'>line 360</a>
+              <br />
+              
+              1 &#40;50 &#37;&#41; &#40;incl.&#41;
+              when called from renumber_ssa&#33;
+              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L69'>line 69</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='utilities.jl-b5a7cc40ca78ac325ac2cc622ae294f1cbe37788.html#L355'>ssamap</a>
+              <br />
+              1 &#40;50 &#37;&#41;
+              samples spent calling
+              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L58'>renumber_ssa</a>
+              <br />
+            </div>
             <span class='code'>    return ssamap&#40;val-&gt;renumber_ssa&#40;val, ssanums, new_ssa&#41;, stmt&#41;</span>
           </td>
         </tr>
@@ -3933,16 +3993,7 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in domsort_ssa&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from construct_ssa&#33;
-              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L965'>line 965</a>
-              <br />
-            </div>
+            
             
             <span class='code'>function domsort_ssa&#33;&#40;ir::IRCode, domtree::DomTree&#41;</span>
           </td>
@@ -3960,15 +4011,10 @@
         <tr id='L393'>
           <td class='lineno'>393</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L448'>getindex</a>
-              <br />
-            </div>
+            
             <span class='code'>    result_order &#61; Int&#91;&#93;</span>
           </td>
         </tr>
@@ -5568,10 +5614,15 @@
         <tr id='L551'>
           <td class='lineno'>551</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L1119'>push&#33;</a>
+              <br />
+            </div>
             <span class='code'>            push&#33;&#40;is_def ? bb_defs : bb_uses, block&#41;</span>
           </td>
         </tr>
@@ -5738,15 +5789,10 @@
         <tr id='L568'>
           <td class='lineno'>568</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L1187'>append&#33;</a>
-              <br />
-            </div>
+            
             <span class='code'>    append&#33;&#40;bb_uses, extra_liveins&#41;</span>
           </td>
         </tr>
@@ -6126,11 +6172,11 @@
           <td class='tracecount incl'></td>
           <td>
             <div class='call-sites'>
-              3 &#40;0 &#37;&#41;
+              2 &#40;0 &#37;&#41;
               samples spent in construct_ssa&#33;
               <br />
               
-              3 &#40;100 &#37;&#41; &#40;incl.&#41;
+              2 &#40;100 &#37;&#41; &#40;incl.&#41;
               when called from slot2reg
               <a href='optimize.jl-35081cc776d14cc56cb6859bd8ca32a1cc6d1ff1.html#L626'>line 626</a>
               <br />
@@ -6402,15 +6448,10 @@
         <tr id='L633'>
           <td class='lineno'>633</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-232df4611e311f9afb9b9453eac4b05c87945aff.html#L726'>_array_for</a>
-              <br />
-            </div>
+            
             <span class='code'>    new_phi_nodes &#61; Vector&#123;NewPhiNode2&#125;&#91;NewPhiNode2&#91;&#93; for _ &#61; 1:length&#40;cfg.blocks&#41;&#93;</span>
           </td>
         </tr>
@@ -9662,10 +9703,15 @@
         <tr id='L958'>
           <td class='lineno'>958</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
             
-            
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L69'>renumber_ssa&#33;</a>
+              <br />
+            </div>
             <span class='code'>        node&#91;:inst&#93; &#61; new_to_regular&#40;renumber_ssa&#33;&#40;new_code&#91;i&#93;, ssavalmap&#41;, nstmts&#41;</span>
           </td>
         </tr>
@@ -9732,15 +9778,10 @@
         <tr id='L965'>
           <td class='lineno'>965</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='slot2ssa.jl-428e404d6e08e3889e4ede4a9eea033f22841fcb.html#L391'>domsort_ssa&#33;</a>
-              <br />
-            </div>
+            
             <span class='code'>    @timeit &quot;domsort&quot; ir &#61; domsort_ssa&#33;&#40;ir, domtree&#41;</span>
           </td>
         </tr>
