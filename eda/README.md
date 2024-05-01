@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
-*Generated on 2024-04-24@19:24:49 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8821216762)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/compathelper/new_version/2024-05-01-00-10-10-594-00897950224`
+*Generated on 2024-05-01@00:57:09 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/8903251612)*
 
 ---
 
