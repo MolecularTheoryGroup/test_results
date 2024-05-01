@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.3/x64/share/julia/base/floatfuncs.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.3/x64/share/julia/base/Base.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 01 May 2024 00:57:02
+        Generated on Wed, 01 May 2024 00:57:50
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>## floating-point functions ##</span>
+            <span class='code'>baremodule Base</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>copysign&#40;x::Float64, y::Float64&#41; &#61; copysign_float&#40;x, y&#41;</span>
+            <span class='code'>using Core.Intrinsics, Core.IR</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>copysign&#40;x::Float32, y::Float32&#41; &#61; copysign_float&#40;x, y&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>copysign&#40;x::Float32, y::Real&#41; &#61; copysign&#40;x, Float32&#40;y&#41;&#41;</span>
+            <span class='code'># to start, we&#39;re going to use a very simple definition of &#96;include&#96;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>copysign&#40;x::Float64, y::Real&#41; &#61; copysign&#40;x, Float64&#40;y&#41;&#41;</span>
+            <span class='code'># that doesn&#39;t require any function &#40;except what we can get from the &#96;Core&#96; top-module&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const _included_files &#61; Array&#123;Tuple&#123;Module,String&#125;,1&#125;&#40;Core.undef, 1&#41;</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>flipsign&#40;x::Float64, y::Float64&#41; &#61; bitcast&#40;Float64, xor_int&#40;bitcast&#40;UInt64, x&#41;, and_int&#40;bitcast&#40;UInt64, y&#41;, 0x8000000000000000&#41;&#41;&#41;</span>
+            <span class='code'>function include&#40;mod::Module, path::String&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>flipsign&#40;x::Float32, y::Float32&#41; &#61; bitcast&#40;Float32, xor_int&#40;bitcast&#40;UInt32, x&#41;, and_int&#40;bitcast&#40;UInt32, y&#41;, 0x80000000&#41;&#41;&#41;</span>
+            <span class='code'>    ccall&#40;:jl_array_grow_end, Cvoid, &#40;Any, UInt&#41;, _included_files, UInt&#40;1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>flipsign&#40;x::Float32, y::Real&#41; &#61; flipsign&#40;x, Float32&#40;y&#41;&#41;</span>
+            <span class='code'>    Core.arrayset&#40;true, _included_files, &#40;mod, ccall&#40;:jl_prepend_cwd, Any, &#40;Any,&#41;, path&#41;&#41;, arraylen&#40;_included_files&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>flipsign&#40;x::Float64, y::Real&#41; &#61; flipsign&#40;x, Float64&#40;y&#41;&#41;</span>
+            <span class='code'>    Core.println&#40;path&#41;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ccall&#40;:jl_uv_flush, Nothing, &#40;Ptr&#123;Nothing&#125;,&#41;, Core.io_pointer&#40;Core.stdout&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>signbit&#40;x::Float64&#41; &#61; signbit&#40;bitcast&#40;Int64, x&#41;&#41;</span>
+            <span class='code'>    Core.include&#40;mod, path&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>signbit&#40;x::Float32&#41; &#61; signbit&#40;bitcast&#40;Int32, x&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>signbit&#40;x::Float16&#41; &#61; signbit&#40;bitcast&#40;Int16, x&#41;&#41;</span>
+            <span class='code'>include&#40;path::String&#41; &#61; include&#40;Base, path&#41;</span>
           </td>
         </tr>
         <tr id='L18'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># from now on, this is now a top-module for resolving syntax</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    maxintfloat&#40;T&#61;Float64&#41;</span>
+            <span class='code'>const is_primary_base_module &#61; ccall&#40;:jl_module_parent, Ref&#123;Module&#125;, &#40;Any,&#41;, Base&#41; &#61;&#61;&#61; Core.Main</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +235,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>ccall&#40;:jl_set_istopmod, Cvoid, &#40;Any, Bool&#41;, Base, is_primary_base_module&#41;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +245,7 @@
           <td>
             
             
-            <span class='code'>The largest consecutive integer-valued floating-point number that is exactly represented in</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>the given floating-point type &#96;T&#96; &#40;which defaults to &#96;Float64&#96;&#41;.</span>
+            <span class='code'># The @inline/@noinline macros that can be applied to a function declaration are not available</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># until after array.jl, and so we will mark them within a function body instead.</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>That is, &#96;maxintfloat&#96; returns the smallest positive integer-valued floating-point number</span>
+            <span class='code'>macro inline&#40;&#41;   Expr&#40;:meta, :inline&#41;   end</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'>&#96;n&#96; such that &#96;n&#43;1&#96; is *not* exactly representable in the type &#96;T&#96;.</span>
+            <span class='code'>macro noinline&#40;&#41; Expr&#40;:meta, :noinline&#41; end</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>When an &#96;Integer&#96;-type value is needed, use &#96;Integer&#40;maxintfloat&#40;T&#41;&#41;&#96;.</span>
+            <span class='code'># Try to help prevent users from shooting them-selves in the foot</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># with ambiguities by defining a few common and critical operations</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>maxintfloat&#40;::Type&#123;Float64&#125;&#41; &#61; 9007199254740992.</span>
+            <span class='code'># &#40;and these don&#39;t need the extra convert code&#41;</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>maxintfloat&#40;::Type&#123;Float32&#125;&#41; &#61; Float32&#40;16777216.&#41;</span>
+            <span class='code'>getproperty&#40;x::Module, f::Symbol&#41; &#61; &#40;@inline; getglobal&#40;x, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>maxintfloat&#40;::Type&#123;Float16&#125;&#41; &#61; Float16&#40;2048f0&#41;</span>
+            <span class='code'>getproperty&#40;x::Type, f::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>maxintfloat&#40;x::T&#41; where &#123;T&lt;:AbstractFloat&#125; &#61; maxintfloat&#40;T&#41;</span>
+            <span class='code'>setproperty&#33;&#40;x::Type, f::Symbol, v&#41; &#61; error&#40;&quot;setfield&#33; fields of Types should not be changed&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>getproperty&#40;x::Tuple, f::Int&#41; &#61; &#40;@inline; getfield&#40;x, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>setproperty&#33;&#40;x::Tuple, f::Int, v&#41; &#61; setfield&#33;&#40;x, f, v&#41; # to get a decent error</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,17 +385,26 @@
           <td>
             
             
-            <span class='code'>    maxintfloat&#40;T, S&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L37'>
           <td class='lineno'>37</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;8 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;8 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;8 &#37;&#41;
+              samples spent in getproperty
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from #cp_should_be_skipped#15
+              <a href='critical_points.jl-e501c7201f5f77db71b4e61ad43af0b25550f4ec.html#L174'>line 174</a>
+              <br />
+            </div>
             
-            
-            <span class='code'></span>
+            <span class='code'>getproperty&#40;x, f::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +414,7 @@
           <td>
             
             
-            <span class='code'>The largest consecutive integer representable in the given floating-point type &#96;T&#96; that</span>
+            <span class='code'>function setproperty&#33;&#40;x, f::Symbol, v&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +424,7 @@
           <td>
             
             
-            <span class='code'>also does not exceed the maximum integer representable by the integer type &#96;S&#96;.  Equivalently,</span>
+            <span class='code'>    ty &#61; fieldtype&#40;typeof&#40;x&#41;, f&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +434,7 @@
           <td>
             
             
-            <span class='code'>it is the minimum of &#96;maxintfloat&#40;T&#41;&#96; and &#91;&#96;typemax&#40;S&#41;&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>    val &#61; v isa ty ? v : convert&#40;ty, v&#41;</span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +444,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    return setfield&#33;&#40;x, f, val&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +454,7 @@
           <td>
             
             
-            <span class='code'>maxintfloat&#40;::Type&#123;S&#125;, ::Type&#123;T&#125;&#41; where &#123;S&lt;:AbstractFloat, T&lt;:Integer&#125; &#61; min&#40;maxintfloat&#40;S&#41;, S&#40;typemax&#40;T&#41;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +464,7 @@
           <td>
             
             
-            <span class='code'>maxintfloat&#40;&#41; &#61; maxintfloat&#40;Float64&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +474,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>dotgetproperty&#40;x, f&#41; &#61; getproperty&#40;x, f&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +484,7 @@
           <td>
             
             
-            <span class='code'>isinteger&#40;x::AbstractFloat&#41; &#61; &#40;x - trunc&#40;x&#41; &#61;&#61; 0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +494,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>getproperty&#40;x::Module, f::Symbol, order::Symbol&#41; &#61; &#40;@inline; getglobal&#40;x, f, order&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +504,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>function setproperty&#33;&#40;x::Module, f::Symbol, v, order::Symbol&#61;:monotonic&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +514,7 @@
           <td>
             
             
-            <span class='code'>    round&#40;&#91;T,&#93; x, &#91;r::RoundingMode&#93;&#41;</span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +524,7 @@
           <td>
             
             
-            <span class='code'>    round&#40;x, &#91;r::RoundingMode&#93;; digits::Integer&#61;0, base &#61; 10&#41;</span>
+            <span class='code'>    ty &#61; Core.get_binding_type&#40;x, f&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +534,7 @@
           <td>
             
             
-            <span class='code'>    round&#40;x, &#91;r::RoundingMode&#93;; sigdigits::Integer, base &#61; 10&#41;</span>
+            <span class='code'>    val &#61; v isa ty ? v : convert&#40;ty, v&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +544,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return setglobal&#33;&#40;x, f, val, order&#41;</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +554,7 @@
           <td>
             
             
-            <span class='code'>Rounds the number &#96;x&#96;.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +564,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>getproperty&#40;x::Type, f::Symbol, order::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f, order&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +574,7 @@
           <td>
             
             
-            <span class='code'>Without keyword arguments, &#96;x&#96; is rounded to an integer value, returning a value of type</span>
+            <span class='code'>setproperty&#33;&#40;x::Type, f::Symbol, v, order::Symbol&#41; &#61; error&#40;&quot;setfield&#33; fields of Types should not be changed&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +584,7 @@
           <td>
             
             
-            <span class='code'>&#96;T&#96;, or of the same type of &#96;x&#96; if no &#96;T&#96; is provided. An &#91;&#96;InexactError&#96;&#93;&#40;@ref&#41; will be</span>
+            <span class='code'>getproperty&#40;x::Tuple, f::Int, order::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f, order&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +594,7 @@
           <td>
             
             
-            <span class='code'>thrown if the value is not representable by &#96;T&#96;, similar to &#91;&#96;convert&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>setproperty&#33;&#40;x::Tuple, f::Int, v, order::Symbol&#41; &#61; setfield&#33;&#40;x, f, v, order&#41; # to get a decent error</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -605,7 +614,7 @@
           <td>
             
             
-            <span class='code'>If the &#96;digits&#96; keyword argument is provided, it rounds to the specified number of digits</span>
+            <span class='code'>getproperty&#40;x, f::Symbol, order::Symbol&#41; &#61; &#40;@inline; getfield&#40;x, f, order&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +624,7 @@
           <td>
             
             
-            <span class='code'>after the decimal place &#40;or before if negative&#41;, in base &#96;base&#96;.</span>
+            <span class='code'>function setproperty&#33;&#40;x, f::Symbol, v, order::Symbol&#41;</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +634,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +644,7 @@
           <td>
             
             
-            <span class='code'>If the &#96;sigdigits&#96; keyword argument is provided, it rounds to the specified number of</span>
+            <span class='code'>    ty &#61; fieldtype&#40;typeof&#40;x&#41;, f&#41;</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +654,7 @@
           <td>
             
             
-            <span class='code'>significant digits, in base &#96;base&#96;.</span>
+            <span class='code'>    val &#61; v isa ty ? v : convert&#40;ty, v&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +664,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return setfield&#33;&#40;x, f, val, order&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +674,7 @@
           <td>
             
             
-            <span class='code'>The &#91;&#96;RoundingMode&#96;&#93;&#40;@ref&#41; &#96;r&#96; controls the direction of the rounding; the default is</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +684,7 @@
           <td>
             
             
-            <span class='code'>&#91;&#96;RoundNearest&#96;&#93;&#40;@ref&#41;, which rounds to the nearest integer, with ties &#40;fractional values</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +694,7 @@
           <td>
             
             
-            <span class='code'>of 0.5&#41; being rounded to the nearest even integer. Note that &#96;round&#96; may give incorrect</span>
+            <span class='code'>function swapproperty&#33;&#40;x, f::Symbol, v, order::Symbol&#61;:not_atomic&#41;</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +704,7 @@
           <td>
             
             
-            <span class='code'>results if the global rounding mode is changed &#40;see &#91;&#96;rounding&#96;&#93;&#40;@ref&#41;&#41;.</span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +714,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    ty &#61; fieldtype&#40;typeof&#40;x&#41;, f&#41;</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +724,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>    val &#61; v isa ty ? v : convert&#40;ty, v&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +734,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    return Core.swapfield&#33;&#40;x, f, val, order&#41;</span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +744,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;1.7&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +754,7 @@
           <td>
             
             
-            <span class='code'>2.0</span>
+            <span class='code'>function modifyproperty&#33;&#40;x, f::Symbol, op, v, order::Symbol&#61;:not_atomic&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +764,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +774,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;Int, 1.7&#41;</span>
+            <span class='code'>    return Core.modifyfield&#33;&#40;x, f, op, v, order&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +784,7 @@
           <td>
             
             
-            <span class='code'>2</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +794,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function replaceproperty&#33;&#40;x, f::Symbol, expected, desired, success_order::Symbol&#61;:not_atomic, fail_order::Symbol&#61;success_order&#41;</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +804,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;1.5&#41;</span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +814,7 @@
           <td>
             
             
-            <span class='code'>2.0</span>
+            <span class='code'>    ty &#61; fieldtype&#40;typeof&#40;x&#41;, f&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +824,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    val &#61; desired isa ty ? desired : convert&#40;ty, desired&#41;</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +834,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;2.5&#41;</span>
+            <span class='code'>    return Core.replacefield&#33;&#40;x, f, expected, val, success_order, fail_order&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +844,7 @@
           <td>
             
             
-            <span class='code'>2.0</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -855,7 +864,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;pi; digits&#61;2&#41;</span>
+            <span class='code'>convert&#40;::Type&#123;Any&#125;, Core.@nospecialize x&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +874,7 @@
           <td>
             
             
-            <span class='code'>3.14</span>
+            <span class='code'>convert&#40;::Type&#123;T&#125;, x::T&#41; where &#123;T&#125; &#61; x</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +884,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;coreio.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +894,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;pi; digits&#61;3, base&#61;2&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +904,7 @@
           <td>
             
             
-            <span class='code'>3.125</span>
+            <span class='code'>eval&#40;x&#41; &#61; Core.eval&#40;Base, x&#41;</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +914,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>eval&#40;m::Module, x&#41; &#61; Core.eval&#40;m, x&#41;</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +924,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;123.456; sigdigits&#61;2&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +934,7 @@
           <td>
             
             
-            <span class='code'>120.0</span>
+            <span class='code'># init core docsystem</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +944,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>import Core: @doc, @__doc__, WrappedException, @int128_str, @uint128_str, @big_str, @cmd</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +954,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; round&#40;357.913; sigdigits&#61;4, base&#61;2&#41;</span>
+            <span class='code'>if isdefined&#40;Core, :Compiler&#41;</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +964,7 @@
           <td>
             
             
-            <span class='code'>352.0</span>
+            <span class='code'>    import Core.Compiler.CoreDocs</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +974,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>    Core.atdoc&#33;&#40;CoreDocs.docm&#41;</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +984,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +994,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; note</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1004,7 @@
           <td>
             
             
-            <span class='code'>    Rounding to specified digits in bases other than 2 can be inexact when</span>
+            <span class='code'>include&#40;&quot;exports.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1014,7 @@
           <td>
             
             
-            <span class='code'>    operating on binary floating point numbers. For example, the &#91;&#96;Float64&#96;&#93;&#40;@ref&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1024,7 @@
           <td>
             
             
-            <span class='code'>    value represented by &#96;1.15&#96; is actually *less* than 1.15, yet will be</span>
+            <span class='code'>if false</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1034,7 @@
           <td>
             
             
-            <span class='code'>    rounded to 1.2. For example:</span>
+            <span class='code'>    # simple print definitions for debugging. enable these if something</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1044,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # goes wrong during bootstrap before printing code is available.</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1054,7 @@
           <td>
             
             
-            <span class='code'>    &#96;&#96;&#96;jldoctest</span>
+            <span class='code'>    # otherwise, they just just eventually get &#40;noisily&#41; overwritten later</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1064,7 @@
           <td>
             
             
-            <span class='code'>    julia&gt; x &#61; 1.15</span>
+            <span class='code'>    global show, print, println</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1074,7 @@
           <td>
             
             
-            <span class='code'>    1.15</span>
+            <span class='code'>    show&#40;io::IO, x&#41; &#61; Core.show&#40;io, x&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1084,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    print&#40;io::IO, a...&#41; &#61; Core.print&#40;io, a...&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1094,7 @@
           <td>
             
             
-            <span class='code'>    julia&gt; big&#40;1.15&#41;</span>
+            <span class='code'>    println&#40;io::IO, x...&#41; &#61; Core.println&#40;io, x...&#41;</span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1104,7 @@
           <td>
             
             
-            <span class='code'>    1.149999999999999911182158029987476766109466552734375</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1115,7 +1124,7 @@
           <td>
             
             
-            <span class='code'>    julia&gt; x &lt; 115//100</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1134,7 @@
           <td>
             
             
-            <span class='code'>    true</span>
+            <span class='code'>    time_ns&#40;&#41; -&gt; UInt64</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1145,7 +1154,7 @@
           <td>
             
             
-            <span class='code'>    julia&gt; round&#40;x, digits&#61;1&#41;</span>
+            <span class='code'>Get the time in nanoseconds. The time corresponding to 0 is undefined, and wraps every 5.8 years.</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1164,7 @@
           <td>
             
             
-            <span class='code'>    1.2</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1174,7 @@
           <td>
             
             
-            <span class='code'>    &#96;&#96;&#96;</span>
+            <span class='code'>time_ns&#40;&#41; &#61; ccall&#40;:jl_hrtime, UInt64, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1185,7 +1194,7 @@
           <td>
             
             
-            <span class='code'># Extensions</span>
+            <span class='code'>start_base_include &#61; time_ns&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1205,7 +1214,7 @@
           <td>
             
             
-            <span class='code'>To extend &#96;round&#96; to new numeric types, it is typically sufficient to define &#96;Base.round&#40;x::NewType, r::RoundingMode&#41;&#96;.</span>
+            <span class='code'># A warning to be interpolated in the docstring of every dangerous mutating function in Base, see PR #50824</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1224,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>const _DOCS_ALIASING_WARNING &#61; &quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1234,7 @@
           <td>
             
             
-            <span class='code'>round&#40;T::Type, x&#41;</span>
+            <span class='code'>&#33;&#33;&#33; warning</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1244,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    Behavior can be unexpected when any mutated argument shares memory with any other argument.</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1254,7 @@
           <td>
             
             
-            <span class='code'>function round&#40;::Type&#123;T&#125;, x::AbstractFloat, r::RoundingMode&#41; where &#123;T&lt;:Integer&#125;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1255,7 +1264,7 @@
           <td>
             
             
-            <span class='code'>    r &#33;&#61; RoundToZero &amp;&amp; &#40;x &#61; round&#40;x,r&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1265,7 +1274,7 @@
           <td>
             
             
-            <span class='code'>    trunc&#40;T, x&#41;</span>
+            <span class='code'>## Load essential files and libraries</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1284,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;essentials.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1294,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;ctypes.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,31 +1304,17 @@
           <td>
             
             
-            <span class='code'># NOTE: this relies on the current keyword dispatch behaviour &#40;#9498&#41;.</span>
+            <span class='code'>include&#40;&quot;gcutils.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
           <td class='lineno'>128</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in round
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from exp_impl_fast
-              <a href='exp.jl-ba159ea198da996a94f8f8980b33e5ce3ecaad38.html#L299'>line 299</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='float.jl-0291162c5fba5099582bc7d1bc64e82d19eaea23.html#L396'>round</a>
-              <br />
-            </div>
-            <span class='code'>function round&#40;x::Real, r::RoundingMode&#61;RoundNearest;</span>
+            
+            
+            <span class='code'>include&#40;&quot;generator.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1329,7 +1324,7 @@
           <td>
             
             
-            <span class='code'>               digits::Union&#123;Nothing,Integer&#125;&#61;nothing, sigdigits::Union&#123;Nothing,Integer&#125;&#61;nothing, base::Union&#123;Nothing,Integer&#125;&#61;nothing&#41;</span>
+            <span class='code'>include&#40;&quot;reflection.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1339,7 +1334,7 @@
           <td>
             
             
-            <span class='code'>    if digits &#61;&#61;&#61; nothing</span>
+            <span class='code'>include&#40;&quot;options.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1349,7 +1344,7 @@
           <td>
             
             
-            <span class='code'>        if sigdigits &#61;&#61;&#61; nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1359,7 +1354,7 @@
           <td>
             
             
-            <span class='code'>            if base &#61;&#61;&#61; nothing</span>
+            <span class='code'># define invoke&#40;f, T, args...; kwargs...&#41;, without kwargs wrapping</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1369,7 +1364,7 @@
           <td>
             
             
-            <span class='code'>                # avoid recursive calls</span>
+            <span class='code'># to forward to invoke</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1379,7 +1374,7 @@
           <td>
             
             
-            <span class='code'>                throw&#40;MethodError&#40;round, &#40;x,r&#41;&#41;&#41;</span>
+            <span class='code'>function Core.kwcall&#40;kwargs::NamedTuple, ::typeof&#40;invoke&#41;, f, T, args...&#41;</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1389,7 +1384,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1399,7 +1394,7 @@
           <td>
             
             
-            <span class='code'>                round&#40;x,r&#41;</span>
+            <span class='code'>    # prepend kwargs and f to the invoked from the user</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1409,7 +1404,7 @@
           <td>
             
             
-            <span class='code'>                # or throw&#40;ArgumentError&#40;&quot;&#96;round&#96; cannot use &#96;base&#96; argument without &#96;digits&#96; or &#96;sigdigits&#96; arguments.&quot;&#41;&#41;</span>
+            <span class='code'>    T &#61; rewrap_unionall&#40;Tuple&#123;Core.Typeof&#40;kwargs&#41;, Core.Typeof&#40;f&#41;, &#40;unwrap_unionall&#40;T&#41;::DataType&#41;.parameters...&#125;, T&#41;</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1419,7 +1414,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    return invoke&#40;Core.kwcall, T, kwargs, f, args...&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1429,7 +1424,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1439,7 +1434,7 @@
           <td>
             
             
-            <span class='code'>            isfinite&#40;x&#41; || return float&#40;x&#41;</span>
+            <span class='code'># invoke does not have its own call cache, but kwcall for invoke does</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1449,7 +1444,7 @@
           <td>
             
             
-            <span class='code'>            _round_sigdigits&#40;x, r, sigdigits, base &#61;&#61;&#61; nothing ? 10 : base&#41;</span>
+            <span class='code'>setfield&#33;&#40;typeof&#40;invoke&#41;.name.mt, :max_args, 3, :monotonic&#41; # invoke, f, T, args...</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1459,7 +1454,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1469,7 +1464,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'># define applicable&#40;f, T, args...; kwargs...&#41;, without kwargs wrapping</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1479,7 +1474,7 @@
           <td>
             
             
-            <span class='code'>        if sigdigits &#61;&#61;&#61; nothing</span>
+            <span class='code'># to forward to applicable</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1489,7 +1484,7 @@
           <td>
             
             
-            <span class='code'>            isfinite&#40;x&#41; || return float&#40;x&#41;</span>
+            <span class='code'>function Core.kwcall&#40;kwargs::NamedTuple, ::typeof&#40;applicable&#41;, @nospecialize&#40;args...&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1499,7 +1494,7 @@
           <td>
             
             
-            <span class='code'>            _round_digits&#40;x, r, digits, base &#61;&#61;&#61; nothing ? 10 : base&#41;</span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1509,7 +1504,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>    return applicable&#40;Core.kwcall, kwargs, args...&#41;</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1519,7 +1514,7 @@
           <td>
             
             
-            <span class='code'>            throw&#40;ArgumentError&#40;&quot;&#96;round&#96; cannot use both &#96;digits&#96; and &#96;sigdigits&#96; arguments.&quot;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1529,7 +1524,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>function Core._hasmethod&#40;@nospecialize&#40;f&#41;, @nospecialize&#40;t&#41;&#41; # this function has a special tfunc &#40;TODO: make this a Builtin instead like applicable&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1539,7 +1534,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    tt &#61; rewrap_unionall&#40;Tuple&#123;Core.Typeof&#40;f&#41;, &#40;unwrap_unionall&#40;t&#41;::DataType&#41;.parameters...&#125;, t&#41;</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1549,7 +1544,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    return Core._hasmethod&#40;tt&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1559,7 +1554,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1569,7 +1564,7 @@
           <td>
             
             
-            <span class='code'>trunc&#40;x::Real; kwargs...&#41; &#61; round&#40;x, RoundToZero; kwargs...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1579,7 +1574,7 @@
           <td>
             
             
-            <span class='code'>floor&#40;x::Real; kwargs...&#41; &#61; round&#40;x, RoundDown; kwargs...&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1589,7 +1584,7 @@
           <td>
             
             
-            <span class='code'>ceil&#40;x::Real; kwargs...&#41;  &#61; round&#40;x, RoundUp; kwargs...&#41;</span>
+            <span class='code'># core operations &amp; types</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1599,7 +1594,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;promotion.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1609,7 +1604,7 @@
           <td>
             
             
-            <span class='code'>round&#40;x::Integer, r::RoundingMode&#41; &#61; x</span>
+            <span class='code'>include&#40;&quot;tuple.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1619,7 +1614,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;expr.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1629,7 +1624,7 @@
           <td>
             
             
-            <span class='code'># round x to multiples of 1/invstep</span>
+            <span class='code'>include&#40;&quot;pair.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1639,7 +1634,7 @@
           <td>
             
             
-            <span class='code'>function _round_invstep&#40;x, invstep, r::RoundingMode&#41;</span>
+            <span class='code'>include&#40;&quot;traits.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1649,7 +1644,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; round&#40;x * invstep, r&#41; / invstep</span>
+            <span class='code'>include&#40;&quot;range.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1659,7 +1654,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isfinite&#40;y&#41;</span>
+            <span class='code'>include&#40;&quot;error.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1669,7 +1664,7 @@
           <td>
             
             
-            <span class='code'>        return x</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1679,7 +1674,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># core numeric operations &amp; types</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1689,7 +1684,7 @@
           <td>
             
             
-            <span class='code'>    return y</span>
+            <span class='code'>&#61;&#61;&#40;x, y&#41; &#61; x &#61;&#61;&#61; y</span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1699,7 +1694,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;bool.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1709,7 +1704,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;number.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1719,7 +1714,7 @@
           <td>
             
             
-            <span class='code'># round x to multiples of 1/&#40;invstepsqrt^2&#41;</span>
+            <span class='code'>include&#40;&quot;int.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1729,7 +1724,7 @@
           <td>
             
             
-            <span class='code'># Using square root of step prevents overflowing</span>
+            <span class='code'>include&#40;&quot;operators.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1739,7 +1734,7 @@
           <td>
             
             
-            <span class='code'>function _round_invstepsqrt&#40;x, invstepsqrt, r::RoundingMode&#41;</span>
+            <span class='code'>include&#40;&quot;pointer.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1749,7 +1744,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; round&#40;&#40;x * invstepsqrt&#41; * invstepsqrt, r&#41; / invstepsqrt / invstepsqrt</span>
+            <span class='code'>include&#40;&quot;refvalue.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1759,7 +1754,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isfinite&#40;y&#41;</span>
+            <span class='code'>include&#40;&quot;cmem.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1769,7 +1764,7 @@
           <td>
             
             
-            <span class='code'>        return x</span>
+            <span class='code'>include&#40;&quot;refpointer.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1779,7 +1774,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1789,7 +1784,7 @@
           <td>
             
             
-            <span class='code'>    return y</span>
+            <span class='code'># now replace the Pair constructor &#40;relevant for NamedTuples&#41; with one that calls our Base.convert</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1799,7 +1794,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>delete_method&#40;which&#40;Pair&#123;Any,Any&#125;, &#40;Any, Any&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1809,7 +1804,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@eval function &#40;P::Type&#123;Pair&#123;A, B&#125;&#125;&#41;&#40;@nospecialize&#40;a&#41;, @nospecialize&#40;b&#41;&#41; where &#123;A, B&#125;</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1819,7 +1814,7 @@
           <td>
             
             
-            <span class='code'># round x to multiples of step</span>
+            <span class='code'>    @inline</span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1829,7 +1824,7 @@
           <td>
             
             
-            <span class='code'>function _round_step&#40;x, step, r::RoundingMode&#41;</span>
+            <span class='code'>    return &#36;&#40;Expr&#40;:new, :P, :&#40;a isa A ? a : convert&#40;A, a&#41;&#41;, :&#40;b isa B ? b : convert&#40;B, b&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1839,7 +1834,7 @@
           <td>
             
             
-            <span class='code'>    # TODO: use div with rounding mode</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1849,7 +1844,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; round&#40;x / step, r&#41; * step</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1859,7 +1854,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isfinite&#40;y&#41;</span>
+            <span class='code'># The REPL stdlib hooks into Base using this Ref</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1869,7 +1864,7 @@
           <td>
             
             
-            <span class='code'>        if x &gt; 0</span>
+            <span class='code'>const REPL_MODULE_REF &#61; Ref&#123;Module&#125;&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1879,7 +1874,7 @@
           <td>
             
             
-            <span class='code'>            return &#40;r &#61;&#61; RoundUp ? oftype&#40;x, Inf&#41; : zero&#40;x&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1889,7 +1884,7 @@
           <td>
             
             
-            <span class='code'>        elseif x &lt; 0</span>
+            <span class='code'>include&#40;&quot;checked.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1899,7 +1894,7 @@
           <td>
             
             
-            <span class='code'>            return &#40;r &#61;&#61; RoundDown ? -oftype&#40;x, Inf&#41; : -zero&#40;x&#41;&#41;</span>
+            <span class='code'>using .Checked</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1909,7 +1904,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>function cld end</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1919,7 +1914,7 @@
           <td>
             
             
-            <span class='code'>            return x</span>
+            <span class='code'>function fld end</span>
           </td>
         </tr>
         <tr id='L189'>
@@ -1929,7 +1924,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1939,7 +1934,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Lazy strings</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1949,7 +1944,7 @@
           <td>
             
             
-            <span class='code'>    return y</span>
+            <span class='code'>include&#40;&quot;strings/lazy.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1959,7 +1954,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1969,7 +1964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># array structures</span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1979,7 +1974,7 @@
           <td>
             
             
-            <span class='code'>function _round_digits&#40;x, r::RoundingMode, digits::Integer, base&#41;</span>
+            <span class='code'>include&#40;&quot;indices.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1989,7 +1984,7 @@
           <td>
             
             
-            <span class='code'>    fx &#61; float&#40;x&#41;</span>
+            <span class='code'>include&#40;&quot;array.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1999,7 +1994,7 @@
           <td>
             
             
-            <span class='code'>    if digits &gt;&#61; 0</span>
+            <span class='code'>include&#40;&quot;abstractarray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -2009,7 +2004,7 @@
           <td>
             
             
-            <span class='code'>        invstep &#61; oftype&#40;fx, base&#41;^digits</span>
+            <span class='code'>include&#40;&quot;subarray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2019,7 +2014,7 @@
           <td>
             
             
-            <span class='code'>        if isfinite&#40;invstep&#41;</span>
+            <span class='code'>include&#40;&quot;views.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2029,7 +2024,7 @@
           <td>
             
             
-            <span class='code'>            return _round_invstep&#40;fx, invstep, r&#41;</span>
+            <span class='code'>include&#40;&quot;baseext.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2039,7 +2034,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2049,7 +2044,7 @@
           <td>
             
             
-            <span class='code'>            invstepsqrt &#61; oftype&#40;fx, base&#41;^oftype&#40;fx, digits/2&#41;</span>
+            <span class='code'>include&#40;&quot;ntuple.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2059,7 +2054,7 @@
           <td>
             
             
-            <span class='code'>            return _round_invstepsqrt&#40;fx, invstepsqrt, r&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2069,7 +2064,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>include&#40;&quot;abstractdict.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2079,7 +2074,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>include&#40;&quot;iddict.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2089,7 +2084,7 @@
           <td>
             
             
-            <span class='code'>        step &#61; oftype&#40;fx, base&#41;^-digits</span>
+            <span class='code'>include&#40;&quot;idset.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2099,7 +2094,7 @@
           <td>
             
             
-            <span class='code'>        return _round_step&#40;fx, step, r&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2109,7 +2104,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>include&#40;&quot;iterators.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2119,7 +2114,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>using .Iterators: zip, enumerate, only</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2129,7 +2124,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using .Iterators: Flatten, Filter, product  # for generators</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2139,7 +2134,7 @@
           <td>
             
             
-            <span class='code'>hidigit&#40;x::Integer, base&#41; &#61; ndigits0z&#40;x, base&#41;</span>
+            <span class='code'>using .Iterators: Stateful    # compat &#40;was formerly used in reinterpretarray.jl&#41;</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2149,7 +2144,7 @@
           <td>
             
             
-            <span class='code'>function hidigit&#40;x::AbstractFloat, base&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2159,7 +2154,7 @@
           <td>
             
             
-            <span class='code'>    iszero&#40;x&#41; &amp;&amp; return 0</span>
+            <span class='code'>include&#40;&quot;namedtuple.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2169,7 +2164,7 @@
           <td>
             
             
-            <span class='code'>    if base &#61;&#61; 10</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2179,7 +2174,7 @@
           <td>
             
             
-            <span class='code'>        return 1 &#43; floor&#40;Int, log10&#40;abs&#40;x&#41;&#41;&#41;</span>
+            <span class='code'># For OS specific stuff</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2189,7 +2184,7 @@
           <td>
             
             
-            <span class='code'>    elseif base &#61;&#61; 2</span>
+            <span class='code'># We need to strcat things here, before strings are really defined</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2199,7 +2194,7 @@
           <td>
             
             
-            <span class='code'>        return 1 &#43; exponent&#40;x&#41;</span>
+            <span class='code'>function strcat&#40;x::String, y::String&#41;</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2209,7 +2204,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    out &#61; ccall&#40;:jl_alloc_string, Ref&#123;String&#125;, &#40;Csize_t,&#41;, Core.sizeof&#40;x&#41; &#43; Core.sizeof&#40;y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2219,7 +2214,7 @@
           <td>
             
             
-            <span class='code'>        return 1 &#43; floor&#40;Int, log&#40;base, abs&#40;x&#41;&#41;&#41;</span>
+            <span class='code'>    GC.@preserve x y out begin</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2229,7 +2224,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        out_ptr &#61; unsafe_convert&#40;Ptr&#123;UInt8&#125;, out&#41;</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2239,7 +2234,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        unsafe_copyto&#33;&#40;out_ptr, unsafe_convert&#40;Ptr&#123;UInt8&#125;, x&#41;, Core.sizeof&#40;x&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2249,7 +2244,7 @@
           <td>
             
             
-            <span class='code'>hidigit&#40;x::Real, base&#41; &#61; hidigit&#40;float&#40;x&#41;, base&#41;</span>
+            <span class='code'>        unsafe_copyto&#33;&#40;out_ptr &#43; Core.sizeof&#40;x&#41;, unsafe_convert&#40;Ptr&#123;UInt8&#125;, y&#41;, Core.sizeof&#40;y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2259,7 +2254,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2269,7 +2264,7 @@
           <td>
             
             
-            <span class='code'>function _round_sigdigits&#40;x, r::RoundingMode, sigdigits::Integer, base&#41;</span>
+            <span class='code'>    return out</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2279,7 +2274,7 @@
           <td>
             
             
-            <span class='code'>    h &#61; hidigit&#40;x, base&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2289,7 +2284,7 @@
           <td>
             
             
-            <span class='code'>    _round_digits&#40;x, r, sigdigits-h, base&#41;</span>
+            <span class='code'>include&#40;strcat&#40;&#40;length&#40;Core.ARGS&#41;&gt;&#61;2 ? Core.ARGS&#91;2&#93; : &quot;&quot;&#41;, &quot;build_h.jl&quot;&#41;&#41;     # include&#40;&#36;BUILDROOT/base/build_h.jl&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2299,7 +2294,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;strcat&#40;&#40;length&#40;Core.ARGS&#41;&gt;&#61;2 ? Core.ARGS&#91;2&#93; : &quot;&quot;&#41;, &quot;version_git.jl&quot;&#41;&#41; # include&#40;&#36;BUILDROOT/base/version_git.jl&#41;</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2319,7 +2314,7 @@
           <td>
             
             
-            <span class='code'># C-style round</span>
+            <span class='code'># numeric operations</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2329,7 +2324,7 @@
           <td>
             
             
-            <span class='code'>function round&#40;x::AbstractFloat, ::RoundingMode&#123;:NearestTiesAway&#125;&#41;</span>
+            <span class='code'>include&#40;&quot;hashing.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2339,7 +2334,7 @@
           <td>
             
             
-            <span class='code'>    y &#61; trunc&#40;x&#41;</span>
+            <span class='code'>include&#40;&quot;rounding.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2349,7 +2344,7 @@
           <td>
             
             
-            <span class='code'>    ifelse&#40;x&#61;&#61;y,y,trunc&#40;2*x-y&#41;&#41;</span>
+            <span class='code'>using .Rounding</span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2359,7 +2354,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;div.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2369,7 +2364,7 @@
           <td>
             
             
-            <span class='code'># Java-style round</span>
+            <span class='code'>include&#40;&quot;float.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2379,7 +2374,7 @@
           <td>
             
             
-            <span class='code'>function round&#40;x::T, ::RoundingMode&#123;:NearestTiesUp&#125;&#41; where &#123;T &lt;: AbstractFloat&#125;</span>
+            <span class='code'>include&#40;&quot;twiceprecision.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2389,7 +2384,7 @@
           <td>
             
             
-            <span class='code'>    copysign&#40;floor&#40;&#40;x &#43; &#40;T&#40;0.25&#41; - eps&#40;T&#40;0.5&#41;&#41;&#41;&#41; &#43; &#40;T&#40;0.25&#41; &#43; eps&#40;T&#40;0.5&#41;&#41;&#41;&#41;, x&#41;</span>
+            <span class='code'>include&#40;&quot;complex.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2399,7 +2394,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;rational.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2409,7 +2404,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;multinverses.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2419,7 +2414,7 @@
           <td>
             
             
-            <span class='code'>function Base.round&#40;x::AbstractFloat, ::typeof&#40;RoundFromZero&#41;&#41;</span>
+            <span class='code'>using .MultiplicativeInverses</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2429,7 +2424,7 @@
           <td>
             
             
-            <span class='code'>    signbit&#40;x&#41; ? round&#40;x, RoundDown&#41; : round&#40;x, RoundUp&#41;</span>
+            <span class='code'>include&#40;&quot;abstractarraymath.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2439,7 +2434,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;arraymath.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2449,7 +2444,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;slicearray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2459,7 +2454,7 @@
           <td>
             
             
-            <span class='code'># isapprox: approximate equality of numbers</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2469,7 +2464,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># SIMD loops</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2479,7 +2474,7 @@
           <td>
             
             
-            <span class='code'>    isapprox&#40;x, y; atol::Real&#61;0, rtol::Real&#61;atol&gt;0 ? 0 : √eps, nans::Bool&#61;false&#91;, norm::Function&#93;&#41;</span>
+            <span class='code'>sizeof&#40;s::String&#41; &#61; Core.sizeof&#40;s&#41;  # needed by gensym as called from simdloop</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2489,7 +2484,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;simdloop.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2499,7 +2494,7 @@
           <td>
             
             
-            <span class='code'>Inexact equality comparison. Two numbers compare equal if their relative distance *or* their</span>
+            <span class='code'>using .SimdLoop</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2509,7 +2504,7 @@
           <td>
             
             
-            <span class='code'>absolute distance is within tolerance bounds: &#96;isapprox&#96; returns &#96;true&#96; if</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L248'>
@@ -2519,7 +2514,7 @@
           <td>
             
             
-            <span class='code'>&#96;norm&#40;x-y&#41; &lt;&#61; max&#40;atol, rtol*max&#40;norm&#40;x&#41;, norm&#40;y&#41;&#41;&#41;&#96;. The default &#96;atol&#96; &#40;absolute tolerance&#41; is zero and the</span>
+            <span class='code'># map-reduce operators</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2529,7 +2524,7 @@
           <td>
             
             
-            <span class='code'>default &#96;rtol&#96; &#40;relative tolerance&#41; depends on the types of &#96;x&#96; and &#96;y&#96;. The keyword argument &#96;nans&#96; determines</span>
+            <span class='code'>include&#40;&quot;reduce.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2539,7 +2534,7 @@
           <td>
             
             
-            <span class='code'>whether or not NaN values are considered equal &#40;defaults to false&#41;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2549,7 +2544,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>## core structures</span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2559,7 +2554,7 @@
           <td>
             
             
-            <span class='code'>For real or complex floating-point values, if an &#96;atol &gt; 0&#96; is not specified, &#96;rtol&#96; defaults to</span>
+            <span class='code'>include&#40;&quot;reshapedarray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2569,7 +2564,7 @@
           <td>
             
             
-            <span class='code'>the square root of &#91;&#96;eps&#96;&#93;&#40;@ref&#41; of the type of &#96;x&#96; or &#96;y&#96;, whichever is bigger &#40;least precise&#41;.</span>
+            <span class='code'>include&#40;&quot;reinterpretarray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2579,7 +2574,7 @@
           <td>
             
             
-            <span class='code'>This corresponds to requiring equality of about half of the significant digits. Otherwise,</span>
+            <span class='code'>include&#40;&quot;bitarray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2589,7 +2584,7 @@
           <td>
             
             
-            <span class='code'>e.g. for integer arguments or if an &#96;atol &gt; 0&#96; is supplied, &#96;rtol&#96; defaults to zero.</span>
+            <span class='code'>include&#40;&quot;bitset.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2609,7 +2604,7 @@
           <td>
             
             
-            <span class='code'>The &#96;norm&#96; keyword defaults to &#96;abs&#96; for numeric &#96;&#40;x,y&#41;&#96; and to &#96;LinearAlgebra.norm&#96; for</span>
+            <span class='code'>if &#33;isdefined&#40;Core, :Compiler&#41;</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2619,7 +2614,7 @@
           <td>
             
             
-            <span class='code'>arrays &#40;where an alternative &#96;norm&#96; choice is sometimes useful&#41;.</span>
+            <span class='code'>    include&#40;&quot;docs/core.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2629,7 +2624,7 @@
           <td>
             
             
-            <span class='code'>When &#96;x&#96; and &#96;y&#96; are arrays, if &#96;norm&#40;x-y&#41;&#96; is not finite &#40;i.e. &#96;±Inf&#96;</span>
+            <span class='code'>    Core.atdoc&#33;&#40;CoreDocs.docm&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2639,7 +2634,7 @@
           <td>
             
             
-            <span class='code'>or &#96;NaN&#96;&#41;, the comparison falls back to checking whether all elements of &#96;x&#96; and &#96;y&#96; are</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2649,7 +2644,7 @@
           <td>
             
             
-            <span class='code'>approximately equal component-wise.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2659,7 +2654,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;multimedia.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2669,7 +2664,7 @@
           <td>
             
             
-            <span class='code'>The binary operator &#96;≈&#96; is equivalent to &#96;isapprox&#96; with the default arguments, and &#96;x ≉ y&#96;</span>
+            <span class='code'>using .Multimedia</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2679,7 +2674,7 @@
           <td>
             
             
-            <span class='code'>is equivalent to &#96;&#33;isapprox&#40;x,y&#41;&#96;.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2689,7 +2684,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Some type</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2699,7 +2694,7 @@
           <td>
             
             
-            <span class='code'>Note that &#96;x ≈ 0&#96; &#40;i.e., comparing to zero with the default tolerances&#41; is</span>
+            <span class='code'>include&#40;&quot;some.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2709,7 +2704,7 @@
           <td>
             
             
-            <span class='code'>equivalent to &#96;x &#61;&#61; 0&#96; since the default &#96;atol&#96; is &#96;0&#96;.  In such cases, you should either</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2719,7 +2714,7 @@
           <td>
             
             
-            <span class='code'>supply an appropriate &#96;atol&#96; &#40;or use &#96;norm&#40;x&#41; ≤ atol&#96;&#41; or rearrange your code &#40;e.g.</span>
+            <span class='code'>include&#40;&quot;dict.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2729,7 +2724,7 @@
           <td>
             
             
-            <span class='code'>use &#96;x ≈ y&#96; rather than &#96;x - y ≈ 0&#96;&#41;.   It is not possible to pick a nonzero &#96;atol&#96;</span>
+            <span class='code'>include&#40;&quot;abstractset.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2739,7 +2734,7 @@
           <td>
             
             
-            <span class='code'>automatically because it depends on the overall scaling &#40;the &quot;units&quot;&#41; of your problem:</span>
+            <span class='code'>include&#40;&quot;set.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2749,7 +2744,7 @@
           <td>
             
             
-            <span class='code'>for example, in &#96;x - y ≈ 0&#96;, &#96;atol&#61;1e-9&#96; is an absurdly small tolerance if &#96;x&#96; is the</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L272'>
@@ -2759,7 +2754,7 @@
           <td>
             
             
-            <span class='code'>&#91;radius of the Earth&#93;&#40;https://en.wikipedia.org/wiki/Earth_radius&#41; in meters,</span>
+            <span class='code'># Strings</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2769,7 +2764,7 @@
           <td>
             
             
-            <span class='code'>but an absurdly large tolerance if &#96;x&#96; is the</span>
+            <span class='code'>include&#40;&quot;char.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2779,7 +2774,7 @@
           <td>
             
             
-            <span class='code'>&#91;radius of a Hydrogen atom&#93;&#40;https://en.wikipedia.org/wiki/Bohr_radius&#41; in meters.</span>
+            <span class='code'>include&#40;&quot;strings/basic.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2789,7 +2784,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;strings/string.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2799,7 +2794,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.6&quot;</span>
+            <span class='code'>include&#40;&quot;strings/substring.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2809,7 +2804,7 @@
           <td>
             
             
-            <span class='code'>    Passing the &#96;norm&#96; keyword argument when comparing numeric &#40;non-array&#41; arguments</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L278'>
@@ -2819,7 +2814,7 @@
           <td>
             
             
-            <span class='code'>    requires Julia 1.6 or later.</span>
+            <span class='code'># Initialize DL_LOAD_PATH as early as possible.  We are defining things here in</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2829,7 +2824,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># a slightly more verbose fashion than usual, because we&#39;re running so early.</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2839,7 +2834,7 @@
           <td>
             
             
-            <span class='code'># Examples</span>
+            <span class='code'>const DL_LOAD_PATH &#61; String&#91;&#93;</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2849,7 +2844,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;jldoctest</span>
+            <span class='code'>let os &#61; ccall&#40;:jl_get_UNAME, Any, &#40;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2859,7 +2854,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isapprox&#40;0.1, 0.15; atol&#61;0.05&#41;</span>
+            <span class='code'>    if os &#61;&#61;&#61; :Darwin || os &#61;&#61;&#61; :Apple</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2869,7 +2864,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>        if Base.DARWIN_FRAMEWORK</span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2879,7 +2874,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            push&#33;&#40;DL_LOAD_PATH, &quot;@loader_path/Frameworks&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2889,7 +2884,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isapprox&#40;0.1, 0.15; rtol&#61;0.34&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2899,7 +2894,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>        push&#33;&#40;DL_LOAD_PATH, &quot;@loader_path&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2909,7 +2904,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L288'>
@@ -2919,7 +2914,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isapprox&#40;0.1, 0.15; rtol&#61;0.33&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2929,7 +2924,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2939,7 +2934,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;osutils.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L291'>
@@ -2949,7 +2944,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; 0.1 &#43; 1e-10 ≈ 0.1</span>
+            <span class='code'>include&#40;&quot;c.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2959,7 +2954,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2969,7 +2964,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Core I/O</span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2979,7 +2974,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; 1e-10 ≈ 0</span>
+            <span class='code'>include&#40;&quot;io.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2989,7 +2984,7 @@
           <td>
             
             
-            <span class='code'>false</span>
+            <span class='code'>include&#40;&quot;iobuffer.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L296'>
@@ -3009,7 +3004,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isapprox&#40;1e-10, 0, atol&#61;1e-8&#41;</span>
+            <span class='code'># strings &amp; printing</span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3019,7 +3014,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>include&#40;&quot;intfuncs.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3029,7 +3024,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;strings/strings.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3039,7 +3034,7 @@
           <td>
             
             
-            <span class='code'>julia&gt; isapprox&#40;&#91;10.0^9, 1.0&#93;, &#91;10.0^9, 2.0&#93;&#41; # using &#96;norm&#96;</span>
+            <span class='code'>include&#40;&quot;regex.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3049,7 +3044,7 @@
           <td>
             
             
-            <span class='code'>true</span>
+            <span class='code'>include&#40;&quot;parse.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3059,7 +3054,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>include&#40;&quot;shell.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3069,7 +3064,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>include&#40;&quot;show.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3079,7 +3074,7 @@
           <td>
             
             
-            <span class='code'>function isapprox&#40;x::Number, y::Number;</span>
+            <span class='code'>include&#40;&quot;arrayshow.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3089,7 +3084,7 @@
           <td>
             
             
-            <span class='code'>                  atol::Real&#61;0, rtol::Real&#61;rtoldefault&#40;x,y,atol&#41;,</span>
+            <span class='code'>include&#40;&quot;methodshow.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3099,7 +3094,7 @@
           <td>
             
             
-            <span class='code'>                  nans::Bool&#61;false, norm::Function&#61;abs&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3109,7 +3104,7 @@
           <td>
             
             
-            <span class='code'>    x′, y′ &#61; promote&#40;x, y&#41; # to avoid integer overflow</span>
+            <span class='code'># multidimensional arrays</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3119,7 +3114,7 @@
           <td>
             
             
-            <span class='code'>    x &#61;&#61; y ||</span>
+            <span class='code'>include&#40;&quot;cartesian.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3129,7 +3124,7 @@
           <td>
             
             
-            <span class='code'>        &#40;isfinite&#40;x&#41; &amp;&amp; isfinite&#40;y&#41; &amp;&amp; norm&#40;x-y&#41; &lt;&#61; max&#40;atol, rtol*max&#40;norm&#40;x′&#41;, norm&#40;y′&#41;&#41;&#41;&#41; ||</span>
+            <span class='code'>using .Cartesian</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3139,7 +3134,7 @@
           <td>
             
             
-            <span class='code'>         &#40;nans &amp;&amp; isnan&#40;x&#41; &amp;&amp; isnan&#40;y&#41;&#41;</span>
+            <span class='code'>include&#40;&quot;multidimensional.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3149,7 +3144,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3159,7 +3154,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;broadcast.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3169,7 +3164,7 @@
           <td>
             
             
-            <span class='code'>function isapprox&#40;x::Integer, y::Integer;</span>
+            <span class='code'>using .Broadcast</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3179,7 +3174,7 @@
           <td>
             
             
-            <span class='code'>                  atol::Real&#61;0, rtol::Real&#61;rtoldefault&#40;x,y,atol&#41;,</span>
+            <span class='code'>using .Broadcast: broadcasted, broadcasted_kwsyntax, materialize, materialize&#33;,</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3189,7 +3184,7 @@
           <td>
             
             
-            <span class='code'>                  nans::Bool&#61;false, norm::Function&#61;abs&#41;</span>
+            <span class='code'>                  broadcast_preserving_zero_d, andand, oror</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3199,7 +3194,7 @@
           <td>
             
             
-            <span class='code'>    if norm &#61;&#61;&#61; abs &amp;&amp; atol &lt; 1 &amp;&amp; rtol &#61;&#61; 0</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3209,7 +3204,7 @@
           <td>
             
             
-            <span class='code'>        return x &#61;&#61; y</span>
+            <span class='code'># missing values</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3219,7 +3214,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>include&#40;&quot;missing.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3229,7 +3224,7 @@
           <td>
             
             
-            <span class='code'>        return norm&#40;x - y&#41; &lt;&#61; max&#40;atol, rtol*max&#40;norm&#40;x&#41;, norm&#40;y&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3239,7 +3234,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># version</span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3249,7 +3244,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>include&#40;&quot;version.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3269,7 +3264,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># system &amp; environment</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3279,7 +3274,7 @@
           <td>
             
             
-            <span class='code'>    isapprox&#40;x; kwargs...&#41; / ≈&#40;x; kwargs...&#41;</span>
+            <span class='code'>include&#40;&quot;sysinfo.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3289,7 +3284,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;libc.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3299,7 +3294,7 @@
           <td>
             
             
-            <span class='code'>Create a function that compares its argument to &#96;x&#96; using &#96;≈&#96;, i.e. a function equivalent to &#96;y -&gt; y ≈ x&#96;.</span>
+            <span class='code'>using .Libc: getpid, gethostname, time, memcpy, memset, memmove, memcmp</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3319,7 +3314,7 @@
           <td>
             
             
-            <span class='code'>The keyword arguments supported here are the same as those in the 2-argument &#96;isapprox&#96;.</span>
+            <span class='code'># These used to be in build_h.jl and are retained for backwards compatibility.</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3329,7 +3324,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># NOTE: keep in sync with &#96;libblastrampoline_jll.libblastrampoline&#96;.</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3339,7 +3334,7 @@
           <td>
             
             
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.5&quot;</span>
+            <span class='code'>const libblas_name &#61; &quot;libblastrampoline&quot; * &#40;Sys.iswindows&#40;&#41; ? &quot;-5&quot; : &quot;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3349,7 +3344,7 @@
           <td>
             
             
-            <span class='code'>    This method requires Julia 1.5 or later.</span>
+            <span class='code'>const liblapack_name &#61; libblas_name</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3359,7 +3354,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3369,7 +3364,7 @@
           <td>
             
             
-            <span class='code'>isapprox&#40;y; kwargs...&#41; &#61; x -&gt; isapprox&#40;x, y; kwargs...&#41;</span>
+            <span class='code'># Logging</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3379,7 +3374,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;logging.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3389,7 +3384,7 @@
           <td>
             
             
-            <span class='code'>const ≈ &#61; isapprox</span>
+            <span class='code'>using .CoreLogging</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3399,7 +3394,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3409,7 +3404,7 @@
           <td>
             
             
-            <span class='code'>    x ≉ y</span>
+            <span class='code'># Concurrency</span>
           </td>
         </tr>
         <tr id='L338'>
@@ -3419,7 +3414,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;linked_list.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3429,7 +3424,7 @@
           <td>
             
             
-            <span class='code'>This is equivalent to &#96;&#33;isapprox&#40;x,y&#41;&#96; &#40;see &#91;&#96;isapprox&#96;&#93;&#40;@ref&#41;&#41;.</span>
+            <span class='code'>include&#40;&quot;condition.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3439,7 +3434,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>include&#40;&quot;threads.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3449,7 +3444,7 @@
           <td>
             
             
-            <span class='code'>≉&#40;args...; kws...&#41; &#61; &#33;≈&#40;args...; kws...&#41;</span>
+            <span class='code'>include&#40;&quot;lock.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3459,7 +3454,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;channels.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3469,7 +3464,7 @@
           <td>
             
             
-            <span class='code'># default tolerance arguments</span>
+            <span class='code'>include&#40;&quot;partr.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3479,7 +3474,7 @@
           <td>
             
             
-            <span class='code'>rtoldefault&#40;::Type&#123;T&#125;&#41; where &#123;T&lt;:AbstractFloat&#125; &#61; sqrt&#40;eps&#40;T&#41;&#41;</span>
+            <span class='code'>include&#40;&quot;task.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3489,7 +3484,7 @@
           <td>
             
             
-            <span class='code'>rtoldefault&#40;::Type&#123;&lt;:Real&#125;&#41; &#61; 0</span>
+            <span class='code'>include&#40;&quot;threads_overloads.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3499,7 +3494,7 @@
           <td>
             
             
-            <span class='code'>function rtoldefault&#40;x::Union&#123;T,Type&#123;T&#125;&#125;, y::Union&#123;S,Type&#123;S&#125;&#125;, atol::Real&#41; where &#123;T&lt;:Number,S&lt;:Number&#125;</span>
+            <span class='code'>include&#40;&quot;weakkeydict.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3509,7 +3504,7 @@
           <td>
             
             
-            <span class='code'>    rtol &#61; max&#40;rtoldefault&#40;real&#40;T&#41;&#41;,rtoldefault&#40;real&#40;S&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3519,7 +3514,7 @@
           <td>
             
             
-            <span class='code'>    return atol &gt; 0 ? zero&#40;rtol&#41; : rtol</span>
+            <span class='code'>include&#40;&quot;env.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3529,7 +3524,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3539,7 +3534,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># functions defined in Random</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3549,7 +3544,7 @@
           <td>
             
             
-            <span class='code'># fused multiply-add</span>
+            <span class='code'>function rand end</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3559,7 +3554,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function randn end</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3569,7 +3564,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3579,7 +3574,7 @@
           <td>
             
             
-            <span class='code'>    fma&#40;x, y, z&#41;</span>
+            <span class='code'># I/O</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3589,7 +3584,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>include&#40;&quot;libuv.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3599,7 +3594,7 @@
           <td>
             
             
-            <span class='code'>Computes &#96;x*y&#43;z&#96; without rounding the intermediate result &#96;x*y&#96;. On some systems this is</span>
+            <span class='code'>include&#40;&quot;asyncevent.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3609,7 +3604,7 @@
           <td>
             
             
-            <span class='code'>significantly more expensive than &#96;x*y&#43;z&#96;. &#96;fma&#96; is used to improve accuracy in certain</span>
+            <span class='code'>include&#40;&quot;iostream.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3619,7 +3614,7 @@
           <td>
             
             
-            <span class='code'>algorithms. See &#91;&#96;muladd&#96;&#93;&#40;@ref&#41;.</span>
+            <span class='code'>include&#40;&quot;stream.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3629,7 +3624,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>include&#40;&quot;filesystem.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3639,7 +3634,7 @@
           <td>
             
             
-            <span class='code'>function fma end</span>
+            <span class='code'>using .Filesystem</span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3649,7 +3644,7 @@
           <td>
             
             
-            <span class='code'>function fma_emulated&#40;a::Float32, b::Float32, c::Float32&#41;::Float32</span>
+            <span class='code'>include&#40;&quot;cmd.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3659,7 +3654,7 @@
           <td>
             
             
-            <span class='code'>    ab &#61; Float64&#40;a&#41; * b</span>
+            <span class='code'>include&#40;&quot;process.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3669,7 +3664,7 @@
           <td>
             
             
-            <span class='code'>    res &#61; ab&#43;c</span>
+            <span class='code'>include&#40;&quot;ttyhascolor.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3679,7 +3674,7 @@
           <td>
             
             
-            <span class='code'>    reinterpret&#40;UInt64, res&#41;&amp;0x1fff_ffff&#33;&#61;0x1000_0000 &amp;&amp; return res</span>
+            <span class='code'>include&#40;&quot;secretbuffer.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3689,7 +3684,7 @@
           <td>
             
             
-            <span class='code'>    # yes error compensation is necessary. It sucks</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3699,7 +3694,7 @@
           <td>
             
             
-            <span class='code'>    reslo &#61; abs&#40;c&#41;&gt;abs&#40;ab&#41; ? ab-&#40;res - c&#41; : c-&#40;res - ab&#41;</span>
+            <span class='code'># core math functions</span>
           </td>
         </tr>
         <tr id='L367'>
@@ -3709,7 +3704,7 @@
           <td>
             
             
-            <span class='code'>    res &#61; iszero&#40;reslo&#41; ? res : &#40;signbit&#40;reslo&#41; ? prevfloat&#40;res&#41; : nextfloat&#40;res&#41;&#41;</span>
+            <span class='code'>include&#40;&quot;floatfuncs.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L368'>
@@ -3719,7 +3714,7 @@
           <td>
             
             
-            <span class='code'>    return res</span>
+            <span class='code'>include&#40;&quot;math.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3729,7 +3724,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>using .Math</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3739,7 +3734,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const &#40;√&#41;&#61;sqrt</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3749,7 +3744,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot; Splits a Float64 into a hi bit and a low bit where the high bit has 27 trailing 0s and the low bit has 26 trailing 0s&quot;&quot;&quot;</span>
+            <span class='code'>const &#40;∛&#41;&#61;cbrt</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3759,7 +3754,7 @@
           <td>
             
             
-            <span class='code'>@inline function splitbits&#40;x::Float64&#41;</span>
+            <span class='code'>const &#40;∜&#41;&#61;fourthroot</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3769,7 +3764,7 @@
           <td>
             
             
-            <span class='code'>    hi &#61; reinterpret&#40;Float64, reinterpret&#40;UInt64, x&#41; &amp; 0xffff_ffff_f800_0000&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3779,7 +3774,7 @@
           <td>
             
             
-            <span class='code'>    return hi, x-hi</span>
+            <span class='code'># now switch to a simple, race-y TLS, relative include for the rest of Base</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3789,7 +3784,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>delete_method&#40;which&#40;include, &#40;Module, String&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3799,7 +3794,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>let SOURCE_PATH &#61; &quot;&quot;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3809,7 +3804,7 @@
           <td>
             
             
-            <span class='code'>function twomul&#40;a::Float64, b::Float64&#41;</span>
+            <span class='code'>    global function include&#40;mod::Module, path::String&#41;</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3819,7 +3814,7 @@
           <td>
             
             
-            <span class='code'>    ahi, alo &#61; splitbits&#40;a&#41;</span>
+            <span class='code'>        prev &#61; SOURCE_PATH::String</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3829,7 +3824,7 @@
           <td>
             
             
-            <span class='code'>    bhi, blo &#61; splitbits&#40;b&#41;</span>
+            <span class='code'>        path &#61; normpath&#40;joinpath&#40;dirname&#40;prev&#41;, path&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3839,7 +3834,7 @@
           <td>
             
             
-            <span class='code'>    abhi &#61; a*b</span>
+            <span class='code'>        Core.println&#40;path&#41;</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3849,7 +3844,7 @@
           <td>
             
             
-            <span class='code'>    blohi, blolo &#61; splitbits&#40;blo&#41;</span>
+            <span class='code'>        ccall&#40;:jl_uv_flush, Nothing, &#40;Ptr&#123;Nothing&#125;,&#41;, Core.io_pointer&#40;Core.stdout&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3859,7 +3854,7 @@
           <td>
             
             
-            <span class='code'>    ablo &#61; alo*blohi - &#40;&#40;&#40;abhi - ahi*bhi&#41; - alo*bhi&#41; - ahi*blo&#41; &#43; blolo*alo</span>
+            <span class='code'>        push&#33;&#40;_included_files, &#40;mod, abspath&#40;path&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3869,7 +3864,7 @@
           <td>
             
             
-            <span class='code'>    return abhi, ablo</span>
+            <span class='code'>        SOURCE_PATH &#61; path</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3879,7 +3874,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        result &#61; Core.include&#40;mod, path&#41;</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3889,7 +3884,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        SOURCE_PATH &#61; prev</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3899,7 +3894,7 @@
           <td>
             
             
-            <span class='code'>function fma_emulated&#40;a::Float64, b::Float64,c::Float64&#41;</span>
+            <span class='code'>        return result</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3909,7 +3904,7 @@
           <td>
             
             
-            <span class='code'>    abhi, ablo &#61; @inline twomul&#40;a,b&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3919,7 +3914,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isfinite&#40;abhi&#43;c&#41; || isless&#40;abs&#40;abhi&#41;, nextfloat&#40;0x1p-969&#41;&#41; || issubnormal&#40;a&#41; || issubnormal&#40;b&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L389'>
@@ -3929,7 +3924,7 @@
           <td>
             
             
-            <span class='code'>        aandbfinite &#61; isfinite&#40;a&#41; &amp;&amp; isfinite&#40;b&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3939,7 +3934,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;&#40;isfinite&#40;c&#41; &amp;&amp; aandbfinite&#41;</span>
+            <span class='code'># reduction along dims</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3949,7 +3944,7 @@
           <td>
             
             
-            <span class='code'>            return aandbfinite ? c : abhi&#43;c</span>
+            <span class='code'>include&#40;&quot;reducedim.jl&quot;&#41;  # macros in this file rely on string.jl</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3959,7 +3954,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>include&#40;&quot;accumulate.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3969,7 +3964,7 @@
           <td>
             
             
-            <span class='code'>        &#40;iszero&#40;a&#41; || iszero&#40;b&#41;&#41; &amp;&amp; return abhi&#43;c</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3979,7 +3974,7 @@
           <td>
             
             
-            <span class='code'>        # The checks above satisfy exponent&#39;s nothrow precondition</span>
+            <span class='code'>include&#40;&quot;permuteddimsarray.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3989,7 +3984,7 @@
           <td>
             
             
-            <span class='code'>        bias &#61; Math._exponent_finite_nonzero&#40;a&#41; &#43; Math._exponent_finite_nonzero&#40;b&#41;</span>
+            <span class='code'>using .PermutedDimsArrays</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3999,7 +3994,7 @@
           <td>
             
             
-            <span class='code'>        c_denorm &#61; ldexp&#40;c, -bias&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4009,7 +4004,7 @@
           <td>
             
             
-            <span class='code'>        if isfinite&#40;c_denorm&#41;</span>
+            <span class='code'># basic data structures</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4019,7 +4014,7 @@
           <td>
             
             
-            <span class='code'>            # rescale a and b to &#91;1,2&#41;, equivalent to ldexp&#40;a, -exponent&#40;a&#41;&#41;</span>
+            <span class='code'>include&#40;&quot;ordering.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4029,7 +4024,7 @@
           <td>
             
             
-            <span class='code'>            issubnormal&#40;a&#41; &amp;&amp; &#40;a *&#61; 0x1p52&#41;</span>
+            <span class='code'>using .Order</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4039,7 +4034,7 @@
           <td>
             
             
-            <span class='code'>            issubnormal&#40;b&#41; &amp;&amp; &#40;b *&#61; 0x1p52&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4049,7 +4044,7 @@
           <td>
             
             
-            <span class='code'>            a &#61; reinterpret&#40;Float64, &#40;reinterpret&#40;UInt64, a&#41; &amp; ~Base.exponent_mask&#40;Float64&#41;&#41; | Base.exponent_one&#40;Float64&#41;&#41;</span>
+            <span class='code'># Combinatorics</span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4059,7 +4054,7 @@
           <td>
             
             
-            <span class='code'>            b &#61; reinterpret&#40;Float64, &#40;reinterpret&#40;UInt64, b&#41; &amp; ~Base.exponent_mask&#40;Float64&#41;&#41; | Base.exponent_one&#40;Float64&#41;&#41;</span>
+            <span class='code'>include&#40;&quot;sort.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4069,7 +4064,7 @@
           <td>
             
             
-            <span class='code'>            c &#61; c_denorm</span>
+            <span class='code'>using .Sort</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4079,7 +4074,7 @@
           <td>
             
             
-            <span class='code'>            abhi, ablo &#61; twomul&#40;a,b&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4089,7 +4084,7 @@
           <td>
             
             
-            <span class='code'>            # abhi &lt;&#61; 4 -&gt; isfinite&#40;r&#41;      &#40;α&#41;</span>
+            <span class='code'># BinaryPlatforms, used by Artifacts.  Needs &#96;Sort&#96;.</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4099,7 +4094,7 @@
           <td>
             
             
-            <span class='code'>            r &#61; abhi&#43;c</span>
+            <span class='code'>include&#40;&quot;binaryplatforms.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4109,7 +4104,7 @@
           <td>
             
             
-            <span class='code'>            # s ≈ 0                         &#40;β&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4119,7 +4114,7 @@
           <td>
             
             
-            <span class='code'>            s &#61; &#40;abs&#40;abhi&#41; &gt; abs&#40;c&#41;&#41; ? &#40;abhi-r&#43;c&#43;ablo&#41; : &#40;c-r&#43;abhi&#43;ablo&#41;</span>
+            <span class='code'># Fast math</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4129,7 +4124,7 @@
           <td>
             
             
-            <span class='code'>            # α ⩓ β -&gt; isfinite&#40;sumhi&#41;      &#40;γ&#41;</span>
+            <span class='code'>include&#40;&quot;fastmath.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4139,7 +4134,7 @@
           <td>
             
             
-            <span class='code'>            sumhi &#61; r&#43;s</span>
+            <span class='code'>using .FastMath</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4149,7 +4144,7 @@
           <td>
             
             
-            <span class='code'>            # If result is subnormal, ldexp will cause double rounding because subnormals have fewer mantisa bits.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4159,7 +4154,7 @@
           <td>
             
             
-            <span class='code'>            # As such, we need to check whether round to even would lead to double rounding and manually round sumhi to avoid it.</span>
+            <span class='code'>function deepcopy_internal end</span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4169,7 +4164,7 @@
           <td>
             
             
-            <span class='code'>            if issubnormal&#40;ldexp&#40;sumhi, bias&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4179,7 +4174,7 @@
           <td>
             
             
-            <span class='code'>                sumlo &#61; r-sumhi&#43;s</span>
+            <span class='code'># enums</span>
           </td>
         </tr>
         <tr id='L415'>
@@ -4189,7 +4184,7 @@
           <td>
             
             
-            <span class='code'>                # finite: See γ</span>
+            <span class='code'>include&#40;&quot;Enums.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4199,7 +4194,7 @@
           <td>
             
             
-            <span class='code'>                # non-zero: If sumhi &#61;&#61; ±0., then ldexp&#40;sumhi, bias&#41; &#61;&#61; ±0,</span>
+            <span class='code'>using .Enums</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4209,7 +4204,7 @@
           <td>
             
             
-            <span class='code'>                # so we don&#39;t take this branch.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4219,7 +4214,7 @@
           <td>
             
             
-            <span class='code'>                bits_lost &#61; -bias-Math._exponent_finite_nonzero&#40;sumhi&#41;-1022</span>
+            <span class='code'># BigInts</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4229,7 +4224,7 @@
           <td>
             
             
-            <span class='code'>                sumhiInt &#61; reinterpret&#40;UInt64, sumhi&#41;</span>
+            <span class='code'>include&#40;&quot;gmp.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L420'>
@@ -4239,7 +4234,7 @@
           <td>
             
             
-            <span class='code'>                if &#40;bits_lost &#33;&#61; 1&#41; ⊻ &#40;sumhiInt&amp;1 &#61;&#61; 1&#41;</span>
+            <span class='code'>using .GMP</span>
           </td>
         </tr>
         <tr id='L421'>
@@ -4249,7 +4244,7 @@
           <td>
             
             
-            <span class='code'>                    sumhi &#61; nextfloat&#40;sumhi, cmp&#40;sumlo,0&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L422'>
@@ -4259,7 +4254,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'># float printing: requires BigInt</span>
           </td>
         </tr>
         <tr id='L423'>
@@ -4269,7 +4264,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>include&#40;&quot;ryu/Ryu.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L424'>
@@ -4279,7 +4274,7 @@
           <td>
             
             
-            <span class='code'>            return ldexp&#40;sumhi, bias&#41;</span>
+            <span class='code'>using .Ryu</span>
           </td>
         </tr>
         <tr id='L425'>
@@ -4289,7 +4284,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L426'>
@@ -4299,7 +4294,7 @@
           <td>
             
             
-            <span class='code'>        isinf&#40;abhi&#41; &amp;&amp; signbit&#40;c&#41; &#61;&#61; signbit&#40;a*b&#41; &amp;&amp; return abhi</span>
+            <span class='code'># BigFloats</span>
           </td>
         </tr>
         <tr id='L427'>
@@ -4309,7 +4304,7 @@
           <td>
             
             
-            <span class='code'>        # fall through</span>
+            <span class='code'>include&#40;&quot;mpfr.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L428'>
@@ -4319,7 +4314,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>using .MPFR</span>
           </td>
         </tr>
         <tr id='L429'>
@@ -4329,7 +4324,7 @@
           <td>
             
             
-            <span class='code'>    r &#61; abhi&#43;c</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L430'>
@@ -4339,7 +4334,7 @@
           <td>
             
             
-            <span class='code'>    s &#61; &#40;abs&#40;abhi&#41; &gt; abs&#40;c&#41;&#41; ? &#40;abhi-r&#43;c&#43;ablo&#41; : &#40;c-r&#43;abhi&#43;ablo&#41;</span>
+            <span class='code'>include&#40;&quot;combinatorics.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L431'>
@@ -4349,7 +4344,7 @@
           <td>
             
             
-            <span class='code'>    return r&#43;s</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L432'>
@@ -4359,7 +4354,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># irrational mathematical constants</span>
           </td>
         </tr>
         <tr id='L433'>
@@ -4369,7 +4364,7 @@
           <td>
             
             
-            <span class='code'>fma_llvm&#40;x::Float32, y::Float32, z::Float32&#41; &#61; fma_float&#40;x, y, z&#41;</span>
+            <span class='code'>include&#40;&quot;irrationals.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L434'>
@@ -4379,7 +4374,7 @@
           <td>
             
             
-            <span class='code'>fma_llvm&#40;x::Float64, y::Float64, z::Float64&#41; &#61; fma_float&#40;x, y, z&#41;</span>
+            <span class='code'>include&#40;&quot;mathconstants.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L435'>
@@ -4389,7 +4384,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>using .MathConstants: ℯ, π, pi</span>
           </td>
         </tr>
         <tr id='L436'>
@@ -4399,7 +4394,7 @@
           <td>
             
             
-            <span class='code'># Disable LLVM&#39;s fma if it is incorrect, e.g. because LLVM falls back</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L437'>
@@ -4409,7 +4404,7 @@
           <td>
             
             
-            <span class='code'># onto a broken system libm; if so, use a software emulated fma</span>
+            <span class='code'># metaprogramming</span>
           </td>
         </tr>
         <tr id='L438'>
@@ -4419,7 +4414,7 @@
           <td>
             
             
-            <span class='code'>@assume_effects :consistent fma&#40;x::Float32, y::Float32, z::Float32&#41; &#61; Core.Intrinsics.have_fma&#40;Float32&#41; ? fma_llvm&#40;x,y,z&#41; : fma_emulated&#40;x,y,z&#41;</span>
+            <span class='code'>include&#40;&quot;meta.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L439'>
@@ -4429,7 +4424,7 @@
           <td>
             
             
-            <span class='code'>@assume_effects :consistent fma&#40;x::Float64, y::Float64, z::Float64&#41; &#61; Core.Intrinsics.have_fma&#40;Float64&#41; ? fma_llvm&#40;x,y,z&#41; : fma_emulated&#40;x,y,z&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L440'>
@@ -4439,7 +4434,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Stack frames and traces</span>
           </td>
         </tr>
         <tr id='L441'>
@@ -4449,7 +4444,7 @@
           <td>
             
             
-            <span class='code'>function fma&#40;a::Float16, b::Float16, c::Float16&#41;</span>
+            <span class='code'>include&#40;&quot;stacktraces.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L442'>
@@ -4459,7 +4454,7 @@
           <td>
             
             
-            <span class='code'>    Float16&#40;muladd&#40;Float32&#40;a&#41;, Float32&#40;b&#41;, Float32&#40;c&#41;&#41;&#41; #don&#39;t use fma if the hardware doesn&#39;t have it.</span>
+            <span class='code'>using .StackTraces</span>
           </td>
         </tr>
         <tr id='L443'>
@@ -4469,7 +4464,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L444'>
@@ -4479,7 +4474,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># experimental API&#39;s</span>
           </td>
         </tr>
         <tr id='L445'>
@@ -4489,7 +4484,7 @@
           <td>
             
             
-            <span class='code'># This is necessary at least on 32-bit Intel Linux, since fma_llvm may</span>
+            <span class='code'>include&#40;&quot;experimental.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L446'>
@@ -4499,7 +4494,7 @@
           <td>
             
             
-            <span class='code'># have called glibc, and some broken glibc fma implementations don&#39;t</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L447'>
@@ -4509,7 +4504,7 @@
           <td>
             
             
-            <span class='code'># properly restore the rounding mode</span>
+            <span class='code'># utilities</span>
           </td>
         </tr>
         <tr id='L448'>
@@ -4519,7 +4514,7 @@
           <td>
             
             
-            <span class='code'>Rounding.setrounding_raw&#40;Float32, Rounding.JL_FE_TONEAREST&#41;</span>
+            <span class='code'>include&#40;&quot;deepcopy.jl&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L449'>
@@ -4529,7 +4524,1797 @@
           <td>
             
             
-            <span class='code'>Rounding.setrounding_raw&#40;Float64, Rounding.JL_FE_TONEAREST&#41;</span>
+            <span class='code'>include&#40;&quot;download.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L450'>
+          <td class='lineno'>450</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;summarysize.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L451'>
+          <td class='lineno'>451</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;errorshow.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L452'>
+          <td class='lineno'>452</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L453'>
+          <td class='lineno'>453</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;initdefs.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L454'>
+          <td class='lineno'>454</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L455'>
+          <td class='lineno'>455</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># worker threads</span>
+          </td>
+        </tr>
+        <tr id='L456'>
+          <td class='lineno'>456</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;threadcall.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L457'>
+          <td class='lineno'>457</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L458'>
+          <td class='lineno'>458</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># code loading</span>
+          </td>
+        </tr>
+        <tr id='L459'>
+          <td class='lineno'>459</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;uuid.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L460'>
+          <td class='lineno'>460</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;pkgid.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L461'>
+          <td class='lineno'>461</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;toml_parser.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L462'>
+          <td class='lineno'>462</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;linking.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L463'>
+          <td class='lineno'>463</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;loading.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L464'>
+          <td class='lineno'>464</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L465'>
+          <td class='lineno'>465</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># misc useful functions &amp; macros</span>
+          </td>
+        </tr>
+        <tr id='L466'>
+          <td class='lineno'>466</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;timing.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L467'>
+          <td class='lineno'>467</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;util.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L468'>
+          <td class='lineno'>468</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;client.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L469'>
+          <td class='lineno'>469</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;asyncmap.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L470'>
+          <td class='lineno'>470</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L471'>
+          <td class='lineno'>471</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># deprecated functions</span>
+          </td>
+        </tr>
+        <tr id='L472'>
+          <td class='lineno'>472</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;deprecated.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L473'>
+          <td class='lineno'>473</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>#</span>
+          </td>
+        </tr>
+        <tr id='L474'>
+          <td class='lineno'>474</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Some additional basic documentation</span>
+          </td>
+        </tr>
+        <tr id='L475'>
+          <td class='lineno'>475</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;docs/basedocs.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L476'>
+          <td class='lineno'>476</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L477'>
+          <td class='lineno'>477</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Documentation -- should always be included last in sysimg.</span>
+          </td>
+        </tr>
+        <tr id='L478'>
+          <td class='lineno'>478</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;&quot;docs/Docs.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L479'>
+          <td class='lineno'>479</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>using .Docs</span>
+          </td>
+        </tr>
+        <tr id='L480'>
+          <td class='lineno'>480</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>if isdefined&#40;Core, :Compiler&#41; &amp;&amp; is_primary_base_module</span>
+          </td>
+        </tr>
+        <tr id='L481'>
+          <td class='lineno'>481</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Docs.loaddocs&#40;Core.Compiler.CoreDocs.DOCS&#41;</span>
+          </td>
+        </tr>
+        <tr id='L482'>
+          <td class='lineno'>482</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L483'>
+          <td class='lineno'>483</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L484'>
+          <td class='lineno'>484</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># finally, now make &#96;include&#96; point to the full version</span>
+          </td>
+        </tr>
+        <tr id='L485'>
+          <td class='lineno'>485</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>for m in methods&#40;include&#41;</span>
+          </td>
+        </tr>
+        <tr id='L486'>
+          <td class='lineno'>486</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    delete_method&#40;m&#41;</span>
+          </td>
+        </tr>
+        <tr id='L487'>
+          <td class='lineno'>487</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L488'>
+          <td class='lineno'>488</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L489'>
+          <td class='lineno'>489</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># This method is here only to be overwritten during the test suite to test</span>
+          </td>
+        </tr>
+        <tr id='L490'>
+          <td class='lineno'>490</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># various sysimg related invalidation scenarios.</span>
+          </td>
+        </tr>
+        <tr id='L491'>
+          <td class='lineno'>491</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>a_method_to_overwrite_in_test&#40;&#41; &#61; inferencebarrier&#40;1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L492'>
+          <td class='lineno'>492</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L493'>
+          <td class='lineno'>493</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># These functions are duplicated in client.jl/include&#40;::String&#41; for</span>
+          </td>
+        </tr>
+        <tr id='L494'>
+          <td class='lineno'>494</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># nicer stacktraces. Modifications here have to be backported there</span>
+          </td>
+        </tr>
+        <tr id='L495'>
+          <td class='lineno'>495</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;mod::Module, _path::AbstractString&#41; &#61; _include&#40;identity, mod, _path&#41;</span>
+          </td>
+        </tr>
+        <tr id='L496'>
+          <td class='lineno'>496</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;mapexpr::Function, mod::Module, _path::AbstractString&#41; &#61; _include&#40;mapexpr, mod, _path&#41;</span>
+          </td>
+        </tr>
+        <tr id='L497'>
+          <td class='lineno'>497</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L498'>
+          <td class='lineno'>498</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># External libraries vendored into Base</span>
+          </td>
+        </tr>
+        <tr id='L499'>
+          <td class='lineno'>499</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>Core.println&#40;&quot;JuliaSyntax/src/JuliaSyntax.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L500'>
+          <td class='lineno'>500</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>include&#40;@__MODULE__, &quot;JuliaSyntax/src/JuliaSyntax.jl&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L501'>
+          <td class='lineno'>501</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L502'>
+          <td class='lineno'>502</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end_base_include &#61; time_ns&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L503'>
+          <td class='lineno'>503</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L504'>
+          <td class='lineno'>504</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>const _sysimage_modules &#61; PkgId&#91;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L505'>
+          <td class='lineno'>505</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>in_sysimage&#40;pkgid::PkgId&#41; &#61; pkgid in _sysimage_modules</span>
+          </td>
+        </tr>
+        <tr id='L506'>
+          <td class='lineno'>506</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L507'>
+          <td class='lineno'>507</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Precompiles for Revise and other packages</span>
+          </td>
+        </tr>
+        <tr id='L508'>
+          <td class='lineno'>508</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># TODO: move these to contrib/generate_precompile.jl</span>
+          </td>
+        </tr>
+        <tr id='L509'>
+          <td class='lineno'>509</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># The problem is they don&#39;t work there</span>
+          </td>
+        </tr>
+        <tr id='L510'>
+          <td class='lineno'>510</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>for match &#61; _methods&#40;&#43;, &#40;Int, Int&#41;, -1, get_world_counter&#40;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L511'>
+          <td class='lineno'>511</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    m &#61; match.method</span>
+          </td>
+        </tr>
+        <tr id='L512'>
+          <td class='lineno'>512</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    delete&#33;&#40;push&#33;&#40;Set&#123;Method&#125;&#40;&#41;, m&#41;, m&#41;</span>
+          </td>
+        </tr>
+        <tr id='L513'>
+          <td class='lineno'>513</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    copy&#40;Core.Compiler.retrieve_code_info&#40;Core.Compiler.specialize_method&#40;match&#41;, typemax&#40;UInt&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L514'>
+          <td class='lineno'>514</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L515'>
+          <td class='lineno'>515</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    empty&#33;&#40;Set&#40;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L516'>
+          <td class='lineno'>516</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    push&#33;&#40;push&#33;&#40;Set&#123;Union&#123;GlobalRef,Symbol&#125;&#125;&#40;&#41;, :two&#41;, GlobalRef&#40;Base, :two&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L517'>
+          <td class='lineno'>517</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;String,Base.PkgId&#125;&#40;&#41;, Base.PkgId&#40;Base&#41;, &quot;file.jl&quot;&#41;&#41;&#91;&quot;file.jl&quot;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L518'>
+          <td class='lineno'>518</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;Symbol,Vector&#123;Int&#125;&#125;&#40;&#41;, &#91;1&#93;, :two&#41;&#41;&#91;:two&#93;</span>
+          </td>
+        </tr>
+        <tr id='L519'>
+          <td class='lineno'>519</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;Base.PkgId,String&#125;&#40;&#41;, &quot;file.jl&quot;, Base.PkgId&#40;Base&#41;&#41;&#41;&#91;Base.PkgId&#40;Base&#41;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L520'>
+          <td class='lineno'>520</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#40;setindex&#33;&#40;Dict&#123;Union&#123;GlobalRef,Symbol&#125;, Vector&#123;Int&#125;&#125;&#40;&#41;, &#91;1&#93;, :two&#41;&#41;&#91;:two&#93;</span>
+          </td>
+        </tr>
+        <tr id='L521'>
+          <td class='lineno'>521</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    &#40;setindex&#33;&#40;IdDict&#123;Type, Union&#123;Missing, Vector&#123;Tuple&#123;LineNumberNode, Expr&#125;&#125;&#125;&#125;&#40;&#41;, missing, Int&#41;&#41;&#91;Int&#93;</span>
+          </td>
+        </tr>
+        <tr id='L522'>
+          <td class='lineno'>522</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Dict&#123;Symbol, Union&#123;Nothing, Bool, Symbol&#125;&#125;&#40;:one &#61;&gt; false&#41;&#91;:one&#93;</span>
+          </td>
+        </tr>
+        <tr id='L523'>
+          <td class='lineno'>523</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Dict&#40;Base &#61;&gt; &#91;:&#40;1&#43;1&#41;&#93;&#41;&#91;Base&#93;</span>
+          </td>
+        </tr>
+        <tr id='L524'>
+          <td class='lineno'>524</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Dict&#40;:one &#61;&gt; &#91;1&#93;&#41;&#91;:one&#93;</span>
+          </td>
+        </tr>
+        <tr id='L525'>
+          <td class='lineno'>525</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Dict&#40;&quot;abc&quot; &#61;&gt; Set&#40;&#41;&#41;&#91;&quot;abc&quot;&#93;</span>
+          </td>
+        </tr>
+        <tr id='L526'>
+          <td class='lineno'>526</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    pushfirst&#33;&#40;&#91;&#93;, sum&#41;</span>
+          </td>
+        </tr>
+        <tr id='L527'>
+          <td class='lineno'>527</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    get&#40;Base.pkgorigins, Base.PkgId&#40;Base&#41;, nothing&#41;</span>
+          </td>
+        </tr>
+        <tr id='L528'>
+          <td class='lineno'>528</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    sort&#33;&#40;&#91;1,2,3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L529'>
+          <td class='lineno'>529</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    unique&#33;&#40;&#91;1,2,3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L530'>
+          <td class='lineno'>530</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    cumsum&#40;&#91;1,2,3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L531'>
+          <td class='lineno'>531</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    append&#33;&#40;Int&#91;&#93;, BitSet&#40;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L532'>
+          <td class='lineno'>532</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    isempty&#40;BitSet&#40;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L533'>
+          <td class='lineno'>533</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    delete&#33;&#40;BitSet&#40;&#91;1,2&#93;&#41;, 3&#41;</span>
+          </td>
+        </tr>
+        <tr id='L534'>
+          <td class='lineno'>534</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    deleteat&#33;&#40;Int32&#91;1,2,3&#93;, &#91;1,3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L535'>
+          <td class='lineno'>535</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    deleteat&#33;&#40;Any&#91;1,2,3&#93;, &#91;1,3&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L536'>
+          <td class='lineno'>536</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Core.svec&#40;1, 2&#41; &#61;&#61; Core.svec&#40;3, 4&#41;</span>
+          </td>
+        </tr>
+        <tr id='L537'>
+          <td class='lineno'>537</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    any&#40;t-&gt;t&#91;1&#93;.line &gt; 1, &#91;&#40;LineNumberNode&#40;2,:none&#41;, :&#40;1&#43;1&#41;&#41;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L538'>
+          <td class='lineno'>538</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L539'>
+          <td class='lineno'>539</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Code loading uses this</span>
+          </td>
+        </tr>
+        <tr id='L540'>
+          <td class='lineno'>540</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    sortperm&#40;mtime.&#40;readdir&#40;&quot;.&quot;&#41;&#41;, rev&#61;true&#41;</span>
+          </td>
+        </tr>
+        <tr id='L541'>
+          <td class='lineno'>541</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # JLLWrappers uses these</span>
+          </td>
+        </tr>
+        <tr id='L542'>
+          <td class='lineno'>542</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Dict&#123;UUID,Set&#123;String&#125;&#125;&#40;&#41;&#91;UUID&#40;&quot;692b3bcd-3c85-4b1f-b108-f13ce0eb3210&quot;&#41;&#93; &#61; Set&#123;String&#125;&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L543'>
+          <td class='lineno'>543</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    get&#33;&#40;Set&#123;String&#125;, Dict&#123;UUID,Set&#123;String&#125;&#125;&#40;&#41;, UUID&#40;&quot;692b3bcd-3c85-4b1f-b108-f13ce0eb3210&quot;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L544'>
+          <td class='lineno'>544</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    eachindex&#40;IndexLinear&#40;&#41;, Expr&#91;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L545'>
+          <td class='lineno'>545</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    push&#33;&#40;Expr&#91;&#93;, Expr&#40;:return, false&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L546'>
+          <td class='lineno'>546</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    vcat&#40;String&#91;&#93;, String&#91;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L547'>
+          <td class='lineno'>547</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    k, v &#61; &#40;:hello &#61;&gt; nothing&#41;</span>
+          </td>
+        </tr>
+        <tr id='L548'>
+          <td class='lineno'>548</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    precompile&#40;indexed_iterate, &#40;Pair&#123;Symbol, Union&#123;Nothing, String&#125;&#125;, Int&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L549'>
+          <td class='lineno'>549</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    precompile&#40;indexed_iterate, &#40;Pair&#123;Symbol, Union&#123;Nothing, String&#125;&#125;, Int, Int&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L550'>
+          <td class='lineno'>550</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Preferences uses these</span>
+          </td>
+        </tr>
+        <tr id='L551'>
+          <td class='lineno'>551</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    precompile&#40;get_preferences, &#40;UUID,&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L552'>
+          <td class='lineno'>552</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    precompile&#40;record_compiletime_preference, &#40;UUID, String&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L553'>
+          <td class='lineno'>553</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    get&#40;Dict&#123;String,Any&#125;&#40;&#41;, &quot;missing&quot;, nothing&#41;</span>
+          </td>
+        </tr>
+        <tr id='L554'>
+          <td class='lineno'>554</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    delete&#33;&#40;Dict&#123;String,Any&#125;&#40;&#41;, &quot;missing&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L555'>
+          <td class='lineno'>555</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    for &#40;k, v&#41; in Dict&#123;String,Any&#125;&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L556'>
+          <td class='lineno'>556</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        println&#40;k&#41;</span>
+          </td>
+        </tr>
+        <tr id='L557'>
+          <td class='lineno'>557</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L558'>
+          <td class='lineno'>558</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L559'>
+          <td class='lineno'>559</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    break   # only actually need to do this once</span>
+          </td>
+        </tr>
+        <tr id='L560'>
+          <td class='lineno'>560</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L561'>
+          <td class='lineno'>561</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L562'>
+          <td class='lineno'>562</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>if is_primary_base_module</span>
+          </td>
+        </tr>
+        <tr id='L563'>
+          <td class='lineno'>563</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L564'>
+          <td class='lineno'>564</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Profiling helper</span>
+          </td>
+        </tr>
+        <tr id='L565'>
+          <td class='lineno'>565</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># triggers printing the report and &#40;optionally&#41; saving a heap snapshot after a SIGINFO/SIGUSR1 profile request</span>
+          </td>
+        </tr>
+        <tr id='L566'>
+          <td class='lineno'>566</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Needs to be in Base because Profile is no longer loaded on boot</span>
+          </td>
+        </tr>
+        <tr id='L567'>
+          <td class='lineno'>567</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>const PROFILE_PRINT_COND &#61; Ref&#123;Base.AsyncCondition&#125;&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L568'>
+          <td class='lineno'>568</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function profile_printing_listener&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L569'>
+          <td class='lineno'>569</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    profile &#61; nothing</span>
+          </td>
+        </tr>
+        <tr id='L570'>
+          <td class='lineno'>570</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    try</span>
+          </td>
+        </tr>
+        <tr id='L571'>
+          <td class='lineno'>571</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        while true</span>
+          </td>
+        </tr>
+        <tr id='L572'>
+          <td class='lineno'>572</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            wait&#40;PROFILE_PRINT_COND&#91;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L573'>
+          <td class='lineno'>573</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            profile &#61; @something&#40;profile, require&#40;PkgId&#40;UUID&#40;&quot;9abbd945-dff8-562f-b5e8-e1ebf5ef1b79&quot;&#41;, &quot;Profile&quot;&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L574'>
+          <td class='lineno'>574</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L575'>
+          <td class='lineno'>575</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            invokelatest&#40;profile.peek_report&#91;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L576'>
+          <td class='lineno'>576</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            if Base.get_bool_env&#40;&quot;JULIA_PROFILE_PEEK_HEAP_SNAPSHOT&quot;, false&#41; &#61;&#61;&#61; true</span>
+          </td>
+        </tr>
+        <tr id='L577'>
+          <td class='lineno'>577</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                println&#40;stderr, &quot;Saving heap snapshot...&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L578'>
+          <td class='lineno'>578</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                fname &#61; invokelatest&#40;profile.take_heap_snapshot&#41;</span>
+          </td>
+        </tr>
+        <tr id='L579'>
+          <td class='lineno'>579</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>                println&#40;stderr, &quot;Heap snapshot saved to &#96;&#36;&#40;fname&#41;&#96;&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L580'>
+          <td class='lineno'>580</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            end</span>
+          </td>
+        </tr>
+        <tr id='L581'>
+          <td class='lineno'>581</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L582'>
+          <td class='lineno'>582</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    catch ex</span>
+          </td>
+        </tr>
+        <tr id='L583'>
+          <td class='lineno'>583</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        if &#33;isa&#40;ex, InterruptException&#41;</span>
+          </td>
+        </tr>
+        <tr id='L584'>
+          <td class='lineno'>584</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>            @error &quot;Profile printing listener crashed&quot; exception&#61;ex,catch_backtrace&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L585'>
+          <td class='lineno'>585</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        end</span>
+          </td>
+        </tr>
+        <tr id='L586'>
+          <td class='lineno'>586</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L587'>
+          <td class='lineno'>587</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L588'>
+          <td class='lineno'>588</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L589'>
+          <td class='lineno'>589</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>function __init__&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L590'>
+          <td class='lineno'>590</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Base library init</span>
+          </td>
+        </tr>
+        <tr id='L591'>
+          <td class='lineno'>591</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    reinit_stdio&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L592'>
+          <td class='lineno'>592</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    Multimedia.reinit_displays&#40;&#41; # since Multimedia.displays uses stdout as fallback</span>
+          </td>
+        </tr>
+        <tr id='L593'>
+          <td class='lineno'>593</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # initialize loading</span>
+          </td>
+        </tr>
+        <tr id='L594'>
+          <td class='lineno'>594</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    init_depot_path&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L595'>
+          <td class='lineno'>595</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    init_load_path&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L596'>
+          <td class='lineno'>596</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    init_active_project&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L597'>
+          <td class='lineno'>597</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    append&#33;&#40;empty&#33;&#40;_sysimage_modules&#41;, keys&#40;loaded_modules&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L598'>
+          <td class='lineno'>598</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if haskey&#40;ENV, &quot;JULIA_MAX_NUM_PRECOMPILE_FILES&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L599'>
+          <td class='lineno'>599</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        MAX_NUM_PRECOMPILE_FILES&#91;&#93; &#61; parse&#40;Int, ENV&#91;&quot;JULIA_MAX_NUM_PRECOMPILE_FILES&quot;&#93;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L600'>
+          <td class='lineno'>600</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L601'>
+          <td class='lineno'>601</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Profiling helper</span>
+          </td>
+        </tr>
+        <tr id='L602'>
+          <td class='lineno'>602</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    @static if &#33;Sys.iswindows&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L603'>
+          <td class='lineno'>603</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        # triggering a profile via signals is not implemented on windows</span>
+          </td>
+        </tr>
+        <tr id='L604'>
+          <td class='lineno'>604</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        cond &#61; Base.AsyncCondition&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L605'>
+          <td class='lineno'>605</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        Base.uv_unref&#40;cond.handle&#41;</span>
+          </td>
+        </tr>
+        <tr id='L606'>
+          <td class='lineno'>606</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        PROFILE_PRINT_COND&#91;&#93; &#61; cond</span>
+          </td>
+        </tr>
+        <tr id='L607'>
+          <td class='lineno'>607</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        ccall&#40;:jl_set_peek_cond, Cvoid, &#40;Ptr&#123;Cvoid&#125;,&#41;, PROFILE_PRINT_COND&#91;&#93;.handle&#41;</span>
+          </td>
+        </tr>
+        <tr id='L608'>
+          <td class='lineno'>608</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        errormonitor&#40;Threads.@spawn&#40;profile_printing_listener&#40;&#41;&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L609'>
+          <td class='lineno'>609</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L610'>
+          <td class='lineno'>610</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    _require_world_age&#91;&#93; &#61; get_world_counter&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L611'>
+          <td class='lineno'>611</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    # Prevent spawned Julia process from getting stuck waiting on Tracy to connect.</span>
+          </td>
+        </tr>
+        <tr id='L612'>
+          <td class='lineno'>612</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    delete&#33;&#40;ENV, &quot;JULIA_WAIT_FOR_TRACY&quot;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L613'>
+          <td class='lineno'>613</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    if get_bool_env&#40;&quot;JULIA_USE_FLISP_PARSER&quot;, false&#41; &#61;&#61;&#61; false</span>
+          </td>
+        </tr>
+        <tr id='L614'>
+          <td class='lineno'>614</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>        JuliaSyntax.enable_in_core&#33;&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L615'>
+          <td class='lineno'>615</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    end</span>
+          </td>
+        </tr>
+        <tr id='L616'>
+          <td class='lineno'>616</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>    nothing</span>
+          </td>
+        </tr>
+        <tr id='L617'>
+          <td class='lineno'>617</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L618'>
+          <td class='lineno'>618</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L619'>
+          <td class='lineno'>619</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># enable threads support</span>
+          </td>
+        </tr>
+        <tr id='L620'>
+          <td class='lineno'>620</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@eval PCRE PCRE_COMPILE_LOCK &#61; Threads.SpinLock&#40;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L621'>
+          <td class='lineno'>621</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L622'>
+          <td class='lineno'>622</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end</span>
+          </td>
+        </tr>
+        <tr id='L623'>
+          <td class='lineno'>623</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L624'>
+          <td class='lineno'>624</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'># Ensure this file is also tracked</span>
+          </td>
+        </tr>
+        <tr id='L625'>
+          <td class='lineno'>625</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>@assert &#33;isassigned&#40;_included_files, 1&#41;</span>
+          </td>
+        </tr>
+        <tr id='L626'>
+          <td class='lineno'>626</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>_included_files&#91;1&#93; &#61; &#40;parentmodule&#40;Base&#41;, abspath&#40;@__FILE__&#41;&#41;</span>
+          </td>
+        </tr>
+        <tr id='L627'>
+          <td class='lineno'>627</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'></span>
+          </td>
+        </tr>
+        <tr id='L628'>
+          <td class='lineno'>628</td>
+          <td class='tracecount excl'></td>
+          <td class='tracecount incl'></td>
+          <td>
+            
+            
+            <span class='code'>end # baremodule Base</span>
           </td>
         </tr>
       </tbody>

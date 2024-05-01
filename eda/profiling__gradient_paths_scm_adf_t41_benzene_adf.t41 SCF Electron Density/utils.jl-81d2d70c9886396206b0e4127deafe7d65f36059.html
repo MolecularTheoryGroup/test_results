@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../.julia/packages/DiffEqBase/NaUtB/src/calculate_residuals.jl</title>
+    <title>StatProfilerHTML - ../../../../.julia/packages/DiffEqBase/NaUtB/src/utils.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 01 May 2024 00:57:02
+        Generated on Wed, 01 May 2024 00:58:02
       </div>
     </div>
     <table>
@@ -35,7 +35,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'># Handled in Extensions</span>
           </td>
         </tr>
         <tr id='L2'>
@@ -45,7 +45,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#40;ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'>value&#40;x&#41; &#61; x</span>
           </td>
         </tr>
         <tr id='L3'>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>isdistribution&#40;u0&#41; &#61; false</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>Calculate element-wise residuals</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;math</span>
+            <span class='code'>_vec&#40;v&#41; &#61; vec&#40;v&#41;</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>\\frac&#123;ũ&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
+            <span class='code'>_vec&#40;v::Number&#41; &#61; v</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>_vec&#40;v::AbstractSciMLScalarOperator&#41; &#61; v</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>_vec&#40;v::AbstractVector&#41; &#61; v</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>@inline @muladd function calculate_residuals&#40;ũ::Number, u₀::Number, u₁::Number,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>        α, ρ, internalnorm, t&#41;</span>
+            <span class='code'>_reshape&#40;v, siz&#41; &#61; reshape&#40;v, siz&#41;</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>    @fastmath ũ / &#40;α &#43; max&#40;internalnorm&#40;u₀, t&#41;, internalnorm&#40;u₁, t&#41;&#41; * ρ&#41;</span>
+            <span class='code'>_reshape&#40;v::Number, siz&#41; &#61; v</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>_reshape&#40;v::AbstractSciMLScalarOperator, siz&#41; &#61; v</span>
           </td>
         </tr>
         <tr id='L13'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#40;ũ::Array&#123;T&#125;, u₀::Array&#123;T&#125;, u₁::Array&#123;T&#125;, α::T2,</span>
+            <span class='code'>macro tight_loop_macros&#40;ex&#41;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>        ρ::Real, internalnorm,</span>
+            <span class='code'>    :&#40;&#36;&#40;esc&#40;ex&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>        t&#41; where</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,7 +195,7 @@
           <td>
             
             
-            <span class='code'>        &#123;T &lt;: Number, T2 &lt;: Number&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
@@ -205,7 +205,7 @@
           <td>
             
             
-            <span class='code'>    out &#61; similar&#40;ũ&#41;</span>
+            <span class='code'># TODO: would be good to have dtmin a function of dt</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +215,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#33;&#40;out, ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'>function prob2dtmin&#40;prob; use_end_time &#61; true&#41;</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +225,7 @@
           <td>
             
             
-            <span class='code'>    out</span>
+            <span class='code'>    prob2dtmin&#40;prob.tspan, oneunit&#40;eltype&#40;prob.tspan&#41;&#41;, use_end_time&#41;</span>
           </td>
         </tr>
         <tr id='L21'>
@@ -255,7 +255,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#40;ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'># This functino requires &#96;eps&#96; to exist, which restricts below &#96;&lt;: Real&#96;</span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +265,7 @@
           <td>
             
             
-            <span class='code'>    @.. broadcast&#61;false calculate_residuals&#40;ũ, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'># Example of a failure is Rational</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +275,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function prob2dtmin&#40;tspan, ::Union&#123;AbstractFloat, ForwardDiff.Dual&#125;, use_end_time&#41;</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +285,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    t1, t2 &#61; tspan</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +295,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    isfinite&#40;t1&#41; || throw&#40;ArgumentError&#40;&quot;t0 in the tspan &#96;&#40;t0, t1&#41;&#96; must be finite&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +305,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'>    if use_end_time &amp;&amp; isfinite&#40;t2 - t1&#41;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +315,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return max&#40;eps&#40;t2&#41;, eps&#40;t1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +325,7 @@
           <td>
             
             
-            <span class='code'>Calculate element-wise residuals</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +335,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;math</span>
+            <span class='code'>        return max&#40;eps&#40;typeof&#40;t1&#41;&#41;, eps&#40;t1&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +345,7 @@
           <td>
             
             
-            <span class='code'>\\frac&#123;u₁ - u₀&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +355,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +365,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>prob2dtmin&#40;tspan, ::Integer, ::Any&#41; &#61; 0</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +375,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># Multiplication is for putting the right units on the constant&#33;</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +385,7 @@
           <td>
             
             
-            <span class='code'>@inline @muladd function calculate_residuals&#40;u₀::Number, u₁::Number,</span>
+            <span class='code'>prob2dtmin&#40;tspan, onet, ::Any&#41; &#61; onet * 1 // Int64&#40;2&#41;^33 # roughly 10^10 but more likely to turn into a multiplication.</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +395,7 @@
           <td>
             
             
-            <span class='code'>        α, ρ, internalnorm, t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,17 +405,31 @@
           <td>
             
             
-            <span class='code'>    @fastmath &#40;u₁ - u₀&#41; / &#40;α &#43; max&#40;internalnorm&#40;u₀, t&#41;, internalnorm&#40;u₁, t&#41;&#41; * ρ&#41;</span>
+            <span class='code'>function timedepentdtmin&#40;integrator::DEIntegrator&#41;</span>
           </td>
         </tr>
         <tr id='L39'>
           <td class='lineno'>39</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>end</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in timedepentdtmin
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from calc_dt_propose&#33;
+              <a href='integrator_utils.jl-5e99e0470e1905bf5da52d5d939604a5adfbe863.html#L437'>line 437</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='utils.jl-81d2d70c9886396206b0e4127deafe7d65f36059.html#L41'>timedepentdtmin</a>
+              <br />
+            </div>
+            <span class='code'>    timedepentdtmin&#40;integrator.t, integrator.opts.dtmin&#41;</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,17 +439,31 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L41'>
           <td class='lineno'>41</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>@inline function calculate_residuals&#40;u₀::Array&#123;T&#125;, u₁::Array&#123;T&#125;, α::T2,</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in timedepentdtmin
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from timedepentdtmin
+              <a href='utils.jl-81d2d70c9886396206b0e4127deafe7d65f36059.html#L39'>line 39</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='float.jl-0291162c5fba5099582bc7d1bc64e82d19eaea23.html#L966'>eps</a>
+              <br />
+            </div>
+            <span class='code'>timedepentdtmin&#40;t::AbstractFloat, dtmin&#41; &#61; abs&#40;max&#40;eps&#40;t&#41;, dtmin&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +473,7 @@
           <td>
             
             
-            <span class='code'>        ρ::Real, internalnorm,</span>
+            <span class='code'>timedepentdtmin&#40;::Any, dtmin&#41; &#61; abs&#40;dtmin&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,7 +483,7 @@
           <td>
             
             
-            <span class='code'>        t&#41; where &#123;T &lt;: Number, T2 &lt;: Number&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
@@ -465,7 +493,7 @@
           <td>
             
             
-            <span class='code'>    out &#61; similar&#40;u₀&#41;</span>
+            <span class='code'>maybe_with_logger&#40;f, logger&#41; &#61; logger &#61;&#61;&#61; nothing ? f&#40;&#41; : Logging.with_logger&#40;f, logger&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
@@ -475,7 +503,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#33;&#40;out, u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +513,7 @@
           <td>
             
             
-            <span class='code'>    out</span>
+            <span class='code'>function default_logger&#40;logger&#41;</span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +523,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    Logging.min_enabled_level&#40;logger&#41; ≤ ProgressLogging.ProgressLevel &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -515,7 +543,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'>    if Sys.iswindows&#40;&#41; || &#40;isdefined&#40;Main, :IJulia&#41; &amp;&amp; Main.IJulia.inited&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +553,7 @@
           <td>
             
             
-            <span class='code'>    @.. broadcast&#61;false calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
+            <span class='code'>        progresslogger &#61; ConsoleProgressMonitor.ProgressLogger&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +563,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +573,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        progresslogger &#61; TerminalLoggers.TerminalLogger&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +583,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +593,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +603,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    logger1 &#61; LoggingExtras.EarlyFilteredLogger&#40;progresslogger&#41; do log</span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +613,7 @@
           <td>
             
             
-            <span class='code'>Return element-wise residuals</span>
+            <span class='code'>        log.level &#61;&#61; ProgressLogging.ProgressLevel</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +623,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;math</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +633,7 @@
           <td>
             
             
-            <span class='code'>\\frac&#123;δ E₁ &#43; E₂&#125;&#123;α&#43;\\max&#123;scalarnorm&#40;u₀&#41;,scalarnorm&#40;u₁&#41;&#125;*ρ&#125;.</span>
+            <span class='code'>    logger2 &#61; LoggingExtras.EarlyFilteredLogger&#40;logger&#41; do log</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +643,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>        log.level &#33;&#61; ProgressLogging.ProgressLevel</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +653,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +663,7 @@
           <td>
             
             
-            <span class='code'>@inline @muladd function calculate_residuals&#40;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +673,7 @@
           <td>
             
             
-            <span class='code'>        E₁::Number, E₂::Number, u₀::Number, u₁::Number,</span>
+            <span class='code'>    LoggingExtras.TeeLogger&#40;logger1, logger2&#41;</span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +683,7 @@
           <td>
             
             
-            <span class='code'>        α::Real, ρ::Real, δ::Number, scalarnorm, t&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +693,7 @@
           <td>
             
             
-            <span class='code'>    @fastmath &#40;δ * E₁ &#43; E₂&#41; / &#40;α &#43; max&#40;scalarnorm&#40;u₀, t&#41;, scalarnorm&#40;u₁, t&#41;&#41; * ρ&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +703,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'># for the non-unitful case the correct type is just u</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +713,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>_rate_prototype&#40;u, t::T, onet::T&#41; where &#123;T&#125; &#61; u</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +723,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#40;E₁::Array&#123;&lt;:Number&#125;, E₂::Array&#123;&lt;:Number&#125;,</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +733,7 @@
           <td>
             
             
-            <span class='code'>        u₀::Array&#123;&lt;:Number&#125;, u₁::Array&#123;&lt;:Number&#125;, α::Real,</span>
+            <span class='code'># Nonlinear Solve functionality</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +743,7 @@
           <td>
             
             
-            <span class='code'>        ρ::Real, δ::Number, scalarnorm, t&#41;</span>
+            <span class='code'>@inline __fast_scalar_indexing&#40;args...&#41; &#61; all&#40;ArrayInterface.fast_scalar_indexing, args&#41;</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +753,7 @@
           <td>
             
             
-            <span class='code'>    out &#61; similar&#40;u₀&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +763,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#33;&#40;out, E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
+            <span class='code'>@inline __maximum_abs&#40;op::F, x, y&#41; where &#123;F&#125; &#61; __maximum&#40;abs ∘ op, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +773,7 @@
           <td>
             
             
-            <span class='code'>    out</span>
+            <span class='code'>## Nonallocating version of maximum&#40;op.&#40;x, y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +783,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function __maximum&#40;op::F, x, y&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +793,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if __fast_scalar_indexing&#40;x, y&#41;</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +803,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
+            <span class='code'>        return maximum&#40;@closure&#40;&#40;xᵢyᵢ&#41;-&gt;begin</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +813,7 @@
           <td>
             
             
-            <span class='code'>    @.. broadcast&#61;false calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t&#41;</span>
+            <span class='code'>                xᵢ, yᵢ &#61; xᵢyᵢ</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +823,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                return op&#40;xᵢ, yᵢ&#41;</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +833,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end&#41;, zip&#40;x, y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +843,7 @@
           <td>
             
             
-            <span class='code'># Inplace Versions</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +853,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return mapreduce&#40;@closure&#40;&#40;xᵢ, yᵢ&#41;-&gt;op&#40;xᵢ, yᵢ&#41;&#41;, max, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +863,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +873,7 @@
           <td>
             
             
-            <span class='code'>    DiffEqBase.calculate_residuals&#33;&#40;out, ũ, u₀, u₁, α, ρ, thread&#61;False&#40;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -865,7 +893,7 @@
           <td>
             
             
-            <span class='code'>Save element-wise residuals</span>
+            <span class='code'>@inline function __norm_op&#40;::typeof&#40;Base.Fix2&#40;norm, 2&#41;&#41;, op::F, x, y&#41; where &#123;F&#125;</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +903,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;math</span>
+            <span class='code'>    if __fast_scalar_indexing&#40;x, y&#41;</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +913,7 @@
           <td>
             
             
-            <span class='code'>\\frac&#123;ũ&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
+            <span class='code'>        return sqrt&#40;sum&#40;@closure&#40;&#40;xᵢyᵢ&#41;-&gt;begin</span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +923,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>                xᵢ, yᵢ &#61; xᵢyᵢ</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +933,7 @@
           <td>
             
             
-            <span class='code'>in &#96;out&#96;.</span>
+            <span class='code'>                return op&#40;xᵢ, yᵢ&#41;^2</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,7 +943,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            end&#41;, zip&#40;x, y&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L90'>
@@ -925,7 +953,7 @@
           <td>
             
             
-            <span class='code'>The argument &#96;thread&#96; determines whether internal broadcasting on</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +963,7 @@
           <td>
             
             
-            <span class='code'>appropriate CPU arrays should be serial &#40;&#96;thread &#61; False&#40;&#41;&#96;, default&#41;</span>
+            <span class='code'>        return sqrt&#40;mapreduce&#40;@closure&#40;&#40;xᵢ, yᵢ&#41;-&gt;&#40;op&#40;xᵢ, yᵢ&#41;^2&#41;&#41;, &#43;, x, y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +973,7 @@
           <td>
             
             
-            <span class='code'>or use multiple threads &#40;&#96;thread &#61; True&#40;&#41;&#96;&#41; when Julia is started</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +983,7 @@
           <td>
             
             
-            <span class='code'>with multiple threads.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +993,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +1003,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#33;&#40;out, ũ, u₀, u₁, α, ρ, internalnorm, t,</span>
+            <span class='code'>@inline __norm_op&#40;norm::N, op::F, x, y&#41; where &#123;N, F&#125; &#61; norm&#40;op.&#40;x, y&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +1013,7 @@
           <td>
             
             
-            <span class='code'>        thread::Union&#123;False, True&#125; &#61; False&#40;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1023,7 @@
           <td>
             
             
-            <span class='code'>    @.. broadcast&#61;false thread&#61;thread out&#61;calculate_residuals&#40;</span>
+            <span class='code'>function __nonlinearsolve_is_approx&#40;x::Number, y::Number; atol &#61; false,</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1033,7 @@
           <td>
             
             
-            <span class='code'>        ũ, u₀, u₁, α, ρ, internalnorm,</span>
+            <span class='code'>        rtol &#61; atol &gt; 0 ? false : sqrt&#40;eps&#40;promote_type&#40;typeof&#40;x&#41;, typeof&#40;y&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1043,7 @@
           <td>
             
             
-            <span class='code'>        t&#41;</span>
+            <span class='code'>    return isapprox&#40;x, y; atol, rtol&#41;</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1053,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1063,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function __nonlinearsolve_is_approx&#40;x, y; atol &#61; false,</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1073,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        rtol &#61; atol &gt; 0 ? false : sqrt&#40;eps&#40;promote_type&#40;eltype&#40;x&#41;, eltype&#40;y&#41;&#41;&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1083,7 @@
           <td>
             
             
-            <span class='code'>@inline function calculate_residuals&#33;&#40;</span>
+            <span class='code'>    length&#40;x&#41; &#33;&#61; length&#40;y&#41; &amp;&amp; return false</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1093,7 @@
           <td>
             
             
-            <span class='code'>        out::Array, ũ::Array, u₀::Array, u₁::Array, α::Number,</span>
+            <span class='code'>    d &#61; __maximum_abs&#40;-, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,55 +1103,27 @@
           <td>
             
             
-            <span class='code'>        ρ::Number, internalnorm::F, t, ::False&#41; where &#123;F&#125;</span>
+            <span class='code'>    return d ≤ max&#40;atol, rtol * max&#40;maximum&#40;abs, x&#41;, maximum&#40;abs, y&#41;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L106'>
           <td class='lineno'>106</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in calculate_residuals&#33;
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from perform_step&#33;
-              <a href='verner_rk_perform_step.jl-55620588fe68123bfc8e280b7835ae1887aafc30.html#L1170'>line 1170</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='simdloop.jl-a49aefd055a334f575171a25d0361e6c0f86ebc9.html#L77'>macro expansion</a>
-              <br />
-            </div>
-            <span class='code'>    @inbounds @simd ivdep for i in eachindex&#40;out, ũ, u₀, u₁&#41;</span>
+            
+            
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L107'>
           <td class='lineno'>107</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;0 &#37;&#41;
-              samples spent in macro expansion
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from macro expansion
-              <a href='simdloop.jl-a49aefd055a334f575171a25d0361e6c0f86ebc9.html#L77'>line 77</a>
-              <br />
-            </div>
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='array.jl-da1554f2de548b64da514123eb16cb2768431e9c.html#L1021'>setindex&#33;</a>
-              <br />
-            </div>
-            <span class='code'>        out&#91;i&#93; &#61; calculate_residuals&#40;ũ&#91;i&#93;, u₀&#91;i&#93;, u₁&#91;i&#93;, α, ρ, internalnorm, t&#41;</span>
+            
+            
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1133,7 +1133,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@inline function __add_and_norm&#40;::Nothing, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1143,7 +1143,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>    Base.depwarn&#40;&quot;Not specifying the internal norm of termination conditions has been \</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1153,7 +1153,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>                  deprecated. Using inf-norm currently.&quot;,</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1163,7 +1163,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        :__add_and_norm&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1173,7 +1173,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    return __maximum_abs&#40;&#43;, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1183,7 +1183,7 @@
           <td>
             
             
-            <span class='code'>    calculate_residuals&#33;&#40;out, u₀, u₁, α, ρ, thread&#61;False&#40;&#41;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1193,7 +1193,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline __add_and_norm&#40;::typeof&#40;Base.Fix1&#40;maximum, abs&#41;&#41;, x, y&#41; &#61; __maximum_abs&#40;&#43;, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1203,7 +1203,7 @@
           <td>
             
             
-            <span class='code'>Save element-wise residuals</span>
+            <span class='code'>@inline __add_and_norm&#40;::typeof&#40;Base.Fix2&#40;norm, Inf&#41;&#41;, x, y&#41; &#61; __maximum_abs&#40;&#43;, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1213,7 +1213,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;math</span>
+            <span class='code'>@inline __add_and_norm&#40;f::F, x, y&#41; where &#123;F&#125; &#61; __norm_op&#40;f, &#43;, x, y&#41;</span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1223,7 +1223,7 @@
           <td>
             
             
-            <span class='code'>\\frac&#123;u₁ - u₀&#125;&#123;α&#43;\\max&#123;|u₀|,|u₁|&#125;*ρ&#125;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1233,7 +1233,7 @@
           <td>
             
             
-            <span class='code'>&#96;&#96;&#96;</span>
+            <span class='code'>@inline function __apply_termination_internalnorm&#40;::Nothing, u&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1243,7 +1243,7 @@
           <td>
             
             
-            <span class='code'>in &#96;out&#96;.</span>
+            <span class='code'>    Base.depwarn&#40;&quot;Not specifying the internal norm of termination conditions has been \</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1253,7 +1253,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                  deprecated. Using inf-norm currently.&quot;,</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1263,7 +1263,7 @@
           <td>
             
             
-            <span class='code'>The argument &#96;thread&#96; determines whether internal broadcasting on</span>
+            <span class='code'>        :__apply_termination_internalnorm&#41;</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1273,7 +1273,7 @@
           <td>
             
             
-            <span class='code'>appropriate CPU arrays should be serial &#40;&#96;thread &#61; False&#40;&#41;&#96;, default&#41;</span>
+            <span class='code'>    return __apply_termination_internalnorm&#40;Base.Fix1&#40;maximum, abs&#41;, u&#41;</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1283,7 +1283,7 @@
           <td>
             
             
-            <span class='code'>or use multiple threads &#40;&#96;thread &#61; True&#40;&#41;&#96;&#41; when Julia is started</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L124'>
@@ -1293,257 +1293,7 @@
           <td>
             
             
-            <span class='code'>with multiple threads.</span>
-          </td>
-        </tr>
-        <tr id='L125'>
-          <td class='lineno'>125</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L126'>
-          <td class='lineno'>126</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function calculate_residuals&#33;&#40;out, u₀, u₁, α, ρ, internalnorm, t,</span>
-          </td>
-        </tr>
-        <tr id='L127'>
-          <td class='lineno'>127</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        thread::Union&#123;False, True&#125; &#61; False&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L128'>
-          <td class='lineno'>128</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @.. broadcast&#61;false thread&#61;thread out&#61;calculate_residuals&#40;u₀, u₁, α, ρ, internalnorm, t&#41;</span>
-          </td>
-        </tr>
-        <tr id='L129'>
-          <td class='lineno'>129</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L130'>
-          <td class='lineno'>130</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L131'>
-          <td class='lineno'>131</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L132'>
-          <td class='lineno'>132</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    calculate_residuals&#33;&#40;out, E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, thread&#61;False&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L133'>
-          <td class='lineno'>133</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L134'>
-          <td class='lineno'>134</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Calculate element-wise residuals</span>
-          </td>
-        </tr>
-        <tr id='L135'>
-          <td class='lineno'>135</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;math</span>
-          </td>
-        </tr>
-        <tr id='L136'>
-          <td class='lineno'>136</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>\\frac&#123;δ E₁ &#43; E₂&#125;&#123;α&#43;\\max&#123;scalarnorm&#40;u₀&#41;,scalarnorm&#40;u₁&#41;&#125;*ρ&#125;.</span>
-          </td>
-        </tr>
-        <tr id='L137'>
-          <td class='lineno'>137</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;&#96;&#96;</span>
-          </td>
-        </tr>
-        <tr id='L138'>
-          <td class='lineno'>138</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L139'>
-          <td class='lineno'>139</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>The argument &#96;thread&#96; determines whether internal broadcasting on</span>
-          </td>
-        </tr>
-        <tr id='L140'>
-          <td class='lineno'>140</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>appropriate CPU arrays should be serial &#40;&#96;thread &#61; False&#40;&#41;&#96;, default&#41;</span>
-          </td>
-        </tr>
-        <tr id='L141'>
-          <td class='lineno'>141</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>or use multiple threads &#40;&#96;thread &#61; True&#40;&#41;&#96;&#41; when Julia is started</span>
-          </td>
-        </tr>
-        <tr id='L142'>
-          <td class='lineno'>142</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>with multiple threads.</span>
-          </td>
-        </tr>
-        <tr id='L143'>
-          <td class='lineno'>143</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L144'>
-          <td class='lineno'>144</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>@inline function calculate_residuals&#33;&#40;out, E₁, E₂, u₀, u₁, α, ρ, δ, scalarnorm, t,</span>
-          </td>
-        </tr>
-        <tr id='L145'>
-          <td class='lineno'>145</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        thread::Union&#123;False, True&#125; &#61; False&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L146'>
-          <td class='lineno'>146</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    @.. broadcast&#61;false thread&#61;thread out&#61;calculate_residuals&#40;E₁, E₂, u₀, u₁, α, ρ, δ,</span>
-          </td>
-        </tr>
-        <tr id='L147'>
-          <td class='lineno'>147</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        scalarnorm, t&#41;</span>
-          </td>
-        </tr>
-        <tr id='L148'>
-          <td class='lineno'>148</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    out</span>
-          </td>
-        </tr>
-        <tr id='L149'>
-          <td class='lineno'>149</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
+            <span class='code'>@inline __apply_termination_internalnorm&#40;f::F, u&#41; where &#123;F&#125; &#61; f&#40;u&#41;</span>
           </td>
         </tr>
       </tbody>
