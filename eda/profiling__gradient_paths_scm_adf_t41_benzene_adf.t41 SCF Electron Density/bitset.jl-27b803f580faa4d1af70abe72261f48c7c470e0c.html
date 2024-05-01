@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'></meta>
     <link rel='stylesheet' type='text/css' href='statprofiler.css'></link>
-    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.3/x64/share/julia/base/client.jl</title>
+    <title>StatProfilerHTML - ../../../../../../opt/hostedtoolcache/julia/1.10.3/x64/share/julia/base/bitset.jl</title>
   </head>
   <body>
     <div class='report-header'>
@@ -14,7 +14,7 @@
         StatProfilerHTML.jl report
       </div>
       <div class='generated-on'>
-        Generated on Wed, 01 May 2024 00:56:31
+        Generated on Wed, 01 May 2024 00:57:02
       </div>
     </div>
     <table>
@@ -55,7 +55,7 @@
           <td>
             
             
-            <span class='code'>## client.jl - frontend handling command line options, environment setup,</span>
+            <span class='code'>const Bits &#61; Vector&#123;UInt64&#125;</span>
           </td>
         </tr>
         <tr id='L4'>
@@ -65,7 +65,7 @@
           <td>
             
             
-            <span class='code'>##             and REPL</span>
+            <span class='code'>const CHK0 &#61; zero&#40;UInt64&#41;</span>
           </td>
         </tr>
         <tr id='L5'>
@@ -75,7 +75,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>const NO_OFFSET &#61; Int &#61;&#61;&#61; Int64 ? -one&#40;Int&#41; &lt;&lt; 60 : -one&#40;Int&#41; &lt;&lt; 29</span>
           </td>
         </tr>
         <tr id='L6'>
@@ -85,7 +85,7 @@
           <td>
             
             
-            <span class='code'>have_color &#61; nothing</span>
+            <span class='code'># &#43; NO_OFFSET must be small enough to stay &lt; 0 when added with any offset.</span>
           </td>
         </tr>
         <tr id='L7'>
@@ -95,7 +95,7 @@
           <td>
             
             
-            <span class='code'>const default_color_warn &#61; :yellow</span>
+            <span class='code'>#   An offset is in the range -2^57:2^57 &#40;64-bits architectures&#41;</span>
           </td>
         </tr>
         <tr id='L8'>
@@ -105,7 +105,7 @@
           <td>
             
             
-            <span class='code'>const default_color_error &#61; :light_red</span>
+            <span class='code'>#   or -2^26:2^26 &#40;32-bits architectures&#41;</span>
           </td>
         </tr>
         <tr id='L9'>
@@ -115,7 +115,7 @@
           <td>
             
             
-            <span class='code'>const default_color_info &#61; :cyan</span>
+            <span class='code'># &#43; when the offset is NO_OFFSET, the bits field *must* be empty</span>
           </td>
         </tr>
         <tr id='L10'>
@@ -125,7 +125,7 @@
           <td>
             
             
-            <span class='code'>const default_color_debug &#61; :blue</span>
+            <span class='code'># &#43; NO_OFFSET could be made to be &gt; 0, but a negative one allows</span>
           </td>
         </tr>
         <tr id='L11'>
@@ -135,7 +135,7 @@
           <td>
             
             
-            <span class='code'>const default_color_input &#61; :normal</span>
+            <span class='code'>#   a small optimization in the in&#40;x, ::BitSet&#41; method</span>
           </td>
         </tr>
         <tr id='L12'>
@@ -145,7 +145,7 @@
           <td>
             
             
-            <span class='code'>const default_color_answer &#61; :normal</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L13'>
@@ -155,7 +155,7 @@
           <td>
             
             
-            <span class='code'>const color_normal &#61; text_colors&#91;:normal&#93;</span>
+            <span class='code'>mutable struct BitSet &lt;: AbstractSet&#123;Int&#125;</span>
           </td>
         </tr>
         <tr id='L14'>
@@ -165,7 +165,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    const bits::Vector&#123;UInt64&#125;</span>
           </td>
         </tr>
         <tr id='L15'>
@@ -175,7 +175,7 @@
           <td>
             
             
-            <span class='code'>function repl_color&#40;key, default&#41;</span>
+            <span class='code'>    # 1st stored Int equals 64*offset</span>
           </td>
         </tr>
         <tr id='L16'>
@@ -185,7 +185,7 @@
           <td>
             
             
-            <span class='code'>    env_str &#61; get&#40;ENV, key, &quot;&quot;&#41;</span>
+            <span class='code'>    offset::Int</span>
           </td>
         </tr>
         <tr id='L17'>
@@ -195,17 +195,26 @@
           <td>
             
             
-            <span class='code'>    c &#61; tryparse&#40;Int, env_str&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L18'>
           <td class='lineno'>18</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount excl'>1 &#40;0 &#37;&#41;</td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in BitSet
+              <br />
+              1 &#40;100 &#37;&#41; &#40;ex.&#41;,
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from copy
+              <a href='bitset.jl-27b803f580faa4d1af70abe72261f48c7c470e0c.html#L44'>line 44</a>
+              <br />
+            </div>
             
-            
-            <span class='code'>    c_conv &#61; something&#40;c, Symbol&#40;env_str&#41;&#41;</span>
+            <span class='code'>    BitSet&#40;&#41; &#61; new&#40;resize&#33;&#40;Vector&#123;UInt64&#125;&#40;undef, 4&#41;, 0&#41;, NO_OFFSET&#41;</span>
           </td>
         </tr>
         <tr id='L19'>
@@ -215,7 +224,7 @@
           <td>
             
             
-            <span class='code'>    haskey&#40;text_colors, c_conv&#41; ? c_conv : default</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L20'>
@@ -225,7 +234,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L21'>
@@ -235,7 +244,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L22'>
@@ -245,7 +254,7 @@
           <td>
             
             
-            <span class='code'>error_color&#40;&#41; &#61; repl_color&#40;&quot;JULIA_ERROR_COLOR&quot;, default_color_error&#41;</span>
+            <span class='code'>    BitSet&#40;&#91;itr&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L23'>
@@ -255,7 +264,7 @@
           <td>
             
             
-            <span class='code'>warn_color&#40;&#41;  &#61; repl_color&#40;&quot;JULIA_WARN_COLOR&quot; , default_color_warn&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L24'>
@@ -265,7 +274,7 @@
           <td>
             
             
-            <span class='code'>info_color&#40;&#41;  &#61; repl_color&#40;&quot;JULIA_INFO_COLOR&quot; , default_color_info&#41;</span>
+            <span class='code'>Construct a sorted set of &#96;Int&#96;s generated by the given iterable object, or an</span>
           </td>
         </tr>
         <tr id='L25'>
@@ -275,7 +284,7 @@
           <td>
             
             
-            <span class='code'>debug_color&#40;&#41;  &#61; repl_color&#40;&quot;JULIA_DEBUG_COLOR&quot; , default_color_debug&#41;</span>
+            <span class='code'>empty set. Implemented as a bit string, and therefore designed for dense integer sets.</span>
           </td>
         </tr>
         <tr id='L26'>
@@ -285,7 +294,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>If the set will be sparse &#40;for example, holding a few</span>
           </td>
         </tr>
         <tr id='L27'>
@@ -295,7 +304,7 @@
           <td>
             
             
-            <span class='code'>input_color&#40;&#41;  &#61; text_colors&#91;repl_color&#40;&quot;JULIA_INPUT_COLOR&quot;, default_color_input&#41;&#93;</span>
+            <span class='code'>very large integers&#41;, use &#91;&#96;Set&#96;&#93;&#40;@ref&#41; instead.</span>
           </td>
         </tr>
         <tr id='L28'>
@@ -305,7 +314,7 @@
           <td>
             
             
-            <span class='code'>answer_color&#40;&#41; &#61; text_colors&#91;repl_color&#40;&quot;JULIA_ANSWER_COLOR&quot;, default_color_answer&#41;&#93;</span>
+            <span class='code'>&quot;&quot;&quot;</span>
           </td>
         </tr>
         <tr id='L29'>
@@ -315,7 +324,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>BitSet&#40;itr&#41; &#61; union&#33;&#40;BitSet&#40;&#41;, itr&#41;</span>
           </td>
         </tr>
         <tr id='L30'>
@@ -325,7 +334,7 @@
           <td>
             
             
-            <span class='code'>stackframe_lineinfo_color&#40;&#41; &#61; repl_color&#40;&quot;JULIA_STACKFRAME_LINEINFO_COLOR&quot;, :bold&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L31'>
@@ -335,7 +344,7 @@
           <td>
             
             
-            <span class='code'>stackframe_function_color&#40;&#41; &#61; repl_color&#40;&quot;JULIA_STACKFRAME_FUNCTION_COLOR&quot;, :bold&#41;</span>
+            <span class='code'># Special implementation for BitSet, which lacks a fast &#96;length&#96; method.</span>
           </td>
         </tr>
         <tr id='L32'>
@@ -345,7 +354,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>function union&#33;&#40;s::BitSet, itr&#41;</span>
           </td>
         </tr>
         <tr id='L33'>
@@ -355,7 +364,7 @@
           <td>
             
             
-            <span class='code'>function repl_cmd&#40;cmd, out&#41;</span>
+            <span class='code'>    for x in itr</span>
           </td>
         </tr>
         <tr id='L34'>
@@ -365,7 +374,7 @@
           <td>
             
             
-            <span class='code'>    shell &#61; shell_split&#40;get&#40;ENV, &quot;JULIA_SHELL&quot;, get&#40;ENV, &quot;SHELL&quot;, &quot;/bin/sh&quot;&#41;&#41;&#41;</span>
+            <span class='code'>        push&#33;&#40;s, x&#41;</span>
           </td>
         </tr>
         <tr id='L35'>
@@ -375,7 +384,7 @@
           <td>
             
             
-            <span class='code'>    shell_name &#61; Base.basename&#40;shell&#91;1&#93;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L36'>
@@ -385,7 +394,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return s</span>
           </td>
         </tr>
         <tr id='L37'>
@@ -395,7 +404,7 @@
           <td>
             
             
-            <span class='code'>    # Immediately expand all arguments, so that typing e.g. ~/bin/foo works.</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L38'>
@@ -405,7 +414,7 @@
           <td>
             
             
-            <span class='code'>    cmd.exec .&#61; expanduser.&#40;cmd.exec&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L39'>
@@ -415,7 +424,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline intoffset&#40;s::BitSet&#41; &#61; s.offset &lt;&lt; 6</span>
           </td>
         </tr>
         <tr id='L40'>
@@ -425,7 +434,7 @@
           <td>
             
             
-            <span class='code'>    if isempty&#40;cmd.exec&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L41'>
@@ -435,7 +444,7 @@
           <td>
             
             
-            <span class='code'>        throw&#40;ArgumentError&#40;&quot;no cmd to execute&quot;&#41;&#41;</span>
+            <span class='code'>empty&#40;s::BitSet, ::Type&#123;Int&#125;&#61;Int&#41; &#61; BitSet&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L42'>
@@ -445,7 +454,7 @@
           <td>
             
             
-            <span class='code'>    elseif cmd.exec&#91;1&#93; &#61;&#61; &quot;cd&quot;</span>
+            <span class='code'>emptymutable&#40;s::BitSet, ::Type&#123;Int&#125;&#61;Int&#41; &#61; BitSet&#40;&#41;</span>
           </td>
         </tr>
         <tr id='L43'>
@@ -455,27 +464,55 @@
           <td>
             
             
-            <span class='code'>        new_oldpwd &#61; pwd&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L44'>
           <td class='lineno'>44</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>        if length&#40;cmd.exec&#41; &gt; 2</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in copy
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from copymutable
+              <a href='bitset.jl-27b803f580faa4d1af70abe72261f48c7c470e0c.html#L45'>line 45</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='bitset.jl-27b803f580faa4d1af70abe72261f48c7c470e0c.html#L18'>BitSet</a>
+              <br />
+            </div>
+            <span class='code'>copy&#40;s1::BitSet&#41; &#61; copy&#33;&#40;BitSet&#40;&#41;, s1&#41;</span>
           </td>
         </tr>
         <tr id='L45'>
           <td class='lineno'>45</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            throw&#40;ArgumentError&#40;&quot;cd method only takes one argument&quot;&#41;&#41;</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in copymutable
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from setdiff
+              <a href='abstractset.jl-52d5baa1717d2d128fe24ecb34847df547dbd9d8.html#L216'>line 216</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='bitset.jl-27b803f580faa4d1af70abe72261f48c7c470e0c.html#L44'>copy</a>
+              <br />
+            </div>
+            <span class='code'>copymutable&#40;s::BitSet&#41; &#61; copy&#40;s&#41;</span>
           </td>
         </tr>
         <tr id='L46'>
@@ -485,7 +522,7 @@
           <td>
             
             
-            <span class='code'>        elseif length&#40;cmd.exec&#41; &#61;&#61; 2</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L47'>
@@ -495,7 +532,7 @@
           <td>
             
             
-            <span class='code'>            dir &#61; cmd.exec&#91;2&#93;</span>
+            <span class='code'>function copy&#33;&#40;dest::BitSet, src::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L48'>
@@ -505,7 +542,7 @@
           <td>
             
             
-            <span class='code'>            if dir &#61;&#61; &quot;-&quot;</span>
+            <span class='code'>    resize&#33;&#40;dest.bits, length&#40;src.bits&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L49'>
@@ -515,7 +552,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;haskey&#40;ENV, &quot;OLDPWD&quot;&#41;</span>
+            <span class='code'>    copyto&#33;&#40;dest.bits, src.bits&#41;</span>
           </td>
         </tr>
         <tr id='L50'>
@@ -525,7 +562,7 @@
           <td>
             
             
-            <span class='code'>                    error&#40;&quot;cd: OLDPWD not set&quot;&#41;</span>
+            <span class='code'>    dest.offset &#61; src.offset</span>
           </td>
         </tr>
         <tr id='L51'>
@@ -535,7 +572,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>    dest</span>
           </td>
         </tr>
         <tr id='L52'>
@@ -545,7 +582,7 @@
           <td>
             
             
-            <span class='code'>                dir &#61; ENV&#91;&quot;OLDPWD&quot;&#93;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L53'>
@@ -555,7 +592,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L54'>
@@ -565,7 +602,7 @@
           <td>
             
             
-            <span class='code'>            cd&#40;dir&#41;</span>
+            <span class='code'>sizehint&#33;&#40;s::BitSet, n::Integer&#41; &#61; &#40;sizehint&#33;&#40;s.bits, &#40;n&#43;63&#41; &gt;&gt; 6&#41;; s&#41;</span>
           </td>
         </tr>
         <tr id='L55'>
@@ -575,7 +612,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L56'>
@@ -585,7 +622,7 @@
           <td>
             
             
-            <span class='code'>            cd&#40;&#41;</span>
+            <span class='code'>function _bits_getindex&#40;b::Bits, n::Int, offset::Int&#41;</span>
           </td>
         </tr>
         <tr id='L57'>
@@ -595,7 +632,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    ci &#61; _div64&#40;n&#41; - offset &#43; 1</span>
           </td>
         </tr>
         <tr id='L58'>
@@ -605,7 +642,7 @@
           <td>
             
             
-            <span class='code'>        ENV&#91;&quot;OLDPWD&quot;&#93; &#61; new_oldpwd</span>
+            <span class='code'>    1 &lt;&#61; ci &lt;&#61; length&#40;b&#41; || return false</span>
           </td>
         </tr>
         <tr id='L59'>
@@ -615,7 +652,7 @@
           <td>
             
             
-            <span class='code'>        println&#40;out, pwd&#40;&#41;&#41;</span>
+            <span class='code'>    @inbounds r &#61; &#40;b&#91;ci&#93; &amp; &#40;one&#40;UInt64&#41; &lt;&lt; _mod64&#40;n&#41;&#41;&#41; &#33;&#61; 0</span>
           </td>
         </tr>
         <tr id='L60'>
@@ -625,7 +662,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>    r</span>
           </td>
         </tr>
         <tr id='L61'>
@@ -635,7 +672,7 @@
           <td>
             
             
-            <span class='code'>        @static if &#33;Sys.iswindows&#40;&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L62'>
@@ -645,7 +682,7 @@
           <td>
             
             
-            <span class='code'>            if shell_name &#61;&#61; &quot;fish&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L63'>
@@ -655,7 +692,7 @@
           <td>
             
             
-            <span class='code'>                shell_escape_cmd &#61; &quot;begin; &#36;&#40;shell_escape_posixly&#40;cmd&#41;&#41;; and true; end&quot;</span>
+            <span class='code'>function _bits_findnext&#40;b::Bits, start::Int&#41;</span>
           </td>
         </tr>
         <tr id='L64'>
@@ -665,7 +702,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    # start is 0-based</span>
           </td>
         </tr>
         <tr id='L65'>
@@ -675,7 +712,7 @@
           <td>
             
             
-            <span class='code'>                shell_escape_cmd &#61; &quot;&#40;&#36;&#40;shell_escape_posixly&#40;cmd&#41;&#41;&#41; &amp;&amp; true&quot;</span>
+            <span class='code'>    # @assert start &gt;&#61; 0</span>
           </td>
         </tr>
         <tr id='L66'>
@@ -685,7 +722,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    _div64&#40;start&#41; &#43; 1 &gt; length&#40;b&#41; &amp;&amp; return -1</span>
           </td>
         </tr>
         <tr id='L67'>
@@ -695,7 +732,7 @@
           <td>
             
             
-            <span class='code'>            cmd &#61; &#96;&#36;shell -c &#36;shell_escape_cmd&#96;</span>
+            <span class='code'>    ind &#61; unsafe_bitfindnext&#40;b, start&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L68'>
@@ -705,7 +742,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    ind &#61;&#61;&#61; nothing ? -1 : ind - 1</span>
           </td>
         </tr>
         <tr id='L69'>
@@ -715,7 +752,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L70'>
@@ -725,7 +762,7 @@
           <td>
             
             
-            <span class='code'>            run&#40;ignorestatus&#40;cmd&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L71'>
@@ -735,7 +772,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>function _bits_findprev&#40;b::Bits, start::Int&#41;</span>
           </td>
         </tr>
         <tr id='L72'>
@@ -745,7 +782,7 @@
           <td>
             
             
-            <span class='code'>            # Windows doesn&#39;t shell out right now &#40;complex issue&#41;, so Julia tries to run the program itself</span>
+            <span class='code'>    # start is 0-based</span>
           </td>
         </tr>
         <tr id='L73'>
@@ -755,7 +792,7 @@
           <td>
             
             
-            <span class='code'>            # Julia throws an exception if it can&#39;t find the program, but the stack trace isn&#39;t useful</span>
+            <span class='code'>    # @assert start &lt;&#61; 64 * length&#40;b&#41; - 1</span>
           </td>
         </tr>
         <tr id='L74'>
@@ -765,7 +802,7 @@
           <td>
             
             
-            <span class='code'>            lasterr &#61; current_exceptions&#40;&#41;</span>
+            <span class='code'>    start &gt;&#61; 0 || return -1</span>
           </td>
         </tr>
         <tr id='L75'>
@@ -775,7 +812,7 @@
           <td>
             
             
-            <span class='code'>            lasterr &#61; ExceptionStack&#40;&#91;&#40;exception &#61; e&#91;1&#93;, backtrace &#61; &#91;&#93; &#41; for e in lasterr&#93;&#41;</span>
+            <span class='code'>    ind &#61; unsafe_bitfindprev&#40;b, start&#43;1&#41;</span>
           </td>
         </tr>
         <tr id='L76'>
@@ -785,7 +822,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;display_error, lasterr&#41;</span>
+            <span class='code'>    ind &#61;&#61;&#61; nothing ? -1 : ind - 1</span>
           </td>
         </tr>
         <tr id='L77'>
@@ -795,7 +832,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L78'>
@@ -805,7 +842,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L79'>
@@ -815,7 +852,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'># An internal function for setting the inclusion bit for a given integer</span>
           </td>
         </tr>
         <tr id='L80'>
@@ -825,7 +862,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>@inline function _setint&#33;&#40;s::BitSet, idx::Int, b::Bool&#41;</span>
           </td>
         </tr>
         <tr id='L81'>
@@ -835,7 +872,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    cidx &#61; _div64&#40;idx&#41;</span>
           </td>
         </tr>
         <tr id='L82'>
@@ -845,7 +882,7 @@
           <td>
             
             
-            <span class='code'># deprecated function--preserved for DocTests.jl</span>
+            <span class='code'>    len &#61; length&#40;s.bits&#41;</span>
           </td>
         </tr>
         <tr id='L83'>
@@ -855,7 +892,7 @@
           <td>
             
             
-            <span class='code'>function ip_matches_func&#40;ip, func::Symbol&#41;</span>
+            <span class='code'>    diff &#61; cidx - s.offset</span>
           </td>
         </tr>
         <tr id='L84'>
@@ -865,7 +902,7 @@
           <td>
             
             
-            <span class='code'>    for fr in StackTraces.lookup&#40;ip&#41;</span>
+            <span class='code'>    if diff &gt;&#61; len</span>
           </td>
         </tr>
         <tr id='L85'>
@@ -875,7 +912,7 @@
           <td>
             
             
-            <span class='code'>        if fr &#61;&#61;&#61; StackTraces.UNKNOWN || fr.from_c</span>
+            <span class='code'>        b || return s # setting a bit to zero outside the set&#39;s bits is a no-op</span>
           </td>
         </tr>
         <tr id='L86'>
@@ -885,7 +922,7 @@
           <td>
             
             
-            <span class='code'>            return false</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L87'>
@@ -895,7 +932,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        # we put the following test within one of the two branches,</span>
           </td>
         </tr>
         <tr id='L88'>
@@ -905,7 +942,7 @@
           <td>
             
             
-            <span class='code'>        fr.func &#61;&#61;&#61; func &amp;&amp; return true</span>
+            <span class='code'>        # with the NO_OFFSET trick, to avoid having to perform it at</span>
           </td>
         </tr>
         <tr id='L89'>
@@ -915,17 +952,31 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        # each and every call to _setint&#33;</span>
           </td>
         </tr>
         <tr id='L90'>
           <td class='lineno'>90</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>    return false</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in _setint&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from push&#33;
+              <a href='bitset.jl-27b803f580faa4d1af70abe72261f48c7c470e0c.html#L248'>line 248</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='promotion.jl-f5e646fa17755a69a5c2ccbf0842aad8f7fe1e7c.html#L521'>&#61;&#61;</a>
+              <br />
+            </div>
+            <span class='code'>        if s.offset &#61;&#61; NO_OFFSET # initialize the offset</span>
           </td>
         </tr>
         <tr id='L91'>
@@ -935,7 +986,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            # we assume isempty&#40;s.bits&#41;</span>
           </td>
         </tr>
         <tr id='L92'>
@@ -945,7 +996,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            s.offset &#61; cidx</span>
           </td>
         </tr>
         <tr id='L93'>
@@ -955,7 +1006,7 @@
           <td>
             
             
-            <span class='code'>function scrub_repl_backtrace&#40;bt&#41;</span>
+            <span class='code'>            diff &#61; 0</span>
           </td>
         </tr>
         <tr id='L94'>
@@ -965,7 +1016,7 @@
           <td>
             
             
-            <span class='code'>    if bt &#33;&#61;&#61; nothing &amp;&amp; &#33;&#40;bt isa Vector&#123;Any&#125;&#41; # ignore our sentinel value types</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L95'>
@@ -975,7 +1026,7 @@
           <td>
             
             
-            <span class='code'>        bt &#61; bt isa Vector&#123;StackFrame&#125; ? copy&#40;bt&#41; : stacktrace&#40;bt&#41;</span>
+            <span class='code'>        _growend0&#33;&#40;s.bits, diff - len &#43; 1&#41;</span>
           </td>
         </tr>
         <tr id='L96'>
@@ -985,7 +1036,7 @@
           <td>
             
             
-            <span class='code'>        # remove REPL-related frames from interactive printing</span>
+            <span class='code'>    elseif diff &lt; 0</span>
           </td>
         </tr>
         <tr id='L97'>
@@ -995,7 +1046,7 @@
           <td>
             
             
-            <span class='code'>        eval_ind &#61; findlast&#40;frame -&gt; &#33;frame.from_c &amp;&amp; frame.func &#61;&#61;&#61; :eval, bt&#41;</span>
+            <span class='code'>        b || return s</span>
           </td>
         </tr>
         <tr id='L98'>
@@ -1005,7 +1056,7 @@
           <td>
             
             
-            <span class='code'>        eval_ind &#61;&#61;&#61; nothing || deleteat&#33;&#40;bt, eval_ind:length&#40;bt&#41;&#41;</span>
+            <span class='code'>        _growbeg0&#33;&#40;s.bits, -diff&#41;</span>
           </td>
         </tr>
         <tr id='L99'>
@@ -1015,7 +1066,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        s.offset &#43;&#61; diff</span>
           </td>
         </tr>
         <tr id='L100'>
@@ -1025,7 +1076,7 @@
           <td>
             
             
-            <span class='code'>    return bt</span>
+            <span class='code'>        diff &#61; 0</span>
           </td>
         </tr>
         <tr id='L101'>
@@ -1035,7 +1086,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L102'>
@@ -1045,7 +1096,7 @@
           <td>
             
             
-            <span class='code'>scrub_repl_backtrace&#40;stack::ExceptionStack&#41; &#61;</span>
+            <span class='code'>    _unsafe_bitsetindex&#33;&#40;s.bits, b, diff&#43;1, _mod64&#40;idx&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L103'>
@@ -1055,7 +1106,7 @@
           <td>
             
             
-            <span class='code'>    ExceptionStack&#40;Any&#91;&#40;;x.exception, backtrace &#61; scrub_repl_backtrace&#40;x.backtrace&#41;&#41; for x in stack&#93;&#41;</span>
+            <span class='code'>    s</span>
           </td>
         </tr>
         <tr id='L104'>
@@ -1065,7 +1116,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L105'>
@@ -1075,7 +1126,7 @@
           <td>
             
             
-            <span class='code'>istrivialerror&#40;stack::ExceptionStack&#41; &#61;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L106'>
@@ -1085,7 +1136,7 @@
           <td>
             
             
-            <span class='code'>    length&#40;stack&#41; &#61;&#61; 1 &amp;&amp; length&#40;stack&#91;1&#93;.backtrace&#41; ≤ 1 &amp;&amp; &#33;isa&#40;stack&#91;1&#93;.exception, MethodError&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L107'>
@@ -1095,7 +1146,7 @@
           <td>
             
             
-            <span class='code'>    # frame 1 &#61; top level; assumes already went through scrub_repl_backtrace; MethodError see #50803</span>
+            <span class='code'># An internal function to resize a Bits object and ensure the newly allocated</span>
           </td>
         </tr>
         <tr id='L108'>
@@ -1105,7 +1156,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'># elements are zeroed &#40;will become unnecessary if this behavior changes&#41;</span>
           </td>
         </tr>
         <tr id='L109'>
@@ -1115,7 +1166,7 @@
           <td>
             
             
-            <span class='code'>function display_error&#40;io::IO, stack::ExceptionStack&#41;</span>
+            <span class='code'>@inline function _growend0&#33;&#40;b::Bits, nchunks::Int&#41;</span>
           </td>
         </tr>
         <tr id='L110'>
@@ -1125,7 +1176,7 @@
           <td>
             
             
-            <span class='code'>    printstyled&#40;io, &quot;ERROR: &quot;; bold&#61;true, color&#61;Base.error_color&#40;&#41;&#41;</span>
+            <span class='code'>    len &#61; length&#40;b&#41;</span>
           </td>
         </tr>
         <tr id='L111'>
@@ -1135,7 +1186,7 @@
           <td>
             
             
-            <span class='code'>    show_exception_stack&#40;IOContext&#40;io, :limit &#61;&gt; true&#41;, stack&#41;</span>
+            <span class='code'>    _growend&#33;&#40;b, nchunks&#41;</span>
           </td>
         </tr>
         <tr id='L112'>
@@ -1145,7 +1196,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;io&#41;</span>
+            <span class='code'>    for i in len&#43;1:length&#40;b&#41;</span>
           </td>
         </tr>
         <tr id='L113'>
@@ -1155,7 +1206,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>        @inbounds b&#91;i&#93; &#61; CHK0 # resize&#33; gives dirty memory</span>
           </td>
         </tr>
         <tr id='L114'>
@@ -1165,7 +1216,7 @@
           <td>
             
             
-            <span class='code'>display_error&#40;stack::ExceptionStack&#41; &#61; display_error&#40;stderr, stack&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L115'>
@@ -1175,7 +1226,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L116'>
@@ -1185,7 +1236,7 @@
           <td>
             
             
-            <span class='code'># these forms are depended on by packages outside Julia</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L117'>
@@ -1195,7 +1246,7 @@
           <td>
             
             
-            <span class='code'>function display_error&#40;io::IO, er, bt&#41;</span>
+            <span class='code'>@inline function _growbeg0&#33;&#40;b::Bits, nchunks::Int&#41;</span>
           </td>
         </tr>
         <tr id='L118'>
@@ -1205,7 +1256,7 @@
           <td>
             
             
-            <span class='code'>    printstyled&#40;io, &quot;ERROR: &quot;; bold&#61;true, color&#61;Base.error_color&#40;&#41;&#41;</span>
+            <span class='code'>    _growbeg&#33;&#40;b, nchunks&#41;</span>
           </td>
         </tr>
         <tr id='L119'>
@@ -1215,7 +1266,7 @@
           <td>
             
             
-            <span class='code'>    showerror&#40;IOContext&#40;io, :limit &#61;&gt; true&#41;, er, bt, backtrace &#61; bt&#33;&#61;&#61;nothing&#41;</span>
+            <span class='code'>    for i in 1:nchunks</span>
           </td>
         </tr>
         <tr id='L120'>
@@ -1225,7 +1276,7 @@
           <td>
             
             
-            <span class='code'>    println&#40;io&#41;</span>
+            <span class='code'>        @inbounds b&#91;i&#93; &#61; CHK0</span>
           </td>
         </tr>
         <tr id='L121'>
@@ -1235,7 +1286,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L122'>
@@ -1245,7 +1296,7 @@
           <td>
             
             
-            <span class='code'>display_error&#40;er, bt&#61;nothing&#41; &#61; display_error&#40;stderr, er, bt&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L123'>
@@ -1265,7 +1316,7 @@
           <td>
             
             
-            <span class='code'>function eval_user_input&#40;errio, @nospecialize&#40;ast&#41;, show_value::Bool&#41;</span>
+            <span class='code'>function union&#33;&#40;s::BitSet, r::AbstractUnitRange&#123;&lt;:Integer&#125;&#41;</span>
           </td>
         </tr>
         <tr id='L125'>
@@ -1275,7 +1326,7 @@
           <td>
             
             
-            <span class='code'>    errcount &#61; 0</span>
+            <span class='code'>    isempty&#40;r&#41; &amp;&amp; return s</span>
           </td>
         </tr>
         <tr id='L126'>
@@ -1285,7 +1336,7 @@
           <td>
             
             
-            <span class='code'>    lasterr &#61; nothing</span>
+            <span class='code'>    a, b &#61; Int&#40;first&#40;r&#41;&#41;, Int&#40;last&#40;r&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L127'>
@@ -1295,7 +1346,7 @@
           <td>
             
             
-            <span class='code'>    have_color &#61; get&#40;stdout, :color, false&#41;::Bool</span>
+            <span class='code'>    cidxa &#61; _div64&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L128'>
@@ -1305,7 +1356,7 @@
           <td>
             
             
-            <span class='code'>    while true</span>
+            <span class='code'>    cidxb &#61; _div64&#40;b&#41;</span>
           </td>
         </tr>
         <tr id='L129'>
@@ -1315,7 +1366,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>    if s.offset &#61;&#61; NO_OFFSET</span>
           </td>
         </tr>
         <tr id='L130'>
@@ -1325,7 +1376,7 @@
           <td>
             
             
-            <span class='code'>            if have_color</span>
+            <span class='code'>        s.offset &#61; cidxa</span>
           </td>
         </tr>
         <tr id='L131'>
@@ -1335,7 +1386,7 @@
           <td>
             
             
-            <span class='code'>                print&#40;color_normal&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L132'>
@@ -1345,7 +1396,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    len &#61; length&#40;s.bits&#41;</span>
           </td>
         </tr>
         <tr id='L133'>
@@ -1355,7 +1406,7 @@
           <td>
             
             
-            <span class='code'>            if lasterr &#33;&#61;&#61; nothing</span>
+            <span class='code'>    diffa &#61; cidxa - s.offset</span>
           </td>
         </tr>
         <tr id='L134'>
@@ -1365,7 +1416,7 @@
           <td>
             
             
-            <span class='code'>                lasterr &#61; scrub_repl_backtrace&#40;lasterr&#41;</span>
+            <span class='code'>    diffb &#61; cidxb - s.offset</span>
           </td>
         </tr>
         <tr id='L135'>
@@ -1375,7 +1426,7 @@
           <td>
             
             
-            <span class='code'>                istrivialerror&#40;lasterr&#41; || setglobal&#33;&#40;Base.MainInclude, :err, lasterr&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L136'>
@@ -1385,7 +1436,7 @@
           <td>
             
             
-            <span class='code'>                invokelatest&#40;display_error, errio, lasterr&#41;</span>
+            <span class='code'>    # grow s.bits as necessary</span>
           </td>
         </tr>
         <tr id='L137'>
@@ -1395,7 +1446,7 @@
           <td>
             
             
-            <span class='code'>                errcount &#61; 0</span>
+            <span class='code'>    if diffb &gt;&#61; len</span>
           </td>
         </tr>
         <tr id='L138'>
@@ -1405,7 +1456,7 @@
           <td>
             
             
-            <span class='code'>                lasterr &#61; nothing</span>
+            <span class='code'>        _growend0&#33;&#40;s.bits, diffb - len &#43; 1&#41;</span>
           </td>
         </tr>
         <tr id='L139'>
@@ -1415,7 +1466,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L140'>
@@ -1425,7 +1476,7 @@
           <td>
             
             
-            <span class='code'>                ast &#61; Meta.lower&#40;Main, ast&#41;</span>
+            <span class='code'>    if diffa &lt; 0</span>
           </td>
         </tr>
         <tr id='L141'>
@@ -1435,7 +1486,7 @@
           <td>
             
             
-            <span class='code'>                value &#61; Core.eval&#40;Main, ast&#41;</span>
+            <span class='code'>        _growbeg0&#33;&#40;s.bits, -diffa&#41;</span>
           </td>
         </tr>
         <tr id='L142'>
@@ -1445,7 +1496,7 @@
           <td>
             
             
-            <span class='code'>                setglobal&#33;&#40;Base.MainInclude, :ans, value&#41;</span>
+            <span class='code'>        s.offset &#61; cidxa # s.offset &#43;&#61; diffa</span>
           </td>
         </tr>
         <tr id='L143'>
@@ -1455,7 +1506,7 @@
           <td>
             
             
-            <span class='code'>                if &#33;&#40;value &#61;&#61;&#61; nothing&#41; &amp;&amp; show_value</span>
+            <span class='code'>        diffb -&#61; diffa</span>
           </td>
         </tr>
         <tr id='L144'>
@@ -1465,7 +1516,7 @@
           <td>
             
             
-            <span class='code'>                    if have_color</span>
+            <span class='code'>        diffa &#61; 0</span>
           </td>
         </tr>
         <tr id='L145'>
@@ -1475,7 +1526,7 @@
           <td>
             
             
-            <span class='code'>                        print&#40;answer_color&#40;&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L146'>
@@ -1485,7 +1536,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L147'>
@@ -1495,7 +1546,7 @@
           <td>
             
             
-            <span class='code'>                    try</span>
+            <span class='code'>    # update s.bits</span>
           </td>
         </tr>
         <tr id='L148'>
@@ -1505,7 +1556,7 @@
           <td>
             
             
-            <span class='code'>                        invokelatest&#40;display, value&#41;</span>
+            <span class='code'>    i &#61; _mod64&#40;a&#41;</span>
           </td>
         </tr>
         <tr id='L149'>
@@ -1515,7 +1566,7 @@
           <td>
             
             
-            <span class='code'>                    catch</span>
+            <span class='code'>    j &#61; _mod64&#40;b&#41;</span>
           </td>
         </tr>
         <tr id='L150'>
@@ -1525,7 +1576,7 @@
           <td>
             
             
-            <span class='code'>                        @error &quot;Evaluation succeeded, but an error occurred while displaying the value&quot; typeof&#40;value&#41;</span>
+            <span class='code'>    @inbounds if diffa &#61;&#61; diffb</span>
           </td>
         </tr>
         <tr id='L151'>
@@ -1535,7 +1586,7 @@
           <td>
             
             
-            <span class='code'>                        rethrow&#40;&#41;</span>
+            <span class='code'>        s.bits&#91;diffa &#43; 1&#93; |&#61; &#40;&#40;&#40;~CHK0&#41; &gt;&gt; i&#41; &lt;&lt; &#40;i&#43;63-j&#41;&#41; &gt;&gt; &#40;63-j&#41;</span>
           </td>
         </tr>
         <tr id='L152'>
@@ -1545,7 +1596,7 @@
           <td>
             
             
-            <span class='code'>                    end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L153'>
@@ -1555,7 +1606,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>        s.bits&#91;diffa &#43; 1&#93; |&#61; &#40;&#40;~CHK0&#41; &gt;&gt; i&#41; &lt;&lt; i</span>
           </td>
         </tr>
         <tr id='L154'>
@@ -1565,7 +1616,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>        s.bits&#91;diffb &#43; 1&#93; |&#61; &#40;~CHK0  &lt;&lt; &#40;63-j&#41;&#41; &gt;&gt; &#40;63-j&#41;</span>
           </td>
         </tr>
         <tr id='L155'>
@@ -1575,7 +1626,7 @@
           <td>
             
             
-            <span class='code'>            break</span>
+            <span class='code'>        for n &#61; diffa&#43;1:diffb-1</span>
           </td>
         </tr>
         <tr id='L156'>
@@ -1585,7 +1636,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>            s.bits&#91;n&#43;1&#93; &#61; ~CHK0</span>
           </td>
         </tr>
         <tr id='L157'>
@@ -1595,7 +1646,7 @@
           <td>
             
             
-            <span class='code'>            if errcount &gt; 0</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L158'>
@@ -1605,7 +1656,7 @@
           <td>
             
             
-            <span class='code'>                @error &quot;SYSTEM: display_error&#40;errio, lasterr&#41; caused an error&quot;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L159'>
@@ -1615,7 +1666,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    s</span>
           </td>
         </tr>
         <tr id='L160'>
@@ -1625,7 +1676,7 @@
           <td>
             
             
-            <span class='code'>            errcount &#43;&#61; 1</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L161'>
@@ -1635,7 +1686,7 @@
           <td>
             
             
-            <span class='code'>            lasterr &#61; scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L162'>
@@ -1645,7 +1696,7 @@
           <td>
             
             
-            <span class='code'>            setglobal&#33;&#40;Base.MainInclude, :err, lasterr&#41;</span>
+            <span class='code'>function _matched_map&#33;&#40;f, s1::BitSet, s2::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L163'>
@@ -1655,7 +1706,7 @@
           <td>
             
             
-            <span class='code'>            if errcount &gt; 2</span>
+            <span class='code'>    left_false_is_false &#61; f&#40;false, false&#41; &#61;&#61; f&#40;false, true&#41; &#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L164'>
@@ -1665,7 +1716,7 @@
           <td>
             
             
-            <span class='code'>                @error &quot;It is likely that something important is broken, and Julia will not be able to continue normally&quot; errcount</span>
+            <span class='code'>    right_false_is_false &#61; f&#40;false, false&#41; &#61;&#61; f&#40;true, false&#41; &#61;&#61; false</span>
           </td>
         </tr>
         <tr id='L165'>
@@ -1675,7 +1726,7 @@
           <td>
             
             
-            <span class='code'>                break</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L166'>
@@ -1685,7 +1736,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>    # we must first handle the NO_OFFSET case; we could test for</span>
           </td>
         </tr>
         <tr id='L167'>
@@ -1695,7 +1746,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    # isempty&#40;s1&#41; but it can be costly, so the user has to call</span>
           </td>
         </tr>
         <tr id='L168'>
@@ -1705,7 +1756,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    # empty&#33;&#40;s1&#41; herself before-hand to re-initialize to NO_OFFSET</span>
           </td>
         </tr>
         <tr id='L169'>
@@ -1715,7 +1766,7 @@
           <td>
             
             
-            <span class='code'>    isa&#40;stdin, TTY&#41; &amp;&amp; println&#40;&#41;</span>
+            <span class='code'>    if s1.offset &#61;&#61; NO_OFFSET</span>
           </td>
         </tr>
         <tr id='L170'>
@@ -1725,7 +1776,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>        return left_false_is_false ? s1 : copy&#33;&#40;s1, s2&#41;</span>
           </td>
         </tr>
         <tr id='L171'>
@@ -1735,7 +1786,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    elseif s2.offset &#61;&#61; NO_OFFSET</span>
           </td>
         </tr>
         <tr id='L172'>
@@ -1745,7 +1796,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        return right_false_is_false ? empty&#33;&#40;s1&#41; : s1</span>
           </td>
         </tr>
         <tr id='L173'>
@@ -1755,7 +1806,7 @@
           <td>
             
             
-            <span class='code'>function _parse_input_line_core&#40;s::String, filename::String&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L174'>
@@ -1765,7 +1816,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; Meta.parseall&#40;s, filename&#61;filename&#41;</span>
+            <span class='code'>    s1.offset &#61; _matched_map&#33;&#40;f, s1.bits, s1.offset, s2.bits, s2.offset,</span>
           </td>
         </tr>
         <tr id='L175'>
@@ -1775,7 +1826,7 @@
           <td>
             
             
-            <span class='code'>    if ex isa Expr &amp;&amp; ex.head &#61;&#61;&#61; :toplevel</span>
+            <span class='code'>                              left_false_is_false, right_false_is_false&#41;</span>
           </td>
         </tr>
         <tr id='L176'>
@@ -1785,7 +1836,7 @@
           <td>
             
             
-            <span class='code'>        if isempty&#40;ex.args&#41;</span>
+            <span class='code'>    s1</span>
           </td>
         </tr>
         <tr id='L177'>
@@ -1795,7 +1846,7 @@
           <td>
             
             
-            <span class='code'>            return nothing</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L178'>
@@ -1805,7 +1856,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L179'>
@@ -1815,7 +1866,7 @@
           <td>
             
             
-            <span class='code'>        last &#61; ex.args&#91;end&#93;</span>
+            <span class='code'># An internal function that takes a pure function &#96;f&#96; and maps across two BitArrays</span>
           </td>
         </tr>
         <tr id='L180'>
@@ -1825,7 +1876,7 @@
           <td>
             
             
-            <span class='code'>        if last isa Expr &amp;&amp; &#40;last.head &#61;&#61;&#61; :error || last.head &#61;&#61;&#61; :incomplete&#41;</span>
+            <span class='code'># allowing the lengths and offsets to be different and altering b1 with the result</span>
           </td>
         </tr>
         <tr id='L181'>
@@ -1835,7 +1886,7 @@
           <td>
             
             
-            <span class='code'>            # if a parse error happens in the middle of a multi-line input</span>
+            <span class='code'># WARNING: the assumptions written in the else clauses must hold</span>
           </td>
         </tr>
         <tr id='L182'>
@@ -1845,7 +1896,7 @@
           <td>
             
             
-            <span class='code'>            # return only the error, so that none of the input is evaluated.</span>
+            <span class='code'>function _matched_map&#33;&#40;f, a1::Bits, b1::Int, a2::Bits, b2::Int,</span>
           </td>
         </tr>
         <tr id='L183'>
@@ -1855,7 +1906,7 @@
           <td>
             
             
-            <span class='code'>            return last</span>
+            <span class='code'>                       left_false_is_false::Bool, right_false_is_false::Bool&#41;</span>
           </td>
         </tr>
         <tr id='L184'>
@@ -1865,7 +1916,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    l1, l2 &#61; length&#40;a1&#41;, length&#40;a2&#41;</span>
           </td>
         </tr>
         <tr id='L185'>
@@ -1875,7 +1926,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    bdiff &#61; b2 - b1</span>
           </td>
         </tr>
         <tr id='L186'>
@@ -1885,7 +1936,7 @@
           <td>
             
             
-            <span class='code'>    return ex</span>
+            <span class='code'>    e1, e2 &#61; l1&#43;b1, l2&#43;b2</span>
           </td>
         </tr>
         <tr id='L187'>
@@ -1895,7 +1946,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    ediff &#61; e2 - e1</span>
           </td>
         </tr>
         <tr id='L188'>
@@ -1915,7 +1966,7 @@
           <td>
             
             
-            <span class='code'>function parse_input_line&#40;s::String; filename::String&#61;&quot;none&quot;, depwarn&#61;true&#41;</span>
+            <span class='code'>    # map&#33; over the common indices</span>
           </td>
         </tr>
         <tr id='L190'>
@@ -1925,7 +1976,7 @@
           <td>
             
             
-            <span class='code'>    # For now, assume all parser warnings are depwarns</span>
+            <span class='code'>    @inbounds for i &#61; max&#40;1, 1&#43;bdiff&#41;:min&#40;l1, l2&#43;bdiff&#41;</span>
           </td>
         </tr>
         <tr id='L191'>
@@ -1935,7 +1986,7 @@
           <td>
             
             
-            <span class='code'>    ex &#61; if depwarn</span>
+            <span class='code'>        a1&#91;i&#93; &#61; f&#40;a1&#91;i&#93;, a2&#91;i-bdiff&#93;&#41;</span>
           </td>
         </tr>
         <tr id='L192'>
@@ -1945,7 +1996,7 @@
           <td>
             
             
-            <span class='code'>        _parse_input_line_core&#40;s, filename&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L193'>
@@ -1955,7 +2006,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L194'>
@@ -1965,7 +2016,7 @@
           <td>
             
             
-            <span class='code'>        with_logger&#40;NullLogger&#40;&#41;&#41; do</span>
+            <span class='code'>    if ediff &gt; 0</span>
           </td>
         </tr>
         <tr id='L195'>
@@ -1975,7 +2026,7 @@
           <td>
             
             
-            <span class='code'>            _parse_input_line_core&#40;s, filename&#41;</span>
+            <span class='code'>        if left_false_is_false</span>
           </td>
         </tr>
         <tr id='L196'>
@@ -1985,7 +2036,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
           </td>
         </tr>
         <tr id='L197'>
@@ -1995,7 +2046,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        else # @assert f&#40;false, x&#41; &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L198'>
@@ -2005,7 +2056,7 @@
           <td>
             
             
-            <span class='code'>    return ex</span>
+            <span class='code'>            _growend&#33;&#40;a1, ediff&#41;</span>
           </td>
         </tr>
         <tr id='L199'>
@@ -2015,7 +2066,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            # if a1 and a2 are not overlapping, we infer implied &quot;false&quot; values from a2</span>
           </td>
         </tr>
         <tr id='L200'>
@@ -2025,7 +2076,7 @@
           <td>
             
             
-            <span class='code'>parse_input_line&#40;s::AbstractString&#41; &#61; parse_input_line&#40;String&#40;s&#41;&#41;</span>
+            <span class='code'>            for outer l1 &#61; l1&#43;1:bdiff</span>
           </td>
         </tr>
         <tr id='L201'>
@@ -2035,7 +2086,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>                @inbounds a1&#91;l1&#93; &#61; CHK0</span>
           </td>
         </tr>
         <tr id='L202'>
@@ -2045,7 +2096,7 @@
           <td>
             
             
-            <span class='code'># detect the reason which caused an :incomplete expression</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L203'>
@@ -2055,7 +2106,7 @@
           <td>
             
             
-            <span class='code'># from the error message</span>
+            <span class='code'>            # update ediff in case l1 was updated</span>
           </td>
         </tr>
         <tr id='L204'>
@@ -2065,7 +2116,7 @@
           <td>
             
             
-            <span class='code'># NOTE: the error messages are defined in src/julia-parser.scm</span>
+            <span class='code'>            ediff &#61; e2 - l1 - b1</span>
           </td>
         </tr>
         <tr id='L205'>
@@ -2075,7 +2126,7 @@
           <td>
             
             
-            <span class='code'>function fl_incomplete_tag&#40;msg::AbstractString&#41;</span>
+            <span class='code'>            # copy actual chunks from a2</span>
           </td>
         </tr>
         <tr id='L206'>
@@ -2085,7 +2136,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;string&quot;, msg&#41; &amp;&amp; return :string</span>
+            <span class='code'>            unsafe_copyto&#33;&#40;a1, l1&#43;1, a2, l2&#43;1-ediff, ediff&#41;</span>
           </td>
         </tr>
         <tr id='L207'>
@@ -2095,7 +2146,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;comment&quot;, msg&#41; &amp;&amp; return :comment</span>
+            <span class='code'>            l1 &#61; length&#40;a1&#41;</span>
           </td>
         </tr>
         <tr id='L208'>
@@ -2105,7 +2156,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;requires end&quot;, msg&#41; &amp;&amp; return :block</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L209'>
@@ -2115,7 +2166,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;\&quot;&#96;\&quot;&quot;, msg&#41; &amp;&amp; return :cmd</span>
+            <span class='code'>    elseif ediff &lt; 0</span>
           </td>
         </tr>
         <tr id='L210'>
@@ -2125,7 +2176,7 @@
           <td>
             
             
-            <span class='code'>    occursin&#40;&quot;character&quot;, msg&#41; &amp;&amp; return :char</span>
+            <span class='code'>        if right_false_is_false</span>
           </td>
         </tr>
         <tr id='L211'>
@@ -2135,7 +2186,7 @@
           <td>
             
             
-            <span class='code'>    return :other</span>
+            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
           </td>
         </tr>
         <tr id='L212'>
@@ -2145,7 +2196,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            _deleteend&#33;&#40;a1, min&#40;l1, -ediff&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L213'>
@@ -2155,7 +2206,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            # no need to update l1, as if bdiff &gt; 0 &#40;case below&#41;, then bdiff will</span>
           </td>
         </tr>
         <tr id='L214'>
@@ -2165,7 +2216,7 @@
           <td>
             
             
-            <span class='code'>incomplete_tag&#40;ex&#41; &#61; :none</span>
+            <span class='code'>            # be smaller anyway than an updated l1</span>
           </td>
         </tr>
         <tr id='L215'>
@@ -2175,7 +2226,7 @@
           <td>
             
             
-            <span class='code'>function incomplete_tag&#40;ex::Expr&#41;</span>
+            <span class='code'>        else # @assert f&#40;x, false&#41; &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L216'>
@@ -2185,7 +2236,7 @@
           <td>
             
             
-            <span class='code'>    if ex.head &#33;&#61;&#61; :incomplete</span>
+            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they already have the</span>
           </td>
         </tr>
         <tr id='L217'>
@@ -2195,7 +2246,7 @@
           <td>
             
             
-            <span class='code'>        return :none</span>
+            <span class='code'>            # correct value</span>
           </td>
         </tr>
         <tr id='L218'>
@@ -2205,7 +2256,7 @@
           <td>
             
             
-            <span class='code'>    elseif isempty&#40;ex.args&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L219'>
@@ -2215,7 +2266,7 @@
           <td>
             
             
-            <span class='code'>        return :other</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L220'>
@@ -2225,7 +2276,7 @@
           <td>
             
             
-            <span class='code'>    elseif ex.args&#91;1&#93; isa String</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L221'>
@@ -2235,7 +2286,7 @@
           <td>
             
             
-            <span class='code'>        return fl_incomplete_tag&#40;ex.args&#91;1&#93;&#41;</span>
+            <span class='code'>    if bdiff &lt; 0</span>
           </td>
         </tr>
         <tr id='L222'>
@@ -2245,7 +2296,7 @@
           <td>
             
             
-            <span class='code'>    else</span>
+            <span class='code'>        if left_false_is_false</span>
           </td>
         </tr>
         <tr id='L223'>
@@ -2255,7 +2306,7 @@
           <td>
             
             
-            <span class='code'>        return incomplete_tag&#40;ex.args&#91;1&#93;&#41;</span>
+            <span class='code'>            # We don&#39;t need to worry about the leading bits — they&#39;re all false</span>
           </td>
         </tr>
         <tr id='L224'>
@@ -2265,7 +2316,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        else # @assert f&#40;false, x&#41; &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L225'>
@@ -2275,7 +2326,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>            _growbeg&#33;&#40;a1, -bdiff&#41;</span>
           </td>
         </tr>
         <tr id='L226'>
@@ -2285,7 +2336,7 @@
           <td>
             
             
-            <span class='code'>incomplete_tag&#40;exc::Meta.ParseError&#41; &#61; incomplete_tag&#40;exc.detail&#41;</span>
+            <span class='code'>            # if a1 and a2 are not overlapping, we infer implied &quot;false&quot; values from a2</span>
           </td>
         </tr>
         <tr id='L227'>
@@ -2295,7 +2346,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>            for i &#61; l2&#43;1:-bdiff</span>
           </td>
         </tr>
         <tr id='L228'>
@@ -2303,18 +2354,9 @@
           <td class='tracecount excl'></td>
           <td class='tracecount incl'></td>
           <td>
-            <div class='call-sites'>
-              1 &#40;25 &#37;&#41;
-              samples spent in exec_options
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from _start
-              <a href='client.jl-d249f5e37741c5b9632fc90043548e51ba6002b5.html#L552'>line 552</a>
-              <br />
-            </div>
             
-            <span class='code'>function exec_options&#40;opts&#41;</span>
+            
+            <span class='code'>                @inbounds a1&#91;i&#93; &#61; CHK0</span>
           </td>
         </tr>
         <tr id='L229'>
@@ -2324,7 +2366,7 @@
           <td>
             
             
-            <span class='code'>    quiet                 &#61; &#40;opts.quiet &#33;&#61; 0&#41;</span>
+            <span class='code'>            end</span>
           </td>
         </tr>
         <tr id='L230'>
@@ -2334,7 +2376,7 @@
           <td>
             
             
-            <span class='code'>    startup               &#61; &#40;opts.startupfile &#33;&#61; 2&#41;</span>
+            <span class='code'>            b1 &#43;&#61; bdiff # updated return value</span>
           </td>
         </tr>
         <tr id='L231'>
@@ -2344,7 +2386,7 @@
           <td>
             
             
-            <span class='code'>    history_file          &#61; &#40;opts.historyfile &#33;&#61; 0&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L232'>
@@ -2354,7 +2396,7 @@
           <td>
             
             
-            <span class='code'>    color_set             &#61; &#40;opts.color &#33;&#61; 0&#41; # --color&#33;&#61;auto</span>
+            <span class='code'>            # copy actual chunks from a2</span>
           </td>
         </tr>
         <tr id='L233'>
@@ -2364,7 +2406,7 @@
           <td>
             
             
-            <span class='code'>    global have_color     &#61; color_set ? &#40;opts.color &#61;&#61; 1&#41; : nothing # --color&#61;on</span>
+            <span class='code'>            unsafe_copyto&#33;&#40;a1, 1, a2, 1, min&#40;-bdiff, l2&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L234'>
@@ -2374,7 +2416,7 @@
           <td>
             
             
-            <span class='code'>    global is_interactive &#61; &#40;opts.isinteractive &#33;&#61; 0&#41;</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L235'>
@@ -2384,7 +2426,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    elseif bdiff &gt; 0</span>
           </td>
         </tr>
         <tr id='L236'>
@@ -2394,7 +2436,7 @@
           <td>
             
             
-            <span class='code'>    # pre-process command line argument list</span>
+            <span class='code'>        if right_false_is_false</span>
           </td>
         </tr>
         <tr id='L237'>
@@ -2404,7 +2446,7 @@
           <td>
             
             
-            <span class='code'>    arg_is_program &#61; &#33;isempty&#40;ARGS&#41;</span>
+            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they&#39;re all false</span>
           </td>
         </tr>
         <tr id='L238'>
@@ -2414,7 +2456,7 @@
           <td>
             
             
-            <span class='code'>    repl &#61; &#33;arg_is_program</span>
+            <span class='code'>            _deletebeg&#33;&#40;a1, min&#40;l1, bdiff&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L239'>
@@ -2424,7 +2466,7 @@
           <td>
             
             
-            <span class='code'>    cmds &#61; unsafe_load_commands&#40;opts.commands&#41;</span>
+            <span class='code'>            b1 &#43;&#61; bdiff</span>
           </td>
         </tr>
         <tr id='L240'>
@@ -2434,7 +2476,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;cmd, arg&#41; in cmds</span>
+            <span class='code'>        else # @assert f&#40;x, false&#41; &#61;&#61; x</span>
           </td>
         </tr>
         <tr id='L241'>
@@ -2444,7 +2486,7 @@
           <td>
             
             
-            <span class='code'>        if cmd &#61;&#61; &#39;e&#39;</span>
+            <span class='code'>            # We don&#39;t need to worry about the trailing bits — they already have the</span>
           </td>
         </tr>
         <tr id='L242'>
@@ -2454,7 +2496,7 @@
           <td>
             
             
-            <span class='code'>            arg_is_program &#61; false</span>
+            <span class='code'>            # correct value</span>
           </td>
         </tr>
         <tr id='L243'>
@@ -2464,7 +2506,7 @@
           <td>
             
             
-            <span class='code'>            repl &#61; false</span>
+            <span class='code'>        end</span>
           </td>
         </tr>
         <tr id='L244'>
@@ -2474,7 +2516,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;E&#39;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L245'>
@@ -2484,7 +2526,7 @@
           <td>
             
             
-            <span class='code'>            arg_is_program &#61; false</span>
+            <span class='code'>    b1 # the new offset</span>
           </td>
         </tr>
         <tr id='L246'>
@@ -2494,7 +2536,7 @@
           <td>
             
             
-            <span class='code'>            repl &#61; false</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L247'>
@@ -2504,17 +2546,31 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;L&#39;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L248'>
           <td class='lineno'>248</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
+          <td class='tracecount incl'>1 &#40;0 &#37;&#41;</td>
           <td>
-            
-            
-            <span class='code'>            # nothing</span>
+            <div class='call-sites'>
+              1 &#40;0 &#37;&#41;
+              samples spent in push&#33;
+              <br />
+              
+              1 &#40;100 &#37;&#41; &#40;incl.&#41;
+              when called from find_ssavalue_uses
+              <a href='utilities.jl-5666f3100eb0a5f1e36e24286315eeea7a5c8ddb.html#L415'>line 415</a>
+              <br />
+            </div>
+            <div class='callees'>
+              1 &#40;100 &#37;&#41;
+              samples spent calling
+              <a href='bitset.jl-27b803f580faa4d1af70abe72261f48c7c470e0c.html#L90'>_setint&#33;</a>
+              <br />
+            </div>
+            <span class='code'>@inline push&#33;&#40;s::BitSet, n::Integer&#41; &#61; _setint&#33;&#40;s, Int&#40;n&#41;, true&#41;</span>
           </td>
         </tr>
         <tr id='L249'>
@@ -2524,7 +2580,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;B&#39; # --bug-report</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L250'>
@@ -2534,7 +2590,7 @@
           <td>
             
             
-            <span class='code'>            # If we&#39;re doing a bug report, don&#39;t load anything else. We will</span>
+            <span class='code'>push&#33;&#40;s::BitSet, ns::Integer...&#41; &#61; &#40;for n in ns; push&#33;&#40;s, n&#41;; end; s&#41;</span>
           </td>
         </tr>
         <tr id='L251'>
@@ -2544,7 +2600,7 @@
           <td>
             
             
-            <span class='code'>            # spawn a child in which to execute these options.</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L252'>
@@ -2554,7 +2610,7 @@
           <td>
             
             
-            <span class='code'>            let InteractiveUtils &#61; load_InteractiveUtils&#40;&#41;</span>
+            <span class='code'>@inline pop&#33;&#40;s::BitSet&#41; &#61; pop&#33;&#40;s, last&#40;s&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L253'>
@@ -2564,7 +2620,7 @@
           <td>
             
             
-            <span class='code'>                InteractiveUtils.report_bug&#40;arg&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L254'>
@@ -2574,7 +2630,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@inline function pop&#33;&#40;s::BitSet, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L255'>
@@ -2584,7 +2640,7 @@
           <td>
             
             
-            <span class='code'>            return nothing</span>
+            <span class='code'>    if n in s</span>
           </td>
         </tr>
         <tr id='L256'>
@@ -2594,7 +2650,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>        delete&#33;&#40;s, n&#41;</span>
           </td>
         </tr>
         <tr id='L257'>
@@ -2604,7 +2660,7 @@
           <td>
             
             
-            <span class='code'>            @warn &quot;Unexpected command -&#36;cmd&#39;&#36;arg&#39;&quot;</span>
+            <span class='code'>        n</span>
           </td>
         </tr>
         <tr id='L258'>
@@ -2614,7 +2670,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L259'>
@@ -2624,7 +2680,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        throw&#40;KeyError&#40;n&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L260'>
@@ -2634,7 +2690,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L261'>
@@ -2644,7 +2700,7 @@
           <td>
             
             
-            <span class='code'>    # remove filename from ARGS</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L262'>
@@ -2654,7 +2710,7 @@
           <td>
             
             
-            <span class='code'>    global PROGRAM_FILE &#61; arg_is_program ? popfirst&#33;&#40;ARGS&#41; : &quot;&quot;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L263'>
@@ -2664,7 +2720,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline function pop&#33;&#40;s::BitSet, n::Integer, default&#41;</span>
           </td>
         </tr>
         <tr id='L264'>
@@ -2674,7 +2730,7 @@
           <td>
             
             
-            <span class='code'>    # Load Distributed module only if any of the Distributed options have been specified.</span>
+            <span class='code'>    if n in s</span>
           </td>
         </tr>
         <tr id='L265'>
@@ -2684,7 +2740,7 @@
           <td>
             
             
-            <span class='code'>    distributed_mode &#61; &#40;opts.worker &#61;&#61; 1&#41; || &#40;opts.nprocs &gt; 0&#41; || &#40;opts.machine_file &#33;&#61; C_NULL&#41;</span>
+            <span class='code'>        delete&#33;&#40;s, n&#41;</span>
           </td>
         </tr>
         <tr id='L266'>
@@ -2694,7 +2750,7 @@
           <td>
             
             
-            <span class='code'>    if distributed_mode</span>
+            <span class='code'>        n</span>
           </td>
         </tr>
         <tr id='L267'>
@@ -2704,7 +2760,7 @@
           <td>
             
             
-            <span class='code'>        let Distributed &#61; require&#40;PkgId&#40;UUID&#40;&#40;0x8ba89e20_285c_5b6f, 0x9357_94700520ee1b&#41;&#41;, &quot;Distributed&quot;&#41;&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L268'>
@@ -2714,7 +2770,7 @@
           <td>
             
             
-            <span class='code'>            Core.eval&#40;Main, :&#40;const Distributed &#61; &#36;Distributed&#41;&#41;</span>
+            <span class='code'>        default</span>
           </td>
         </tr>
         <tr id='L269'>
@@ -2724,7 +2780,7 @@
           <td>
             
             
-            <span class='code'>            Core.eval&#40;Main, :&#40;using .Distributed&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L270'>
@@ -2734,7 +2790,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L271'>
@@ -2754,7 +2810,7 @@
           <td>
             
             
-            <span class='code'>        invokelatest&#40;Main.Distributed.process_opts, opts&#41;</span>
+            <span class='code'>@inline _is_convertible_Int&#40;n&#41; &#61; typemin&#40;Int&#41; &lt;&#61; n &lt;&#61; typemax&#40;Int&#41;</span>
           </td>
         </tr>
         <tr id='L273'>
@@ -2764,7 +2820,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>@inline delete&#33;&#40;s::BitSet, n::Int&#41; &#61; _setint&#33;&#40;s, n, false&#41;</span>
           </td>
         </tr>
         <tr id='L274'>
@@ -2774,7 +2830,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>@inline delete&#33;&#40;s::BitSet, n::Integer&#41; &#61; _is_convertible_Int&#40;n&#41; ? delete&#33;&#40;s, Int&#40;n&#41;&#41; : s</span>
           </td>
         </tr>
         <tr id='L275'>
@@ -2784,7 +2840,7 @@
           <td>
             
             
-            <span class='code'>    interactiveinput &#61; &#40;repl || is_interactive::Bool&#41; &amp;&amp; isa&#40;stdin, TTY&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L276'>
@@ -2794,7 +2850,7 @@
           <td>
             
             
-            <span class='code'>    is_interactive::Bool |&#61; interactiveinput</span>
+            <span class='code'>popfirst&#33;&#40;s::BitSet&#41; &#61; pop&#33;&#40;s, first&#40;s&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L277'>
@@ -2814,7 +2870,7 @@
           <td>
             
             
-            <span class='code'>    # load ~/.julia/config/startup.jl file</span>
+            <span class='code'>function empty&#33;&#40;s::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L279'>
@@ -2824,7 +2880,7 @@
           <td>
             
             
-            <span class='code'>    if startup</span>
+            <span class='code'>    empty&#33;&#40;s.bits&#41;</span>
           </td>
         </tr>
         <tr id='L280'>
@@ -2834,7 +2890,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>    s.offset &#61; NO_OFFSET</span>
           </td>
         </tr>
         <tr id='L281'>
@@ -2844,7 +2900,7 @@
           <td>
             
             
-            <span class='code'>            load_julia_startup&#40;&#41;</span>
+            <span class='code'>    s</span>
           </td>
         </tr>
         <tr id='L282'>
@@ -2854,7 +2910,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L283'>
@@ -2864,7 +2920,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;display_error, scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L284'>
@@ -2874,7 +2930,7 @@
           <td>
             
             
-            <span class='code'>            &#33;&#40;repl || is_interactive::Bool&#41; &amp;&amp; exit&#40;1&#41;</span>
+            <span class='code'>isempty&#40;s::BitSet&#41; &#61; _check0&#40;s.bits, 1, length&#40;s.bits&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L285'>
@@ -2884,7 +2940,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L286'>
@@ -2894,7 +2950,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'># Mathematical set functions: union&#33;, intersect&#33;, setdiff&#33;, symdiff&#33;</span>
           </td>
         </tr>
         <tr id='L287'>
@@ -2914,7 +2970,7 @@
           <td>
             
             
-            <span class='code'>    # process cmds list</span>
+            <span class='code'>union&#40;s::BitSet, sets...&#41; &#61; union&#33;&#40;copy&#40;s&#41;, sets...&#41;</span>
           </td>
         </tr>
         <tr id='L289'>
@@ -2924,7 +2980,7 @@
           <td>
             
             
-            <span class='code'>    for &#40;cmd, arg&#41; in cmds</span>
+            <span class='code'>union&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;|, s1, s2&#41;</span>
           </td>
         </tr>
         <tr id='L290'>
@@ -2934,22 +2990,17 @@
           <td>
             
             
-            <span class='code'>        if cmd &#61;&#61; &#39;e&#39;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L291'>
           <td class='lineno'>291</td>
           <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;25 &#37;&#41;</td>
+          <td class='tracecount incl'></td>
           <td>
             
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='boot.jl-298d21f3be57618471d6b1c32c16f23053313030.html#L385'>eval</a>
-              <br />
-            </div>
-            <span class='code'>            Core.eval&#40;Main, parse_input_line&#40;arg&#41;&#41;</span>
+            
+            <span class='code'>intersect&#40;s1::BitSet, s2::BitSet&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L292'>
@@ -2959,7 +3010,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;E&#39;</span>
+            <span class='code'>    length&#40;s1.bits&#41; &lt; length&#40;s2.bits&#41; ? intersect&#33;&#40;copy&#40;s1&#41;, s2&#41; : intersect&#33;&#40;copy&#40;s2&#41;, s1&#41;</span>
           </td>
         </tr>
         <tr id='L293'>
@@ -2969,7 +3020,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;show, Core.eval&#40;Main, parse_input_line&#40;arg&#41;&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L294'>
@@ -2979,7 +3030,7 @@
           <td>
             
             
-            <span class='code'>            println&#40;&#41;</span>
+            <span class='code'>intersect&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;&amp;, s1, s2&#41;</span>
           </td>
         </tr>
         <tr id='L295'>
@@ -2989,7 +3040,7 @@
           <td>
             
             
-            <span class='code'>        elseif cmd &#61;&#61; &#39;L&#39;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L296'>
@@ -2999,7 +3050,7 @@
           <td>
             
             
-            <span class='code'>            # load file immediately on all processors</span>
+            <span class='code'>setdiff&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;&#40;p, q&#41; -&gt; p &amp; ~q, s1, s2&#41;</span>
           </td>
         </tr>
         <tr id='L297'>
@@ -3009,7 +3060,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;distributed_mode</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L298'>
@@ -3019,7 +3070,7 @@
           <td>
             
             
-            <span class='code'>                include&#40;Main, arg&#41;</span>
+            <span class='code'>function symdiff&#33;&#40;s::BitSet, ns&#41;</span>
           </td>
         </tr>
         <tr id='L299'>
@@ -3029,7 +3080,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>    for x in ns</span>
           </td>
         </tr>
         <tr id='L300'>
@@ -3039,7 +3090,7 @@
           <td>
             
             
-            <span class='code'>                # TODO: Move this logic to Distributed and use a callback</span>
+            <span class='code'>        int_symdiff&#33;&#40;s, x&#41;</span>
           </td>
         </tr>
         <tr id='L301'>
@@ -3049,7 +3100,7 @@
           <td>
             
             
-            <span class='code'>                @sync for p in invokelatest&#40;Main.procs&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L302'>
@@ -3059,7 +3110,7 @@
           <td>
             
             
-            <span class='code'>                    @async invokelatest&#40;Main.remotecall_wait, include, p, Main, arg&#41;</span>
+            <span class='code'>    return s</span>
           </td>
         </tr>
         <tr id='L303'>
@@ -3069,7 +3120,7 @@
           <td>
             
             
-            <span class='code'>                end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L304'>
@@ -3079,7 +3130,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L305'>
@@ -3089,7 +3140,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>function symdiff&#33;&#40;s::BitSet, ns::AbstractSet&#41;</span>
           </td>
         </tr>
         <tr id='L306'>
@@ -3099,7 +3150,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    for x in ns</span>
           </td>
         </tr>
         <tr id='L307'>
@@ -3109,7 +3160,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        int_symdiff&#33;&#40;s, x&#41;</span>
           </td>
         </tr>
         <tr id='L308'>
@@ -3119,7 +3170,7 @@
           <td>
             
             
-            <span class='code'>    # load file</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L309'>
@@ -3129,7 +3180,7 @@
           <td>
             
             
-            <span class='code'>    if arg_is_program</span>
+            <span class='code'>    return s</span>
           </td>
         </tr>
         <tr id='L310'>
@@ -3139,7 +3190,7 @@
           <td>
             
             
-            <span class='code'>        # program</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L311'>
@@ -3149,7 +3200,7 @@
           <td>
             
             
-            <span class='code'>        if &#33;is_interactive::Bool</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L312'>
@@ -3159,7 +3210,7 @@
           <td>
             
             
-            <span class='code'>            exit_on_sigint&#40;true&#41;</span>
+            <span class='code'>function int_symdiff&#33;&#40;s::BitSet, n::Integer&#41;</span>
           </td>
         </tr>
         <tr id='L313'>
@@ -3169,7 +3220,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    n0 &#61; Int&#40;n&#41;</span>
           </td>
         </tr>
         <tr id='L314'>
@@ -3179,7 +3230,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>    val &#61; &#33;&#40;n0 in s&#41;</span>
           </td>
         </tr>
         <tr id='L315'>
@@ -3189,7 +3240,7 @@
           <td>
             
             
-            <span class='code'>            if PROGRAM_FILE &#61;&#61; &quot;-&quot;</span>
+            <span class='code'>    _setint&#33;&#40;s, n0, val&#41;</span>
           </td>
         </tr>
         <tr id='L316'>
@@ -3199,7 +3250,7 @@
           <td>
             
             
-            <span class='code'>                include_string&#40;Main, read&#40;stdin, String&#41;, &quot;stdin&quot;&#41;</span>
+            <span class='code'>    s</span>
           </td>
         </tr>
         <tr id='L317'>
@@ -3209,7 +3260,7 @@
           <td>
             
             
-            <span class='code'>            else</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L318'>
@@ -3219,7 +3270,7 @@
           <td>
             
             
-            <span class='code'>                include&#40;Main, PROGRAM_FILE&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L319'>
@@ -3229,7 +3280,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>symdiff&#33;&#40;s1::BitSet, s2::BitSet&#41; &#61; _matched_map&#33;&#40;xor, s1, s2&#41;</span>
           </td>
         </tr>
         <tr id='L320'>
@@ -3239,7 +3290,7 @@
           <td>
             
             
-            <span class='code'>        catch</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L321'>
@@ -3249,7 +3300,7 @@
           <td>
             
             
-            <span class='code'>            invokelatest&#40;display_error, scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;&#41;</span>
+            <span class='code'>filter&#33;&#40;f, s::BitSet&#41; &#61; unsafe_filter&#33;&#40;f, s&#41;</span>
           </td>
         </tr>
         <tr id='L322'>
@@ -3259,7 +3310,7 @@
           <td>
             
             
-            <span class='code'>            if &#33;is_interactive::Bool</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L323'>
@@ -3269,7 +3320,7 @@
           <td>
             
             
-            <span class='code'>                exit&#40;1&#41;</span>
+            <span class='code'>@inline in&#40;n::Int, s::BitSet&#41; &#61; _bits_getindex&#40;s.bits, n, s.offset&#41;</span>
           </td>
         </tr>
         <tr id='L324'>
@@ -3279,7 +3330,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>@inline in&#40;n::Integer, s::BitSet&#41; &#61; _is_convertible_Int&#40;n&#41; ? in&#40;Int&#40;n&#41;, s&#41; : false</span>
           </td>
         </tr>
         <tr id='L325'>
@@ -3289,7 +3340,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L326'>
@@ -3299,7 +3350,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>function iterate&#40;s::BitSet, &#40;word, idx&#41; &#61; &#40;CHK0, 0&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L327'>
@@ -3309,7 +3360,7 @@
           <td>
             
             
-            <span class='code'>    if repl || is_interactive::Bool</span>
+            <span class='code'>    while word &#61;&#61; 0</span>
           </td>
         </tr>
         <tr id='L328'>
@@ -3319,7 +3370,7 @@
           <td>
             
             
-            <span class='code'>        if interactiveinput</span>
+            <span class='code'>        idx &#61;&#61; length&#40;s.bits&#41; &amp;&amp; return nothing</span>
           </td>
         </tr>
         <tr id='L329'>
@@ -3329,7 +3380,7 @@
           <td>
             
             
-            <span class='code'>            banner &#61; &#40;opts.banner &#33;&#61; 0&#41; # --banner&#33;&#61;no</span>
+            <span class='code'>        idx &#43;&#61; 1</span>
           </td>
         </tr>
         <tr id='L330'>
@@ -3339,7 +3390,7 @@
           <td>
             
             
-            <span class='code'>        else</span>
+            <span class='code'>        word &#61; @inbounds s.bits&#91;idx&#93;</span>
           </td>
         </tr>
         <tr id='L331'>
@@ -3349,7 +3400,7 @@
           <td>
             
             
-            <span class='code'>            banner &#61; &#40;opts.banner &#61;&#61; 1&#41; # --banner&#61;yes</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L332'>
@@ -3359,7 +3410,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    trailing_zeros&#40;word&#41; &#43; &#40;idx - 1 &#43; s.offset&#41; &lt;&lt; 6, &#40;_blsr&#40;word&#41;, idx&#41;</span>
           </td>
         </tr>
         <tr id='L333'>
@@ -3369,7 +3420,7 @@
           <td>
             
             
-            <span class='code'>        run_main_repl&#40;interactiveinput, quiet, banner, history_file, color_set&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L334'>
@@ -3379,7 +3430,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L335'>
@@ -3389,7 +3440,7 @@
           <td>
             
             
-            <span class='code'>    nothing</span>
+            <span class='code'>@noinline _throw_bitset_notempty_error&#40;&#41; &#61;</span>
           </td>
         </tr>
         <tr id='L336'>
@@ -3399,7 +3450,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    throw&#40;ArgumentError&#40;&quot;collection must be non-empty&quot;&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L337'>
@@ -3419,7 +3470,7 @@
           <td>
             
             
-            <span class='code'>function _global_julia_startup_file&#40;&#41;</span>
+            <span class='code'>function first&#40;s::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L339'>
@@ -3429,7 +3480,7 @@
           <td>
             
             
-            <span class='code'>    # If the user built us with a specific Base.SYSCONFDIR, check that location first for a startup.jl file</span>
+            <span class='code'>    idx &#61; _bits_findnext&#40;s.bits, 0&#41;</span>
           </td>
         </tr>
         <tr id='L340'>
@@ -3439,7 +3490,7 @@
           <td>
             
             
-            <span class='code'>    # If it is not found, then continue on to the relative path based on Sys.BINDIR</span>
+            <span class='code'>    idx &#61;&#61; -1 ? _throw_bitset_notempty_error&#40;&#41; : idx &#43; intoffset&#40;s&#41;</span>
           </td>
         </tr>
         <tr id='L341'>
@@ -3449,7 +3500,7 @@
           <td>
             
             
-            <span class='code'>    BINDIR &#61; Sys.BINDIR</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L342'>
@@ -3459,7 +3510,7 @@
           <td>
             
             
-            <span class='code'>    SYSCONFDIR &#61; Base.SYSCONFDIR</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L343'>
@@ -3469,7 +3520,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;SYSCONFDIR&#41;</span>
+            <span class='code'>function last&#40;s::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L344'>
@@ -3479,7 +3530,7 @@
           <td>
             
             
-            <span class='code'>        p1 &#61; abspath&#40;BINDIR, SYSCONFDIR, &quot;julia&quot;, &quot;startup.jl&quot;&#41;</span>
+            <span class='code'>    idx &#61; _bits_findprev&#40;s.bits, &#40;length&#40;s.bits&#41; &lt;&lt; 6&#41; - 1&#41;</span>
           </td>
         </tr>
         <tr id='L345'>
@@ -3489,7 +3540,7 @@
           <td>
             
             
-            <span class='code'>        isfile&#40;p1&#41; &amp;&amp; return p1</span>
+            <span class='code'>    idx &#61;&#61; -1 ? _throw_bitset_notempty_error&#40;&#41; : idx &#43; intoffset&#40;s&#41;</span>
           </td>
         </tr>
         <tr id='L346'>
@@ -3499,7 +3550,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L347'>
@@ -3509,7 +3560,7 @@
           <td>
             
             
-            <span class='code'>    p2 &#61; abspath&#40;BINDIR, &quot;..&quot;, &quot;etc&quot;, &quot;julia&quot;, &quot;startup.jl&quot;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L348'>
@@ -3519,7 +3570,7 @@
           <td>
             
             
-            <span class='code'>    isfile&#40;p2&#41; &amp;&amp; return p2</span>
+            <span class='code'>length&#40;s::BitSet&#41; &#61; bitcount&#40;s.bits&#41; # &#61; mapreduce&#40;count_ones, &#43;, s.bits; init&#61;0&#41;</span>
           </td>
         </tr>
         <tr id='L349'>
@@ -3529,7 +3580,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L350'>
@@ -3539,7 +3590,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>function show&#40;io::IO, s::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L351'>
@@ -3549,7 +3600,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    print&#40;io, &quot;BitSet&#40;&#91;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L352'>
@@ -3559,7 +3610,7 @@
           <td>
             
             
-            <span class='code'>function _local_julia_startup_file&#40;&#41;</span>
+            <span class='code'>    first &#61; true</span>
           </td>
         </tr>
         <tr id='L353'>
@@ -3569,7 +3620,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isempty&#40;DEPOT_PATH&#41;</span>
+            <span class='code'>    for n in s</span>
           </td>
         </tr>
         <tr id='L354'>
@@ -3579,7 +3630,7 @@
           <td>
             
             
-            <span class='code'>        path &#61; abspath&#40;DEPOT_PATH&#91;1&#93;, &quot;config&quot;, &quot;startup.jl&quot;&#41;</span>
+            <span class='code'>        &#33;first &amp;&amp; print&#40;io, &quot;, &quot;&#41;</span>
           </td>
         </tr>
         <tr id='L355'>
@@ -3589,7 +3640,7 @@
           <td>
             
             
-            <span class='code'>        isfile&#40;path&#41; &amp;&amp; return path</span>
+            <span class='code'>        print&#40;io, n&#41;</span>
           </td>
         </tr>
         <tr id='L356'>
@@ -3599,7 +3650,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>        first &#61; false</span>
           </td>
         </tr>
         <tr id='L357'>
@@ -3609,7 +3660,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L358'>
@@ -3619,7 +3670,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    print&#40;io, &quot;&#93;&#41;&quot;&#41;</span>
           </td>
         </tr>
         <tr id='L359'>
@@ -3629,7 +3680,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L360'>
@@ -3639,7 +3690,7 @@
           <td>
             
             
-            <span class='code'>function load_julia_startup&#40;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L361'>
@@ -3649,7 +3700,7 @@
           <td>
             
             
-            <span class='code'>    global_file &#61; _global_julia_startup_file&#40;&#41;</span>
+            <span class='code'>function _check0&#40;a::Vector&#123;UInt64&#125;, b::Int, e::Int&#41;</span>
           </td>
         </tr>
         <tr id='L362'>
@@ -3659,7 +3710,7 @@
           <td>
             
             
-            <span class='code'>    &#40;global_file &#33;&#61;&#61; nothing&#41; &amp;&amp; include&#40;Main, global_file&#41;</span>
+            <span class='code'>    @inbounds for i in b:e</span>
           </td>
         </tr>
         <tr id='L363'>
@@ -3669,7 +3720,7 @@
           <td>
             
             
-            <span class='code'>    local_file &#61; _local_julia_startup_file&#40;&#41;</span>
+            <span class='code'>        a&#91;i&#93; &#61;&#61; CHK0 || return false</span>
           </td>
         </tr>
         <tr id='L364'>
@@ -3679,7 +3730,7 @@
           <td>
             
             
-            <span class='code'>    &#40;local_file &#33;&#61;&#61; nothing&#41; &amp;&amp; include&#40;Main, local_file&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L365'>
@@ -3689,7 +3740,7 @@
           <td>
             
             
-            <span class='code'>    return nothing</span>
+            <span class='code'>    true</span>
           </td>
         </tr>
         <tr id='L366'>
@@ -3719,7 +3770,7 @@
           <td>
             
             
-            <span class='code'>const repl_hooks &#61; &#91;&#93;</span>
+            <span class='code'>function &#61;&#61;&#40;s1::BitSet, s2::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L369'>
@@ -3729,7 +3780,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    # Swap so s1 has always the smallest offset</span>
           </td>
         </tr>
         <tr id='L370'>
@@ -3739,7 +3790,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    if s1.offset &gt; s2.offset</span>
           </td>
         </tr>
         <tr id='L371'>
@@ -3749,7 +3800,7 @@
           <td>
             
             
-            <span class='code'>    atreplinit&#40;f&#41;</span>
+            <span class='code'>        s1, s2 &#61; s2, s1</span>
           </td>
         </tr>
         <tr id='L372'>
@@ -3759,7 +3810,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L373'>
@@ -3769,7 +3820,7 @@
           <td>
             
             
-            <span class='code'>Register a one-argument function to be called before the REPL interface is initialized in</span>
+            <span class='code'>    a1 &#61; s1.bits</span>
           </td>
         </tr>
         <tr id='L374'>
@@ -3779,7 +3830,7 @@
           <td>
             
             
-            <span class='code'>interactive sessions; this is useful to customize the interface. The argument of &#96;f&#96; is the</span>
+            <span class='code'>    a2 &#61; s2.bits</span>
           </td>
         </tr>
         <tr id='L375'>
@@ -3789,7 +3840,7 @@
           <td>
             
             
-            <span class='code'>REPL object. This function should be called from within the &#96;.julia/config/startup.jl&#96;</span>
+            <span class='code'>    b1, b2 &#61; s1.offset, s2.offset</span>
           </td>
         </tr>
         <tr id='L376'>
@@ -3799,7 +3850,7 @@
           <td>
             
             
-            <span class='code'>initialization file.</span>
+            <span class='code'>    l1, l2 &#61; length&#40;a1&#41;, length&#40;a2&#41;</span>
           </td>
         </tr>
         <tr id='L377'>
@@ -3809,7 +3860,7 @@
           <td>
             
             
-            <span class='code'>&quot;&quot;&quot;</span>
+            <span class='code'>    e1 &#61; l1&#43;b1</span>
           </td>
         </tr>
         <tr id='L378'>
@@ -3819,7 +3870,7 @@
           <td>
             
             
-            <span class='code'>atreplinit&#40;f::Function&#41; &#61; &#40;pushfirst&#33;&#40;repl_hooks, f&#41;; nothing&#41;</span>
+            <span class='code'>    overlap0 &#61; max&#40;0, e1 - b2&#41;</span>
           </td>
         </tr>
         <tr id='L379'>
@@ -3829,7 +3880,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    included &#61; overlap0 &gt;&#61; l2  # whether a2&#39;s indices are included in a1&#39;s</span>
           </td>
         </tr>
         <tr id='L380'>
@@ -3839,7 +3890,7 @@
           <td>
             
             
-            <span class='code'>function __atreplinit&#40;repl&#41;</span>
+            <span class='code'>    overlap  &#61; included ? l2 : overlap0</span>
           </td>
         </tr>
         <tr id='L381'>
@@ -3849,7 +3900,7 @@
           <td>
             
             
-            <span class='code'>    for f in repl_hooks</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L382'>
@@ -3859,7 +3910,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>    # Ensure non-overlap chunks are zero &#40;unlikely&#41;</span>
           </td>
         </tr>
         <tr id='L383'>
@@ -3869,7 +3920,7 @@
           <td>
             
             
-            <span class='code'>            f&#40;repl&#41;</span>
+            <span class='code'>    _check0&#40;a1, 1, l1-overlap0&#41; || return false</span>
           </td>
         </tr>
         <tr id='L384'>
@@ -3879,7 +3930,7 @@
           <td>
             
             
-            <span class='code'>        catch err</span>
+            <span class='code'>    if included</span>
           </td>
         </tr>
         <tr id='L385'>
@@ -3889,7 +3940,7 @@
           <td>
             
             
-            <span class='code'>            showerror&#40;stderr, err&#41;</span>
+            <span class='code'>        _check0&#40;a1, b2-b1&#43;l2&#43;1, l1&#41; || return false</span>
           </td>
         </tr>
         <tr id='L386'>
@@ -3899,7 +3950,7 @@
           <td>
             
             
-            <span class='code'>            println&#40;stderr&#41;</span>
+            <span class='code'>    else</span>
           </td>
         </tr>
         <tr id='L387'>
@@ -3909,7 +3960,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>        _check0&#40;a2, 1&#43;overlap, l2&#41; || return false</span>
           </td>
         </tr>
         <tr id='L388'>
@@ -3929,7 +3980,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L390'>
@@ -3939,7 +3990,7 @@
           <td>
             
             
-            <span class='code'>_atreplinit&#40;repl&#41; &#61; invokelatest&#40;__atreplinit, repl&#41;</span>
+            <span class='code'>    # compare overlap values</span>
           </td>
         </tr>
         <tr id='L391'>
@@ -3949,7 +4000,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    if overlap &gt; 0</span>
           </td>
         </tr>
         <tr id='L392'>
@@ -3959,7 +4010,7 @@
           <td>
             
             
-            <span class='code'>function load_InteractiveUtils&#40;mod::Module&#61;Main&#41;</span>
+            <span class='code'>        t1 &#61; @_gc_preserve_begin a1</span>
           </td>
         </tr>
         <tr id='L393'>
@@ -3969,7 +4020,7 @@
           <td>
             
             
-            <span class='code'>    # load interactive-only libraries</span>
+            <span class='code'>        t2 &#61; @_gc_preserve_begin a2</span>
           </td>
         </tr>
         <tr id='L394'>
@@ -3979,7 +4030,7 @@
           <td>
             
             
-            <span class='code'>    if &#33;isdefined&#40;mod, :InteractiveUtils&#41;</span>
+            <span class='code'>        memcmp&#40;pointer&#40;a1, b2-b1&#43;1&#41;, pointer&#40;a2&#41;, overlap&lt;&lt;3&#41; &#61;&#61; 0 || return false</span>
           </td>
         </tr>
         <tr id='L395'>
@@ -3989,7 +4040,7 @@
           <td>
             
             
-            <span class='code'>        try</span>
+            <span class='code'>        @_gc_preserve_end t2</span>
           </td>
         </tr>
         <tr id='L396'>
@@ -3999,7 +4050,7 @@
           <td>
             
             
-            <span class='code'>            let InteractiveUtils &#61; require&#40;PkgId&#40;UUID&#40;0xb77e0a4c_d291_57a0_90e8_8db25a27a240&#41;, &quot;InteractiveUtils&quot;&#41;&#41;</span>
+            <span class='code'>        @_gc_preserve_end t1</span>
           </td>
         </tr>
         <tr id='L397'>
@@ -4009,7 +4060,7 @@
           <td>
             
             
-            <span class='code'>                Core.eval&#40;mod, :&#40;const InteractiveUtils &#61; &#36;InteractiveUtils&#41;&#41;</span>
+            <span class='code'>    end</span>
           </td>
         </tr>
         <tr id='L398'>
@@ -4019,7 +4070,7 @@
           <td>
             
             
-            <span class='code'>                Core.eval&#40;mod, :&#40;using .InteractiveUtils&#41;&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L399'>
@@ -4029,7 +4080,7 @@
           <td>
             
             
-            <span class='code'>                return InteractiveUtils</span>
+            <span class='code'>    return true</span>
           </td>
         </tr>
         <tr id='L400'>
@@ -4039,7 +4090,7 @@
           <td>
             
             
-            <span class='code'>            end</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L401'>
@@ -4049,7 +4100,7 @@
           <td>
             
             
-            <span class='code'>        catch ex</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L402'>
@@ -4059,7 +4110,7 @@
           <td>
             
             
-            <span class='code'>            @warn &quot;Failed to import InteractiveUtils into module &#36;mod&quot; exception&#61;&#40;ex, catch_backtrace&#40;&#41;&#41;</span>
+            <span class='code'>function issubset&#40;a::BitSet, b::BitSet&#41;</span>
           </td>
         </tr>
         <tr id='L403'>
@@ -4069,7 +4120,7 @@
           <td>
             
             
-            <span class='code'>        end</span>
+            <span class='code'>    n &#61; length&#40;a.bits&#41;</span>
           </td>
         </tr>
         <tr id='L404'>
@@ -4079,7 +4130,7 @@
           <td>
             
             
-            <span class='code'>        return nothing</span>
+            <span class='code'>    shift &#61; b.offset - a.offset</span>
           </td>
         </tr>
         <tr id='L405'>
@@ -4089,7 +4140,7 @@
           <td>
             
             
-            <span class='code'>    end</span>
+            <span class='code'>    i, j &#61; shift, shift &#43; length&#40;b.bits&#41;</span>
           </td>
         </tr>
         <tr id='L406'>
@@ -4099,7 +4150,7 @@
           <td>
             
             
-            <span class='code'>    return getfield&#40;mod, :InteractiveUtils&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L407'>
@@ -4109,7 +4160,7 @@
           <td>
             
             
-            <span class='code'>end</span>
+            <span class='code'>    f&#40;a, b&#41; &#61; a &#61;&#61; a &amp; b</span>
           </td>
         </tr>
         <tr id='L408'>
@@ -4119,7 +4170,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>    return &#40;</span>
           </td>
         </tr>
         <tr id='L409'>
@@ -4129,7 +4180,7 @@
           <td>
             
             
-            <span class='code'>global active_repl</span>
+            <span class='code'>        all&#40;@inbounds iszero&#40;a.bits&#91;i&#93;&#41; for i in 1:min&#40;n, i&#41;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L410'>
@@ -4139,7 +4190,7 @@
           <td>
             
             
-            <span class='code'></span>
+            <span class='code'>        all&#40;@inbounds f&#40;a.bits&#91;i&#93;, b.bits&#91;i - shift&#93;&#41; for i in max&#40;1, i&#43;1&#41;:min&#40;n, j&#41;&#41; &amp;&amp;</span>
           </td>
         </tr>
         <tr id='L411'>
@@ -4149,7 +4200,7 @@
           <td>
             
             
-            <span class='code'># run the requested sort of evaluation loop on stdio</span>
+            <span class='code'>        all&#40;@inbounds iszero&#40;a.bits&#91;i&#93;&#41; for i in max&#40;1, j&#43;1&#41;:n&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L412'>
@@ -4159,7 +4210,7 @@
           <td>
             
             
-            <span class='code'>function run_main_repl&#40;interactive::Bool, quiet::Bool, banner::Bool, history_file::Bool, color_set::Bool&#41;</span>
+            <span class='code'>end</span>
           </td>
         </tr>
         <tr id='L413'>
@@ -4169,7 +4220,7 @@
           <td>
             
             
-            <span class='code'>    load_InteractiveUtils&#40;&#41;</span>
+            <span class='code'>⊊&#40;a::BitSet, b::BitSet&#41; &#61; a &lt;&#61; b &amp;&amp; a &#33;&#61; b</span>
           </td>
         </tr>
         <tr id='L414'>
@@ -4189,7 +4240,7 @@
           <td>
             
             
-            <span class='code'>    if interactive &amp;&amp; isassigned&#40;REPL_MODULE_REF&#41;</span>
+            <span class='code'></span>
           </td>
         </tr>
         <tr id='L416'>
@@ -4199,7 +4250,7 @@
           <td>
             
             
-            <span class='code'>        invokelatest&#40;REPL_MODULE_REF&#91;&#93;&#41; do REPL</span>
+            <span class='code'>minimum&#40;s::BitSet&#41; &#61; first&#40;s&#41;</span>
           </td>
         </tr>
         <tr id='L417'>
@@ -4209,7 +4260,7 @@
           <td>
             
             
-            <span class='code'>            term_env &#61; get&#40;ENV, &quot;TERM&quot;, @static Sys.iswindows&#40;&#41; ? &quot;&quot; : &quot;dumb&quot;&#41;</span>
+            <span class='code'>maximum&#40;s::BitSet&#41; &#61; last&#40;s&#41;</span>
           </td>
         </tr>
         <tr id='L418'>
@@ -4219,7 +4270,7 @@
           <td>
             
             
-            <span class='code'>            term &#61; REPL.Terminals.TTYTerminal&#40;term_env, stdin, stdout, stderr&#41;</span>
+            <span class='code'>extrema&#40;s::BitSet&#41; &#61; &#40;first&#40;s&#41;, last&#40;s&#41;&#41;</span>
           </td>
         </tr>
         <tr id='L419'>
@@ -4229,1436 +4280,7 @@
           <td>
             
             
-            <span class='code'>            banner &amp;&amp; Base.banner&#40;term&#41;</span>
-          </td>
-        </tr>
-        <tr id='L420'>
-          <td class='lineno'>420</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            if term.term_type &#61;&#61; &quot;dumb&quot;</span>
-          </td>
-        </tr>
-        <tr id='L421'>
-          <td class='lineno'>421</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                repl &#61; REPL.BasicREPL&#40;term&#41;</span>
-          </td>
-        </tr>
-        <tr id='L422'>
-          <td class='lineno'>422</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                quiet || @warn &quot;Terminal not fully functional&quot;</span>
-          </td>
-        </tr>
-        <tr id='L423'>
-          <td class='lineno'>423</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            else</span>
-          </td>
-        </tr>
-        <tr id='L424'>
-          <td class='lineno'>424</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                repl &#61; REPL.LineEditREPL&#40;term, get&#40;stdout, :color, false&#41;, true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L425'>
-          <td class='lineno'>425</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                repl.history_file &#61; history_file</span>
-          </td>
-        </tr>
-        <tr id='L426'>
-          <td class='lineno'>426</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            end</span>
-          </td>
-        </tr>
-        <tr id='L427'>
-          <td class='lineno'>427</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            global active_repl &#61; repl</span>
-          </td>
-        </tr>
-        <tr id='L428'>
-          <td class='lineno'>428</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            # Make sure any displays pushed in .julia/config/startup.jl ends up above the</span>
-          </td>
-        </tr>
-        <tr id='L429'>
-          <td class='lineno'>429</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            # REPLDisplay</span>
-          </td>
-        </tr>
-        <tr id='L430'>
-          <td class='lineno'>430</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            pushdisplay&#40;REPL.REPLDisplay&#40;repl&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L431'>
-          <td class='lineno'>431</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            _atreplinit&#40;repl&#41;</span>
-          </td>
-        </tr>
-        <tr id='L432'>
-          <td class='lineno'>432</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            REPL.run_repl&#40;repl, backend-&gt;&#40;global active_repl_backend &#61; backend&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L433'>
-          <td class='lineno'>433</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L434'>
-          <td class='lineno'>434</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    else</span>
-          </td>
-        </tr>
-        <tr id='L435'>
-          <td class='lineno'>435</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        # otherwise provide a simple fallback</span>
-          </td>
-        </tr>
-        <tr id='L436'>
-          <td class='lineno'>436</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        if interactive &amp;&amp; &#33;quiet</span>
-          </td>
-        </tr>
-        <tr id='L437'>
-          <td class='lineno'>437</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            @warn &quot;REPL provider not available: using basic fallback&quot;</span>
-          </td>
-        </tr>
-        <tr id='L438'>
-          <td class='lineno'>438</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L439'>
-          <td class='lineno'>439</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        banner &amp;&amp; Base.banner&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L440'>
-          <td class='lineno'>440</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        let input &#61; stdin</span>
-          </td>
-        </tr>
-        <tr id='L441'>
-          <td class='lineno'>441</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            if isa&#40;input, File&#41; || isa&#40;input, IOStream&#41;</span>
-          </td>
-        </tr>
-        <tr id='L442'>
-          <td class='lineno'>442</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                # for files, we can slurp in the whole thing at once</span>
-          </td>
-        </tr>
-        <tr id='L443'>
-          <td class='lineno'>443</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                ex &#61; parse_input_line&#40;read&#40;input, String&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L444'>
-          <td class='lineno'>444</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                if Meta.isexpr&#40;ex, :toplevel&#41;</span>
-          </td>
-        </tr>
-        <tr id='L445'>
-          <td class='lineno'>445</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    # if we get back a list of statements, eval them sequentially</span>
-          </td>
-        </tr>
-        <tr id='L446'>
-          <td class='lineno'>446</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    # as if we had parsed them sequentially</span>
-          </td>
-        </tr>
-        <tr id='L447'>
-          <td class='lineno'>447</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    for stmt in ex.args</span>
-          </td>
-        </tr>
-        <tr id='L448'>
-          <td class='lineno'>448</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        eval_user_input&#40;stderr, stmt, true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L449'>
-          <td class='lineno'>449</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    end</span>
-          </td>
-        </tr>
-        <tr id='L450'>
-          <td class='lineno'>450</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    body &#61; ex.args</span>
-          </td>
-        </tr>
-        <tr id='L451'>
-          <td class='lineno'>451</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                else</span>
-          </td>
-        </tr>
-        <tr id='L452'>
-          <td class='lineno'>452</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    eval_user_input&#40;stderr, ex, true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L453'>
-          <td class='lineno'>453</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                end</span>
-          </td>
-        </tr>
-        <tr id='L454'>
-          <td class='lineno'>454</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            else</span>
-          </td>
-        </tr>
-        <tr id='L455'>
-          <td class='lineno'>455</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                while isopen&#40;input&#41; || &#33;eof&#40;input&#41;</span>
-          </td>
-        </tr>
-        <tr id='L456'>
-          <td class='lineno'>456</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    if interactive</span>
-          </td>
-        </tr>
-        <tr id='L457'>
-          <td class='lineno'>457</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        print&#40;&quot;julia&gt; &quot;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L458'>
-          <td class='lineno'>458</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        flush&#40;stdout&#41;</span>
-          </td>
-        </tr>
-        <tr id='L459'>
-          <td class='lineno'>459</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    end</span>
-          </td>
-        </tr>
-        <tr id='L460'>
-          <td class='lineno'>460</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    try</span>
-          </td>
-        </tr>
-        <tr id='L461'>
-          <td class='lineno'>461</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        line &#61; &quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L462'>
-          <td class='lineno'>462</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        ex &#61; nothing</span>
-          </td>
-        </tr>
-        <tr id='L463'>
-          <td class='lineno'>463</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        while &#33;eof&#40;input&#41;</span>
-          </td>
-        </tr>
-        <tr id='L464'>
-          <td class='lineno'>464</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                            line *&#61; readline&#40;input, keep&#61;true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L465'>
-          <td class='lineno'>465</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                            ex &#61; parse_input_line&#40;line&#41;</span>
-          </td>
-        </tr>
-        <tr id='L466'>
-          <td class='lineno'>466</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                            if &#33;&#40;isa&#40;ex, Expr&#41; &amp;&amp; ex.head &#61;&#61;&#61; :incomplete&#41;</span>
-          </td>
-        </tr>
-        <tr id='L467'>
-          <td class='lineno'>467</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                                break</span>
-          </td>
-        </tr>
-        <tr id='L468'>
-          <td class='lineno'>468</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                            end</span>
-          </td>
-        </tr>
-        <tr id='L469'>
-          <td class='lineno'>469</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        end</span>
-          </td>
-        </tr>
-        <tr id='L470'>
-          <td class='lineno'>470</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        eval_user_input&#40;stderr, ex, true&#41;</span>
-          </td>
-        </tr>
-        <tr id='L471'>
-          <td class='lineno'>471</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    catch err</span>
-          </td>
-        </tr>
-        <tr id='L472'>
-          <td class='lineno'>472</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                        isa&#40;err, InterruptException&#41; ? print&#40;&quot;\n\n&quot;&#41; : rethrow&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L473'>
-          <td class='lineno'>473</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                    end</span>
-          </td>
-        </tr>
-        <tr id='L474'>
-          <td class='lineno'>474</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>                end</span>
-          </td>
-        </tr>
-        <tr id='L475'>
-          <td class='lineno'>475</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>            end</span>
-          </td>
-        </tr>
-        <tr id='L476'>
-          <td class='lineno'>476</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        end</span>
-          </td>
-        </tr>
-        <tr id='L477'>
-          <td class='lineno'>477</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L478'>
-          <td class='lineno'>478</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    nothing</span>
-          </td>
-        </tr>
-        <tr id='L479'>
-          <td class='lineno'>479</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L480'>
-          <td class='lineno'>480</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L481'>
-          <td class='lineno'>481</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># MainInclude exists to hide Main.include and eval from &#96;names&#40;Main&#41;&#96;.</span>
-          </td>
-        </tr>
-        <tr id='L482'>
-          <td class='lineno'>482</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>baremodule MainInclude</span>
-          </td>
-        </tr>
-        <tr id='L483'>
-          <td class='lineno'>483</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>using ..Base</span>
-          </td>
-        </tr>
-        <tr id='L484'>
-          <td class='lineno'>484</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># These definitions calls Base._include rather than Base.include to get</span>
-          </td>
-        </tr>
-        <tr id='L485'>
-          <td class='lineno'>485</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># one-frame stacktraces for the common case of using include&#40;fname&#41; in Main.</span>
-          </td>
-        </tr>
-        <tr id='L486'>
-          <td class='lineno'>486</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>include&#40;mapexpr::Function, fname::AbstractString&#41; &#61; Base._include&#40;mapexpr, Main, fname&#41;</span>
-          </td>
-        </tr>
-        <tr id='L487'>
-          <td class='lineno'>487</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            <div class='call-sites'>
-              1 &#40;25 &#37;&#41;
-              samples spent in include
-              <br />
-              
-              1 &#40;100 &#37;&#41; &#40;incl.&#41;
-              when called from eval
-              <a href='boot.jl-298d21f3be57618471d6b1c32c16f23053313030.html#L385'>line 385</a>
-              <br />
-            </div>
-            
-            <span class='code'>function include&#40;fname::AbstractString&#41;</span>
-          </td>
-        </tr>
-        <tr id='L488'>
-          <td class='lineno'>488</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    isa&#40;fname, String&#41; || &#40;fname &#61; Base.convert&#40;String, fname&#41;::String&#41;</span>
-          </td>
-        </tr>
-        <tr id='L489'>
-          <td class='lineno'>489</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;25 &#37;&#41;</td>
-          <td>
-            
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='loading.jl-0a1104fc1f3683af66509096f8b452363409d941.html#L2126'>_include</a>
-              <br />
-            </div>
-            <span class='code'>    Base._include&#40;identity, Main, fname&#41;</span>
-          </td>
-        </tr>
-        <tr id='L490'>
-          <td class='lineno'>490</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L491'>
-          <td class='lineno'>491</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>eval&#40;x&#41; &#61; Core.eval&#40;Main, x&#41;</span>
-          </td>
-        </tr>
-        <tr id='L492'>
-          <td class='lineno'>492</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L493'>
-          <td class='lineno'>493</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L494'>
-          <td class='lineno'>494</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    ans</span>
-          </td>
-        </tr>
-        <tr id='L495'>
-          <td class='lineno'>495</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L496'>
-          <td class='lineno'>496</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>A variable referring to the last computed value, automatically imported to the interactive prompt.</span>
-          </td>
-        </tr>
-        <tr id='L497'>
-          <td class='lineno'>497</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L498'>
-          <td class='lineno'>498</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>global ans &#61; nothing</span>
-          </td>
-        </tr>
-        <tr id='L499'>
-          <td class='lineno'>499</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L500'>
-          <td class='lineno'>500</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L501'>
-          <td class='lineno'>501</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    err</span>
-          </td>
-        </tr>
-        <tr id='L502'>
-          <td class='lineno'>502</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L503'>
-          <td class='lineno'>503</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>A variable referring to the last thrown errors, automatically imported to the interactive prompt.</span>
-          </td>
-        </tr>
-        <tr id='L504'>
-          <td class='lineno'>504</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>The thrown errors are collected in a stack of exceptions.</span>
-          </td>
-        </tr>
-        <tr id='L505'>
-          <td class='lineno'>505</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L506'>
-          <td class='lineno'>506</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>global err &#61; nothing</span>
-          </td>
-        </tr>
-        <tr id='L507'>
-          <td class='lineno'>507</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L508'>
-          <td class='lineno'>508</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'># weakly exposes ans and err variables to Main</span>
-          </td>
-        </tr>
-        <tr id='L509'>
-          <td class='lineno'>509</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>export ans, err</span>
-          </td>
-        </tr>
-        <tr id='L510'>
-          <td class='lineno'>510</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L511'>
-          <td class='lineno'>511</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
-          </td>
-        </tr>
-        <tr id='L512'>
-          <td class='lineno'>512</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L513'>
-          <td class='lineno'>513</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L514'>
-          <td class='lineno'>514</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    eval&#40;expr&#41;</span>
-          </td>
-        </tr>
-        <tr id='L515'>
-          <td class='lineno'>515</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L516'>
-          <td class='lineno'>516</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Evaluate an expression in the global scope of the containing module.</span>
-          </td>
-        </tr>
-        <tr id='L517'>
-          <td class='lineno'>517</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Every &#96;Module&#96; &#40;except those defined with &#96;baremodule&#96;&#41; has its own 1-argument</span>
-          </td>
-        </tr>
-        <tr id='L518'>
-          <td class='lineno'>518</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>definition of &#96;eval&#96;, which evaluates expressions in that module.</span>
-          </td>
-        </tr>
-        <tr id='L519'>
-          <td class='lineno'>519</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L520'>
-          <td class='lineno'>520</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>MainInclude.eval</span>
-          </td>
-        </tr>
-        <tr id='L521'>
-          <td class='lineno'>521</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L522'>
-          <td class='lineno'>522</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L523'>
-          <td class='lineno'>523</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    include&#40;&#91;mapexpr::Function,&#93; path::AbstractString&#41;</span>
-          </td>
-        </tr>
-        <tr id='L524'>
-          <td class='lineno'>524</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L525'>
-          <td class='lineno'>525</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Evaluate the contents of the input source file in the global scope of the containing module.</span>
-          </td>
-        </tr>
-        <tr id='L526'>
-          <td class='lineno'>526</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Every module &#40;except those defined with &#96;baremodule&#96;&#41; has its own</span>
-          </td>
-        </tr>
-        <tr id='L527'>
-          <td class='lineno'>527</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>definition of &#96;include&#96;, which evaluates the file in that module.</span>
-          </td>
-        </tr>
-        <tr id='L528'>
-          <td class='lineno'>528</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Returns the result of the last evaluated expression of the input file. During including,</span>
-          </td>
-        </tr>
-        <tr id='L529'>
-          <td class='lineno'>529</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>a task-local include path is set to the directory containing the file. Nested calls to</span>
-          </td>
-        </tr>
-        <tr id='L530'>
-          <td class='lineno'>530</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#96;include&#96; will search relative to that path. This function is typically used to load source</span>
-          </td>
-        </tr>
-        <tr id='L531'>
-          <td class='lineno'>531</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>interactively, or to combine files in packages that are broken into multiple source files.</span>
-          </td>
-        </tr>
-        <tr id='L532'>
-          <td class='lineno'>532</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>The argument &#96;path&#96; is normalized using &#91;&#96;normpath&#96;&#93;&#40;@ref&#41; which will resolve</span>
-          </td>
-        </tr>
-        <tr id='L533'>
-          <td class='lineno'>533</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>relative path tokens such as &#96;..&#96; and convert &#96;/&#96; to the appropriate path separator.</span>
-          </td>
-        </tr>
-        <tr id='L534'>
-          <td class='lineno'>534</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L535'>
-          <td class='lineno'>535</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>The optional first argument &#96;mapexpr&#96; can be used to transform the included code before</span>
-          </td>
-        </tr>
-        <tr id='L536'>
-          <td class='lineno'>536</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>it is evaluated: for each parsed expression &#96;expr&#96; in &#96;path&#96;, the &#96;include&#96; function</span>
-          </td>
-        </tr>
-        <tr id='L537'>
-          <td class='lineno'>537</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>actually evaluates &#96;mapexpr&#40;expr&#41;&#96;.  If it is omitted, &#96;mapexpr&#96; defaults to &#91;&#96;identity&#96;&#93;&#40;@ref&#41;.</span>
-          </td>
-        </tr>
-        <tr id='L538'>
-          <td class='lineno'>538</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L539'>
-          <td class='lineno'>539</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>Use &#91;&#96;Base.include&#96;&#93;&#40;@ref&#41; to evaluate a file into another module.</span>
-          </td>
-        </tr>
-        <tr id='L540'>
-          <td class='lineno'>540</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L541'>
-          <td class='lineno'>541</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&#33;&#33;&#33; compat &quot;Julia 1.5&quot;</span>
-          </td>
-        </tr>
-        <tr id='L542'>
-          <td class='lineno'>542</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    Julia 1.5 is required for passing the &#96;mapexpr&#96; argument.</span>
-          </td>
-        </tr>
-        <tr id='L543'>
-          <td class='lineno'>543</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>&quot;&quot;&quot;</span>
-          </td>
-        </tr>
-        <tr id='L544'>
-          <td class='lineno'>544</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>MainInclude.include</span>
-          </td>
-        </tr>
-        <tr id='L545'>
-          <td class='lineno'>545</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'></span>
-          </td>
-        </tr>
-        <tr id='L546'>
-          <td class='lineno'>546</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>function _start&#40;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L547'>
-          <td class='lineno'>547</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    empty&#33;&#40;ARGS&#41;</span>
-          </td>
-        </tr>
-        <tr id='L548'>
-          <td class='lineno'>548</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    append&#33;&#40;ARGS, Core.ARGS&#41;</span>
-          </td>
-        </tr>
-        <tr id='L549'>
-          <td class='lineno'>549</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    # clear any postoutput hooks that were saved in the sysimage</span>
-          </td>
-        </tr>
-        <tr id='L550'>
-          <td class='lineno'>550</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    empty&#33;&#40;Base.postoutput_hooks&#41;</span>
-          </td>
-        </tr>
-        <tr id='L551'>
-          <td class='lineno'>551</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    try</span>
-          </td>
-        </tr>
-        <tr id='L552'>
-          <td class='lineno'>552</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'>1 &#40;25 &#37;&#41;</td>
-          <td>
-            
-            <div class='callees'>
-              1 &#40;100 &#37;&#41;
-              samples spent calling
-              <a href='client.jl-d249f5e37741c5b9632fc90043548e51ba6002b5.html#L228'>exec_options</a>
-              <br />
-            </div>
-            <span class='code'>        exec_options&#40;JLOptions&#40;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L553'>
-          <td class='lineno'>553</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    catch</span>
-          </td>
-        </tr>
-        <tr id='L554'>
-          <td class='lineno'>554</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        invokelatest&#40;display_error, scrub_repl_backtrace&#40;current_exceptions&#40;&#41;&#41;&#41;</span>
-          </td>
-        </tr>
-        <tr id='L555'>
-          <td class='lineno'>555</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        exit&#40;1&#41;</span>
-          </td>
-        </tr>
-        <tr id='L556'>
-          <td class='lineno'>556</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L557'>
-          <td class='lineno'>557</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    if is_interactive &amp;&amp; get&#40;stdout, :color, false&#41;</span>
-          </td>
-        </tr>
-        <tr id='L558'>
-          <td class='lineno'>558</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>        print&#40;color_normal&#41;</span>
-          </td>
-        </tr>
-        <tr id='L559'>
-          <td class='lineno'>559</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>    end</span>
-          </td>
-        </tr>
-        <tr id='L560'>
-          <td class='lineno'>560</td>
-          <td class='tracecount excl'></td>
-          <td class='tracecount incl'></td>
-          <td>
-            
-            
-            <span class='code'>end</span>
+            <span class='code'>issorted&#40;s::BitSet&#41; &#61; true</span>
           </td>
         </tr>
       </tbody>
