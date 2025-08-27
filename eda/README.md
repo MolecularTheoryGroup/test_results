@@ -1,5 +1,5 @@
 ## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/ci-self-hosted-runners`
-*Generated on 2025-08-24@00:55:05 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/17184510802)*
+*Generated on 2025-08-26@20:36:43 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/17251254372)*
 
 ---
 
