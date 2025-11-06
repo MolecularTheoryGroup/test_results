@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/compathelper/new_version/2025-11-01-00-14-36-359-02722999671`
-*Generated on 2025-11-02@08:34:01 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/18988255104)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/feature/isosurface-curvature-fields`
+*Generated on 2025-11-06@11:25:00 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/19143899457)*
 
 ---
 
@@ -8,16 +8,7 @@
 ---
 
 ## Image Galleries
-1. [cp v0 plots: 1 images](#cp-v0-plots)
-2. [dataloader plots: 30 images](#dataloader-plots)
-3. [gp plots: 16 images](#gp-plots)
-#### cp v0 plots
-| cp v0 plots | 1 images |
-| --- | --- |
-| [Test System_CPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/cp_v0_plots%2F%2FTest%20System_CPs.png) ![Test System_CPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/cp_v0_plots%2F%2FTest%20System_CPs.png) | |
-
----
-
+1. [dataloader plots: 30 images](#dataloader-plots)
 #### dataloader plots
 | dataloader plots | 30 images |
 | --- | --- |
@@ -36,20 +27,6 @@
 | [Fe-unrestricted_bcc_vasp.AECCAR0 (uFebcc) - Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FFe-unrestricted_bcc_vasp.AECCAR0%20%28uFebcc%29%20-%20Electron%20Density.png) ![Fe-unrestricted_bcc_vasp.AECCAR0 (uFebcc) - Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FFe-unrestricted_bcc_vasp.AECCAR0%20%28uFebcc%29%20-%20Electron%20Density.png) | [H2_adf.t41 - SCF Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FH2_adf.t41%20-%20SCF%20Density.png) ![H2_adf.t41 - SCF Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FH2_adf.t41%20-%20SCF%20Density.png) |
 | [OsB2_vasp.AECCAR0 (Re_ReStruct) - Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FOsB2_vasp.AECCAR0%20%28Re_ReStruct%29%20-%20Electron%20Density.png) ![OsB2_vasp.AECCAR0 (Re_ReStruct) - Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FOsB2_vasp.AECCAR0%20%28Re_ReStruct%29%20-%20Electron%20Density.png) | [propane_gaussian.cube - ( propane Density=SCF,  Electron density from Total SCF Density).png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2Fpropane_gaussian.cube%20-%20%28%20propane%20Density%3DSCF%2C%20%20Electron%20density%20from%20Total%20SCF%20Density%29.png) ![propane_gaussian.cube - ( propane Density=SCF,  Electron density from Total SCF Density).png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2Fpropane_gaussian.cube%20-%20%28%20propane%20Density%3DSCF%2C%20%20Electron%20density%20from%20Total%20SCF%20Density%29.png) |
 | [td_turbomole.plt Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2Ftd_turbomole.plt%20Electron%20Density.png) ![td_turbomole.plt Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2Ftd_turbomole.plt%20Electron%20Density.png) | [V__periodic-xyz_vasp.CHGCAR (V - bcc) - Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FV__periodic-xyz_vasp.CHGCAR%20%28V%20-%20bcc%29%20-%20Electron%20Density.png) ![V__periodic-xyz_vasp.CHGCAR (V - bcc) - Electron Density.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/dataloader_plots%2F%2FV__periodic-xyz_vasp.CHGCAR%20%28V%20-%20bcc%29%20-%20Electron%20Density.png) |
-
----
-
-#### gp plots
-| gp plots | 16 images |
-| --- | --- |
-| [adamantane_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fadamantane_adf.png) ![adamantane_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fadamantane_adf.png) | [adamantane_he_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fadamantane_he_adf.png) ![adamantane_he_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fadamantane_he_adf.png) |
-| [benzene_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fbenzene_adf.png) ![benzene_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fbenzene_adf.png) | [buckyball_acetone_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fbuckyball_acetone_adf.png) ![buckyball_acetone_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fbuckyball_acetone_adf.png) |
-| [buckyball_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fbuckyball_adf.png) ![buckyball_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fbuckyball_adf.png) | [Cu_fcc_PBE_TZ2P_AE_ZORA_periodic-xyz_band.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FCu_fcc_PBE_TZ2P_AE_ZORA_periodic-xyz_band.png) ![Cu_fcc_PBE_TZ2P_AE_ZORA_periodic-xyz_band.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FCu_fcc_PBE_TZ2P_AE_ZORA_periodic-xyz_band.png) |
-| [ethanol_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fethanol_adf.png) ![ethanol_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fethanol_adf.png) | [ethynylbenzene_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fethynylbenzene_adf.png) ![ethynylbenzene_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Fethynylbenzene_adf.png) |
-| [fluorobenzene_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Ffluorobenzene_adf.png) ![fluorobenzene_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2Ffluorobenzene_adf.png) | [H2_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FH2_adf.png) ![H2_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FH2_adf.png) |
-| [N2_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FN2_adf.png) ![N2_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FN2_adf.png) | [Ne2_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FNe2_adf.png) ![Ne2_adf.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FNe2_adf.png) |
-| [Test System_bond_ring_paths.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_bond_ring_paths.png) ![Test System_bond_ring_paths.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_bond_ring_paths.png) | [Test System_GPs_noCPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_GPs_noCPs.png) ![Test System_GPs_noCPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_GPs_noCPs.png) |
-| [Test System_GPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_GPs.png) ![Test System_GPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_GPs.png) | [Test System_parametrized_GPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_parametrized_GPs.png) ![Test System_parametrized_GPs.png](https://raw.githubusercontent.com/MolecularTheoryGroup/test_results/main/eda/gp_plots%2F%2FTest%20System_parametrized_GPs.png) |
 
 ---
 
