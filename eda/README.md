@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/feature/isosurface-curvature-fields`
-*Generated on 2025-12-09@21:59:44 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/20082566880)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
+*Generated on 2025-12-10@15:49:25 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/20106670274)*
 
 ---
 
