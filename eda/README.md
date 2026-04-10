@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/refactor-fix-includes`
-*Generated on 2026-02-01@22:57:20 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/21573230516)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/feat/bondalyzer-runfile-support`
+*Generated on 2026-04-10@15:09:49 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/24251032458)*
 
 ---
 
