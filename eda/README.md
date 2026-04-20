@@ -1,5 +1,5 @@
 ## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/feat/bondalyzer-runfile-support`
-*Generated on 2026-04-17@14:04:38 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/24571538448)*
+*Generated on 2026-04-20@14:51:18 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/24677815662)*
 
 ---
 
