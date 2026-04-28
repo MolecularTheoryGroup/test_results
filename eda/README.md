@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/refactor/tringulation-convex-hull`
-*Generated on 2026-04-28@07:20:14 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/25034707843)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/main`
+*Generated on 2026-04-28@13:58:34 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/25059326612)*
 
 ---
 
