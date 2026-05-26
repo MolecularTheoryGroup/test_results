@@ -1,5 +1,5 @@
-## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/feat/plot-combine-bond-paths`
-*Generated on 2026-05-15@18:13:42 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/25942568950)*
+## Automated test output of `ElectronDensityAnalysis.jl/refs/heads/fix/linux-arm-kf-loader`
+*Generated on 2026-05-26@14:01:17 [(link to source GitHub action workflow)](https://github.com/MolecularTheoryGroup/ElectronDensityAnalysis.jl/actions/runs/26467649719)*
 
 ---
 
